@@ -19,6 +19,11 @@ class AuthorizationModel {
     console.log(this.name, this.password)
     api.auth.login(this.name, this.password)
   }
+
+  async signUp(value: any) {
+    console.log(this.name, this.password)
+    api.auth.login(this.name, this.password)
+  }
 }
 
 export default AuthorizationModel

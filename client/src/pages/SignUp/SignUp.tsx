@@ -1,35 +1,37 @@
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 
+import {
+  emailValidation,
+  passwordValidation,
+  confirmPasswordValidation,
+} from 'validations'
+
+import { useFormik } from 'formik'
 import { useRootStore } from 'stores/Root'
-import { Formik, useFormik } from 'formik'
+import { Button, FormControl, TextField } from '@mui/material'
 
 const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+  email: emailValidation,
+  password: passwordValidation,
+  confirmPassword: confirmPasswordValidation,
 })
 
 const SignUp = () => {
-  // const { authorization } = useRootStore()
+  const { authorization } = useRootStore()
 
   const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      console.log(values)
+      authorization.signUp(values)
     },
   })
 
@@ -64,6 +66,22 @@ const SignUp = () => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
+          />
+          <TextField
+            fullWidth
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm password"
+            type="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
           />
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
