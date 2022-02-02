@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import { useRootStore } from 'stores/Root'
 
-const SignInPage = () => {
+const SignIn = () => {
   const { authorization } = useRootStore()
 
   const handleSubmit = () => {
@@ -66,4 +66,4 @@ const SignInPage = () => {
   )
 }
 
-export default observer(SignInPage)
+export default observer(SignIn)
