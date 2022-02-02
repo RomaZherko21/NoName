@@ -1,13 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
 import { BrowserRouter as Router } from 'react-router-dom'
+
+import { RootStoreProvider } from 'stores/Root'
+
+import './index.css'
 import App from './App'
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <RootStoreProvider>
+        <App />
+      </RootStoreProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
