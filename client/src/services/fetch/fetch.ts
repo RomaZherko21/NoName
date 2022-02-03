@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
+import extractDataInterceptor from './extractDataInterceptor'
+
 export type FetchServiceConfig = {
   apiUrl: string
   photoUrl: string
@@ -10,10 +12,12 @@ export class FetchService {
 
   constructor() {
     this.instance = axios.create()
+
+    this.instance.interceptors.response.use(extractDataInterceptor)
   }
 
   init() {
-    this.instance.defaults.baseURL = 'http://localhost:3001/'
+    this.instance.defaults.baseURL = 'http://localhost:5000'
   }
 
   public post<T>(

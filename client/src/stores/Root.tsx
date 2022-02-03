@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react'
 import AuthorizationModel from 'models/Authorization'
+import fetchService from 'services/fetch/fetch'
 
 import AppConfig from './AppConfig'
 
@@ -13,8 +14,8 @@ export class RootStore {
   }
 
   async init() {
-    console.log(this)
     AppConfig.init()
+    fetchService.init()
   }
 }
 

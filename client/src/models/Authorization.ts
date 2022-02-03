@@ -2,27 +2,22 @@ import { makeAutoObservable } from 'mobx'
 
 import api from 'services/api'
 import { RootStore } from 'stores/Root'
+import { SignInData, SignUpData } from 'types/auth'
 
 class AuthorizationModel {
   readonly rootStore: RootStore
-
-  name = ''
-
-  password = ''
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
   }
 
-  async signIn(value: any) {
-    console.log(this.name, this.password)
-    api.auth.signIn(this.name, this.password)
+  async signIn(value: SignInData) {
+    api.auth.signIn(value.email, value.password)
   }
 
-  async signUp(value: any) {
-    console.log(this.name, this.password)
-    api.auth.signUp(this.name, this.password)
+  async signUp(value: SignUpData) {
+    api.auth.signUp(value.email, value.password)
   }
 }
 

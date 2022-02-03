@@ -5,9 +5,7 @@ interface AppConfigValues {
 class AppConfig implements AppConfigValues {
   API_URL = 'http://localhost:3001/'
 
-  init() {
-    console.log(this)
-  }
+  init() {}
 }
 
 export default new AppConfig()

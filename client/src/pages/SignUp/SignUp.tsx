@@ -9,9 +9,9 @@ import {
   confirmPasswordValidation,
 } from 'validations'
 import { useRootStore } from 'stores/Root'
+import { SignUpData } from 'types/auth'
 
 import styles from './Styles.module.scss'
-import { FormTypes } from './types'
 
 const validationSchema = yup.object().shape({
   email: emailValidation,
@@ -22,21 +22,21 @@ const validationSchema = yup.object().shape({
 const SignUp = () => {
   const { authorization } = useRootStore()
 
-  const formik = useFormik<FormTypes>({
+  const formik = useFormik<SignUpData>({
     initialValues: {
       email: '',
       password: '',
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: (values: FormTypes) => {
+    onSubmit: (values: SignUpData) => {
       authorization.signUp(values)
     },
   })
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.centered}>
-      <Grid container spacing={2} direction="column" xs={12} md={6}>
+      <Grid item container spacing={2} direction="column" xs={11} md={6}>
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
@@ -68,7 +68,7 @@ const SignUp = () => {
             id="confirmPassword"
             name="confirmPassword"
             label="Confirm password"
-            type="confirmPassword"
+            type="password"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             error={

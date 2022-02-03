@@ -5,9 +5,9 @@ import { Button, Grid, TextField } from '@mui/material'
 
 import { emailValidation, passwordValidation } from 'validations'
 import { useRootStore } from 'stores/Root'
+import { SignInData } from 'types/auth'
 
 import styles from './Styles.module.scss'
-import { FormTypes } from './types'
 
 const validationSchema = yup.object().shape({
   email: emailValidation,
@@ -17,20 +17,20 @@ const validationSchema = yup.object().shape({
 const SignIn = () => {
   const { authorization } = useRootStore()
 
-  const formik = useFormik<FormTypes>({
+  const formik = useFormik<SignInData>({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values: FormTypes) => {
+    onSubmit: (values: SignInData) => {
       authorization.signIn(values)
     },
   })
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.centered}>
-      <Grid container spacing={2} direction="column" xs={12} md={6}>
+      <Grid item container spacing={2} direction="column" xs={11} md={6}>
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
