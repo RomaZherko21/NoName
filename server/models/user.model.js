@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
-const sequelize = require('../config/mySQL')
+const sequelize = require('.')
 
-const Users = sequelize.define(
+const User = sequelize.define(
   'users',
   {
     id: {
@@ -10,16 +10,19 @@ const Users = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    name: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
-    freezeTableName: false, //table name = "Customer" will be "Customer" in a database (not "Customers")
     tableName: 'users', // You can simply tell DataTypes the name of the table directly
   }
 )
 
-module.exports = Users
+module.exports = User
