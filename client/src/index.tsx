@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { RootStoreProvider } from 'stores/Root'
 
-import './index.css'
+import './index.scss'
 import App from './App'
 
 ReactDOM.render(

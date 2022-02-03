@@ -1,68 +1,68 @@
 import { observer } from 'mobx-react-lite'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
+import * as yup from 'yup'
+import { useFormik } from 'formik'
+import { Button, Grid, TextField } from '@mui/material'
+
+import { emailValidation, passwordValidation } from 'validations'
 import { useRootStore } from 'stores/Root'
+
+import styles from './Styles.module.scss'
+import { FormTypes } from './types'
+
+const validationSchema = yup.object().shape({
+  email: emailValidation,
+  password: passwordValidation,
+})
 
 const SignIn = () => {
   const { authorization } = useRootStore()
 
-  const handleSubmit = () => {
-    authorization.signIn()
-  }
+  const formik = useFormik<FormTypes>({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: (values: FormTypes) => {
+      authorization.signIn(values)
+    },
+  })
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Box sx={{ mt: 1 }}>
+    <form onSubmit={formik.handleSubmit} className={styles.centered}>
+      <Grid container spacing={2} direction="column" xs={12} md={6}>
+        <Grid item xs={12} md={6}>
           <TextField
-            margin="normal"
-            required
             fullWidth
             id="email"
-            label="Email Address"
             name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={(e) => {
-              authorization.name = e.target.value
-            }}
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
           <TextField
-            margin="normal"
-            required
             fullWidth
+            id="password"
             name="password"
             label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(e) => {
-              authorization.password = e.target.value
-            }}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleSubmit}
-          >
-            Sign In
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
           </Button>
-          {authorization.name}
-          {authorization.password}
-        </Box>
-      </Box>
-    </Container>
+        </Grid>
+      </Grid>
+    </form>
   )
 }
 

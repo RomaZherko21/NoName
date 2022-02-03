@@ -15,14 +15,14 @@ class AuthorizationModel {
     this.rootStore = rootStore
   }
 
-  async signIn() {
+  async signIn(value: any) {
     console.log(this.name, this.password)
-    api.auth.login(this.name, this.password)
+    api.auth.signIn(this.name, this.password)
   }
 
   async signUp(value: any) {
     console.log(this.name, this.password)
-    api.auth.login(this.name, this.password)
+    api.auth.signUp(this.name, this.password)
   }
 }
 

@@ -13,3 +13,4 @@ export const passwordValidation = yup
 export const confirmPasswordValidation = yup
   .string()
   .oneOf([yup.ref('password'), null], 'Passwords must match')
+  .required('Password confirmed is required')
