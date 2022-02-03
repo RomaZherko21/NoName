@@ -1,14 +1,19 @@
 require('dotenv').config()
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 
-const router = require('./routes')
-const sequelize = require('./models')
-const log = require('./helpers/logs')
+import router from './routes'
+import sequelize from './models'
+import log from './helpers/logs'
 
-const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } =
-  process.env
+const {
+  CLIENT_PROTOCOL,
+  CLIENT_HOST,
+  CLIENT_PORT,
+  SERVER_HOST,
+  SERVER_PORT,
+}: any = process.env
 
 const app = express()
 const corsOptions = {
@@ -28,7 +33,9 @@ sequelize
       log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
     })
   })
-  .catch((err) => log.negative(`Server has not been started: ${err.message}`))
+  .catch((err: any) =>
+    log.negative(`Server has not been started: ${err.message}`)
+  )
 
 // app.use('/', (req, res) => {
 //   Users.create({

@@ -3,17 +3,17 @@ const chalk = require('chalk')
 class Log {
   constructor() {}
 
-  positive(msg) {
+  positive(msg: string) {
     console.log(chalk.greenBright.bold(msg))
   }
 
-  negative(msg) {
+  negative(msg: string) {
     console.log(chalk.red.bold(msg))
   }
 
-  neutral(msg) {
+  neutral(msg: string) {
     console.log(chalk.blueBright.bold(msg))
   }
 }
 
-module.exports = new Log()
+export default new Log()

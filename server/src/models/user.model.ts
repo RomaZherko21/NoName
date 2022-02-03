@@ -1,5 +1,6 @@
-const { DataTypes } = require('sequelize')
-const sequelize = require('.')
+import { DataTypes } from 'sequelize'
+
+import sequelize from '.'
 
 const User = sequelize.define(
   'users',
@@ -25,4 +26,4 @@ const User = sequelize.define(
   }
 )
 
-module.exports = User
+export default User

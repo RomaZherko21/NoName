@@ -1,7 +1,7 @@
-const User = require('../models/user.model')
+import User from '../models/user.model'
 
 class AuthController {
-  async signUp(req, res, next) {
+  async signUp(req: any, res: any, next: any) {
     console.log('signUp', req.body)
     const { email, password } = req.body
 
@@ -10,9 +10,9 @@ class AuthController {
       password,
     })
   }
-  async signIn(req, res, next) {
+  async signIn(req: any, res: any, next: any) {
     console.log('signIn', req.body)
   }
 }
 
-module.exports = new AuthController()
+export default new AuthController()
