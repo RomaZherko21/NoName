@@ -12,6 +12,20 @@ class AuthController {
   }
   async signIn(req: any, res: any, next: any) {
     console.log('signIn', req.body)
+    const { email, password } = req.body
+
+    const data = await User.findOne({
+      where: {
+        email,
+        password,
+      },
+    })
+
+    if (!Boolean(data)) {
+      res.send({ msg: 'Not authorized' })
+    }
+
+    console.log('HEHEH', data)
   }
 }
 
