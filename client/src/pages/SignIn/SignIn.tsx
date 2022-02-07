@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { Button, Grid, TextField } from '@mui/material'
+import { useHistory } from 'react-router-dom'
 
 import { emailValidation, passwordValidation } from 'validations'
 import { useRootStore } from 'stores/Root'
@@ -16,6 +17,7 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const { authorization } = useRootStore()
+  const history = useHistory()
 
   const formik = useFormik<SignInData>({
     initialValues: {
@@ -25,6 +27,7 @@ const SignIn = () => {
     validationSchema,
     onSubmit: (values: SignInData) => {
       authorization.signIn(values)
+      history.push('/home')
     },
   })
 
