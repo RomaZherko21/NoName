@@ -1,14 +1,8 @@
 import { observer } from 'mobx-react-lite'
 
-import Header from 'components/Layout/Header/Header'
-
 const Home = () => {
   console.log('Home')
-  return (
-    <>
-      <Header />
-    </>
-  )
+  return <>EHHEHEHEH</>
 }
 
 export default observer(Home)

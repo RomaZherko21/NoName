@@ -15,9 +15,8 @@ class AuthorizationModel {
   }
 
   async signIn(value: SignInData) {
-    const res: any = await api.auth.signIn(value.email, value.password)
+    await api.auth.signIn(value.email, value.password)
     this.isAuthorized = true
-    console.log(this.isAuthorized)
   }
 
   async signUp(value: SignUpData) {
