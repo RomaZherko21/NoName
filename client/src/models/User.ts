@@ -6,15 +6,15 @@ import { RootStore } from 'stores/Root'
 class UserModel {
   readonly rootStore: RootStore
 
-  id: number
+  id: number = 0
 
-  email: number
+  email: string = ''
 
-  role_id: number
+  role_id: number = 0
 
-  name: string
+  name: string = ''
 
-  surname: string
+  surname: string = ''
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
