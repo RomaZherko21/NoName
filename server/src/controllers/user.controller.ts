@@ -17,7 +17,7 @@ class UserController {
       const { name, surname, email, password, role_id } = req.body
       await User.create({ name, surname, email, password, role_id })
     } catch (err) {
-      res.status().json()
+      res.status(400).json({ message: err.errors[0].message })
     }
   }
 

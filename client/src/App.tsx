@@ -9,17 +9,24 @@ import UsersList from 'pages/UsersList/UsersList'
 import { useRootStore } from 'stores/Root'
 
 import './App.scss'
+import Notification from 'components/Notification/Notification'
 
 function App() {
-  const { authorization } = useRootStore()
+  const {
+    authorization,
+    notification: { message, isOpen, severity },
+  } = useRootStore()
 
   return authorization.isAuthorized ? (
-    <Layout>
-      <Switch>
-        <Route path={routes.home} component={Home} />
-        <Route path={routes.usersList} component={UsersList} />
-      </Switch>
-    </Layout>
+    <>
+      <Notification message={message} open={isOpen} severity={severity} />
+      <Layout>
+        <Switch>
+          <Route path={routes.home} component={Home} />
+          <Route path={routes.usersList} component={UsersList} />
+        </Switch>
+      </Layout>
+    </>
   ) : (
     <>
       <Redirect to={routes.signIn} />
