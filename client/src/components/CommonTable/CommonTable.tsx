@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { ReactElement } from 'react'
 
-const CommonTable = ({ bodyRows, additionalColumns = [] }: any) => {
+const CommonTable = ({ bodyRows = [{}], additionalColumns = [] }: any) => {
   const headerRow = Object.keys(bodyRows[0])
   return (
     <TableContainer component={Paper}>

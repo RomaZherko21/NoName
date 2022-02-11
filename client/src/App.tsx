@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import SignIn from 'pages/SignIn/SignIn'
 import Home from 'pages/Home/Home'
@@ -13,7 +13,7 @@ import './App.scss'
 function App() {
   const { authorization } = useRootStore()
 
-  return true ? (
+  return authorization.isAuthorized ? (
     <Layout>
       <Switch>
         <Route path={routes.home} component={Home} />
@@ -21,7 +21,10 @@ function App() {
       </Switch>
     </Layout>
   ) : (
-    <Route path={routes.signIn} component={SignIn} />
+    <>
+      <Redirect to={routes.signIn} />
+      <Route path={routes.signIn} component={SignIn} />
+    </>
   )
 }
 

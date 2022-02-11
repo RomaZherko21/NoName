@@ -24,6 +24,7 @@ class UserController {
   async list(req: any, res: any) {
     try {
       const data = await User.findAll()
+      console.log('hehehe', data)
       res.status(200).json(data)
     } catch (err) {
       res.status().json()

@@ -8,12 +8,19 @@ class UserModel {
 
   constructor() {
     makeAutoObservable(this)
+    this.init()
   }
 
   async init() {
     const data: any = await api.user.list()
+    console.log('HEHEHE', data)
+    this.users = data
+  }
+
+  async create(user: User) {
+    const data: any = await api.user.create(user)
     this.users = data
   }
 }
 
-export default UserModel
+export default new UserModel()
