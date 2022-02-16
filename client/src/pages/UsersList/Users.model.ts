@@ -12,14 +12,12 @@ class UserModel {
   }
 
   async init() {
-    const data: any = await api.user.list()
-    console.log('HEHEHE', data)
+    const data = await api.user.list()
     this.users = data
   }
 
   async create(user: User) {
-    const data: any = await api.user.create(user)
-    this.users = data
+    const data = await api.user.create(user)
   }
 }
 

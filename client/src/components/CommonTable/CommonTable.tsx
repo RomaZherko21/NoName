@@ -6,32 +6,36 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { ReactElement } from 'react'
 
-const CommonTable = ({ bodyRows = [{}], additionalColumns = [] }: any) => {
-  const headerRow = Object.keys(bodyRows[0])
+import { TableColumn } from 'types/common'
+
+const CommonTable = ({
+  data,
+  columns,
+}: {
+  data: any
+  columns: TableColumn[]
+}) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            {headerRow.map((row) => (
-              <TableCell key={row} align="right">
-                {row}
+            {columns.map((column) => (
+              <TableCell key={column.key} align={column.align}>
+                {column.title}
               </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {bodyRows.map((row: any) => (
-            <TableRow key={row.name}>
-              {Object.entries(row).map(([key, value]: any) => (
-                <TableCell key={key} align="right">
-                  {value}
+          {data.map((user: any) => (
+            <TableRow key={user.id}>
+              {columns.map((column) => (
+                <TableCell key={column.key} align={column.align}>
+                  {user[column.key]}
                 </TableCell>
               ))}
-              {additionalColumns.length &&
-                additionalColumns.map((item: ReactElement) => item)}
             </TableRow>
           ))}
         </TableBody>

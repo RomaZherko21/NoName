@@ -1,6 +1,5 @@
 import { createContext, useContext } from 'react'
 import AuthorizationModel from 'models/Authorization'
-import NotificationModel from 'models/Notification'
 import fetchService from 'services/fetch/fetch'
 
 import AppConfig from './AppConfig'
@@ -8,11 +7,8 @@ import AppConfig from './AppConfig'
 export class RootStore {
   readonly authorization: AuthorizationModel
 
-  readonly notification: NotificationModel
-
   constructor() {
     this.authorization = new AuthorizationModel(this)
-    this.notification = new NotificationModel(this)
 
     this.init()
   }

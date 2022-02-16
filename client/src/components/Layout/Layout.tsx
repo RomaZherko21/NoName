@@ -5,7 +5,6 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  console.log('hehe')
   return (
     <>
       <Header />

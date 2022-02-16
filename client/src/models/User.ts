@@ -21,9 +21,7 @@ class UserModel {
     this.rootStore = rootStore
   }
 
-  async init() {
-    console.log('user INIt')
-  }
+  async init() {}
 }
 
 export default UserModel

@@ -1,28 +1,33 @@
 import { observer } from 'mobx-react-lite'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
+import { Slide, toast } from 'react-toastify'
 
 import SignIn from 'pages/SignIn/SignIn'
-import Home from 'pages/Home/Home'
 import routes from 'services/routes'
 import Layout from 'components/Layout/Layout'
 import UsersList from 'pages/UsersList/UsersList'
 import { useRootStore } from 'stores/Root'
 
 import './App.scss'
-import Notification from 'components/Notification/Notification'
+
+toast.configure({
+  position: 'top-right',
+  autoClose: 5000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  transition: Slide,
+})
 
 function App() {
-  const {
-    authorization,
-    notification: { message, isOpen, severity },
-  } = useRootStore()
+  const { authorization } = useRootStore()
 
   return authorization.isAuthorized ? (
     <>
-      <Notification message={message} open={isOpen} severity={severity} />
       <Layout>
         <Switch>
-          <Route path={routes.home} component={Home} />
           <Route path={routes.usersList} component={UsersList} />
         </Switch>
       </Layout>

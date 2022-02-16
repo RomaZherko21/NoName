@@ -5,15 +5,12 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 
-import useAuthorize from 'hooks/useAuthorize'
 import { observer } from 'mobx-react-lite'
 import { Link } from 'react-router-dom'
 
 const pages = ['usersList', 'Pricing', 'Blog']
 
 const Header = () => {
-  const isAuthorized = useAuthorize()
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -34,11 +31,9 @@ const Header = () => {
             ))}
           </Box>
 
-          {isAuthorized && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </Box>
-          )}
+          <Box sx={{ flexGrow: 0 }}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
