@@ -18,7 +18,7 @@ const CommonTable = ({
 }) => {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+      <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             {columns.map((column) => (

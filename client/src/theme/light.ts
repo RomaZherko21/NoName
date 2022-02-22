@@ -1,19 +1,29 @@
 const lightTheme = {
   palette: {
     primary: {
-      main: '#121111',
+      main: '#000000',
     },
     secondary: {
-      main: '#c62828',
+      main: '#910500',
     },
     text: {
-      primary: '#f7f7f7',
+      primary: '#F5F5F5',
     },
   },
   typography: {
     htmlFontSize: 18,
     fontFamily: 'Arial',
     fontSize: 16,
+  },
+  components: {
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          borderColor: '#000000',
+          width: '90%',
+        },
+      },
+    },
   },
 }
 

@@ -1,0 +1,16 @@
+.root
+  display: grid
+  grid-template-columns: auto 1fr
+  grid-template-rows: auto 1fr
+  grid-template-areas: "h h" "a c"
+
+.header
+  grid-area: h
+  z-index: 2000 //убрать при подключении theme
+
+.aside
+  grid-area: a
+
+.content
+  grid-area: c
+  padding: 32px

@@ -23,7 +23,7 @@ const UsersList = () => {
   return (
     <>
       <CommonTable data={UserModel.users} columns={columns} />
-      <Button variant="contained" onClick={onCreateUser}>
+      <Button variant="contained" color="secondary" onClick={onCreateUser}>
         Create new user
       </Button>
     </>

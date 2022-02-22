@@ -1,19 +1,39 @@
 const commonTheme = {
   palette: {
     primary: {
-      main: '#121111',
+      main: '#000000',
     },
     secondary: {
-      main: '#c62828',
+      main: '#910500',
     },
     text: {
-      primary: '#f7f7f7',
+      primary: '#F5F5F5',
     },
+  },
+  zIndex: {
+    appBar: 1250,
   },
   typography: {
     htmlFontSize: 18,
     fontFamily: 'Arial',
     fontSize: 16,
+  },
+  components: {
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#910500',
+          width: '90%',
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: '#000',
+        },
+      },
+    },
   },
 }
 

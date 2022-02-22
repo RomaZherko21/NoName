@@ -1,37 +1,36 @@
+import { observer } from 'mobx-react-lite'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
+import ListIcon from '@mui/icons-material/List'
+import { IconButton } from '@mui/material'
 
-import { observer } from 'mobx-react-lite'
-import { Link } from 'react-router-dom'
+interface Props {
+  className?: string
+  toggleMenu: () => void
+}
 
-const pages = ['usersList', 'Pricing', 'Blog']
-
-const Header = () => {
+const Header = ({ className, toggleMenu }: Props) => {
   return (
-    <AppBar position="static" color="secondary">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+    <AppBar position="static" className={className}>
+      <Container>
+        <Toolbar disableGutters sx={{ flexGrow: 1 }}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleMenu}
           >
-            LOGO
+            <ListIcon />
+          </IconButton>
+          <Typography sx={{ flexGrow: 1 }} variant="h6">
+            No Name
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Link to={`/${page}`} color="inherit" key={page}>
-                {page}
-              </Link>
-            ))}
-          </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           </Box>
         </Toolbar>
