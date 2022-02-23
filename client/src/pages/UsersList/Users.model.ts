@@ -17,7 +17,7 @@ class UserModel {
   }
 
   async create(user: User) {
-    const data = await api.user.create(user)
+    await api.user.create(user)
   }
 }
 

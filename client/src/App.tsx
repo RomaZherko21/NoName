@@ -1,6 +1,6 @@
+import 'react-toastify/dist/ReactToastify.css'
 import { observer } from 'mobx-react-lite'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css'
 import { Slide, toast } from 'react-toastify'
 
 import SignIn from 'pages/SignIn/SignIn'

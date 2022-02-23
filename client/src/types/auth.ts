@@ -7,6 +7,7 @@ export interface SignUpData {
   name: string
   surname: string
   email: string
+  role: string
   password: string
   confirmPassword: string
 }
