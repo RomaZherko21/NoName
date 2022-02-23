@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { ModalProvider } from 'react-modal-hook'
 
 import { RootStoreProvider } from 'stores/Root'
 // import AppThemeProvider from 'theme'
@@ -13,7 +14,9 @@ ReactDOM.render(
     <Router>
       <RootStoreProvider>
         {/* <AppThemeProvider> */}
-        <App />
+        <ModalProvider>
+          <App />
+        </ModalProvider>
         {/* </AppThemeProvider> */}
       </RootStoreProvider>
     </Router>

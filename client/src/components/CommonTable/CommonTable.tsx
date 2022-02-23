@@ -9,15 +9,14 @@ import Paper from '@mui/material/Paper'
 
 import { TableColumn } from 'types/common'
 
-const CommonTable = ({
-  data,
-  columns,
-}: {
+interface Props {
   data: any
   columns: TableColumn[]
-}) => {
+}
+
+const CommonTable = ({ data, columns }: Props) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer sx={{ margin: '20px 0' }} component={Paper}>
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>

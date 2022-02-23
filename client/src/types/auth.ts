@@ -4,6 +4,8 @@ export interface SignInData {
 }
 
 export interface SignUpData {
+  name: string
+  surname: string
   email: string
   password: string
   confirmPassword: string

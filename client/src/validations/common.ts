@@ -1,5 +1,17 @@
 import * as yup from 'yup'
 
+export const commonStringValidation = (
+  fieldName: string,
+  minSymbols: number = 1
+) =>
+  yup
+    .string()
+    .min(
+      minSymbols,
+      `${fieldName} should be of minimum ${minSymbols} characters length`
+    )
+    .required(`${fieldName} is required`)
+
 export const emailValidation = yup
   .string()
   .email('Enter a valid email')

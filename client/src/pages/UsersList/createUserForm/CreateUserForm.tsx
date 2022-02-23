@@ -7,6 +7,7 @@ import {
   emailValidation,
   passwordValidation,
   confirmPasswordValidation,
+  commonStringValidation,
 } from 'validations'
 import { useRootStore } from 'stores/Root'
 import { SignUpData } from 'types/auth'
@@ -14,29 +15,58 @@ import { SignUpData } from 'types/auth'
 import styles from './Styles.module.scss'
 
 const validationSchema = yup.object().shape({
+  name: commonStringValidation('Name', 3),
+  surname: commonStringValidation('Surname', 3),
   email: emailValidation,
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation,
 })
 
-const SignUp = () => {
+const CreateUserForm = () => {
   const { authorization } = useRootStore()
 
   const formik = useFormik<SignUpData>({
     initialValues: {
+      name: '',
+      surname: '',
       email: '',
       password: '',
       confirmPassword: '',
     },
     validationSchema,
     onSubmit: (values: SignUpData) => {
-      authorization.signUp(values)
+      console.log('values', values)
+      // authorization.signUp(values)
     },
   })
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.centered}>
-      <Grid item container spacing={2} direction="column" xs={11} md={6}>
+      <Grid item container spacing={2} direction="column">
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            label="Name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="surname"
+            name="surname"
+            label="Surname"
+            value={formik.values.surname}
+            onChange={formik.handleChange}
+            error={formik.touched.surname && Boolean(formik.errors.surname)}
+            helperText={formik.touched.surname && formik.errors.surname}
+          />
+        </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
@@ -90,4 +120,4 @@ const SignUp = () => {
   )
 }
 
-export default observer(SignUp)
+export default observer(CreateUserForm)

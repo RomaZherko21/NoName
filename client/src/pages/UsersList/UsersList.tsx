@@ -3,29 +3,23 @@ import { observer } from 'mobx-react-lite'
 import { Button } from '@mui/material'
 
 import CommonTable from 'components/CommonTable/CommonTable'
+import { useDialog } from 'hooks'
 
 import UserModel from './Users.model'
 import { getColumns } from './columns'
+import CreateUserForm from './createUserForm/CreateUserForm'
 
 const UsersList = () => {
   const columns = useMemo(() => getColumns(), [getColumns])
 
-  const onCreateUser = () => {
-    UserModel.create({
-      name: 'roma',
-      surname: 'zherko',
-      email: 'Romaasd@asd.asd',
-      password: 'qwerqwer',
-      role_id: 2,
-    })
-  }
+  const [showModal] = useDialog('Create new user', <CreateUserForm />)
 
   return (
     <>
-      <CommonTable data={UserModel.users} columns={columns} />
-      <Button variant="contained" color="secondary" onClick={onCreateUser}>
+      <Button variant="contained" color="secondary" onClick={showModal}>
         Create new user
       </Button>
+      <CommonTable data={UserModel.users} columns={columns} />
     </>
   )
 }

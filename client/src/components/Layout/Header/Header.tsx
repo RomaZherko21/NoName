@@ -16,25 +16,23 @@ interface Props {
 const Header = ({ className, toggleMenu }: Props) => {
   return (
     <AppBar position="static" className={className}>
-      <Container>
-        <Toolbar disableGutters sx={{ flexGrow: 1 }}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleMenu}
-          >
-            <ListIcon />
-          </IconButton>
-          <Typography sx={{ flexGrow: 1 }} variant="h6">
-            No Name
-          </Typography>
+      <Toolbar disableGutters sx={{ flexGrow: 1, padding: '0 15px' }}>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={toggleMenu}
+        >
+          <ListIcon />
+        </IconButton>
+        <Typography sx={{ flexGrow: 1 }} variant="h6">
+          No Name
+        </Typography>
 
-          <Box>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-          </Box>
-        </Toolbar>
-      </Container>
+        <Box>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        </Box>
+      </Toolbar>
     </AppBar>
   )
 }
