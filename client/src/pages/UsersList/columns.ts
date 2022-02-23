@@ -1,3 +1,4 @@
+import { ROLES } from 'constants/roles'
 import { TableColumn } from 'types/common'
 
 export const getColumns = (): TableColumn[] => [
@@ -30,5 +31,6 @@ export const getColumns = (): TableColumn[] => [
     title: 'role',
     width: 100,
     align: 'right',
+    getValue: (value) => ROLES[value],
   },
 ]

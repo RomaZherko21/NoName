@@ -3,4 +3,5 @@ export interface TableColumn {
   title: string
   width: number
   align: 'inherit' | 'left' | 'center' | 'right' | 'justify' | undefined
+  getValue?: (item: any) => any
 }

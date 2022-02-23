@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import api from 'services/api'
 import { RootStore } from 'stores/Root'
-import { SignInData, SignUpData } from 'types/auth'
+import { User } from 'types/user'
 
 class AuthorizationModel {
   readonly rootStore: RootStore
@@ -14,13 +14,9 @@ class AuthorizationModel {
     this.rootStore = rootStore
   }
 
-  async signIn(value: SignInData) {
+  async signIn(value: User) {
     await api.auth.signIn(value.email, value.password)
     this.isAuthorized = true
-  }
-
-  async signUp(value: SignUpData) {
-    api.auth.signUp(value.email, value.password)
   }
 
   async unauthorize() {

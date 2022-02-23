@@ -28,11 +28,13 @@ const CommonTable = ({ data, columns }: Props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((user: any) => (
-            <TableRow key={user.id}>
+          {data.map((row: any) => (
+            <TableRow key={row.id}>
               {columns.map((column) => (
                 <TableCell key={column.key} align={column.align}>
-                  {user[column.key]}
+                  {column.getValue
+                    ? column.getValue(row[column.key])
+                    : row[column.key]}
                 </TableCell>
               ))}
             </TableRow>

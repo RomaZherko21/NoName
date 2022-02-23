@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 
 import api from 'services/api'
-import { User } from 'types/user'
+import { UserMeta } from 'types/user'
 
-class UserModel {
-  users: User[] = []
+class UsersModel {
+  users: UserMeta[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -16,9 +16,9 @@ class UserModel {
     this.users = data
   }
 
-  async create(user: User) {
+  async create(user: UserMeta) {
     await api.user.create(user)
   }
 }
 
-export default new UserModel()
+export default new UsersModel()

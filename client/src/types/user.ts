@@ -1,8 +1,13 @@
 export interface User {
-  id?: number
   email: string
-  role_id: number
+  password: string
+}
+
+export interface UserMeta extends User {
+  id?: number
+  role_id?: number
   name: string
   surname: string
-  password?: string
+  role: 'admin' | 'user'
+  confirmPassword?: string
 }

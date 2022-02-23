@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 import CommonTable from 'components/CommonTable/CommonTable'
 import { useDialog } from 'hooks'
 
-import UserModel from './Users.model'
+import UsersModel from './Users.model'
 import { getColumns } from './columns'
 import CreateUserForm from './createUserForm/CreateUserForm'
 
@@ -19,7 +19,7 @@ const UsersList = () => {
       <Button variant="contained" color="secondary" onClick={showModal}>
         Create new user
       </Button>
-      <CommonTable data={UserModel.users} columns={columns} />
+      <CommonTable data={UsersModel.users} columns={columns} />
     </>
   )
 }

@@ -17,10 +17,10 @@ import {
   confirmPasswordValidation,
   commonStringValidation,
 } from 'validations'
-import { SignUpData } from 'types/auth'
-import { roles } from 'constants/index'
-import { useRootStore } from 'stores/Root'
+import { UserMeta } from 'types/user'
+import { roles, ROLES } from 'constants/index'
 
+import UsersModel from '../Users.model'
 import styles from './Styles.module.scss'
 
 const validationSchema = yup.object().shape({
@@ -32,10 +32,8 @@ const validationSchema = yup.object().shape({
 })
 
 const CreateUserForm = () => {
-  const { authorization } = useRootStore()
-
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
-    useFormik<SignUpData>({
+    useFormik<UserMeta>({
       initialValues: {
         name: '',
         surname: '',
@@ -45,8 +43,8 @@ const CreateUserForm = () => {
         confirmPassword: '',
       },
       validationSchema,
-      onSubmit: (val: SignUpData) => {
-        authorization.signUp(val)
+      onSubmit: (val: UserMeta) => {
+        UsersModel.create({ ...val, role_id: ROLES[val.role] })
       },
     })
 
