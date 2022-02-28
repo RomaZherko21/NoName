@@ -32,9 +32,7 @@ const CommonTable = ({ data, columns }: Props) => {
             <TableRow key={row.id}>
               {columns.map((column) => (
                 <TableCell key={column.key} align={column.align}>
-                  {column.getValue
-                    ? column.getValue(row[column.key])
-                    : row[column.key]}
+                  {column.getValue ? column.getValue(row) : row[column.key]}
                 </TableCell>
               ))}
             </TableRow>

@@ -5,21 +5,35 @@ import { Button } from '@mui/material'
 import CommonTable from 'components/CommonTable/CommonTable'
 import { useDialog } from 'hooks'
 
-import UsersModel from './Users.model'
 import { getColumns } from './columns'
-import CreateUserForm from './createUserForm/CreateUserForm'
+import CreateUserForm from './CreateUserForm/CreateUserForm'
+
+const users = [
+  {
+    id: 1,
+    name: 'er',
+    surname: 'er',
+    password: 'HELL',
+    email: 'er',
+    role_id: 1,
+  },
+]
 
 const UsersList = () => {
-  const columns = useMemo(() => getColumns(), [getColumns])
+  const [showCreateUserModal] = useDialog('Create new user', <CreateUserForm />)
 
-  const [showModal] = useDialog('Create new user', <CreateUserForm />)
+  const columns = useMemo(() => getColumns(), [getColumns])
 
   return (
     <>
-      <Button variant="contained" color="secondary" onClick={showModal}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={showCreateUserModal}
+      >
         Create new user
       </Button>
-      <CommonTable data={UsersModel.users} columns={columns} />
+      <CommonTable data={users} columns={columns} />
     </>
   )
 }

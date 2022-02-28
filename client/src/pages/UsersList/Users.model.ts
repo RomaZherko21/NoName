@@ -19,6 +19,14 @@ class UsersModel {
   async create(user: UserMeta) {
     await api.user.create(user)
   }
+
+  async remove(id: number) {
+    await api.user.remove(id)
+  }
+
+  async update(user: UserMeta) {
+    await api.user.update(user)
+  }
 }
 
 export default new UsersModel()
