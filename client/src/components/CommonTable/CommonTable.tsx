@@ -16,8 +16,8 @@ interface Props {
 
 const CommonTable = ({ data, columns }: Props) => {
   return (
-    <TableContainer sx={{ margin: '20px 0' }} component={Paper}>
-      <Table size="small" aria-label="a dense table">
+    <TableContainer component={Paper}>
+      <Table aria-label="a dense table">
         <TableHead>
           <TableRow>
             {columns.map((column) => (

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Button } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 
 import CommonTable from 'components/CommonTable/CommonTable'
 import { useDialog } from 'hooks'
@@ -16,6 +16,7 @@ const users = [
     password: 'HELL',
     email: 'er',
     role_id: 1,
+    role: 'admin',
   },
 ]
 
@@ -25,16 +26,20 @@ const UsersList = () => {
   const columns = useMemo(() => getColumns(), [getColumns])
 
   return (
-    <>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={showCreateUserModal}
-      >
-        Create new user
-      </Button>
-      <CommonTable data={users} columns={columns} />
-    </>
+    <Grid spacing={2} container direction="column">
+      <Grid item alignSelf="flex-end">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={showCreateUserModal}
+        >
+          Create new user
+        </Button>
+      </Grid>
+      <Grid item>
+        <CommonTable data={users} columns={columns} />
+      </Grid>
+    </Grid>
   )
 }
 

@@ -46,7 +46,7 @@ const UpdateUserForm = ({ user }: any) => {
       },
       validationSchema,
       onSubmit: (val: UserMeta) => {
-        UsersModel.create({ ...val, role_id: ROLES[val.role] })
+        UsersModel.update({ ...val, role_id: ROLES[val.role] })
       },
     })
 
