@@ -31,7 +31,7 @@ const validationSchema = yup.object().shape({
   confirmPassword: confirmPasswordValidation,
 })
 
-const CreateUserForm = () => {
+const CreateUserForm = ({ hideModal }: any) => {
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
     useFormik<UserMeta>({
       initialValues: {
@@ -45,6 +45,7 @@ const CreateUserForm = () => {
       validationSchema,
       onSubmit: (val: UserMeta) => {
         UsersModel.create({ ...val, role_id: ROLES[val.role] })
+        hideModal()
       },
     })
 

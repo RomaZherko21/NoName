@@ -6,14 +6,14 @@ import { ROLES } from 'constants/roles'
 import { useDialog } from 'hooks'
 import { TableColumn } from 'types/common'
 import { UserMeta } from 'types/user'
+
 import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'
 
 const ActionButtons = (user: UserMeta) => {
-  const [showUpdateUserModal] = useDialog(
-    'Update new user',
-    <UpdateUserForm user={user} />
-  )
+  const [showUpdateUserModal] = useDialog('Update new user', (hideModal) => (
+    <UpdateUserForm user={user} hideModal={hideModal} />
+  ))
 
   return (
     <>

@@ -21,7 +21,9 @@ const users = [
 ]
 
 const UsersList = () => {
-  const [showCreateUserModal] = useDialog('Create new user', <CreateUserForm />)
+  const [showCreateUserModal] = useDialog('Create new user', (hideModal) => (
+    <CreateUserForm hideModal={hideModal} />
+  ))
 
   const columns = useMemo(() => getColumns(), [getColumns])
 

@@ -31,7 +31,7 @@ const validationSchema = yup.object().shape({
   confirmPassword: confirmPasswordValidation,
 })
 
-const UpdateUserForm = ({ user }: any) => {
+const UpdateUserForm = ({ user, hideModal }: any) => {
   const { name, surname, email, role, password } = user
 
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
@@ -47,6 +47,7 @@ const UpdateUserForm = ({ user }: any) => {
       validationSchema,
       onSubmit: (val: UserMeta) => {
         UsersModel.update({ ...val, role_id: ROLES[val.role] })
+        hideModal()
       },
     })
 

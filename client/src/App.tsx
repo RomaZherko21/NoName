@@ -7,6 +7,7 @@ import SignIn from 'pages/SignIn/SignIn'
 import routes from 'services/routes'
 import Layout from 'components/Layout/Layout'
 import UsersList from 'pages/UsersList/UsersList'
+import Profile from 'pages/Profile/Profile'
 import { useRootStore } from 'stores/Root'
 
 import './App.scss'
@@ -29,6 +30,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path={routes.usersList} component={UsersList} />
+          <Route path={routes.profile} component={Profile} />
         </Switch>
       </Layout>
     </>

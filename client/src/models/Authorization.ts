@@ -19,7 +19,7 @@ class AuthorizationModel {
     this.isAuthorized = true
   }
 
-  async unauthorize() {
+  unauthorize() {
     this.isAuthorized = false
   }
 }
