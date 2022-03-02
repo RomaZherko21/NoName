@@ -6,8 +6,11 @@ import {
   ListItemText,
   Paper,
 } from '@mui/material'
+import { useRootStore } from 'stores/Root'
 
 const Profile = () => {
+  const { user } = useRootStore()
+
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
       <Grid container spacing={3}>
@@ -21,16 +24,16 @@ const Profile = () => {
         <Grid item>
           <List>
             <ListItem disablePadding>
-              <ListItemText primary="Name" secondary="Jan 9, 2014" />
+              <ListItemText primary="Name" secondary={user.name} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Surname" secondary="Jan 9, 2014" />
+              <ListItemText primary="Surname" secondary={user.surname} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Email" secondary="Jan 9, 2014" />
+              <ListItemText primary="Email" secondary={user.email} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Role" secondary="Jan 9, 2014" />
+              <ListItemText primary="Role" secondary={user.role_id} />
             </ListItem>
           </List>
         </Grid>

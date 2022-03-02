@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
 import extractDataInterceptor from './extractDataInterceptor'
+import setAuthInterceptor from './setAuthInterceptor'
 import unauthorizedInterceptor from './unauthorizedInterceptor'
 
 export type FetchServiceConfig = {
@@ -14,6 +15,7 @@ export class FetchService {
   constructor() {
     this.instance = axios.create()
 
+    this.instance.interceptors.request.use(setAuthInterceptor)
     this.instance.interceptors.response.use(extractDataInterceptor)
     this.instance.interceptors.response.use(undefined, unauthorizedInterceptor)
   }

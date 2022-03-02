@@ -8,20 +8,28 @@ class UserModel {
 
   id: number = 0
 
-  email: string = ''
-
-  role_id: number = 0
-
   name: string = ''
 
   surname: string = ''
+
+  email: string = ''
+
+  role_id: number = 0
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
   }
 
-  async init() {}
+  async init() {
+    const data = await api.user.self(this.id)
+
+    this.id = data.id || 0
+    this.name = data.name
+    this.surname = data.surname
+    this.email = data.email
+    this.role_id = data.role_id || 0
+  }
 }
 
 export default UserModel

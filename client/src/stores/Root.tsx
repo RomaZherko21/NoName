@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react'
 import AuthorizationModel from 'models/Authorization'
+import UserModel from 'models/User'
 import fetchService from 'services/fetch/fetch'
 
 import AppConfig from './AppConfig'
@@ -7,8 +8,11 @@ import AppConfig from './AppConfig'
 export class RootStore {
   readonly authorization: AuthorizationModel
 
+  readonly user: UserModel
+
   constructor() {
     this.authorization = new AuthorizationModel(this)
+    this.user = new UserModel(this)
 
     this.init()
   }
