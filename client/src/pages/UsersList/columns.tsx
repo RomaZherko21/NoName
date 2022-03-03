@@ -1,3 +1,5 @@
+import i18n from 'i18n'
+import { useTranslation } from 'react-i18next'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { IconButton, Tooltip } from '@mui/material'
@@ -11,13 +13,16 @@ import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'
 
 const ActionButtons = (user: UserMeta) => {
-  const [showUpdateUserModal] = useDialog('Update new user', (hideModal) => (
-    <UpdateUserForm user={user} hideModal={hideModal} />
-  ))
+  const { t } = useTranslation()
+
+  const [showUpdateUserModal] = useDialog(
+    'user:form.updateUser',
+    (hideModal) => <UpdateUserForm user={user} hideModal={hideModal} />
+  )
 
   return (
     <>
-      <Tooltip title="edit" placement="top">
+      <Tooltip title={i18n.t('actions.edit') || 'edit'} placement="top">
         <IconButton
           aria-label="edit"
           size="small"
@@ -26,7 +31,7 @@ const ActionButtons = (user: UserMeta) => {
           <EditOutlinedIcon color="primary" fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      <Tooltip title="delete" placement="top">
+      <Tooltip title={i18n.t('actions.delete') || 'edit'} placement="top">
         <IconButton
           aria-label="delete"
           size="small"
@@ -49,32 +54,32 @@ export const getColumns = (): TableColumn[] => [
   },
   {
     key: 'name',
-    title: 'name',
+    title: i18n.t('user:name'),
     width: 100,
     align: 'right',
   },
   {
     key: 'surname',
-    title: 'surname',
+    title: i18n.t('user:surname'),
     width: 100,
     align: 'right',
   },
   {
     key: 'email',
-    title: 'email',
+    title: i18n.t('user:email'),
     width: 100,
     align: 'right',
   },
   {
     key: 'role_id',
-    title: 'role',
+    title: i18n.t('user:role'),
     width: 100,
     align: 'right',
     getValue: (row) => ROLES[row.role_id],
   },
   {
     key: 'actions',
-    title: 'action',
+    title: i18n.t('common.actions'),
     width: 100,
     align: 'right',
     getValue: (row) => ActionButtons(row),

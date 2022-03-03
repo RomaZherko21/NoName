@@ -9,6 +9,8 @@ import { RootStoreProvider } from 'stores/Root'
 import './index.scss'
 import App from './App'
 
+import './i18n'
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>

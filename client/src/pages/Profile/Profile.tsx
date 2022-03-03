@@ -1,15 +1,27 @@
+import { useState } from 'react'
+import i18n from 'i18n'
+import { useTranslation } from 'react-i18next'
 import {
   Avatar,
+  FormControl,
   Grid,
+  InputLabel,
   List,
   ListItem,
   ListItemText,
+  MenuItem,
   Paper,
+  Select,
+  SelectChangeEvent,
 } from '@mui/material'
+
 import { useRootStore } from 'stores/Root'
 
 const Profile = () => {
   const { user } = useRootStore()
+  const { t } = useTranslation()
+
+  const [language, setLanguage] = useState('en')
 
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
@@ -24,18 +36,39 @@ const Profile = () => {
         <Grid item>
           <List>
             <ListItem disablePadding>
-              <ListItemText primary="Name" secondary={user.name} />
+              <ListItemText primary={t('user:name')} secondary={user.name} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Surname" secondary={user.surname} />
+              <ListItemText
+                primary={t('user:surname')}
+                secondary={user.surname}
+              />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Email" secondary={user.email} />
+              <ListItemText primary={t('user:email')} secondary={user.email} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Role" secondary={user.role_id} />
+              <ListItemText primary={t('user:role')} secondary={user.role_id} />
             </ListItem>
           </List>
+        </Grid>
+        <Grid item>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Language</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={language}
+              label={t('common.language')}
+              onChange={(event: SelectChangeEvent) => {
+                i18n.changeLanguage(event.target.value as string)
+                setLanguage(event.target.value as string)
+              }}
+            >
+              <MenuItem value="en">{t('common.english')}</MenuItem>
+              <MenuItem value="ru">{t('common.russian')}</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
     </Paper>

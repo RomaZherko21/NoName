@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
+import { useTranslation } from 'react-i18next'
 import { useFormik } from 'formik'
 import {
   Button,
@@ -34,6 +35,8 @@ const validationSchema = yup.object().shape({
 const UpdateUserForm = ({ user, hideModal }: any) => {
   const { name, surname, email, role, password } = user
 
+  const { t } = useTranslation()
+
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
     useFormik<UserMeta>({
       initialValues: {
@@ -59,7 +62,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
             fullWidth
             id="name"
             name="name"
-            label="Name"
+            label={t('user:name')}
             value={values.name}
             onChange={handleChange}
             error={touched.name && Boolean(errors.name)}
@@ -71,7 +74,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
             fullWidth
             id="surname"
             name="surname"
-            label="Surname"
+            label={t('user:surname')}
             value={values.surname}
             onChange={handleChange}
             error={touched.surname && Boolean(errors.surname)}
@@ -83,7 +86,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
             fullWidth
             id="email"
             name="email"
-            label="Email"
+            label={t('user:email')}
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}
@@ -92,7 +95,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
         </Grid>
         <Grid item>
           <FormControl fullWidth>
-            <InputLabel id="role">Role</InputLabel>
+            <InputLabel id="role">{t('user:role')}</InputLabel>
             <Select
               labelId="role"
               id="role"
@@ -113,7 +116,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
             fullWidth
             id="password"
             name="password"
-            label="Password"
+            label={t('user:password')}
             type="password"
             value={values.password}
             onChange={handleChange}
@@ -126,7 +129,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
             fullWidth
             id="confirmPassword"
             name="confirmPassword"
-            label="Confirm password"
+            label={t('user:confirmPassword')}
             type="password"
             value={values.confirmPassword}
             onChange={handleChange}
@@ -136,7 +139,7 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+            {t('common.confirm')}
           </Button>
         </Grid>
       </Grid>

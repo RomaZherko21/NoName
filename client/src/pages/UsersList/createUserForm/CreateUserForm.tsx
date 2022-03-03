@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   FormControl,
@@ -32,6 +33,8 @@ const validationSchema = yup.object().shape({
 })
 
 const CreateUserForm = ({ hideModal }: any) => {
+  const { t } = useTranslation()
+
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
     useFormik<UserMeta>({
       initialValues: {
@@ -57,7 +60,7 @@ const CreateUserForm = ({ hideModal }: any) => {
             fullWidth
             id="name"
             name="name"
-            label="Name"
+            label={t('user:name')}
             value={values.name}
             onChange={handleChange}
             error={touched.name && Boolean(errors.name)}
@@ -69,7 +72,7 @@ const CreateUserForm = ({ hideModal }: any) => {
             fullWidth
             id="surname"
             name="surname"
-            label="Surname"
+            label={t('user:surname')}
             value={values.surname}
             onChange={handleChange}
             error={touched.surname && Boolean(errors.surname)}
@@ -81,7 +84,7 @@ const CreateUserForm = ({ hideModal }: any) => {
             fullWidth
             id="email"
             name="email"
-            label="Email"
+            label={t('user:email')}
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}
@@ -90,12 +93,12 @@ const CreateUserForm = ({ hideModal }: any) => {
         </Grid>
         <Grid item>
           <FormControl fullWidth>
-            <InputLabel id="role">Role</InputLabel>
+            <InputLabel id="role">{t('user:role')}</InputLabel>
             <Select
               labelId="role"
               id="role"
               value={values.role}
-              label="role"
+              label={t('user:role')}
               onChange={(e) => setFieldValue('role', e.target.value)}
             >
               {Object.keys(roles).map((key) => (
@@ -111,7 +114,7 @@ const CreateUserForm = ({ hideModal }: any) => {
             fullWidth
             id="password"
             name="password"
-            label="Password"
+            label={t('user:password')}
             type="password"
             value={values.password}
             onChange={handleChange}
@@ -124,7 +127,7 @@ const CreateUserForm = ({ hideModal }: any) => {
             fullWidth
             id="confirmPassword"
             name="confirmPassword"
-            label="Confirm password"
+            label={t('user:confirmPassword')}
             type="password"
             value={values.confirmPassword}
             onChange={handleChange}
@@ -134,7 +137,7 @@ const CreateUserForm = ({ hideModal }: any) => {
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+            {t('common:submit')}
           </Button>
         </Grid>
       </Grid>

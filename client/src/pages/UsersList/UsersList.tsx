@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
 
@@ -21,9 +22,12 @@ const users = [
 ]
 
 const UsersList = () => {
-  const [showCreateUserModal] = useDialog('Create new user', (hideModal) => (
-    <CreateUserForm hideModal={hideModal} />
-  ))
+  const { t } = useTranslation()
+
+  const [showCreateUserModal] = useDialog(
+    'user:form.createNewUser',
+    (hideModal) => <CreateUserForm hideModal={hideModal} />
+  )
 
   const columns = useMemo(() => getColumns(), [getColumns])
 
@@ -35,7 +39,7 @@ const UsersList = () => {
           color="secondary"
           onClick={showCreateUserModal}
         >
-          Create new user
+          {t('user:form.createNewUser')}
         </Button>
       </Grid>
       <Grid item>

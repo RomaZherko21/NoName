@@ -1,0 +1,16 @@
+{
+  "name":"Имя",
+  "surname":"Фамилия",
+  "email":"Email",
+  "role":"Роль",
+  "password":"Пароль",
+  "confirmPassword":"Подтвердите пароль",
+  "aside":{
+    "usersList":"Список пользователей",
+    "reports":"Отчеты"
+  },
+  "form":{
+    "createNewUser":"Создать нового пользователя",
+    "updateUser":"Обновить пользователя"
+  }
+}

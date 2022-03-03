@@ -1,4 +1,5 @@
 import { Button, Stack } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import { useRootStore } from 'stores/Root'
 
@@ -8,6 +9,8 @@ interface Props {
 
 const ExitDialog = ({ onClose }: Props) => {
   const { authorization } = useRootStore()
+
+  const { t } = useTranslation()
 
   return (
     <Stack direction="row" spacing={2} sx={{ padding: '20px', width: '300px' }}>
@@ -20,7 +23,7 @@ const ExitDialog = ({ onClose }: Props) => {
         color="error"
         fullWidth
       >
-        Exit
+        {t('common.exit')}
       </Button>
     </Stack>
   )

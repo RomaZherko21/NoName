@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
@@ -13,6 +14,8 @@ interface AsideProps {
 }
 
 const Aside = ({ className, isOpen }: AsideProps) => {
+  const { t } = useTranslation()
+
   return (
     <Drawer
       variant="permanent"
@@ -31,15 +34,8 @@ const Aside = ({ className, isOpen }: AsideProps) => {
       <List>
         <AsideItemLink
           icon={<GroupIcon />}
-          title="Список пользователей"
+          title={t('user:aside.usersList')}
           to="/usersList"
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<AddBoxIcon />}
-          title="Загрузить документ"
-          to="/qwe"
           isOpen={isOpen}
         />
 
@@ -49,15 +45,8 @@ const Aside = ({ className, isOpen }: AsideProps) => {
               <AddBoxIcon />
             </Badge>
           }
-          title="Документы"
+          title={t('user:aside.reports')}
           to="/ewq"
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<AddBoxIcon />}
-          title="Отчеты"
-          to="/www"
           isOpen={isOpen}
         />
       </List>

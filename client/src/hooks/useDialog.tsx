@@ -1,4 +1,5 @@
 import { useModal } from 'react-modal-hook'
+import { useTranslation } from 'react-i18next'
 import { Dialog, DialogTitle, IconButton, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -7,19 +8,22 @@ const useDialog = (
   body: (hideModal: () => void) => JSX.Element,
   closable = false
 ) => {
+  const { t } = useTranslation()
+
   const [showModal, hideModal] = useModal(() => (
     <Dialog onClose={() => (closable ? hideModal() : null)} open>
       <DialogTitle>
         <Typography variant="h6" component="div">
-          {title}
+          {t(title)}
         </Typography>
         <IconButton
           aria-label="close"
           onClick={hideModal}
           sx={{
             position: 'absolute',
-            right: 8,
-            top: 8,
+            padding: 0,
+            right: 4,
+            top: 4,
             color: (theme) => theme.palette.grey[500],
           }}
         >

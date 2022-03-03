@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   Box,
@@ -19,8 +20,10 @@ import { useState } from 'react'
 import ExitDialog from './ExitDialog'
 
 const ProfileMenu = () => {
+  const { t } = useTranslation()
+
   const [showConfirmationModal] = useDialog(
-    'Are you want to exit?',
+    'notification:exitConfirm',
     (onClose) => <ExitDialog onClose={onClose} />,
     true
   )
@@ -80,7 +83,7 @@ const ProfileMenu = () => {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary={t('common.profile')} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -95,7 +98,7 @@ const ProfileMenu = () => {
               <ListItemIcon>
                 <MeetingRoomIcon />
               </ListItemIcon>
-              <ListItemText primary="Exit" />
+              <ListItemText primary={t('common.exit')} />
             </ListItemButton>
           </ListItem>
         </List>

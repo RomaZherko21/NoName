@@ -1,0 +1,15 @@
+{
+  "common":{
+    "language":"Язык",
+    "english":"Английский",
+    "russian":"Русский",
+    "exit":"Выход",
+    "profile":"Профиль",
+    "confirm":"Подтвердить",
+    "actions":"Действия"
+  },
+  "actions":{
+    "edit":"Изменить",
+    "delete":"Удалить"
+  }
+}
