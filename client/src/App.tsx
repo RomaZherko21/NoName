@@ -15,17 +15,17 @@ import './App.scss'
 toast.configure({
   position: 'top-right',
   autoClose: 5000,
-  hideProgressBar: true,
+  hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
-  draggable: true,
+  draggable: false,
   transition: Slide,
 })
 
 function App() {
   const { authorization } = useRootStore()
 
-  return true ? (
+  return authorization.isAuthorized ? (
     <>
       <Layout>
         <Switch>

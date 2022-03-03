@@ -6,10 +6,14 @@ import RootStore from 'stores/Root'
 export default function unauthorizedInterceptor(error: AxiosError) {
   const { response } = error
 
-  if (response && response.status === 400) {
-    toast(response.data.message)
+  if (
+    response?.status === 400 ||
+    response?.status === 401 ||
+    response?.status === 500
+  ) {
+    toast.error(response.data.message)
   }
-  if (response && response.status === 403) {
+  if (response?.status === 403) {
     RootStore.authorization.unauthorize()
   }
 

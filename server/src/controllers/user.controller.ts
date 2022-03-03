@@ -1,14 +1,15 @@
+import createError from 'http-errors'
+
 import User from '../models/user.model'
 
 class UserController {
-  async get(req: any, res: any) {
+  async list(req: any, res: any, next: any) {
     try {
-      const { id } = req.body
-      const data = await User.findByPk(id)
+      const data = await User.findAll()
 
       res.status(200).json(data)
-    } catch (err) {
-      res.status().json()
+    } catch {
+      next(createError(500))
     }
   }
 
@@ -18,16 +19,6 @@ class UserController {
       await User.create({ name, surname, email, password, role_id })
     } catch (err) {
       res.status(400).json({ message: err.errors[0].message })
-    }
-  }
-
-  async list(req: any, res: any) {
-    try {
-      const data = await User.findAll()
-      console.log('hehehe', data)
-      res.status(200).json(data)
-    } catch (err) {
-      res.status().json()
     }
   }
 

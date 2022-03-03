@@ -31,3 +31,12 @@ sequelize
   .catch((err: any) =>
     log.negative(`Server has not been started: ${err.message}`)
   )
+
+app.use((error: any, req: any, res: any, next: any) => {
+  log.negative(`${error.status}: ${error.message}`)
+  res.status(error.status || 500)
+  res.json({
+    status: error.status,
+    message: error.message,
+  })
+})

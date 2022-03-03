@@ -22,7 +22,7 @@ class UserModel {
   }
 
   async init() {
-    const data = await api.user.self(this.id)
+    const data = await api.user.self()
 
     this.id = data.id || 0
     this.name = data.name

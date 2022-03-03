@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
@@ -9,18 +9,7 @@ import Pagination from 'components/Pagination'
 
 import { getColumns } from './columns'
 import CreateUserForm from './CreateUserForm/CreateUserForm'
-
-const users = [
-  {
-    id: 1,
-    name: 'er',
-    surname: 'er',
-    password: 'HELL',
-    email: 'er',
-    role_id: 1,
-    role: 'admin',
-  },
-]
+import UsersModel from './Users.model'
 
 const UsersList = () => {
   const { t } = useTranslation()
@@ -31,6 +20,10 @@ const UsersList = () => {
   )
 
   const columns = useMemo(() => getColumns(), [getColumns])
+
+  useEffect(() => {
+    UsersModel.init()
+  }, [])
 
   return (
     <Grid spacing={2} container direction="column">
@@ -44,7 +37,7 @@ const UsersList = () => {
         </Button>
       </Grid>
       <Grid item>
-        <CommonTable data={users} columns={columns} />
+        <CommonTable data={UsersModel.users} columns={columns} />
       </Grid>
       <Grid item>
         <Pagination />
