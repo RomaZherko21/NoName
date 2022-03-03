@@ -5,6 +5,7 @@ import { Button, Grid } from '@mui/material'
 
 import CommonTable from 'components/CommonTable/CommonTable'
 import { useDialog } from 'hooks'
+import Pagination from 'components/Pagination'
 
 import { getColumns } from './columns'
 import CreateUserForm from './CreateUserForm/CreateUserForm'
@@ -44,6 +45,9 @@ const UsersList = () => {
       </Grid>
       <Grid item>
         <CommonTable data={users} columns={columns} />
+      </Grid>
+      <Grid item>
+        <Pagination />
       </Grid>
     </Grid>
   )

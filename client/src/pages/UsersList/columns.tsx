@@ -22,7 +22,7 @@ const ActionButtons = (user: UserMeta) => {
 
   return (
     <>
-      <Tooltip title={i18n.t('actions.edit') || 'edit'} placement="top">
+      <Tooltip title={t('actions.edit') || 'edit'} placement="top">
         <IconButton
           aria-label="edit"
           size="small"
@@ -31,7 +31,7 @@ const ActionButtons = (user: UserMeta) => {
           <EditOutlinedIcon color="primary" fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      <Tooltip title={i18n.t('actions.delete') || 'edit'} placement="top">
+      <Tooltip title={t('actions.delete') || 'edit'} placement="top">
         <IconButton
           aria-label="delete"
           size="small"

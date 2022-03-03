@@ -54,7 +54,9 @@ const Profile = () => {
         </Grid>
         <Grid item>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Language</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              {t('common.language')}
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
