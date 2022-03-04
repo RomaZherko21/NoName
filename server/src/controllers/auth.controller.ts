@@ -1,9 +1,10 @@
+import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
 import User from '../models/user.model'
 
 class AuthController {
-  async signIn(req: any, res: any, next: any) {
+  async signIn(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body
       const data = await User.findOne({
