@@ -1,9 +1,10 @@
+import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
 import User from '../models/user.model'
 
 class UserController {
-  async list(req: any, res: any, next: any) {
+  async list(req: Request, res: Response, next: NextFunction) {
     try {
       const data = await User.findAll()
 
@@ -13,7 +14,7 @@ class UserController {
     }
   }
 
-  async create(req: any, res: any) {
+  async create(req: Request, res: Response) {
     try {
       const { name, surname, email, password, role_id } = req.body
       await User.create({ name, surname, email, password, role_id })
@@ -22,14 +23,14 @@ class UserController {
     }
   }
 
-  async self(req: any, res: any) {
+  async self(req: Request, res: Response) {
     try {
       const { id } = req.body
       const data = await User.findByPk(id)
 
       res.status(200).json(data)
     } catch (err) {
-      res.status().json()
+      res.status(401).json()
     }
   }
 }
