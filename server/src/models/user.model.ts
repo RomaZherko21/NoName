@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 
 import sequelize from '.'
 
-const User = sequelize.define(
+const UserModel = sequelize.define(
   'users',
   {
     id: {
@@ -35,4 +35,4 @@ const User = sequelize.define(
   }
 )
 
-export default User
+export default UserModel

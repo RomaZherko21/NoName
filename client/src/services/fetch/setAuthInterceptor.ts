@@ -3,12 +3,12 @@ import { AxiosRequestConfig } from 'axios'
 import rootStore from 'stores/Root'
 
 export default function setAuthInterceptor(config: AxiosRequestConfig) {
-  const accessToken = rootStore.authorization.getAccessToken()
+  const token = rootStore.authorization.accessToken
 
   if (config.headers) {
-    if (accessToken) {
+    if (token) {
       // eslint-disable-next-line no-param-reassign
-      config.headers.Authorization = `Bearer ${accessToken}`
+      config.headers.Authorization = `Bearer ${token}`
     } else {
       // eslint-disable-next-line no-param-reassign
       delete config.headers.Authorization
