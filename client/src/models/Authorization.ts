@@ -22,6 +22,10 @@ class AuthorizationModel {
     this._accessToken = this.getAccessToken()
   }
 
+  get accessToken() {
+    return this._accessToken
+  }
+
   getAccessToken() {
     return localStorage.getItem(ACCESS_TOKEN) || ''
   }
@@ -34,9 +38,9 @@ class AuthorizationModel {
   async signIn(value: User) {
     const data = await api.auth.signIn(value.email, value.password)
 
-    this.setAccessToken(data.access)
+    this.setAccessToken(data.accessToken)
     this.isAuthorized = true
-    this.rootStore.user.init()
+    // this.rootStore.user.init()
   }
 
   unauthorize() {

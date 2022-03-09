@@ -14,16 +14,14 @@ import UsersModel from './Users.model'
 const UsersList = () => {
   const { t } = useTranslation()
 
+  // const data = useMemo(() => new UsersModel(), [])
+
   const [showCreateUserModal] = useDialog(
     'user:form.createNewUser',
     (hideModal) => <CreateUserForm hideModal={hideModal} />
   )
 
   const columns = useMemo(() => getColumns(), [getColumns])
-
-  useEffect(() => {
-    UsersModel.init()
-  }, [])
 
   return (
     <Grid spacing={2} container direction="column">

@@ -1,20 +1,31 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
-import User from '../models/user.model'
+import UserModel from '../models/user.model'
 
 class AuthController {
   async signIn(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body
-      const data = await User.findOne({
+      const data: any = await UserModel.findOne({
         where: {
           email,
-          password,
         },
       })
-      if (!data) return next(createError(401, 'Wrong email or password'))
-      res.status(200).json()
+      if (!data) return next(createError(401, 'Wrong email'))
+
+      const compare = await bcrypt.compare(password, data.password)
+
+      if (compare) {
+        const token = jwt.sign({ email }, process.env.TOKEN_SECRET, {
+          expiresIn: '1800s',
+        })
+        res.status(200).json({ accessToken: token })
+      } else {
+        return next(createError(401, 'Wrong password'))
+      }
     } catch {
       next(createError(500))
     }

@@ -1,13 +1,15 @@
 require('dotenv').config()
 import express, { NextFunction, Request, Response } from 'express'
-import { ValidationErrorItem } from 'sequelize/dist'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import jwt from 'jsonwebtoken'
+import createError from 'http-errors'
 
 import router from './routes'
 import sequelize from './models'
 import log from './helpers/logs'
-import { HttpException } from './types/Common'
+import { HttpException } from './types/common'
+import { ValidationErrorItem } from 'sequelize/dist'
 
 const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } =
   process.env
@@ -20,6 +22,31 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.originalUrl === '/auth/signIn') return next()
+
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  console.log('token', token)
+
+  if (!token) return next(createError(403))
+
+  jwt.verify(
+    token,
+    process.env.TOKEN_SECRET as string,
+    (err: any, user: any) => {
+      console.log(user)
+
+      if (err) return next(createError(403))
+
+      // req.user = user
+
+      next()
+    }
+  )
+})
 
 app.use('/', router)
 
