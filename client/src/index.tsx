@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ModalProvider } from 'react-modal-hook'
+import { configure } from 'mobx'
 
 import { RootStoreProvider } from 'stores/Root'
 // import AppThemeProvider from 'theme'
@@ -10,6 +11,10 @@ import './index.scss'
 import App from './App'
 
 import './i18n'
+
+configure({
+  reactionScheduler: (f) => setTimeout(f),
+})
 
 ReactDOM.render(
   <React.StrictMode>

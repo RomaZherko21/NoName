@@ -19,10 +19,14 @@ class UserModel {
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
+
+    this.init()
   }
 
   async init() {
     const data = await api.user.self()
+
+    this.rootStore.authorization.isAuthorized = true
 
     this.id = data.id || 0
     this.name = data.name

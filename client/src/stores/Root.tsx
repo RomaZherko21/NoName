@@ -11,10 +11,10 @@ export class RootStore {
   readonly user: UserModel
 
   constructor() {
+    this.init()
+
     this.authorization = new AuthorizationModel(this)
     this.user = new UserModel(this)
-
-    this.init()
   }
 
   async init() {

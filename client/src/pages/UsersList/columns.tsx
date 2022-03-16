@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { IconButton, Tooltip } from '@mui/material'
+import { observer } from 'mobx-react-lite'
 
 import { ROLES } from 'constants/roles'
 import { useDialog } from 'hooks'
@@ -12,7 +13,7 @@ import { UserMeta } from 'types/user'
 import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'
 
-const ActionButtons = (user: UserMeta) => {
+const ActionButtons = observer(({ user }: { user: UserMeta }) => {
   const { t } = useTranslation()
 
   const [showUpdateUserModal] = useDialog(
@@ -43,7 +44,7 @@ const ActionButtons = (user: UserMeta) => {
       </Tooltip>
     </>
   )
-}
+})
 
 export const getColumns = (): TableColumn[] => [
   {
@@ -82,6 +83,6 @@ export const getColumns = (): TableColumn[] => [
     title: i18n.t('common.actions'),
     width: 100,
     align: 'right',
-    getValue: (row) => ActionButtons(row),
+    getValue: (row: any) => <ActionButtons user={row} />,
   },
 ]

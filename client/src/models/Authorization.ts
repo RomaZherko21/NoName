@@ -16,6 +16,8 @@ class AuthorizationModel {
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
+
+    this.init()
   }
 
   init() {

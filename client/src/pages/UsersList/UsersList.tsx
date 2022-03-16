@@ -14,7 +14,9 @@ import UsersModel from './Users.model'
 const UsersList = () => {
   const { t } = useTranslation()
 
-  // const data = useMemo(() => new UsersModel(), [])
+  useEffect(() => {
+    UsersModel.fetch()
+  }, [])
 
   const [showCreateUserModal] = useDialog(
     'user:form.createNewUser',

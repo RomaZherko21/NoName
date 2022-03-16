@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { observer } from 'mobx-react-lite'
 import { Button, Grid, TextField } from '@mui/material'
 
 import { emailValidation, passwordValidation } from 'validations'
@@ -65,4 +66,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default observer(SignIn)
