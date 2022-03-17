@@ -1,3 +1,4 @@
 {
-  "exitConfirm":"Are you want to exit?"
+  "exitConfirm":"Are you want to exit?",
+  "removeConfirm":"Are you want to delete?"
 }

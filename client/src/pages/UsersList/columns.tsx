@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import i18n from 'i18n'
 import { useTranslation } from 'react-i18next'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -12,6 +13,7 @@ import { UserMeta } from 'types/user'
 
 import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'
+import DeleteUserDialog from './DeleteUserDialog'
 
 const ActionButtons = observer(({ user }: { user: UserMeta }) => {
   const { t } = useTranslation()
@@ -19,6 +21,17 @@ const ActionButtons = observer(({ user }: { user: UserMeta }) => {
   const [showUpdateUserModal] = useDialog(
     'user:form.updateUser',
     (hideModal) => <UpdateUserForm user={user} hideModal={hideModal} />
+  )
+
+  const removeUser = useCallback(
+    () => user.id && UsersModel.remove(user.id),
+    [user.id]
+  )
+
+  const [showConfirmationModal] = useDialog(
+    'notification:removeConfirm',
+    (onClose) => <DeleteUserDialog onSubmit={removeUser} onClose={onClose} />,
+    true
   )
 
   return (
@@ -36,8 +49,7 @@ const ActionButtons = observer(({ user }: { user: UserMeta }) => {
         <IconButton
           aria-label="delete"
           size="small"
-          // eslint-disable-next-line
-          onClick={() => UsersModel.remove(user.id || 0)}
+          onClick={showConfirmationModal}
         >
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
