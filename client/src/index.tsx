@@ -7,9 +7,9 @@ import { configure } from 'mobx'
 import { RootStoreProvider } from 'stores/Root'
 // import AppThemeProvider from 'theme'
 
-import './index.scss'
 import App from './App'
 
+import './index.scss'
 import './i18n'
 
 configure({
