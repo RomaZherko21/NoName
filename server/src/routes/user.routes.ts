@@ -4,9 +4,9 @@ import userController from '../controllers/user.controller'
 
 const user = express.Router()
 
-user.get('/list', userController.list)
 user.get('/self', userController.self)
 
+user.post('/list', userController.list)
 user.post('/create', userController.create)
 user.post('/update', userController.update)
 user.post('/remove', userController.remove)

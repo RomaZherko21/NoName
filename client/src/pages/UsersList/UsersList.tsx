@@ -16,7 +16,7 @@ const UsersList = () => {
 
   useEffect(() => {
     UsersModel.fetch()
-  }, [])
+  }, [UsersModel.pagination.page, UsersModel.pagination.perPage])
 
   const [showCreateUserModal] = useDialog(
     'user:form.createNewUser',
@@ -40,7 +40,7 @@ const UsersList = () => {
         <CommonTable data={UsersModel.users} columns={columns} />
       </Grid>
       <Grid item>
-        <Pagination />
+        <Pagination paginationModel={UsersModel.pagination} />
       </Grid>
     </Grid>
   )

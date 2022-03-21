@@ -8,9 +8,13 @@ import UserModel from '../models/user.model'
 class UserController {
   async list(req: Request, res: Response, next: NextFunction) {
     try {
-      const data = await UserModel.findAll()
+      const { offset, limit } = req.body
+      const data = await UserModel.findAll({
+        offset: offset || 0,
+        limit: limit || 2,
+      })
 
-      res.status(200).json(data)
+      res.status(200).json({ users: data, count: data.length })
     } catch {
       next(createError(500))
     }

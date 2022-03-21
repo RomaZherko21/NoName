@@ -1,15 +1,16 @@
 {
-  "common":{
-    "language":"Language",
-    "english":"English",
-    "russian":"Russian",
-    "exit":"Exit",
-    "profile":"Profile",
-    "confirm":"Confirm",
-    "actions":"Actions"
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "russian": "Russian",
+    "exit": "Exit",
+    "profile": "Profile",
+    "confirm": "Confirm",
+    "actions": "Actions",
+    "amount": "Amount"
   },
-  "actions":{
-    "edit":"Edit",
-    "delete":"Delete"
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

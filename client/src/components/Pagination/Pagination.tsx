@@ -1,19 +1,56 @@
-import * as React from 'react'
-import { Pagination as MUiPagination } from '@mui/material'
+import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Pagination as MUiPagination,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material'
 import Stack from '@mui/material/Stack'
 
-const Pagination = () => {
+import PaginationModel from 'models/Pagination'
+import { useTranslation } from 'react-i18next'
+
+interface Props {
+  paginationModel: PaginationModel
+}
+
+const Pagination = ({ paginationModel }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Stack spacing={2}>
+      <FormControl fullWidth>
+        <InputLabel id="perPage">{t('common.amount')}</InputLabel>
+        <Select
+          labelId="perPage"
+          id="perPage"
+          value={String(paginationModel.perPage)}
+          label={t('common.amount')}
+          onChange={(event: SelectChangeEvent) => {
+            // eslint-disable-next-line
+            paginationModel.perPage = Number(event.target.value)
+          }}
+        >
+          {paginationModel.perPageArr.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <MUiPagination
-        count={10}
+        count={paginationModel.pageCount}
         color="primary"
         onChange={(event: React.ChangeEvent<unknown>, page: number) => {
-          console.log(event, page)
+          // eslint-disable-next-line
+          paginationModel.page = page
+          console.log(page)
         }}
       />
     </Stack>
   )
 }
 
-export default Pagination
+export default observer(Pagination)

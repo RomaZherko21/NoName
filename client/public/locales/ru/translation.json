@@ -1,15 +1,16 @@
 {
-  "common":{
-    "language":"Язык",
-    "english":"Английский",
-    "russian":"Русский",
-    "exit":"Выход",
-    "profile":"Профиль",
-    "confirm":"Подтвердить",
-    "actions":"Действия"
+  "common": {
+    "language": "Язык",
+    "english": "Английский",
+    "russian": "Русский",
+    "exit": "Выход",
+    "profile": "Профиль",
+    "confirm": "Подтвердить",
+    "actions": "Действия",
+    "amount": "Количество"
   },
-  "actions":{
-    "edit":"Изменить",
-    "delete":"Удалить"
+  "actions": {
+    "edit": "Изменить",
+    "delete": "Удалить"
   }
 }
