@@ -93,6 +93,6 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('common.actions'),
     width: 100,
     align: 'right',
-    getValue: (row: any) => <ActionButtons user={row} />,
+    getValue: (row: UserMeta) => <ActionButtons user={row} />,
   },
 ]

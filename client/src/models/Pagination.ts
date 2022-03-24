@@ -17,32 +17,32 @@ class PaginationModel {
     makeAutoObservable(this)
   }
 
-  get pageCount() {
-    return Math.ceil(this._count / this.perPage) || 1
+  set count(data: number) {
+    this._count = data
   }
 
   get count() {
     return this._count
   }
 
-  set count(data: number) {
-    this._count = data
+  set page(page: number) {
+    this._page = page || 1
   }
 
   get page() {
     return this._page
   }
 
-  set page(page: number) {
-    this._page = page || 1
+  set perPage(perPage: number) {
+    this._perPage = perPage || 1
   }
 
   get perPage() {
     return this._perPage
   }
 
-  set perPage(perPage: number) {
-    this._perPage = perPage || 1
+  get pageCount() {
+    return Math.ceil(this._count / this.perPage) || 1
   }
 
   get offset() {

@@ -20,20 +20,20 @@ class AuthorizationModel {
     this.init()
   }
 
-  init() {
-    this._accessToken = this.getAccessToken()
-  }
-
-  get accessToken() {
-    return this._accessToken
+  set isAuthorized(data: boolean) {
+    this._isAuthorized = data
   }
 
   get isAuthorized() {
     return this._isAuthorized
   }
 
-  set isAuthorized(data: boolean) {
-    this._isAuthorized = data
+  get accessToken() {
+    return this._accessToken
+  }
+
+  init() {
+    this._accessToken = this.getAccessToken()
   }
 
   getAccessToken() {
@@ -45,16 +45,16 @@ class AuthorizationModel {
     localStorage.setItem(ACCESS_TOKEN, value)
   }
 
+  unauthorize() {
+    this.isAuthorized = false
+  }
+
   async signIn(value: User) {
     const data = await api.auth.signIn(value.email, value.password)
 
     this.setAccessToken(data.accessToken)
     this.isAuthorized = true
     // this.rootStore.user.init()
-  }
-
-  unauthorize() {
-    this.isAuthorized = false
   }
 }
 
