@@ -1,9 +1,10 @@
-export const roles = {
-  admin: 1,
-  user: 2,
+export const ROLES = {
+  admin: 'admin',
+  user: 'user',
 }
 
-export enum ROLES {
-  admin = 1,
-  user = 2,
+export enum TRoles {
+  admin = 'admin',
+  user = 'user',
+  empty = '',
 }

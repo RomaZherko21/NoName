@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import api from 'services/api'
+import { TRoles } from 'constants/index'
 import { RootStore } from 'stores/Root'
 
 class UserModel {
@@ -14,7 +15,7 @@ class UserModel {
 
   email: string = ''
 
-  role_id: number = 0
+  role: TRoles = TRoles.user
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
@@ -24,15 +25,15 @@ class UserModel {
   }
 
   async init() {
-    const data = await api.user.self()
+    const { id, name, surname, email, role } = await api.user.self()
 
     this.rootStore.authorization.isAuthorized = true
 
-    this.id = data.id || 0
-    this.name = data.name
-    this.surname = data.surname
-    this.email = data.email
-    this.role_id = data.role_id || 0
+    this.id = id || 0
+    this.name = name
+    this.surname = surname
+    this.email = email
+    this.role = role
   }
 }
 

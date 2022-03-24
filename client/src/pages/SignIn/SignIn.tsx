@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import { Button, Grid, TextField } from '@mui/material'
 
 import { emailValidation, passwordValidation } from 'validations'
@@ -10,11 +11,12 @@ import { User } from 'types/user'
 import styles from './Styles.module.scss'
 
 const validationSchema = yup.object().shape({
-  email: emailValidation,
-  password: passwordValidation,
+  email: emailValidation(),
+  password: passwordValidation(),
 })
 
 const SignIn = () => {
+  const { t } = useTranslation()
   const { authorization } = useRootStore()
 
   const formik = useFormik<User>({
@@ -58,7 +60,7 @@ const SignIn = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+            {t('common.confirm')}
           </Button>
         </Grid>
       </Grid>

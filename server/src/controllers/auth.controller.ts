@@ -6,9 +6,9 @@ import bcrypt from 'bcrypt'
 import UserModel from '../models/user.model'
 
 class AuthController {
-  async signIn(req: Request, res: Response, next: NextFunction) {
+  async signIn({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { email, password } = req.body
+      const { email, password } = body
       const data: any = await UserModel.findOne({
         where: {
           email,

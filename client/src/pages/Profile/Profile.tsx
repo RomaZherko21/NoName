@@ -48,7 +48,7 @@ const Profile = () => {
               <ListItemText primary={t('user:email')} secondary={user.email} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary={t('user:role')} secondary={user.role_id} />
+              <ListItemText primary={t('user:role')} secondary={user.role} />
             </ListItem>
           </List>
         </Grid>

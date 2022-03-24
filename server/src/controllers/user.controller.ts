@@ -6,32 +6,27 @@ import jwt from 'jsonwebtoken'
 import UserModel from '../models/user.model'
 
 class UserController {
-  async list(req: Request, res: Response, next: NextFunction) {
+  async list({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { offset, limit } = req.body
-      const data = await UserModel.findAll({
+      const { offset, limit } = body
+      const { rows, count } = await UserModel.findAndCountAll({
         offset: offset || 0,
         limit: limit || 2,
       })
 
-      res.status(200).json({ users: data, count: data.length })
+      res.status(200).json({ users: rows, count })
     } catch {
       next(createError(500))
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { name, surname, email, password, role_id } = req.body
-
-      const hash = await bcrypt.hash(password, 10)
+      const hash = await bcrypt.hash(body.password, 10)
 
       const data = await UserModel.create({
-        name,
-        surname,
-        email,
+        ...body,
         password: hash,
-        role_id,
       })
 
       res.status(200).json(data)
@@ -40,23 +35,18 @@ class UserController {
     }
   }
 
-  async update(req: Request, res: Response, next: NextFunction) {
+  async update({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { name, surname, email, password, role_id } = req.body
-
-      const hash = await bcrypt.hash(password, 10)
+      const hash = await bcrypt.hash(body.password, 10)
 
       const data = await UserModel.update(
         {
-          name,
-          surname,
-          email,
+          ...body,
           password: hash,
-          role_id,
         },
         {
           where: {
-            email,
+            email: body.email,
           },
         }
       )

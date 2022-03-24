@@ -1,3 +1,9 @@
 {
-  "validation":"Валидация"
+  "validation":"Валидация",
+  "error":{
+    "isRequired":"Поле {{field}} необходимо",
+    "minSymbols":"Поле {{field}} должно состоять минимум из {{count}} символов",
+    "validField":"Введите валидное {{field}} поле",
+    "needMatched":"{{field}} должны совподать"
+  }
 }

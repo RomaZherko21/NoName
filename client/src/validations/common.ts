@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import i18n from 'i18n'
 
 export const commonStringValidation = (
   fieldName: string,
@@ -8,21 +9,58 @@ export const commonStringValidation = (
     .string()
     .min(
       minSymbols,
-      `${fieldName} should be of minimum ${minSymbols} characters length`
+      i18n.t('validation:error.minSymbols', {
+        field: i18n.t(`user:${fieldName.toLowerCase()}`),
+        count: minSymbols,
+      })
     )
-    .required(`${fieldName} is required`)
+    .required(
+      i18n.t('validation:error.isRequired', {
+        field: i18n.t(`user:${fieldName.toLowerCase()}`),
+      })
+    )
 
-export const emailValidation = yup
-  .string()
-  .email('Enter a valid email')
-  .required('Email is required')
+export const emailValidation = () =>
+  yup
+    .string()
+    .email(
+      i18n.t('validation:error.validField', {
+        field: i18n.t('user:email'),
+      })
+    )
+    .required(
+      i18n.t('validation:error.isRequired', {
+        field: i18n.t('user:email'),
+      })
+    )
 
-export const passwordValidation = yup
-  .string()
-  .min(8, 'Password should be of minimum 8 characters length')
-  .required('Password is required')
+export const passwordValidation = () =>
+  yup
+    .string()
+    .min(
+      8,
+      i18n.t('validation:error.minSymbols', {
+        field: i18n.t('user:password'),
+        count: 8,
+      })
+    )
+    .required(
+      i18n.t('validation:error.isRequired', {
+        field: i18n.t('user:password'),
+      })
+    )
 
-export const confirmPasswordValidation = yup
-  .string()
-  .oneOf([yup.ref('password'), null], 'Passwords must match')
-  .required('Password confirmed is required')
+export const confirmPasswordValidation = () =>
+  yup
+    .string()
+    .oneOf(
+      [yup.ref('password'), null],
+      i18n.t('validation:error.needMatched', {
+        field: i18n.t('user:password'),
+      })
+    )
+    .required(
+      i18n.t('validation:error.isRequired', {
+        field: i18n.t('user:confirmPassword'),
+      })
+    )

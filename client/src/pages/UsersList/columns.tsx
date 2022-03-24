@@ -6,7 +6,6 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { IconButton, Tooltip } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
-import { ROLES } from 'constants/roles'
 import { useDialog } from 'hooks'
 import { TableColumn } from 'types/common'
 import { UserMeta } from 'types/user'
@@ -84,11 +83,10 @@ export const getColumns = (): TableColumn[] => [
     align: 'right',
   },
   {
-    key: 'role_id',
+    key: 'role',
     title: i18n.t('user:role'),
     width: 100,
     align: 'right',
-    getValue: (row) => ROLES[row.role_id],
   },
   {
     key: 'actions',

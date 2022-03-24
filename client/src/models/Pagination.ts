@@ -18,7 +18,6 @@ class PaginationModel {
   }
 
   get pageCount() {
-    console.log(this.count, this.perPage)
     return Math.ceil(this.count / this.perPage) || 1
   }
 

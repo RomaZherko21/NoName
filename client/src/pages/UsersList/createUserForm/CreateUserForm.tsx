@@ -1,10 +1,12 @@
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
+import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import {
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -19,21 +21,26 @@ import {
   commonStringValidation,
 } from 'validations'
 import { UserMeta } from 'types/user'
-import { roles, ROLES } from 'constants/index'
+import { ROLES, TRoles } from 'constants/index'
 
 import UsersModel from '../Users.model'
 import styles from './Styles.module.scss'
 
-const validationSchema = yup.object().shape({
-  name: commonStringValidation('Name', 3),
-  surname: commonStringValidation('Surname', 3),
-  email: emailValidation,
-  password: passwordValidation,
-  confirmPassword: confirmPasswordValidation,
-})
-
 const CreateUserForm = ({ hideModal }: any) => {
   const { t } = useTranslation()
+
+  const validationSchema = useMemo(
+    () =>
+      yup.object().shape({
+        name: commonStringValidation('Name', 3),
+        surname: commonStringValidation('Surname', 3),
+        email: emailValidation(),
+        role: commonStringValidation('Role'),
+        password: passwordValidation(),
+        confirmPassword: confirmPasswordValidation(),
+      }),
+    []
+  )
 
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
     useFormik<UserMeta>({
@@ -41,13 +48,13 @@ const CreateUserForm = ({ hideModal }: any) => {
         name: '',
         surname: '',
         email: '',
-        role: 'admin',
+        role: TRoles.empty,
         password: '',
         confirmPassword: '',
       },
       validationSchema,
       onSubmit: (val: UserMeta) => {
-        UsersModel.create({ ...val, role_id: ROLES[val.role] })
+        UsersModel.create(val)
         hideModal()
       },
     })
@@ -92,7 +99,7 @@ const CreateUserForm = ({ hideModal }: any) => {
           />
         </Grid>
         <Grid item>
-          <FormControl fullWidth>
+          <FormControl fullWidth error={touched.role && Boolean(errors.role)}>
             <InputLabel id="role">{t('user:role')}</InputLabel>
             <Select
               labelId="role"
@@ -101,12 +108,13 @@ const CreateUserForm = ({ hideModal }: any) => {
               label={t('user:role')}
               onChange={(e) => setFieldValue('role', e.target.value)}
             >
-              {Object.keys(roles).map((key) => (
-                <MenuItem key={key} value={key}>
-                  {key}
+              {Object.values(ROLES).map((value) => (
+                <MenuItem key={value} value={value}>
+                  {value}
                 </MenuItem>
               ))}
             </Select>
+            {touched.role && <FormHelperText>{errors.role}</FormHelperText>}
           </FormControl>
         </Grid>
         <Grid item>
@@ -137,7 +145,7 @@ const CreateUserForm = ({ hideModal }: any) => {
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
-            {t('common:submit')}
+            {t('common.confirm')}
           </Button>
         </Grid>
       </Grid>

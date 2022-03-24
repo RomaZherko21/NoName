@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import {
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -19,7 +20,7 @@ import {
   commonStringValidation,
 } from 'validations'
 import { UserMeta } from 'types/user'
-import { roles, ROLES } from 'constants/index'
+import { ROLES } from 'constants/index'
 
 import UsersModel from '../Users.model'
 import styles from './Styles.module.scss'
@@ -27,13 +28,13 @@ import styles from './Styles.module.scss'
 const validationSchema = yup.object().shape({
   name: commonStringValidation('Name', 3),
   surname: commonStringValidation('Surname', 3),
-  email: emailValidation,
-  password: passwordValidation,
-  confirmPassword: confirmPasswordValidation,
+  email: emailValidation(),
+  password: passwordValidation(),
+  confirmPassword: confirmPasswordValidation(),
 })
 
 const UpdateUserForm = ({ user, hideModal }: any) => {
-  const { name, surname, email, role, password } = user
+  const { name, surname, email, role } = user
 
   const { t } = useTranslation()
 
@@ -44,12 +45,12 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
         surname,
         email,
         role,
-        password,
-        confirmPassword: password,
+        password: '',
+        confirmPassword: '',
       },
       validationSchema,
       onSubmit: (val: UserMeta) => {
-        UsersModel.update({ ...val, role_id: ROLES[val.role] })
+        UsersModel.update(val)
         hideModal()
       },
     })
@@ -103,12 +104,13 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
               label="role"
               onChange={(e) => setFieldValue('role', e.target.value)}
             >
-              {Object.keys(roles).map((key) => (
-                <MenuItem key={key} value={key}>
-                  {key}
+              {Object.values(ROLES).map((value) => (
+                <MenuItem key={value} value={value}>
+                  {value}
                 </MenuItem>
               ))}
             </Select>
+            {touched.role && <FormHelperText>{errors.role}</FormHelperText>}
           </FormControl>
         </Grid>
         <Grid item>
