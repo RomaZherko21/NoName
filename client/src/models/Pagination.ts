@@ -9,7 +9,7 @@ class PaginationModel {
 
   private _offset: number = 0
 
-  count: number = 0
+  private _count: number = 0
 
   perPageArr: number[] = [2, 10, 15, 20]
 
@@ -18,7 +18,15 @@ class PaginationModel {
   }
 
   get pageCount() {
-    return Math.ceil(this.count / this.perPage) || 1
+    return Math.ceil(this._count / this.perPage) || 1
+  }
+
+  get count() {
+    return this._count
+  }
+
+  set count(data: number) {
+    this._count = data
   }
 
   get page() {

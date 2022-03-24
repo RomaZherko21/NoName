@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import i18n from 'i18n'
 import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 import {
   Avatar,
   FormControl,
@@ -63,7 +63,7 @@ const Profile = () => {
               value={language}
               label={t('common.language')}
               onChange={(event: SelectChangeEvent) => {
-                i18n.changeLanguage(event.target.value as string)
+                i18next.changeLanguage(event.target.value as string)
                 setLanguage(event.target.value as string)
               }}
             >

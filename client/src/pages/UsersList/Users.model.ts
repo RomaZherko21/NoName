@@ -5,7 +5,7 @@ import { UserMeta } from 'types/user'
 import PaginationModel from 'models/Pagination'
 
 class UsersModel {
-  users: UserMeta[] = []
+  private _users: UserMeta[] = []
 
   pagination: PaginationModel
 
@@ -13,6 +13,14 @@ class UsersModel {
     makeAutoObservable(this)
 
     this.pagination = new PaginationModel()
+  }
+
+  set users(data: UserMeta[]) {
+    this._users = data
+  }
+
+  get users() {
+    return this._users
   }
 
   async fetch() {

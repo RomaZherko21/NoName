@@ -29,6 +29,7 @@ function App() {
     <>
       <Layout>
         <Switch>
+          <Redirect from={routes.signIn} to={routes.usersList} />
           <Route path={routes.usersList} component={UsersList} />
           <Route path={routes.profile} component={Profile} />
         </Switch>

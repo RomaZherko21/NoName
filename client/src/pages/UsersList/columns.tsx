@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import i18n from 'i18n'
 import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { IconButton, Tooltip } from '@mui/material'
@@ -66,31 +66,31 @@ export const getColumns = (): TableColumn[] => [
   },
   {
     key: 'name',
-    title: i18n.t('user:name'),
+    title: i18next.t('user:name'),
     width: 100,
     align: 'right',
   },
   {
     key: 'surname',
-    title: i18n.t('user:surname'),
+    title: i18next.t('user:surname'),
     width: 100,
     align: 'right',
   },
   {
     key: 'email',
-    title: i18n.t('user:email'),
+    title: i18next.t('user:email'),
     width: 100,
     align: 'right',
   },
   {
     key: 'role',
-    title: i18n.t('user:role'),
+    title: i18next.t('user:role'),
     width: 100,
     align: 'right',
   },
   {
     key: 'actions',
-    title: i18n.t('common.actions'),
+    title: i18next.t('common.actions'),
     width: 100,
     align: 'right',
     getValue: (row: any) => <ActionButtons user={row} />,

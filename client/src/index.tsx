@@ -9,8 +9,8 @@ import { RootStoreProvider } from 'stores/Root'
 
 import App from './App'
 
-import './index.scss'
 import './i18n'
+import './index.scss'
 
 configure({
   reactionScheduler: (f) => setTimeout(f),

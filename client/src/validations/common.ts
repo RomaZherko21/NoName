@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import i18n from 'i18n'
+import i18next from 'i18next'
 
 export const commonStringValidation = (
   fieldName: string,
@@ -9,14 +9,14 @@ export const commonStringValidation = (
     .string()
     .min(
       minSymbols,
-      i18n.t('validation:error.minSymbols', {
-        field: i18n.t(`user:${fieldName.toLowerCase()}`),
+      i18next.t('validation:error.minSymbols', {
+        field: i18next.t(`user:${fieldName.toLowerCase()}`),
         count: minSymbols,
       })
     )
     .required(
-      i18n.t('validation:error.isRequired', {
-        field: i18n.t(`user:${fieldName.toLowerCase()}`),
+      i18next.t('validation:error.isRequired', {
+        field: i18next.t(`user:${fieldName.toLowerCase()}`),
       })
     )
 
@@ -24,13 +24,13 @@ export const emailValidation = () =>
   yup
     .string()
     .email(
-      i18n.t('validation:error.validField', {
-        field: i18n.t('user:email'),
+      i18next.t('validation:error.validField', {
+        field: i18next.t('user:email'),
       })
     )
     .required(
-      i18n.t('validation:error.isRequired', {
-        field: i18n.t('user:email'),
+      i18next.t('validation:error.isRequired', {
+        field: i18next.t('user:email'),
       })
     )
 
@@ -39,14 +39,14 @@ export const passwordValidation = () =>
     .string()
     .min(
       8,
-      i18n.t('validation:error.minSymbols', {
-        field: i18n.t('user:password'),
+      i18next.t('validation:error.minSymbols', {
+        field: i18next.t('user:password'),
         count: 8,
       })
     )
     .required(
-      i18n.t('validation:error.isRequired', {
-        field: i18n.t('user:password'),
+      i18next.t('validation:error.isRequired', {
+        field: i18next.t('user:password'),
       })
     )
 
@@ -55,12 +55,12 @@ export const confirmPasswordValidation = () =>
     .string()
     .oneOf(
       [yup.ref('password'), null],
-      i18n.t('validation:error.needMatched', {
-        field: i18n.t('user:password'),
+      i18next.t('validation:error.needMatched', {
+        field: i18next.t('user:password'),
       })
     )
     .required(
-      i18n.t('validation:error.isRequired', {
-        field: i18n.t('user:confirmPassword'),
+      i18next.t('validation:error.isRequired', {
+        field: i18next.t('user:confirmPassword'),
       })
     )

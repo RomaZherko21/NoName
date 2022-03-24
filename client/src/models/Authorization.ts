@@ -9,7 +9,7 @@ const ACCESS_TOKEN = 'ACCESS_TOKEN'
 class AuthorizationModel {
   readonly rootStore: RootStore
 
-  isAuthorized: boolean = false
+  private _isAuthorized: boolean = false
 
   private _accessToken: string | null = null
 
@@ -26,6 +26,14 @@ class AuthorizationModel {
 
   get accessToken() {
     return this._accessToken
+  }
+
+  get isAuthorized() {
+    return this._isAuthorized
+  }
+
+  set isAuthorized(data: boolean) {
+    this._isAuthorized = data
   }
 
   getAccessToken() {
