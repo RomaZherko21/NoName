@@ -47,10 +47,12 @@ class AuthorizationModel {
 
   unauthorize() {
     this.isAuthorized = false
+    localStorage.removeItem(ACCESS_TOKEN)
   }
 
   async signIn(value: User) {
     const data = await api.auth.signIn(value.email, value.password)
+    this.rootStore.user.init()
 
     this.setAccessToken(data.accessToken)
     this.isAuthorized = true

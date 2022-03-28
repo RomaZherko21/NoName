@@ -43,6 +43,7 @@ const Pagination = ({ paginationModel }: Props) => {
 
       <MUiPagination
         count={paginationModel.pageCount}
+        defaultPage={paginationModel.page}
         color="primary"
         onChange={(event: React.ChangeEvent<unknown>, page: number) => {
           // eslint-disable-next-line
