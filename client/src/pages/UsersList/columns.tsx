@@ -61,37 +61,26 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'id',
     title: 'id',
-    width: 100,
-    align: 'right',
   },
   {
     key: 'name',
     title: i18next.t('user:name'),
-    width: 100,
-    align: 'right',
   },
   {
     key: 'surname',
     title: i18next.t('user:surname'),
-    width: 100,
-    align: 'right',
   },
   {
     key: 'email',
     title: i18next.t('user:email'),
-    width: 100,
-    align: 'right',
   },
   {
     key: 'role',
     title: i18next.t('user:role'),
-    width: 100,
-    align: 'right',
   },
   {
     key: 'actions',
     title: i18next.t('common.actions'),
-    width: 100,
     align: 'right',
     getValue: (row: UserMeta) => <ActionButtons user={row} />,
   },

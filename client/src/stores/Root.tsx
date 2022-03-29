@@ -1,5 +1,7 @@
 import { createContext, useContext } from 'react'
+
 import AuthorizationModel from 'models/Authorization'
+import LoadingModel from 'models/Loading'
 import UserModel from 'models/User'
 import fetchService from 'services/fetch/fetch'
 
@@ -10,11 +12,15 @@ export class RootStore {
 
   readonly user: UserModel
 
+  readonly loading: LoadingModel
+
   constructor() {
     this.init()
 
     this.authorization = new AuthorizationModel(this)
     this.user = new UserModel(this)
+
+    this.loading = new LoadingModel()
   }
 
   async init() {
