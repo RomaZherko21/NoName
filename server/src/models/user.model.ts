@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 
 import sequelize from '.'
+import ItemModel from './item.model'
 
 const UserModel = sequelize.define(
   'users',
@@ -34,5 +35,7 @@ const UserModel = sequelize.define(
     tableName: 'users', // You can simply tell DataTypes the name of the table directly
   }
 )
+
+UserModel.hasMany(ItemModel)
 
 export default UserModel

@@ -5,10 +5,6 @@
   "role":"Role",
   "password":"Password",
   "confirmPassword":"Confirm password",
-  "aside":{
-    "usersList":"Users list",
-    "reports":"Reports"
-  },
   "form":{
     "createNewUser":"Create new user",
     "updateUser":"Update user"

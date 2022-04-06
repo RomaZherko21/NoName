@@ -11,6 +11,7 @@ import Profile from 'pages/Profile/Profile'
 import { useRootStore } from 'stores/Root'
 
 import './App.scss'
+import ItemsList from 'pages/ItemsList/ItemsList'
 
 toast.configure({
   position: 'top-right',
@@ -31,6 +32,7 @@ function App() {
         <Switch>
           <Redirect from={routes.signIn} to={routes.usersList} />
           <Route path={routes.usersList} component={UsersList} />
+          <Route path={routes.items} component={ItemsList} />
           <Route path={routes.profile} component={Profile} />
         </Switch>
       </Layout>

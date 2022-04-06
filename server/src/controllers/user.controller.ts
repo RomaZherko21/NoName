@@ -10,8 +10,8 @@ class UserController {
     try {
       const { offset, limit } = body
       const { rows, count } = await UserModel.findAndCountAll({
-        offset: offset || 0,
-        limit: limit || 2,
+        offset,
+        limit,
       })
 
       res.status(200).json({ users: rows, count })

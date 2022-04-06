@@ -15,6 +15,7 @@ declare global {
       DB_HOST: string
 
       TOKEN_SECRET: string
+      ACCESS_TOKEN_EXPIRED_TIME: string
     }
   }
 }

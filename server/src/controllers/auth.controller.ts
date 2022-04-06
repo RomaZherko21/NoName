@@ -20,7 +20,7 @@ class AuthController {
 
       if (compare) {
         const token = jwt.sign({ email }, process.env.TOKEN_SECRET, {
-          expiresIn: '1800s',
+          expiresIn: process.env.ACCESS_TOKEN_EXPIRED_TIME,
         })
         res.status(200).json({ accessToken: token })
       } else {

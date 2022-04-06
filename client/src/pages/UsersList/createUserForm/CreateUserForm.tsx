@@ -53,8 +53,8 @@ const CreateUserForm = ({ hideModal }: any) => {
         confirmPassword: '',
       },
       validationSchema,
-      onSubmit: (val: UserMeta) => {
-        UsersModel.create(val)
+      onSubmit: (value: UserMeta) => {
+        UsersModel.create(value)
         hideModal()
       },
     })

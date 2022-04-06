@@ -49,8 +49,8 @@ const UpdateUserForm = ({ user, hideModal }: any) => {
         confirmPassword: '',
       },
       validationSchema,
-      onSubmit: (val: UserMeta) => {
-        UsersModel.update(val)
+      onSubmit: (value: UserMeta) => {
+        UsersModel.update(value)
         hideModal()
       },
     })
