@@ -4,6 +4,7 @@ import itemController from '../controllers/item.controller'
 
 const item = express.Router()
 
+item.post('/list', itemController.list)
 item.post('/create', itemController.create)
 
 export default item

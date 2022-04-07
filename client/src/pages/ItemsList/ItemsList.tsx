@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
@@ -5,6 +6,7 @@ import { Button, Grid } from '@mui/material'
 import { useDialog } from 'hooks'
 import Pagination from 'components/Pagination'
 import Spinner from 'components/Spinner/Spinner'
+import CommonCard from 'components/CommonCard'
 
 import CreateItemForm from './CreateItemForm/CreateItemForm'
 import ItemsModel from './Items.model'
@@ -12,9 +14,9 @@ import ItemsModel from './Items.model'
 const ItemsList = () => {
   const { t } = useTranslation()
 
-  // useEffect(() => {
-  //   ItemsModel.fetch()
-  // }, [ItemsModel.pagination.page, ItemsModel.pagination.perPage])
+  useEffect(() => {
+    ItemsModel.fetch()
+  }, [ItemsModel.pagination.page, ItemsModel.pagination.perPage])
 
   const [showCreateItemModal] = useDialog('item:form.create', (hideModal) => (
     <CreateItemForm hideModal={hideModal} />
@@ -31,7 +33,15 @@ const ItemsList = () => {
           {t('item:form.create')}
         </Button>
       </Grid>
-      <Grid item>{ItemsModel.loading.has ? <Spinner /> : <>HELL</>}</Grid>
+      <Grid item>
+        {ItemsModel.loading.has ? (
+          <Spinner />
+        ) : (
+          ItemsModel.items.map((item) => (
+            <CommonCard name={item.name} description={item.description} />
+          ))
+        )}
+      </Grid>
       <Grid item>
         <Pagination paginationModel={ItemsModel.pagination} />
       </Grid>
