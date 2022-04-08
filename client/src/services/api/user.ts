@@ -14,4 +14,10 @@ export const list = (limit: number, offset: number) =>
     offset,
   })
 
+export const uploadPhoto = (file: any) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  return fetch.post<any>('/user/uploadPhoto', formData)
+}
+
 export const self = () => fetch.get<UserMeta>('/user/self')

@@ -14,6 +14,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material'
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload'
 
 import { useRootStore } from 'stores/Root'
 
@@ -21,15 +22,64 @@ const Profile = () => {
   const { user } = useRootStore()
   const { t } = useTranslation()
 
+  const [selectedFile, setSelectedFile] = useState<any>('')
+
   const [language, setLanguage] = useState('en')
+
+  const handleUploadClick = async (event: any) => {
+    // const file = event.target.files[0]
+    // const data = new FormData()
+
+    // data.append('avatar', file)
+
+    await user.uploadPhoto(event.target.files[0])
+
+    // reader.onloadend = function (e: any) {
+    //   const blob = new Blob([new Uint8Array(e.target.result)], {
+    //     type: file.type,
+    //   })
+    //   console.log(blob)
+    //   setSelectedFile(reader.result)
+    // }
+
+    // setSelectedFile(event.target.files[0])
+  }
 
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
       <Grid container spacing={3}>
         <Grid item>
+          {user.avatar ? (
+            <Avatar
+              alt="Remy Sharp"
+              src={user.avatar}
+              sx={{ width: 146, height: 146 }}
+            />
+          ) : (
+            <>
+              <label htmlFor="upload-file">
+                <input
+                  accept="image/*"
+                  name="avatar"
+                  style={{ display: 'none' }}
+                  id="upload-file"
+                  multiple={false}
+                  type="file"
+                  onChange={handleUploadClick}
+                />{' '}
+                <Avatar
+                  style={{ cursor: 'pointer' }}
+                  alt="Upload"
+                  sx={{ width: 146, height: 146 }}
+                >
+                  <DriveFolderUploadIcon fontSize="large" />
+                </Avatar>
+              </label>
+            </>
+          )}
           <Avatar
             alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
+            src={selectedFile}
             sx={{ width: 146, height: 146 }}
           />
         </Grid>

@@ -11,4 +11,5 @@ export interface UserMeta extends User {
   surname: string
   role: TRoles
   confirmPassword?: string
+  avatar?: string
 }

@@ -102,6 +102,29 @@ class UserController {
       next(createError(500))
     }
   }
+
+  async uploadPhoto(req: any, res: Response, next: NextFunction) {
+    console.log(req.file, req.body)
+    try {
+      if (req.file) {
+        console.log(req.file.path)
+      }
+      // console.log('EHHEHEHE')
+      // const { file } = req.body
+      // console.log(file)
+      // const data = await UserModel.destroy({
+      //   where: {
+      //     id,
+      //   },
+      // })
+
+      // if (!data) return next(createError(403, 'Unauthorized'))
+
+      // res.status(200).json(data)
+    } catch (err) {
+      next(createError(500))
+    }
+  }
 }
 
 export default new UserController()

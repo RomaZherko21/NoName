@@ -3,6 +3,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
+import path from 'path'
 
 import router from './routes'
 import sequelize from './models'
@@ -21,6 +22,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 app.use(useAuth)
 

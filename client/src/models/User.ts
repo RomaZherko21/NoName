@@ -15,6 +15,8 @@ class UserModel {
 
   email: string = ''
 
+  avatar: string = ''
+
   role: TRoles = TRoles.user
 
   constructor(rootStore: RootStore) {
@@ -25,15 +27,21 @@ class UserModel {
   }
 
   async init() {
-    const { id, name, surname, email, role } = await api.user.self()
+    const { id, name, surname, email, role, avatar } = await api.user.self()
 
     this.rootStore.authorization.isAuthorized = true
 
     this.id = id || 0
     this.name = name
     this.surname = surname
+    this.avatar = avatar || ''
     this.email = email
     this.role = role
+  }
+
+  async uploadPhoto(file: any) {
+    const data = await api.user.uploadPhoto(file)
+    console.log(data)
   }
 }
 
