@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
+import { API_URL } from 'constants/config'
+
 import extractDataInterceptor from './extractDataInterceptor'
 import setAuthInterceptor from './setAuthInterceptor'
 import unauthorizedInterceptor from './unauthorizedInterceptor'
@@ -21,7 +23,7 @@ export class FetchService {
   }
 
   init() {
-    this.instance.defaults.baseURL = 'http://localhost:5000'
+    this.instance.defaults.baseURL = API_URL
   }
 
   public post<T>(

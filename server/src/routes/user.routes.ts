@@ -12,6 +12,6 @@ user.post('/create', userController.create)
 user.post('/update', userController.update)
 user.post('/remove', userController.remove)
 
-user.post('/uploadPhoto', useFile.single('file'), userController.uploadPhoto)
+user.post('/uploadPhoto', useFile.single('avatar'), userController.uploadPhoto)
 
 export default user

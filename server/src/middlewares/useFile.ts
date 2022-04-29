@@ -1,24 +1,13 @@
 import multer from 'multer'
 
+//only multipart/form-data
 const storage = multer.diskStorage({
-  destination(req: any, file: any, cb: any) {
-    console.log('HEHEHE', file)
-    cb(null, 'images/')
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/')
   },
-  //   filename(req: any, file: any, cb: any) {
-  //     cb(null, new Date().toISOString() + '-' + file.originalname)
-  //   },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + Date.now() + '.jpg')
+  },
 })
-
-const allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg']
-
-const fileFilter = (req: any, file: any, cb: any) => {
-  console.log('FUCK')
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true)
-  } else {
-    cb(null, false)
-  }
-}
 
 export default multer({ storage })

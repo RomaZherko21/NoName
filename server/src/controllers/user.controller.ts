@@ -104,23 +104,17 @@ class UserController {
   }
 
   async uploadPhoto(req: any, res: Response, next: NextFunction) {
-    console.log(req.file, req.body)
     try {
-      if (req.file) {
-        console.log(req.file.path)
+      const { id } = req.body
+      if (req.file && id) {
+        const [result] = await UserModel.update(
+          { avatar: req.file.filename },
+          { where: { id } }
+        )
+        res.status(200).json({ url: req.file.filename })
+      } else {
+        next(createError(400, 'Avatar wasnt uploaded'))
       }
-      // console.log('EHHEHEHE')
-      // const { file } = req.body
-      // console.log(file)
-      // const data = await UserModel.destroy({
-      //   where: {
-      //     id,
-      //   },
-      // })
-
-      // if (!data) return next(createError(403, 'Unauthorized'))
-
-      // res.status(200).json(data)
     } catch (err) {
       next(createError(500))
     }

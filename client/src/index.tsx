@@ -5,12 +5,15 @@ import { ModalProvider } from 'react-modal-hook'
 import { configure } from 'mobx'
 
 import { RootStoreProvider } from 'stores/Root'
+// import dotenv from 'dotenv'
 // import AppThemeProvider from 'theme'
 
 import App from './App'
 
 import './i18n'
 import './index.scss'
+
+// dotenv.config()
 
 configure({
   reactionScheduler: (f) => setTimeout(f),

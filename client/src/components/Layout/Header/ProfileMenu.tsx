@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
   Avatar,
@@ -15,12 +17,14 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 
 import { useDialog } from 'hooks'
-import { useState } from 'react'
+import { useRootStore } from 'stores/Root'
 
 import ExitDialog from './ExitDialog'
 
 const ProfileMenu = () => {
   const { t } = useTranslation()
+
+  const { user } = useRootStore()
 
   const [showConfirmationModal] = useDialog(
     'notification:exitConfirm',
@@ -52,7 +56,7 @@ const ProfileMenu = () => {
           <Avatar
             alt="Remy Sharp"
             sx={{ cursor: 'pointer' }}
-            src="/static/images/avatar/2.jpg"
+            src={user.getPhotoUrl()}
           />
         </Box>
       </IconButton>
@@ -107,4 +111,4 @@ const ProfileMenu = () => {
   )
 }
 
-export default ProfileMenu
+export default observer(ProfileMenu)

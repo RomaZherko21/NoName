@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
+import { observer } from 'mobx-react-lite'
 import {
   Avatar,
   FormControl,
@@ -14,74 +15,50 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material'
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload'
+import EditIcon from '@mui/icons-material/Edit'
 
 import { useRootStore } from 'stores/Root'
+import Spinner from 'components/Spinner/Spinner'
+
+import styles from './Styles.module.scss'
 
 const Profile = () => {
-  const { user } = useRootStore()
+  const { user, loading } = useRootStore()
   const { t } = useTranslation()
-
-  const [selectedFile, setSelectedFile] = useState<any>('')
 
   const [language, setLanguage] = useState('en')
 
   const handleUploadClick = async (event: any) => {
-    // const file = event.target.files[0]
-    // const data = new FormData()
-
-    // data.append('avatar', file)
-
     await user.uploadPhoto(event.target.files[0])
-
-    // reader.onloadend = function (e: any) {
-    //   const blob = new Blob([new Uint8Array(e.target.result)], {
-    //     type: file.type,
-    //   })
-    //   console.log(blob)
-    //   setSelectedFile(reader.result)
-    // }
-
-    // setSelectedFile(event.target.files[0])
   }
 
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
       <Grid container spacing={3}>
         <Grid item>
-          {user.avatar ? (
-            <Avatar
-              alt="Remy Sharp"
-              src={user.avatar}
-              sx={{ width: 146, height: 146 }}
-            />
+          {loading.has ? (
+            <Spinner />
           ) : (
-            <>
-              <label htmlFor="upload-file">
-                <input
-                  accept="image/*"
-                  name="avatar"
-                  style={{ display: 'none' }}
-                  id="upload-file"
-                  multiple={false}
-                  type="file"
-                  onChange={handleUploadClick}
-                />{' '}
-                <Avatar
-                  style={{ cursor: 'pointer' }}
-                  alt="Upload"
-                  sx={{ width: 146, height: 146 }}
-                >
-                  <DriveFolderUploadIcon fontSize="large" />
-                </Avatar>
-              </label>
-            </>
+            <label htmlFor="upload-file" className={styles.avatar}>
+              <input
+                accept="image/*"
+                name="avatar"
+                style={{ display: 'none' }}
+                id="upload-file"
+                multiple={false}
+                type="file"
+                onChange={handleUploadClick}
+              />
+              <Avatar
+                style={{ cursor: 'pointer' }}
+                alt="Upload"
+                src={user.getPhotoUrl()}
+                sx={{ width: 100, height: 100 }}
+                // className={styles.avatar}
+              />
+              <EditIcon className={styles.editIcon} />
+            </label>
           )}
-          <Avatar
-            alt="Remy Sharp"
-            src={selectedFile}
-            sx={{ width: 146, height: 146 }}
-          />
         </Grid>
         <Grid item>
           <List>
@@ -127,4 +104,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default observer(Profile)

@@ -22,7 +22,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
-app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/uploads', express.static(path.join('uploads')))
 
 app.use(useAuth)
 

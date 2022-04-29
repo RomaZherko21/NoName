@@ -14,9 +14,10 @@ export const list = (limit: number, offset: number) =>
     offset,
   })
 
-export const uploadPhoto = (file: any) => {
+export const uploadPhoto = async (avatar: any, id: number) => {
   const formData = new FormData()
-  formData.append('file', file)
+  formData.append('avatar', avatar)
+  formData.append('id', String(id))
   return fetch.post<any>('/user/uploadPhoto', formData)
 }
 

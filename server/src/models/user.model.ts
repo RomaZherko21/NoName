@@ -30,6 +30,9 @@ const UserModel = sequelize.define(
     role: {
       type: DataTypes.STRING,
     },
+    avatar: {
+      type: DataTypes.STRING,
+    },
   },
   {
     tableName: 'users', // You can simply tell DataTypes the name of the table directly
