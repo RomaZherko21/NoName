@@ -1,13 +1,38 @@
+import { Request } from 'express'
 import multer from 'multer'
+import createError from 'http-errors'
+
+type FileNameCallback = (error: Error | null, filename: string) => void
+
+const validFileExtensions = ['image/png', 'image/jpg', 'image/jpeg']
 
 //only multipart/form-data
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/')
+  destination: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: FileNameCallback
+  ) => {
+    console.log(file)
+    if (file.fieldname === 'avatar') {
+      cb(null, 'uploads/avatars')
+    }
   },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + Date.now() + '.jpg')
+  filename: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
+    cb(null, `${file.fieldname}${Date.now()}.${file.mimetype.split('/')[1]}`)
   },
 })
 
-export default multer({ storage })
+const fileFilter = (
+  req: Request,
+  file: Express.Multer.File,
+  cb: (err: Error | null, filename: boolean) => void
+) => {
+  if (validFileExtensions.includes(file.mimetype)) {
+    cb(null, true)
+  } else {
+    cb(createError(400, 'Not valid file format'), false)
+  }
+}
+
+export default multer({ storage, fileFilter })

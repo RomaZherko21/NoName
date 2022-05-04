@@ -39,7 +39,7 @@ const Profile = () => {
           {loading.has ? (
             <Spinner />
           ) : (
-            <label htmlFor="upload-file" className={styles.avatar}>
+            <label htmlFor="upload-file">
               <input
                 accept="image/*"
                 name="avatar"
@@ -49,14 +49,15 @@ const Profile = () => {
                 type="file"
                 onChange={handleUploadClick}
               />
-              <Avatar
-                style={{ cursor: 'pointer' }}
-                alt="Upload"
-                src={user.getPhotoUrl()}
-                sx={{ width: 100, height: 100 }}
-                // className={styles.avatar}
-              />
-              <EditIcon className={styles.editIcon} />
+              <div className={styles.avatar}>
+                <Avatar
+                  style={{ cursor: 'pointer' }}
+                  alt="Upload"
+                  src={user.getPhotoUrl()}
+                  sx={{ width: 100, height: 100 }}
+                />
+                <EditIcon className={styles.editIcon} />
+              </div>
             </label>
           )}
         </Grid>

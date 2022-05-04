@@ -51,7 +51,7 @@ class UserModel {
   }
 
   getPhotoUrl() {
-    return `${API_URL}/uploads/${this.avatar.url}`
+    return `${API_URL}/uploads/avatars/${this.avatar.url}`
   }
 
   async uploadPhoto(file: File) {

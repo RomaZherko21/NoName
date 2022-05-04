@@ -105,13 +105,15 @@ class UserController {
 
   async uploadPhoto(req: any, res: Response, next: NextFunction) {
     try {
+      const { file } = req
       const { id } = req.body
-      if (req.file && id) {
+
+      if (file && id) {
         const [result] = await UserModel.update(
-          { avatar: req.file.filename },
+          { avatar: file.filename },
           { where: { id } }
         )
-        res.status(200).json({ url: req.file.filename })
+        res.status(200).json({ url: file.filename })
       } else {
         next(createError(400, 'Avatar wasnt uploaded'))
       }
