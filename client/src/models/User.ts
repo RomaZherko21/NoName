@@ -51,17 +51,18 @@ class UserModel {
   }
 
   getPhotoUrl() {
-    return `${API_URL}/uploads/avatars/${this.avatar.url}`
+    return `${API_URL}/uploads/avatar/${this.avatar.url}`
   }
 
   async uploadPhoto(file: File) {
     this.rootStore.loading.begin()
-
-    const { url } = await api.user.uploadPhoto(file, this.id)
-
-    this.rootStore.loading.end()
-
-    this.avatar.setFileData(file, url)
+    try {
+      const { url } = await api.user.uploadPhoto(file, this.id)
+      this.avatar.setFileData(file, url)
+      this.rootStore.loading.end()
+    } catch {
+      this.rootStore.loading.end()
+    }
   }
 }
 
