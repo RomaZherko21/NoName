@@ -7,6 +7,7 @@ import { useDialog } from 'hooks'
 import Pagination from 'components/Pagination'
 import Spinner from 'components/Spinner/Spinner'
 import CommonCard from 'components/CommonCard'
+import { API_URL } from 'constants/config'
 
 import CreateItemForm from './CreateItemForm/CreateItemForm'
 import ItemsModel from './Items.model'
@@ -38,7 +39,11 @@ const ItemsList = () => {
           <Spinner />
         ) : (
           ItemsModel.items.map((item) => (
-            <CommonCard name={item.name} description={item.description} />
+            <CommonCard
+              name={item.name}
+              description={item.description}
+              imageUrl={`${API_URL}/uploads/item/${item.item}`}
+            />
           ))
         )}
       </Grid>

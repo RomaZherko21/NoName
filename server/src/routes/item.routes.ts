@@ -1,10 +1,11 @@
 import express from 'express'
 
 import itemController from '../controllers/item.controller'
+import useFile from '../middlewares/useFile'
 
 const item = express.Router()
 
 item.post('/list', itemController.list)
-item.post('/create', itemController.create)
+item.post('/create', useFile.single('item'), itemController.create)
 
 export default item

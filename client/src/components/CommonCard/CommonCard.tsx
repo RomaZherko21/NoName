@@ -16,9 +16,10 @@ import ShareIcon from '@mui/icons-material/Share'
 interface Props {
   name: string
   description: string
+  imageUrl: string
 }
 
-const CommonCard = ({ name, description }: Props) => {
+const CommonCard = ({ name, description, imageUrl }: Props) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -38,7 +39,7 @@ const CommonCard = ({ name, description }: Props) => {
       <CardMedia
         component="img"
         height="194"
-        image="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+        image={imageUrl}
         alt="Paella dish"
       />
       <CardContent>

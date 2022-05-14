@@ -5,3 +5,28 @@
   justify-content: center;
   align-items: center;
 }
+
+.avatar {
+  position: relative;
+  width: fit-content;
+
+  .editIcon {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+  }
+
+  &:hover {
+      img {
+          transition: .3s ease;
+          filter: brightness(70%);
+      }
+
+      .editIcon {
+          display: block;
+      }
+  }
+}

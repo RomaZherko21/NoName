@@ -7,6 +7,7 @@ type FileNameCallback = (error: Error | null, filename: string) => void
 const validFileExtensions = ['image/png', 'image/jpg', 'image/jpeg']
 const FILE_FIELD_NAMES = {
   avatar: 'avatar',
+  item: 'item',
 }
 
 //only multipart/form-data
@@ -19,9 +20,15 @@ const storage = multer.diskStorage({
     if (file.fieldname === FILE_FIELD_NAMES.avatar) {
       cb(null, `uploads/${FILE_FIELD_NAMES.avatar}`)
     }
+    if (file.fieldname === FILE_FIELD_NAMES.item) {
+      cb(null, `uploads/${FILE_FIELD_NAMES.item}`)
+    }
   },
   filename: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
     if (file.fieldname === FILE_FIELD_NAMES.avatar) {
+      cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
+    }
+    if (file.fieldname === FILE_FIELD_NAMES.item) {
       cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
     }
   },

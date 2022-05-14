@@ -41,13 +41,12 @@ const Profile = () => {
           ) : (
             <label htmlFor="upload-file">
               <input
-                accept="image/*"
-                name="avatar"
-                style={{ display: 'none' }}
                 id="upload-file"
-                multiple={false}
+                name="avatar"
                 type="file"
+                accept="image/*"
                 onChange={handleUploadClick}
+                style={{ display: 'none' }}
               />
               <div className={styles.avatar}>
                 <Avatar

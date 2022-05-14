@@ -8,4 +8,13 @@ export const list = (limit: number, offset: number, userId: number) =>
     offset,
   })
 
-export const create = (item: Item) => fetch.post<Item>('/item/create', item)
+export const create = async (item: any) => {
+  const formData = new FormData()
+
+  // eslint-disable-next-line
+  for (const key in item) {
+    formData.append(key, item[key])
+  }
+
+  return fetch.post<Item>('/item/create', formData)
+}

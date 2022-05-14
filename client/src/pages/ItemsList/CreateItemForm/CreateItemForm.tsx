@@ -3,7 +3,8 @@ import * as yup from 'yup'
 import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Button, Grid, TextField } from '@mui/material'
+import { Avatar, Button, Grid, TextField } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
 
 import { commonStringValidation } from 'validations'
 import { useRootStore } from 'stores/Root'
@@ -26,11 +27,12 @@ const CreateItemForm = ({ hideModal }: any) => {
     []
   )
 
-  const { handleSubmit, values, handleChange, touched, errors } =
+  const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
     useFormik<Item>({
       initialValues: {
         name: '',
         description: '',
+        item: '',
       },
       validationSchema,
       onSubmit: (value: Item) => {
@@ -65,6 +67,30 @@ const CreateItemForm = ({ hideModal }: any) => {
             error={touched.description && Boolean(errors.description)}
             helperText={touched.description && errors.description}
           />
+        </Grid>
+        <Grid item>
+          <label htmlFor="upload-file">
+            <input
+              id="upload-file"
+              name="item"
+              type="file"
+              accept="image/*"
+              onChange={(event: any) => {
+                setFieldValue('item', event.target.files[0])
+              }}
+              style={{ display: 'none' }}
+            />
+            <div className={styles.avatar}>
+              <Avatar
+                style={{ cursor: 'pointer' }}
+                alt="Upload"
+                variant="square"
+                src={values.item}
+                sx={{ width: 50, height: 50 }}
+              />
+              <EditIcon className={styles.editIcon} />
+            </div>
+          </label>
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
