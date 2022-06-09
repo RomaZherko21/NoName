@@ -3,5 +3,6 @@ export interface Item {
   userId?: number
   name: string
   description: string
-  item: any
+  image: string
+  creatorAvatar: string
 }

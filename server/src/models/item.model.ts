@@ -17,6 +17,12 @@ const ItemModel = sequelize.define(
     description: {
       type: DataTypes.TEXT,
     },
+    image: {
+      type: DataTypes.STRING,
+    },
+    creatorAvatar: {
+      type: DataTypes.STRING,
+    },
   },
   {
     tableName: 'items', // You can simply tell DataTypes the name of the table directly

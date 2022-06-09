@@ -32,7 +32,8 @@ const CreateItemForm = ({ hideModal }: any) => {
       initialValues: {
         name: '',
         description: '',
-        item: '',
+        image: '',
+        creatorAvatar: '',
       },
       validationSchema,
       onSubmit: (value: Item) => {
@@ -85,7 +86,7 @@ const CreateItemForm = ({ hideModal }: any) => {
                 style={{ cursor: 'pointer' }}
                 alt="Upload"
                 variant="square"
-                src={values.item}
+                src={values.image}
                 sx={{ width: 50, height: 50 }}
               />
               <EditIcon className={styles.editIcon} />

@@ -17,16 +17,23 @@ interface Props {
   name: string
   description: string
   imageUrl: string
+  creatorAvatarUrl: string
 }
 
-const CommonCard = ({ name, description, imageUrl }: Props) => {
+const CommonCard = ({
+  name,
+  description,
+  imageUrl,
+  creatorAvatarUrl,
+}: Props) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
+          <Avatar
+            sx={{ cursor: 'pointer', bgcolor: red[500] }}
+            src={creatorAvatarUrl}
+          />
         }
         action={
           <IconButton aria-label="settings">

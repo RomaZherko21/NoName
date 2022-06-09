@@ -42,7 +42,8 @@ const ItemsList = () => {
             <CommonCard
               name={item.name}
               description={item.description}
-              imageUrl={`${API_URL}/uploads/item/${item.item}`}
+              imageUrl={`${API_URL}/uploads/item/${item.image}`}
+              creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
             />
           ))
         )}
