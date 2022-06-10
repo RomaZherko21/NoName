@@ -8,10 +8,15 @@ import EditIcon from '@mui/icons-material/Edit'
 
 import { commonStringValidation } from 'validations'
 import { useRootStore } from 'stores/Root'
-import { Item } from 'types/item'
 
 import ItemsModel from '../Items.model'
 import styles from './Styles.module.scss'
+
+interface FormValues {
+  name: string
+  description: string
+  image: string
+}
 
 const CreateItemForm = ({ hideModal }: any) => {
   const { t } = useTranslation()
@@ -28,15 +33,14 @@ const CreateItemForm = ({ hideModal }: any) => {
   )
 
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
-    useFormik<Item>({
+    useFormik<FormValues>({
       initialValues: {
         name: '',
         description: '',
         image: '',
-        creatorAvatar: '',
       },
       validationSchema,
-      onSubmit: (value: Item) => {
+      onSubmit: (value: FormValues) => {
         ItemsModel.create({ ...value, userId: user.id })
         hideModal()
       },

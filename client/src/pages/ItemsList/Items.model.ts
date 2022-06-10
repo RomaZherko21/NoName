@@ -47,11 +47,18 @@ class ItemsModel {
     }
   }
 
-  async create(item: Item) {
+  async create(item: {
+    name: string
+    description: string
+    image: string
+    userId: number
+  }) {
     try {
       this.loading.begin()
 
-      await api.item.create(item)
+      const createdAt = Date.now()
+
+      await api.item.create({ ...item, createdAt })
       this.fetch()
 
       this.loading.end()

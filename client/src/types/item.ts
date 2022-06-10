@@ -3,6 +3,7 @@ export interface Item {
   userId?: number
   name: string
   description: string
+  createdAt: number
   image: string
   creatorAvatar: string
 }

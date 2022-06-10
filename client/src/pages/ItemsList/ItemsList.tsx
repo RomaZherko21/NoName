@@ -44,6 +44,7 @@ const ItemsList = () => {
               description={item.description}
               imageUrl={`${API_URL}/uploads/item/${item.image}`}
               creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
+              createdAt={item.createdAt}
             />
           ))
         )}
