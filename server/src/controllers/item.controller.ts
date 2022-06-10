@@ -7,11 +7,11 @@ import ItemModel from '../models/item.model'
 class ItemController {
   async list({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { offset, limit, userId } = body
+      const { offset, limit } = body
       const { rows, count } = await ItemModel.findAndCountAll({
-        where: {
-          userId,
-        },
+        // where: {
+        //   userId:body.userId,
+        // },
         offset,
         limit,
       })

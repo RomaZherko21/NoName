@@ -17,6 +17,9 @@ const ItemModel = sequelize.define(
     description: {
       type: DataTypes.TEXT,
     },
+    createdAt: {
+      type: DataTypes.BIGINT,
+    },
     image: {
       type: DataTypes.STRING,
     },
