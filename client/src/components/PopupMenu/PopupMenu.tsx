@@ -17,9 +17,10 @@ interface Props {
     onClick?: (args?: any) => void
   }>
   ActionButton: (args: any) => ReactNode
+  id?: number
 }
 
-const PopupMenu = ({ config, ActionButton }: Props) => {
+const PopupMenu = ({ config, ActionButton, id }: Props) => {
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleMenu = (event: any) => {
@@ -29,8 +30,6 @@ const PopupMenu = ({ config, ActionButton }: Props) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
-  console.log(config)
 
   return (
     <>
@@ -69,7 +68,7 @@ const PopupMenu = ({ config, ActionButton }: Props) => {
               <ListItem
                 disablePadding
                 onClick={() => {
-                  item.onClick?.()
+                  item.onClick?.(id)
                   handleClose()
                 }}
               >

@@ -4,6 +4,8 @@ import i18next from 'i18next'
 
 import { routes } from 'services'
 
+import ItemsModel from './Items.model'
+
 export const getPopupConfig = () => [
   {
     Icon: <AccountBoxIcon />,
@@ -13,8 +15,8 @@ export const getPopupConfig = () => [
   {
     Icon: <DeleteIcon />,
     text: i18next.t('actions.delete'),
-    onClick: () => {
-      console.log('fuck')
+    onClick: (id: number) => {
+      ItemsModel.remove(id)
     },
   },
 ]

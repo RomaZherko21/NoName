@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
@@ -11,9 +11,12 @@ import { API_URL } from 'constants/config'
 
 import CreateItemForm from './CreateItemForm/CreateItemForm'
 import ItemsModel from './Items.model'
+import { getPopupConfig } from './PopupConfig'
 
 const ItemsList = () => {
   const { t } = useTranslation()
+
+  const popupConfig = useMemo(() => getPopupConfig(), [])
 
   useEffect(() => {
     ItemsModel.fetch()
@@ -40,11 +43,13 @@ const ItemsList = () => {
         ) : (
           ItemsModel.items.map((item) => (
             <CommonCard
+              id={item.id}
               name={item.name}
               description={item.description}
               imageUrl={`${API_URL}/uploads/item/${item.image}`}
               creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
               createdAt={item.createdAt}
+              popupConfig={popupConfig}
             />
           ))
         )}

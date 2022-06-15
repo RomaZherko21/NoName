@@ -66,6 +66,20 @@ class ItemsModel {
       this.loading.reset()
     }
   }
+
+  async remove(id: number) {
+    try {
+      this.loading.begin()
+
+      console.log('fucck', id)
+      await api.item.remove(id)
+      this.fetch()
+
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
+  }
 }
 
 export default new ItemsModel()

@@ -7,5 +7,6 @@ const item = express.Router()
 
 item.post('/list', itemController.list)
 item.post('/create', useFile.single('item'), itemController.create)
+item.post('/remove', itemController.remove)
 
 export default item

@@ -16,29 +16,34 @@ import ShareIcon from '@mui/icons-material/Share'
 import { format } from 'date-fns'
 import { fromMsToDate } from 'helpers'
 import { COMMON_DATE_FORMAT } from 'constants/dates'
-import { useMemo } from 'react'
 import { PopupMenu } from 'components/PopupMenu'
-import { getPopupConfig } from './PopupConfig'
 
 interface Props {
+  id?: number
   name: string
   description: string
   createdAt: number
   imageUrl: string
   creatorAvatarUrl: string
+  popupConfig: Array<{
+    Icon: JSX.Element
+    text: string
+    linkTo?: string
+    onClick?: (args?: any) => void
+  }>
 }
 
 const CommonCard = ({
+  id,
   name,
   description,
   createdAt,
   imageUrl,
   creatorAvatarUrl,
+  popupConfig,
 }: Props) => {
-  const popupConfig = useMemo(() => getPopupConfig(), [])
-
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} key={id}>
       <CardHeader
         avatar={
           <Avatar
@@ -49,6 +54,7 @@ const CommonCard = ({
         action={
           <IconButton aria-label="settings">
             <PopupMenu
+              id={id}
               ActionButton={(btnProps: any) => <MoreVertIcon {...btnProps} />}
               config={popupConfig}
             />

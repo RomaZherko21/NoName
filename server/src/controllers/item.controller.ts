@@ -38,6 +38,21 @@ class ItemController {
       next(createError(500))
     }
   }
+
+  async remove(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.body
+      const data = await ItemModel.destroy({
+        where: {
+          id,
+        },
+      })
+
+      res.status(200).json(data)
+    } catch (err) {
+      next(createError(500))
+    }
+  }
 }
 
 export default new ItemController()

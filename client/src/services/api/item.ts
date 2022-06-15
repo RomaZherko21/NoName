@@ -18,3 +18,6 @@ export const create = async (item: any) => {
 
   return fetch.post<Item>('/item/create', formData)
 }
+
+export const remove = async (id: number) =>
+  fetch.post<Item>('/item/remove', { id })
