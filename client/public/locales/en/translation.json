@@ -3,14 +3,16 @@
     "language": "Language",
     "english": "English",
     "russian": "Russian",
-    "exit": "Exit",
+   
     "profile": "Profile",
     "confirm": "Confirm",
     "actions": "Actions",
-    "amount": "Amount"
+    "amount": "Amount",
+    "details": "Details"
   },
   "actions": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "exit": "Exit"
   }
 }

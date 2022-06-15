@@ -23,7 +23,7 @@ const ExitDialog = ({ onClose }: Props) => {
         color="error"
         fullWidth
       >
-        {t('common.exit')}
+        {t('actions.exit')}
       </Button>
     </Stack>
   )

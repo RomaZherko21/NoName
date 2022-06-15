@@ -6,25 +6,19 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
   Typography,
 } from '@mui/material'
 import { red } from '@mui/material/colors'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
-import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import { format } from 'date-fns'
 import { fromMsToDate } from 'helpers'
 import { COMMON_DATE_FORMAT } from 'constants/dates'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
+import { PopupMenu } from 'components/PopupMenu'
+import { getPopupConfig } from './PopupConfig'
 
 interface Props {
   name: string
@@ -41,19 +35,8 @@ const CommonCard = ({
   imageUrl,
   creatorAvatarUrl,
 }: Props) => {
-  const { t } = useTranslation()
+  const popupConfig = useMemo(() => getPopupConfig(), [])
 
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleMenu = (event: any) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
-  console.log(createdAt)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -65,39 +48,10 @@ const CommonCard = ({
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon onClick={handleMenu} />
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <List>
-                <Link
-                  to="/profile"
-                  style={{ color: 'inherit', textDecoration: 'none' }}
-                  color="black"
-                >
-                  <ListItem disablePadding onClick={() => handleClose()}>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <AccountBoxIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={t('common.profile')} />
-                    </ListItemButton>
-                  </ListItem>
-                </Link>
-              </List>
-            </Menu>
+            <PopupMenu
+              ActionButton={(btnProps: any) => <MoreVertIcon {...btnProps} />}
+              config={popupConfig}
+            />
           </IconButton>
         }
         title={name}

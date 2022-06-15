@@ -1,29 +1,15 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
-import {
-  Avatar,
-  Box,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-} from '@mui/material'
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
-import AccountBoxIcon from '@mui/icons-material/AccountBox'
+import { Avatar, Box, IconButton } from '@mui/material'
 
 import { useDialog } from 'hooks'
 import { useRootStore } from 'stores/Root'
+import { PopupMenu } from 'components/PopupMenu'
 
 import ExitDialog from './ExitDialog'
+import { getPopupConfig } from './PopupConfig'
 
 const ProfileMenu = () => {
-  const { t } = useTranslation()
-
   const { user } = useRootStore()
 
   const [showConfirmationModal] = useDialog(
@@ -32,82 +18,33 @@ const ProfileMenu = () => {
     true
   )
 
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleMenu = (event: any) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const popupConfig = useMemo(
+    () => getPopupConfig(showConfirmationModal),
+    [showConfirmationModal]
+  )
 
   return (
-    <>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
-        <Box>
-          <Avatar
-            alt="Remy Sharp"
-            sx={{ cursor: 'pointer' }}
-            src={user.getPhotoUrl()}
-          />
-        </Box>
-      </IconButton>
-
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <List>
-          <Link
-            to="/profile"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-            color="black"
-          >
-            <ListItem disablePadding onClick={() => handleClose()}>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('common.profile')} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-
-          <ListItem
-            disablePadding
-            onClick={() => {
-              showConfirmationModal()
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <MeetingRoomIcon />
-              </ListItemIcon>
-              <ListItemText primary={t('common.exit')} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Menu>
-    </>
+    <PopupMenu
+      ActionButton={(btnProps: any) => (
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          color="inherit"
+          {...btnProps}
+        >
+          <Box>
+            <Avatar
+              alt="Remy Sharp"
+              sx={{ cursor: 'pointer' }}
+              src={user.getPhotoUrl()}
+            />
+          </Box>
+        </IconButton>
+      )}
+      config={popupConfig}
+    />
   )
 }
 

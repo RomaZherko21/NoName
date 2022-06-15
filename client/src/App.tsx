@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { Slide, toast } from 'react-toastify'
 
 import SignIn from 'pages/SignIn/SignIn'
-import routes from 'services/routes'
+import { routes } from 'services'
 import Layout from 'components/Layout/Layout'
 import UsersList from 'pages/UsersList/UsersList'
 import Profile from 'pages/Profile/Profile'
