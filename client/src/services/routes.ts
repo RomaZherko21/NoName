@@ -4,4 +4,5 @@ export const routes = {
   usersList: '/usersList',
   items: '/items',
   profile: '/profile',
+  NOT_FOUND: '/notFound',
 }

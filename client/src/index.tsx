@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
 import { ModalProvider } from 'react-modal-hook'
 import { configure } from 'mobx'
+import { BrowserRouter } from 'react-router-dom'
 
 import { RootStoreProvider } from 'stores/Root'
 // import dotenv from 'dotenv'
@@ -21,7 +21,7 @@ configure({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <BrowserRouter>
       <RootStoreProvider>
         {/* <AppThemeProvider> */}
         <ModalProvider>
@@ -29,7 +29,7 @@ ReactDOM.render(
         </ModalProvider>
         {/* </AppThemeProvider> */}
       </RootStoreProvider>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )

@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css'
 import { observer } from 'mobx-react-lite'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Slide, toast } from 'react-toastify'
 
 import SignIn from 'pages/SignIn/SignIn'
@@ -10,8 +10,9 @@ import UsersList from 'pages/UsersList/UsersList'
 import Profile from 'pages/Profile/Profile'
 import { useRootStore } from 'stores/Root'
 
-import './App.scss'
 import ItemsList from 'pages/ItemsList/ItemsList'
+
+import './App.scss'
 
 toast.configure({
   position: 'top-right',
@@ -27,21 +28,18 @@ function App() {
   const { authorization } = useRootStore()
 
   return authorization.isAuthorized ? (
-    <>
-      <Layout>
-        <Switch>
-          <Redirect from={routes.signIn} to={routes.usersList} />
-          <Route path={routes.usersList} component={UsersList} />
-          <Route path={routes.items} component={ItemsList} />
-          <Route path={routes.profile} component={Profile} />
-        </Switch>
-      </Layout>
-    </>
+    <Layout>
+      <Routes>
+        <Route path={routes.usersList} element={<UsersList />} />
+        <Route path={routes.items} element={<ItemsList />} />
+        <Route path={routes.profile} element={<Profile />} />
+        <Route path={routes.NOT_FOUND} element={<>NOT FOUND</>} />
+        <Route path="/" element={<Navigate to={routes.usersList} replace />} />
+        <Route path="*" element={<Navigate to={routes.NOT_FOUND} replace />} />
+      </Routes>
+    </Layout>
   ) : (
-    <>
-      <Redirect to={routes.signIn} />
-      <Route path={routes.signIn} component={SignIn} />
-    </>
+    <SignIn />
   )
 }
 
