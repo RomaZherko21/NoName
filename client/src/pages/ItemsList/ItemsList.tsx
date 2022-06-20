@@ -37,20 +37,22 @@ const ItemsList = () => {
           {t('item:form.create')}
         </Button>
       </Grid>
-      <Grid item>
+      <Grid container spacing={0.5} justifyContent="space-between">
         {ItemsModel.loading.has ? (
           <Spinner />
         ) : (
           ItemsModel.items.map((item) => (
-            <CommonCard
-              id={item.id}
-              name={item.name}
-              description={item.description}
-              imageUrl={`${API_URL}/uploads/item/${item.image}`}
-              creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
-              createdAt={item.createdAt}
-              popupConfig={popupConfig}
-            />
+            <Grid item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+              <CommonCard
+                id={item.id}
+                name={item.name}
+                description={item.description}
+                imageUrl={`${API_URL}/uploads/item/${item.image}`}
+                creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
+                createdAt={item.createdAt}
+                popupConfig={popupConfig}
+              />
+            </Grid>
           ))
         )}
       </Grid>

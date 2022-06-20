@@ -8,7 +8,6 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-import { red } from '@mui/material/colors'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -43,11 +42,12 @@ const CommonCard = ({
   popupConfig,
 }: Props) => {
   return (
-    <Card sx={{ maxWidth: 345 }} key={id}>
+    <Card sx={{ height: 380 }} key={id}>
       <CardHeader
         avatar={
           <Avatar
-            sx={{ cursor: 'pointer', bgcolor: red[500] }}
+            style={{ objectFit: 'fill' }}
+            sx={{ cursor: 'pointer', objectFit: 'fill' }}
             src={creatorAvatarUrl}
           />
         }
@@ -67,6 +67,7 @@ const CommonCard = ({
         component="img"
         height="194"
         image={imageUrl}
+        sx={{ objectFit: 'fill' }}
         alt="Paella dish"
       />
       <CardContent>
