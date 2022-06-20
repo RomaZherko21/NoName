@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from 'axios'
 
-import rootStore from 'stores/Root'
+import { RootStore } from 'stores'
 
-export default function setAuthInterceptor(config: AxiosRequestConfig) {
-  const token = rootStore.authorization.accessToken
+export function setAuthInterceptor(config: AxiosRequestConfig) {
+  const token = RootStore.authorization.accessToken
 
   if (config.headers) {
     if (token) {

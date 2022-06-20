@@ -7,7 +7,7 @@ import { Avatar, Button, Grid, TextField } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
 import { commonStringValidation } from 'validations'
-import { useRootStore } from 'stores/Root'
+import { useRootStore } from 'stores'
 
 import ItemsModel from '../Items.model'
 import styles from './Styles.module.scss'

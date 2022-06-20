@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
-import RootStore from 'stores/Root'
+import { RootStore } from 'stores'
 
-export default function unauthorizedInterceptor(error: AxiosError) {
+export function unauthorizedInterceptor(error: AxiosError) {
   const { response } = error
 
   if (

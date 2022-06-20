@@ -1,4 +1,4 @@
-import { TRoles } from 'constants/index'
+import { TRoles } from 'consts'
 
 export interface User {
   email: string

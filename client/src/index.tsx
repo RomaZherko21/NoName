@@ -4,7 +4,7 @@ import { ModalProvider } from 'react-modal-hook'
 import { configure } from 'mobx'
 import { BrowserRouter } from 'react-router-dom'
 
-import { RootStoreProvider } from 'stores/Root'
+import { RootStoreProvider } from 'stores'
 // import dotenv from 'dotenv'
 // import AppThemeProvider from 'theme'
 

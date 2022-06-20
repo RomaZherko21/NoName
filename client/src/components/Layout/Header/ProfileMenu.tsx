@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Avatar, Box, IconButton } from '@mui/material'
 
 import { useDialog } from 'hooks'
-import { useRootStore } from 'stores/Root'
+import { useRootStore } from 'stores'
 import { PopupMenu } from 'components/PopupMenu'
 
 import ExitDialog from './ExitDialog'

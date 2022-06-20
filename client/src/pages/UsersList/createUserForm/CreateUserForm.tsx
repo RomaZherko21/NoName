@@ -20,8 +20,8 @@ import {
   confirmPasswordValidation,
   commonStringValidation,
 } from 'validations'
-import { UserMeta } from 'types/user'
-import { ROLES, TRoles } from 'constants/index'
+import { UserMeta } from 'types'
+import { ROLES, TRoles } from 'consts'
 
 import UsersModel from '../Users.model'
 import styles from './Styles.module.scss'

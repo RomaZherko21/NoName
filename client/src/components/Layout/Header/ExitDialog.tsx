@@ -1,7 +1,7 @@
 import { Button, Stack } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { useRootStore } from 'stores/Root'
+import { useRootStore } from 'stores'
 
 interface Props {
   onClose: () => void

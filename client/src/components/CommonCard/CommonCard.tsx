@@ -14,7 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import { format } from 'date-fns'
 import { fromMsToDate } from 'helpers'
-import { COMMON_DATE_FORMAT } from 'constants/dates'
+import { COMMON_DATE_FORMAT } from 'consts'
 import { PopupMenu } from 'components/PopupMenu'
 
 interface Props {

@@ -7,7 +7,7 @@ import { useDialog } from 'hooks'
 import Pagination from 'components/Pagination'
 import Spinner from 'components/Spinner/Spinner'
 import CommonCard from 'components/CommonCard'
-import { API_URL } from 'constants/config'
+import { API_URL } from 'consts'
 
 import CreateItemForm from './CreateItemForm/CreateItemForm'
 import ItemsModel from './Items.model'

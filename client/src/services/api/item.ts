@@ -1,5 +1,5 @@
-import fetch from 'services/fetch'
-import { Item } from 'types/item'
+import { fetch } from 'services'
+import { Item } from 'types'
 
 export const list = (limit: number, offset: number, userId: number) =>
   fetch.post<{ items: Item[]; count: number }>('/item/list', {

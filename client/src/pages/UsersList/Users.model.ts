@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
-import api from 'services/api'
-import { UserMeta } from 'types/user'
+import { API } from 'services'
+import { UserMeta } from 'types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
@@ -30,7 +30,7 @@ class UsersModel {
   async fetch() {
     this.loading.begin()
 
-    const data = await api.user.list(
+    const data = await API.user.list(
       this.pagination.perPage,
       this.pagination.offset
     )
@@ -43,7 +43,7 @@ class UsersModel {
   async create(user: UserMeta) {
     this.loading.begin()
 
-    await api.user.create(user)
+    await API.user.create(user)
     this.fetch()
 
     this.loading.end()
@@ -52,7 +52,7 @@ class UsersModel {
   async remove(id: number) {
     this.loading.begin()
 
-    await api.user.remove(id)
+    await API.user.remove(id)
     this.fetch()
 
     this.loading.end()
@@ -61,7 +61,7 @@ class UsersModel {
   async update(user: UserMeta) {
     this.loading.begin()
 
-    await api.user.update(user)
+    await API.user.update(user)
     this.fetch()
 
     this.loading.end()

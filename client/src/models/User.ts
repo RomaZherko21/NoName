@@ -1,14 +1,14 @@
 import { makeAutoObservable } from 'mobx'
 
-import api from 'services/api'
-import { TRoles } from 'constants/index'
-import { RootStore } from 'stores/Root'
-import { API_URL } from 'constants/config'
+import { API } from 'services'
+import { TRoles } from 'consts/index'
+import { RootStore } from 'stores'
+import { API_URL } from 'consts'
 
 import FileModel from './File'
 
 class UserModel {
-  readonly rootStore: RootStore
+  readonly rootStore: typeof RootStore
 
   id: number = 0
 
@@ -22,7 +22,7 @@ class UserModel {
 
   role: TRoles = TRoles.user
 
-  constructor(rootStore: RootStore) {
+  constructor(rootStore: typeof RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
 
@@ -38,7 +38,7 @@ class UserModel {
       email,
       role,
       avatar = '',
-    } = await api.user.self()
+    } = await API.user.self()
 
     this.rootStore.authorization.isAuthorized = true
 
@@ -57,7 +57,7 @@ class UserModel {
   async uploadPhoto(file: File) {
     this.rootStore.loading.begin()
     try {
-      const { url } = await api.user.uploadPhoto(file, this.id)
+      const { url } = await API.user.uploadPhoto(file, this.id)
       this.avatar.setFileData(file, url)
       this.rootStore.loading.end()
     } catch {

@@ -4,11 +4,11 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { Slide, toast } from 'react-toastify'
 
 import SignIn from 'pages/SignIn/SignIn'
-import { routes } from 'services'
+import { ROUTES } from 'services'
 import Layout from 'components/Layout/Layout'
 import UsersList from 'pages/UsersList/UsersList'
 import Profile from 'pages/Profile/Profile'
-import { useRootStore } from 'stores/Root'
+import { useRootStore } from 'stores'
 
 import ItemsList from 'pages/ItemsList/ItemsList'
 
@@ -30,12 +30,12 @@ function App() {
   return authorization.isAuthorized ? (
     <Layout>
       <Routes>
-        <Route path={routes.usersList} element={<UsersList />} />
-        <Route path={routes.items} element={<ItemsList />} />
-        <Route path={routes.profile} element={<Profile />} />
-        <Route path={routes.NOT_FOUND} element={<>NOT FOUND</>} />
-        <Route path="/" element={<Navigate to={routes.usersList} replace />} />
-        <Route path="*" element={<Navigate to={routes.NOT_FOUND} replace />} />
+        <Route path={ROUTES.USER_LIST} element={<UsersList />} />
+        <Route path={ROUTES.ITEMS} element={<ItemsList />} />
+        <Route path={ROUTES.PROFILE} element={<Profile />} />
+        <Route path={ROUTES.NOT_FOUND} element={<>NOT FOUND</>} />
+        <Route path="/" element={<Navigate to={ROUTES.USER_LIST} replace />} />
+        <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
       </Routes>
     </Layout>
   ) : (

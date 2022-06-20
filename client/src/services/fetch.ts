@@ -1,10 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
-import { API_URL } from 'constants/config'
+import { API_URL } from 'consts'
 
-import extractDataInterceptor from './extractDataInterceptor'
-import setAuthInterceptor from './setAuthInterceptor'
-import unauthorizedInterceptor from './unauthorizedInterceptor'
+import {
+  extractDataInterceptor,
+  setAuthInterceptor,
+  unauthorizedInterceptor,
+} from './interceptors'
 
 export type FetchServiceConfig = {
   apiUrl: string

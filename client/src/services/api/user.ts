@@ -1,5 +1,5 @@
-import fetch from 'services/fetch'
-import { UserMeta } from 'types/user'
+import { fetch } from 'services'
+import { UserMeta } from 'types'
 
 export const create = (user: UserMeta) =>
   fetch.post<UserMeta>('/user/create', user)

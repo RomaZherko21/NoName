@@ -1,8 +1,8 @@
-export const routes = {
+export const ROUTES = {
   home: '/home',
   signIn: '/signIn',
-  usersList: '/usersList',
-  items: '/items',
-  profile: '/profile',
+  USER_LIST: '/usersList',
+  ITEMS: '/items',
+  PROFILE: '/profile',
   NOT_FOUND: '/notFound',
 }

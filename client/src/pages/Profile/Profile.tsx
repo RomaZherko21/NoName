@@ -17,7 +17,7 @@ import {
 } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
-import { useRootStore } from 'stores/Root'
+import { useRootStore } from 'stores'
 import Spinner from 'components/Spinner/Spinner'
 
 import styles from './Styles.module.scss'

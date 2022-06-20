@@ -5,7 +5,7 @@ import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
-import router from './routes'
+import router from './ROUTES'
 import sequelize from './models'
 import log from './helpers/logs'
 import useHttpError from './middlewares/useHttpError'

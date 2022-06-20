@@ -7,8 +7,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
 import { useDialog } from 'hooks'
-import { TableColumn } from 'types/common'
-import { UserMeta } from 'types/user'
+import { TableColumn, UserMeta } from 'types'
 
 import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'

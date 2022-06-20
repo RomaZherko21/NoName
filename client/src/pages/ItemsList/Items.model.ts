@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 
-import api from 'services/api'
+import { API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { Item } from 'types/item'
+import { Item } from 'types'
 import rootStore from 'stores/Root'
 
 class ItemsModel {
@@ -32,7 +32,7 @@ class ItemsModel {
     try {
       this.loading.begin()
 
-      const data = await api.item.list(
+      const data = await API.item.list(
         this.pagination.perPage,
         this.pagination.offset,
         rootStore.user.id
@@ -58,7 +58,7 @@ class ItemsModel {
 
       const createdAt = Date.now()
 
-      await api.item.create({ ...item, createdAt })
+      await API.item.create({ ...item, createdAt })
       this.fetch()
 
       this.loading.end()
@@ -72,7 +72,7 @@ class ItemsModel {
       this.loading.begin()
 
       console.log('fucck', id)
-      await api.item.remove(id)
+      await API.item.remove(id)
       this.fetch()
 
       this.loading.end()
