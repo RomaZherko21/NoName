@@ -1,15 +1,15 @@
 import { fetch } from 'services'
-import { UserMeta } from 'shared/types'
+import { TUserMeta } from 'shared/types'
 
-export const create = (user: UserMeta) =>
-  fetch.post<UserMeta>('/user/create', user)
+export const create = (user: TUserMeta) =>
+  fetch.post<TUserMeta>('/user/create', user)
 
-export const update = (user: UserMeta) => fetch.post('/user/update', user)
+export const update = (user: TUserMeta) => fetch.post('/user/update', user)
 
 export const remove = (id: number) => fetch.post('/user/remove', { id })
 
 export const list = (limit: number, offset: number) =>
-  fetch.post<{ users: UserMeta[]; count: number }>('/user/list', {
+  fetch.post<{ users: TUserMeta[]; count: number }>('/user/list', {
     limit,
     offset,
   })
@@ -21,4 +21,4 @@ export const uploadPhoto = async (avatar: any, id: number) => {
   return fetch.post<any>('/user/uploadPhoto', formData)
 }
 
-export const self = () => fetch.get<UserMeta>('/user/self')
+export const self = () => fetch.get<TUserMeta>('/user/self')

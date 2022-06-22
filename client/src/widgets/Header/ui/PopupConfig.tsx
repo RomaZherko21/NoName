@@ -2,7 +2,7 @@ import i18next from 'i18next'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
 
-import { ROUTES } from 'services'
+import { ROUTES } from 'shared/consts'
 
 export const getPopupConfig = (showConfirmationModal: () => void) => [
   {

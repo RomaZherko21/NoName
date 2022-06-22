@@ -4,12 +4,12 @@ export enum TRoles {
   empty = '',
 }
 
-export interface User {
+export interface TUser {
   email: string
   password: string
 }
 
-export interface UserMeta extends User {
+export interface TUserMeta extends TUser {
   id?: number
   name: string
   surname: string

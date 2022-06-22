@@ -1,12 +1,13 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from 'react-modal-hook'
+import { Slide, toast } from 'react-toastify'
 import { configure } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import { Slide, toast } from 'react-toastify'
+
 import 'react-toastify/dist/ReactToastify.css'
 
-import SignIn from 'pages/SignIn/SignIn'
+import { SignIn } from 'pages'
 import { useRootStore, RootStoreProvider } from 'stores'
 
 import { Layout } from './Layout'

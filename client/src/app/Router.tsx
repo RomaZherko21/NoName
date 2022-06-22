@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { ROUTES } from 'services'
-
 import { UsersList, Profile, ItemsList } from 'pages'
+import { ROUTES } from 'shared/consts'
 
 function Router() {
   return (

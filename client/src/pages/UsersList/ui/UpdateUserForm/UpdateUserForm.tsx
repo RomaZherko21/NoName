@@ -19,7 +19,7 @@ import {
   confirmPasswordValidation,
   commonStringValidation,
 } from 'shared/validations'
-import { UserMeta } from 'shared/types'
+import { TUserMeta } from 'shared/types'
 import { ROLES } from 'shared/consts'
 
 import { UsersModel } from '../../model'
@@ -39,7 +39,7 @@ function UpdateUserForm({ user, hideModal }: any) {
   const { t } = useTranslation()
 
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
-    useFormik<UserMeta>({
+    useFormik<TUserMeta>({
       initialValues: {
         name,
         surname,
@@ -49,7 +49,7 @@ function UpdateUserForm({ user, hideModal }: any) {
         confirmPassword: '',
       },
       validationSchema,
-      onSubmit: (value: UserMeta) => {
+      onSubmit: (value: TUserMeta) => {
         UsersModel.update(value)
         hideModal()
       },

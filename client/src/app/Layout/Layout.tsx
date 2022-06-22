@@ -1,9 +1,8 @@
 import { Container, Typography } from '@mui/material'
-
-import { useBoolState } from 'shared/hooks'
 import { useLocation } from 'react-router-dom'
 
 import { Aside, Header } from 'widgets'
+import { useBoolState } from 'shared/hooks'
 
 import styles from './Layout.module.sass'
 

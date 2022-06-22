@@ -2,7 +2,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import DeleteIcon from '@mui/icons-material/Delete'
 import i18next from 'i18next'
 
-import { ROUTES } from 'services'
+import { ROUTES } from 'shared/consts'
 
 import { ItemsModel } from '../model'
 

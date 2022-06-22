@@ -1,2 +1,2 @@
-export { default as useBoolState } from './useBoolState'
-export { default as useDialog } from './useDialog'
+export { useBoolState } from './useBoolState'
+export { useDialog } from './useDialog'

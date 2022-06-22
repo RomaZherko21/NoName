@@ -1,4 +1,4 @@
-export interface Item {
+export interface TItem {
   id?: number
   userId?: number
   name: string

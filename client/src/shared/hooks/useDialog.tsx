@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Dialog, DialogTitle, IconButton, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
-const useDialog = (
+export const useDialog = (
   title: string,
   body: (hideModal: () => void) => JSX.Element,
   closable = false
@@ -36,5 +36,3 @@ const useDialog = (
 
   return [showModal]
 }
-
-export default useDialog

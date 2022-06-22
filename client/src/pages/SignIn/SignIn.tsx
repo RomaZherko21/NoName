@@ -6,7 +6,7 @@ import { Button, Grid, TextField } from '@mui/material'
 
 import { emailValidation, passwordValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
-import { User } from 'shared/types'
+import { TUser } from 'shared/types'
 
 import styles from './Styles.module.scss'
 
@@ -15,17 +15,17 @@ const validationSchema = yup.object().shape({
   password: passwordValidation(),
 })
 
-function SignIn(){
+function SignIn() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
 
-  const formik = useFormik<User>({
+  const formik = useFormik<TUser>({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values: User) => {
+    onSubmit: (values: TUser) => {
       authorization.signIn(values)
     },
   })
