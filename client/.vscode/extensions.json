@@ -2,7 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "vscode-icons-team.vscode-icons",
+    "pkief.material-icon-theme",
     "formulahendry.auto-rename-tag",
     "syler.sass-indented",
   ]
