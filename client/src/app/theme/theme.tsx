@@ -1,7 +1,7 @@
 import { createContext, FC, useEffect, useMemo } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material'
 
-import { useBoolState } from 'hooks'
+import { useBoolState } from 'shared/hooks'
 
 import commonTheme from './common'
 import darkTheme from './dark'

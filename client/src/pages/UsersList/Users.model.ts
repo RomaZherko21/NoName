@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
-import { UserMeta } from 'types'
+import { UserMeta } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 

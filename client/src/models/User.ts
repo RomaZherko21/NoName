@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
-import { TRoles } from 'consts/index'
+import { API_URL } from 'shared/consts'
+import { TRoles } from 'shared/types'
 import { RootStore } from 'stores'
-import { API_URL } from 'consts'
 
 import FileModel from './File'
 

@@ -19,9 +19,9 @@ import {
   passwordValidation,
   confirmPasswordValidation,
   commonStringValidation,
-} from 'validations'
-import { UserMeta } from 'types'
-import { ROLES, TRoles } from 'consts'
+} from 'shared/validations'
+import { UserMeta, TRoles } from 'shared/types'
+import { ROLES } from 'shared/consts'
 
 import UsersModel from '../Users.model'
 import styles from './Styles.module.scss'

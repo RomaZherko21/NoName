@@ -6,8 +6,8 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { IconButton, Tooltip } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
-import { useDialog } from 'hooks'
-import { TableColumn, UserMeta } from 'types'
+import { useDialog } from 'shared/hooks'
+import { TableColumn, UserMeta } from 'shared/types'
 
 import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
 import UsersModel from './Users.model'

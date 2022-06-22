@@ -18,7 +18,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit'
 
 import { useRootStore } from 'stores'
-import Spinner from 'components/Spinner/Spinner'
+import { Spinner } from 'shared/ui'
 
 import styles from './Styles.module.scss'
 

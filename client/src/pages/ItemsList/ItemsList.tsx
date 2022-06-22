@@ -3,11 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
 
-import { useDialog } from 'hooks'
-import Pagination from 'components/Pagination'
-import Spinner from 'components/Spinner/Spinner'
-import CommonCard from 'components/CommonCard'
-import { API_URL } from 'consts'
+import { useDialog } from 'shared/hooks'
+import { CommonCard, Pagination, Spinner } from 'shared/ui'
+import { API_URL } from 'shared/consts'
 
 import CreateItemForm from './CreateItemForm/CreateItemForm'
 import ItemsModel from './Items.model'
@@ -37,7 +35,7 @@ const ItemsList = () => {
           {t('item:form.create')}
         </Button>
       </Grid>
-      <Grid container spacing={0.5} justifyContent="space-between">
+      <Grid container spacing={0.5}>
         {ItemsModel.loading.has ? (
           <Spinner />
         ) : (

@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx'
 import { API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { Item } from 'types'
+import { Item } from 'shared/types'
 import rootStore from 'stores/Root'
 
 class ItemsModel {

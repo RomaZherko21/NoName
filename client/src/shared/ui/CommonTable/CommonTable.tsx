@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 
-import { TableColumn } from 'types/common'
+import { TableColumn } from 'shared/types'
 
 interface Props {
   data: any

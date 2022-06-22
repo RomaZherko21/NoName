@@ -3,10 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
 
-import CommonTable from 'components/CommonTable/CommonTable'
-import { useDialog } from 'hooks'
-import Pagination from 'components/Pagination'
-import Spinner from 'components/Spinner/Spinner'
+import { CommonTable, Pagination, Spinner } from 'shared/ui'
+import { useDialog } from 'shared/hooks'
 
 import { getColumns } from './columns'
 import CreateUserForm from './CreateUserForm/CreateUserForm'

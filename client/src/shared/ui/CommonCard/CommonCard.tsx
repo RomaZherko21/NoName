@@ -13,9 +13,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import { format } from 'date-fns'
-import { fromMsToDate } from 'helpers'
-import { COMMON_DATE_FORMAT } from 'consts'
-import { PopupMenu } from 'components/PopupMenu'
+import { fromMsToDate } from 'shared/helpers'
+import { COMMON_DATE_FORMAT } from 'shared/consts'
+import { PopupMenu } from 'shared/ui'
+import { observer } from 'mobx-react-lite'
 
 interface Props {
   id?: number
@@ -87,4 +88,4 @@ const CommonCard = ({
   )
 }
 
-export default CommonCard
+export default observer(CommonCard)

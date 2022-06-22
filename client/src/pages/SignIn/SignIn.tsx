@@ -4,9 +4,9 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Button, Grid, TextField } from '@mui/material'
 
-import { emailValidation, passwordValidation } from 'validations'
+import { emailValidation, passwordValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
-import { User } from 'types/user'
+import { User } from 'shared/types'
 
 import styles from './Styles.module.scss'
 

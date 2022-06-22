@@ -1,4 +1,8 @@
-import { TRoles } from 'consts'
+export enum TRoles {
+  admin = 'admin',
+  user = 'user',
+  empty = '',
+}
 
 export interface User {
   email: string

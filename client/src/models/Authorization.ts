@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
 import { RootStore } from 'stores/Root'
-import { User } from 'types'
+import { User } from 'shared/types'
 
 const ACCESS_TOKEN = 'ACCESS_TOKEN'
 

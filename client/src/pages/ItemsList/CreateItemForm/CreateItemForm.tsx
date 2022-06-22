@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { Avatar, Button, Grid, TextField } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
-import { commonStringValidation } from 'validations'
+import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
 
 import ItemsModel from '../Items.model'

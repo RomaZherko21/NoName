@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 
-import ListItemLink from 'components/ListItemLink'
+import { ListItemLink } from 'shared/ui'
 
 interface AsideItemLinkProps {
   icon: JSX.Element

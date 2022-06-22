@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
-import { API_URL } from 'consts'
+import { API_URL } from 'shared/consts'
 
 import {
   extractDataInterceptor,
