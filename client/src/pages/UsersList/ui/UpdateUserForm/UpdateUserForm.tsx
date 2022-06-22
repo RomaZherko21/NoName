@@ -22,7 +22,7 @@ import {
 import { UserMeta } from 'shared/types'
 import { ROLES } from 'shared/consts'
 
-import UsersModel from '../Users.model'
+import { UsersModel } from '../../model'
 import styles from './Styles.module.scss'
 
 const validationSchema = yup.object().shape({
@@ -33,7 +33,7 @@ const validationSchema = yup.object().shape({
   confirmPassword: confirmPasswordValidation(),
 })
 
-const UpdateUserForm = ({ user, hideModal }: any) => {
+function UpdateUserForm({ user, hideModal }: any) {
   const { name, surname, email, role } = user
 
   const { t } = useTranslation()

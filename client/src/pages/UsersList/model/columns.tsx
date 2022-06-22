@@ -9,9 +9,8 @@ import { observer } from 'mobx-react-lite'
 import { useDialog } from 'shared/hooks'
 import { TableColumn, UserMeta } from 'shared/types'
 
-import UpdateUserForm from './UpdateUserForm/UpdateUserForm'
+import { UpdateUserForm, DeleteUserDialog } from '../ui'
 import UsersModel from './Users.model'
-import DeleteUserDialog from './DeleteUserDialog'
 
 const ActionButtons = observer(({ user }: { user: UserMeta }) => {
   const { t } = useTranslation()

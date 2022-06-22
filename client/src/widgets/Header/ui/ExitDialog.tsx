@@ -1,30 +1,32 @@
-import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
 import { Button, Stack } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+
+import { useRootStore } from 'stores'
 
 interface Props {
   onClose: () => void
-  onSubmit: () => void
 }
 
-const DeleteUserDialog = ({ onSubmit, onClose }: Props) => {
+function ExitDialog({ onClose }: Props) {
+  const { authorization } = useRootStore()
+
   const { t } = useTranslation()
 
   return (
     <Stack direction="row" spacing={2} sx={{ padding: '20px', width: '300px' }}>
       <Button
         onClick={() => {
-          onSubmit()
+          authorization.unauthorize()
           onClose()
         }}
         variant="contained"
         color="error"
         fullWidth
       >
-        {t('actions.delete')}
+        {t('actions.exit')}
       </Button>
     </Stack>
   )
 }
 
-export default observer(DeleteUserDialog)
+export default ExitDialog

@@ -2,9 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import { ROUTES } from 'services'
-import UsersList from 'pages/UsersList/UsersList'
-import Profile from 'pages/Profile/Profile'
-import ItemsList from 'pages/ItemsList/ItemsList'
+
+import { UsersList, Profile, ItemsList } from 'pages'
 
 function Router() {
   return (

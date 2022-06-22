@@ -15,7 +15,7 @@ const validationSchema = yup.object().shape({
   password: passwordValidation(),
 })
 
-const SignIn = () => {
+function SignIn(){
   const { t } = useTranslation()
   const { authorization } = useRootStore()
 

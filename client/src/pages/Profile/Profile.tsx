@@ -22,7 +22,7 @@ import { Spinner } from 'shared/ui'
 
 import styles from './Styles.module.scss'
 
-const Profile = () => {
+function Profile() {
   const { user, loading } = useRootStore()
   const { t } = useTranslation()
 

@@ -4,7 +4,7 @@ import i18next from 'i18next'
 
 import { ROUTES } from 'services'
 
-import ItemsModel from './Items.model'
+import { ItemsModel } from '../model'
 
 export const getPopupConfig = () => [
   {

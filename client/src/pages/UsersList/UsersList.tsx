@@ -6,11 +6,11 @@ import { Button, Grid } from '@mui/material'
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 
-import { getColumns } from './columns'
-import CreateUserForm from './CreateUserForm/CreateUserForm'
-import UsersModel from './Users.model'
+import { CreateUserForm } from './ui'
+import { UsersModel } from './model'
+import { getColumns } from './model/columns'
 
-const UsersList = () => {
+function UsersList() {
   const { t } = useTranslation()
 
   useEffect(() => {

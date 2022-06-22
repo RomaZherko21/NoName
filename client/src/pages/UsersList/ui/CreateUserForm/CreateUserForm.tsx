@@ -23,10 +23,10 @@ import {
 import { UserMeta, TRoles } from 'shared/types'
 import { ROLES } from 'shared/consts'
 
-import UsersModel from '../Users.model'
+import { UsersModel } from '../../model'
 import styles from './Styles.module.scss'
 
-const CreateUserForm = ({ hideModal }: any) => {
+function CreateUserForm({ hideModal }: any) {
   const { t } = useTranslation()
 
   const validationSchema = useMemo(

@@ -7,11 +7,10 @@ import { useDialog } from 'shared/hooks'
 import { CommonCard, Pagination, Spinner } from 'shared/ui'
 import { API_URL } from 'shared/consts'
 
-import CreateItemForm from './CreateItemForm/CreateItemForm'
-import ItemsModel from './Items.model'
-import { getPopupConfig } from './PopupConfig'
+import { CreateItemForm, getPopupConfig } from './ui'
+import { ItemsModel } from './model'
 
-const ItemsList = () => {
+function ItemsList() {
   const { t } = useTranslation()
 
   const popupConfig = useMemo(() => getPopupConfig(), [])

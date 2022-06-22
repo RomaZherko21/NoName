@@ -9,7 +9,7 @@ import { PopupMenu } from 'shared/ui'
 import ExitDialog from './ExitDialog'
 import { getPopupConfig } from './PopupConfig'
 
-const ProfileMenu = () => {
+function ProfileMenu() {
   const { user } = useRootStore()
 
   const [showConfirmationModal] = useDialog(

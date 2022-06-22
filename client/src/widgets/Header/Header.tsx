@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { IconButton, AppBar, Toolbar, Typography } from '@mui/material'
 import ListIcon from '@mui/icons-material/List'
 
-import ProfileMenu from './ProfileMenu'
+import { ProfileMenu } from './ui'
 
 interface Props {
   className?: string

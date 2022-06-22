@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
 
-import ItemsModel from '../Items.model'
+import { ItemsModel } from '../../model'
 import styles from './Styles.module.scss'
 
 interface FormValues {
@@ -18,7 +18,7 @@ interface FormValues {
   image: string
 }
 
-const CreateItemForm = ({ hideModal }: any) => {
+function CreateItemForm({ hideModal }: any) {
   const { t } = useTranslation()
 
   const { user } = useRootStore()
