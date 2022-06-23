@@ -1,17 +1,17 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { ModalProvider } from 'react-modal-hook'
-import { Slide, toast } from 'react-toastify'
-import { configure } from 'mobx'
-import { observer } from 'mobx-react-lite'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ModalProvider } from 'react-modal-hook';
+import { Slide, toast } from 'react-toastify';
+import { configure } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
-import { SignIn } from 'pages'
-import { useRootStore, RootStoreProvider } from 'stores'
+import { SignIn } from 'pages';
+import { useRootStore, RootStoreProvider } from 'stores';
 
-import { Layout } from './Layout'
-import Router from './Router'
+import { Layout } from './Layout';
+import Router from './Router';
 
 // import dotenv from 'dotenv'
 // import AppThemeProvider from './theme'
@@ -20,7 +20,7 @@ import Router from './Router'
 
 configure({
   reactionScheduler: (f) => setTimeout(f),
-})
+});
 
 toast.configure({
   position: 'top-right',
@@ -30,10 +30,10 @@ toast.configure({
   pauseOnHover: true,
   draggable: false,
   transition: Slide,
-})
+});
 
 function App() {
-  const { authorization } = useRootStore()
+  const { authorization } = useRootStore();
 
   return (
     <React.StrictMode>
@@ -53,7 +53,7 @@ function App() {
         </RootStoreProvider>
       </BrowserRouter>
     </React.StrictMode>
-  )
+  );
 }
 
-export default observer(App)
+export default observer(App);
