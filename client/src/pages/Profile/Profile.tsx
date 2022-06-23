@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { useRootStore } from 'stores'
 import { Spinner } from 'shared/ui'
 
-import styles from './Styles.module.scss'
+import s from './Styles.module.scss'
 
 function Profile() {
   const { user, loading } = useRootStore()
@@ -48,14 +48,14 @@ function Profile() {
                 onChange={handleUploadClick}
                 style={{ display: 'none' }}
               />
-              <div className={styles.avatar}>
+              <div className={s.avatar}>
                 <Avatar
                   style={{ cursor: 'pointer' }}
                   alt="Upload"
                   src={user.getPhotoUrl()}
                   sx={{ width: 100, height: 100 }}
                 />
-                <EditIcon className={styles.editIcon} />
+                <EditIcon className={s.editIcon} />
               </div>
             </label>
           )}

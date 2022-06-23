@@ -18,6 +18,8 @@ import { COMMON_DATE_FORMAT } from 'shared/consts'
 import { PopupMenu } from 'shared/ui'
 import { observer } from 'mobx-react-lite'
 
+import s from './Styles.module.scss'
+
 interface Props {
   id?: number
   name: string
@@ -47,7 +49,6 @@ const CommonCard = ({
       <CardHeader
         avatar={
           <Avatar
-            style={{ objectFit: 'fill' }}
             sx={{ cursor: 'pointer', objectFit: 'fill' }}
             src={creatorAvatarUrl}
           />
@@ -66,13 +67,17 @@ const CommonCard = ({
       />
       <CardMedia
         component="img"
-        height="194"
+        height="185"
         image={imageUrl}
         sx={{ objectFit: 'fill' }}
-        alt="Paella dish"
+        alt={imageUrl}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          className={s.ellipsis}
+          variant="body2"
+          color="text.secondary"
+        >
           {description}
         </Typography>
       </CardContent>
