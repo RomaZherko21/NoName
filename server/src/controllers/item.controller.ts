@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
+import { QueryTypes } from 'sequelize'
+
+import sequelize from '../models'
 
 import UserModel from '../models/user.model'
 import ItemModel from '../models/item.model'
@@ -9,16 +12,21 @@ import ItemModel from '../models/item.model'
 class ItemController {
   async list({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { offset, limit } = body
-      const { rows, count } = await ItemModel.findAndCountAll({
-        // where: {
-        //   userId:body.userId,
-        // },
-        offset,
-        limit,
-      })
+      const { limit, offset } = body
 
-      res.status(200).json({ items: rows, count })
+      const [results] = await sequelize.query(
+        `SELECT items.*, users.avatar  FROM items JOIN users 
+        ON items.userId = users.id 
+        ORDER BY items.createdAt ASC 
+        LIMIT :limit OFFSET :offset; `,
+        {
+          replacements: { limit, offset },
+        }
+      )
+
+      const count = await ItemModel.count()
+
+      res.status(200).json({ items: results, count })
     } catch {
       next(createError(500))
     }
@@ -26,13 +34,9 @@ class ItemController {
 
   async create({ body, file }: Request, res: Response, next: NextFunction) {
     try {
-      console.log('fuck', body)
-      const { avatar }: any = await UserModel.findByPk(body.userId)
-
       const data = await ItemModel.create({
         ...body,
         image: file.filename,
-        creatorAvatar: avatar,
       })
 
       res.status(200).json(data)

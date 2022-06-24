@@ -5,5 +5,5 @@ export interface TItem {
   description: string
   createdAt: number
   image: string
-  creatorAvatar: string
+  avatar: string
 }

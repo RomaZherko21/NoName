@@ -1,9 +1,8 @@
 import { fetch } from 'services'
 import { TItem } from 'shared/types'
 
-export const list = (limit: number, offset: number, userId: number) =>
+export const list = (limit: number, offset: number) =>
   fetch.post<{ items: TItem[]; count: number }>('/item/list', {
-    userId,
     limit,
     offset,
   })

@@ -34,8 +34,7 @@ class ItemsModel {
 
       const data = await API.item.list(
         this.pagination.perPage,
-        this.pagination.offset,
-        rootStore.user.id
+        this.pagination.offset
       )
 
       this.items = data.items

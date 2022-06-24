@@ -45,7 +45,7 @@ function ItemsList() {
                 name={item.name}
                 description={item.description}
                 imageUrl={`${API_URL}/uploads/item/${item.image}`}
-                creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.creatorAvatar}`}
+                creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.avatar}`}
                 createdAt={item.createdAt}
                 popupConfig={popupConfig}
               />
