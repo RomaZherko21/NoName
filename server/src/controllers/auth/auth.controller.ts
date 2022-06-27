@@ -6,7 +6,8 @@ import bcrypt from 'bcrypt'
 import UserModel from 'models/user.model'
 
 class AuthController {
-  async signIn({ body }: Request, res: Response, next: NextFunction) {
+  // eslint-disable-next-line class-methods-use-this
+  public async signIn({ body }: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = body
       const data: any = await UserModel.findOne({
@@ -22,12 +23,12 @@ class AuthController {
         const token = jwt.sign({ email }, String(process.env.TOKEN_SECRET), {
           expiresIn: process.env.ACCESS_TOKEN_EXPIRED_TIME,
         })
-        res.status(200).json({ accessToken: token })
-      } else {
-        return next(createError(401, 'Wrong password'))
+        return res.status(200).json({ accessToken: token })
       }
+
+      return next(createError(401, 'Wrong password'))
     } catch {
-      next(createError(500))
+      return next(createError(500))
     }
   }
 }

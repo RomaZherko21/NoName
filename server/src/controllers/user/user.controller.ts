@@ -55,15 +55,15 @@ class UserController {
 
       if (!data) return next(createError(400, 'User wasnt updated'))
 
-      res.status(200).json(data)
+      return res.status(200).json(data)
     } catch (err) {
-      next(createError(500))
+      return next(createError(500))
     }
   }
 
   async self(req: Request, res: Response, next: NextFunction) {
     try {
-      const authHeader = req.headers['authorization']
+      const authHeader = req.headers.authorization
       const token = authHeader && authHeader.split(' ')[1]
 
       jwt.verify(token || '', process.env.TOKEN_SECRET as string, async (err: any, user: any) => {
@@ -77,7 +77,7 @@ class UserController {
 
         if (!data) return next(createError(400, 'User wasnt deleted'))
 
-        res.status(200).json(data)
+        return res.status(200).json(data)
       })
     } catch (err) {
       next(createError(500))
@@ -95,9 +95,9 @@ class UserController {
 
       if (!data) return next(createError(403, 'Unauthorized'))
 
-      res.status(200).json(data)
+      return res.status(200).json(data)
     } catch (err) {
-      next(createError(500))
+      return next(createError(500))
     }
   }
 

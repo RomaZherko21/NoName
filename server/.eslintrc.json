@@ -1,14 +1,9 @@
-/* eslint linebreak-style: ["error", "unix"] */
-/* eslint linebreak-style: ["error", "windows"] */
 {
   "env": {
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb-typescript"],
-  "pasresOptions": {
-    "project": "./tsconfig.json"
-  },
+  "extends": ["airbnb-base"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -32,16 +27,18 @@
     "operator-linebreak": "off",
     "import/prefer-default-export": "off",
     "function-paren-newline": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "class-methods-use-this": "off"
   },
   "settings": {
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/extensions": [".js", ".ts"],
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts"]
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".ts"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
   }

@@ -1,6 +1,6 @@
-import { Request } from 'express'
+import { Request, Express } from 'express'
 import multer, { FileFilterCallback } from 'multer'
-import createError from 'http-errors'
+// import createError from 'http-errors'
 
 type FileNameCallback = (error: Error | null, filename: string) => void
 
@@ -10,7 +10,7 @@ const FILE_FIELD_NAMES = {
   item: 'item',
 }
 
-//only multipart/form-data
+// only multipart/form-data
 const storage = multer.diskStorage({
   destination: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
     if (file.fieldname === FILE_FIELD_NAMES.avatar) {
