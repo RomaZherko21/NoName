@@ -26,11 +26,7 @@ function ItemsList() {
   return (
     <Grid spacing={2} container direction="column">
       <Grid item alignSelf="flex-end">
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={showCreateItemModal}
-        >
+        <Button variant="contained" color="secondary" onClick={showCreateItemModal}>
           {t('item:form.create')}
         </Button>
       </Grid>

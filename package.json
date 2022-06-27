@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "prettier": "2.7.1"
+  },
+  "scripts": {
+    "format": "yarn prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run format"
+    }
+  }
+}

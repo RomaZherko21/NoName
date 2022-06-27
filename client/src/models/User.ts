@@ -31,14 +31,7 @@ class UserModel {
   }
 
   async init() {
-    const {
-      id,
-      name,
-      surname,
-      email,
-      role,
-      avatar = '',
-    } = await API.user.self()
+    const { id, name, surname, email, role, avatar = '' } = await API.user.self()
 
     this.rootStore.authorization.isAuthorized = true
 

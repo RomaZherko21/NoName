@@ -47,12 +47,7 @@ const CommonCard = ({
   return (
     <Card sx={{ height: 380 }} key={id}>
       <CardHeader
-        avatar={
-          <Avatar
-            sx={{ cursor: 'pointer', objectFit: 'fill' }}
-            src={creatorAvatarUrl}
-          />
-        }
+        avatar={<Avatar sx={{ cursor: 'pointer', objectFit: 'fill' }} src={creatorAvatarUrl} />}
         action={
           <IconButton aria-label="settings">
             <PopupMenu
@@ -73,11 +68,7 @@ const CommonCard = ({
         alt={imageUrl}
       />
       <CardContent>
-        <Typography
-          className={s.ellipsis}
-          variant="body2"
-          color="text.secondary"
-        >
+        <Typography className={s.ellipsis} variant="body2" color="text.secondary">
           {description}
         </Typography>
       </CardContent>

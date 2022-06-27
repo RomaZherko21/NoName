@@ -1,12 +1,5 @@
 import { ReactNode, useState } from 'react'
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-} from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 interface Props {

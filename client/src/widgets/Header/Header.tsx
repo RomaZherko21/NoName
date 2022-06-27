@@ -13,12 +13,7 @@ const Header = ({ className, toggleMenu }: Props) => {
   return (
     <AppBar position="static" className={className}>
       <Toolbar disableGutters sx={{ flexGrow: 1, padding: '0 15px' }}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={toggleMenu}
-        >
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
           <ListIcon />
         </IconButton>
 

@@ -30,10 +30,7 @@ class UsersModel {
   async fetch() {
     this.loading.begin()
 
-    const data = await API.user.list(
-      this.pagination.perPage,
-      this.pagination.offset
-    )
+    const data = await API.user.list(this.pagination.perPage, this.pagination.offset)
     this.users = data.users
     this.pagination.count = data.count
 

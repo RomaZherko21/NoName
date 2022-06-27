@@ -1,10 +1,7 @@
 import * as yup from 'yup'
 import i18next from 'i18next'
 
-export const commonStringValidation = (
-  fieldName: string,
-  minSymbols: number = 1
-) =>
+export const commonStringValidation = (fieldName: string, minSymbols: number = 1) =>
   yup
     .string()
     .min(

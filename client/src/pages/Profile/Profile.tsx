@@ -66,10 +66,7 @@ function Profile() {
               <ListItemText primary={t('user:name')} secondary={user.name} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText
-                primary={t('user:surname')}
-                secondary={user.surname}
-              />
+              <ListItemText primary={t('user:surname')} secondary={user.surname} />
             </ListItem>
             <ListItem disablePadding>
               <ListItemText primary={t('user:email')} secondary={user.email} />
@@ -81,9 +78,7 @@ function Profile() {
         </Grid>
         <Grid item>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              {t('common.language')}
-            </InputLabel>
+            <InputLabel id="demo-simple-select-label">{t('common.language')}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

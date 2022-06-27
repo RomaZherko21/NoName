@@ -15,15 +15,11 @@ import UsersModel from './Users.model'
 const ActionButtons = observer(({ user }: { user: TUserMeta }) => {
   const { t } = useTranslation()
 
-  const [showUpdateUserModal] = useDialog(
-    'user:form.updateUser',
-    (hideModal) => <UpdateUserForm user={user} hideModal={hideModal} />
-  )
+  const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
+    <UpdateUserForm user={user} hideModal={hideModal} />
+  ))
 
-  const removeUser = useCallback(
-    () => user.id && UsersModel.remove(user.id),
-    [user.id]
-  )
+  const removeUser = useCallback(() => user.id && UsersModel.remove(user.id), [user.id])
 
   const [showConfirmationModal] = useDialog(
     'notification:removeConfirm',
@@ -34,20 +30,12 @@ const ActionButtons = observer(({ user }: { user: TUserMeta }) => {
   return (
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
-        <IconButton
-          aria-label="edit"
-          size="small"
-          onClick={showUpdateUserModal}
-        >
+        <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
           <EditOutlinedIcon color="primary" fontSize="inherit" />
         </IconButton>
       </Tooltip>
       <Tooltip title={t('actions.delete') || 'edit'} placement="top">
-        <IconButton
-          aria-label="delete"
-          size="small"
-          onClick={showConfirmationModal}
-        >
+        <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
       </Tooltip>

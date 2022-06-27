@@ -22,14 +22,8 @@ const ListItemLink = ({ icon, primary, to }: ListItemLinkProps) => {
 
   return (
     <li>
-      <ListItem
-        button
-        component={renderLink}
-        selected={location.pathname.includes(to)}
-      >
-        {icon && (
-          <ListItemIcon style={{ color: 'inherit' }}>{icon}</ListItemIcon>
-        )}
+      <ListItem button component={renderLink} selected={location.pathname.includes(to)}>
+        {icon && <ListItemIcon style={{ color: 'inherit' }}>{icon}</ListItemIcon>}
         <ListItemText primary={primary} />
       </ListItem>
     </li>

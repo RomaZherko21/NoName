@@ -32,10 +32,7 @@ class ItemsModel {
     try {
       this.loading.begin()
 
-      const data = await API.item.list(
-        this.pagination.perPage,
-        this.pagination.offset
-      )
+      const data = await API.item.list(this.pagination.perPage, this.pagination.offset)
 
       this.items = data.items
       this.pagination.count = data.count
@@ -46,12 +43,7 @@ class ItemsModel {
     }
   }
 
-  async create(item: {
-    name: string
-    description: string
-    image: string
-    userId: number
-  }) {
+  async create(item: { name: string; description: string; image: string; userId: number }) {
     try {
       this.loading.begin()
 

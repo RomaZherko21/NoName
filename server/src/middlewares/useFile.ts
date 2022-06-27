@@ -12,11 +12,7 @@ const FILE_FIELD_NAMES = {
 
 //only multipart/form-data
 const storage = multer.diskStorage({
-  destination: (
-    req: Request,
-    file: Express.Multer.File,
-    cb: FileNameCallback
-  ) => {
+  destination: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
     if (file.fieldname === FILE_FIELD_NAMES.avatar) {
       cb(null, `uploads/${FILE_FIELD_NAMES.avatar}`)
     }
@@ -34,11 +30,7 @@ const storage = multer.diskStorage({
   },
 })
 
-const fileFilter = (
-  req: Request,
-  file: Express.Multer.File,
-  cb: FileFilterCallback
-) => {
+const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
   if (validFileExtensions.includes(file.mimetype)) {
     cb(null, true)
   } else {

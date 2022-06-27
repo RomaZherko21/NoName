@@ -18,10 +18,7 @@ function ProfileMenu() {
     true
   )
 
-  const popupConfig = useMemo(
-    () => getPopupConfig(showConfirmationModal),
-    [showConfirmationModal]
-  )
+  const popupConfig = useMemo(() => getPopupConfig(showConfirmationModal), [showConfirmationModal])
 
   return (
     <PopupMenu
@@ -35,11 +32,7 @@ function ProfileMenu() {
           {...btnProps}
         >
           <Box>
-            <Avatar
-              alt="Remy Sharp"
-              sx={{ cursor: 'pointer' }}
-              src={user.getPhotoUrl()}
-            />
+            <Avatar alt="Remy Sharp" sx={{ cursor: 'pointer' }} src={user.getPhotoUrl()} />
           </Box>
         </IconButton>
       )}

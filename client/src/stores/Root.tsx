@@ -34,9 +34,7 @@ const rootStore = new RootStore()
 const rootStoreContext = createContext<RootStore>(rootStore)
 
 export const RootStoreProvider = ({ children }: { children: JSX.Element }) => (
-  <rootStoreContext.Provider value={rootStore}>
-    {children}
-  </rootStoreContext.Provider>
+  <rootStoreContext.Provider value={rootStore}>{children}</rootStoreContext.Provider>
 )
 export const useRootStore = () => useContext(rootStoreContext)
 

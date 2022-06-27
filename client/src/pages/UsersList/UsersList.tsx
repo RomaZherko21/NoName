@@ -17,21 +17,16 @@ function UsersList() {
     UsersModel.fetch()
   }, [UsersModel.pagination.page, UsersModel.pagination.perPage])
 
-  const [showCreateUserModal] = useDialog(
-    'user:form.createNewUser',
-    (hideModal) => <CreateUserForm hideModal={hideModal} />
-  )
+  const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
+    <CreateUserForm hideModal={hideModal} />
+  ))
 
   const columns = useMemo(() => getColumns(), [getColumns])
 
   return (
     <Grid spacing={2} container direction="column">
       <Grid item alignSelf="flex-end">
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={showCreateUserModal}
-        >
+        <Button variant="contained" color="secondary" onClick={showCreateUserModal}>
           {t('user:form.createNewUser')}
         </Button>
       </Grid>

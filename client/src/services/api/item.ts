@@ -18,5 +18,4 @@ export const create = async (item: any) => {
   return fetch.post<TItem>('/item/create', formData)
 }
 
-export const remove = async (id: number) =>
-  fetch.post<TItem>('/item/remove', { id })
+export const remove = async (id: number) => fetch.post<TItem>('/item/remove', { id })

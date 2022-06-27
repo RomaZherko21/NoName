@@ -66,23 +66,19 @@ class UserController {
       const authHeader = req.headers['authorization']
       const token = authHeader && authHeader.split(' ')[1]
 
-      jwt.verify(
-        token || '',
-        process.env.TOKEN_SECRET as string,
-        async (err: any, user: any) => {
-          if (err) return next(createError(403))
+      jwt.verify(token || '', process.env.TOKEN_SECRET as string, async (err: any, user: any) => {
+        if (err) return next(createError(403))
 
-          const data = await UserModel.findOne({
-            where: {
-              email: user.email,
-            },
-          })
+        const data = await UserModel.findOne({
+          where: {
+            email: user.email,
+          },
+        })
 
-          if (!data) return next(createError(400, 'User wasnt deleted'))
+        if (!data) return next(createError(400, 'User wasnt deleted'))
 
-          res.status(200).json(data)
-        }
-      )
+        res.status(200).json(data)
+      })
     } catch (err) {
       next(createError(500))
     }
