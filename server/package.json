@@ -10,7 +10,8 @@
     "jsonwebtoken": "8.5.1",
     "multer": "^1.4.4",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.12.5"
+    "sequelize": "^6.12.5",
+    "tsconfig-paths": "^4.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -36,5 +37,18 @@
     "start": "nodemon ./src/index.ts",
     "prestart": "npm run build",
     "build": "tsc --project ./"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts",
+    "ext": "ts, js"
   }
 }

@@ -7,10 +7,10 @@ import path from 'path'
 require('dotenv').config()
 
 /* eslint-disable import/first */
-import { log } from './shared/helpers'
-import router from './routes'
-import { useHttpError, useAuth } from './middlewares'
-import sequelize from './models'
+import { log } from 'shared/helpers'
+import router from 'routes'
+import { useHttpError, useAuth } from 'middlewares'
+import sequelize from 'models'
 /* eslint-enable */
 
 const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } = process.env

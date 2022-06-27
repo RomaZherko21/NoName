@@ -3,8 +3,9 @@ import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
 
-import sequelize from '../../models'
-import ItemModel from '../../models/item.model'
+import ItemModel from 'models/item.model'
+import sequelize from 'models'
+
 import { getItemListQuery } from './queries'
 
 class ItemController {

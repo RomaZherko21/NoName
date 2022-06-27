@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import fs from 'fs'
 import path from 'path'
 
-import UserModel from '../../models/user.model'
+import UserModel from 'models/user.model'
 
 class UserController {
   async list({ body }: Request, res: Response, next: NextFunction) {

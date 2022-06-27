@@ -1,7 +1,7 @@
 import express from 'express'
 
-import { itemController } from '../controllers'
-import { useFile } from '../middlewares'
+import { useFile } from 'middlewares'
+import { itemController } from 'controllers'
 
 const item = express.Router()
 
