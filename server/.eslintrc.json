@@ -17,6 +17,8 @@
     "semi": "off",
     "object-curly-newline": "off",
     "operator-linebreak": "off",
-    "function-paren-newline": "off"
+    "import/prefer-default-export": "off",
+    "function-paren-newline": "off",
+    "comma-dangle": "off"
   }
 }
