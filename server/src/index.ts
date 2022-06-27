@@ -1,17 +1,19 @@
-require('dotenv').config()
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
-import router from './routes'
-import sequelize from './models'
-import { log } from './shared/helpers'
-import { useHttpError, useAuth } from './middlewares'
+require('dotenv').config()
 
-const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } =
-  process.env
+/* eslint-disable import/first */
+import { log } from './shared/helpers'
+import router from './routes'
+import { useHttpError, useAuth } from './middlewares'
+import sequelize from './models'
+/* eslint-enable */
+
+const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } = process.env
 
 const app = express()
 const corsOptions = {
@@ -26,7 +28,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/uploads', express.static(path.join('uploads')))
 
-// app.use(useAuth)
+app.use(useAuth)
 
 app.use('/', router)
 
@@ -37,8 +39,6 @@ sequelize
       log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
     })
   })
-  .catch((err: ValidationErrorItem) =>
-    log.negative(`Server has not been started: ${err.message}`)
-  )
+  .catch((err: ValidationErrorItem) => log.negative(`Server has not been started: ${err.message}`))
 
 app.use(useHttpError)
