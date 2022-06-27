@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { HttpException } from '../types/common'
-import log from '../helpers/logs'
+import { HttpException } from '../shared/types'
+import { log } from '../shared/helpers'
 
 const useHttpError = (
   error: HttpException,

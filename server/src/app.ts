@@ -7,9 +7,8 @@ import path from 'path'
 
 import router from './ROUTES'
 import sequelize from './models'
-import log from './helpers/logs'
-import useHttpError from './middlewares/useHttpError'
-import useAuth from './middlewares/useAuth'
+import { log } from './shared/helpers'
+import { useHttpError, useAuth } from './middlewares'
 
 const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } =
   process.env

@@ -2,27 +2,19 @@ import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
-import { QueryTypes } from 'sequelize'
 
-import sequelize from '../models'
-
-import UserModel from '../models/user.model'
-import ItemModel from '../models/item.model'
+import sequelize from '../../models'
+import ItemModel from '../../models/item.model'
+import { getItemListQuery } from './queries'
 
 class ItemController {
   async list({ body }: Request, res: Response, next: NextFunction) {
     try {
       const { limit, offset } = body
 
-      const [results] = await sequelize.query(
-        `SELECT items.*, users.avatar  FROM items JOIN users 
-        ON items.userId = users.id 
-        ORDER BY items.createdAt ASC 
-        LIMIT :limit OFFSET :offset; `,
-        {
-          replacements: { limit, offset },
-        }
-      )
+      const [results] = await sequelize.query(getItemListQuery(), {
+        replacements: { limit, offset },
+      })
 
       const count = await ItemModel.count()
 

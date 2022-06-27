@@ -1,7 +1,7 @@
 import express from 'express'
 
-import useFile from '../middlewares/useFile'
-import userController from '../controllers/user.controller'
+import { useFile } from '../middlewares'
+import { userController } from '../controllers'
 
 const user = express.Router()
 
