@@ -19,7 +19,7 @@ class AuthController {
       const compare = await bcrypt.compare(password, data.password)
 
       if (compare) {
-        const token = jwt.sign({ email }, process.env.TOKEN_SECRET, {
+        const token = jwt.sign({ email }, String(process.env.TOKEN_SECRET), {
           expiresIn: process.env.ACCESS_TOKEN_EXPIRED_TIME,
         })
         res.status(200).json({ accessToken: token })

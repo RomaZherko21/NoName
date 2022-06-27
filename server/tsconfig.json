@@ -1,18 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es5",
     "module": "commonjs",
-    "moduleResolution": "node",
-    "pretty": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": "src",
-    "paths": {
-      "*": ["node_modules/*"]
-    },
-    "outDir": "./build"
+    "rootDir": "./src",
+    "outDir": "./build",
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+/* Advanced Options */
+"skipLibCheck": true,
+"forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["./node_modules", "./build", "src/**/*.test.ts"]
+  "lib": ["es2015"],
+  "include": ["src/**/*"],
+  "exclude": ["./node_modules", "src/**/*.test.ts"]
 }

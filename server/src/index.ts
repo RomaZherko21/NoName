@@ -5,7 +5,7 @@ import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
-import router from './ROUTES'
+import router from './routes'
 import sequelize from './models'
 import { log } from './shared/helpers'
 import { useHttpError, useAuth } from './middlewares'
@@ -26,14 +26,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/uploads', express.static(path.join('uploads')))
 
-app.use(useAuth)
+// app.use(useAuth)
 
 app.use('/', router)
 
 sequelize
   .sync()
   .then(() => {
-    app.listen(Number(SERVER_PORT), SERVER_HOST, () => {
+    app.listen(Number(SERVER_PORT), String(SERVER_HOST), () => {
       log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
     })
   })

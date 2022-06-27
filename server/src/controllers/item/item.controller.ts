@@ -28,7 +28,7 @@ class ItemController {
     try {
       const data = await ItemModel.create({
         ...body,
-        image: file.filename,
+        image: file?.filename,
       })
 
       res.status(200).json(data)
@@ -44,7 +44,7 @@ class ItemController {
 
       if (image) {
         const filePath = path.join(
-          path.dirname(require.main.path),
+          path.dirname(require?.main?.path || ''),
           '/uploads',
           '/item',
           image

@@ -67,7 +67,7 @@ class UserController {
       const token = authHeader && authHeader.split(' ')[1]
 
       jwt.verify(
-        token,
+        token || '',
         process.env.TOKEN_SECRET as string,
         async (err: any, user: any) => {
           if (err) return next(createError(403))
@@ -115,7 +115,7 @@ class UserController {
 
         if (data.avatar) {
           const filePath = path.join(
-            path.dirname(require.main.path),
+            path.dirname(require?.main?.path || ''),
             '/uploads',
             '/avatar',
             data.avatar

@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import multer from 'multer'
+import multer, { FileFilterCallback } from 'multer'
 import createError from 'http-errors'
 
 type FileNameCallback = (error: Error | null, filename: string) => void
@@ -37,12 +37,13 @@ const storage = multer.diskStorage({
 const fileFilter = (
   req: Request,
   file: Express.Multer.File,
-  cb: (err: Error | null, filename: boolean) => void
+  cb: FileFilterCallback
 ) => {
   if (validFileExtensions.includes(file.mimetype)) {
     cb(null, true)
   } else {
-    cb(createError(400, 'Not valid file format'), false)
+    // cb(createError(400, 'Not valid file format'), false)
+    cb(null, false)
   }
 }
 
