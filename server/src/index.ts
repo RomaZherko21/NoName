@@ -9,26 +9,29 @@ require('dotenv').config()
 /* eslint-disable import/first */
 import { log } from 'shared/helpers'
 import router from 'routes'
-import { useHttpError, useAuth } from 'middlewares'
+// import { useHttpError, useAuth } from 'middlewares'
+import { useHttpError } from 'middlewares'
 import sequelize from 'models'
 /* eslint-enable */
 
-const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } = process.env
+const { SERVER_HOST, SERVER_PORT } = process.env
+// const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } = process.env
 
 const app = express()
-const corsOptions = {
-  credentials: true,
-  origin: `${CLIENT_PROTOCOL}://${CLIENT_HOST}:${CLIENT_PORT}`,
-}
+// const corsOptions = {
+//   credentials: true,
+//   origin: `${CLIENT_PROTOCOL}://${CLIENT_HOST}:${CLIENT_PORT}`,
+// }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/uploads', express.static(path.join('uploads')))
 
-app.use(useAuth)
+// app.use(useAuth)
 
 app.use('/', router)
 

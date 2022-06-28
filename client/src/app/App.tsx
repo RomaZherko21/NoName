@@ -41,13 +41,16 @@ function App() {
         <RootStoreProvider>
           {/* <AppThemeProvider> */}
           <ModalProvider>
-            {authorization.isAuthorized ? (
+            <Layout>
+              <Router />
+            </Layout>
+            {/* {authorization.isAuthorized ? (
               <Layout>
                 <Router />
               </Layout>
             ) : (
               <SignIn />
-            )}
+            )} */}
           </ModalProvider>
           {/* </AppThemeProvider> */}
         </RootStoreProvider>
