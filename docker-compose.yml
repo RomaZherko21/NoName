@@ -43,6 +43,8 @@ services:
     environment:
       <<: *common-variables
       MYSQL_HOST_IP: mysql_db
+    ports:
+      - '3001:3001'
 
   client:
     stdin_open: true
@@ -54,6 +56,8 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    ports:
+      - '3000:3000'
 
   adminer:
     image: adminer:latest

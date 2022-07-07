@@ -36,7 +36,7 @@ app.use('/', router)
 sequelize
   .sync()
   .then(() => {
-    app.listen(Number(SERVER_PORT), String(SERVER_HOST), () => {
+    app.listen(3001, '0.0.0.0', () => {
       log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
     })
   })
