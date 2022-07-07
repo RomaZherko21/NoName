@@ -60,3 +60,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## cd ./root
 
 ### `docker-compose up --build`
+
+## credentials
+
+### email: admin@gmail.com
+
+### password: qwerqwer

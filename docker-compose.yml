@@ -14,7 +14,7 @@ services:
     cap_add:
       - SYS_NICE
     volumes:
-      - 'MqSQL_DB:/var/lib/mysql'
+      - 'MySQL_DB:/var/lib/mysql'
     ports:
       - '9906:3306'
     environment:
@@ -69,4 +69,4 @@ services:
 volumes:
   client_node:
   api_node:
-  MqSQL_DB:
+  MySQL_DB:
