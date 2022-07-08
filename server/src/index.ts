@@ -22,6 +22,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
@@ -35,7 +36,7 @@ app.use('/', router)
 sequelize
   .sync()
   .then(() => {
-    app.listen(Number(SERVER_PORT), String(SERVER_HOST), () => {
+    app.listen(3001, '0.0.0.0', () => {
       log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
     })
   })

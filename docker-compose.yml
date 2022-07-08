@@ -1,0 +1,72 @@
+version: '3.8'
+
+x-common-variables: &common-variables
+  MYSQL_DATABASE: NoName
+  MYSQL_USER: MYSQL_USER
+  MYSQL_PASSWORD: MYSQL_PASSWORD
+
+services:
+  mysql_db:
+    build:
+      context: './server'
+      target: MySQL_DB
+    restart: always
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - 'MySQL_DB:/var/lib/mysql'
+    ports:
+      - '9906:3306'
+    environment:
+      <<: *common-variables
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_HOST: localhost
+
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - '80:80'
+
+  api:
+    build:
+      context: './server'
+      target: api
+    depends_on:
+      - mysql_db
+    volumes:
+      - api_node:/app/node_modules
+      - ./server:/app
+    environment:
+      <<: *common-variables
+      MYSQL_HOST_IP: mysql_db
+
+  client:
+    stdin_open: true
+    build:
+      context: ./client
+      target: client
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - client_node:/app/node_modules
+      - ./client:/app
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8080
+    depends_on:
+      - mysql_db
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db
+
+volumes:
+  client_node:
+  api_node:
+  MySQL_DB:
