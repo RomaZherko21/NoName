@@ -35,6 +35,7 @@
   },
   "scripts": {
     "start": "nodemon ./src/index.ts",
+    "dev": "nodemon -L src/index.ts",
     "prestart": "npm run build",
     "build": "tsc --project ./"
   },

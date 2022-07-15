@@ -8,7 +8,7 @@ x-common-variables: &common-variables
 services:
   mysql_db:
     build:
-      context: './server'
+      context: './MySQL'
       target: MySQL_DB
     restart: always
     cap_add:
