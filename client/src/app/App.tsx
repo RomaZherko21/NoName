@@ -13,10 +13,7 @@ import { useRootStore, RootStoreProvider } from 'stores'
 import { Layout } from './Layout'
 import Router from './Router'
 
-// import dotenv from 'dotenv'
 // import AppThemeProvider from './theme'
-
-// dotenv.config()
 
 configure({
   reactionScheduler: (f) => setTimeout(f),

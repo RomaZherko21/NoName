@@ -1,3 +1,3 @@
-const { REACT_APP_SERVER_PROTOCOL, REACT_APP_SERVER_HOST, REACT_APP_SERVER_PORT } = process.env
+const { REACT_APP_SERVER_API } = process.env
 
-export const API_URL = 'http://localhost/api'
+export const API_URL = REACT_APP_SERVER_API

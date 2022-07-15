@@ -4,7 +4,6 @@ import { API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { TItem } from 'shared/types'
-import rootStore from 'stores/Root'
 
 class ItemsModel {
   private _items: TItem[] = []
@@ -62,7 +61,6 @@ class ItemsModel {
     try {
       this.loading.begin()
 
-      console.log('fucck', id)
       await API.item.remove(id)
       this.fetch()
 
