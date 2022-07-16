@@ -35,14 +35,14 @@ const Aside = ({ className, isOpen }: AsideProps) => {
       <List>
         <AsideItemLink
           icon={<GroupIcon />}
-          title={t('pages:aside.usersList')}
+          title={t('pages:usersList')}
           to="/usersList"
           isOpen={isOpen}
         />
 
         <AsideItemLink
           icon={<CollectionsBookmarkIcon />}
-          title={t('pages:aside.items')}
+          title={t('pages:items')}
           to="/items"
           isOpen={isOpen}
         />
@@ -53,7 +53,7 @@ const Aside = ({ className, isOpen }: AsideProps) => {
               <AddBoxIcon />
             </Badge>
           }
-          title={t('pages:aside.reports')}
+          title={t('pages:reports')}
           to="/ewq"
           isOpen={isOpen}
         />

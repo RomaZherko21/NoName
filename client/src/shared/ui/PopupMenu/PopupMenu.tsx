@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   config: Array<{
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const PopupMenu = ({ config, ActionButton, id }: Props) => {
+  const { t } = useTranslation()
+
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleMenu = (event: any) => {
@@ -53,7 +56,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                 <ListItem disablePadding onClick={() => handleClose()}>
                   <ListItemButton>
                     <ListItemIcon>{item.Icon}</ListItemIcon>
-                    <ListItemText primary={item.text} />
+                    <ListItemText primary={t(item.text)} />
                   </ListItemButton>
                 </ListItem>
               </Link>
@@ -67,7 +70,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
               >
                 <ListItemButton>
                   <ListItemIcon>{item.Icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={t(item.text)} />
                 </ListItemButton>
               </ListItem>
             )

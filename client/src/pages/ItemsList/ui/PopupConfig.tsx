@@ -9,12 +9,12 @@ import { ItemsModel } from '../model'
 export const getPopupConfig = () => [
   {
     Icon: <AccountBoxIcon />,
-    text: i18next.t('common.details'),
+    text: 'common.details',
     linkTo: ROUTES.PROFILE,
   },
   {
     Icon: <DeleteIcon />,
-    text: i18next.t('actions.delete'),
+    text: 'actions.delete',
     onClick: (id: number) => {
       ItemsModel.remove(id)
     },

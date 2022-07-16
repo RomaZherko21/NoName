@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Button, Grid, TextField } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
+import FolderIcon from '@mui/icons-material/Folder'
 
 import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
@@ -15,7 +16,7 @@ import styles from './Styles.module.scss'
 interface FormValues {
   name: string
   description: string
-  image: string
+  item: File | ''
 }
 
 function CreateItemForm({ hideModal }: any) {
@@ -37,7 +38,7 @@ function CreateItemForm({ hideModal }: any) {
       initialValues: {
         name: '',
         description: '',
-        image: '',
+        item: '',
       },
       validationSchema,
       onSubmit: (value: FormValues) => {
@@ -73,7 +74,7 @@ function CreateItemForm({ hideModal }: any) {
             helperText={touched.description && errors.description}
           />
         </Grid>
-        <Grid item>
+        <Grid item style={{ width: 'fit-content' }}>
           <label htmlFor="upload-file">
             <input
               id="upload-file"
@@ -89,10 +90,12 @@ function CreateItemForm({ hideModal }: any) {
               <Avatar
                 style={{ cursor: 'pointer' }}
                 alt="Upload"
-                variant="square"
-                src={values.image}
+                variant="circular"
+                src={values.item && URL.createObjectURL(values.item)}
                 sx={{ width: 50, height: 50 }}
-              />
+              >
+                <FolderIcon />
+              </Avatar>
               <EditIcon className={styles.editIcon} />
             </div>
           </label>

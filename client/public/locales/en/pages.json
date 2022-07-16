@@ -1,7 +1,5 @@
 {
-  "aside":{
-    "usersList":"Users list",
-    "items":"Items",
-    "reports":"Reports"
-  }
+  "usersList": "Users list",
+  "itemsCards": "Items cards",
+  "reports": "Reports"
 }

@@ -42,7 +42,7 @@ class ItemsModel {
     }
   }
 
-  async create(item: { name: string; description: string; image: string; userId: number }) {
+  async create(item: { name: string; description: string; item: File | ''; userId: number }) {
     try {
       this.loading.begin()
 

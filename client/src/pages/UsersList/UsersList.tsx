@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
@@ -24,23 +24,26 @@ function UsersList() {
   const columns = useMemo(() => getColumns(), [getColumns])
 
   return (
-    <Grid spacing={2} container direction="column">
-      <Grid item alignSelf="flex-end">
-        <Button variant="contained" color="secondary" onClick={showCreateUserModal}>
-          {t('user:form.createNewUser')}
-        </Button>
+    <>
+      <Typography variant="h5">{t('pages:usersList')}</Typography>
+      <Grid spacing={2} container direction="column">
+        <Grid item alignSelf="flex-end">
+          <Button variant="contained" color="secondary" onClick={showCreateUserModal}>
+            {t('user:form.createNewUser')}
+          </Button>
+        </Grid>
+        <Grid item>
+          {UsersModel.loading.has ? (
+            <Spinner />
+          ) : (
+            <CommonTable data={UsersModel.users} columns={columns} />
+          )}
+        </Grid>
+        <Grid item>
+          <Pagination paginationModel={UsersModel.pagination} />
+        </Grid>
       </Grid>
-      <Grid item>
-        {UsersModel.loading.has ? (
-          <Spinner />
-        ) : (
-          <CommonTable data={UsersModel.users} columns={columns} />
-        )}
-      </Grid>
-      <Grid item>
-        <Pagination paginationModel={UsersModel.pagination} />
-      </Grid>
-    </Grid>
+    </>
   )
 }
 

@@ -28,40 +28,56 @@ class UsersModel {
   }
 
   async fetch() {
-    this.loading.begin()
+    try {
+      this.loading.begin()
 
-    const data = await API.user.list(this.pagination.perPage, this.pagination.offset)
-    this.users = data.users
-    this.pagination.count = data.count
+      const data = await API.user.list(this.pagination.perPage, this.pagination.offset)
+      this.users = data.users
+      this.pagination.count = data.count
 
-    this.loading.end()
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
   }
 
   async create(user: TUserMeta) {
-    this.loading.begin()
+    try {
+      this.loading.begin()
 
-    await API.user.create(user)
-    this.fetch()
+      await API.user.create(user)
+      this.fetch()
 
-    this.loading.end()
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
   }
 
   async remove(id: number) {
-    this.loading.begin()
+    try {
+      this.loading.begin()
 
-    await API.user.remove(id)
-    this.fetch()
+      await API.user.remove(id)
+      this.fetch()
 
-    this.loading.end()
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
   }
 
   async update(user: TUserMeta) {
-    this.loading.begin()
+    try {
+      this.loading.begin()
 
-    await API.user.update(user)
-    this.fetch()
+      await API.user.update(user)
+      this.fetch()
 
-    this.loading.end()
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
   }
 }
 
