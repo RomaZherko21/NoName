@@ -4,6 +4,7 @@ import { API } from 'services'
 import { TUserMeta } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
+import { UserFilters } from './filters'
 
 class UsersModel {
   private _users: TUserMeta[] = []
@@ -27,11 +28,15 @@ class UsersModel {
     return this._users
   }
 
-  async fetch() {
+  async fetch(filters?: UserFilters) {
     try {
       this.loading.begin()
 
-      const data = await API.user.list(this.pagination.perPage, this.pagination.offset)
+      const data = await API.user.list({
+        limit: this.pagination.perPage,
+        offset: this.pagination.offset,
+        filters,
+      })
       this.users = data.users
       this.pagination.count = data.count
 

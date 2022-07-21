@@ -4,19 +4,24 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import fs from 'fs'
 import path from 'path'
+import { QueryTypes } from 'sequelize'
 
 import UserModel from 'models/user.model'
+import sequelize from 'models'
+
+import { getUserListQuery } from './queries'
 
 class UserController {
   async list({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { offset, limit } = body
-      const { rows, count } = await UserModel.findAndCountAll({
-        offset,
-        limit,
-      })
+      const { offset, limit, filters = {} } = body
 
-      res.status(200).json({ users: rows, count })
+      const users = await sequelize.query(getUserListQuery({ limit, offset, filters }), {
+        type: QueryTypes.SELECT,
+      })
+      const count = await UserModel.count()
+
+      res.status(200).json({ users, count })
     } catch {
       next(createError(500))
     }

@@ -7,8 +7,17 @@ export const update = (user: TUserMeta) => fetch.post('/user/update', user)
 
 export const remove = (id: number) => fetch.post('/user/remove', { id })
 
-export const list = (limit: number, offset: number) =>
+export const list = ({
+  limit,
+  offset,
+  filters,
+}: {
+  limit: number
+  offset: number
+  filters?: any
+}) =>
   fetch.post<{ users: TUserMeta[]; count: number }>('/user/list', {
+    filters,
     limit,
     offset,
   })

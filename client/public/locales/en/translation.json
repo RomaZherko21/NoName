@@ -3,12 +3,13 @@
     "language": "Language",
     "english": "English",
     "russian": "Russian",
-   
     "profile": "Profile",
     "confirm": "Confirm",
-    "actions": "Actions",
+    "doing": "Actions",
     "amount": "Amount",
-    "details": "Details"
+    "details": "Details",
+    "id": "ID",
+    "emptyInput": "Enter value"
   },
   "actions": {
     "edit": "Edit",

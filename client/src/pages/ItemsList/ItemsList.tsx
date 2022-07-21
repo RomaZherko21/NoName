@@ -25,14 +25,18 @@ function ItemsList() {
 
   return (
     <>
-      <Typography variant="h5">{t('pages:itemsCards')}</Typography>
-
-      <Grid container spacing={3} direction="column">
-        <Grid item alignSelf="flex-end">
+      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
+        <Grid item>
+          <Typography variant="h5">{t('pages:itemsCards')}</Typography>
+        </Grid>
+        <Grid item>
           <Button variant="contained" color="secondary" onClick={showCreateItemModal}>
             {t('item:form.create')}
           </Button>
         </Grid>
+      </Grid>
+
+      <Grid container spacing={3} direction="column" style={{ marginTop: '12px' }}>
         <Grid item container spacing={0.5}>
           {ItemsModel.loading.has ? (
             <Spinner />
