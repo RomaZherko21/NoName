@@ -1,6 +1,6 @@
 .PHONY: run
 run: ## Runs the whole app in docker containers
-	docker-compose up --build
+	docker-compose up --build --abort-on-container-exit 
 
 .PHONY: down
 down: ## Runs the whole app in docker containers
