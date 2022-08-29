@@ -8,6 +8,7 @@ import (
 	"github.com/RomaZherko21/goApi/pkg/handler"
 	"github.com/RomaZherko21/goApi/pkg/repository"
 	"github.com/RomaZherko21/goApi/pkg/service"
+	"github.com/spf13/viper"
 
 	"database/sql"
 
@@ -15,7 +16,11 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "MYSQL_USER:MYSQL_PASSWORD@tcp(mysql_db:3306)/NoName")
+	if err := initConfig(); err != nil {
+		log.Fatalf("error in init configuration, %s", err.Error())
+	}
+
+	db, err := sql.Open(viper.GetString("DB"), viper.GetString("DB_USER")+":"+viper.GetString("DB_PASSWORD")+"@tcp(mysql_db:"+viper.GetString("DB_PORT")+")/"+viper.GetString("DB_NAME"))
 	if err != nil {
 		panic(err.Error())
 	}
@@ -34,8 +39,14 @@ func main() {
 
 	server := new(goapi.Server)
 
-	if err := server.Run("8000", handlers.InitRoutes()); err != nil {
+	if err := server.Run(viper.GetString("PORT"), handlers.InitRoutes()); err != nil {
 		log.Fatalf("error occured while running http server: %s", err.Error())
 	}
 
+}
+
+func initConfig() error {
+	viper.AddConfigPath("config")
+	viper.SetConfigName("config")
+	return viper.ReadInConfig()
 }

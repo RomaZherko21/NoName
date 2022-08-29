@@ -11,3 +11,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (email, password) 
 VALUES('admin@gmail.com', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS');
+
+CREATE TABLE IF NOT EXISTS `reports` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `text` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
