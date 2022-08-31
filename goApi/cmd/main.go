@@ -5,15 +5,24 @@ import (
 	"log"
 
 	goapi "github.com/RomaZherko21/goApi"
+	_ "github.com/RomaZherko21/goApi/docs"
 	"github.com/RomaZherko21/goApi/pkg/handler"
 	"github.com/RomaZherko21/goApi/pkg/repository"
 	"github.com/RomaZherko21/goApi/pkg/service"
-	"github.com/spf13/viper"
 
 	"database/sql"
 
+	"github.com/spf13/viper"
+
 	_ "github.com/go-sql-driver/mysql"
 )
+
+// @title NoName go_api
+// @version 1.0
+// @description something about this app
+
+// @host localhost:8000
+// @BasePath /
 
 func main() {
 	if err := initConfig(); err != nil {

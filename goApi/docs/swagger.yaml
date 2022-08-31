@@ -1,0 +1,114 @@
+basePath: /
+definitions:
+  goapi.Report:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: something about this app
+  title: NoName go_api
+  version: "1.0"
+paths:
+  /api/reports:
+    get:
+      consumes:
+      - application/json
+      description: get all reports
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/goapi.Report'
+      summary: getAllReports
+      tags:
+      - report
+    post:
+      consumes:
+      - application/json
+      description: create report
+      parameters:
+      - description: report info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/goapi.Report'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+      summary: createReport
+      tags:
+      - report
+  /api/reports/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete report by id
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+      summary: deleteReport
+      tags:
+      - report
+    get:
+      consumes:
+      - application/json
+      description: get report by id
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/goapi.Report'
+      summary: getReportById
+      tags:
+      - report
+    put:
+      consumes:
+      - application/json
+      description: update report by id
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/goapi.Report'
+      summary: updateReport
+      tags:
+      - report
+swagger: "2.0"

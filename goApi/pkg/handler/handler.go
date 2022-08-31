@@ -5,6 +5,8 @@ import (
 
 	"github.com/RomaZherko21/goApi/pkg/service"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -30,6 +32,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			reports.DELETE("/:id", h.deleteReport)
 		}
 	}
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.Run(":8000")
 
 	return router
 }

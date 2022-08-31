@@ -10,8 +10,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary      createReport
+// @Description  create report
+// @Tags         report
+// @Accept       json
+// @Produce      json
+// @Param        input body goapi.Report true "report info"
+// @Success      200  {integer}  integer 1
+// @Router       /api/reports [post]
 func (h *Handler) createReport(c *gin.Context) {
-
 	var requestBody goapi.Report
 
 	if err := c.BindJSON(&requestBody); err != nil {
@@ -36,6 +43,13 @@ func (h *Handler) createReport(c *gin.Context) {
 	})
 }
 
+// @Summary      getAllReports
+// @Description  get all reports
+// @Tags         report
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  goapi.Report
+// @Router       /api/reports [get]
 func (h *Handler) getAllReports(c *gin.Context) {
 	query := "SELECT id, description FROM reports"
 
@@ -70,6 +84,14 @@ func (h *Handler) getAllReports(c *gin.Context) {
 	//Паника только в main / критически важные места
 }
 
+// @Summary      getReportById
+// @Description  get report by id
+// @Tags         report
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Report ID"
+// @Success      200  {object}  goapi.Report
+// @Router       /api/reports/{id} [get]
 func (h *Handler) getReportById(c *gin.Context) {
 	id := c.Param("id")
 
@@ -92,6 +114,14 @@ func (h *Handler) getReportById(c *gin.Context) {
 
 }
 
+// @Summary      updateReport
+// @Description  update report by id
+// @Tags         report
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Report ID"
+// @Success      200  {object}  goapi.Report
+// @Router       /api/reports/{id} [put]
 func (h *Handler) updateReport(c *gin.Context) {
 	cid := c.Param("id")
 	id, err := strconv.Atoi(cid)
@@ -125,6 +155,14 @@ func (h *Handler) updateReport(c *gin.Context) {
 
 }
 
+// @Summary      deleteReport
+// @Description  delete report by id
+// @Tags         report
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Report ID"
+// @Success      200  {integer}  integer 1
+// @Router       /api/reports/{id} [delete]
 func (h *Handler) deleteReport(c *gin.Context) {
 	cid := c.Param("id")
 	id, err := strconv.Atoi(cid)

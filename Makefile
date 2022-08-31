@@ -29,3 +29,8 @@ runGo: ## Run go_api container
 .PHONY: downGo
 downGo: ## Stops go_api container
 	docker-compose rm -s -v go_api
+
+.PHONY: init_swagger
+init_swagger: ## init swagger config
+	swag init -g ./cmd/main.go
+
