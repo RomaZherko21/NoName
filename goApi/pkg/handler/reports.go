@@ -2,26 +2,28 @@ package handler
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"strconv"
 
+	goapi "github.com/RomaZherko21/goApi"
 	"github.com/gin-gonic/gin"
 )
 
-type ReportRequestBody struct {
-	Text string
-}
-
 func (h *Handler) createReport(c *gin.Context) {
 
-	var requestBody ReportRequestBody
+	var requestBody goapi.Report
 
 	if err := c.BindJSON(&requestBody); err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
-	fmt.Println("createReport", requestBody.Text)
+	fmt.Println("createReport", requestBody.Description)
 
-	insert, err := h.db.Query(fmt.Sprintf("INSERT INTO reports (text) VALUES('%s')", requestBody.Text))
+	query := fmt.Sprintf("INSERT INTO reports (description) VALUES('%s')", requestBody.Description)
+
+	insert, err := h.db.Query(query)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -29,17 +31,13 @@ func (h *Handler) createReport(c *gin.Context) {
 		defer insert.Close()
 	}
 
-	c.JSON(200, struct {
-		message string
-	}{
-		message: "Report was created!",
+	c.JSON(http.StatusOK, gin.H{
+		"msg": "report was created",
 	})
 }
 
 func (h *Handler) getAllReports(c *gin.Context) {
-	fmt.Println("getAllReports")
-
-	query := "SELECT * FROM reports"
+	query := "SELECT id, description FROM reports"
 
 	rows, queryErr := h.db.Query(query)
 
@@ -50,57 +48,100 @@ func (h *Handler) getAllReports(c *gin.Context) {
 
 	defer rows.Close()
 
-	var allReports []ReportRequestBody
+	fmt.Println(rows)
+
+	allReports := make([]goapi.Report, 0)
 
 	for rows.Next() {
-		report := ReportRequestBody{}
-		rows.Scan(&report.Text)
+		var report goapi.Report
+		rows.Scan(&report.Id, &report.Description)
 		allReports = append(allReports, report)
 	}
 
-	queryErr = rows.Err()
-	if queryErr != nil {
+	if err := rows.Err(); err != nil {
 		fmt.Println(queryErr.Error())
 		return
-	} else {
-		defer rows.Close()
 	}
 
-	c.JSON(200, allReports)
-
-	// fmt.Println(insert)
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// 	return
-	// } else {
-	// 	defer insert.Close()
-	// }
+	c.JSON(http.StatusOK, gin.H{
+		"reports": allReports,
+	})
 
 	//Паника только в main / критически важные места
 }
 
 func (h *Handler) getReportById(c *gin.Context) {
-	fmt.Println("getReportById")
-	var requestBody map[string][]string = c.Request.URL.Query()
+	id := c.Param("id")
 
-	fmt.Println("getReportById", requestBody["id"], requestBody)
+	var report goapi.Report
 
-	insert, err := h.db.Query(fmt.Sprintf("SELECT * FROM reports WHERE id = '%s'", requestBody["id"]))
+	err := h.db.QueryRow("SELECT id, description FROM reports WHERE id=?", id).Scan(
+		&report.Id, &report.Description,
+	)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println(err)
+		c.JSON(http.StatusOK, gin.H{
+			"report": nil,
+		})
 		return
-	} else {
-		defer insert.Close()
 	}
 
-	c.JSON(200, insert)
+	c.JSON(http.StatusOK, gin.H{
+		"report": report,
+	})
 
 }
 
-func (h *Handler) updateList(c *gin.Context) {
+func (h *Handler) updateReport(c *gin.Context) {
+	cid := c.Param("id")
+	id, err := strconv.Atoi(cid)
+	report := goapi.Report{Id: id}
+	err = c.Bind(&report)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	stmt, err := h.db.Prepare("UPDATE reports SET description=? WHERE id=?")
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer stmt.Close()
+
+	rs, err := stmt.Exec(report.Description, report.Id)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	rowsAffected, err := rs.RowsAffected()
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+	msg := fmt.Sprintf("Update report %d successful, %d rows affected", report.Id, rowsAffected)
+	c.JSON(http.StatusOK, gin.H{
+		"msg": msg,
+	})
 
 }
 
-func (h *Handler) deleteList(c *gin.Context) {
+func (h *Handler) deleteReport(c *gin.Context) {
+	cid := c.Param("id")
+	id, err := strconv.Atoi(cid)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	rs, err := h.db.Exec("DELETE FROM reports WHERE id=?", id)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	ra, err := rs.RowsAffected()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	msg := fmt.Sprintf("Delete report %d successful %d", id, ra)
+	c.JSON(http.StatusOK, gin.H{
+		"msg": msg,
+	})
 
 }

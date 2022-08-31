@@ -26,8 +26,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			reports.POST("/", h.createReport)
 			reports.GET("/", h.getAllReports)
 			reports.GET("/:id", h.getReportById)
-			reports.PUT("/:id", h.updateList)
-			reports.DELETE("/:id", h.deleteList)
+			reports.PUT("/:id", h.updateReport)
+			reports.DELETE("/:id", h.deleteReport)
 		}
 	}
 
