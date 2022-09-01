@@ -26,11 +26,11 @@ services:
     build:
       context: ./MySQL
       target: MySQL_DB
+    volumes:
+      - 'mySQL_db_volume:/var/lib/mysql'
     restart: always
     cap_add:
       - SYS_NICE
-    volumes:
-      - 'MySQL_DB:/var/lib/mysql'
     ports:
       - ${MYSQL_PORT_OUTER}:3306
     environment:
@@ -38,12 +38,12 @@ services:
 
   nginx:
     container_name: nginx
+    build:
+      context: ./nginx
     depends_on:
       - node_api
       - client
     restart: always
-    build:
-      context: ./nginx
     ports:
       - ${NGINX_PORT_OUTER}:80
 
@@ -52,11 +52,11 @@ services:
     build:
       context: ./server
       target: node_api
+    volumes:
+      - node_api_volume:/app/node_modules
+      - ./server:/app
     depends_on:
       - mysql_db
-    volumes:
-      - api_node:/app/node_modules
-      - ./server:/app
     environment:
       <<: *my-sql-variables
       <<: *node-api-variables
@@ -67,39 +67,39 @@ services:
       container_name: go_api
       build:
         context: ./goApi
-      ports:
-        - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
       depends_on:
         - mysql_db
+      ports:
+        - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
       environment:
         <<: *my-sql-variables
         GO_API_PORT_INNER: ${GO_API_PORT_INNER}
 
   client:
     container_name: client
-    stdin_open: true
     build:
       context: ./client
       target: client
+    volumes:
+      - client_volume:/app/node_modules
+      - ./client:/app
+    stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - client_node:/app/node_modules
-      - ./client:/app
 
   adminer:
     container_name: adminer
     image: adminer:4.8.1
+    depends_on:
+      - mysql_db
     restart: unless-stopped
     ports:
       - ${MY_SQL_ADMINER_PORT_OUTER}:8080
-    depends_on:
-      - mysql_db
     environment:
       ADMINER_DEFAULT_SERVER: mysql_db
 
 volumes:
-  client_node:
-  api_node:
-  goApi_node:
-  MySQL_DB:
+  mySQL_db_volume:
+  client_volume:
+  node_api_volume:
+  go_api_volume:
