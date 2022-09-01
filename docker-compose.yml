@@ -39,7 +39,7 @@ services:
   nginx:
     container_name: nginx
     depends_on:
-      - api
+      - node_api
       - client
     restart: always
     build:
@@ -47,11 +47,11 @@ services:
     ports:
       - ${NGINX_PORT_OUTER}:80
 
-  api:
+  node_api:
     container_name: node_api
     build:
       context: ./server
-      target: api
+      target: node_api
     depends_on:
       - mysql_db
     volumes:
