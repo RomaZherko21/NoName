@@ -5,14 +5,13 @@ import (
 	"log"
 
 	goapi "github.com/RomaZherko21/goApi"
+	"github.com/RomaZherko21/goApi/common"
 	_ "github.com/RomaZherko21/goApi/docs"
 	"github.com/RomaZherko21/goApi/pkg/handler"
 	"github.com/RomaZherko21/goApi/pkg/repository"
 	"github.com/RomaZherko21/goApi/pkg/service"
 
 	"database/sql"
-
-	"github.com/spf13/viper"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -23,13 +22,15 @@ import (
 
 // @host localhost:8000
 // @BasePath /
-
 func main() {
-	if err := initConfig(); err != nil {
-		log.Fatalf("error in init configuration, %s", err.Error())
-	}
+	API_PORT_INNER := common.MustGetEnv("GO_API_PORT_INNER")
 
-	db, err := sql.Open(viper.GetString("DB"), viper.GetString("DB_USER")+":"+viper.GetString("DB_PASSWORD")+"@tcp(mysql_db:"+viper.GetString("DB_PORT")+")/"+viper.GetString("DB_NAME"))
+	MYSQL_DATABASE := common.MustGetEnv("MYSQL_DATABASE")
+	MYSQL_PORT := common.MustGetEnv("MYSQL_PORT_OUTER")
+	MYSQL_USER := common.MustGetEnv("MYSQL_USERNAME")
+	MYSQL_PASSWORD := common.MustGetEnv("MYSQL_PASSWORD")
+
+	db, err := sql.Open("mysql", MYSQL_USER+":"+MYSQL_PASSWORD+"@tcp(mysql_db:"+MYSQL_PORT+")/"+MYSQL_DATABASE)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -48,14 +49,8 @@ func main() {
 
 	server := new(goapi.Server)
 
-	if err := server.Run(viper.GetString("PORT"), handlers.InitRoutes()); err != nil {
+	if err := server.Run(API_PORT_INNER, handlers.InitRoutes()); err != nil {
 		log.Fatalf("error occured while running http server: %s", err.Error())
 	}
 
-}
-
-func initConfig() error {
-	viper.AddConfigPath("config")
-	viper.SetConfigName("config")
-	return viper.ReadInConfig()
 }

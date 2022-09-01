@@ -1,10 +1,12 @@
 version: '3.8'
 
-x-common-variables: &common-variables
-  MYSQL_DATABASE: NoName
-  MYSQL_USER: MYSQL_USER
-  MYSQL_PASSWORD: MYSQL_PASSWORD
-  MYSQL_ROOT_PASSWORD: MYSQL_PASSWORD
+x-my-sql-variables: &my-sql-variables
+  MYSQL_DATABASE: ${MYSQL_DATABASE}
+  MYSQL_USERNAME: ${MYSQL_USERNAME}
+  MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+  MYSQL_HOST: ${MYSQL_HOST}
+  MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
 services:
   mysql_db:
@@ -17,11 +19,9 @@ services:
     volumes:
       - 'MySQL_DB:/var/lib/mysql'
     ports:
-      - '3306:3306'
+      - ${MYSQL_PORT_OUTER}:3306
     environment:
-      <<: *common-variables
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_HOST: localhost
+      <<: *my-sql-variables
 
   nginx:
     depends_on:
@@ -31,7 +31,7 @@ services:
     build:
       context: ./nginx
     ports:
-      - '80:80'
+      - ${NGINX_PORT_OUTER}:80
 
   api:
     build:
@@ -43,16 +43,19 @@ services:
       - api_node:/app/node_modules
       - ./server:/app
     environment:
-      <<: *common-variables
+      <<: *my-sql-variables
       MYSQL_HOST_IP: mysql_db
   
   go_api:
       build:
         context: ./goApi
       ports:
-        - "8000:8000"
+        - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
       depends_on:
         - mysql_db
+      environment:
+        <<: *my-sql-variables
+        GO_API_PORT_INNER: ${GO_API_PORT_INNER}
 
   client:
     stdin_open: true
@@ -66,10 +69,10 @@ services:
       - ./client:/app
 
   adminer:
-    image: adminer:latest
+    image: adminer:4.8.1
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - ${MY_SQL_ADMINER_PORT_OUTER}:8080
     depends_on:
       - mysql_db
     environment:
