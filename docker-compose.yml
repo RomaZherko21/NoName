@@ -22,8 +22,9 @@ x-client-variables: &client-variables
 
 services:
   mysql_db:
+    container_name: mysql_db
     build:
-      context: './MySQL'
+      context: ./MySQL
       target: MySQL_DB
     restart: always
     cap_add:
@@ -36,6 +37,7 @@ services:
       <<: *my-sql-variables
 
   nginx:
+    container_name: nginx
     depends_on:
       - api
       - client
@@ -46,8 +48,9 @@ services:
       - ${NGINX_PORT_OUTER}:80
 
   api:
+    container_name: node_api
     build:
-      context: './server'
+      context: ./server
       target: api
     depends_on:
       - mysql_db
@@ -61,6 +64,7 @@ services:
       MYSQL_HOST_IP: mysql_db
   
   go_api:
+      container_name: go_api
       build:
         context: ./goApi
       ports:
@@ -72,6 +76,7 @@ services:
         GO_API_PORT_INNER: ${GO_API_PORT_INNER}
 
   client:
+    container_name: client
     stdin_open: true
     build:
       context: ./client
@@ -83,6 +88,7 @@ services:
       - ./client:/app
 
   adminer:
+    container_name: adminer
     image: adminer:4.8.1
     restart: unless-stopped
     ports:
