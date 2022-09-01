@@ -8,6 +8,18 @@ x-my-sql-variables: &my-sql-variables
   MYSQL_HOST: ${MYSQL_HOST}
   MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
+x-node-api-variables: &node-api-variables
+  NODE_API_PROTOCOL: ${NODE_API_PROTOCOL}
+  NODE_API_HOST: ${NODE_API_HOST}
+  NODE_API_PORT: ${NODE_API_PORT}
+  ACCESS_TOKEN_EXPIRED_TIME: ${ACCESS_TOKEN_EXPIRED_TIME}
+  TOKEN_SECRET: ${TOKEN_SECRET}
+
+x-client-variables: &client-variables
+  CLIENT_PROTOCOL: ${CLIENT_PROTOCOL}
+  CLIENT_HOST: ${CLIENT_HOST}
+  CLIENT_PORT: ${CLIENT_PORT}
+
 services:
   mysql_db:
     build:
@@ -44,6 +56,8 @@ services:
       - ./server:/app
     environment:
       <<: *my-sql-variables
+      <<: *node-api-variables
+      <<: *client-variables
       MYSQL_HOST_IP: mysql_db
   
   go_api:

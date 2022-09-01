@@ -4,8 +4,6 @@ import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
-require('dotenv').config()
-
 /* eslint-disable import/first */
 import { log } from 'shared/helpers'
 import router from 'routes'
@@ -13,7 +11,7 @@ import { useHttpError, useAuth } from 'middlewares'
 import sequelize from 'models'
 /* eslint-enable */
 
-const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT } = process.env
+const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, NODE_API_HOST, NODE_API_PORT } = process.env
 
 const app = express()
 const corsOptions = {
@@ -36,8 +34,8 @@ app.use('/', router)
 sequelize
   .sync()
   .then(() => {
-    app.listen(3001, '0.0.0.0', () => {
-      log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT}`)
+    app.listen(Number(NODE_API_PORT), String(NODE_API_HOST), () => {
+      log.positive(`Server has been started: ${NODE_API_HOST}:${NODE_API_PORT}`)
     })
   })
   .catch((err: ValidationErrorItem) => log.negative(`Server has not been started: ${err.message}`))
