@@ -67,6 +67,7 @@ services:
       container_name: go_api
       build:
         context: ./goApi
+        target: go_api
       depends_on:
         - mysql_db
       ports:
