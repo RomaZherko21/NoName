@@ -31,8 +31,6 @@ services:
     restart: always
     cap_add:
       - SYS_NICE
-    ports:
-      - ${MYSQL_PORT_OUTER}:3306
     environment:
       <<: *my-sql-variables
 
