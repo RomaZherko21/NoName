@@ -43,4 +43,4 @@ Stops docker containers.
 
 https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdocker-services.png
 
-![docker-services](https://github.com/RomaZherko21/NoName/blob/master/docker-services.png?raw=true)
+![docker-services](https://github.com/RomaZherko21/NoName/blob/master/diagrams/docker-services.png?raw=true)
