@@ -1,5 +1,10 @@
 # **_NoName app_**
 
+- [How to start](#how-to-start)
+- [CMD](#cmd)
+- [Credentials](#credentials)
+- [Diagrams](#diagrams)
+
 The main idea of the project is to practice with different technologies such as:\
 :white_check_mark: React\
 :white_check_mark: MobX\
@@ -17,7 +22,7 @@ The main idea of the project is to practice with different technologies such as:
 First of all you need to download Docker on your desktop.\
 I also recommend you to install "Make", it is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 
-## In the project directory, you can run:
+## CMD:
 
 ### `make run` or `docker-compose up --build`
 
@@ -41,6 +46,6 @@ Stops docker containers.
 
 ## Diagrams
 
-https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdocker-services.png
+https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-services.png
 
 ![docker-services](https://github.com/RomaZherko21/NoName/blob/master/diagrams/docker-services.png?raw=true)
