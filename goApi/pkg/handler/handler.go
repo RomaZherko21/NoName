@@ -3,10 +3,11 @@ package handler
 import (
 	"database/sql"
 
-	"github.com/RomaZherko21/goApi/pkg/service"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+
+	"github.com/RomaZherko21/goApi/pkg/service"
 )
 
 type Handler struct {

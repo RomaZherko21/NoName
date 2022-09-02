@@ -29,14 +29,7 @@ const docTemplate = `{
                     "report"
                 ],
                 "summary": "getAllReports",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/goapi.Report"
-                        }
-                    }
-                }
+                "responses": {}
             },
             "post": {
                 "description": "create report",
@@ -52,23 +45,16 @@ const docTemplate = `{
                 "summary": "createReport",
                 "parameters": [
                     {
-                        "description": "report info",
+                        "description": "Some description...",
                         "name": "input",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/goapi.Report"
+                            "$ref": "#/definitions/goapi.ReportRequest"
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
         "/api/reports/{id}": {
@@ -93,14 +79,7 @@ const docTemplate = `{
                         "required": true
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/goapi.Report"
-                        }
-                    }
-                }
+                "responses": {}
             },
             "put": {
                 "description": "update report by id",
@@ -121,16 +100,18 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                    },
+                    {
+                        "description": "New description...",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
                         "schema": {
-                            "$ref": "#/definitions/goapi.Report"
+                            "$ref": "#/definitions/goapi.ReportRequest"
                         }
                     }
-                }
+                ],
+                "responses": {}
             },
             "delete": {
                 "description": "delete report by id",
@@ -153,26 +134,16 @@ const docTemplate = `{
                         "required": true
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                }
+                "responses": {}
             }
         }
     },
     "definitions": {
-        "goapi.Report": {
+        "goapi.ReportRequest": {
             "type": "object",
             "properties": {
                 "description": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 }
             }
         }

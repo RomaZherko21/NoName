@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"strconv"
 
-	goapi "github.com/RomaZherko21/goApi"
 	"github.com/gin-gonic/gin"
+
+	goapi "github.com/RomaZherko21/goApi"
 )
 
 // @Summary      createReport
@@ -15,11 +16,10 @@ import (
 // @Tags         report
 // @Accept       json
 // @Produce      json
-// @Param        input body goapi.Report true "report info"
-// @Success      200  {integer}  integer 1
+// @Param        input body goapi.ReportRequest true "Some description..."
 // @Router       /api/reports [post]
 func (h *Handler) createReport(c *gin.Context) {
-	var requestBody goapi.Report
+	var requestBody goapi.ReportRequest
 
 	if err := c.BindJSON(&requestBody); err != nil {
 		fmt.Println(err.Error())
@@ -48,7 +48,6 @@ func (h *Handler) createReport(c *gin.Context) {
 // @Tags         report
 // @Accept       json
 // @Produce      json
-// @Success      200  {object}  goapi.Report
 // @Router       /api/reports [get]
 func (h *Handler) getAllReports(c *gin.Context) {
 	query := "SELECT id, description FROM reports"
@@ -90,7 +89,6 @@ func (h *Handler) getAllReports(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Report ID"
-// @Success      200  {object}  goapi.Report
 // @Router       /api/reports/{id} [get]
 func (h *Handler) getReportById(c *gin.Context) {
 	id := c.Param("id")
@@ -120,7 +118,7 @@ func (h *Handler) getReportById(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Report ID"
-// @Success      200  {object}  goapi.Report
+// @Param        input body goapi.ReportRequest true "New description..."
 // @Router       /api/reports/{id} [put]
 func (h *Handler) updateReport(c *gin.Context) {
 	cid := c.Param("id")
@@ -161,7 +159,6 @@ func (h *Handler) updateReport(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Report ID"
-// @Success      200  {integer}  integer 1
 // @Router       /api/reports/{id} [delete]
 func (h *Handler) deleteReport(c *gin.Context) {
 	cid := c.Param("id")

@@ -1,11 +1,9 @@
 basePath: /
 definitions:
-  goapi.Report:
+  goapi.ReportRequest:
     properties:
       description:
         type: string
-      id:
-        type: integer
     type: object
 host: localhost:8000
 info:
@@ -21,11 +19,7 @@ paths:
       description: get all reports
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/goapi.Report'
+      responses: {}
       summary: getAllReports
       tags:
       - report
@@ -34,19 +28,15 @@ paths:
       - application/json
       description: create report
       parameters:
-      - description: report info
+      - description: Some description...
         in: body
         name: input
         required: true
         schema:
-          $ref: '#/definitions/goapi.Report'
+          $ref: '#/definitions/goapi.ReportRequest'
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
+      responses: {}
       summary: createReport
       tags:
       - report
@@ -63,11 +53,7 @@ paths:
         type: integer
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
+      responses: {}
       summary: deleteReport
       tags:
       - report
@@ -83,11 +69,7 @@ paths:
         type: integer
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/goapi.Report'
+      responses: {}
       summary: getReportById
       tags:
       - report
@@ -101,13 +83,15 @@ paths:
         name: id
         required: true
         type: integer
+      - description: New description...
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/goapi.ReportRequest'
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/goapi.Report'
+      responses: {}
       summary: updateReport
       tags:
       - report
