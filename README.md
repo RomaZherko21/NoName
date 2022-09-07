@@ -3,7 +3,7 @@
 - [How to start](#how-to-start)
 - [CMD](#cmd)
 - [Client credentials](#client-credentials)
-- [PHPmyAdmin credentials](#PHPmyAdmin-credentials)
+- [phpMyAdmin credentials](#phpMyAdmin-credentials)
 - [Diagrams](#diagrams)
 
 The main idea of the project is to practice with different technologies such as:\
@@ -36,22 +36,19 @@ Client and node_api server will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `make down` or `docker compose down --remove-orphans -t 0`
-
 Stops docker containers.
 
 ## Client credentials
+- email: admin@gmail.com
+- password: qwerqwer
 
-### email: admin@gmail.com
+## phpMyAdmin credentials
+- host: mysql_db
+- name: root
+- password: qwer
 
-### password: qwerqwer
-
-## PHPmyAdmin credentials
-
-### host: mysql_db
-
-### name: root
-
-### password: qwer
+## go_api swagger
+http://localhost:8000/swagger/index.html
 
 ## Diagrams
 
