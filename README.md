@@ -38,11 +38,19 @@ You will also see any lint errors in the console.
 
 Stops docker containers.
 
-## Credentials
+## Client credentials
 
 ### email: admin@gmail.com
 
 ### password: qwerqwer
+
+## PHPmyAdmin credentials
+
+### host: mysql_db
+
+### name: root
+
+### password: qwer
 
 ## Diagrams
 
