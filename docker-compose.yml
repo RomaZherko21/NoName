@@ -86,16 +86,16 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
 
-  adminer:
-    container_name: adminer
-    image: adminer:4.8.1
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.0
     depends_on:
       - mysql_db
     restart: unless-stopped
     ports:
-      - ${MY_SQL_ADMINER_PORT_OUTER}:8080
+      - ${MY_SQL_ADMINER_PORT_OUTER}:80
     environment:
-      ADMINER_DEFAULT_SERVER: mysql_db
+      PMA_ARBITRARY: 1
 
 volumes:
   mySQL_db_volume:
