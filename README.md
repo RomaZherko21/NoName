@@ -2,7 +2,8 @@
 
 - [How to start](#how-to-start)
 - [CMD](#cmd)
-- [Credentials](#credentials)
+- [Client credentials](#client-credentials)
+- [PHPmyAdmin credentials](#PHPmyAdmin-credentials)
 - [Diagrams](#diagrams)
 
 The main idea of the project is to practice with different technologies such as:\
