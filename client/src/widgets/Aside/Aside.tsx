@@ -5,6 +5,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
@@ -44,6 +45,13 @@ const Aside = ({ className, isOpen }: AsideProps) => {
           icon={<CollectionsBookmarkIcon />}
           title={t('pages:items')}
           to="/items"
+          isOpen={isOpen}
+        />
+
+        <AsideItemLink
+          icon={<CurrencyExchangeIcon />}
+          title="Крипта"
+          to="/crypto"
           isOpen={isOpen}
         />
 

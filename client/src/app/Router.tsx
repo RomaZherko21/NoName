@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { UsersList, Profile, ItemsList } from 'pages'
+import { UsersList, Profile, ItemsList, CryptoList } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 function Router() {
@@ -9,6 +9,7 @@ function Router() {
     <Routes>
       <Route path={ROUTES.USER_LIST} element={<UsersList />} />
       <Route path={ROUTES.ITEMS} element={<ItemsList />} />
+      <Route path={ROUTES.CRYPTO} element={<CryptoList />} />
       <Route path={ROUTES.PROFILE} element={<Profile />} />
       <Route path={ROUTES.NOT_FOUND} element={<>NOT FOUND</>} />
       <Route path="/" element={<Navigate to={ROUTES.USER_LIST} replace />} />
