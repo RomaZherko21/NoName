@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
@@ -21,12 +21,7 @@ function CryptoList() {
     <>
       <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
-          <Typography variant="h5">{t('pages:itemsCards')}</Typography>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color="secondary">
-            {t('item:form.create')}
-          </Button>
+          <Typography variant="h5">{t('pages:cryptoList')}</Typography>
         </Grid>
       </Grid>
 

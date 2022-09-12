@@ -33,9 +33,7 @@ class CryptoModel {
 
       const { data } = await API.crypto.list()
 
-      console.log(data.data)
-
-      this._items = data.data
+      this._items = data.slice(0, 10) || []
 
       this.loading.end()
     } catch {
