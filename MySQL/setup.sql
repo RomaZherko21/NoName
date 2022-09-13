@@ -18,20 +18,142 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `description` text,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
-CREATE TABLE IF NOT EXISTS `messages` (
+CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `text` text,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `name` varchar(150),
+  `year` int,
+  `qantity` int,
+  PRIMARY KEY (`id`)
+);
 
-CREATE TABLE IF NOT EXISTS `wallets` (
+INSERT INTO `books` (name, year, qantity) 
+VALUES
+	('Eugene Onegin', 1985, 2),
+	('The Tale of the Fisherman and the Fish', 1990, 3),
+  ('Foundation and Empire', 2000, 5),
+  ('Psychology of Programming', 1998, 1),
+	('C++ Programming Language', 1996, 3),
+  ('Course of Theoretical Physics', 1981, 12),
+  ('The Art of Programming', 1993, 7);
+
+CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `name` varchar(255),
+  `name` varchar(150),
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `genres` (name) 
+VALUES
+	('Poetry'),
+  ('Programming'),
+  ('Psychology'),
+  ('Science'),
+  ('Classic'),
+  ('Fiction');
+
+CREATE TABLE IF NOT EXISTS `authors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150),
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `authors` (name) 
+VALUES
+	('D. Whip'),
+  ('A. Asimov'),
+  ('D. Carnegie'),
+  ('L.D. Landau'),
+  ('E.M. Lifshitz'),
+  ('B. Stroustrup'),
+  ('A.S. Pushkin');
+
+CREATE TABLE IF NOT EXISTS `subscribers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150),
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `subscribers` (name) 
+VALUES
+	('Ivanov I.I.'),
+  ('Petrov P.P.'),
+  ('Sidorov S.S.'),
+  ('Sidorov S.S.');
+
+CREATE TABLE IF NOT EXISTS `m2m_books_authors` (
+  `book_id` int NOT NULL,
+  `author_id` int NOT NULL,
+  PRIMARY KEY (`book_id`, `author_id`),
+  CONSTRAINT `Constr_m2m_books_authors_book_fk`
+      FOREIGN KEY (`book_id`) REFERENCES books(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Constr_m2m_books_authors_author_fk`
+      FOREIGN KEY (`author_id`) REFERENCES authors(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO `m2m_books_authors` (book_id, author_id) 
+VALUES
+	(1,7),
+  (2,7),
+  (3,2),
+  (4,3),
+  (4,6),
+  (5,6),
+  (6,5),
+  (6,4),
+  (7,1);
+
+CREATE TABLE IF NOT EXISTS `m2m_books_genres` (
+  `book_id` int NOT NULL,
+  `genre_id` int NOT NULL,
+  PRIMARY KEY (`book_id`, `genre_id`),
+  CONSTRAINT `Constr_m2m_books_genres_book_fk`
+      FOREIGN KEY (`book_id`) REFERENCES books(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Constr_m2m_books_genres_genre_fk`
+      FOREIGN KEY (`genre_id`) REFERENCES genres(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO `m2m_books_genres` (book_id, genre_id) 
+VALUES
+	(1,1),
+	(1,5),
+  (2,1),
+  (2,5),
+  (3,6),
+  (4,2),
+  (4,3),
+  (5,2),
+  (6,5),
+  (7,2),
+  (7,5);
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `subscriber_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `start` date,
+  `finish` date,
+  `is_active` ENUM('Y', 'N'),
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  FOREIGN KEY (`subscriber_id`) REFERENCES subscribers(`id`),
+  FOREIGN KEY (`book_id`) REFERENCES books(`id`)
+);
+
+INSERT INTO `subscriptions` (subscriber_id, book_id, start, finish, is_active) 
+VALUES
+	(1, 3, '2011-01-12', '2011-02-12', 'N'),
+	(1, 1, '2011-01-12', '2011-02-12', 'N'),
+	(3, 3, '2012-05-17', '2012-07-17', 'Y'),
+	(1, 2, '2012-06-11', '2012-08-11', 'N'),
+	(4, 5, '2012-06-11', '2012-08-11', 'N'),
+	(1, 7, '2014-08-03', '2014-10-03', 'N'),
+	(3, 5, '2014-08-03', '2014-10-03', 'Y'),
+	(3, 1, '2014-08-03', '2014-09-03', 'Y'),
+	(4, 1, '2015-10-07', '2015-03-07', 'Y'),
+	(1, 4, '2015-10-07', '2015-11-07', 'N'),
+	(4, 4, '2015-10-08', '2025-11-08', 'Y');
