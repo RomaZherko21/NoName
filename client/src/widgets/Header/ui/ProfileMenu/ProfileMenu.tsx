@@ -29,6 +29,7 @@ function ProfileMenu() {
           aria-controls="menu-appbar"
           aria-haspopup="true"
           color="inherit"
+          sx={{ ml: 1 }}
           {...btnProps}
         >
           <Box>

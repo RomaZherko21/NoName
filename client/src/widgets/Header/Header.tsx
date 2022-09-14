@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite'
-import { IconButton, AppBar, Toolbar, Typography, Tooltip, Badge, useTheme } from '@mui/material'
+import { IconButton, AppBar, Toolbar, Tooltip, Badge, useTheme } from '@mui/material'
 import ListIcon from '@mui/icons-material/List'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import GroupIcon from '@mui/icons-material/Group'
 
-import { ProfileMenu } from './ui'
+import { ProfileMenu, ChangeLang } from './ui'
 
 interface Props {
   className?: string
@@ -22,29 +22,31 @@ const Header = ({ className, toggleMenu }: Props) => {
       position="static"
       className={className}
     >
-      <Toolbar disableGutters sx={{ flexGrow: 1, padding: '0 15px' }}>
+      <Toolbar disableGutters sx={{ padding: '0 15px', justifyContent: 'space-between' }}>
         <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
           <ListIcon />
         </IconButton>
 
-        <Typography sx={{ flexGrow: 1 }} variant="h6">
-          No Name
-        </Typography>
+        {/* <Typography sx={{ flexGrow: 1 }} variant="h6">
+          <img src="https://svgsilh.com/svg/2379396.svg" width="40px" alt="" />
+        </Typography> */}
 
-        <Tooltip title="Contacts">
-          <IconButton sx={{ ml: 1 }}>
-            <GroupIcon fontSize="small" />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Notifications">
-          <IconButton sx={{ ml: 1 }}>
-            <Badge badgeContent={4} color="secondary" variant="dot">
-              <NotificationsIcon fontSize="small" />
-            </Badge>
-          </IconButton>
-        </Tooltip>
-
-        <ProfileMenu />
+        <div>
+          <ChangeLang />
+          <Tooltip title="Contacts">
+            <IconButton sx={{ ml: 1 }}>
+              <GroupIcon fontSize="medium" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Notifications">
+            <IconButton sx={{ ml: 1 }}>
+              <Badge badgeContent={12} color="secondary" max={999}>
+                <NotificationsIcon fontSize="medium" />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <ProfileMenu />
+        </div>
       </Toolbar>
     </AppBar>
   )

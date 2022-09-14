@@ -1,1 +1,2 @@
-export { default as ProfileMenu } from './ProfileMenu'
+export { ProfileMenu } from './ProfileMenu'
+export { ChangeLang } from './ChangeLang'
