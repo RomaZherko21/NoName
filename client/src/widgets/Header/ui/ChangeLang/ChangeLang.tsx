@@ -7,7 +7,7 @@ import { PopupMenu } from 'shared/ui'
 
 import { getPopupConfig } from './PopupConfig'
 import i18next from 'i18next'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 
 function ChangeLang() {
   const popupConfig = useMemo(
@@ -21,9 +21,11 @@ function ChangeLang() {
   return (
     <PopupMenu
       ActionButton={(btnProps: any) => (
-        <IconButton sx={{ ml: 1 }}>
-          <img width="20px" alt="uk" src={ukIcon} {...btnProps} />
-        </IconButton>
+        <Tooltip title="Change language">
+          <IconButton sx={{ ml: 1 }}>
+            <img width="20px" alt="uk" src={ukIcon} {...btnProps} />
+          </IconButton>
+        </Tooltip>
       )}
       config={popupConfig}
     />

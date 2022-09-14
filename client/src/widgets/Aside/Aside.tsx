@@ -5,7 +5,6 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
