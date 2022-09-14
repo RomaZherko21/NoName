@@ -17,7 +17,10 @@ const toggleThemeContext = createContext<() => void>(() => {})
 
 const AppThemeProvider: FC = ({ children }) => {
   const [isDefaultTheme, , , toggleTheme] = useBoolState(false)
-  const theme = useMemo(() => createTheme(commonTheme), [isDefaultTheme])
+  const theme = useMemo(
+    () => createTheme(isDefaultTheme ? lightTheme : darkTheme, commonTheme),
+    [isDefaultTheme]
+  )
 
   useEffect(() => {
     const prevTheme = localStorage.getItem('theme.isDefault')

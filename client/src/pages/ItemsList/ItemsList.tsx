@@ -9,6 +9,7 @@ import { API_URL } from 'shared/consts'
 
 import { CreateItemForm, getPopupConfig } from './ui'
 import { ItemsModel } from './model'
+import { Helmet } from 'react-helmet'
 
 function ItemsList() {
   const { t } = useTranslation()
@@ -25,9 +26,16 @@ function ItemsList() {
 
   return (
     <>
+      <Helmet>
+        <title>{t('pages:itemsCards')}</title>
+        <meta name="description" content={t('pages:itemsCards')} />
+      </Helmet>
+
       <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
-          <Typography variant="h5">{t('pages:itemsCards')}</Typography>
+          <Typography variant="h3" color="text.primary">
+            {t('pages:itemsCards')}
+          </Typography>
         </Grid>
         <Grid item>
           <Button variant="contained" color="secondary" onClick={showCreateItemModal}>

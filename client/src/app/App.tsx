@@ -13,7 +13,7 @@ import { useRootStore, RootStoreProvider } from 'stores'
 import { Layout } from './Layout'
 import Router from './Router'
 
-// import AppThemeProvider from './theme'
+import AppThemeProvider from './theme'
 
 configure({
   reactionScheduler: (f) => setTimeout(f),
@@ -36,17 +36,17 @@ function App() {
     <React.StrictMode>
       <BrowserRouter>
         <RootStoreProvider>
-          {/* <AppThemeProvider> */}
-          <ModalProvider>
-            {authorization.isAuthorized ? (
-              <Layout>
-                <Router />
-              </Layout>
-            ) : (
-              <SignIn />
-            )}
-          </ModalProvider>
-          {/* </AppThemeProvider> */}
+          <AppThemeProvider>
+            <ModalProvider>
+              {authorization.isAuthorized ? (
+                <Layout>
+                  <Router />
+                </Layout>
+              ) : (
+                <SignIn />
+              )}
+            </ModalProvider>
+          </AppThemeProvider>
         </RootStoreProvider>
       </BrowserRouter>
     </React.StrictMode>

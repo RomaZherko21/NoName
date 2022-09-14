@@ -31,6 +31,14 @@ const Aside = ({ className, isOpen }: AsideProps) => {
           [styles.drawerClose]: !isOpen,
         }),
       }}
+      PaperProps={{
+        sx: {
+          backgroundColor: 'neutral.900',
+          color: '#FFFFFF',
+        },
+      }}
+      color="secondary"
+      style={{ backgroundColor: 'black' }}
       open={isOpen}
     >
       <List>
@@ -45,13 +53,6 @@ const Aside = ({ className, isOpen }: AsideProps) => {
           icon={<CollectionsBookmarkIcon />}
           title={t('pages:items')}
           to="/items"
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<CurrencyExchangeIcon />}
-          title="Крипта"
-          to="/crypto"
           isOpen={isOpen}
         />
 

@@ -10,6 +10,7 @@ import { Filters } from 'shared/ui/Filters'
 
 import { CreateUserForm } from './ui'
 import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
+import { Helmet } from 'react-helmet'
 
 function UsersList() {
   const { t } = useTranslation()
@@ -29,9 +30,16 @@ function UsersList() {
 
   return (
     <>
+      <Helmet>
+        <title>{t('pages:usersList')}</title>
+        <meta name="description" content={t('pages:usersList')} />
+      </Helmet>
+
       <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
-          <Typography variant="h5">{t('pages:usersList')}</Typography>
+          <Typography variant="h3" color="text.primary">
+            {t('pages:usersList')}
+          </Typography>
         </Grid>
         <Grid item>
           <Button variant="contained" color="secondary" onClick={showCreateUserModal}>
