@@ -16,6 +16,22 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/books": {
+            "get": {
+                "description": "get all books with genres and author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "books"
+                ],
+                "summary": "getAllBooksByGenre",
+                "responses": {}
+            }
+        },
         "/api/reports": {
             "get": {
                 "description": "get all reports",

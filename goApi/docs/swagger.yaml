@@ -12,6 +12,17 @@ info:
   title: NoName go_api
   version: "1.0"
 paths:
+  /api/books:
+    get:
+      consumes:
+      - application/json
+      description: get all books with genres and author
+      produces:
+      - application/json
+      responses: {}
+      summary: getAllBooksByGenre
+      tags:
+      - books
   /api/reports:
     get:
       consumes:

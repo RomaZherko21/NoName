@@ -157,3 +157,9 @@ VALUES
 	(4, 1, '2015-10-07', '2015-03-07', 'Y'),
 	(1, 4, '2015-10-07', '2015-11-07', 'N'),
 	(4, 4, '2015-10-08', '2025-11-08', 'Y');
+
+
+  -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов
+  -- SELECT COUNT(m2m_books_genres.book_id) AS total FROM m2m_books_genres    11 посчитать всех по book_id c повторами
+  -- SELECT SUM(qantity) as total_books, MIN(qantity) as min_copies_of_book, MAX(qantity) as max_copies_of_book, AVG(qantity) as avg_copies_of_book FROM books   33, 1, 12
+  -- SELECT * FROM `subscriptions` WHERE start >='2011-01-01' AND finish < '2014-01-01' от 2011 до 2013 года

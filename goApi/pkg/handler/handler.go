@@ -32,6 +32,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			reports.PUT("/:id", h.updateReport)
 			reports.DELETE("/:id", h.deleteReport)
 		}
+
+		books := api.Group("/books")
+		{
+			books.GET("/", h.getAllBooksByGenre)
+		}
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run(":8000")
