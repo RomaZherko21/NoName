@@ -24,11 +24,11 @@ CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150),
   `year` int,
-  `qantity` int,
+  `quantity` int,
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO `books` (name, year, qantity) 
+INSERT INTO `books` (name, year, quantity) 
 VALUES
 	('Eugene Onegin', 1985, 2),
 	('The Tale of the Fisherman and the Fish', 1990, 3),
@@ -161,5 +161,6 @@ VALUES
 
   -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов
   -- SELECT COUNT(m2m_books_genres.book_id) AS total FROM m2m_books_genres    11 посчитать всех по book_id c повторами
-  -- SELECT SUM(qantity) as total_books, MIN(qantity) as min_copies_of_book, MAX(qantity) as max_copies_of_book, AVG(qantity) as avg_copies_of_book FROM books   33, 1, 12
+  -- SELECT SUM(quantity) as total_books, MIN(quantity) as min_copies_of_book, MAX(quantity) as max_copies_of_book, AVG(quantity) as avg_copies_of_book FROM books   33, 1, 12
   -- SELECT * FROM `subscriptions` WHERE start >='2011-01-01' AND finish < '2014-01-01' от 2011 до 2013 года
+  -- SELECT name, quantity FROM `books` AS external WHERE quantity> ALL(SELECT quantity FROM books AS internal WHERE external.id != internal.id)  выбрать книгу с максимальным количеством копий
