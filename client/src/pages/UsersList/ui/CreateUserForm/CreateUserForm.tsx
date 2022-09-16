@@ -61,8 +61,8 @@ function CreateUserForm({ hideModal }: any) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.centered}>
-      <Grid item container spacing={2} direction="column">
-        <Grid item>
+      <Grid container spacing={3}>
+        <Grid item md={6} xs={12}>
           <TextField
             fullWidth
             id="name"
@@ -74,7 +74,7 @@ function CreateUserForm({ hideModal }: any) {
             helperText={touched.name && errors.name}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={6} xs={12}>
           <TextField
             fullWidth
             id="surname"
@@ -86,7 +86,7 @@ function CreateUserForm({ hideModal }: any) {
             helperText={touched.surname && errors.surname}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={8} xs={12}>
           <TextField
             fullWidth
             id="email"
@@ -98,7 +98,7 @@ function CreateUserForm({ hideModal }: any) {
             helperText={touched.email && errors.email}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={4} xs={12}>
           <FormControl fullWidth error={touched.role && Boolean(errors.role)}>
             <InputLabel id="role">{t('user:role')}</InputLabel>
             <Select
@@ -117,7 +117,7 @@ function CreateUserForm({ hideModal }: any) {
             {touched.role && <FormHelperText>{errors.role}</FormHelperText>}
           </FormControl>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             id="password"
@@ -130,7 +130,7 @@ function CreateUserForm({ hideModal }: any) {
             helperText={touched.password && errors.password}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             id="confirmPassword"
@@ -143,8 +143,8 @@ function CreateUserForm({ hideModal }: any) {
             helperText={touched.confirmPassword && errors.confirmPassword}
           />
         </Grid>
-        <Grid item>
-          <Button color="primary" variant="contained" fullWidth type="submit">
+        <Grid item xs={12}>
+          <Button color="primary" variant="contained" type="submit">
             {t('common.confirm')}
           </Button>
         </Grid>

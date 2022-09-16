@@ -45,10 +45,58 @@ const commonTheme = {
     borderRadius: 10,
   },
   components: {
-    MuiTable: {
+    MuiTableHead: {
       styleOverrides: {
         root: {
-          width: '90%',
+          width: '100%',
+          '& .MuiTableCell-root': {
+            borderBottom: 'none',
+            fontSize: '12px',
+            fontWeight: 600,
+            lineHeight: 1,
+            letterSpacing: 0.5,
+            textTransform: 'uppercase',
+          },
+        },
+      },
+    },
+    MuiTableBody: {
+      styleOverrides: {
+        root: {
+          '& .MuiTableCell-root': {
+            border: 'none',
+          },
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        '*': {
+          boxSizing: 'border-box',
+          margin: 0,
+          padding: 0,
+        },
+        html: {
+          MozOsxFontSmoothing: 'grayscale',
+          WebkitFontSmoothing: 'antialiased',
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100%',
+          width: '100%',
+        },
+        body: {
+          display: 'flex',
+          flex: '1 1 auto',
+          flexDirection: 'column',
+          minHeight: '100%',
+          width: '100%',
+        },
+        '#__next': {
+          display: 'flex',
+          flex: '1 1 auto',
+          flexDirection: 'column',
+          height: '100%',
+          width: '100%',
         },
       },
     },

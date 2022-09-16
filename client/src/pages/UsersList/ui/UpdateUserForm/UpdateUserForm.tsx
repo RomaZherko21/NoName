@@ -57,8 +57,8 @@ function UpdateUserForm({ user, hideModal }: any) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.centered}>
-      <Grid item container spacing={2} direction="column">
-        <Grid item>
+      <Grid container spacing={3}>
+        <Grid item md={6} xs={12}>
           <TextField
             fullWidth
             id="name"
@@ -70,7 +70,7 @@ function UpdateUserForm({ user, hideModal }: any) {
             helperText={touched.name && errors.name}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={6} xs={12}>
           <TextField
             fullWidth
             id="surname"
@@ -82,7 +82,7 @@ function UpdateUserForm({ user, hideModal }: any) {
             helperText={touched.surname && errors.surname}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={8} xs={12}>
           <TextField
             fullWidth
             id="email"
@@ -94,7 +94,7 @@ function UpdateUserForm({ user, hideModal }: any) {
             helperText={touched.email && errors.email}
           />
         </Grid>
-        <Grid item>
+        <Grid item md={4} xs={12}>
           <FormControl fullWidth>
             <InputLabel id="role">{t('user:role')}</InputLabel>
             <Select
@@ -113,7 +113,7 @@ function UpdateUserForm({ user, hideModal }: any) {
             {touched.role && <FormHelperText>{errors.role}</FormHelperText>}
           </FormControl>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             id="password"
@@ -126,7 +126,7 @@ function UpdateUserForm({ user, hideModal }: any) {
             helperText={touched.password && errors.password}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             id="confirmPassword"
