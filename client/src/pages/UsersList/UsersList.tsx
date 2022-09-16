@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import UploadIcon from '@mui/icons-material/Upload'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
@@ -42,9 +44,17 @@ function UsersList() {
           </Typography>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary" onClick={showCreateUserModal}>
-            {t('user:form.createNewUser')}
-          </Button>
+          <Box sx={{ m: 1 }}>
+            <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
+              Import
+            </Button>
+            <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
+              Export
+            </Button>
+            <Button variant="contained" color="primary" onClick={showCreateUserModal}>
+              {t('user:form.createNewUser')}
+            </Button>
+          </Box>
         </Grid>
       </Grid>
       <Grid spacing={2} container direction="column">

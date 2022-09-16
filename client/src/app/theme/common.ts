@@ -6,7 +6,7 @@ const commonTheme = {
     htmlFontSize: 18,
     fontSize: 16,
     button: {
-      fontWeight: 600,
+      fontWeight: 400,
     },
     fontFamily:
       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',

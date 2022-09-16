@@ -1,12 +1,12 @@
 {
-  "name":"Name",
-  "surname":"Surname",
-  "email":"Email",
-  "role":"Role",
-  "password":"Password",
-  "confirmPassword":"Confirm password",
-  "form":{
-    "createNewUser":"Create new user",
-    "updateUser":"Update user"
+  "name": "Name",
+  "surname": "Surname",
+  "email": "Email",
+  "role": "Role",
+  "password": "Password",
+  "confirmPassword": "Confirm password",
+  "form": {
+    "createNewUser": "Add user",
+    "updateUser": "Update user"
   }
 }

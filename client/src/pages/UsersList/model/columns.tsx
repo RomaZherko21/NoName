@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { IconButton, Tooltip } from '@mui/material'
+import { Avatar, Box, IconButton, Tooltip, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
 import { useDialog } from 'shared/hooks'
@@ -11,6 +11,7 @@ import { TableColumn, TUserMeta } from 'shared/types'
 
 import { UpdateUserForm, DeleteUserDialog } from '../ui'
 import UsersModel from './Users.model'
+import { getInitials } from 'shared/helpers'
 
 const ActionButtons = observer(({ user }: { user: TUserMeta }) => {
   const { t } = useTranslation()
@@ -51,10 +52,21 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('user:name'),
-  },
-  {
-    key: 'surname',
-    title: i18next.t('user:surname'),
+    getValue: (row: TUserMeta) => (
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+        }}
+      >
+        <Avatar src={`http://localhost/api/uploads/avatar/${row.avatar}`} sx={{ mr: 2 }}>
+          {getInitials(`${row.name} ${row.surname}`)}
+        </Avatar>
+        <Typography color="textPrimary" variant="body1">
+          {`${row.name} ${row.surname}`}
+        </Typography>
+      </Box>
+    ),
   },
   {
     key: 'email',

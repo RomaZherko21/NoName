@@ -38,7 +38,7 @@ function ItemsList() {
           </Typography>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary" onClick={showCreateItemModal}>
+          <Button variant="contained" color="primary" onClick={showCreateItemModal}>
             {t('item:form.create')}
           </Button>
         </Grid>
