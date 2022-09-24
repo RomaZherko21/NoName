@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 
 import sequelize from '.'
-import ItemModel from './item.model'
+import PostModel from './post.model'
 
 const UserModel = sequelize.define(
   'users',
@@ -39,6 +39,6 @@ const UserModel = sequelize.define(
   }
 )
 
-UserModel.hasMany(ItemModel)
+UserModel.hasMany(PostModel)
 
 export default UserModel

@@ -14,7 +14,7 @@ import { CreateUserForm } from './ui'
 import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
 import { Helmet } from 'react-helmet'
 
-function UsersList() {
+function Users() {
   const { t } = useTranslation()
 
   const [filters, setFilters] = useState<UserFilters>({})
@@ -33,14 +33,14 @@ function UsersList() {
   return (
     <>
       <Helmet>
-        <title>{t('pages:usersList')}</title>
-        <meta name="description" content={t('pages:usersList')} />
+        <title>{t('page:users')}</title>
+        <meta name="description" content={t('page:users')} />
       </Helmet>
 
       <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
           <Typography variant="h3" color="text.primary">
-            {t('pages:usersList')}
+            {t('page:users')}
           </Typography>
         </Grid>
         <Grid item>
@@ -77,4 +77,4 @@ function UsersList() {
   )
 }
 
-export default observer(UsersList)
+export default observer(Users)

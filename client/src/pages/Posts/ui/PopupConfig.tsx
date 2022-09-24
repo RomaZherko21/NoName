@@ -1,10 +1,9 @@
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import DeleteIcon from '@mui/icons-material/Delete'
-import i18next from 'i18next'
 
 import { ROUTES } from 'shared/consts'
 
-import { ItemsModel } from '../model'
+import { PostsModel } from '../model'
 
 export const getPopupConfig = () => [
   {
@@ -16,7 +15,7 @@ export const getPopupConfig = () => [
     Icon: <DeleteIcon />,
     text: 'actions.delete',
     onClick: (id: number) => {
-      ItemsModel.remove(id)
+      PostsModel.remove(id)
     },
   },
 ]

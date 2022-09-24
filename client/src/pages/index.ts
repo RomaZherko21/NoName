@@ -1,5 +1,5 @@
 export { SignIn } from './SignIn'
-export { UsersList } from './UsersList'
+export { Users } from './Users'
 export { Profile } from './Profile'
-export { ItemsList } from './ItemsList'
+export { Posts } from './Posts'
 export { NotFound } from './404'

@@ -1,4 +1,4 @@
-export interface TItem {
+export interface Post {
   id?: number
   userId?: number
   name: string

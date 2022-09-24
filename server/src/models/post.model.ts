@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize'
 
 import sequelize from '.'
 
-const ItemModel = sequelize.define(
-  'items',
+const PostModel = sequelize.define(
+  'posts',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -25,8 +25,8 @@ const ItemModel = sequelize.define(
     },
   },
   {
-    tableName: 'items', // You can simply tell DataTypes the name of the table directly
+    tableName: 'posts', // You can simply tell DataTypes the name of the table directly
   }
 )
 
-export default ItemModel
+export default PostModel

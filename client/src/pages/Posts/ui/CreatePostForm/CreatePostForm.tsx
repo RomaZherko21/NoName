@@ -10,16 +10,16 @@ import FolderIcon from '@mui/icons-material/Folder'
 import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
 
-import { ItemsModel } from '../../model'
+import { PostsModel } from '../../model'
 import styles from './Styles.module.scss'
 
 interface FormValues {
   name: string
   description: string
-  item: File | ''
+  post: File | ''
 }
 
-function CreateItemForm({ hideModal }: any) {
+function CreatePostForm({ hideModal }: any) {
   const { t } = useTranslation()
 
   const { user } = useRootStore()
@@ -38,11 +38,11 @@ function CreateItemForm({ hideModal }: any) {
       initialValues: {
         name: '',
         description: '',
-        item: '',
+        post: '',
       },
       validationSchema,
       onSubmit: (value: FormValues) => {
-        ItemsModel.create({ ...value, userId: user.id })
+        PostsModel.create({ ...value, userId: user.id })
         hideModal()
       },
     })
@@ -55,7 +55,7 @@ function CreateItemForm({ hideModal }: any) {
             fullWidth
             id="name"
             name="name"
-            label={t('item:name')}
+            label={t('post:name')}
             value={values.name}
             onChange={handleChange}
             error={touched.name && Boolean(errors.name)}
@@ -67,7 +67,7 @@ function CreateItemForm({ hideModal }: any) {
             fullWidth
             id="description"
             name="description"
-            label={t('item:description')}
+            label={t('post:description')}
             value={values.description}
             onChange={handleChange}
             error={touched.description && Boolean(errors.description)}
@@ -78,11 +78,11 @@ function CreateItemForm({ hideModal }: any) {
           <label htmlFor="upload-file">
             <input
               id="upload-file"
-              name="item"
+              name="post"
               type="file"
               accept="image/*"
               onChange={(event: any) => {
-                setFieldValue('item', event.target.files[0])
+                setFieldValue('post', event.target.files[0])
               }}
               style={{ display: 'none' }}
             />
@@ -91,7 +91,7 @@ function CreateItemForm({ hideModal }: any) {
                 style={{ cursor: 'pointer' }}
                 alt="Upload"
                 variant="circular"
-                src={values.item && URL.createObjectURL(values.item)}
+                src={values.post && URL.createObjectURL(values.post)}
                 sx={{ width: 50, height: 50 }}
               >
                 <FolderIcon />
@@ -110,4 +110,4 @@ function CreateItemForm({ hideModal }: any) {
   )
 }
 
-export default observer(CreateItemForm)
+export default observer(CreatePostForm)

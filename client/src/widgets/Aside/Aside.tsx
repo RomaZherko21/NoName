@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
@@ -41,17 +41,12 @@ const Aside = ({ className, isOpen }: AsideProps) => {
       open={isOpen}
     >
       <List>
-        <AsideItemLink
-          icon={<GroupIcon />}
-          title={t('pages:usersList')}
-          to="/usersList"
-          isOpen={isOpen}
-        />
+        <AsideItemLink icon={<GroupIcon />} title={t('page:users')} to="/users" isOpen={isOpen} />
 
         <AsideItemLink
-          icon={<CollectionsBookmarkIcon />}
-          title={t('pages:items')}
-          to="/items"
+          icon={<NewspaperIcon />}
+          title={t('page:posts')}
+          to="/posts"
           isOpen={isOpen}
         />
 
@@ -61,7 +56,7 @@ const Aside = ({ className, isOpen }: AsideProps) => {
               <AddBoxIcon />
             </Badge>
           }
-          title={t('pages:reports')}
+          title={t('page:reports')}
           to="/ewq"
           isOpen={isOpen}
         />

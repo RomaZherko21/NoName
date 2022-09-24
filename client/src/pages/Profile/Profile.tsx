@@ -12,14 +12,14 @@ function Profile() {
   return (
     <>
       <Helmet>
-        <title>{t('pages:profile')}</title>
-        <meta name="description" content={t('pages:profile')} />
+        <title>{t('page:profile')}</title>
+        <meta name="description" content={t('page:profile')} />
       </Helmet>
 
       <Grid container>
         <Grid item>
           <Typography variant="h3" color="text.primary">
-            {t('pages:profile')}
+            {t('page:profile')}
           </Typography>
         </Grid>
       </Grid>

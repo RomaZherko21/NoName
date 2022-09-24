@@ -7,57 +7,57 @@ import { useDialog } from 'shared/hooks'
 import { CommonCard, Pagination, Spinner } from 'shared/ui'
 import { API_URL } from 'shared/consts'
 
-import { CreateItemForm, getPopupConfig } from './ui'
-import { ItemsModel } from './model'
+import { CreatePostForm, getPopupConfig } from './ui'
+import { PostsModel } from './model'
 import { Helmet } from 'react-helmet'
 
-function ItemsList() {
+function Posts() {
   const { t } = useTranslation()
 
   const popupConfig = useMemo(() => getPopupConfig(), [])
 
   useEffect(() => {
-    ItemsModel.fetch()
-  }, [ItemsModel.pagination.page, ItemsModel.pagination.perPage])
+    PostsModel.fetch()
+  }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
 
-  const [showCreateItemModal] = useDialog('item:form.create', (hideModal) => (
-    <CreateItemForm hideModal={hideModal} />
+  const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
+    <CreatePostForm hideModal={hideModal} />
   ))
 
   return (
     <>
       <Helmet>
-        <title>{t('pages:itemsCards')}</title>
-        <meta name="description" content={t('pages:itemsCards')} />
+        <title>{t('page:posts')}</title>
+        <meta name="description" content={t('page:posts')} />
       </Helmet>
 
       <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
           <Typography variant="h3" color="text.primary">
-            {t('pages:itemsCards')}
+            {t('page:posts')}
           </Typography>
         </Grid>
         <Grid item>
           <Button variant="contained" color="primary" onClick={showCreateItemModal}>
-            {t('item:form.create')}
+            {t('post:form.create')}
           </Button>
         </Grid>
       </Grid>
 
       <Grid container spacing={3} direction="column" style={{ marginTop: '12px' }}>
         <Grid item container spacing={0.5}>
-          {ItemsModel.loading.has ? (
+          {PostsModel.loading.has ? (
             <Spinner />
           ) : (
-            ItemsModel.items.map((item) => (
+            PostsModel.posts.map((post) => (
               <Grid item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
                 <CommonCard
-                  id={item.id}
-                  name={item.name}
-                  description={item.description}
-                  imageUrl={`${API_URL}/uploads/item/${item.image}`}
-                  creatorAvatarUrl={`${API_URL}/uploads/avatar/${item.avatar}`}
-                  createdAt={item.createdAt}
+                  id={post.id}
+                  name={post.name}
+                  description={post.description}
+                  imageUrl={`${API_URL}/uploads/post/${post.image}`}
+                  creatorAvatarUrl={`${API_URL}/uploads/avatar/${post.avatar}`}
+                  createdAt={post.createdAt}
                   popupConfig={popupConfig}
                 />
               </Grid>
@@ -65,11 +65,11 @@ function ItemsList() {
           )}
         </Grid>
         <Grid item>
-          <Pagination paginationModel={ItemsModel.pagination} />
+          <Pagination paginationModel={PostsModel.pagination} />
         </Grid>
       </Grid>
     </>
   )
 }
 
-export default observer(ItemsList)
+export default observer(Posts)

@@ -3,23 +3,23 @@ import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
 
-import ItemModel from 'models/item.model'
+import PostModel from 'models/post.model'
 import sequelize from 'models'
 
-import { getItemListQuery } from './queries'
+import { getPostListQuery } from './queries'
 
-class ItemController {
+class PostController {
   async list({ body }: Request, res: Response, next: NextFunction) {
     try {
       const { limit, offset } = body
 
-      const [results] = await sequelize.query(getItemListQuery(), {
+      const [results] = await sequelize.query(getPostListQuery(), {
         replacements: { limit, offset },
       })
 
-      const count = await ItemModel.count()
+      const count = await PostModel.count()
 
-      res.status(200).json({ items: results, count })
+      res.status(200).json({ posts: results, count })
     } catch {
       next(createError(500))
     }
@@ -27,7 +27,7 @@ class ItemController {
 
   async create({ body, file }: Request, res: Response, next: NextFunction) {
     try {
-      const data = await ItemModel.create({
+      const data = await PostModel.create({
         ...body,
         image: file?.filename,
       })
@@ -41,13 +41,13 @@ class ItemController {
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.body
-      const { image }: any = await ItemModel.findByPk(id)
+      const { image }: any = await PostModel.findByPk(id)
 
       if (image) {
         const filePath = path.join(
           path.dirname(require?.main?.path || ''),
           '/uploads',
-          '/item',
+          '/post',
           image
         )
         if (fs.existsSync(filePath)) {
@@ -57,7 +57,7 @@ class ItemController {
         }
       }
 
-      const data = await ItemModel.destroy({
+      const data = await PostModel.destroy({
         where: {
           id,
         },
@@ -70,4 +70,4 @@ class ItemController {
   }
 }
 
-export default new ItemController()
+export default new PostController()

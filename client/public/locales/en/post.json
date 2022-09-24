@@ -2,6 +2,6 @@
   "name": "Name",
   "description": "Description",
   "form": {
-    "create": "Add item"
+    "create": "Add post"
   }
 }

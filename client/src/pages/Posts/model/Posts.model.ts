@@ -3,10 +3,10 @@ import { makeAutoObservable } from 'mobx'
 import { API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { TItem } from 'shared/types'
+import { Post } from 'shared/types'
 
-class ItemsModel {
-  private _items: TItem[] = []
+class PostsModel {
+  private _posts: Post[] = []
 
   pagination: PaginationModel
 
@@ -19,21 +19,21 @@ class ItemsModel {
     this.loading = new LoadingModel()
   }
 
-  set items(data: TItem[]) {
-    this._items = data
+  set posts(data: Post[]) {
+    this._posts = data
   }
 
-  get items() {
-    return this._items
+  get posts() {
+    return this._posts
   }
 
   async fetch() {
     try {
       this.loading.begin()
 
-      const data = await API.item.list(this.pagination.perPage, this.pagination.offset)
+      const data = await API.post.list(this.pagination.perPage, this.pagination.offset)
 
-      this.items = data.items
+      this.posts = data.posts
       this.pagination.count = data.count
 
       this.loading.end()
@@ -42,13 +42,13 @@ class ItemsModel {
     }
   }
 
-  async create(item: { name: string; description: string; item: File | ''; userId: number }) {
+  async create(post: { name: string; description: string; post: File | ''; userId: number }) {
     try {
       this.loading.begin()
 
       const createdAt = Date.now()
 
-      await API.item.create({ ...item, createdAt })
+      await API.post.create({ ...post, createdAt })
       this.fetch()
 
       this.loading.end()
@@ -61,7 +61,7 @@ class ItemsModel {
     try {
       this.loading.begin()
 
-      await API.item.remove(id)
+      await API.post.remove(id)
       this.fetch()
 
       this.loading.end()
@@ -71,4 +71,4 @@ class ItemsModel {
   }
 }
 
-export default new ItemsModel()
+export default new PostsModel()
