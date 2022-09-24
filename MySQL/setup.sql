@@ -24,6 +24,24 @@ CREATE TABLE IF NOT EXISTS `reports` (
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
 );
 
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `name` varchar(255),
+  `description` text,
+  `createdAt` bigint,
+  `image` varchar(255),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+);
+
+INSERT INTO `posts` (user_id, name, description, createdAt, image) 
+VALUES
+  (1,'What are articles?','Articles are words that define a noun as specific or unspecific. Consider the following examples:',1664011922672,'1663318230996.jpg'),
+  (1,'Clothing','Clothing (also known as clothes, apparel, and attire) are items worn on the body. Typically, clothing is made of fabrics or textiles, but over time it has included garments made from animal skin and other thin sheets of materials and natural products found in the environment, put together. The wearing of clothing is mostly restricted to human beings and is a feature of all human societies. The amount and type of clothing worn depends on gender, body type, social factors, and geographic considerations. Garments cover the body, footwear covers the feet, gloves cover the hands, while hats and headgear cover the head. Eyewear and jewelry are not generally considered items of clothing, but play an important role in fashion and clothing as costume.',1662011922672,'1663318230997.jpg'),
+  (2,'MacBook','The MacBook is a brand of Macintosh notebook computers designed and marketed by Apple Inc. that use Apples macOS operating system since 2006. It replaced the PowerBook and iBook brands during the Mac transition to Intel processors, announced in 2005. The current lineup consists of the MacBook Air (2008–present) and the MacBook Pro (2006–present). Two different lines simply named "MacBook" existed from 2006 to 2012 and 2015 to 2019.',1664611922672,'1663318230998.jpg'),
+  (3,'Book','A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.[1] The technical term for this physical arrangement is codex (plural, codices). In the history of hand-held physical supports for extended written compositions or records, the codex replaces its predecessor, the scroll. A single sheet in a codex is a leaf and each side of a leaf is a page.',1664491922672,'1663318230999.jpg');
+
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150),

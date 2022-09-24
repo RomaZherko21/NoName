@@ -1,6 +1,6 @@
 export interface Post {
   id?: number
-  userId?: number
+  user_id?: number
   name: string
   description: string
   createdAt: number

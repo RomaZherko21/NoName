@@ -42,7 +42,7 @@ function CreatePostForm({ hideModal }: any) {
       },
       validationSchema,
       onSubmit: (value: FormValues) => {
-        PostsModel.create({ ...value, userId: user.id })
+        PostsModel.create({ ...value, user_id: user.id })
         hideModal()
       },
     })

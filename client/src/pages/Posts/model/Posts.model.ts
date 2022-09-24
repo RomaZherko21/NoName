@@ -42,7 +42,7 @@ class PostsModel {
     }
   }
 
-  async create(post: { name: string; description: string; post: File | ''; userId: number }) {
+  async create(post: { name: string; description: string; post: File | ''; user_id: number }) {
     try {
       this.loading.begin()
 

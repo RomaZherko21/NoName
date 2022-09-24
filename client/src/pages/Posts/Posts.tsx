@@ -45,7 +45,7 @@ function Posts() {
       </Grid>
 
       <Grid container spacing={3} direction="column" style={{ marginTop: '12px' }}>
-        <Grid item container spacing={0.5}>
+        <Grid item container spacing={2}>
           {PostsModel.loading.has ? (
             <Spinner />
           ) : (
