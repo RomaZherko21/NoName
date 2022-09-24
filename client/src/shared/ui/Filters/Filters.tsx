@@ -1,5 +1,7 @@
-import { Grid } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Grid, IconButton } from '@mui/material'
 import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import TuneIcon from '@mui/icons-material/Tune'
 
 interface Props {
   config: {
@@ -11,19 +13,32 @@ interface Props {
 }
 
 const Filters = ({ config, setFilters }: Props) => {
+  const [expanded, setExpanded] = useState(false)
+
+  const onExpand = () => setExpanded((pre) => !pre)
+
   return (
-    <Grid container spacing={1} style={{ marginTop: '20px' }}>
-      {config.map((item) => (
-        <Grid item>
-          <item.Control
-            placeholder={item.placeholder}
-            onChange={(e: any) => {
-              setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
-            }}
-          />
+    <Accordion expanded={expanded} onChange={onExpand}>
+      <AccordionSummary>
+        <IconButton aria-label="delete" color="primary">
+          <TuneIcon />
+        </IconButton>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Grid container spacing={1}>
+          {config.map((item) => (
+            <Grid item>
+              <item.Control
+                placeholder={item.placeholder}
+                onChange={(e: any) => {
+                  setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
+                }}
+              />
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 
