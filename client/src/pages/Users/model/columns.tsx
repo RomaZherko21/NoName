@@ -1,17 +1,19 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
+import { Avatar, Box, Chip, IconButton, Tooltip, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { Avatar, Box, IconButton, Tooltip, Typography } from '@mui/material'
-import { observer } from 'mobx-react-lite'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, TUserMeta } from 'shared/types'
-
-import { UpdateUserForm, DeleteUserDialog } from '../ui'
-import UsersModel from './Users.model'
+import { TableColumn, TRoles, TUserMeta } from 'shared/types'
 import { getInitials } from 'shared/helpers'
+
+import UsersModel from './Users.model'
+import { UpdateUserForm, DeleteUserDialog } from '../ui'
 
 const ActionButtons = observer(({ user }: { user: TUserMeta }) => {
   const { t } = useTranslation()
@@ -75,6 +77,12 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'role',
     title: i18next.t('user:role'),
+    getValue: (row: TUserMeta) =>
+      row.role === TRoles.admin ? (
+        <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
+      ) : (
+        <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
+      ),
   },
   {
     key: 'actions',

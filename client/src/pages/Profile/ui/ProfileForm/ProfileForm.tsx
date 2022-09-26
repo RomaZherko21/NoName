@@ -18,7 +18,7 @@ const states = [
 ]
 
 const ProfileForm = (props: any) => {
-  const { user, loading } = useRootStore()
+  const { user } = useRootStore()
 
   const [values, setValues] = useState({
     firstName: user.name,

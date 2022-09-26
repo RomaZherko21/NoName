@@ -32,7 +32,7 @@ const AppThemeProvider: FC = ({ children }) => {
   useEffect(() => {
     document.body.style.backgroundColor = theme.palette.background.default
     localStorage.setItem('theme.isDefault', String(isDefaultTheme))
-  }, [isDefaultTheme])
+  }, [isDefaultTheme, theme.palette.background.default])
 
   return (
     <toggleThemeContext.Provider value={toggleTheme}>
