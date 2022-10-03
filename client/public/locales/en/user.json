@@ -1,10 +1,16 @@
 {
   "name": "Name",
   "surname": "Surname",
+  "middleName": "Middle name",
   "email": "Email",
+  "gender": "Gender",
+  "dateOfBirth": "Date of birth",
+  "telephoneNumber": "Telephone number",
   "role": "Role",
   "password": "Password",
   "confirmPassword": "Confirm password",
+  "man": "Man",
+  "woman": "Women",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

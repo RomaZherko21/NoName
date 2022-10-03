@@ -6,7 +6,6 @@ import { Avatar, Button, Container, Paper, Stack, TextField, Typography } from '
 
 import { emailValidation, passwordValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
-import { TUser } from 'shared/types'
 
 const validationSchema = yup.object().shape({
   email: emailValidation(),
@@ -17,13 +16,16 @@ function SignIn() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
 
-  const formik = useFormik<TUser>({
+  const formik = useFormik<{
+    email: string
+    password: string
+  }>({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values: TUser) => {
+    onSubmit: (values: { email: string; password: string }) => {
       authorization.signIn(values)
     },
   })

@@ -2,19 +2,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255),
   `surname` varchar(255),
+  `middle_name` varchar(255),
+  `gender` ENUM('man', 'woman'),
+  `date_of_birth` DATE,
   `email` varchar(255) NOT NULL UNIQUE,
+  `tel_number` varchar(255) UNIQUE,
   `password` varchar(255) NOT NULL,
-  `role` varchar(255),
+  `role` ENUM('admin', 'user') NOT NULL,
   `avatar` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `users` (name, surname, email, password, role, avatar) 
+INSERT INTO `users` (name, surname,middle_name,email,gender,date_of_birth, tel_number, password, role, avatar) 
 VALUES
-  ('Roma','Zherko','admin@gmail.com', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
-  ('Adam','Keizer','adam@gmail.com', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
-  ('Alexa','Richardson','lexa@gmail.com', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
-  ('Cao','Yu','chao@gmail.com', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png');
+  ('Roma','Zherko','Tomas','admin@gmail.com','man','2000-04-21','+375-25-709-67-14', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
+  ('Adam','Keizer','David','adam@gmail.com','man','1995-12-01','+375-25-709-67-17', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
+  ('Alexa','Richardson','William','lexa@gmail.com','woman','1991-08-13','+375-25-709-67-18', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
+  ('Cao','Yu','Mason','chao@gmail.com','man','1956-03-13','+375-25-709-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png');
 
 CREATE TABLE IF NOT EXISTS `reports` (
   `id` int NOT NULL AUTO_INCREMENT,

@@ -18,9 +18,22 @@ const UserModel = sequelize.define(
     surname: {
       type: DataTypes.STRING,
     },
+    middle_name: {
+      type: DataTypes.STRING,
+    },
+    gender: {
+      type: DataTypes.ENUM('man', 'woman'),
+    },
+    date_of_birth: {
+      type: DataTypes.DATE,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+    },
+    tel_number: {
+      type: DataTypes.STRING,
       unique: true,
     },
     password: {
@@ -28,7 +41,8 @@ const UserModel = sequelize.define(
       allowNull: false,
     },
     role: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('admin', 'user'),
+      allowNull: false,
     },
     avatar: {
       type: DataTypes.STRING,

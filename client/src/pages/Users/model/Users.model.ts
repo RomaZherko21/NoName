@@ -1,13 +1,13 @@
 import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
-import { TUserMeta } from 'shared/types'
+import { User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { UserFilters } from './filters'
 
 class UsersModel {
-  private _users: TUserMeta[] = []
+  private _users: User[] = []
 
   pagination: PaginationModel
 
@@ -20,7 +20,7 @@ class UsersModel {
     this.loading = new LoadingModel()
   }
 
-  set users(data: TUserMeta[]) {
+  set users(data: User[]) {
     this._users = data
   }
 
@@ -46,7 +46,7 @@ class UsersModel {
     }
   }
 
-  async create(user: TUserMeta) {
+  async create(user: User) {
     try {
       this.loading.begin()
 
@@ -72,7 +72,7 @@ class UsersModel {
     }
   }
 
-  async update(user: TUserMeta) {
+  async update(user: User) {
     try {
       this.loading.begin()
 

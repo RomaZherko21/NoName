@@ -1,19 +1,24 @@
-export enum TRoles {
+export enum Roles {
   admin = 'admin',
   user = 'user',
-  empty = '',
 }
 
-export interface TUser {
-  email: string
-  password: string
+export enum Gender {
+  man = 'man',
+  woman = 'woman',
 }
 
-export interface TUserMeta extends TUser {
+export interface User {
   id?: number
   name: string
   surname: string
-  role: TRoles
+  middle_name: string
+  email: string
+  password: string
+  role: Roles
+  date_of_birth?: string
+  tel_number?: string
+  gender?: Gender
   confirmPassword?: string
   avatar?: string
 }

@@ -19,7 +19,7 @@ import {
   confirmPasswordValidation,
   commonStringValidation,
 } from 'shared/validations'
-import { TUserMeta } from 'shared/types'
+import { User } from 'shared/types'
 import { ROLES } from 'shared/consts'
 
 import { UsersModel } from '../../model'
@@ -34,26 +34,26 @@ const validationSchema = yup.object().shape({
 })
 
 function UpdateUserForm({ user, hideModal }: any) {
-  const { name, surname, email, role } = user
+  const { name, surname, middle_name, email, role } = user
 
   const { t } = useTranslation()
 
-  const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
-    useFormik<TUserMeta>({
-      initialValues: {
-        name,
-        surname,
-        email,
-        role,
-        password: '',
-        confirmPassword: '',
-      },
-      validationSchema,
-      onSubmit: (value: TUserMeta) => {
-        UsersModel.update(value)
-        hideModal()
-      },
-    })
+  const { handleSubmit, values, handleChange, touched, errors, setFieldValue } = useFormik<User>({
+    initialValues: {
+      name,
+      surname,
+      middle_name,
+      email,
+      role,
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema,
+    onSubmit: (value: User) => {
+      UsersModel.update(value)
+      hideModal()
+    },
+  })
 
   return (
     <form onSubmit={handleSubmit} className={styles.centered}>

@@ -2,7 +2,6 @@ import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
 import { RootStore } from 'stores/Root'
-import { TUser } from 'shared/types'
 
 const ACCESS_TOKEN = 'ACCESS_TOKEN'
 
@@ -50,7 +49,7 @@ class AuthorizationModel {
     localStorage.removeItem(ACCESS_TOKEN)
   }
 
-  async signIn(value: TUser) {
+  async signIn(value: { email: string; password: string }) {
     const data = await API.auth.signIn(value.email, value.password)
     this.rootStore.user.init()
 

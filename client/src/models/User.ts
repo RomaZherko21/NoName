@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
 import { API_URL } from 'shared/consts'
-import { TRoles } from 'shared/types'
+import { Roles } from 'shared/types'
 import { RootStore } from 'stores'
 
 import FileModel from './File'
@@ -20,7 +20,7 @@ class UserModel {
 
   avatar: FileModel
 
-  role: TRoles = TRoles.user
+  role: Roles = Roles.user
 
   constructor(rootStore: typeof RootStore) {
     makeAutoObservable(this)
