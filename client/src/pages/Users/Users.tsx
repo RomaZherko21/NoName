@@ -46,10 +46,10 @@ function Users() {
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              Import
+              {t('common.import')}
             </Button>
             <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              Export
+              {t('common.export')}
             </Button>
             <Button variant="contained" color="primary" onClick={showCreateUserModal}>
               {t('user:form.createNewUser')}

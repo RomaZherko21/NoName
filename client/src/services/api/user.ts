@@ -5,6 +5,8 @@ export const create = (user: TUserMeta) => fetch.post<TUserMeta>('/user/create',
 
 export const update = (user: TUserMeta) => fetch.post('/user/update', user)
 
+export const selfUpdate = (user: any) => fetch.post('/user/selfUpdate', user)
+
 export const remove = (id: number) => fetch.post('/user/remove', { id })
 
 export const list = ({

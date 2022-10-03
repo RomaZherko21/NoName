@@ -7,6 +7,7 @@ const user = express.Router()
 
 user.get('/self', userController.self)
 
+user.post('/selfUpdate', userController.selfUpdate)
 user.post('/list', userController.list)
 user.post('/create', userController.create)
 user.post('/update', userController.update)

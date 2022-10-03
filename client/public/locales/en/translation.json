@@ -6,13 +6,16 @@
     "german": "German",
     "profile": "Profile",
     "confirm": "Confirm",
-    "doing": "Actions",
+    "actions": "Actions",
     "amount": "Amount",
     "details": "Details",
     "id": "ID",
-    "emptyInput": "Enter value"
+    "emptyInput": "Enter value",
+    "import": "Import",
+    "export": "Export"
   },
   "actions": {
+    "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
     "exit": "Exit"

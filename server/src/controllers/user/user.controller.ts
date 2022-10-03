@@ -66,6 +66,22 @@ class UserController {
     }
   }
 
+  async selfUpdate({ body }: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await UserModel.update(body, {
+        where: {
+          email: body.email,
+        },
+      })
+
+      if (!data) return next(createError(400, 'User wasnt updated'))
+
+      return res.status(200).json(data)
+    } catch (err) {
+      return next(createError(500))
+    }
+  }
+
   async self(req: Request, res: Response, next: NextFunction) {
     try {
       const authHeader = req.headers.authorization

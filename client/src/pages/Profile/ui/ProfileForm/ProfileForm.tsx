@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField } from '@mui/material'
 import { useRootStore } from 'stores'
+import { useTranslation } from 'react-i18next'
+import { API } from 'services'
 
 const states = [
   {
@@ -19,12 +21,12 @@ const states = [
 
 const ProfileForm = (props: any) => {
   const { user } = useRootStore()
+  const { t } = useTranslation()
 
   const [values, setValues] = useState({
-    firstName: user.name,
-    lastName: user.surname,
+    name: user.name,
+    surname: user.surname,
     email: user.email,
-    state: user.role,
   })
 
   const handleChange = (event: any) => {
@@ -37,19 +39,18 @@ const ProfileForm = (props: any) => {
   return (
     <form autoComplete="off" noValidate {...props}>
       <Card>
-        <CardHeader subheader="The information can be edited" title="Profile" />
+        <CardHeader subheader={t('sentence:profileSubheader')} title={t('common.profile')} />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
                 label="First name"
-                name="firstName"
+                name="name"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.name}
                 variant="outlined"
               />
             </Grid>
@@ -57,10 +58,10 @@ const ProfileForm = (props: any) => {
               <TextField
                 fullWidth
                 label="Last name"
-                name="lastName"
+                name="surname"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.surname}
                 variant="outlined"
               />
             </Grid>
@@ -106,7 +107,6 @@ const ProfileForm = (props: any) => {
                 required
                 select
                 SelectProps={{ native: true }}
-                value={values.state}
                 variant="outlined"
               >
                 {states.map((option) => (
@@ -126,8 +126,14 @@ const ProfileForm = (props: any) => {
             p: 2,
           }}
         >
-          <Button color="primary" variant="contained">
-            Save details
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              API.user.selfUpdate(values)
+            }}
+          >
+            {t('actions:save')}
           </Button>
         </Box>
       </Card>
