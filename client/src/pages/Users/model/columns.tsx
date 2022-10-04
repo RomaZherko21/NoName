@@ -7,9 +7,11 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import ManIcon from '@mui/icons-material/Man'
+import WomanIcon from '@mui/icons-material/Woman'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, Roles, User } from 'shared/types'
+import { TableColumn, Roles, User, Gender } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
 import UsersModel from './Users.model'
@@ -40,10 +42,10 @@ const ActionButtons = observer(({ user }: { user: User }) => {
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
         <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
-          <EditOutlinedIcon color="primary" fontSize="inherit" />
+          <EditOutlinedIcon color="secondary" fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      <Tooltip title={t('actions.delete') || 'edit'} placement="top">
+      <Tooltip title={t('actions.delete') || 'delete'} placement="top">
         <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
@@ -83,7 +85,13 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'gender',
     title: i18next.t('user:gender'),
-    getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    getValue: (row: User) =>
+      row.gender === Gender.man ? (
+        <Chip label={row.gender} icon={<ManIcon />} color="primary" />
+      ) : (
+        <Chip label={row.gender} icon={<WomanIcon />} color="primary" />
+      ),
   },
   {
     key: 'date_of_birth',
