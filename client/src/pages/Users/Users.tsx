@@ -10,9 +10,10 @@ import { useDialog } from 'shared/hooks'
 
 import { Filters } from 'shared/ui/Filters'
 
-import { CreateUserForm } from './ui'
+import { UserForm } from './ui'
 import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
 import { Helmet } from 'react-helmet'
+import { User } from 'shared/types'
 
 function Users() {
   const { t } = useTranslation()
@@ -24,7 +25,12 @@ function Users() {
   }, [UsersModel.pagination.page, UsersModel.pagination.perPage, filters])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
-    <CreateUserForm hideModal={hideModal} />
+    <UserForm
+      onSubmit={(value: User) => {
+        UsersModel.create(value)
+        hideModal()
+      }}
+    />
   ))
 
   const columns = useMemo(() => getColumns(), [getColumns])

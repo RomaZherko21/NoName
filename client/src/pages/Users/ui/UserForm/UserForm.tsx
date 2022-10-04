@@ -1,18 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
 import { useMemo } from 'react'
-import { Formik, useFormik } from 'formik'
+import { Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material'
+import { Button, Grid } from '@mui/material'
 
 import {
   emailValidation,
@@ -23,64 +14,42 @@ import {
 import { User, Roles, Gender } from 'shared/types'
 import { GENDER, ROLES } from 'shared/consts'
 
-import { UsersModel } from '../../model'
 import styles from './Styles.module.scss'
 import { InputField, SelectField } from 'shared/ui'
 
-function CreateUserForm({ hideModal }: any) {
+function UserForm({ onSubmit, user }: { onSubmit: (value: User) => void; user?: User }) {
   const { t } = useTranslation()
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation('Name', 3),
-        surname: commonStringValidation('Surname', 3),
+        name: commonStringValidation(`user:name`, 3),
+        surname: commonStringValidation(`user:surname`, 3),
         email: emailValidation(),
-        role: commonStringValidation('Role'),
-        date_of_birth: commonStringValidation('date_of_birth', 10),
+        role: commonStringValidation(`user:role`),
+        date_of_birth: commonStringValidation(`user:dateOfBirth`, 10),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
       }),
     []
   )
 
-  const { handleSubmit, values, handleChange, touched, errors, setFieldValue } = useFormik<User>({
-    initialValues: {
-      name: '',
-      surname: '',
-      middle_name: '',
-      email: '',
-      tel_number: '',
-      role: Roles.user,
-      gender: Gender.man,
-      password: '',
-      confirmPassword: '',
-    },
-    validationSchema,
-    onSubmit: (value: User) => {
-      UsersModel.create(value)
-      hideModal()
-    },
-  })
-
   return (
     <Formik
       initialValues={{
-        name: '',
-        surname: '',
-        middle_name: '',
-        email: '',
-        tel_number: '',
-        role: Roles.user,
-        gender: Gender.man,
+        name: user?.name || '',
+        surname: user?.surname || '',
+        middle_name: user?.middle_name || '',
+        email: user?.email || '',
+        tel_number: user?.tel_number || '',
+        role: user?.role || Roles.user,
+        gender: user?.gender || Gender.man,
+        date_of_birth: user?.date_of_birth || '1999-04-21',
         password: '',
         confirmPassword: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={(value: User) => {
-        UsersModel.create(value)
-        hideModal()
-      }}
+      onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className={styles.centered}>
@@ -127,4 +96,4 @@ function CreateUserForm({ hideModal }: any) {
   )
 }
 
-export default observer(CreateUserForm)
+export default observer(UserForm)

@@ -13,13 +13,19 @@ import { TableColumn, Roles, User } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
 import UsersModel from './Users.model'
-import { UpdateUserForm, DeleteUserDialog } from '../ui'
+import { UserForm, DeleteUserDialog } from '../ui'
 
 const ActionButtons = observer(({ user }: { user: User }) => {
   const { t } = useTranslation()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
-    <UpdateUserForm user={user} hideModal={hideModal} />
+    <UserForm
+      user={user}
+      onSubmit={(value: User) => {
+        UsersModel.update(value)
+        hideModal()
+      }}
+    />
   ))
 
   const removeUser = useCallback(() => user.id && UsersModel.remove(user.id), [user.id])

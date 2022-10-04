@@ -1,19 +1,19 @@
 import * as yup from 'yup'
 import i18next from 'i18next'
 
-export const commonStringValidation = (fieldName: string, minSymbols: number = 1) =>
+export const commonStringValidation = (field: string, minSymbols: number = 1) =>
   yup
     .string()
     .min(
       minSymbols,
       i18next.t('validation:error.minSymbols', {
-        field: i18next.t(`user:${fieldName.toLowerCase()}`),
+        field: i18next.t(field),
         count: minSymbols,
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field: i18next.t(`user:${fieldName.toLowerCase()}`),
+        field: i18next.t(field),
       })
     )
 
