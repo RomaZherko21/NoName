@@ -53,6 +53,8 @@ const UserModel = sequelize.define(
   }
 )
 
-UserModel.hasMany(PostModel)
+UserModel.hasMany(PostModel, {
+  foreignKey: 'user_id',
+})
 
 export default UserModel

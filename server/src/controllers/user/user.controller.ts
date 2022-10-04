@@ -1,88 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import fs from 'fs'
 import path from 'path'
-import { QueryTypes } from 'sequelize'
 
 import UserModel from 'models/user.model'
-import sequelize from 'models'
-
-import { getUserListQuery } from './queries'
 
 class UserController {
-  async list({ body }: Request, res: Response, next: NextFunction) {
-    try {
-      const { offset, limit, filters = {} } = body
-
-      const users = await sequelize.query(getUserListQuery({ limit, offset, filters }), {
-        type: QueryTypes.SELECT,
-      })
-      const count = await UserModel.count()
-
-      res.status(200).json({ users, count })
-    } catch {
-      next(createError(500))
-    }
-  }
-
-  async create({ body }: Request, res: Response, next: NextFunction) {
-    try {
-      const hash = await bcrypt.hash(body.password, 10)
-
-      const data = await UserModel.create({
-        ...body,
-        password: hash,
-      })
-
-      res.status(200).json(data)
-    } catch (err) {
-      next(createError(500))
-    }
-  }
-
-  async update({ body }: Request, res: Response, next: NextFunction) {
-    try {
-      const hash = await bcrypt.hash(body.password, 10)
-
-      const data = await UserModel.update(
-        {
-          ...body,
-          password: hash,
-        },
-        {
-          where: {
-            email: body.email,
-          },
-        }
-      )
-
-      if (!data) return next(createError(400, 'User wasnt updated'))
-
-      return res.status(200).json(data)
-    } catch (err) {
-      return next(createError(500))
-    }
-  }
-
-  async selfUpdate({ body }: Request, res: Response, next: NextFunction) {
-    try {
-      const data = await UserModel.update(body, {
-        where: {
-          email: body.email,
-        },
-      })
-
-      if (!data) return next(createError(400, 'User wasnt updated'))
-
-      return res.status(200).json(data)
-    } catch (err) {
-      return next(createError(500))
-    }
-  }
-
-  async self(req: Request, res: Response, next: NextFunction) {
+  async get(req: Request, res: Response, next: NextFunction) {
     try {
       const authHeader = req.headers.authorization
       const token = authHeader && authHeader.split(' ')[1]
@@ -105,16 +30,15 @@ class UserController {
     }
   }
 
-  async remove(req: Request, res: Response, next: NextFunction) {
+  async update({ body }: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.body
-      const data = await UserModel.destroy({
+      const data = await UserModel.update(body, {
         where: {
-          id,
+          email: body.email,
         },
       })
 
-      if (!data) return next(createError(403, 'Unauthorized'))
+      if (!data) return next(createError(400, 'User wasnt updated'))
 
       return res.status(200).json(data)
     } catch (err) {

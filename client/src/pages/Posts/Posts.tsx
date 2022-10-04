@@ -57,7 +57,7 @@ function Posts() {
                   description={post.description}
                   imageUrl={`${API_URL}/uploads/post/${post.image}`}
                   creatorAvatarUrl={`${API_URL}/uploads/avatar/${post.avatar}`}
-                  createdAt={post.createdAt}
+                  createdAt={post.created_at}
                   popupConfig={popupConfig}
                 />
               </Grid>

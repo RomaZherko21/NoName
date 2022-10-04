@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 
 import sequelize from '.'
+import UserModel from './user.model'
 
 const PostModel = sequelize.define(
   'posts',
@@ -17,7 +18,7 @@ const PostModel = sequelize.define(
     description: {
       type: DataTypes.TEXT,
     },
-    createdAt: {
+    created_at: {
       type: DataTypes.BIGINT,
     },
     image: {

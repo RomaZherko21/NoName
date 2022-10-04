@@ -33,13 +33,13 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `user_id` int NOT NULL,
   `name` varchar(255),
   `description` text,
-  `createdAt` bigint,
+  `created_at` bigint,
   `image` varchar(255),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
 );
 
-INSERT INTO `posts` (user_id, name, description, createdAt, image) 
+INSERT INTO `posts` (user_id, name, description, created_at, image) 
 VALUES
   (1,'What are articles?','Articles are words that define a noun as specific or unspecific. Consider the following examples:',1664011922672,'1663318230996.jpg'),
   (1,'Clothing','Clothing (also known as clothes, apparel, and attire) are items worn on the body. Typically, clothing is made of fabrics or textiles, but over time it has included garments made from animal skin and other thin sheets of materials and natural products found in the environment, put together. The wearing of clothing is mostly restricted to human beings and is a feature of all human societies. The amount and type of clothing worn depends on gender, body type, social factors, and geographic considerations. Garments cover the body, footwear covers the feet, gloves cover the hands, while hats and headgear cover the head. Eyewear and jewelry are not generally considered items of clothing, but play an important role in fashion and clothing as costume.',1662011922672,'1663318230997.jpg'),

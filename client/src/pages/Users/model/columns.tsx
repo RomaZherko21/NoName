@@ -24,8 +24,10 @@ const ActionButtons = observer(({ user }: { user: User }) => {
     <UserForm
       user={user}
       onSubmit={(value: User) => {
-        UsersModel.update(value)
-        hideModal()
+        if (user.id) {
+          UsersModel.update(value, user.id)
+          hideModal()
+        }
       }}
     />
   ))

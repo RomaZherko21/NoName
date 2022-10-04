@@ -46,9 +46,9 @@ class PostsModel {
     try {
       this.loading.begin()
 
-      const createdAt = Date.now()
+      const created_at = Date.now()
 
-      await API.post.create({ ...post, createdAt })
+      await API.post.create({ ...post, created_at })
       this.fetch()
 
       this.loading.end()

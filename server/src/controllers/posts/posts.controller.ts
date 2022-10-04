@@ -6,15 +6,15 @@ import path from 'path'
 import PostModel from 'models/post.model'
 import sequelize from 'models'
 
-import { getPostListQuery } from './queries'
+import { getPostsQuery } from './queries'
 
-class PostController {
-  async list({ body }: Request, res: Response, next: NextFunction) {
+class PostsController {
+  async list({ query }: Request, res: Response, next: NextFunction) {
     try {
-      const { limit, offset } = body
+      const { limit, offset } = query
 
-      const [results] = await sequelize.query(getPostListQuery(), {
-        replacements: { limit, offset },
+      const [results] = await sequelize.query(getPostsQuery(), {
+        replacements: { limit: Number(limit), offset: Number(offset) },
       })
 
       const count = await PostModel.count()
@@ -40,7 +40,7 @@ class PostController {
 
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.body
+      const { id } = req.params
       const { image }: any = await PostModel.findByPk(id)
 
       if (image) {
@@ -70,4 +70,4 @@ class PostController {
   }
 }
 
-export default new PostController()
+export default new PostsController()

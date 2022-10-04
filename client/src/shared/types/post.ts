@@ -3,7 +3,7 @@ export interface Post {
   user_id?: number
   name: string
   description: string
-  createdAt: number
+  created_at: number
   image: string
   avatar: string
 }

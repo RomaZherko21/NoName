@@ -32,7 +32,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      const data = await API.user.list({
+      const data = await API.users.list({
         limit: this.pagination.perPage,
         offset: this.pagination.offset,
         filters,
@@ -50,7 +50,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await API.user.create(user)
+      await API.users.create(user)
       this.fetch()
 
       this.loading.end()
@@ -63,7 +63,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await API.user.remove(id)
+      await API.users.remove(id)
       this.fetch()
 
       this.loading.end()
@@ -72,11 +72,11 @@ class UsersModel {
     }
   }
 
-  async update(user: User) {
+  async update(user: User, id: number) {
     try {
       this.loading.begin()
 
-      await API.user.update(user)
+      await API.users.update(user, id)
       this.fetch()
 
       this.loading.end()

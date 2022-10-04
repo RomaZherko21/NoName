@@ -17,7 +17,7 @@ prune: ## Remove ALL stopped container and ALL unused volumes
 
 .PHONY: sysPrune
 sysPrune: ## Remove all unused containers, networks, images, and optionally, volumes.
-	docker system prune 
+	docker system prune -a 
 
 
 

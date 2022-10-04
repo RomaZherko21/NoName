@@ -1,3 +1,4 @@
 export { authController } from './auth'
-export { postController } from './post'
+export { postsController } from './posts'
 export { userController } from './user'
+export { usersController } from './users'
