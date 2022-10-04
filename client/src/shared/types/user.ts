@@ -14,7 +14,7 @@ export interface User {
   surname: string
   middle_name: string
   email: string
-  password: string
+  password?: string
   role: Roles
   date_of_birth?: string
   tel_number?: string
