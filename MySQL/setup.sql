@@ -190,3 +190,30 @@ VALUES
   -- SELECT SUM(quantity) as total_books, MIN(quantity) as min_copies_of_book, MAX(quantity) as max_copies_of_book, AVG(quantity) as avg_copies_of_book FROM books   33, 1, 12
   -- SELECT * FROM `subscriptions` WHERE start >='2011-01-01' AND finish < '2014-01-01' от 2011 до 2013 года
   -- SELECT name, quantity FROM `books` AS external WHERE quantity> ALL(SELECT quantity FROM books AS internal WHERE external.id != internal.id)  выбрать книгу с максимальным количеством копий
+  -- SELECT YEAR(start) as year, COUNT(id) as books_taken FROM subscriptions GROUP BY year ORDER BY year     посчитать количество всех подписок по годам
+
+-- SELECT books.name as b_name, authors.name as a_name, genres.name as g_name   Взять инфу о книгах авторах и жанре из 3ех таблиц
+-- FROM `books` 
+--     	JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
+--       JOIN authors ON authors.id = m2m_books_authors.author_id
+--     	JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
+--       JOIN genres ON genres.id = m2m_books_genres.genre_id
+
+
+-- SELECT books.name as book, GROUP_CONCAT(authors.name ORDER BY authors.name SEPARATOR ', ') as `authors`  Взять инфу о книгах и авторах из 2ух таблиц соеденив всех авторов для книги
+-- FROM `books` 
+--     	JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
+--       	JOIN authors ON authors.id = m2m_books_authors.author_id
+--  GROUP BY books.id
+-- ORDER BY books.name
+
+-- SELECT books.name as book,   Взять инфу о книгах, авторах и жанрах из 3ех таблиц соеденив всех авторов и жанры для одной книги
+-- GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name SEPARATOR ', ') as `authors`, 
+-- GROUP_CONCAT(DISTINCT genres.name ORDER BY genres.name SEPARATOR ', ') as `genres`
+-- FROM `books` 
+--     	JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
+--       	JOIN authors ON authors.id = m2m_books_authors.author_id
+--         JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
+--       	JOIN genres ON genres.id = m2m_books_genres.genre_id
+--  GROUP BY books.id
+-- ORDER BY books.name
