@@ -1,8 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
-import { API_URL } from 'shared/consts'
+import { GO_API_URL } from 'shared/consts'
 
-import { extractDataInterceptor, setAuthInterceptor, unauthorizedInterceptor } from './interceptors'
+import {
+  extractDataInterceptor,
+  setAuthInterceptor,
+  unauthorizedInterceptor,
+} from '../interceptors'
 
 export type FetchServiceConfig = {
   apiUrl: string
@@ -18,10 +22,7 @@ export class FetchService {
     this.instance.interceptors.request.use(setAuthInterceptor)
     this.instance.interceptors.response.use(extractDataInterceptor)
     this.instance.interceptors.response.use(undefined, unauthorizedInterceptor)
-  }
-
-  init() {
-    this.instance.defaults.baseURL = API_URL
+    this.instance.defaults.baseURL = GO_API_URL
   }
 
   public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {

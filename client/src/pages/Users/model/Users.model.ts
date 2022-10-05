@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { API } from 'services'
+import { NODE_API } from 'services'
 import { User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
@@ -32,7 +32,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      const data = await API.users.list({
+      const data = await NODE_API.users.list({
         limit: this.pagination.perPage,
         offset: this.pagination.offset,
         filters,
@@ -50,7 +50,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await API.users.create(user)
+      await NODE_API.users.create(user)
       this.fetch()
 
       this.loading.end()
@@ -63,7 +63,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await API.users.remove(id)
+      await NODE_API.users.remove(id)
       this.fetch()
 
       this.loading.end()
@@ -76,7 +76,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await API.users.update(user, id)
+      await NODE_API.users.update(user, id)
       this.fetch()
 
       this.loading.end()

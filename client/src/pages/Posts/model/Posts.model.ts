@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { API } from 'services'
+import { NODE_API, GO_API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { Post } from 'shared/types'
@@ -31,7 +31,7 @@ class PostsModel {
     try {
       this.loading.begin()
 
-      const data = await API.post.list(this.pagination.perPage, this.pagination.offset)
+      const data = await NODE_API.post.list(this.pagination.perPage, this.pagination.offset)
 
       this.posts = data.posts
       this.pagination.count = data.count
@@ -48,7 +48,7 @@ class PostsModel {
 
       const created_at = Date.now()
 
-      await API.post.create({ ...post, created_at })
+      await NODE_API.post.create({ ...post, created_at })
       this.fetch()
 
       this.loading.end()
@@ -61,7 +61,7 @@ class PostsModel {
     try {
       this.loading.begin()
 
-      await API.post.remove(id)
+      await NODE_API.post.remove(id)
       this.fetch()
 
       this.loading.end()

@@ -25,11 +25,11 @@ app.use(cors())
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/uploads', express.static(path.join('uploads')))
+app.use('/node-api/uploads', express.static(path.join('uploads')))
 
 app.use(useAuth)
 
-app.use('/', router)
+app.use('/node-api', router)
 
 sequelize
   .sync()

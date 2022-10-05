@@ -71,7 +71,7 @@ export const getColumns = (): TableColumn[] => [
           display: 'flex',
         }}
       >
-        <Avatar src={`http://localhost/api/uploads/avatar/${avatar}`} sx={{ mr: 2 }}>
+        <Avatar src={`http://localhost/node-api/uploads/avatar/${avatar}`} sx={{ mr: 2 }}>
           {getInitials(`${name} ${surname}`)}
         </Avatar>
         <Typography color="textPrimary" variant="body1">

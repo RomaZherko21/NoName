@@ -1,5 +1,6 @@
-import { fetch } from 'services'
 import { User } from 'shared/types'
+
+import fetch from './fetch'
 
 const ENDPOINT_BASE = '/users'
 

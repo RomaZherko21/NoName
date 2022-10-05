@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { API } from 'services'
+import { NODE_API } from 'services'
 import { RootStore } from 'stores/Root'
 
 const ACCESS_TOKEN = 'ACCESS_TOKEN'
@@ -50,7 +50,7 @@ class AuthorizationModel {
   }
 
   async signIn(value: { email: string; password: string }) {
-    const data = await API.auth.signIn(value.email, value.password)
+    const data = await NODE_API.auth.signIn(value.email, value.password)
     this.rootStore.user.init()
 
     this.setAccessToken(data.accessToken)

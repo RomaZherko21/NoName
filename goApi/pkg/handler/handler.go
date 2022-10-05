@@ -22,7 +22,7 @@ func NewHandler(services *service.Service, db *sql.DB) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	api := router.Group("/api")
+	api := router.Group("/go-api")
 	{
 		reports := api.Group("/reports")
 		{

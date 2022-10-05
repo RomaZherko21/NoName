@@ -40,6 +40,7 @@ services:
       context: ./nginx
     depends_on:
       - node_api
+      - go_api
       - client
     restart: always
     ports:
@@ -62,17 +63,17 @@ services:
       MYSQL_HOST_IP: mysql_db
   
   go_api:
-      container_name: go_api
-      build:
-        context: ./goApi
-        target: go_api
-      depends_on:
-        - mysql_db
-      ports:
-        - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
-      environment:
-        <<: *my-sql-variables
-        GO_API_PORT_INNER: ${GO_API_PORT_INNER}
+    container_name: go_api
+    build:
+      context: ./goApi
+      target: go_api
+    depends_on:
+      - mysql_db
+    ports:
+      - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
+    environment:
+      <<: *my-sql-variables
+      GO_API_PORT_INNER: ${GO_API_PORT_INNER}
 
   client:
     container_name: client

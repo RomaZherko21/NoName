@@ -4,6 +4,6 @@ import * as user from './user'
 import * as post from './post'
 import * as file from './file'
 
-const API = { auth, user, users, post, file }
+const NODE_API = { auth, user, users, post, file }
 
-export default API
+export default NODE_API

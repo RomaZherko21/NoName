@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
-import { API } from 'services'
-import { API_URL } from 'shared/consts'
+import { NODE_API } from 'services'
+import { NODE_API_URL } from 'shared/consts'
 import { Gender, Roles, User } from 'shared/types'
 import { RootStore } from 'stores'
 
@@ -50,7 +50,7 @@ class UserModel {
       date_of_birth = '',
       role,
       avatar = '',
-    } = await API.user.self()
+    } = await NODE_API.user.self()
 
     this.rootStore.authorization.isAuthorized = true
 
@@ -67,13 +67,13 @@ class UserModel {
   }
 
   getPhotoUrl() {
-    return `${API_URL}/uploads/avatar/${this.avatar.url}`
+    return `${NODE_API_URL}/uploads/avatar/${this.avatar.url}`
   }
 
   async uploadPhoto(file: File) {
     this.rootStore.loading.begin()
     try {
-      const { url } = await API.user.uploadPhoto(file, this.id)
+      const { url } = await NODE_API.user.uploadPhoto(file, this.id)
       this.avatar.setFileData(file, url)
       this.rootStore.loading.end()
     } catch {
@@ -84,7 +84,7 @@ class UserModel {
   async selfUpdate(values: User) {
     this.rootStore.loading.begin()
     try {
-      await API.user.selfUpdate(values)
+      await NODE_API.user.selfUpdate(values)
       await this.init()
       this.rootStore.loading.end()
     } catch {
