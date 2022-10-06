@@ -3,7 +3,7 @@ import createError from 'http-errors'
 import jwt from 'jsonwebtoken'
 
 const useAuth = (req: Request, res: Response, next: NextFunction) => {
-  if (req.originalUrl === '/auth/signIn') return next()
+  if (req.originalUrl === '/node-api/auth/signIn') return next()
 
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]

@@ -5,6 +5,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
 import NewspaperIcon from '@mui/icons-material/Newspaper'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
@@ -42,6 +43,13 @@ const Aside = ({ className, isOpen }: AsideProps) => {
     >
       <List>
         <AsideItemLink icon={<GroupIcon />} title={t('page:users')} to="/users" isOpen={isOpen} />
+
+        <AsideItemLink
+          icon={<MenuBookIcon />}
+          title={t('page:books')}
+          to="/books"
+          isOpen={isOpen}
+        />
 
         <AsideItemLink
           icon={<NewspaperIcon />}
