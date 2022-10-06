@@ -217,3 +217,25 @@ VALUES
 --       	JOIN genres ON genres.id = m2m_books_genres.genre_id
 --  GROUP BY books.id
 -- ORDER BY books.name
+
+
+
+-- Выбрать всех name и id с данными, сджоинить с таблицей subscriptions, если нет совпадений то у таблицы справа будут null значения. В конце показать только с null знрачениями
+-- SELECT subscribers.name as s_name, subscribers.id as s_id  
+-- FROM subscribers 
+--     	LEFT JOIN subscriptions ON subscribers.id = subscriptions.subscriber_id
+-- WHERE subscriptions.subscriber_id IS NULL
+
+-- IN работает быстрее чем JOIN, Выбирает name и id у тех у кого хоть одна подписка
+-- SELECT subscribers.name as s_name, subscribers.id as s_id  
+-- 	FROM subscribers 
+-- WHERE  subscribers.id IN (SELECT DISTINCT subscriptions.subscriber_id FROM subscriptions)
+
+
+
+--  Выбрать всех name и id с данными, сджоинить с таблицей subscriptions, если нет совпадений то у таблицы справа будут null значения. Преобразовать все "Y" в NULL, Оставить поля только NULL
+-- SELECT subscribers.name, subscribers.id
+-- FROM subscribers 
+--     	LEFT OUTER JOIN subscriptions ON subscribers.id = subscriptions.subscriber_id
+-- GROUP BY subscribers.id
+-- HAVING COUNT(IF(subscriptions.is_active = "Y", subscriptions.is_active, NULL)) = 0
