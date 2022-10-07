@@ -239,3 +239,11 @@ VALUES
 --     	LEFT OUTER JOIN subscriptions ON subscribers.id = subscriptions.subscriber_id
 -- GROUP BY subscribers.id
 -- HAVING COUNT(IF(subscriptions.is_active = "Y", subscriptions.is_active, NULL)) = 0
+
+
+-- Выбрать книги по жанрам 'Programming' и 'Psychology' (можно так же по id жанра без 2ого IN)
+-- SELECT DISTINCT books.id, books.name 
+-- FROM books 
+--   JOIN m2m_books_genres ON m2m_books_genres.book_id = books.id 
+-- WHERE m2m_books_genres.genre_id IN (SELECT id FROM genres WHERE genres.name IN ('Programming', 'Psychology'))
+-- ORDER BY books.name ASC
