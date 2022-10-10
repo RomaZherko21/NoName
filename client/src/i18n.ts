@@ -2,7 +2,16 @@ import i18n from 'i18next'
 import Backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
-const namespaces = ['translation', 'validation', 'user', 'notification', 'post', 'page', 'sentence']
+const namespaces = [
+  'translation',
+  'validation',
+  'user',
+  'notification',
+  'post',
+  'page',
+  'sentence',
+  'book',
+]
 
 i18n
   .use(Backend)
