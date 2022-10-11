@@ -35,7 +35,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		books := api.Group("/books")
 		{
-			books.GET("/", h.getAllBooksByGenre)
+			books.GET("/", h.getAllBooks)
+			books.GET("/:id", h.getBookById)
 		}
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

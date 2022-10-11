@@ -18,6 +18,7 @@
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
-    "exit": "Exit"
+    "exit": "Exit",
+    "info": "Show more information"
   }
 }

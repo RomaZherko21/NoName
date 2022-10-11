@@ -1,6 +1,7 @@
 {
   "users": "Users",
   "books": "Books",
+  "book": "Book",
   "posts": "Posts",
   "profile": "Profile"
 }

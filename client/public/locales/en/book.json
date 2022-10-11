@@ -1,5 +1,7 @@
 {
   "bookName": "Book name",
   "author": "Author",
-  "genre": "Genre"
+  "genre": "Genre",
+  "publisher": "Publisher",
+  "quantity": "Quantity"
 }
