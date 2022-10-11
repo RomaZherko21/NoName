@@ -76,18 +76,20 @@ func (h *Handler) getBookById(c *gin.Context) {
 	id := c.Param("id")
 
 	type resType struct {
-		Id        int    `json:"id" db:"book_id"`
-		Name      string `json:"name" db:"book_name"`
-		Authors   string `json:"authors"`
-		Genres    string `json:"genres"`
-		Publisher string `json:"publisher"`
-		Quantity  int    `json:"quantity"`
+		Id          int    `json:"id" db:"book_id"`
+		Name        string `json:"name" db:"book_name"`
+		Description string `json:"description" db:"description"`
+		Authors     string `json:"authors"`
+		Genres      string `json:"genres"`
+		Publisher   string `json:"publisher"`
+		Quantity    int    `json:"quantity"`
 	}
 
 	var book resType
 
 	query := `SELECT books.id as book_id,
-					books.name as book_name, 
+					books.name as book_name,
+					books.description, 
 					GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name SEPARATOR ', ') as authors, 
 					GROUP_CONCAT(DISTINCT genres.name ORDER BY genres.name SEPARATOR ', ') as genres,
 					books.publisher,
@@ -101,7 +103,7 @@ func (h *Handler) getBookById(c *gin.Context) {
 	GROUP BY books.id`
 
 	err := h.db.QueryRow(query, id).Scan(
-		&book.Id, &book.Name, &book.Authors, &book.Genres, &book.Publisher, &book.Quantity,
+		&book.Id, &book.Name, &book.Description, &book.Authors, &book.Genres, &book.Publisher, &book.Quantity,
 	)
 
 	if err != nil {

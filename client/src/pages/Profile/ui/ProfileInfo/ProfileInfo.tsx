@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
@@ -46,7 +47,7 @@ const ProfileInfo = (props: any) => {
               </div>
             </label>
           )}
-          <Typography color="textPrimary" gutterBottom variant="h5">
+          <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
             {user.name}
           </Typography>
           <Typography color="textSecondary" variant="body2">
@@ -64,4 +65,4 @@ const ProfileInfo = (props: any) => {
   )
 }
 
-export default ProfileInfo
+export default observer(ProfileInfo)

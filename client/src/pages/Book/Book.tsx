@@ -7,13 +7,17 @@ import { BookForm } from './ui/BookForm'
 import { Helmet } from 'react-helmet'
 import { BookModel } from './model'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 function Book() {
   const { t } = useTranslation()
+  let { id } = useParams()
 
   useEffect(() => {
-    BookModel.fetch()
-  }, [])
+    if (Number(id)) {
+      BookModel.fetch(Number(id))
+    }
+  }, [id])
 
   return (
     <>

@@ -1,14 +1,16 @@
 import { useMemo } from 'react'
-import { Button, Card, CardContent, CardHeader, Divider, Grid } from '@mui/material'
-import { useRootStore } from 'stores'
+import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import * as yup from 'yup'
-import { InputField, SelectField } from 'shared/ui'
 import { Formik } from 'formik'
+import * as yup from 'yup'
+import { Button, Card, CardContent, CardHeader, Divider, Grid } from '@mui/material'
+
+import { InputField, SelectField } from 'shared/ui'
 import { commonStringValidation, emailValidation } from 'shared/validations'
+import { useRootStore } from 'stores'
+import { GENDER, ROLES } from 'shared/consts'
 
 import styles from './Styles.module.scss'
-import { GENDER, ROLES } from 'shared/consts'
 
 const ProfileForm = () => {
   const { t } = useTranslation()
@@ -88,4 +90,4 @@ const ProfileForm = () => {
   )
 }
 
-export default ProfileForm
+export default observer(ProfileForm)

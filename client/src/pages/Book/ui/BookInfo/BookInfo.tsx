@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
@@ -44,17 +45,14 @@ const BookInfo = (props: any) => {
               </div>
             </label>
           )}
-          <Typography color="textPrimary" gutterBottom variant="h5">
+          <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
             {BookModel.name}
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            {/* {`${user.surname}`} */}
+            {BookModel.publisher}
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            {/* {user.email} */}
-          </Typography>
-          <Typography color="textSecondary" variant="body2">
-            {/* {user.role} */}
+            {BookModel.genres}
           </Typography>
         </Box>
       </CardContent>
@@ -62,4 +60,4 @@ const BookInfo = (props: any) => {
   )
 }
 
-export default BookInfo
+export default observer(BookInfo)
