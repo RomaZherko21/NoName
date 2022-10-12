@@ -1,6 +1,8 @@
 {
   "private": false,
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-angular": "^17.1.0",
     "husky": "^8.0.1",
     "prettier": "2.7.1"
   },
@@ -13,6 +15,7 @@
       "postinstall": "husky install",
       "prepack": "pinst --disable",
       "postpack": "pinst --enable",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn run format"
     }
   }
