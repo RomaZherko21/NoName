@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react'
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu } from '@mui/material'
 
 interface Props {
   config: Array<{

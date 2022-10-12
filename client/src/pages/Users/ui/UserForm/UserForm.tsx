@@ -23,15 +23,15 @@ function UserForm({ onSubmit, user }: { onSubmit: (value: User) => void; user?: 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation(`user:name`, 3),
-        surname: commonStringValidation(`user:surname`, 3),
+        name: commonStringValidation(t(`user:name`), 3),
+        surname: commonStringValidation(t(`user:surname`), 3),
         email: emailValidation(),
-        role: commonStringValidation(`user:role`),
-        date_of_birth: commonStringValidation(`user:dateOfBirth`, 10),
+        role: commonStringValidation(t(`user:role`)),
+        date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
       }),
-    []
+    [t]
   )
 
   return (

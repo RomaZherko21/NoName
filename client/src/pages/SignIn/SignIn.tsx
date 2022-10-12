@@ -4,8 +4,8 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Button, Container, Paper, Stack, TextField, Typography } from '@mui/material'
 
-import { emailValidation, passwordValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
+import { emailValidation, passwordValidation } from 'shared/validations'
 
 const validationSchema = yup.object().shape({
   email: emailValidation(),

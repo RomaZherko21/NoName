@@ -1,8 +1,8 @@
 module.exports = {
   extends: ['@commitlint/config-angular'],
   rules: {
-    'scope-case': () => [2, 'always', 'lower-case'],
-    'scope-validation': () => [2, 'always', ['client', 'nodeApi', 'mySQL', 'goApi', 'root']],
+    'scope-case': () => [2, 'always', 'kebab-case'],
+    'scope-validation': () => [2, 'always', ['client', 'node-api', 'mysql', 'go-api', 'root']],
   },
   plugins: [
     {

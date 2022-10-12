@@ -1,13 +1,13 @@
+import * as yup from 'yup'
 import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Formik } from 'formik'
-import * as yup from 'yup'
 import { Button, Card, CardContent, CardHeader, Divider, Grid } from '@mui/material'
 
+import { useRootStore } from 'stores'
 import { InputField, SelectField } from 'shared/ui'
 import { commonStringValidation, emailValidation } from 'shared/validations'
-import { useRootStore } from 'stores'
 import { GENDER, ROLES } from 'shared/consts'
 
 import styles from './Styles.module.scss'
@@ -19,13 +19,13 @@ const ProfileForm = () => {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation(`user:name`, 3),
-        surname: commonStringValidation(`user:surname`, 3),
+        name: commonStringValidation(t(`user:name`), 3),
+        surname: commonStringValidation(t(`user:surname`), 3),
         email: emailValidation(),
-        role: commonStringValidation(`user:role`),
-        date_of_birth: commonStringValidation(`user:dateOfBirth`, 10),
+        role: commonStringValidation(t(`user:role`)),
+        date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
       }),
-    []
+    [t]
   )
 
   return (

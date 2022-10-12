@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Box, Button, Grid, Typography } from '@mui/material'
@@ -7,13 +8,11 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
-
 import { Filters } from 'shared/ui/Filters'
+import { User } from 'shared/types'
 
 import { UserForm } from './ui'
 import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
-import { Helmet } from 'react-helmet'
-import { User } from 'shared/types'
 
 function Users() {
   const { t } = useTranslation()
@@ -22,6 +21,7 @@ function Users() {
 
   useEffect(() => {
     UsersModel.fetch(filters)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [UsersModel.pagination.page, UsersModel.pagination.perPage, filters])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
@@ -33,7 +33,7 @@ function Users() {
     />
   ))
 
-  const columns = useMemo(() => getColumns(), [getColumns])
+  const columns = useMemo(() => getColumns(), [])
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   return (

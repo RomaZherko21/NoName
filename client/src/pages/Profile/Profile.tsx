@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
-import { ProfileInfo } from './ui/ProfileInfo'
-import { ProfileForm } from './ui/ProfileForm'
-import { Helmet } from 'react-helmet'
+import { ProfileInfo, ProfileForm } from './ui'
 
 function Profile() {
   const { t } = useTranslation()

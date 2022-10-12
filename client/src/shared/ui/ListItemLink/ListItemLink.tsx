@@ -1,6 +1,6 @@
-import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { forwardRef, ReactElement, useMemo } from 'react'
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 interface ListItemLinkProps {
   icon?: ReactElement

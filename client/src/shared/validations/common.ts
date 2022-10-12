@@ -7,13 +7,13 @@ export const commonStringValidation = (field: string, minSymbols: number = 1) =>
     .min(
       minSymbols,
       i18next.t('validation:error.minSymbols', {
-        field: i18next.t(field),
+        field,
         count: minSymbols,
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field: i18next.t(field),
+        field,
       })
     )
 

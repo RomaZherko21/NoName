@@ -1,6 +1,6 @@
+import { Helmet } from 'react-helmet'
 import { Box, Button, Container, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { Helmet } from 'react-helmet'
 
 import notFoundImg from 'assets/images/404.svg'
 

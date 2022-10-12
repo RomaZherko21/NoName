@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import {
   FormControl,
   InputLabel,
@@ -10,7 +11,6 @@ import {
 import Stack from '@mui/material/Stack'
 
 import PaginationModel from 'models/Pagination'
-import { useTranslation } from 'react-i18next'
 
 interface Props {
   paginationModel: PaginationModel
@@ -29,7 +29,6 @@ const Pagination = ({ paginationModel }: Props) => {
           value={String(paginationModel.perPage)}
           label={t('common.amount')}
           onChange={(event: SelectChangeEvent) => {
-            // eslint-disable-next-line
             paginationModel.perPage = Number(event.target.value)
           }}
         >
@@ -46,7 +45,6 @@ const Pagination = ({ paginationModel }: Props) => {
         defaultPage={paginationModel.page}
         color="primary"
         onChange={(event: React.ChangeEvent<unknown>, page: number) => {
-          // eslint-disable-next-line
           paginationModel.page = page
         }}
       />

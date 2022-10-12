@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 
+import { RootStore } from 'stores'
 import { NODE_API } from 'services'
 import { NODE_API_URL } from 'shared/consts'
 import { Gender, Roles, User } from 'shared/types'
-import { RootStore } from 'stores'
 
 import FileModel from './File'
 

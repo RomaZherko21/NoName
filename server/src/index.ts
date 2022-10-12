@@ -4,12 +4,10 @@ import cors from 'cors'
 import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
-/* eslint-disable import/first */
-import { log } from 'shared/helpers'
 import router from 'routes'
 import { useHttpError, useAuth } from 'middlewares'
 import sequelize from 'models'
-/* eslint-enable */
+import { log } from 'shared/helpers'
 
 const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, NODE_API_HOST, NODE_API_PORT } = process.env
 

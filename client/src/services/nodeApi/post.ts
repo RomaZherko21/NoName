@@ -10,7 +10,6 @@ export const list = (limit: number, offset: number) =>
 export const create = async (post: any) => {
   const formData = new FormData()
 
-  // eslint-disable-next-line
   for (const key in post) {
     formData.append(key, post[key])
   }

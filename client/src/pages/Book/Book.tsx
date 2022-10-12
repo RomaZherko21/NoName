@@ -1,17 +1,16 @@
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
-import { BookInfo } from './ui/BookInfo'
-import { BookForm } from './ui/BookForm'
-import { Helmet } from 'react-helmet'
+import { BookInfo, BookForm } from './ui'
 import { BookModel } from './model'
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 
 function Book() {
   const { t } = useTranslation()
-  let { id } = useParams()
+  const { id } = useParams()
 
   useEffect(() => {
     if (Number(id)) {

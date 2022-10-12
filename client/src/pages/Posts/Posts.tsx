@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid, Typography } from '@mui/material'
 
@@ -9,7 +10,6 @@ import { NODE_API_URL } from 'shared/consts'
 
 import { CreatePostForm, getPopupConfig } from './ui'
 import { PostsModel } from './model'
-import { Helmet } from 'react-helmet'
 
 function Posts() {
   const { t } = useTranslation()
@@ -18,6 +18,7 @@ function Posts() {
 
   useEffect(() => {
     PostsModel.fetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
 
   const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { NODE_API, GO_API } from 'services'
+import { NODE_API } from 'services'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { Post } from 'shared/types'

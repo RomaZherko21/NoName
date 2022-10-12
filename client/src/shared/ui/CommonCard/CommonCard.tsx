@@ -1,3 +1,5 @@
+import { format } from 'date-fns'
+import { observer } from 'mobx-react-lite'
 import {
   Avatar,
   Card,
@@ -9,14 +11,12 @@ import {
   Typography,
 } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
-import { format } from 'date-fns'
+
 import { fromMsToDate } from 'shared/helpers'
 import { COMMON_DATE_FORMAT } from 'shared/consts'
 import { PopupMenu } from 'shared/ui'
-import { observer } from 'mobx-react-lite'
 
 import s from './Styles.module.scss'
 

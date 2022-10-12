@@ -3,17 +3,17 @@ import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
 import { Spinner } from 'shared/ui'
-
-import s from './Styles.module.scss'
 import { BookModel } from 'pages/Book/model'
 
-const BookInfo = (props: any) => {
+import s from './Styles.module.scss'
+
+const BookInfo = () => {
   // const handleUploadClick = async (event: any) => {
   //   await user.uploadPhoto(event.target.files[0])
   // }
 
   return (
-    <Card {...props}>
+    <Card>
       <CardContent>
         <Box
           sx={{

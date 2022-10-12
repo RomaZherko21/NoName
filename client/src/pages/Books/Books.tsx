@@ -1,14 +1,12 @@
 import { useEffect, useMemo } from 'react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, Typography } from '@mui/material'
-import UploadIcon from '@mui/icons-material/Upload'
-import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import { Grid, Typography } from '@mui/material'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
 import { BooksModel, getColumns } from './model'
-import { Helmet } from 'react-helmet'
 
 function Books() {
   const { t } = useTranslation()
@@ -17,7 +15,7 @@ function Books() {
     BooksModel.fetch()
   }, [])
 
-  const columns = useMemo(() => getColumns(), [getColumns])
+  const columns = useMemo(() => getColumns(), [])
 
   return (
     <>
@@ -31,16 +29,6 @@ function Books() {
           <Typography variant="h3" color="text.primary">
             {t('page:books')}
           </Typography>
-        </Grid>
-        <Grid item>
-          <Box sx={{ m: 1 }}>
-            <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              {t('common.import')}
-            </Button>
-            <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              {t('common.export')}
-            </Button>
-          </Box>
         </Grid>
       </Grid>
       <Grid spacing={2} container direction="column">

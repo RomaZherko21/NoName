@@ -27,10 +27,10 @@ function CreatePostForm({ hideModal }: any) {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation('user:name', 3),
-        description: commonStringValidation('user:description', 8),
+        name: commonStringValidation(t('user:name'), 3),
+        description: commonStringValidation(t('user:description'), 8),
       }),
-    []
+    [t]
   )
 
   const { handleSubmit, values, handleChange, touched, errors, setFieldValue } =
