@@ -1,20 +1,32 @@
 module.exports = {
   extends: ['@commitlint/config-angular'],
   rules: {
-    'scope-case': () => [2, 'always', 'upper-case'],
-    'scope-regexp-validation': () => [2, 'always', /^PTLS-[0-9]+$/],
+    'scope-case': () => [2, 'always', 'lower-case'],
+    'scope-validation': () => [2, 'always', ['client', 'nodeApi', 'mySQL', 'goApi', 'root']],
   },
   plugins: [
     {
       rules: {
-        'scope-regexp-validation': (parsed, when = 'always', regExp) => {
+        'scope-validation': (parsed, when = 'always', scope = []) => {
           const isInvertedRule = when === 'never'
 
-          const result = regExp.test(parsed.scope)
+          let result = true
+
+          if (parsed.scope) {
+            parsed.scope.split(', ').forEach((word) => {
+              if (!scope.includes(word)) {
+                result = false
+              }
+            })
+          } else {
+            result = false
+          }
 
           return [
             isInvertedRule ? !result : result,
-            `Scope must be match regex ${regExp}, f.e. PTLS-111`,
+            `Scope must be in [${scope.join(', ')}], f.e. (${scope[0]}, ${scope[1]}) or (${
+              scope[0]
+            })`,
           ]
         },
       },
