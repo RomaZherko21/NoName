@@ -52,6 +52,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                 to={item.linkTo}
                 style={{ color: 'inherit', textDecoration: 'none' }}
                 color="black"
+                id={item.linkTo}
               >
                 <ListItem disablePadding onClick={() => handleClose()}>
                   <ListItemButton>
@@ -67,6 +68,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                   item.onClick?.(id)
                   handleClose()
                 }}
+                id={item.text}
               >
                 <ListItemButton>
                   <ListItemIcon>{item.Icon}</ListItemIcon>

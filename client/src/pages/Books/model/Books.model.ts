@@ -33,8 +33,6 @@ class BooksModel {
 
       const data = await GO_API.books.list()
 
-      console.log(data.books)
-
       this.books = data.books
 
       this.loading.end()

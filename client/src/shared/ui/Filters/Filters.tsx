@@ -27,7 +27,7 @@ const Filters = ({ config, setFilters }: Props) => {
       <AccordionDetails>
         <Grid container spacing={1}>
           {config.map((item) => (
-            <Grid item>
+            <Grid item key={item.key}>
               <item.Control
                 placeholder={item.placeholder}
                 onChange={(e: any) => {

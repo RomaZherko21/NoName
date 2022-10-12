@@ -51,7 +51,7 @@ function Posts() {
             <Spinner />
           ) : (
             PostsModel.posts.map((post) => (
-              <Grid item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+              <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
                 <CommonCard
                   id={post.id}
                   name={post.name}
