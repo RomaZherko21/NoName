@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ActionButtons = observer(({ book }: { book: Book }) => {
   const { t } = useTranslation()
-  let navigate = useNavigate()
+  const navigate = useNavigate()
 
   const showMoreInfo = () => {
     navigate(`/books/${book.id}`)

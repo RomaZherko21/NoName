@@ -21,7 +21,7 @@ import InfoIcon from '@mui/icons-material/Info'
 
 import { BookModel } from 'pages/Book/model'
 
-const SimilarBooks = () => {
+const AuthorBooks = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -33,16 +33,7 @@ const SimilarBooks = () => {
     <Card>
       <CardContent>
         <Box>
-          <Stack direction="row" justifyContent="space-between" spacing={2}>
-            <Typography color="textPrimary">{BookModel.authors}</Typography>
-            <Tooltip title={t('book:actions.authorInfo') || 'info'} placement="top">
-              <IconButton aria-label="info" size="small" onClick={showMoreInfo}>
-                <InfoIcon color="secondary" fontSize="inherit" />
-              </IconButton>
-            </Tooltip>
-          </Stack>
-          <Divider />
-          <Typography color="textSecondary">{t('book:similarBooks')}:</Typography>
+          <Typography color="textSecondary">{t('book:authorsBooks')}:</Typography>
           <List>
             <ListItem button>
               <ListItemAvatar>
@@ -59,4 +50,4 @@ const SimilarBooks = () => {
   )
 }
 
-export default observer(SimilarBooks)
+export default observer(AuthorBooks)

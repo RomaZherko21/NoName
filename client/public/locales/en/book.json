@@ -5,6 +5,7 @@
   "publisher": "Publisher",
   "quantity": "Quantity",
   "similarBooks": "Similar books",
+  "authorsBooks": "Authors books",
   "actions": {
     "authorInfo": "Show more author information"
   }
