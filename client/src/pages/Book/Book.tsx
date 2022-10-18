@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
-import { BookInfo, BookForm } from './ui'
+import { BookInfo, BookForm, SimilarBooks } from './ui'
 import { BookModel } from './model'
 
 function Book() {
@@ -39,6 +39,9 @@ function Book() {
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
           <BookForm />
+        </Grid>
+        <Grid item lg={4} md={6} xs={12}>
+          <SimilarBooks />
         </Grid>
       </Grid>
     </>

@@ -3,5 +3,9 @@
   "author": "Author",
   "genre": "Genre",
   "publisher": "Publisher",
-  "quantity": "Quantity"
+  "quantity": "Quantity",
+  "similarBooks": "Similar books",
+  "actions": {
+    "authorInfo": "Show more author information"
+  }
 }
