@@ -34,7 +34,9 @@ const SimilarBooks = () => {
       <CardContent>
         <Box>
           <Stack direction="row" justifyContent="space-between" spacing={2}>
-            <Typography color="textPrimary">{BookModel.authors}</Typography>
+            <Typography color="textPrimary">
+              {BookModel.authors.map((item: any) => item.name + ', ')}
+            </Typography>
             <Tooltip title={t('book:actions.authorInfo') || 'info'} placement="top">
               <IconButton aria-label="info" size="small" onClick={showMoreInfo}>
                 <InfoIcon color="secondary" fontSize="inherit" />

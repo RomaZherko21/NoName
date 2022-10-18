@@ -7,7 +7,7 @@ import { Book } from 'shared/types'
 class BookModel {
   name: string = ''
 
-  authors: string = ''
+  authors: string[] = []
 
   genres: string = ''
 
