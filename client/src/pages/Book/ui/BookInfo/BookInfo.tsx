@@ -52,7 +52,9 @@ const BookInfo = () => {
             {BookModel.publisher}
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            {BookModel.genres}
+            {BookModel.genres.map((item) => (
+              <div>{item.name}</div>
+            ))}
           </Typography>
         </Box>
       </CardContent>

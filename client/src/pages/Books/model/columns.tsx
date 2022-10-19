@@ -48,10 +48,12 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'authors',
     title: i18next.t('book:author'),
+    getValue: (row: Book) => row.authors.map((item) => item.name),
   },
   {
     key: 'genres',
     title: i18next.t('book:genre'),
+    getValue: (row: Book) => row.genres.map((item) => item.name),
   },
   {
     key: 'publisher',

@@ -2,14 +2,14 @@ import { makeAutoObservable } from 'mobx'
 
 import { GO_API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Author, Book } from 'shared/types'
+import { Author, Book, Genre } from 'shared/types'
 
 class BookModel {
   name: string = ''
 
   authors: Author[] = []
 
-  genres: string = ''
+  genres: Genre[] = []
 
   publisher: string = ''
 
