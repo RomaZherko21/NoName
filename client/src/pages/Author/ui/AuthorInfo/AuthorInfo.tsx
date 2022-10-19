@@ -46,10 +46,13 @@ const AuthorInfo = () => {
             </label>
           )}
           <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
-            AUTHOR NAME
+            {AuthorModel.name} {AuthorModel.surname}
           </Typography>
           <Typography color="textSecondary" variant="body2">
-            some info
+            {AuthorModel.date_of_birth} - {AuthorModel.date_of_death}
+          </Typography>
+          <Typography color="textSecondary" variant="body2">
+            {AuthorModel.description}
           </Typography>
         </Box>
       </CardContent>

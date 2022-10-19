@@ -20,29 +20,37 @@ import ImageIcon from '@mui/icons-material/Image'
 import InfoIcon from '@mui/icons-material/Info'
 
 import { BookModel } from 'pages/Book/model'
+import { Author } from 'shared/types'
 
 const SimilarBooks = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const showMoreInfo = () => {
-    navigate(`/authors/5`)
+  const showMoreInfo = (id: number) => {
+    navigate(`/authors/${id}`)
   }
 
   return (
     <Card>
       <CardContent>
         <Box>
-          <Stack direction="row" justifyContent="space-between" spacing={2}>
-            <Typography color="textPrimary">
-              {BookModel.authors.map((item: any) => item.name + ', ')}
-            </Typography>
-            <Tooltip title={t('book:actions.authorInfo') || 'info'} placement="top">
-              <IconButton aria-label="info" size="small" onClick={showMoreInfo}>
-                <InfoIcon color="secondary" fontSize="inherit" />
-              </IconButton>
-            </Tooltip>
-          </Stack>
+          {BookModel.authors.map((author: Author) => (
+            <Stack direction="row" justifyContent="space-between" spacing={2}>
+              <Typography color="textPrimary">{author.name}</Typography>
+              <Tooltip title={t('book:actions.authorInfo') || 'info'} placement="top">
+                <IconButton
+                  aria-label="info"
+                  size="small"
+                  onClick={() => {
+                    showMoreInfo(author.id)
+                  }}
+                >
+                  <InfoIcon color="secondary" fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          ))}
+
           <Divider />
           <Typography color="textSecondary">{t('book:similarBooks')}:</Typography>
           <List>

@@ -13,6 +13,7 @@ type Author struct {
 	Id          int    `json:"id"`
 	Name        string `json:"name" `
 	Surname     string `json:"surname"`
+	Description string `json:"description"`
 	DateOfBirth string `json:"date_of_birth" `
 	DateOfDeath string `json:"date_of_death"`
 }

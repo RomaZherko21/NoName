@@ -39,6 +39,7 @@ SELECT
 	authors.id,
 	authors.name,
 	authors.surname,
+	authors.description,
 	authors.date_of_birth,
 	authors.date_of_death
 		FROM authors 
@@ -54,4 +55,15 @@ SELECT
 			JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
 			JOIN genres ON genres.id = m2m_books_genres.genre_id
 	WHERE book_id=?
+`
+var GetAuthorQuery string = `
+SELECT 
+	authors.id,
+	authors.name,
+	authors.surname,
+	authors.description,
+	authors.date_of_birth, 
+	authors.date_of_death
+		FROM authors 
+	WHERE authors.id=?
 `

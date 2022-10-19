@@ -38,6 +38,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			books.GET("/", h.getAllBooks)
 			books.GET("/:id", h.getBookById)
 		}
+
+		authors := api.Group("/authors")
+		{
+			authors.GET("/:id", h.getAuthorById)
+			authors.GET("/:id/books", h.getAuthorBooks)
+		}
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run(":8000")
