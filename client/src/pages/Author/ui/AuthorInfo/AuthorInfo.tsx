@@ -3,9 +3,9 @@ import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 
 import { Spinner } from 'shared/ui'
-import { BookModel } from 'pages/Book/model'
 
 import s from './Styles.module.scss'
+import { AuthorModel } from '../../model'
 
 const AuthorInfo = () => {
   // const handleUploadClick = async (event: any) => {
@@ -22,7 +22,7 @@ const AuthorInfo = () => {
             flexDirection: 'column',
           }}
         >
-          {BookModel.loading.has ? (
+          {AuthorModel.loading.has ? (
             <Spinner />
           ) : (
             <label htmlFor="upload-file">

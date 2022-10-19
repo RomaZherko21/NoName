@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	goapi "github.com/RomaZherko21/goApi"
 	"github.com/gin-gonic/gin"
 )
 
@@ -75,42 +76,28 @@ func (h *Handler) getAllBooks(c *gin.Context) {
 func (h *Handler) getBookById(c *gin.Context) {
 	id := c.Param("id")
 
-	type bookAuthor struct {
-		Id          int    `json:"id" db:"id"`
-		Name        string `json:"name" db:"name"`
-		Surname     string `json:"surname" db:"surname"`
-		DateOfBirth string `json:"date_of_birth" db:"date_of_birth"`
-		DateOfDeath string `json:"date_of_death" db:"date_of_death"`
-	}
-
 	type resType struct {
-		Id          int          `json:"id" db:"book_id"`
-		Name        string       `json:"name" db:"book_name"`
-		Description string       `json:"description" db:"description"`
-		Authors     []bookAuthor `json:"authors"`
-		Genres      string       `json:"genres"`
-		Publisher   string       `json:"publisher"`
-		Quantity    int          `json:"quantity"`
+		goapi.Book
+		Authors []goapi.Author `json:"authors"`
+		Genres  []goapi.Genre  `json:"genres"`
 	}
 
 	var book resType
 
-	query := `SELECT books.id as book_id,
-					books.name as book_name,
+	bookQuery := `SELECT books.id,
+					books.name,
 					books.description, 
-					GROUP_CONCAT(DISTINCT genres.name ORDER BY genres.name SEPARATOR ', ') as genres,
 					books.publisher,
+					books.year, 
 					books.quantity
 	FROM books 
 			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
 			JOIN authors ON authors.id = m2m_books_authors.author_id
-			JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
-			JOIN genres ON genres.id = m2m_books_genres.genre_id
 	WHERE books.id=?
 	GROUP BY books.id`
 
-	err := h.db.QueryRow(query, id).Scan(
-		&book.Id, &book.Name, &book.Description, &book.Genres, &book.Publisher, &book.Quantity,
+	err := h.db.QueryRow(bookQuery, id).Scan(
+		&book.Id, &book.Name, &book.Description, &book.Publisher, &book.Quantity, &book.Year,
 	)
 
 	if err != nil {
@@ -121,7 +108,7 @@ func (h *Handler) getBookById(c *gin.Context) {
 		return
 	}
 
-	bookAuthors := `SELECT 
+	bookAuthorsQuery := `SELECT 
 	authors.id as id,
 	authors.name as name,
     authors.surname as surname,
@@ -131,7 +118,7 @@ func (h *Handler) getBookById(c *gin.Context) {
 		JOIN m2m_books_authors ON authors.id = m2m_books_authors.author_id
 	WHERE book_id=?`
 
-	rows, queryErr := h.db.Query(bookAuthors, book.Id)
+	authorsRows, queryErr := h.db.Query(bookAuthorsQuery, book.Id)
 
 	if queryErr != nil {
 		fmt.Println(queryErr)
@@ -141,18 +128,49 @@ func (h *Handler) getBookById(c *gin.Context) {
 		return
 	}
 
-	defer rows.Close()
+	defer authorsRows.Close()
 
-	authors := make([]bookAuthor, 0)
+	authors := make([]goapi.Author, 0)
 
-	for rows.Next() {
-		var author bookAuthor
-		rows.Scan(&author.Id, &author.Name, &author.Surname, &author.DateOfBirth, &author.DateOfDeath)
+	for authorsRows.Next() {
+		var author goapi.Author
+		authorsRows.Scan(&author.Id, &author.Name, &author.Surname, &author.DateOfBirth, &author.DateOfDeath)
 		fmt.Printf("%+v\n", author)
 		authors = append(authors, author)
 	}
 
 	book.Authors = authors
+
+	bookGenresQuery := `SELECT 
+	genres.id,
+	genres.name
+		FROM books 
+		JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
+        JOIN genres ON genres.id = m2m_books_genres.genre_id
+	WHERE book_id=?`
+
+	genresRows, queryErr := h.db.Query(bookGenresQuery, book.Id)
+
+	if queryErr != nil {
+		fmt.Println(queryErr)
+		c.JSON(http.StatusOK, gin.H{
+			"book": nil,
+		})
+		return
+	}
+
+	defer genresRows.Close()
+
+	genres := make([]goapi.Genre, 0)
+
+	for genresRows.Next() {
+		var genre goapi.Genre
+		genresRows.Scan(&genre.Id, &genre.Name)
+		fmt.Printf("%+v\n", genre)
+		genres = append(genres, genre)
+	}
+
+	book.Genres = genres
 
 	fmt.Printf("%+v\n", book)
 

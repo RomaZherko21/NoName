@@ -1,1 +1,1 @@
-export { default as BookModel } from './Book.model'
+export { default as AuthorModel } from './Author.model'

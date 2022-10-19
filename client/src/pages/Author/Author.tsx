@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
 import { AuthorBooks, AuthorInfo } from './ui'
-import { BookModel } from './model'
+import { AuthorModel } from './model'
 
 function Author() {
   const { t } = useTranslation()
@@ -14,7 +14,7 @@ function Author() {
 
   useEffect(() => {
     if (Number(id)) {
-      BookModel.fetch(Number(id))
+      AuthorModel.fetch(Number(id))
     }
   }, [id])
 
