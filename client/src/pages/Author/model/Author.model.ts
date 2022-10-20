@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { GO_API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Author } from 'shared/types'
+import { Author, Book } from 'shared/types'
 
 class AuthorModel {
   id: number | undefined
@@ -16,6 +16,8 @@ class AuthorModel {
   date_of_birth: string = ''
 
   date_of_death: string | null = ''
+
+  books: Book[] = []
 
   loading: LoadingModel
 
@@ -32,6 +34,20 @@ class AuthorModel {
       const data = await GO_API.authors.get(id)
 
       this.fromJSON(data.author)
+
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
+  }
+
+  async fetchAuthorBooks(id: number) {
+    try {
+      this.loading.begin()
+
+      const data = await GO_API.authors.getAuthorBooks(id)
+
+      this.books = data.books
 
       this.loading.end()
     } catch {

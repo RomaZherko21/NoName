@@ -35,7 +35,7 @@ func (h *Handler) getAllBooks(c *gin.Context) {
 
 	for rows.Next() {
 		var book resType
-		rows.Scan(&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year, &book.Quantity, &book.Authors, &book.Genres)
+		rows.Scan(&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year, &book.Quantity)
 
 		authorsRows, queryErr := h.db.Query(goapi.GetBookAuthorsQuery, book.Id)
 
@@ -140,7 +140,7 @@ func (h *Handler) getBookById(c *gin.Context) {
 
 	for authorsRows.Next() {
 		var author goapi.Author
-		authorsRows.Scan(&author.Id, &author.Name, &author.Surname, &author.DateOfBirth, &author.DateOfDeath)
+		authorsRows.Scan(&author.Id, &author.Name, &author.Surname, &author.Description, &author.DateOfBirth, &author.DateOfDeath)
 		fmt.Printf("%+v\n", author)
 		authors = append(authors, author)
 	}

@@ -49,7 +49,7 @@ func (h *Handler) getAuthorById(c *gin.Context) {
 func (h *Handler) getAuthorBooks(c *gin.Context) {
 	id := c.Param("id")
 
-	booksRows, queryErr := h.db.Query(goapi.GetBookAuthorsQuery, id)
+	booksRows, queryErr := h.db.Query(goapi.GetAuthorBooksQuery, id)
 
 	if queryErr != nil {
 		fmt.Println(queryErr)
@@ -73,5 +73,4 @@ func (h *Handler) getAuthorBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"books": books,
 	})
-
 }

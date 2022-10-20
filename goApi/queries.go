@@ -7,14 +7,8 @@ SELECT
 	books.publisher,
 	books.description, 
 	books.year, 
-	books.quantity,
-	GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name SEPARATOR ', ') as authors, 
-	GROUP_CONCAT(DISTINCT genres.name ORDER BY genres.name SEPARATOR ', ') as genres
+	books.quantity
 		FROM books 
-			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
-			JOIN authors ON authors.id = m2m_books_authors.author_id
-			JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
-			JOIN genres ON genres.id = m2m_books_genres.genre_id
 	GROUP BY books.id
 	ORDER BY books.name
 `
@@ -63,7 +57,21 @@ SELECT
 	authors.surname,
 	authors.description,
 	authors.date_of_birth, 
-	authors.date_of_death
+	COALESCE(authors.date_of_death, '') as date_of_death
 		FROM authors 
 	WHERE authors.id=?
+`
+
+var GetAuthorBooksQuery string = `
+SELECT 
+	books.id,
+	books.name,
+	books.publisher,
+	books.description, 
+	books.year, 
+	books.quantity
+		FROM books 
+			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
+	WHERE m2m_books_authors.author_id=?
+	GROUP BY books.id
 `

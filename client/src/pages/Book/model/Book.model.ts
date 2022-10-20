@@ -17,6 +17,10 @@ class BookModel {
 
   quantity: number = 0
 
+  year?: number
+
+  similarBooks: Book[] = []
+
   loading: LoadingModel
 
   constructor() {
@@ -39,6 +43,20 @@ class BookModel {
     }
   }
 
+  async fetchAuthorBooks(id: number) {
+    try {
+      this.loading.begin()
+
+      const data = await GO_API.authors.getAuthorBooks(id)
+
+      this.similarBooks = data.books
+
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
+  }
+
   private fromJSON(book: Book) {
     this.name = book.name
     this.description = book.description
@@ -46,6 +64,7 @@ class BookModel {
     this.genres = book.genres
     this.publisher = book.publisher
     this.quantity = book.quantity
+    this.year = book.year
   }
 }
 

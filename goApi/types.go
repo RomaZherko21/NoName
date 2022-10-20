@@ -32,18 +32,11 @@ type Subscriber struct {
 	TelNumber   string `json:"tel_number" `
 }
 
-type IsActive int
-
-const (
-	Y IsActive = iota
-	N
-)
-
 type Subscribtion struct {
-	Id           int      `json:"id"`
-	SubscriberId int      `json:"subscriber_id" `
-	BookId       int      `json:"book_id"`
-	Start        string   `json:"start"`
-	Finish       string   `json:"finish" `
-	IsActive     IsActive `json:"is_active" `
+	Id           int    `json:"id"`
+	SubscriberId int    `json:"subscriber_id" `
+	BookId       int    `json:"book_id"`
+	Start        string `json:"start"`
+	Finish       string `json:"finish" `
+	IsActive     bool   `json:"is_active" `
 }

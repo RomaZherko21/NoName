@@ -20,7 +20,7 @@ const ActionButtons = observer(({ book }: { book: Book }) => {
     <>
       <Tooltip title={t('actions.info') || 'info'} placement="top">
         <IconButton aria-label="info" size="small" onClick={() => showMoreInfo()}>
-          <InfoIcon color="secondary" fontSize="inherit" />
+          <InfoIcon color="secondary" />
         </IconButton>
       </Tooltip>
     </>

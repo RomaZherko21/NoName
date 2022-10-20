@@ -12,9 +12,19 @@ import {
   Typography,
 } from '@mui/material'
 import ImageIcon from '@mui/icons-material/Image'
+import { useEffect } from 'react'
+
+import { AuthorModel } from '../../model'
 
 const AuthorBooks = () => {
   const { t } = useTranslation()
+
+  useEffect(() => {
+    if (AuthorModel.id) {
+      AuthorModel.fetchAuthorBooks(AuthorModel.id)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [AuthorModel.id])
 
   return (
     <Card>
@@ -22,14 +32,16 @@ const AuthorBooks = () => {
         <Box>
           <Typography color="textSecondary">{t('book:authorsBooks')}:</Typography>
           <List>
-            <ListItem button>
-              <ListItemAvatar>
-                <Avatar>
-                  <ImageIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-            </ListItem>
+            {AuthorModel.books.map((item) => (
+              <ListItem button>
+                <ListItemAvatar>
+                  <Avatar>
+                    <ImageIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={item.name} secondary={item.year} />
+              </ListItem>
+            ))}
           </List>
         </Box>
       </CardContent>

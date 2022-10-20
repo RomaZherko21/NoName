@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `subscriptions` (
   `book_id` int NOT NULL,
   `start` date,
   `finish` date,
-  `is_active` ENUM('Y', 'N'),
+  `is_active` boolean,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`subscriber_id`) REFERENCES subscribers(`id`),
   FOREIGN KEY (`book_id`) REFERENCES books(`id`)
@@ -192,17 +192,17 @@ CREATE TABLE IF NOT EXISTS `subscriptions` (
 
 INSERT INTO `subscriptions` (subscriber_id, book_id, start, finish, is_active) 
 VALUES
-	(1, 3, '2011-01-12', '2011-02-12', 'N'),
-	(1, 1, '2011-01-12', '2011-02-12', 'N'),
-	(3, 3, '2012-05-17', '2012-07-17', 'Y'),
-	(1, 2, '2012-06-11', '2012-08-11', 'N'),
-	(4, 5, '2012-06-11', '2012-08-11', 'N'),
-	(1, 7, '2014-08-03', '2014-10-03', 'N'),
-	(3, 5, '2014-08-03', '2014-10-03', 'Y'),
-	(3, 1, '2014-08-03', '2014-09-03', 'Y'),
-	(4, 1, '2015-10-07', '2015-03-07', 'Y'),
-	(1, 4, '2015-10-07', '2015-11-07', 'N'),
-	(4, 4, '2015-10-08', '2025-11-08', 'Y');
+	(1, 3, '2011-01-12', '2011-02-12', false),
+	(1, 1, '2011-01-12', '2011-02-12', false),
+	(3, 3, '2012-05-17', '2012-07-17', true),
+	(1, 2, '2012-06-11', '2012-08-11', false),
+	(4, 5, '2012-06-11', '2012-08-11', false),
+	(1, 7, '2014-08-03', '2014-10-03', false),
+	(3, 5, '2014-08-03', '2014-10-03', true),
+	(3, 1, '2014-08-03', '2014-09-03', true),
+	(4, 1, '2015-10-07', '2015-03-07', true),
+	(1, 4, '2015-10-07', '2015-11-07', false),
+	(4, 4, '2015-10-08', '2025-11-08', true);
 
 
   -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов
