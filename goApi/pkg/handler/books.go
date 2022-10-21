@@ -54,7 +54,6 @@ func (h *Handler) getAllBooks(c *gin.Context) {
 		for authorsRows.Next() {
 			var author goapi.Author
 			authorsRows.Scan(&author.Id, &author.Name, &author.Surname, &author.Description, &author.DateOfBirth, &author.DateOfDeath)
-			fmt.Printf("%+v\n", author)
 			authors = append(authors, author)
 		}
 
@@ -77,7 +76,6 @@ func (h *Handler) getAllBooks(c *gin.Context) {
 		for genresRows.Next() {
 			var genre goapi.Genre
 			genresRows.Scan(&genre.Id, &genre.Name)
-			fmt.Printf("%+v\n", genre)
 			genres = append(genres, genre)
 		}
 

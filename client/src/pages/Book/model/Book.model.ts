@@ -5,6 +5,8 @@ import LoadingModel from 'models/Loading'
 import { Author, Book, Genre } from 'shared/types'
 
 class BookModel {
+  id?: number
+
   name: string = ''
 
   authors: Author[] = []
@@ -58,6 +60,7 @@ class BookModel {
   }
 
   private fromJSON(book: Book) {
+    this.id = book.id
     this.name = book.name
     this.description = book.description
     this.authors = book.authors

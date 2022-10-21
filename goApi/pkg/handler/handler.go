@@ -2,6 +2,7 @@ package handler
 
 import (
 	"database/sql"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -44,6 +45,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			authors.GET("/:id", h.getAuthorById)
 			authors.GET("/:id/books", h.getAuthorBooks)
 		}
+
+		api.StaticFS("/uploads", http.Dir("./uploads"))
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run(":8000")

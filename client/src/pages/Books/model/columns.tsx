@@ -7,6 +7,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import { getInitials } from 'shared/helpers'
 import { Book, TableColumn } from 'shared/types'
 import { useNavigate } from 'react-router-dom'
+import { GO_API_URL } from 'shared/consts'
 
 const ActionButtons = observer(({ book }: { book: Book }) => {
   const { t } = useTranslation()
@@ -31,14 +32,17 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('book:bookName'),
-    getValue: ({ name }: Book) => (
+    getValue: ({ name, id }: Book) => (
       <Box
         sx={{
           alignItems: 'center',
           display: 'flex',
         }}
       >
-        <Avatar sx={{ mr: 2 }}>{getInitials(name)}</Avatar>
+        <Avatar
+          sx={{ width: 50, height: 50, mr: 2 }}
+          src={`${GO_API_URL}/uploads/book/${id}.jpg`}
+        />
         <Typography color="textPrimary" variant="body1">
           {name}
         </Typography>

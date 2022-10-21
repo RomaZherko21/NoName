@@ -6,6 +6,7 @@ import { Spinner } from 'shared/ui'
 import { BookModel } from 'pages/Book/model'
 
 import s from './Styles.module.scss'
+import { GO_API_URL } from 'shared/consts'
 
 const BookInfo = () => {
   // const handleUploadClick = async (event: any) => {
@@ -39,7 +40,8 @@ const BookInfo = () => {
                   style={{ cursor: 'pointer' }}
                   alt="Upload"
                   // src={user.getPhotoUrl()}
-                  sx={{ width: 100, height: 100 }}
+                  src={`${GO_API_URL}/uploads/book/${BookModel.id}.jpg`}
+                  sx={{ width: 160, height: 160 }}
                 />
                 <EditIcon className={s.editIcon} />
               </div>
