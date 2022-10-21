@@ -267,3 +267,9 @@ VALUES
 --   JOIN m2m_books_genres ON m2m_books_genres.book_id = books.id 
 -- WHERE m2m_books_genres.genre_id IN (SELECT id FROM genres WHERE genres.name IN ('Programming', 'Psychology'))
 -- ORDER BY books.name ASC
+
+
+-- INSERT добавление в базу (перезаписывпние при схожести данных (первичных ключей))
+-- DELETE удаление
+-- UPDATE Обновление
+-- REPLACE Обновление (если есть строка с таким же первичным ключом) или создание новой строки с новым первичным ключом
