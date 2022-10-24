@@ -19,6 +19,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "exit": "Exit",
-    "info": "Show more information"
+    "info": "Show more information",
+    "goBack": "Go back"
   }
 }
