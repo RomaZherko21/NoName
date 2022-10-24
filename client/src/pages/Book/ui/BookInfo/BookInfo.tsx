@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react-lite'
-import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
+import { Box, Card, CardContent, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import ImageIcon from '@mui/icons-material/Image'
+import BadgeIcon from '@mui/icons-material/Badge'
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
 
-import { Spinner } from 'shared/ui'
+import { Spinner, UploadImage } from 'shared/ui'
 import { BookModel } from 'pages/Book/model'
 
-import s from './Styles.module.scss'
 import { GO_API_URL } from 'shared/consts'
 
 const BookInfo = () => {
@@ -21,43 +22,46 @@ const BookInfo = () => {
             alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
+            gap: '12px',
           }}
         >
           {BookModel.loading.has ? (
             <Spinner />
           ) : (
-            <label htmlFor="upload-file">
-              <input
-                id="upload-file"
-                name="avatar"
-                type="file"
-                accept="image/*"
-                // onChange={handleUploadClick}
-                style={{ display: 'none' }}
-              />
-              <div className={s.avatar}>
-                <Avatar
-                  style={{ cursor: 'pointer' }}
-                  alt="Upload"
-                  // src={user.getPhotoUrl()}
-                  src={`${GO_API_URL}/uploads/book/${BookModel.id}.jpg`}
-                  sx={{ width: 160, height: 160 }}
-                />
-                <EditIcon className={s.editIcon} />
-              </div>
-            </label>
+            <UploadImage
+              handleUploadClick={() => {}}
+              width={160}
+              height={180}
+              borderRadius="5px"
+              imageUrl={`${GO_API_URL}/uploads/book/${BookModel.id}.jpg`}
+            />
           )}
-          <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
-            {BookModel.name}
-          </Typography>
-          <Typography color="textSecondary" variant="body2">
-            {BookModel.publisher}
-          </Typography>
-          <Typography color="textSecondary" variant="body2">
-            {BookModel.genres.map((item) => (
-              <div>{item.name}</div>
-            ))}
-          </Typography>
+
+          <List sx={{ alignSelf: 'flex-start' }}>
+            <ListItem button sx={{ height: 54 }}>
+              <ListItemAvatar>
+                <DriveFileRenameOutlineIcon fontSize="small" />
+              </ListItemAvatar>
+              <ListItemText primary={BookModel.name} secondary="Name" />
+            </ListItem>
+
+            <ListItem button sx={{ height: 54 }}>
+              <ListItemAvatar>
+                <BadgeIcon fontSize="small" />
+              </ListItemAvatar>
+              <ListItemText primary={BookModel.publisher} secondary="Publisher" />
+            </ListItem>
+
+            <ListItem button sx={{ height: 54 }}>
+              <ListItemAvatar>
+                <ImageIcon fontSize="small" />
+              </ListItemAvatar>
+              <ListItemText
+                primary={BookModel.genres.map((item) => item.name).join(', ')}
+                secondary="Genres"
+              />
+            </ListItem>
+          </List>
         </Box>
       </CardContent>
     </Card>

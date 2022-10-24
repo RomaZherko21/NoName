@@ -1,10 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 
-import { Spinner } from 'shared/ui'
+import { Spinner, UploadImage } from 'shared/ui'
 
-import s from './Styles.module.scss'
 import { AuthorModel } from '../../model'
 
 const AuthorInfo = () => {
@@ -25,25 +23,7 @@ const AuthorInfo = () => {
           {AuthorModel.loading.has ? (
             <Spinner />
           ) : (
-            <label htmlFor="upload-file">
-              <input
-                id="upload-file"
-                name="avatar"
-                type="file"
-                accept="image/*"
-                // onChange={handleUploadClick}
-                style={{ display: 'none' }}
-              />
-              <div className={s.avatar}>
-                <Avatar
-                  style={{ cursor: 'pointer' }}
-                  alt="Upload"
-                  // src={user.getPhotoUrl()}
-                  sx={{ width: 100, height: 100 }}
-                />
-                <EditIcon className={s.editIcon} />
-              </div>
-            </label>
+            <UploadImage handleUploadClick={() => {}} imageUrl="" />
           )}
           <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
             {AuthorModel.name} {AuthorModel.surname}

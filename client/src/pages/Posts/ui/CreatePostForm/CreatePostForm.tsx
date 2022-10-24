@@ -3,12 +3,11 @@ import * as yup from 'yup'
 import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Avatar, Button, Grid, TextField } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
-import FolderIcon from '@mui/icons-material/Folder'
+import { Button, Grid, TextField } from '@mui/material'
 
 import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
+import { UploadImage } from 'shared/ui'
 
 import { PostsModel } from '../../model'
 import styles from './Styles.module.scss'
@@ -75,30 +74,14 @@ function CreatePostForm({ hideModal }: any) {
           />
         </Grid>
         <Grid item style={{ width: 'fit-content' }}>
-          <label htmlFor="upload-file">
-            <input
-              id="upload-file"
-              name="post"
-              type="file"
-              accept="image/*"
-              onChange={(event: any) => {
-                setFieldValue('post', event.target.files[0])
-              }}
-              style={{ display: 'none' }}
-            />
-            <div className={styles.avatar}>
-              <Avatar
-                style={{ cursor: 'pointer' }}
-                alt="Upload"
-                variant="circular"
-                src={values.post && URL.createObjectURL(values.post)}
-                sx={{ width: 50, height: 50 }}
-              >
-                <FolderIcon />
-              </Avatar>
-              <EditIcon className={styles.editIcon} />
-            </div>
-          </label>
+          <UploadImage
+            handleUploadClick={(event: any) => {
+              setFieldValue('post', event.target.files[0])
+            }}
+            width={50}
+            height={50}
+            imageUrl={values.post && URL.createObjectURL(values.post)}
+          />
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
