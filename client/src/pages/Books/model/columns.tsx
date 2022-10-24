@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import InfoIcon from '@mui/icons-material/Info'
 
-import { getInitials } from 'shared/helpers'
+import { getFullName, getInitials } from 'shared/helpers'
 import { Book, TableColumn } from 'shared/types'
 import { useNavigate } from 'react-router-dom'
 import { GO_API_URL } from 'shared/consts'
@@ -32,40 +32,51 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('book:bookName'),
-    getValue: ({ name, id }: Book) => (
+    getValue: ({ name, id, quantity }: Book) => (
       <Box
         sx={{
-          alignItems: 'center',
           display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Avatar
-          sx={{ width: 50, height: 50, mr: 2 }}
+          sx={{ width: 80, height: 100, mr: 2, borderRadius: '8px' }}
           src={`${GO_API_URL}/uploads/book/${id}.jpg`}
         />
-        <Typography color="textPrimary" variant="body1">
-          {name}
-        </Typography>
+        <Box>
+          <Typography color="textPrimary">{name}</Typography>
+          <Typography
+            color="textSecondary"
+            variant="subtitle1"
+            sx={{ display: 'flex', gap: '4px' }}
+          >
+            {i18next.t('book:quantity')}
+            <Typography color="secondary" variant="subtitle1">
+              {quantity}
+            </Typography>
+          </Typography>
+        </Box>
       </Box>
     ),
   },
   {
     key: 'authors',
     title: i18next.t('book:author'),
-    getValue: (row: Book) => row.authors.map((item) => item.name),
+    getValue: (row: Book) =>
+      row.authors.map((item) => getFullName(item.name, item.surname)).join(', '),
   },
   {
     key: 'genres',
     title: i18next.t('book:genre'),
-    getValue: (row: Book) => row.genres.map((item) => item.name),
+    getValue: (row: Book) => row.genres.map((item) => item.name).join(', '),
   },
   {
     key: 'publisher',
     title: i18next.t('book:publisher'),
   },
   {
-    key: 'quantity',
-    title: i18next.t('book:quantity'),
+    key: 'year',
+    title: i18next.t('book:year'),
   },
   {
     key: 'actions',

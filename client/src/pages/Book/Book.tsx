@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
+import { PercentageCircle } from 'shared/ui'
+
 import { BookInfo, BookForm, SimilarBooks } from './ui'
 import { BookModel } from './model'
 
@@ -42,6 +44,11 @@ function Book() {
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <SimilarBooks />
+        </Grid>
+        <Grid item lg={4} md={6} xs={12}>
+          <PercentageCircle percentage={10} caption="Book rate" color="warning" />
+          <PercentageCircle percentage={50} caption="Book rate" color="neutral" />
+          <PercentageCircle percentage={90} caption="Book rate" color="success" />
         </Grid>
       </Grid>
     </>

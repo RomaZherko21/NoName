@@ -1,6 +1,6 @@
 package goapi
 
-var GetAllBooksQuery string = `
+const GetAllBooksQuery string = `
 SELECT 
 	books.id,
 	books.name, 
@@ -8,12 +8,10 @@ SELECT
 	books.description, 
 	books.year, 
 	books.quantity
-		FROM books 
-	GROUP BY books.id
-	ORDER BY books.name
+		FROM books
 `
 
-var GetBookQuery string = `
+const GetBookQuery string = `
 SELECT 
 	books.id,
 	books.name,
@@ -22,13 +20,10 @@ SELECT
 	books.year, 
 	books.quantity
 		FROM books 
-			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
-			JOIN authors ON authors.id = m2m_books_authors.author_id
 	WHERE books.id=?
-	GROUP BY books.id
 `
 
-var GetBookAuthorsQuery string = `
+const GetBookAuthorsQuery string = `
 SELECT 
 	authors.id,
 	authors.name,
@@ -38,19 +33,18 @@ SELECT
 	authors.date_of_death
 		FROM authors 
 			JOIN m2m_books_authors ON authors.id = m2m_books_authors.author_id
-	WHERE book_id=?
+	WHERE m2m_books_authors.book_id=?
 `
 
-var GetBookGenresQuery string = `
+const GetBookGenresQuery string = `
 SELECT 
 	genres.id,
 	genres.name
-		FROM books 
-			JOIN m2m_books_genres ON books.id = m2m_books_genres.book_id
-			JOIN genres ON genres.id = m2m_books_genres.genre_id
-	WHERE book_id=?
+		FROM genres 
+			JOIN m2m_books_genres ON genres.id = m2m_books_genres.genre_id
+	WHERE m2m_books_genres.book_id=?
 `
-var GetAuthorQuery string = `
+const GetAuthorQuery string = `
 SELECT 
 	authors.id,
 	authors.name,
@@ -62,7 +56,7 @@ SELECT
 	WHERE authors.id=?
 `
 
-var GetAuthorBooksQuery string = `
+const GetAuthorBooksQuery string = `
 SELECT 
 	books.id,
 	books.name,
@@ -73,5 +67,4 @@ SELECT
 		FROM books 
 			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
 	WHERE m2m_books_authors.author_id=?
-	GROUP BY books.id
 `

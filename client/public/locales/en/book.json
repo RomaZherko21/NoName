@@ -6,6 +6,7 @@
   "quantity": "Quantity",
   "similarBooks": "Similar books",
   "authorsBooks": "Authors books",
+  "year": "Year",
   "actions": {
     "authorInfo": "Show more author information"
   }

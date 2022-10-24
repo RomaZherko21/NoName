@@ -6,5 +6,5 @@ export const getInitials = (name = '') =>
     .map((v) => v && v[0].toUpperCase())
     .join('')
 
-export const getFullName = (name = '', middleName = '', surname = '') =>
-  `${name} ${middleName} ${surname}`
+export const getFullName = (name = '', surname = '', middleName = '') =>
+  middleName ? `${name} ${middleName} ${surname}` : `${name} ${surname}`

@@ -75,7 +75,7 @@ export const getColumns = (): TableColumn[] => [
           {getInitials(`${name} ${surname}`)}
         </Avatar>
         <Typography color="textPrimary" variant="body1">
-          {getFullName(name, middle_name, surname)}
+          {getFullName(name, surname, middle_name)}
         </Typography>
       </Box>
     ),

@@ -1,4 +1,9 @@
 {
-  "exitConfirm":"Are you want to exit?",
-  "removeConfirm":"Are you want to delete?"
+  "exitConfirm": "Are you want to exit?",
+  "removeConfirm": "Are you want to delete?",
+  "status": {
+    "good": "Very good",
+    "neutral": "Good",
+    "warning": "Needs attention"
+  }
 }
