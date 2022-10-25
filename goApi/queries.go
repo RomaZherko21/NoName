@@ -68,3 +68,9 @@ SELECT
 			JOIN m2m_books_authors ON books.id = m2m_books_authors.book_id
 	WHERE m2m_books_authors.author_id=?
 `
+const GetAllGenresQuery string = `
+SELECT 
+	genres.id,
+	genres.name
+		FROM genres
+`

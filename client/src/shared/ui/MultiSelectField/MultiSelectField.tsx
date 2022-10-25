@@ -13,10 +13,15 @@ import {
   SelectChangeEvent,
 } from '@mui/material'
 
+interface Option {
+  id: number
+  name: string
+}
+
 interface Props {
   field: string
   label: string
-  options: any
+  options: Option[]
 }
 
 const MultiSelectField = ({ field, label, options }: Props) => {
@@ -24,11 +29,8 @@ const MultiSelectField = ({ field, label, options }: Props) => {
 
   const { touched, values, errors, setFieldValue } = useFormikContext<any>()
 
-  const handleChange = (event: SelectChangeEvent<typeof options>) => {
-    const {
-      target: { value },
-    } = event
-    setFieldValue(field, value.split(','))
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
+    setFieldValue(field, event.target.value)
   }
 
   return (
@@ -37,16 +39,23 @@ const MultiSelectField = ({ field, label, options }: Props) => {
       <Select
         labelId={field}
         id={field}
-        value={values[field]}
+        value={values[field] || []}
         input={<OutlinedInput label={t(label)} />}
         onChange={handleChange}
         renderValue={(selected) => selected.join(', ')}
         multiple
+        MenuProps={{
+          PaperProps: {
+            style: {
+              maxHeight: 230,
+            },
+          },
+        }}
       >
-        {Object.values(options).map((value: any) => (
-          <MenuItem key={value} value={value}>
-            <Checkbox checked={Object.values(options).indexOf(value) > -1} />
-            <ListItemText primary={value} />
+        {options.map((value: { id: number; name: string }) => (
+          <MenuItem key={value.name} value={value.name}>
+            <Checkbox checked={values[field]?.indexOf(value.name) > -1} />
+            <ListItemText primary={value.name} />
           </MenuItem>
         ))}
       </Select>
