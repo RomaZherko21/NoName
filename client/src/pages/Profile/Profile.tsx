@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
-import { ProfileInfo, ProfileForm } from './ui'
+import { ProfileInfo, ProfileForm, DeleteAccount } from './ui'
 
 function Profile() {
   const { t } = useTranslation()
@@ -29,6 +29,11 @@ function Profile() {
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
           <ProfileForm />
+        </Grid>
+
+        <Grid item lg={4} md={6} xs={12}></Grid>
+        <Grid item lg={8} md={8} xs={12}>
+          <DeleteAccount />
         </Grid>
       </Grid>
     </>

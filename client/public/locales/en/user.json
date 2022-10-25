@@ -14,5 +14,9 @@
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
+  },
+  "actions": {
+    "deleteAccount": "Delete account",
+    "updateUser": "Update user"
   }
 }

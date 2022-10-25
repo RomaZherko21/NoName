@@ -91,6 +91,17 @@ class UserModel {
       this.rootStore.loading.end()
     }
   }
+
+  async selfDelete() {
+    this.rootStore.loading.begin()
+    try {
+      await NODE_API.user.selfDelete(this.id)
+      this.rootStore.authorization.unauthorize()
+      this.rootStore.loading.end()
+    } catch {
+      this.rootStore.loading.end()
+    }
+  }
 }
 
 export default UserModel

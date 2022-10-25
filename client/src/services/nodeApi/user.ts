@@ -8,6 +8,8 @@ export const self = () => fetch.get<User>(`${ENDPOINT_BASE}`)
 
 export const selfUpdate = (user: any) => fetch.put(`${ENDPOINT_BASE}`, user)
 
+export const selfDelete = (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)
+
 export const uploadPhoto = async (avatar: any, id: number) => {
   const formData = new FormData()
   formData.append('avatar', avatar)
