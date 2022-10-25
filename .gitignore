@@ -1,6 +1,9 @@
 # packages
 node_modules/
 
+# static files
+uploads/
+
 # eslint
 *.eslintcache
 
