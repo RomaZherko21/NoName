@@ -7,7 +7,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import { Spinner, UploadImage } from 'shared/ui'
 import { BookModel } from 'pages/Book/model'
 
-import { GO_API_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
 
 const BookInfo = () => {
   // const handleUploadClick = async (event: any) => {
@@ -33,7 +33,7 @@ const BookInfo = () => {
               width={160}
               height={180}
               borderRadius="5px"
-              imageUrl={`${GO_API_URL}/uploads/book/${BookModel.id}.jpg`}
+              imageUrl={`${GO_API_BOOK_IMAGES_URL}/${BookModel.id}.jpg`}
             />
           )}
 

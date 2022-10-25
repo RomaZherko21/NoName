@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import InfoIcon from '@mui/icons-material/Info'
 
-import { getFullName, getInitials } from 'shared/helpers'
+import { getFullName } from 'shared/helpers'
 import { Book, TableColumn } from 'shared/types'
 import { useNavigate } from 'react-router-dom'
-import { GO_API_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
+import { ImageAvatar } from 'shared/ui'
 
 const ActionButtons = observer(({ book }: { book: Book }) => {
   const { t } = useTranslation()
@@ -39,9 +40,9 @@ export const getColumns = (): TableColumn[] => [
           alignItems: 'center',
         }}
       >
-        <Avatar
-          sx={{ width: 80, height: 100, mr: 2, borderRadius: '8px' }}
-          src={`${GO_API_URL}/uploads/book/${id}.jpg`}
+        <ImageAvatar
+          src={`${GO_API_BOOK_IMAGES_URL}/${id}.jpg`}
+          styles={{ width: 80, height: 100, mr: 2, borderRadius: '8px' }}
         />
         <Box>
           <Typography color="textPrimary">{name}</Typography>

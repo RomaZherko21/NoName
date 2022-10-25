@@ -4,6 +4,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material'
 import { Spinner, UploadImage } from 'shared/ui'
 
 import { AuthorModel } from '../../model'
+import { GO_API_AUTHOR_IMAGES_URL } from 'shared/consts'
 
 const AuthorInfo = () => {
   // const handleUploadClick = async (event: any) => {
@@ -23,7 +24,10 @@ const AuthorInfo = () => {
           {AuthorModel.loading.has ? (
             <Spinner />
           ) : (
-            <UploadImage handleUploadClick={() => {}} imageUrl="" />
+            <UploadImage
+              handleUploadClick={() => {}}
+              imageUrl={`${GO_API_AUTHOR_IMAGES_URL}/${AuthorModel.id}.jpg`}
+            />
           )}
           <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
             {AuthorModel.name} {AuthorModel.surname}

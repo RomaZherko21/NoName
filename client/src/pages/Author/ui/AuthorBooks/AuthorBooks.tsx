@@ -11,8 +11,10 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
-import ImageIcon from '@mui/icons-material/Image'
 import { useEffect } from 'react'
+
+import { ImageAvatar } from 'shared/ui'
+import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
 
 import { AuthorModel } from '../../model'
 
@@ -35,9 +37,7 @@ const AuthorBooks = () => {
             {AuthorModel.books.map((item) => (
               <ListItem button>
                 <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
+                  <ImageAvatar src={`${GO_API_BOOK_IMAGES_URL}/${item.id}.jpg`} />
                 </ListItemAvatar>
                 <ListItemText primary={item.name} secondary={item.year} />
               </ListItem>
