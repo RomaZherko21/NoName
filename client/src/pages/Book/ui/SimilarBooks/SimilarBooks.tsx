@@ -20,7 +20,7 @@ import InfoIcon from '@mui/icons-material/Info'
 
 import { BookModel } from 'pages/Book/model'
 import { Author } from 'shared/types'
-import { GO_API_AUTHOR_IMAGES_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
 import { ImageAvatar } from 'shared/ui'
 
 const SimilarBooks = () => {
@@ -63,9 +63,14 @@ const SimilarBooks = () => {
           <Typography color="textSecondary">{t('book:similarBooks')}:</Typography>
           <List>
             {BookModel.similarBooks.map((item) => (
-              <ListItem button>
+              <ListItem
+                button
+                onClick={() => {
+                  navigate(`/books/${item.id}`)
+                }}
+              >
                 <ListItemAvatar>
-                  <ImageAvatar src={`${GO_API_AUTHOR_IMAGES_URL}/${item.id}.jpg`} />
+                  <ImageAvatar src={`${GO_API_BOOK_IMAGES_URL}/${item.id}.jpg`} />
                 </ListItemAvatar>
                 <ListItemText primary={item.name} secondary={item.year} />
               </ListItem>

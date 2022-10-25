@@ -173,3 +173,52 @@ func (h *Handler) getBookById(c *gin.Context) {
 	})
 
 }
+
+// @Summary      getAllBooksByGenre
+// @Description  get all books with genres and author
+// @Tags         books
+// @Accept       json
+// @Produce      json
+// @Router       /api/books [get]
+func (h *Handler) getBookStatsById(c *gin.Context) {
+	id := c.Param("id")
+
+	type resType struct {
+		SubscriptionsCounter int     `json:"subscriptions_counter"`
+		BooksTakenPercentage float32 `json:"books_taken_percentage"`
+		Quantity             int     `json:"quantity"`
+		RemainsCounter       int     `json:"remains_counter"`
+	}
+
+	var bookStats resType
+
+	remainsBooksErr := h.db.QueryRow(goapi.GetBookSubscriptionsCounterQuery, id).Scan(
+		&bookStats.SubscriptionsCounter)
+
+	if remainsBooksErr != nil {
+		fmt.Println(remainsBooksErr)
+		c.JSON(http.StatusOK, gin.H{
+			"bookStats": nil,
+		})
+		return
+	}
+
+	bookErr := h.db.QueryRow(`SELECT books.quantity FROM books WHERE books.id=?`, id).Scan(
+		&bookStats.Quantity)
+
+	if bookErr != nil {
+		fmt.Println(bookErr)
+		c.JSON(http.StatusOK, gin.H{
+			"bookStats": nil,
+		})
+		return
+	}
+
+	bookStats.BooksTakenPercentage = (float32(bookStats.SubscriptionsCounter) / float32(bookStats.Quantity)) * 100
+	bookStats.RemainsCounter = bookStats.Quantity - bookStats.SubscriptionsCounter
+
+	c.JSON(http.StatusOK, gin.H{
+		"bookStats": bookStats,
+	})
+
+}

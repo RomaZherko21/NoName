@@ -45,6 +45,22 @@ class BookModel {
     }
   }
 
+  async fetchStats() {
+    try {
+      this.loading.begin()
+
+      if (this.id !== undefined) {
+        const data = await GO_API.books.getStats(this.id)
+
+        console.log(data.stats)
+      }
+
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
+  }
+
   async fetchAuthorBooks(id: number) {
     try {
       this.loading.begin()

@@ -23,6 +23,13 @@ SELECT
 	WHERE books.id=?
 `
 
+const GetBookSubscriptionsCounterQuery string = `
+SELECT 
+	COUNT(subscriptions.book_id) as books_remains
+		FROM subscriptions 
+	WHERE subscriptions.book_id=? AND subscriptions.is_active=true
+`
+
 const GetBookAuthorsQuery string = `
 SELECT 
 	authors.id,

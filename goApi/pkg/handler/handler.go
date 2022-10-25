@@ -38,6 +38,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		{
 			books.GET("/", h.getAllBooks)
 			books.GET("/:id", h.getBookById)
+			books.GET("/:id/stats", h.getBookStatsById)
 		}
 
 		authors := api.Group("/authors")

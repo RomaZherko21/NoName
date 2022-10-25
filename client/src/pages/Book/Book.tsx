@@ -57,10 +57,10 @@ function Book() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item lg={3} md={4} xs={12}>
+        <Grid item md={4} xs={12}>
           <BookInfo />
         </Grid>
-        <Grid item lg={9} md={6} xs={12}>
+        <Grid item md={8} xs={12}>
           <BookDescription />
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
