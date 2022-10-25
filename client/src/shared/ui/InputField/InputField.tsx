@@ -7,9 +7,10 @@ interface Props {
   field: string
   label: string
   type?: string
+  multiline?: boolean
 }
 
-const InputField = ({ field, label, type }: Props) => {
+const InputField = ({ field, label, type, multiline = false }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<any>()
@@ -25,6 +26,7 @@ const InputField = ({ field, label, type }: Props) => {
       onChange={handleChange}
       error={touched[field] && Boolean(errors[field])}
       helperText={touched[field] && errors[field]}
+      multiline={multiline}
     />
   )
 }

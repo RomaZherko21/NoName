@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
-  Avatar,
   Box,
   Card,
   CardContent,

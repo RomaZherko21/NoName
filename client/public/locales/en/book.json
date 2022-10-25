@@ -1,5 +1,5 @@
 {
-  "bookName": "Book name",
+  "name": "Book name",
   "author": "Author",
   "genre": "Genre",
   "publisher": "Publisher",
@@ -7,7 +7,11 @@
   "similarBooks": "Similar books",
   "authorsBooks": "Authors books",
   "year": "Year",
+  "description": "Description",
   "actions": {
     "authorInfo": "Show more author information"
+  },
+  "form": {
+    "updateBook": "Edit book"
   }
 }

@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import i18next from 'i18next'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
@@ -32,7 +32,7 @@ const ActionButtons = observer(({ book }: { book: Book }) => {
 export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
-    title: i18next.t('book:bookName'),
+    title: i18next.t('book:name'),
     getValue: ({ name, id, quantity }: Book) => (
       <Box
         sx={{

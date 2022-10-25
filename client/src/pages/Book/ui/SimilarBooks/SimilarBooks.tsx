@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
@@ -21,7 +20,7 @@ import InfoIcon from '@mui/icons-material/Info'
 
 import { BookModel } from 'pages/Book/model'
 import { Author } from 'shared/types'
-import { GO_API_AUTHOR_IMAGES_URL, GO_API_URL } from 'shared/consts'
+import { GO_API_AUTHOR_IMAGES_URL } from 'shared/consts'
 import { ImageAvatar } from 'shared/ui'
 
 const SimilarBooks = () => {

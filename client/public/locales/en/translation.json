@@ -20,6 +20,7 @@
     "delete": "Delete",
     "exit": "Exit",
     "info": "Show more information",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "download": "Download"
   }
 }

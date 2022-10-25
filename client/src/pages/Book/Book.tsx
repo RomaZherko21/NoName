@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
-import { Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
 import { PercentageCircle } from 'shared/ui'
 
-import { BookInfo, BookForm, SimilarBooks } from './ui'
+import { BookInfo, BookDescription, SimilarBooks, BookForm } from './ui'
 import { BookModel } from './model'
+import { useDialog } from 'shared/hooks'
 
 function Book() {
   const { t } = useTranslation()
@@ -20,6 +23,10 @@ function Book() {
     }
   }, [id])
 
+  const [showCreateUserModal] = useDialog('book:form.updateBook', (hideModal) => (
+    <BookForm hideModal={hideModal} />
+  ))
+
   return (
     <>
       <Helmet>
@@ -27,11 +34,25 @@ function Book() {
         <meta name="description" content={t('page:book')} />
       </Helmet>
 
-      <Grid container>
+      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
           <Typography variant="h3" color="text.primary">
             {t('page:book')}
           </Typography>
+        </Grid>
+        <Grid item>
+          <Box sx={{ m: 1 }}>
+            <Button
+              onClick={showCreateUserModal}
+              startIcon={<EditOutlinedIcon fontSize="small" />}
+              sx={{ mr: 1 }}
+            >
+              {t('actions.edit')}
+            </Button>
+            <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
+              {t('actions.download')}
+            </Button>
+          </Box>
         </Grid>
       </Grid>
 
@@ -40,7 +61,7 @@ function Book() {
           <BookInfo />
         </Grid>
         <Grid item lg={9} md={6} xs={12}>
-          <BookForm />
+          <BookDescription />
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <SimilarBooks />
