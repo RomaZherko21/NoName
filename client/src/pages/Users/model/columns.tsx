@@ -13,6 +13,7 @@ import WomanIcon from '@mui/icons-material/Woman'
 import { useDialog } from 'shared/hooks'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
+import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import UsersModel from './Users.model'
 import { UserForm, DeleteUserDialog } from '../ui'
@@ -71,7 +72,7 @@ export const getColumns = (): TableColumn[] => [
           display: 'flex',
         }}
       >
-        <Avatar src={`http://localhost/node-api/uploads/avatar/${avatar}`} sx={{ mr: 2 }}>
+        <Avatar src={`${NODE_API_USER_AVATAR_URL}/${avatar}`} sx={{ mr: 2 }}>
           {getInitials(`${name} ${surname}`)}
         </Avatar>
         <Typography color="textPrimary" variant="body1">

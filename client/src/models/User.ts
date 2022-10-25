@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { RootStore } from 'stores'
 import { NODE_API } from 'services'
-import { NODE_API_URL } from 'shared/consts'
+import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { Gender, Roles, User } from 'shared/types'
 
 import FileModel from './File'
@@ -67,7 +67,7 @@ class UserModel {
   }
 
   getPhotoUrl() {
-    return `${NODE_API_URL}/uploads/avatar/${this.avatar.url}`
+    return `${NODE_API_USER_AVATAR_URL}/${this.avatar.url}`
   }
 
   async uploadPhoto(file: File) {

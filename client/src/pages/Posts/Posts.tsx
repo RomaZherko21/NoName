@@ -6,7 +6,7 @@ import { Button, Grid, Typography } from '@mui/material'
 
 import { useDialog } from 'shared/hooks'
 import { CommonCard, Pagination, Spinner } from 'shared/ui'
-import { NODE_API_URL } from 'shared/consts'
+import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import { CreatePostForm, getPopupConfig } from './ui'
 import { PostsModel } from './model'
@@ -56,8 +56,8 @@ function Posts() {
                   id={post.id}
                   name={post.name}
                   description={post.description}
-                  imageUrl={`${NODE_API_URL}/uploads/post/${post.image}`}
-                  creatorAvatarUrl={`${NODE_API_URL}/uploads/avatar/${post.avatar}`}
+                  imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
+                  creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
                   createdAt={post.created_at}
                   popupConfig={popupConfig}
                 />
