@@ -5,6 +5,7 @@ import { Avatar, Box, IconButton } from '@mui/material'
 import { useDialog } from 'shared/hooks'
 import { useRootStore } from 'stores'
 import { PopupMenu } from 'shared/ui'
+import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import ExitDialog from './ExitDialog'
 import { getPopupConfig } from './PopupConfig'
@@ -33,7 +34,11 @@ function ProfileMenu() {
           {...btnProps}
         >
           <Box>
-            <Avatar alt="Remy Sharp" sx={{ cursor: 'pointer' }} src={user.getPhotoUrl()} />
+            <Avatar
+              alt="Remy Sharp"
+              sx={{ cursor: 'pointer' }}
+              src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+            />
           </Box>
         </IconButton>
       )}

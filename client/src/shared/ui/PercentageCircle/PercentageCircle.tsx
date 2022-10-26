@@ -54,7 +54,7 @@ const PercentageCircle = ({ percentage, caption = '', color }: Props) => {
           })}
         >
           <Typography color="primaryText" variant="h5">
-            {`${percentage}%`}
+            {`${percentage.toFixed(2)}%`}
           </Typography>
           <Typography color="textSecondary" variant="caption">
             {caption}

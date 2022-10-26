@@ -63,7 +63,11 @@ function BookForm({ hideModal }: Props) {
               <InputField field="description" label="book:description" multiline />
             </Grid>
             <Grid item md={6} xs={6}>
-              <MultiSelectField field="genres" label="book:genre" options={GenresModel.genres} />
+              <MultiSelectField
+                field="genres"
+                label="book:genre"
+                options={GenresModel.genres || []}
+              />
             </Grid>
             <Grid item md={6} xs={6}>
               <InputField field="quantity" label="book:quantity" />

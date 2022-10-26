@@ -188,6 +188,7 @@ func (h *Handler) getBookStatsById(c *gin.Context) {
 		BooksTakenPercentage float32 `json:"books_taken_percentage"`
 		Quantity             int     `json:"quantity"`
 		RemainsCounter       int     `json:"remains_counter"`
+		PopularityPercentage float32 `json:"popularity_percentage"`
 	}
 
 	var bookStats resType
@@ -214,8 +215,35 @@ func (h *Handler) getBookStatsById(c *gin.Context) {
 		return
 	}
 
+	var booksTakenForAllTime int
+
+	booksTakenForAllTimeErr := h.db.QueryRow(`SELECT COUNT(subscriptions.id) FROM subscriptions WHERE subscriptions.book_id=?`, id).Scan(
+		&booksTakenForAllTime)
+
+	if booksTakenForAllTimeErr != nil {
+		fmt.Println(booksTakenForAllTimeErr)
+		c.JSON(http.StatusOK, gin.H{
+			"bookStats": nil,
+		})
+		return
+	}
+
+	var totalSubscriptionsCount int
+
+	totalSubscriptionsErr := h.db.QueryRow(`SELECT COUNT(subscriptions.id) FROM subscriptions`).Scan(
+		&totalSubscriptionsCount)
+
+	if totalSubscriptionsErr != nil {
+		fmt.Println(totalSubscriptionsErr)
+		c.JSON(http.StatusOK, gin.H{
+			"bookStats": nil,
+		})
+		return
+	}
+
 	bookStats.BooksTakenPercentage = (float32(bookStats.SubscriptionsCounter) / float32(bookStats.Quantity)) * 100
 	bookStats.RemainsCounter = bookStats.Quantity - bookStats.SubscriptionsCounter
+	bookStats.PopularityPercentage = (float32(booksTakenForAllTime) / float32(totalSubscriptionsCount)) * 100
 
 	c.JSON(http.StatusOK, gin.H{
 		"bookStats": bookStats,

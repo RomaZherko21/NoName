@@ -43,7 +43,7 @@ const SimilarBooks = () => {
       <CardContent>
         <Box>
           {BookModel.authors.map((author: Author) => (
-            <Stack direction="row" justifyContent="space-between" spacing={2}>
+            <Stack key={author.id} direction="row" justifyContent="space-between" spacing={2}>
               <Typography color="textPrimary">{author.name}</Typography>
               <Tooltip title={t('book:actions.authorInfo') || 'info'} placement="top">
                 <IconButton
@@ -68,6 +68,7 @@ const SimilarBooks = () => {
                 onClick={() => {
                   navigate(`/books/${item.id}`)
                 }}
+                key={item.id}
               >
                 <ListItemAvatar>
                   <ImageAvatar src={`${GO_API_BOOK_IMAGES_URL}/${item.id}.jpg`} />

@@ -5,7 +5,7 @@ import LoadingModel from 'models/Loading'
 import { Genre } from 'shared/types'
 
 class GenresModel {
-  genres: Genre[] = []
+  genres?: Genre[]
 
   loading: LoadingModel
 

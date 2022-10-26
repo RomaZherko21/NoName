@@ -42,7 +42,7 @@ export const getColumns = (): TableColumn[] => [
       >
         <ImageAvatar
           src={`${GO_API_BOOK_IMAGES_URL}/${id}.jpg`}
-          styles={{ width: 80, height: 100, mr: 2, borderRadius: '8px' }}
+          styles={{ width: 100, height: 120, mr: 2, borderRadius: '8px' }}
         />
         <Box>
           <Typography color="textPrimary">{name}</Typography>

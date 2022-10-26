@@ -41,6 +41,7 @@ const AuthorBooks = () => {
                 onClick={() => {
                   navigate(`/books/${item.id}`)
                 }}
+                key={item.id}
               >
                 <ListItemAvatar>
                   <ImageAvatar src={`${GO_API_BOOK_IMAGES_URL}/${item.id}.jpg`} />

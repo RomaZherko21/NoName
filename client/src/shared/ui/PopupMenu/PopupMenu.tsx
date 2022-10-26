@@ -52,25 +52,23 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                 to={item.linkTo}
                 style={{ color: 'inherit', textDecoration: 'none' }}
                 color="black"
-                id={item.linkTo}
+                key={item.linkTo}
               >
-                <ListItem disablePadding onClick={() => handleClose()}>
-                  <ListItemButton>
+                <ListItem disablePadding>
+                  <ListItemButton onClick={() => handleClose()}>
                     <ListItemIcon>{item.Icon}</ListItemIcon>
                     <ListItemText primary={t(item.text)} />
                   </ListItemButton>
                 </ListItem>
               </Link>
             ) : (
-              <ListItem
-                disablePadding
-                onClick={() => {
-                  item.onClick?.(id)
-                  handleClose()
-                }}
-                id={item.text}
-              >
-                <ListItemButton>
+              <ListItem disablePadding key={item.text}>
+                <ListItemButton
+                  onClick={() => {
+                    item.onClick?.(id)
+                    handleClose()
+                  }}
+                >
                   <ListItemIcon>{item.Icon}</ListItemIcon>
                   <ListItemText primary={t(item.text)} />
                 </ListItemButton>

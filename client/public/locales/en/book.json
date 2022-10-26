@@ -8,6 +8,8 @@
   "authorsBooks": "Authors books",
   "year": "Year",
   "description": "Description",
+  "booksLeft": "Books Left",
+  "bookReadability": "Book readability",
   "actions": {
     "authorInfo": "Show more author information"
   },

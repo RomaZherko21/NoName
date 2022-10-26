@@ -23,12 +23,30 @@ class BookModel {
 
   similarBooks: Book[] = []
 
+  booksTakenPercentage: number = 0
+
+  remainsCounter: number = 0
+
+  subscriptionsCounter: number = 0
+
+  popularityPercentage: number = 0
+
   loading: LoadingModel
 
   constructor() {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
+  }
+
+  getBookReadibilityStatus(): 'neutral' | 'success' | 'warning' {
+    if (this.popularityPercentage < 5) {
+      return 'warning'
+    } else if (this.popularityPercentage < 25) {
+      return 'neutral'
+    } else {
+      return 'success'
+    }
   }
 
   async fetch(id: number) {
@@ -39,6 +57,8 @@ class BookModel {
 
       this.fromJSON(data.book)
 
+      await this.fetchStats()
+
       this.loading.end()
     } catch {
       this.loading.reset()
@@ -47,13 +67,18 @@ class BookModel {
 
   async fetchStats() {
     try {
+      if (this.id === undefined) {
+        throw new Error('Dont have id')
+      }
+
       this.loading.begin()
 
-      if (this.id !== undefined) {
-        const data = await GO_API.books.getStats(this.id)
+      const { bookStats } = await GO_API.books.getStats(this.id)
 
-        console.log(data.stats)
-      }
+      this.booksTakenPercentage = bookStats.books_taken_percentage
+      this.remainsCounter = bookStats.remains_counter
+      this.subscriptionsCounter = bookStats.subscriptions_counter
+      this.popularityPercentage = bookStats.popularity_percentage
 
       this.loading.end()
     } catch {
