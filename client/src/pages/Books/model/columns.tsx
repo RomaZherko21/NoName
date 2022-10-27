@@ -1,3 +1,4 @@
+import { generatePath, useNavigate } from 'react-router-dom'
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import i18next from 'i18next'
 import { useTranslation } from 'react-i18next'
@@ -6,8 +7,7 @@ import InfoIcon from '@mui/icons-material/Info'
 
 import { getFullName } from 'shared/helpers'
 import { Book, TableColumn } from 'shared/types'
-import { useNavigate } from 'react-router-dom'
-import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL, ROUTES } from 'shared/consts'
 import { ImageAvatar } from 'shared/ui'
 
 const ActionButtons = observer(({ book }: { book: Book }) => {
@@ -15,7 +15,7 @@ const ActionButtons = observer(({ book }: { book: Book }) => {
   const navigate = useNavigate()
 
   const showMoreInfo = () => {
-    navigate(`/books/${book.id}`)
+    navigate(generatePath(ROUTES.BOOK, { id: String(book.id) }))
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 import {
   Box,
   Card,
@@ -20,7 +20,7 @@ import InfoIcon from '@mui/icons-material/Info'
 
 import { BookModel } from 'pages/Book/model'
 import { Author } from 'shared/types'
-import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL, ROUTES } from 'shared/consts'
 import { ImageAvatar } from 'shared/ui'
 
 const SimilarBooks = () => {
@@ -35,7 +35,7 @@ const SimilarBooks = () => {
   }, [BookModel.authors.length])
 
   const showMoreInfo = (id: number) => {
-    navigate(`/authors/${id}`)
+    navigate(generatePath(ROUTES.AUTHOR, { id: String(id) }))
   }
 
   return (
@@ -66,7 +66,7 @@ const SimilarBooks = () => {
               <ListItem
                 button
                 onClick={() => {
-                  navigate(`/books/${item.id}`)
+                  navigate(generatePath(ROUTES.BOOK, { id: String(item.id) }))
                 }}
                 key={item.id}
               >

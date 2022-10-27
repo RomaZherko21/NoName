@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -14,7 +14,7 @@ import {
 import { useEffect } from 'react'
 
 import { ImageAvatar } from 'shared/ui'
-import { GO_API_BOOK_IMAGES_URL } from 'shared/consts'
+import { GO_API_BOOK_IMAGES_URL, ROUTES } from 'shared/consts'
 
 import { AuthorModel } from '../../model'
 
@@ -39,7 +39,7 @@ const AuthorBooks = () => {
               <ListItem
                 button
                 onClick={() => {
-                  navigate(`/books/${item.id}`)
+                  navigate(generatePath(ROUTES.BOOK, { id: String(item.id) }))
                 }}
                 key={item.id}
               >
