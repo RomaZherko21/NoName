@@ -6,6 +6,8 @@ import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
 import NewspaperIcon from '@mui/icons-material/Newspaper'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
@@ -55,6 +57,20 @@ const Aside = ({ className, isOpen }: AsideProps) => {
           icon={<NewspaperIcon />}
           title={t('page:posts')}
           to="/posts"
+          isOpen={isOpen}
+        />
+
+        <AsideItemLink
+          icon={<AssignmentIndIcon />}
+          title={t('page:subscribers')}
+          to="/subscribers"
+          isOpen={isOpen}
+        />
+
+        <AsideItemLink
+          icon={<AssignmentTurnedInIcon />}
+          title={t('page:subscribtions')}
+          to="/subscribtions"
           isOpen={isOpen}
         />
 

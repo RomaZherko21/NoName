@@ -1,7 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { Users, Books, Book, Profile, Posts, NotFound, Author } from 'pages'
+import {
+  Users,
+  Books,
+  Book,
+  Profile,
+  Posts,
+  NotFound,
+  Author,
+  Subscribers,
+  Subscribtions,
+} from 'pages'
 import { ROUTES } from 'shared/consts'
 
 function Router() {
@@ -12,6 +22,8 @@ function Router() {
       <Route path={ROUTES.BOOK} element={<Book />} />
       <Route path={ROUTES.AUTHOR} element={<Author />} />
       <Route path={ROUTES.ITEMS} element={<Posts />} />
+      <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />
+      <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
       <Route path={ROUTES.PROFILE} element={<Profile />} />
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       <Route path="/" element={<Navigate to={ROUTES.USER_LIST} replace />} />

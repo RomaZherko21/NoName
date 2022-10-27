@@ -4,6 +4,8 @@ export const ROUTES = {
   BOOK: '/books/:id',
   AUTHOR: '/authors/:id',
   ITEMS: '/posts',
+  SUBSCRIBERS: '/subscribers',
+  SUBSCRIBTIONS: '/subscribtions',
   PROFILE: '/profile',
   NOT_FOUND: '/notFound',
 }

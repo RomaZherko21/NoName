@@ -10,7 +10,7 @@ interface Props {
   color: 'warning' | 'neutral' | 'success'
 }
 
-const PercentageCircle = ({ percentage, caption = '', color }: Props) => {
+const PercentageCircle = ({ percentage = 0, caption = '', color }: Props) => {
   const theme = useTheme()
   const { t } = useTranslation()
 

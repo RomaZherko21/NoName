@@ -24,7 +24,7 @@ export interface Genre {
 }
 
 export interface Subscriber {
-  id: number
+  id?: number
   name: string
   surname: string
   middle_name: string
