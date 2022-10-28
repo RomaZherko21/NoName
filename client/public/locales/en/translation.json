@@ -7,7 +7,6 @@
     "profile": "Profile",
     "confirm": "Confirm",
     "actions": "Actions",
-    "amount": "Amount",
     "details": "Details",
     "id": "ID",
     "emptyInput": "Enter value",
@@ -15,12 +14,28 @@
     "export": "Export"
   },
   "actions": {
-    "save": "Save",
+    "add": "Add",
     "edit": "Edit",
     "delete": "Delete",
+    "update": "Update",
+    "save": "Save",
     "exit": "Exit",
     "info": "Show more information",
     "goBack": "Go back",
-    "download": "Download"
+    "download": "Download",
+    "upload": "Upload"
+  },
+  "fields": {
+    "name": "Name",
+    "surname": "Surname",
+    "middleName": "Middle name",
+    "fullName": "Full name",
+    "dateOfBirth": "Date of birth",
+    "dateOfDeath": "Date of death",
+    "description": "Description",
+    "telNumber": "Telephone number",
+    "amount": "Amount",
+    "quantity": "Quantity",
+    "year": "Year"
   }
 }

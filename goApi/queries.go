@@ -81,3 +81,14 @@ SELECT
 	genres.name
 		FROM genres
 `
+
+const GetAllSubscribersQuery string = `
+SELECT 
+	subscribers.id,
+	subscribers.name,
+    subscribers.surname,
+    subscribers.middle_name,
+    subscribers.date_of_birth,
+    subscribers.tel_number
+		FROM subscribers
+`

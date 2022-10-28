@@ -20,7 +20,7 @@ function Subscribers() {
     SubscribersModel.fetch()
   }, [])
 
-  const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
+  const [showCreateUserModal] = useDialog('book:form.addSubscriber', (hideModal) => (
     <SubscriberForm
       onSubmit={(value: Subscriber) => {
         SubscribersModel.create(value)
@@ -46,14 +46,8 @@ function Subscribers() {
         </Grid>
         <Grid item>
           <Box sx={{ m: 1 }}>
-            <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              {t('common.import')}
-            </Button>
-            <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-              {t('common.export')}
-            </Button>
             <Button variant="contained" color="primary" onClick={showCreateUserModal}>
-              {t('user:form.createNewUser')}
+              {t('book:actions.addSubscriber')}
             </Button>
           </Box>
         </Grid>

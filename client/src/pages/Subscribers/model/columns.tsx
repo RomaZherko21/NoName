@@ -59,7 +59,7 @@ export const getColumns = (): TableColumn[] => [
   },
   {
     key: 'name',
-    title: i18next.t('user:name'),
+    title: i18next.t('fields.fullName'),
     getValue: ({ name, surname, middle_name }: Subscriber) => (
       <Typography color="textPrimary" variant="body1">
         {getFullName(name, surname, middle_name)}
@@ -68,12 +68,12 @@ export const getColumns = (): TableColumn[] => [
   },
   {
     key: 'date_of_birth',
-    title: i18next.t('user:dateOfBirth'),
+    title: i18next.t('fields.dateOfBirth'),
     getValue: (row: Subscriber) => reformatDates(row.date_of_birth || ''),
   },
   {
     key: 'tel_number',
-    title: i18next.t('user:telephoneNumber'),
+    title: i18next.t('fields.telNumber'),
   },
   {
     key: 'actions',

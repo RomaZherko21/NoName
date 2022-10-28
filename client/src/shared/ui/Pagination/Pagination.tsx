@@ -22,12 +22,12 @@ const Pagination = ({ paginationModel }: Props) => {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <FormControl style={{ minWidth: '100px' }}>
-        <InputLabel id="perPage">{t('common.amount')}</InputLabel>
+        <InputLabel id="perPage">{t('fields.amount')}</InputLabel>
         <Select
           labelId="perPage"
           id="perPage"
           value={String(paginationModel.perPage)}
-          label={t('common.amount')}
+          label={t('fields.amount')}
           onChange={(event: SelectChangeEvent) => {
             paginationModel.perPage = Number(event.target.value)
           }}

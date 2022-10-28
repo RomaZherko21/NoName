@@ -11,9 +11,11 @@
   "booksLeft": "Books Left",
   "bookReadability": "Book readability",
   "actions": {
-    "authorInfo": "Show more author information"
+    "authorInfo": "Show more author information",
+    "addSubscriber": "New sibscriber"
   },
   "form": {
-    "updateBook": "Edit book"
+    "updateBook": "Edit book",
+    "addSubscriber": "Add new sibscriber"
   }
 }
