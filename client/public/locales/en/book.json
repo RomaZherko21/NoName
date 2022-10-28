@@ -12,10 +12,10 @@
   "bookReadability": "Book readability",
   "actions": {
     "authorInfo": "Show more author information",
-    "addSubscriber": "New sibscriber"
+    "addSubscriber": "New subscriber"
   },
   "form": {
     "updateBook": "Edit book",
-    "addSubscriber": "Add new sibscriber"
+    "addSubscriber": "Add new subscriber"
   }
 }

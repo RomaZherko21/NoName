@@ -4,7 +4,7 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/subscribers'
 
-export const list = () => fetch.get<{ subscribers: Subscriber[] }>(`${ENDPOINT_BASE}`)
+export const list = () => fetch.get<{ subscribers: Subscriber[] }>(`${ENDPOINT_BASE}/`)
 
 export const create = (value: Subscriber) => fetch.post<Subscriber>(`${ENDPOINT_BASE}`, value)
 

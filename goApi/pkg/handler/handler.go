@@ -57,6 +57,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			subscribers.GET("/", h.getAllSubscribers)
 		}
 
+		subscribtions := api.Group("/subscribtions")
+		{
+			subscribtions.GET("/", h.getAllSubscribtions)
+		}
+
 		api.StaticFS("/uploads", http.Dir("./uploads"))
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

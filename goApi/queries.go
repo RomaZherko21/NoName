@@ -92,3 +92,14 @@ SELECT
     subscribers.tel_number
 		FROM subscribers
 `
+
+const GetAllSubscribtionsQuery string = `
+SELECT 
+	subscriptions.id,
+	subscriptions.subscriber_id,
+    subscriptions.book_id,
+    subscriptions.start,
+    subscriptions.finish,
+    subscriptions.is_active
+		FROM subscriptions
+`
