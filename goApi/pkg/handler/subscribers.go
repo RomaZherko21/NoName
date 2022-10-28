@@ -47,3 +47,59 @@ func (h *Handler) getAllSubscribers(c *gin.Context) {
 		"subscribers": allSubscribers,
 	})
 }
+
+// @Summary      getAllBooksByGenre
+// @Description  get all books with genres and author
+// @Tags         books
+// @Accept       json
+// @Produce      json
+// @Router       /api/books [get]
+func (h *Handler) getSubscriber(c *gin.Context) {
+	id := c.Param("id")
+
+	type resType struct {
+		goapi.Subscriber
+		Books []goapi.Book `json:"books"`
+	}
+
+	var subscriber resType
+
+	err := h.db.QueryRow(goapi.GetSubscriberQuery, id).Scan(
+		&subscriber.Id, &subscriber.Name, &subscriber.Surname, &subscriber.MiddleName, &subscriber.DateOfBirth, &subscriber.TelNumber)
+
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(http.StatusOK, gin.H{
+			"book": nil,
+		})
+		return
+	}
+
+	bookRows, queryErr := h.db.Query(goapi.GetSubscriberBooksQuery, subscriber.Id)
+
+	if queryErr != nil {
+		fmt.Println(queryErr)
+		c.JSON(http.StatusOK, gin.H{
+			"book": nil,
+		})
+		return
+	}
+
+	defer bookRows.Close()
+
+	books := make([]goapi.Book, 0)
+
+	for bookRows.Next() {
+		var book goapi.Book
+		bookRows.Scan(&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year)
+		fmt.Printf("%+v\n", book)
+		books = append(books, book)
+	}
+
+	subscriber.Books = books
+
+	c.JSON(http.StatusOK, gin.H{
+		"subscriber": subscriber,
+	})
+
+}

@@ -11,6 +11,7 @@ import {
   Author,
   Subscribers,
   Subscribtions,
+  Subscriber,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -23,6 +24,7 @@ function Router() {
       <Route path={ROUTES.AUTHOR} element={<Author />} />
       <Route path={ROUTES.ITEMS} element={<Posts />} />
       <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />
+      <Route path={ROUTES.SUBSCRIBER} element={<Subscriber />} />
       <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
       <Route path={ROUTES.PROFILE} element={<Profile />} />
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />

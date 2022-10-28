@@ -93,6 +93,30 @@ SELECT
 		FROM subscribers
 `
 
+const GetSubscriberQuery string = `
+SELECT 
+	subscribers.id,
+	subscribers.name,
+    subscribers.surname,
+    subscribers.middle_name,
+    subscribers.date_of_birth,
+    subscribers.tel_number
+		FROM subscribers
+	WHERE subscribers.id=?
+`
+
+const GetSubscriberBooksQuery string = `
+SELECT 
+	DISTINCT(books.id),
+	books.name,
+	books.publisher,
+	books.description, 
+	books.year
+		FROM books 
+			JOIN subscriptions ON subscriptions.book_id = books.id
+	WHERE subscriptions.subscriber_id=?
+`
+
 const GetAllSubscribtionsQuery string = `
 SELECT 
 	subscriptions.id,

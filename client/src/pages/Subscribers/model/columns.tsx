@@ -5,6 +5,7 @@ import i18next from 'i18next'
 import { IconButton, Tooltip, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import InfoIcon from '@mui/icons-material/Info'
 
 import { useDialog } from 'shared/hooks'
 import { Subscriber, TableColumn } from 'shared/types'
@@ -12,23 +13,33 @@ import { getFullName, reformatDates } from 'shared/helpers'
 
 import SubscribersModel from './Subscribers.model'
 import { SubscriberForm, DeleteSubscriberDialog } from '../ui'
+import { generatePath, useNavigate } from 'react-router-dom'
+import { ROUTES } from 'shared/consts'
 
-const ActionButtons = observer(({ user }: { user: Subscriber }) => {
+const ActionButtons = observer(({ subscriber }: { subscriber: Subscriber }) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+
+  const showMoreInfo = () => {
+    navigate(generatePath(ROUTES.SUBSCRIBER, { id: String(subscriber.id) }))
+  }
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <SubscriberForm
-      user={user}
+      user={subscriber}
       onSubmit={(value: Subscriber) => {
-        if (user.id) {
-          SubscribersModel.update(value, user.id)
+        if (subscriber.id) {
+          SubscribersModel.update(value, subscriber.id)
           hideModal()
         }
       }}
     />
   ))
 
-  const removeUser = useCallback(() => user.id && SubscribersModel.remove(user.id), [user.id])
+  const removeUser = useCallback(
+    () => subscriber.id && SubscribersModel.remove(subscriber.id),
+    [subscriber.id]
+  )
 
   const [showConfirmationModal] = useDialog(
     'notification:removeConfirm',
@@ -46,6 +57,11 @@ const ActionButtons = observer(({ user }: { user: Subscriber }) => {
       <Tooltip title={t('actions.delete') || 'delete'} placement="top">
         <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
           <DeleteIcon color="error" fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('actions.info') || 'info'} placement="top">
+        <IconButton aria-label="info" size="small" onClick={() => showMoreInfo()}>
+          <InfoIcon color="warning" fontSize="inherit" />
         </IconButton>
       </Tooltip>
     </>
@@ -79,6 +95,6 @@ export const getColumns = (): TableColumn[] => [
     key: 'actions',
     title: i18next.t('common.actions'),
     align: 'right',
-    getValue: (row: Subscriber) => <ActionButtons user={row} />,
+    getValue: (row: Subscriber) => <ActionButtons subscriber={row} />,
   },
 ]
