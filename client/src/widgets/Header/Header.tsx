@@ -5,6 +5,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import GroupIcon from '@mui/icons-material/Group'
 
 import { ProfileMenu, ChangeLang } from './ui'
+import Profile from './ui/Profile'
 
 interface Props {
   className?: string
@@ -31,7 +32,7 @@ const Header = ({ className, toggleMenu }: Props) => {
           <img src="https://svgsilh.com/svg/2379396.svg" width="40px" alt="" />
         </Typography> */}
 
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <ChangeLang />
           <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>
@@ -46,6 +47,7 @@ const Header = ({ className, toggleMenu }: Props) => {
             </IconButton>
           </Tooltip>
           <ProfileMenu />
+          <Profile />
         </div>
       </Toolbar>
     </AppBar>
