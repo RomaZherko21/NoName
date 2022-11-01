@@ -12,6 +12,7 @@ import {
   Subscribers,
   Subscribtions,
   Subscriber,
+  Analytics,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -27,7 +28,8 @@ function Router() {
       <Route path={ROUTES.SUBSCRIBER} element={<Subscriber />} />
       <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
       <Route path={ROUTES.PROFILE} element={<Profile />} />
-      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+      <Route path={ROUTES.NOT_FOUND} element={<Analytics />} />
+      {/* <Route path={ROUTES.NOT_FOUND} element={<NotFound />} /> */}
       <Route path="/" element={<Navigate to={ROUTES.USER_LIST} replace />} />
       <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
     </Routes>
