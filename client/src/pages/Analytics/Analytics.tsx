@@ -1,6 +1,6 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
-import { AnalyticsInfoBlock } from './ui'
+import { AnalyticsInfoBlock, Charts } from './ui'
 
 function Analytics() {
   return (
@@ -35,6 +35,9 @@ function Analytics() {
           color="warning"
           extra="$20,395"
         />
+      </Grid>
+      <Grid item xs={12}>
+        <Charts />
       </Grid>
     </Grid>
   )

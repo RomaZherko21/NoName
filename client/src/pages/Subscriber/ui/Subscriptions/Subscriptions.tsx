@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
-import { generatePath, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
 import { Card } from '@mui/material'
 
 import { CommonTable } from 'shared/ui'
@@ -10,6 +8,7 @@ import { SubscriberModel } from '../../model'
 import { getColumns } from './columns'
 
 const Subscriptions = () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const columns = useMemo(() => getColumns(), [getColumns])
 
   return (

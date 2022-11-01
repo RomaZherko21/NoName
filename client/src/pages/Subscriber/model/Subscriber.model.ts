@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { GO_API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Author, Book, Subscriber } from 'shared/types'
+import { Book, Subscriber } from 'shared/types'
 
 class SubscriberModel {
   id?: number

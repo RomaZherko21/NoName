@@ -8,7 +8,7 @@ const ACCESS_TOKEN = 'ACCESS_TOKEN'
 class AuthorizationModel {
   readonly rootStore: RootStore
 
-  private _isAuthorized: boolean = false
+  private _isAuthorized: boolean = true
 
   private _accessToken: string | null = null
 
