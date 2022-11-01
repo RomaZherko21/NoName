@@ -31,7 +31,7 @@ const Header = ({ className, toggleMenu }: Props) => {
           <img src="https://svgsilh.com/svg/2379396.svg" width="40px" alt="" />
         </Typography> */}
 
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <ChangeLang />
           <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>

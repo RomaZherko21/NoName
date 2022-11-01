@@ -83,6 +83,13 @@ const darkTheme = {
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: 32,
+        },
+      },
+    },
   },
 }
 

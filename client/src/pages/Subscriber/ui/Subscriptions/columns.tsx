@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import InfoIcon from '@mui/icons-material/Info'
 
-import { getFullName } from 'shared/helpers'
 import { Book, TableColumn } from 'shared/types'
 import { GO_API_BOOK_IMAGES_URL, ROUTES } from 'shared/consts'
 import { ImageAvatar } from 'shared/ui'

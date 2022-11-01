@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Box, Button, Grid, Typography } from '@mui/material'
-import UploadIcon from '@mui/icons-material/Upload'
-import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
 import { CommonTable, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
