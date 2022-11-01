@@ -43,7 +43,7 @@ const Aside = ({ className, isOpen }: AsideProps) => {
       style={{ backgroundColor: 'black' }}
       open={isOpen}
     >
-      <List>
+      <List sx={{ '& .MuiListItemIcon-root': { minWidth: 52 } }}>
         <AsideItemLink icon={<GroupIcon />} title={t('page:users')} to="/users" isOpen={isOpen} />
 
         <AsideItemLink

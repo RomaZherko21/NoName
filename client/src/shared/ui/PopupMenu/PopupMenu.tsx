@@ -45,7 +45,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <List>
+        <List style={{ minWidth: '200px', padding: 0 }}>
           {config.map((item) =>
             item.linkTo ? (
               <Link
@@ -55,7 +55,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                 key={item.linkTo}
               >
                 <ListItem disablePadding>
-                  <ListItemButton onClick={() => handleClose()}>
+                  <ListItemButton style={{ padding: '2px 8px' }} onClick={() => handleClose()}>
                     <ListItemIcon>{item.Icon}</ListItemIcon>
                     <ListItemText primary={t(item.text)} />
                   </ListItemButton>
@@ -68,6 +68,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
                     item.onClick?.(id)
                     handleClose()
                   }}
+                  style={{ padding: '2px 8px' }}
                 >
                   <ListItemIcon>{item.Icon}</ListItemIcon>
                   <ListItemText primary={t(item.text)} />
