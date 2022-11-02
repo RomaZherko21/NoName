@@ -20,7 +20,7 @@ const Pagination = ({ paginationModel }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 2 }}>
+    <Stack direction="row" alignItems="center" spacing={2}>
       <FormControl style={{ minWidth: '100px' }}>
         <InputLabel id="perPage">{t('fields.amount')}</InputLabel>
         <Select

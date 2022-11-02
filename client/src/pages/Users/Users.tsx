@@ -7,7 +7,7 @@ import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import FilterListIcon from '@mui/icons-material/FilterList'
 
-import { AsideFilters, CommonTable, Spinner } from 'shared/ui'
+import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
@@ -89,16 +89,12 @@ function Users() {
           {UsersModel.loading.has ? (
             <Spinner />
           ) : (
-            <CommonTable
-              data={UsersModel.users}
-              columns={columns}
-              paginationModel={UsersModel.pagination}
-            />
+            <CommonTable data={UsersModel.users} columns={columns} />
           )}
         </Grid>
-        {/* <Grid item>
+        <Grid item>
           <Pagination paginationModel={UsersModel.pagination} />
-        </Grid> */}
+        </Grid>
       </Grid>
 
       <AsideFilters

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Grid, Typography } from '@mui/material'
 
-import { CommonTable, Spinner } from 'shared/ui'
+import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
 import { BooksModel, getColumns } from './model'
 
@@ -36,12 +36,11 @@ function Books() {
           {BooksModel.loading.has ? (
             <Spinner />
           ) : (
-            <CommonTable
-              data={BooksModel.books}
-              columns={columns}
-              paginationModel={BooksModel.pagination}
-            />
+            <CommonTable data={BooksModel.books} columns={columns} />
           )}
+        </Grid>
+        <Grid item>
+          <Pagination paginationModel={BooksModel.pagination} />
         </Grid>
       </Grid>
     </>
