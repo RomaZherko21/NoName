@@ -1,10 +1,9 @@
 import { observer } from 'mobx-react-lite'
-import { IconButton, AppBar, Toolbar, Tooltip, Badge, useTheme } from '@mui/material'
+import { IconButton, AppBar, Toolbar, Tooltip, useTheme } from '@mui/material'
 import ListIcon from '@mui/icons-material/List'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import GroupIcon from '@mui/icons-material/Group'
 
-import { ProfileMenu, ChangeLang } from './ui'
+import { ProfileMenu, ChangeLang, NotificationsPopover } from './ui'
 
 interface Props {
   className?: string
@@ -38,13 +37,7 @@ const Header = ({ className, toggleMenu }: Props) => {
               <GroupIcon fontSize="medium" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton sx={{ ml: 1 }}>
-              <Badge badgeContent={12} color="secondary" max={999}>
-                <NotificationsIcon fontSize="medium" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
+          <NotificationsPopover />
           <ProfileMenu />
         </div>
       </Toolbar>
