@@ -53,7 +53,7 @@ const SimilarBooks = () => {
                     showMoreInfo(author.id)
                   }}
                 >
-                  <InfoIcon color="secondary" fontSize="inherit" />
+                  <InfoIcon color="info" fontSize="inherit" />
                 </IconButton>
               </Tooltip>
             </Stack>

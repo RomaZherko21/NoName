@@ -61,7 +61,7 @@ const ActionButtons = observer(({ subscriber }: { subscriber: Subscriber }) => {
       </Tooltip>
       <Tooltip title={t('actions.info') || 'info'} placement="top">
         <IconButton aria-label="info" size="small" onClick={() => showMoreInfo()}>
-          <InfoIcon color="warning" fontSize="inherit" />
+          <InfoIcon color="info" fontSize="inherit" />
         </IconButton>
       </Tooltip>
     </>

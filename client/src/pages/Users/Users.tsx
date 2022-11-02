@@ -60,6 +60,7 @@ function Users() {
             {t('page:users')}
           </Typography>
         </Grid>
+
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
@@ -74,6 +75,7 @@ function Users() {
           </Box>
         </Grid>
       </Grid>
+
       <Grid spacing={1} container direction="column">
         <Grid item>
           <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
