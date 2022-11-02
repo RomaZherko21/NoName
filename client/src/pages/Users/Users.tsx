@@ -5,10 +5,10 @@ import { observer } from 'mobx-react-lite'
 import { Box, Button, Grid, Typography } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import FilterListIcon from '@mui/icons-material/FilterList'
 
-import { CommonTable, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
-import { Filters } from 'shared/ui/Filters'
 import { User } from 'shared/types'
 
 import { UserForm } from './ui'
@@ -16,6 +16,16 @@ import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
 
 function Users() {
   const { t } = useTranslation()
+
+  const [openFilter, setOpenFilter] = useState(false)
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true)
+  }
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false)
+  }
 
   const [filters, setFilters] = useState<UserFilters>({})
 
@@ -43,7 +53,7 @@ function Users() {
         <meta name="description" content={t('page:users')} />
       </Helmet>
 
-      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
+      <Grid spacing={4} container style={{ justifyContent: 'space-between' }}>
         <Grid item>
           <Typography variant="h3" color="text.primary">
             {t('page:users')}
@@ -63,9 +73,16 @@ function Users() {
           </Box>
         </Grid>
       </Grid>
-      <Grid spacing={2} container direction="column">
+      <Grid spacing={4} container direction="column">
         <Grid item>
-          <Filters config={filtersConfig} setFilters={setFilters} />
+          <Button
+            disableRipple
+            color="info"
+            endIcon={<FilterListIcon />}
+            onClick={handleOpenFilter}
+          >
+            Filters
+          </Button>
         </Grid>
 
         <Grid item>
@@ -79,6 +96,13 @@ function Users() {
           <Pagination paginationModel={UsersModel.pagination} />
         </Grid>
       </Grid>
+
+      <AsideFilters
+        config={filtersConfig}
+        setFilters={setFilters}
+        openFilter={openFilter}
+        onCloseFilter={handleCloseFilter}
+      />
     </>
   )
 }
