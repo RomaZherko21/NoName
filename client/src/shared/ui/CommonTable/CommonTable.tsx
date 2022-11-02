@@ -7,16 +7,21 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TableFooter,
 } from '@mui/material'
 
+import PaginationModel from 'models/Pagination'
 import { TableColumn } from 'shared/types'
+
+import { Pagination } from '../Pagination'
 
 interface Props {
   data: any
   columns: TableColumn[]
+  paginationModel?: PaginationModel
 }
 
-const CommonTable = ({ data, columns }: Props) => {
+const CommonTable = ({ data, columns, paginationModel }: Props) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -40,6 +45,11 @@ const CommonTable = ({ data, columns }: Props) => {
             </TableRow>
           ))}
         </TableBody>
+        {paginationModel && (
+          <TableFooter>
+            <Pagination paginationModel={paginationModel} />
+          </TableFooter>
+        )}
       </Table>
     </TableContainer>
   )
