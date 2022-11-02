@@ -7,30 +7,30 @@ import {
   Book,
   Profile,
   Posts,
-  // NotFound,
+  NotFound,
   Author,
   Subscribers,
   Subscribtions,
   Subscriber,
-  Analytics,
+  LibraryStatistics,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 function Router() {
   return (
     <Routes>
-      <Route path={ROUTES.USER_LIST} element={<Users />} />
+      <Route path={ROUTES.USERS} element={<Users />} />
       <Route path={ROUTES.BOOKS} element={<Books />} />
       <Route path={ROUTES.BOOK} element={<Book />} />
       <Route path={ROUTES.AUTHOR} element={<Author />} />
-      <Route path={ROUTES.ITEMS} element={<Posts />} />
+      <Route path={ROUTES.POSTS} element={<Posts />} />
       <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />
       <Route path={ROUTES.SUBSCRIBER} element={<Subscriber />} />
       <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
       <Route path={ROUTES.PROFILE} element={<Profile />} />
-      <Route path={ROUTES.NOT_FOUND} element={<Analytics />} />
-      {/* <Route path={ROUTES.NOT_FOUND} element={<NotFound />} /> */}
-      <Route path="/" element={<Navigate to={ROUTES.USER_LIST} replace />} />
+      <Route path={ROUTES.LIBRARY_STATISTICS} element={<LibraryStatistics />} />
+      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+      <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} />
       <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
     </Routes>
   )

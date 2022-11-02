@@ -8,11 +8,13 @@ const Charts = () => {
   const [slot, setSlot] = useState('week')
 
   return (
-    <>
+    <Grid container rowSpacing={4.5} columnSpacing={2.75}>
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Unique Visitor</Typography>
+            <Typography variant="h5" color="text.primary">
+              Unique Visitor
+            </Typography>
           </Grid>
           <Grid item>
             <Stack direction="row" alignItems="center" spacing={0}>
@@ -41,10 +43,13 @@ const Charts = () => {
           </Box>
         </Card>
       </Grid>
+
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Income Overview</Typography>
+            <Typography variant="h5" color="text.primary">
+              Income Overview
+            </Typography>
           </Grid>
           <Grid item />
         </Grid>
@@ -60,7 +65,7 @@ const Charts = () => {
           <MonthlyBarChart />
         </Card>
       </Grid>
-    </>
+    </Grid>
   )
 }
 

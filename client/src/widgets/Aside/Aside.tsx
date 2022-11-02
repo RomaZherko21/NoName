@@ -8,6 +8,9 @@ import NewspaperIcon from '@mui/icons-material/Newspaper'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
+
+import { ROUTES } from 'shared/consts'
 
 import AsideItemLink from './AsideItemLink'
 import styles from './Aside.module.sass'
@@ -44,33 +47,45 @@ const Aside = ({ className, isOpen }: AsideProps) => {
       open={isOpen}
     >
       <List sx={{ '& .MuiListItemIcon-root': { minWidth: 52 } }}>
-        <AsideItemLink icon={<GroupIcon />} title={t('page:users')} to="/users" isOpen={isOpen} />
+        <AsideItemLink
+          icon={<GroupIcon />}
+          title={t('page:users')}
+          to={ROUTES.USERS}
+          isOpen={isOpen}
+        />
 
         <AsideItemLink
           icon={<MenuBookIcon />}
           title={t('page:books')}
-          to="/books"
+          to={ROUTES.BOOKS}
           isOpen={isOpen}
         />
 
         <AsideItemLink
           icon={<NewspaperIcon />}
           title={t('page:posts')}
-          to="/posts"
+          to={ROUTES.POSTS}
           isOpen={isOpen}
         />
 
         <AsideItemLink
           icon={<AssignmentIndIcon />}
           title={t('page:subscribers')}
-          to="/subscribers"
+          to={ROUTES.SUBSCRIBERS}
           isOpen={isOpen}
         />
 
         <AsideItemLink
           icon={<AssignmentTurnedInIcon />}
           title={t('page:subscribtions')}
-          to="/subscribtions"
+          to={ROUTES.SUBSCRIBTIONS}
+          isOpen={isOpen}
+        />
+
+        <AsideItemLink
+          icon={<QueryStatsIcon />}
+          title={t('page:libraryStatistics')}
+          to={ROUTES.LIBRARY_STATISTICS}
           isOpen={isOpen}
         />
 
@@ -81,7 +96,7 @@ const Aside = ({ className, isOpen }: AsideProps) => {
             </Badge>
           }
           title={t('page:reports')}
-          to="/ewq"
+          to={ROUTES.NOT_FOUND}
           isOpen={isOpen}
         />
       </List>

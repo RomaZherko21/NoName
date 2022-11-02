@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, Paper, TextField, Typography } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import FilterListIcon from '@mui/icons-material/FilterList'
+import SearchIcon from '@mui/icons-material/Search'
 
 import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
@@ -53,7 +54,7 @@ function Users() {
         <meta name="description" content={t('page:users')} />
       </Helmet>
 
-      <Grid spacing={4} container style={{ justifyContent: 'space-between' }}>
+      <Grid container sx={{ justifyContent: 'space-between', mb: 5 }}>
         <Grid item>
           <Typography variant="h3" color="text.primary">
             {t('page:users')}
@@ -73,18 +74,34 @@ function Users() {
           </Box>
         </Grid>
       </Grid>
-      <Grid spacing={4} container direction="column">
+      <Grid spacing={1} container direction="column">
         <Grid item>
-          <Button
-            disableRipple
-            color="info"
-            endIcon={<FilterListIcon />}
-            onClick={handleOpenFilter}
-          >
-            Filters
-          </Button>
+          <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
+            <TextField
+              fullWidth
+              id="name"
+              name="name"
+              label="Search name..."
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              size="small"
+              sx={{ maxWidth: '200px' }}
+            />
+            <Button
+              disableRipple
+              color="info"
+              endIcon={<FilterListIcon />}
+              onClick={handleOpenFilter}
+            >
+              Filters
+            </Button>
+          </Paper>
         </Grid>
-
         <Grid item>
           {UsersModel.loading.has ? (
             <Spinner />
