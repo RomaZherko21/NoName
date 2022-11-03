@@ -1,26 +1,15 @@
 import { useTranslation } from 'react-i18next'
-import { Grid, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
+import { Grid } from '@mui/material'
 
 import { AnalyticsInfoBlock, Charts } from './ui'
+import { PageHeader } from 'shared/ui'
 
 function LibraryStatistics() {
   const { t } = useTranslation()
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:libraryStatistics')}</title>
-        <meta name="description" content={t('page:libraryStatistics')} />
-      </Helmet>
-
-      <Grid container>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:libraryStatistics')}
-          </Typography>
-        </Grid>
-      </Grid>
+      <PageHeader pageName={t('page:libraryStatistics')} />
 
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
         <Grid item xs={12} sm={6} md={4} lg={3}>

@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import {
+  AsideFilters,
+  AsideFiltersBar,
+  CommonTable,
+  PageHeader,
+  Pagination,
+  Spinner,
+} from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
@@ -47,18 +53,7 @@ function Users() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:users')}</title>
-        <meta name="description" content={t('page:users')} />
-      </Helmet>
-
-      <Grid container sx={{ justifyContent: 'space-between', mb: 5 }}>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:users')}
-          </Typography>
-        </Grid>
-
+      <PageHeader pageName={t('page:users')}>
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
@@ -72,7 +67,7 @@ function Users() {
             </Button>
           </Box>
         </Grid>
-      </Grid>
+      </PageHeader>
 
       <Grid spacing={1} container direction="column">
         <Grid item>

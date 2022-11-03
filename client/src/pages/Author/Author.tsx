@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
 import { AuthorBooks, AuthorInfo } from './ui'
 import { AuthorModel } from './model'
+import { PageHeader } from 'shared/ui'
 
 function Author() {
   const { t } = useTranslation()
@@ -20,18 +20,7 @@ function Author() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:book')}</title>
-        <meta name="description" content={t('page:book')} />
-      </Helmet>
-
-      <Grid container>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:book')}
-          </Typography>
-        </Grid>
-      </Grid>
+      <PageHeader pageName={t('page:author')} />
 
       <Grid container spacing={3}>
         <Grid item lg={4} md={6} xs={12}>

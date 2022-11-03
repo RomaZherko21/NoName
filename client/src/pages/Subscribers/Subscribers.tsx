@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, CommonTable, PageHeader, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 import { Subscriber } from 'shared/types'
 
@@ -44,17 +43,7 @@ function Subscribers() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:subscribers')}</title>
-        <meta name="description" content={t('page:subscribers')} />
-      </Helmet>
-
-      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:subscribers')}
-          </Typography>
-        </Grid>
+      <PageHeader pageName={t('page:subscribers')}>
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button variant="contained" color="primary" onClick={showCreateUserModal}>
@@ -62,7 +51,7 @@ function Subscribers() {
             </Button>
           </Box>
         </Grid>
-      </Grid>
+      </PageHeader>
 
       <Grid spacing={2} container direction="column">
         <Grid item>

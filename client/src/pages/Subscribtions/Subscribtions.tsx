@@ -1,10 +1,9 @@
 import { useEffect, useMemo } from 'react'
-import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
-import { CommonTable, Spinner } from 'shared/ui'
+import { CommonTable, PageHeader, Spinner } from 'shared/ui'
 
 import { SubscribtionsModel, getColumns } from './model'
 
@@ -19,18 +18,8 @@ function Subscribtions() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:subscribtions')}</title>
-        <meta name="description" content={t('page:subscribtions')} />
-      </Helmet>
+      <PageHeader pageName={t('page:subscribtions')} />
 
-      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:subscribtions')}
-          </Typography>
-        </Grid>
-      </Grid>
       <Grid spacing={2} container direction="column">
         <Grid item>
           {SubscribtionsModel.loading.has ? (

@@ -8,6 +8,7 @@ export const ROUTES = {
   SUBSCRIBER: '/subscribers/:id',
   SUBSCRIBTIONS: '/subscribtions',
   PROFILE: '/profile',
+  ACCOUNT: '/account',
   LIBRARY_STATISTICS: '/library-statistics',
   NOT_FOUND: '/notFound',
 }

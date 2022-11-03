@@ -1,10 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import {
+  AsideFilters,
+  AsideFiltersBar,
+  CommonTable,
+  PageHeader,
+  Pagination,
+  Spinner,
+} from 'shared/ui'
 
 import { BooksFilters, BooksModel, getColumns, getFiltersConfig } from './model'
 
@@ -32,18 +38,7 @@ function Books() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:books')}</title>
-        <meta name="description" content={t('page:books')} />
-      </Helmet>
-
-      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:books')}
-          </Typography>
-        </Grid>
-      </Grid>
+      <PageHeader pageName={t('page:books')} />
 
       <Grid spacing={2} container direction="column">
         <Grid item>

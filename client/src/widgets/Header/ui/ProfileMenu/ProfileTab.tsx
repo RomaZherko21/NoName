@@ -22,7 +22,7 @@ const ProfileTab = ({ onLogout, onMenuClose }: Props) => {
 
   return (
     <List>
-      <ListItemButton>
+      <ListItemButton onClick={(event) => onChangePage(ROUTES.ACCOUNT, event)}>
         <ListItemIcon>
           <BorderColorIcon fontSize="small" />
         </ListItemIcon>

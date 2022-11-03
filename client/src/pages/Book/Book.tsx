@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Helmet } from 'react-helmet'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
-import { PercentageCircle } from 'shared/ui'
+import { PageHeader, PercentageCircle } from 'shared/ui'
 
 import { BookInfo, BookDescription, SimilarBooks, BookForm } from './ui'
 import { BookModel } from './model'
@@ -29,17 +28,7 @@ function Book() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('page:book')}</title>
-        <meta name="description" content={t('page:book')} />
-      </Helmet>
-
-      <Grid spacing={2} container style={{ justifyContent: 'space-between' }}>
-        <Grid item>
-          <Typography variant="h3" color="text.primary">
-            {t('page:book')}
-          </Typography>
-        </Grid>
+      <PageHeader pageName={t('page:book')}>
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button
@@ -54,7 +43,7 @@ function Book() {
             </Button>
           </Box>
         </Grid>
-      </Grid>
+      </PageHeader>
 
       <Grid container spacing={3}>
         <Grid item md={4} xs={12}>
