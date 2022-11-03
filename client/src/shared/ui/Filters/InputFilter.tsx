@@ -6,7 +6,7 @@ interface Props {
   size?: 'small' | 'medium' | undefined
 }
 
-export const InputFilter = (props: Props) => {
+export const InputFilter = (props: Props & any) => {
   const { t } = useTranslation()
 
   const { placeholder = 'common.emptyInput', size = 'small' } = props
@@ -14,6 +14,7 @@ export const InputFilter = (props: Props) => {
   return (
     <TextField
       {...props}
+      fullWidth
       placeholder={t(placeholder)}
       label={t(placeholder)}
       variant="outlined"

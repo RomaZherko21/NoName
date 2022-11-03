@@ -1,7 +1,7 @@
 import { GENDER } from 'shared/consts'
 import { InputFilter, SelectFilter } from 'shared/ui'
 
-export interface UserFilters {
+export interface SubscriberFilters {
   id?: string
   email?: string
   name?: string

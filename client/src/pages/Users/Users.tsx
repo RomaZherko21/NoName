@@ -2,13 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Button, Grid, InputAdornment, Paper, TextField, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
-import FilterListIcon from '@mui/icons-material/FilterList'
-import SearchIcon from '@mui/icons-material/Search'
 
-import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
@@ -78,31 +76,11 @@ function Users() {
 
       <Grid spacing={1} container direction="column">
         <Grid item>
-          <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
-            <TextField
-              fullWidth
-              id="name"
-              name="name"
-              label="Search name..."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              size="small"
-              sx={{ maxWidth: '200px' }}
-            />
-            <Button
-              disableRipple
-              color="info"
-              endIcon={<FilterListIcon />}
-              onClick={handleOpenFilter}
-            >
-              Filters
-            </Button>
-          </Paper>
+          <AsideFiltersBar
+            filters={filters}
+            setFilters={setFilters}
+            handleOpenFilter={handleOpenFilter}
+          />
         </Grid>
         <Grid item>
           {UsersModel.loading.has ? (
@@ -118,6 +96,7 @@ function Users() {
 
       <AsideFilters
         config={filtersConfig}
+        filters={filters}
         setFilters={setFilters}
         openFilter={openFilter}
         onCloseFilter={handleCloseFilter}

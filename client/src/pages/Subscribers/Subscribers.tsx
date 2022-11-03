@@ -1,18 +1,30 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Box, Button, Grid, Typography } from '@mui/material'
 
-import { CommonTable, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, CommonTable, Spinner } from 'shared/ui'
 import { useDialog } from 'shared/hooks'
 import { Subscriber } from 'shared/types'
 
 import { SubscriberForm } from './ui'
-import { SubscribersModel, getColumns } from './model'
+import { SubscribersModel, getColumns, SubscriberFilters, getFiltersConfig } from './model'
 
 function Subscribers() {
   const { t } = useTranslation()
+
+  const [openFilter, setOpenFilter] = useState(false)
+
+  const handleOpenFilter = () => {
+    setOpenFilter(true)
+  }
+
+  const handleCloseFilter = () => {
+    setOpenFilter(false)
+  }
+
+  const [filters, setFilters] = useState<SubscriberFilters>({})
 
   useEffect(() => {
     SubscribersModel.fetch()
@@ -28,6 +40,7 @@ function Subscribers() {
   ))
 
   const columns = useMemo(() => getColumns(), [])
+  const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   return (
     <>
@@ -50,7 +63,15 @@ function Subscribers() {
           </Box>
         </Grid>
       </Grid>
+
       <Grid spacing={2} container direction="column">
+        <Grid item>
+          <AsideFiltersBar
+            filters={filters}
+            setFilters={setFilters}
+            handleOpenFilter={handleOpenFilter}
+          />
+        </Grid>
         <Grid item>
           {SubscribersModel.loading.has ? (
             <Spinner />
@@ -59,6 +80,14 @@ function Subscribers() {
           )}
         </Grid>
       </Grid>
+
+      <AsideFilters
+        config={filtersConfig}
+        filters={filters}
+        setFilters={setFilters}
+        openFilter={openFilter}
+        onCloseFilter={handleCloseFilter}
+      />
     </>
   )
 }

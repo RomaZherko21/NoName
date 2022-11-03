@@ -1,4 +1,4 @@
-import { InputFilter } from 'shared/ui/Filters/InputFilter'
+import { InputFilter } from 'shared/ui'
 
 export interface BooksFilters {
   id?: string
