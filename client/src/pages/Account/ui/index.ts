@@ -1,4 +1,5 @@
-export { ProfileForm } from './ProfileForm'
+export { ProfileForm } from './General/ProfileForm'
 export { ProfileInfo } from './ProfileInfo'
 export { DeleteAccount } from './DeleteAccount'
 export { ProfileList } from './ProfileList'
+export { General } from './General'

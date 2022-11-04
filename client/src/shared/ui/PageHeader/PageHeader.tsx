@@ -10,7 +10,7 @@ const PageHeader = ({ pageName, children }: { pageName: string; children?: JSX.E
 
     <Grid container spacing={2} sx={{ justifyContent: 'space-between' }}>
       <Grid item>
-        <Typography variant="h3" color="text.primary">
+        <Typography variant="h3" color="text.primary" sx={{ mb: 8 }}>
           {pageName}
         </Typography>
       </Grid>
