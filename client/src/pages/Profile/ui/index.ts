@@ -1,3 +1,2 @@
-export { ProfileForm } from './ProfileForm'
-export { ProfileInfo } from './ProfileInfo'
-export { DeleteAccount } from './DeleteAccount'
+export { Connections } from './Connections'
+export { Timeline } from './Timeline'

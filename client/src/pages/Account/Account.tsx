@@ -2,9 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Grid } from '@mui/material'
 
-import { ProfileInfo, ProfileForm, DeleteAccount } from './ui'
+import { ProfileInfo, ProfileForm, DeleteAccount, ProfileList } from './ui'
 import { PageHeader } from 'shared/ui'
-import { ProfileList } from 'pages/Profile/ui/ProfileList'
 
 function Account() {
   const { t } = useTranslation()
