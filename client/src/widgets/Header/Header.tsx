@@ -22,7 +22,7 @@ const Header = ({ className, toggleMenu }: Props) => {
       className={className}
     >
       <Toolbar disableGutters sx={{ padding: '0 15px', justifyContent: 'space-between' }}>
-        <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
+        <IconButton edge="start" color="primary" aria-label="menu" onClick={toggleMenu}>
           <ListIcon />
         </IconButton>
 

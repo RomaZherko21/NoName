@@ -13,10 +13,10 @@ const darkTheme = {
       paper: '#111827',
     },
     primary: {
-      main: '#5048E5',
+      main: '#7582EB',
       light: '#828DF8',
       dark: '#3832A0',
-      contrastText: '#FFFFFF',
+      contrastText: '#111827',
     },
     secondary: {
       main: '#10B981',

@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Container, Grid, Paper, Typography } from '@mui/material'
+import { Container, Grid } from '@mui/material'
 
-import { ProfileForm, DeleteAccount, ProfileList, General } from './ui'
+import { General, Notifications, Security } from './ui'
 import { PageHeader, Tabs } from 'shared/ui'
 
 function Kek() {
@@ -21,20 +21,17 @@ function Account() {
           { label: 'General', Component: General },
           { label: 'Billing', Component: Kek },
           { label: 'Team', Component: Kek },
-          { label: 'Notifications', Component: Kek },
-          { label: 'Security', Component: Kek },
+          { label: 'Notifications', Component: Notifications },
+          { label: 'Security', Component: Security },
         ]}
       />
 
       <Grid container spacing={3}>
-        <Grid item lg={8} md={6} xs={12}>
+        {/* <Grid item lg={8} md={6} xs={12}>
           <ProfileList />
-        </Grid>
+        </Grid> */}
 
         <Grid item lg={4} xs={12}></Grid>
-        <Grid item lg={8} xs={12}>
-          <DeleteAccount />
-        </Grid>
       </Grid>
     </Container>
   )
