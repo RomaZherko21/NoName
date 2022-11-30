@@ -25,9 +25,9 @@
                 "responses": {}
             }
         },
-        "/api/reports": {
+        "/go-api/authors/{id}": {
             "get": {
-                "description": "get all reports",
+                "description": "get author by it's id",
                 "consumes": [
                     "application/json"
                 ],
@@ -35,109 +35,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "report"
+                    "author"
                 ],
-                "summary": "getAllReports",
-                "responses": {}
-            },
-            "post": {
-                "description": "create report",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "report"
-                ],
-                "summary": "createReport",
-                "parameters": [
-                    {
-                        "description": "Some description...",
-                        "name": "input",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/goapi.ReportRequest"
-                        }
-                    }
-                ],
-                "responses": {}
-            }
-        },
-        "/api/reports/{id}": {
-            "get": {
-                "description": "get report by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "report"
-                ],
-                "summary": "getReportById",
+                "summary": "getAuthorById",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Report ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {}
-            },
-            "put": {
-                "description": "update report by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "report"
-                ],
-                "summary": "updateReport",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Report ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "New description...",
-                        "name": "input",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/goapi.ReportRequest"
-                        }
-                    }
-                ],
-                "responses": {}
-            },
-            "delete": {
-                "description": "delete report by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "report"
-                ],
-                "summary": "deleteReport",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Report ID",
+                        "description": "Author ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -145,15 +49,30 @@
                 ],
                 "responses": {}
             }
-        }
-    },
-    "definitions": {
-        "goapi.ReportRequest": {
-            "type": "object",
-            "properties": {
-                "description": {
-                    "type": "string"
-                }
+        },
+        "/go-api/authors/{id}/books": {
+            "get": {
+                "description": "get all books by author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "getAuthorBooks",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Author ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
             }
         }
     }

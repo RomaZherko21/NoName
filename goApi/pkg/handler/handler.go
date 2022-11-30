@@ -8,6 +8,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
+	"github.com/RomaZherko21/goApi/common"
 	"github.com/RomaZherko21/goApi/pkg/service"
 )
 
@@ -23,17 +24,10 @@ func NewHandler(services *service.Service, db *sql.DB) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
+	API_PORT_INNER := common.MustGetEnv("GO_API_PORT_INNER")
+
 	api := router.Group("/go-api")
 	{
-		reports := api.Group("/reports")
-		{
-			reports.POST("/", h.createReport)
-			reports.GET("/", h.getAllReports)
-			reports.GET("/:id", h.getReportById)
-			reports.PUT("/:id", h.updateReport)
-			reports.DELETE("/:id", h.deleteReport)
-		}
-
 		books := api.Group("/books")
 		{
 			books.GET("/", h.getAllBooks)
@@ -66,7 +60,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		api.StaticFS("/uploads", http.Dir("./uploads"))
 	}
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.Run(":8000")
+	router.Run(":" + API_PORT_INNER)
 
 	return router
 }

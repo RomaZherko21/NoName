@@ -8,29 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Summary      getAllBooksByGenre
-// @Description  get all books with genres and author
-// @Tags         books
+// @Summary      getAuthorById
+// @Description  get author by it's id
+// @Tags         author
 // @Accept       json
 // @Produce      json
-// @Router       /api/books [get]
+// @Param        id   path      int  true  "Author ID"
+// @Router       /go-api/authors/{id} [get]
 func (h *Handler) getAuthorById(c *gin.Context) {
 	id := c.Param("id")
 
-	type resType struct {
-		goapi.Author
-	}
-
-	var author resType
-
-	err := h.db.QueryRow(goapi.GetAuthorQuery, id).Scan(
-		&author.Id, &author.Name, &author.Surname, &author.Description, &author.DateOfBirth, &author.DateOfDeath)
+	author, err := h.services.Author.GetAuthor(id)
 
 	if err != nil {
-		fmt.Println(err)
-		c.JSON(http.StatusOK, gin.H{
-			"book": nil,
-		})
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -40,22 +31,20 @@ func (h *Handler) getAuthorById(c *gin.Context) {
 
 }
 
-// @Summary      getAllBooksByGenre
-// @Description  get all books with genres and author
-// @Tags         books
+// @Summary      getAuthorBooks
+// @Description  get all books by author
+// @Tags         author
 // @Accept       json
 // @Produce      json
-// @Router       /api/books [get]
+// @Param        id   path      int  true  "Author ID"
+// @Router       /go-api/authors/{id}/books [get]
 func (h *Handler) getAuthorBooks(c *gin.Context) {
 	id := c.Param("id")
 
 	booksRows, queryErr := h.db.Query(goapi.GetAuthorBooksQuery, id)
 
 	if queryErr != nil {
-		fmt.Println(queryErr)
-		c.JSON(http.StatusOK, gin.H{
-			"books": nil,
-		})
+		newErrorResponse(c, http.StatusBadRequest, queryErr.Error())
 		return
 	}
 

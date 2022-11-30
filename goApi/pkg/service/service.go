@@ -1,22 +1,20 @@
 package service
 
-import "github.com/RomaZherko21/goApi/pkg/repository"
+import (
+	goapi "github.com/RomaZherko21/goApi"
+	"github.com/RomaZherko21/goApi/pkg/repository"
+)
 
-type Authorization interface {
-}
-
-type TodoList interface {
-}
-
-type TodoItem interface {
+type Author interface {
+	GetAuthor(id string) (goapi.Author, error)
 }
 
 type Service struct {
-	Authorization
-	TodoList
-	TodoItem
+	Author
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Author: NewAuthorService(repos.Author),
+	}
 }

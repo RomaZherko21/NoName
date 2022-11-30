@@ -34,7 +34,7 @@ type Subscriber struct {
 
 type Subscribtion struct {
 	Id           int    `json:"id"`
-	SubscriberId int    `json:"subscriber_id" `
+	SubscriberId int    `json:"subscriber_id" binding:"required"`
 	BookId       int    `json:"book_id"`
 	Start        string `json:"start"`
 	Finish       string `json:"finish" `

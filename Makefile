@@ -19,8 +19,6 @@ prune: ## Remove ALL stopped container and ALL unused volumes
 sysPrune: ## Remove all unused containers, networks, images, and optionally, volumes.
 	docker system prune -a 
 
-
-
 .PHONY: runGo
 runGo: ## Run go_api container
 	docker-compose up --build go_api

@@ -29,13 +29,6 @@ const SettingTab = ({ onMenuClose }: Props) => {
         <ListItemText primary="Support" />
       </ListItemButton>
 
-      <ListItemButton onClick={(event) => onChangePage(ROUTES.PROFILE, event)}>
-        <ListItemIcon>
-          <AccountCircleIcon fontSize="small" />
-        </ListItemIcon>
-        <ListItemText primary="Account Settings" />
-      </ListItemButton>
-
       <ListItemButton>
         <ListItemIcon>
           <HttpsIcon fontSize="small" />

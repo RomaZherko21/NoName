@@ -20,14 +20,6 @@ VALUES
   ('Alexa','Richardson','William','lexa@gmail.com','woman','1991-08-13','+375-25-709-67-18', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
   ('Cao','Yu','Mason','chao@gmail.com','man','1956-03-13','+375-25-709-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png');
 
-CREATE TABLE IF NOT EXISTS `reports` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `description` text,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
-);
-
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,

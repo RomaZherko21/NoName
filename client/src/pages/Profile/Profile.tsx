@@ -91,7 +91,7 @@ function Profile() {
                 src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
               />
               <Stack>
-                <Typography variant="h6">
+                <Typography variant="h6" color="textPrimary">
                   {user.name} {user.surname}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">

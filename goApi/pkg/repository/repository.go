@@ -1,20 +1,21 @@
 package repository
 
-type Authorization interface {
-}
+import (
+	"database/sql"
 
-type TodoList interface {
-}
+	goapi "github.com/RomaZherko21/goApi"
+)
 
-type TodoItem interface {
+type Author interface {
+	GetAuthor(id string) (goapi.Author, error)
 }
 
 type Repository struct {
-	Authorization
-	TodoList
-	TodoItem
+	Author
 }
 
-func NewRepository() *Repository {
-	return &Repository{}
+func NewRepository(db *sql.DB) *Repository {
+	return &Repository{
+		Author: NewAuthorRepo(db),
+	}
 }

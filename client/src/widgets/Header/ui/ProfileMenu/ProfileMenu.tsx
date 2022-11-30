@@ -90,7 +90,7 @@ function ProfileMenu() {
             sx={{ cursor: 'pointer' }}
             src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
           />
-          <Typography variant="subtitle2">
+          <Typography variant="subtitle2" color="textPrimary">
             {user.name} {user.surname}
           </Typography>
         </Stack>
