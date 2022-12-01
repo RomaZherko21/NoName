@@ -13,6 +13,10 @@ func NewAuthorService(repo repository.Author) *AuthorService {
 	return &AuthorService{repo: repo}
 }
 
-func (s *AuthorService) GetAuthor(id string) (goapi.Author, error) {
-	return s.repo.GetAuthor(id)
+func (s *AuthorService) GetAuthorById(id string) (goapi.Author, error) {
+	return s.repo.GetAuthorById(id)
+}
+
+func (s *AuthorService) GetBooksByAuthorId(id string) ([]goapi.Book, error) {
+	return s.repo.GetBooksByAuthorId(id)
 }

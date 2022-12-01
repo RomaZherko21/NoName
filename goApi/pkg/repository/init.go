@@ -8,16 +8,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const (
-	booksTable         = "books"
-	genresTable        = "genres"
-	authorsTable       = "authors"
-	subscribersTable   = "subscribers"
-	subscriptionsTable = "subscriptions"
-	booksAuthorsTable  = "m2m_books_authors"
-	booksGenresTable   = "m2m_books_genres"
-)
-
 func InitDB() *sql.DB {
 	db, err := sql.Open(
 		"mysql",

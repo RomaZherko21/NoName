@@ -1,7 +1,7 @@
 package goapi
 
 type Book struct {
-	Id          int    `json:"id" `
+	Id          int    `json:"id"`
 	Name        string `json:"name"`
 	Publisher   string `json:"publisher"`
 	Description string `json:"description"`

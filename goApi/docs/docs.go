@@ -59,7 +59,7 @@ const docTemplate = `{
         },
         "/go-api/authors/{id}/books": {
             "get": {
-                "description": "get all books by author",
+                "description": "get all books by author id",
                 "consumes": [
                     "application/json"
                 ],
@@ -69,7 +69,7 @@ const docTemplate = `{
                 "tags": [
                     "author"
                 ],
-                "summary": "getAuthorBooks",
+                "summary": "getBooksByAuthorId",
                 "parameters": [
                     {
                         "type": "integer",
@@ -79,6 +79,38 @@ const docTemplate = `{
                         "required": true
                     }
                 ],
+                "responses": {}
+            }
+        },
+        "/go-api/genres": {
+            "get": {
+                "description": "get all genres",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genres"
+                ],
+                "summary": "getAllGenres",
+                "responses": {}
+            }
+        },
+        "/go-api/subscribtions": {
+            "get": {
+                "description": "get all subscribtions",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribtions"
+                ],
+                "summary": "getAllSubscribtions",
                 "responses": {}
             }
         }

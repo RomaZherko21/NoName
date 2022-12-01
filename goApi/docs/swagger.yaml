@@ -38,7 +38,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: get all books by author
+      description: get all books by author id
       parameters:
       - description: Author ID
         in: path
@@ -48,7 +48,29 @@ paths:
       produces:
       - application/json
       responses: {}
-      summary: getAuthorBooks
+      summary: getBooksByAuthorId
       tags:
       - author
+  /go-api/genres:
+    get:
+      consumes:
+      - application/json
+      description: get all genres
+      produces:
+      - application/json
+      responses: {}
+      summary: getAllGenres
+      tags:
+      - genres
+  /go-api/subscribtions:
+    get:
+      consumes:
+      - application/json
+      description: get all subscribtions
+      produces:
+      - application/json
+      responses: {}
+      summary: getAllSubscribtions
+      tags:
+      - subscribtions
 swagger: "2.0"
