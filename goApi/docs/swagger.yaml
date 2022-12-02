@@ -62,6 +62,34 @@ paths:
       summary: getAllGenres
       tags:
       - genres
+  /go-api/subscribers/:
+    get:
+      consumes:
+      - application/json
+      description: get all subscribers
+      produces:
+      - application/json
+      responses: {}
+      summary: getAllSubscribers
+      tags:
+      - subscribers
+  /go-api/subscribers/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get subscriber by id
+      parameters:
+      - description: Subscriber ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: getSubscriberById
+      tags:
+      - subscribers
   /go-api/subscribtions:
     get:
       consumes:

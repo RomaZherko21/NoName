@@ -49,7 +49,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		subscribers := api.Group("/subscribers")
 		{
 			subscribers.GET("/", h.getAllSubscribers)
-			subscribers.GET("/:id", h.getSubscriber)
+			subscribers.GET("/:id", h.getSubscriberById)
 		}
 
 		subscribtions := api.Group("/subscribtions")

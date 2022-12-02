@@ -19,10 +19,17 @@ type Subscribtion interface {
 	GetAllSubscribtions() ([]goapi.Subscribtion, error)
 }
 
+type Subscriber interface {
+	GetAllSubscribers() ([]goapi.Subscriber, error)
+	GetSubscriberById(id string) (goapi.Subscriber, error)
+	GetBooksBySubscriberId(id string) ([]goapi.Book, error)
+}
+
 type Repository struct {
 	Author
 	Genre
 	Subscribtion
+	Subscriber
 }
 
 func NewRepository(db *sql.DB) *Repository {
@@ -30,5 +37,6 @@ func NewRepository(db *sql.DB) *Repository {
 		Author:       NewAuthorRepo(db),
 		Genre:        NewGenreRepo(db),
 		Subscribtion: NewSubscribtionRepo(db),
+		Subscriber:   NewSubscriberRepo(db),
 	}
 }

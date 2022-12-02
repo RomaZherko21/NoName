@@ -91,6 +91,47 @@
                 "responses": {}
             }
         },
+        "/go-api/subscribers/": {
+            "get": {
+                "description": "get all subscribers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "getAllSubscribers",
+                "responses": {}
+            }
+        },
+        "/go-api/subscribers/{id}": {
+            "get": {
+                "description": "get subscriber by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "getSubscriberById",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Subscriber ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/go-api/subscribtions": {
             "get": {
                 "description": "get all subscribtions",
