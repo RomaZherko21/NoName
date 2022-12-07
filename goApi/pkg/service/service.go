@@ -20,7 +20,7 @@ type Subscribtion interface {
 
 type Subscriber interface {
 	GetAllSubscribers() ([]goapi.Subscriber, error)
-	GetSubscriberById(id string) (subscriberWithBooks, error)
+	GetSubscriberById(id string) (SubscriberWithBooks, error)
 }
 
 type Service struct {

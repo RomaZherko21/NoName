@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"strconv"
 
 	goapi "github.com/RomaZherko21/goApi"
@@ -20,20 +19,19 @@ func (s *SubscriberService) GetAllSubscribers() ([]goapi.Subscriber, error) {
 	return s.repo.GetAllSubscribers()
 }
 
-type subscriberWithBooks struct {
-	subscriber goapi.Subscriber
-	books      []goapi.Book
+type SubscriberWithBooks struct {
+	Subscriber goapi.Subscriber `json:"subscriber"`
+	Books      []goapi.Book     `json:"books"`
 }
 
-func (s *SubscriberService) GetSubscriberById(id string) (subscriberWithBooks, error) {
+func (s *SubscriberService) GetSubscriberById(id string) (SubscriberWithBooks, error) {
 	subscriber, err := s.repo.GetSubscriberById(id)
 
 	if err != nil {
-		return subscriberWithBooks{subscriber: subscriber, books: make([]goapi.Book, 0)}, err
+		return SubscriberWithBooks{Subscriber: subscriber, Books: make([]goapi.Book, 0)}, err
 	}
 
 	books, err := s.repo.GetBooksBySubscriberId(strconv.Itoa(subscriber.Id))
-	fmt.Print("books", books)
 
-	return subscriberWithBooks{subscriber: subscriber, books: books}, err
+	return SubscriberWithBooks{Subscriber: subscriber, Books: books}, err
 }

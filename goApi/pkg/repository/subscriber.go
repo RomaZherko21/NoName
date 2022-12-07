@@ -68,19 +68,29 @@ func (s *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 	books.name,
 	books.publisher,
 	books.description, 
-	books.year
+	books.year,
+	books.quantity
 		FROM books 
 			JOIN subscriptions ON subscriptions.book_id = books.id
 	WHERE subscriptions.subscriber_id=?
 	`
 
+	books := make([]goapi.Book, 0)
+
 	rows, err := s.db.Query(query, id)
 
-	books := make([]goapi.Book, 0)
+	if err != nil {
+		return books, err
+	}
 
 	for rows.Next() {
 		var item goapi.Book
-		rows.Scan(&item.Id, &item.Name, &item.Publisher, &item.Description, &item.Year)
+		err = rows.Scan(&item.Id, &item.Name, &item.Publisher, &item.Description, &item.Year, &item.Quantity)
+
+		if err != nil {
+			return books, err
+		}
+
 		books = append(books, item)
 	}
 

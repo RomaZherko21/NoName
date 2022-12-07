@@ -33,7 +33,9 @@ class SubscriberModel {
 
       const data = await GO_API.subscribers.get(id)
 
-      this.fromJSON(data.subscriber)
+      this.fromJSON(data.data.subscriber)
+
+      this.subscriptions = data.data.books
 
       this.loading.end()
     } catch {
@@ -41,14 +43,13 @@ class SubscriberModel {
     }
   }
 
-  private fromJSON(subscriber: Subscriber & { books: Book[] }) {
+  private fromJSON(subscriber: Subscriber) {
     this.id = subscriber.id
     this.name = subscriber.name
     this.surname = subscriber.surname
     this.middle_name = subscriber.middle_name
     this.date_of_birth = subscriber.date_of_birth
     this.tel_number = subscriber.tel_number
-    this.subscriptions = subscriber.books
   }
 }
 

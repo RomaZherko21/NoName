@@ -7,7 +7,7 @@ const ENDPOINT_BASE = '/subscribers'
 export const list = () => fetch.get<{ subscribers: Subscriber[] }>(`${ENDPOINT_BASE}/`)
 
 export const get = (id: number) =>
-  fetch.get<{ subscriber: Subscriber & { books: Book[] } }>(`${ENDPOINT_BASE}/${id}`)
+  fetch.get<{ data: { subscriber: Subscriber; books: Book[] } }>(`${ENDPOINT_BASE}/${id}`)
 
 export const create = (value: Subscriber) => fetch.post<Subscriber>(`${ENDPOINT_BASE}`, value)
 
