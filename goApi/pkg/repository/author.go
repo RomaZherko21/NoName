@@ -49,14 +49,23 @@ func (s *AuthorRepo) GetBooksByAuthorId(id string) ([]goapi.Book, error) {
 	WHERE m2m_books_authors.author_id=?
 		`
 
-	rows, err := s.db.Query(query, id)
-
 	books := make([]goapi.Book, 0)
 
+	rows, err := s.db.Query(query, id)
+
+	if err != nil {
+		return books, err
+	}
+
 	for rows.Next() {
-		var book goapi.Book
-		rows.Scan(&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year, &book.Quantity)
-		books = append(books, book)
+		var item goapi.Book
+		err = rows.Scan(&item.Id, &item.Name, &item.Publisher, &item.Description, &item.Year, &item.Quantity)
+
+		if err != nil {
+			return books, err
+		}
+
+		books = append(books, item)
 	}
 
 	return books, err

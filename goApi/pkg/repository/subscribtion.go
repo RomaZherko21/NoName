@@ -26,13 +26,21 @@ func (s *SubscribtionRepo) GetAllSubscribtions() ([]goapi.Subscribtion, error) {
 	FROM subscriptions
 		`
 
+	subscribtions := make([]goapi.Subscribtion, 0)
+
 	rows, err := s.db.Query(query)
 
-	subscribtions := make([]goapi.Subscribtion, 0)
+	if err != nil {
+		return subscribtions, err
+	}
 
 	for rows.Next() {
 		var item goapi.Subscribtion
-		rows.Scan(&item.Id, &item.SubscriberId, &item.BookId, &item.Start, &item.Finish, &item.IsActive)
+		err = rows.Scan(&item.Id, &item.SubscriberId, &item.BookId, &item.Start, &item.Finish, &item.IsActive)
+
+		if err != nil {
+			return subscribtions, err
+		}
 
 		subscribtions = append(subscribtions, item)
 	}

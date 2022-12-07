@@ -22,13 +22,21 @@ func (s *GenreRepo) GetAllGenres() ([]goapi.Genre, error) {
 	FROM genres
 		`
 
+	genres := make([]goapi.Genre, 0)
+
 	rows, err := s.db.Query(query)
 
-	genres := make([]goapi.Genre, 0)
+	if err != nil {
+		return genres, err
+	}
 
 	for rows.Next() {
 		var genre goapi.Genre
-		rows.Scan(&genre.Id, &genre.Name)
+		err = rows.Scan(&genre.Id, &genre.Name)
+
+		if err != nil {
+			return genres, err
+		}
 
 		genres = append(genres, genre)
 	}

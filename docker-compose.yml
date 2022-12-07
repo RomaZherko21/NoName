@@ -57,9 +57,7 @@ services:
     depends_on:
       - mysql_db
     environment:
-      <<: *my-sql-variables
-      <<: *node-api-variables
-      <<: *client-variables
+      <<: [*my-sql-variables, *node-api-variables, *client-variables]
       MYSQL_HOST_IP: mysql_db
   
   go_api:
