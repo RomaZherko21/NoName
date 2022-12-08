@@ -25,11 +25,24 @@ type Subscriber interface {
 	GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 }
 
+type Book interface {
+	GetAllBooks() ([]goapi.Book, error)
+	GetBookById(id string) (goapi.Book, error)
+	GetAuthorsByBookId(id string) ([]goapi.Author, error)
+	GetGenresByBookId(id string) ([]goapi.Genre, error)
+
+	GetBookAmount(id string) (int, error)
+	GetBookLeftAmount(id string) (int, error)
+	GetBookTakenForAllTimeAmount(id string) (int, error)
+	GetSubscriptionsAmount() (int, error)
+}
+
 type Repository struct {
 	Author
 	Genre
 	Subscribtion
 	Subscriber
+	Book
 }
 
 func NewRepository(db *sql.DB) *Repository {
@@ -38,5 +51,6 @@ func NewRepository(db *sql.DB) *Repository {
 		Genre:        NewGenreRepo(db),
 		Subscribtion: NewSubscribtionRepo(db),
 		Subscriber:   NewSubscriberRepo(db),
+		Book:         NewBookRepo(db),
 	}
 }

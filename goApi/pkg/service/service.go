@@ -23,11 +23,18 @@ type Subscriber interface {
 	GetSubscriberById(id string) (SubscriberWithBooks, error)
 }
 
+type Book interface {
+	GetAllBooks() ([]BookWithMeta, error)
+	GetBookById(id string) (BookWithMeta, error)
+	GetBookStatsById(id string) (BookStats, error)
+}
+
 type Service struct {
 	Author
 	Genre
 	Subscribtion
 	Subscriber
+	Book
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -36,5 +43,6 @@ func NewService(repos *repository.Repository) *Service {
 		Genre:        NewGenreService(repos.Genre),
 		Subscribtion: NewSubscribtionService(repos.Subscribtion),
 		Subscriber:   NewSubscriberService(repos.Subscriber),
+		Book:         NewBookService(repos.Book),
 	}
 }

@@ -6,17 +6,6 @@ info:
   title: NoName go_api
   version: "1.0"
 paths:
-  /api/books:
-    get:
-      consumes:
-      - application/json
-      description: get all books with genres and author
-      produces:
-      - application/json
-      responses: {}
-      summary: getAllBooksByGenre
-      tags:
-      - books
   /go-api/authors/{id}:
     get:
       consumes:
@@ -51,6 +40,51 @@ paths:
       summary: getBooksByAuthorId
       tags:
       - author
+  /go-api/books:
+    get:
+      consumes:
+      - application/json
+      description: get all books
+      produces:
+      - application/json
+      responses: {}
+      summary: getAllBooks
+      tags:
+      - books
+  /go-api/books/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get book by id
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: getBookById
+      tags:
+      - books
+  /go-api/books/{id}/stats:
+    get:
+      consumes:
+      - application/json
+      description: get all books stats
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: getBookStatsById
+      tags:
+      - books
   /go-api/genres:
     get:
       consumes:

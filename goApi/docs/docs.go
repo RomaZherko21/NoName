@@ -16,22 +16,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/books": {
-            "get": {
-                "description": "get all books with genres and author",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "books"
-                ],
-                "summary": "getAllBooksByGenre",
-                "responses": {}
-            }
-        },
         "/go-api/authors/{id}": {
             "get": {
                 "description": "get author by it's id",
@@ -74,6 +58,72 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Author ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/go-api/books": {
+            "get": {
+                "description": "get all books",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "books"
+                ],
+                "summary": "getAllBooks",
+                "responses": {}
+            }
+        },
+        "/go-api/books/{id}": {
+            "get": {
+                "description": "get book by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "books"
+                ],
+                "summary": "getBookById",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Book ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/go-api/books/{id}/stats": {
+            "get": {
+                "description": "get all books stats",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "books"
+                ],
+                "summary": "getBookStatsById",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Book ID",
                         "name": "id",
                         "in": "path",
                         "required": true
