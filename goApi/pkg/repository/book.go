@@ -14,7 +14,7 @@ func NewBookRepo(db *sql.DB) *BookRepo {
 	return &BookRepo{db: db}
 }
 
-func (s *BookRepo) GetAllBooks() ([]goapi.Book, error) {
+func (r *BookRepo) GetAllBooks() ([]goapi.Book, error) {
 	query := `
 	SELECT 
 		books.id,
@@ -28,7 +28,7 @@ func (s *BookRepo) GetAllBooks() ([]goapi.Book, error) {
 
 	books := make([]goapi.Book, 0)
 
-	rows, err := s.db.Query(query)
+	rows, err := r.db.Query(query)
 
 	if err != nil {
 		return books, err
@@ -48,7 +48,7 @@ func (s *BookRepo) GetAllBooks() ([]goapi.Book, error) {
 	return books, err
 }
 
-func (s *BookRepo) GetBookById(id string) (goapi.Book, error) {
+func (r *BookRepo) GetBookById(id string) (goapi.Book, error) {
 	query := `
 	SELECT 
 	books.id,
@@ -63,13 +63,13 @@ func (s *BookRepo) GetBookById(id string) (goapi.Book, error) {
 
 	var book goapi.Book
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year, &book.Quantity)
 
 	return book, err
 }
 
-func (s *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
+func (r *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
 	query := `
 	SELECT 
 	authors.id,
@@ -85,7 +85,7 @@ func (s *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
 
 	authors := make([]goapi.Author, 0)
 
-	rows, err := s.db.Query(query, id)
+	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return authors, err
@@ -105,7 +105,7 @@ func (s *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
 	return authors, err
 }
 
-func (s *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
+func (r *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
 	query := `
 	SELECT 
 	genres.id,
@@ -117,7 +117,7 @@ func (s *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
 
 	genres := make([]goapi.Genre, 0)
 
-	rows, err := s.db.Query(query, id)
+	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return genres, err
@@ -137,12 +137,12 @@ func (s *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
 	return genres, err
 }
 
-func (s *BookRepo) GetBookAmount(id string) (int, error) {
+func (r *BookRepo) GetBookAmount(id string) (int, error) {
 	query := `SELECT books.quantity FROM books WHERE books.id=?`
 
 	var counter int
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&counter)
 
 	if err != nil {
@@ -152,7 +152,7 @@ func (s *BookRepo) GetBookAmount(id string) (int, error) {
 	return counter, err
 }
 
-func (s *BookRepo) GetBookLeftAmount(id string) (int, error) {
+func (r *BookRepo) GetBookLeftAmount(id string) (int, error) {
 	query := `
 	SELECT 
 	COUNT(subscriptions.book_id) as books_remains
@@ -162,7 +162,7 @@ func (s *BookRepo) GetBookLeftAmount(id string) (int, error) {
 
 	var counter int
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&counter)
 
 	if err != nil {
@@ -172,12 +172,12 @@ func (s *BookRepo) GetBookLeftAmount(id string) (int, error) {
 	return counter, err
 }
 
-func (s *BookRepo) GetBookTakenForAllTimeAmount(id string) (int, error) {
+func (r *BookRepo) GetBookTakenForAllTimeAmount(id string) (int, error) {
 	query := `SELECT COUNT(subscriptions.id) FROM subscriptions WHERE subscriptions.book_id=?`
 
 	var counter int
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&counter)
 
 	if err != nil {
@@ -187,12 +187,12 @@ func (s *BookRepo) GetBookTakenForAllTimeAmount(id string) (int, error) {
 	return counter, err
 }
 
-func (s *BookRepo) GetSubscriptionsAmount() (int, error) {
+func (r *BookRepo) GetSubscriptionsAmount() (int, error) {
 	query := `SELECT COUNT(subscriptions.id) FROM subscriptions`
 
 	var counter int
 
-	err := s.db.QueryRow(query).Scan(
+	err := r.db.QueryRow(query).Scan(
 		&counter)
 
 	if err != nil {

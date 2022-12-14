@@ -162,6 +162,31 @@ const docTemplate = `{
                 ],
                 "summary": "getAllSubscribers",
                 "responses": {}
+            },
+            "post": {
+                "description": "create subscriber",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "createSubscriber",
+                "parameters": [
+                    {
+                        "description": "Subscriber JSON",
+                        "name": "subscriber",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/goapi.Subscriber"
+                        }
+                    }
+                ],
+                "responses": {}
             }
         },
         "/go-api/subscribers/{id}": {
@@ -177,6 +202,61 @@ const docTemplate = `{
                     "subscribers"
                 ],
                 "summary": "getSubscriberById",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Subscriber ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "description": "create subscriber",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "updateSubscriberById",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Subscriber ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Subscriber JSON",
+                        "name": "subscriber",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/goapi.Subscriber"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "description": "delete subscriber by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "deleteSubscriberById",
                 "parameters": [
                     {
                         "type": "integer",
@@ -203,6 +283,36 @@ const docTemplate = `{
                 ],
                 "summary": "getAllSubscribtions",
                 "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "goapi.Subscriber": {
+            "type": "object",
+            "properties": {
+                "date_of_birth": {
+                    "type": "string",
+                    "example": "1970-04-21"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "middle_name": {
+                    "type": "string",
+                    "example": "Stark"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Anthony"
+                },
+                "surname": {
+                    "type": "string",
+                    "example": "Edward"
+                },
+                "tel_number": {
+                    "type": "string",
+                    "example": "+375-25-777-55-44"
+                }
             }
         }
     }

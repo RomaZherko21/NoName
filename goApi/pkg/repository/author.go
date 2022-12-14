@@ -14,7 +14,7 @@ func NewAuthorRepo(db *sql.DB) *AuthorRepo {
 	return &AuthorRepo{db: db}
 }
 
-func (s *AuthorRepo) GetAuthorById(id string) (goapi.Author, error) {
+func (r *AuthorRepo) GetAuthorById(id string) (goapi.Author, error) {
 	query := `
 	SELECT 
 		authors.id,
@@ -29,13 +29,13 @@ func (s *AuthorRepo) GetAuthorById(id string) (goapi.Author, error) {
 
 	var author goapi.Author
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&author.Id, &author.Name, &author.Surname, &author.Description, &author.DateOfBirth, &author.DateOfDeath)
 
 	return author, err
 }
 
-func (s *AuthorRepo) GetBooksByAuthorId(id string) ([]goapi.Book, error) {
+func (r *AuthorRepo) GetBooksByAuthorId(id string) ([]goapi.Book, error) {
 	query := `
 	SELECT 
 	books.id,
@@ -51,7 +51,7 @@ func (s *AuthorRepo) GetBooksByAuthorId(id string) ([]goapi.Book, error) {
 
 	books := make([]goapi.Book, 0)
 
-	rows, err := s.db.Query(query, id)
+	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return books, err

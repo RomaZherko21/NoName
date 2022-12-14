@@ -1,4 +1,25 @@
 basePath: /
+definitions:
+  goapi.Subscriber:
+    properties:
+      date_of_birth:
+        example: "1970-04-21"
+        type: string
+      id:
+        type: integer
+      middle_name:
+        example: Stark
+        type: string
+      name:
+        example: Anthony
+        type: string
+      surname:
+        example: Edward
+        type: string
+      tel_number:
+        example: +375-25-777-55-44
+        type: string
+    type: object
 host: localhost:8000
 info:
   contact: {}
@@ -107,7 +128,40 @@ paths:
       summary: getAllSubscribers
       tags:
       - subscribers
+    post:
+      consumes:
+      - application/json
+      description: create subscriber
+      parameters:
+      - description: Subscriber JSON
+        in: body
+        name: subscriber
+        required: true
+        schema:
+          $ref: '#/definitions/goapi.Subscriber'
+      produces:
+      - application/json
+      responses: {}
+      summary: createSubscriber
+      tags:
+      - subscribers
   /go-api/subscribers/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete subscriber by id
+      parameters:
+      - description: Subscriber ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: deleteSubscriberById
+      tags:
+      - subscribers
     get:
       consumes:
       - application/json
@@ -122,6 +176,28 @@ paths:
       - application/json
       responses: {}
       summary: getSubscriberById
+      tags:
+      - subscribers
+    put:
+      consumes:
+      - application/json
+      description: create subscriber
+      parameters:
+      - description: Subscriber ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Subscriber JSON
+        in: body
+        name: subscriber
+        required: true
+        schema:
+          $ref: '#/definitions/goapi.Subscriber'
+      produces:
+      - application/json
+      responses: {}
+      summary: updateSubscriberById
       tags:
       - subscribers
   /go-api/subscribtions:

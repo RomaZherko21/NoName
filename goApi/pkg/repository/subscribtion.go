@@ -14,7 +14,7 @@ func NewSubscribtionRepo(db *sql.DB) *SubscribtionRepo {
 	return &SubscribtionRepo{db: db}
 }
 
-func (s *SubscribtionRepo) GetAllSubscribtions() ([]goapi.Subscribtion, error) {
+func (r *SubscribtionRepo) GetAllSubscribtions() ([]goapi.Subscribtion, error) {
 	query := `
 	SELECT 
 		subscriptions.id,
@@ -28,7 +28,7 @@ func (s *SubscribtionRepo) GetAllSubscribtions() ([]goapi.Subscribtion, error) {
 
 	subscribtions := make([]goapi.Subscribtion, 0)
 
-	rows, err := s.db.Query(query)
+	rows, err := r.db.Query(query)
 
 	if err != nil {
 		return subscribtions, err

@@ -24,12 +24,12 @@ type Genre struct {
 }
 
 type Subscriber struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name" `
-	Surname     string `json:"surname"`
-	MiddleName  string `json:"middle_name"`
-	DateOfBirth string `json:"date_of_birth" `
-	TelNumber   string `json:"tel_number" `
+	Id          int    `json:"id" `
+	Name        string `json:"name" example:"Anthony"`
+	Surname     string `json:"surname" example:"Edward"`
+	MiddleName  string `json:"middle_name" example:"Stark"`
+	DateOfBirth string `json:"date_of_birth" example:"1970-04-21" `
+	TelNumber   string `json:"tel_number" example:"+375-25-777-55-44" `
 }
 
 type Subscribtion struct {

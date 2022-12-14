@@ -35,3 +35,27 @@ func (s *SubscriberService) GetSubscriberById(id string) (SubscriberWithBooks, e
 
 	return SubscriberWithBooks{Subscriber: subscriber, Books: books}, err
 }
+
+func (s *SubscriberService) DeleteSubscriberById(id string) error {
+	err := s.repo.DeleteSubscriptionsBySubscriberId(id)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.repo.DeleteSubscriberById(id)
+
+	return err
+}
+
+func (s *SubscriberService) CreateSubscriber(subscriber goapi.Subscriber) error {
+	err := s.repo.CreateSubscriber(subscriber)
+
+	return err
+}
+
+func (s *SubscriberService) UpdateSubscriberById(subscriber goapi.Subscriber, id string) error {
+	err := s.repo.UpdateSubscriberById(subscriber, id)
+
+	return err
+}

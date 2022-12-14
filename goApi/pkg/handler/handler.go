@@ -50,6 +50,9 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		{
 			subscribers.GET("/", h.getAllSubscribers)
 			subscribers.GET("/:id", h.getSubscriberById)
+			subscribers.POST("/", h.createSubscriber)
+			subscribers.PUT("/:id", h.updateSubscriberById)
+			subscribers.DELETE("/:id", h.deleteSubscriberById)
 		}
 
 		subscribtions := api.Group("/subscribtions")

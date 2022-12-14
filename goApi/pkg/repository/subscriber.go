@@ -14,7 +14,7 @@ func NewSubscriberRepo(db *sql.DB) *SubscriberRepo {
 	return &SubscriberRepo{db: db}
 }
 
-func (s *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
+func (r *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
 	query := `
 	SELECT 
 		subscribers.id,
@@ -28,7 +28,7 @@ func (s *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
 
 	subscribers := make([]goapi.Subscriber, 0)
 
-	rows, err := s.db.Query(query)
+	rows, err := r.db.Query(query)
 
 	if err != nil {
 		return subscribers, err
@@ -48,7 +48,7 @@ func (s *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
 	return subscribers, err
 }
 
-func (s *SubscriberRepo) GetSubscriberById(id string) (goapi.Subscriber, error) {
+func (r *SubscriberRepo) GetSubscriberById(id string) (goapi.Subscriber, error) {
 	query := `
 	SELECT 
 	subscribers.id,
@@ -63,13 +63,13 @@ func (s *SubscriberRepo) GetSubscriberById(id string) (goapi.Subscriber, error) 
 
 	var subscriber goapi.Subscriber
 
-	err := s.db.QueryRow(query, id).Scan(
+	err := r.db.QueryRow(query, id).Scan(
 		&subscriber.Id, &subscriber.Name, &subscriber.Surname, &subscriber.MiddleName, &subscriber.DateOfBirth, &subscriber.TelNumber)
 
 	return subscriber, err
 }
 
-func (s *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error) {
+func (r *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error) {
 	query := `
 	SELECT 
 	DISTINCT(books.id),
@@ -85,7 +85,7 @@ func (s *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 
 	books := make([]goapi.Book, 0)
 
-	rows, err := s.db.Query(query, id)
+	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return books, err
@@ -103,4 +103,38 @@ func (s *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 	}
 
 	return books, err
+}
+
+func (r *SubscriberRepo) DeleteSubscriptionsBySubscriberId(id string) error {
+	query := `DELETE FROM subscriptions WHERE subscriptions.subscriber_id=?`
+
+	_, err := r.db.Exec(query, id)
+
+	return err
+}
+
+func (r *SubscriberRepo) DeleteSubscriberById(id string) error {
+	query := `DELETE FROM subscribers WHERE subscribers.id=?`
+
+	_, err := r.db.Exec(query, id)
+
+	return err
+}
+
+func (r *SubscriberRepo) CreateSubscriber(subscriber goapi.Subscriber) error {
+	query := `INSERT INTO subscribers(name, surname, middle_name, date_of_birth, tel_number) 
+	VALUES (?, ?, ?, ?, ?)`
+
+	_, err := r.db.Exec(query, subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber)
+
+	return err
+}
+
+func (r *SubscriberRepo) UpdateSubscriberById(subscriber goapi.Subscriber, id string) error {
+	query := `UPDATE subscribers SET name=?, surname=?, middle_name=?, date_of_birth=?, tel_number=?
+	WHERE subscribers.id=?`
+
+	_, err := r.db.Exec(query, subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber, id)
+
+	return err
 }

@@ -23,6 +23,13 @@ type Subscriber interface {
 	GetAllSubscribers() ([]goapi.Subscriber, error)
 	GetSubscriberById(id string) (goapi.Subscriber, error)
 	GetBooksBySubscriberId(id string) ([]goapi.Book, error)
+
+	CreateSubscriber(subscriber goapi.Subscriber) error
+
+	UpdateSubscriberById(subscriber goapi.Subscriber, id string) error
+
+	DeleteSubscriptionsBySubscriberId(id string) error
+	DeleteSubscriberById(id string) error
 }
 
 type Book interface {
