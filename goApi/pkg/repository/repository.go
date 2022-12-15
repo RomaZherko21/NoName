@@ -28,7 +28,6 @@ type Subscriber interface {
 
 	UpdateSubscriberById(subscriber goapi.Subscriber, id string) error
 
-	DeleteSubscriptionsBySubscriberId(id string) error
 	DeleteSubscriberById(id string) error
 }
 

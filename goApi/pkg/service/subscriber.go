@@ -37,13 +37,7 @@ func (s *SubscriberService) GetSubscriberById(id string) (SubscriberWithBooks, e
 }
 
 func (s *SubscriberService) DeleteSubscriberById(id string) error {
-	err := s.repo.DeleteSubscriptionsBySubscriberId(id)
-
-	if err != nil {
-		return err
-	}
-
-	err = s.repo.DeleteSubscriberById(id)
+	err := s.repo.DeleteSubscriberById(id)
 
 	return err
 }

@@ -105,18 +105,28 @@ func (r *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 	return books, err
 }
 
-func (r *SubscriberRepo) DeleteSubscriptionsBySubscriberId(id string) error {
-	query := `DELETE FROM subscriptions WHERE subscriptions.subscriber_id=?`
-
-	_, err := r.db.Exec(query, id)
-
-	return err
-}
-
 func (r *SubscriberRepo) DeleteSubscriberById(id string) error {
-	query := `DELETE FROM subscribers WHERE subscribers.id=?`
+	tx, err := r.db.Begin()
 
-	_, err := r.db.Exec(query, id)
+	if err != nil {
+		return err
+	}
+
+	_, err = tx.Exec(`DELETE FROM subscriptions WHERE subscriptions.subscriber_id=?`, id)
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	_, err = tx.Exec(`DELETE FROM subscribers WHERE subscribers.id=?`, id)
+
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Commit()
 
 	return err
 }
