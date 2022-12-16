@@ -34,6 +34,8 @@ func (r *BookRepo) GetAllBooks() ([]goapi.Book, error) {
 		return books, err
 	}
 
+	defer rows.Close()
+
 	for rows.Next() {
 		var item goapi.Book
 		err = rows.Scan(&item.Id, &item.Name, &item.Publisher, &item.Description, &item.Year, &item.Quantity)
@@ -49,7 +51,7 @@ func (r *BookRepo) GetAllBooks() ([]goapi.Book, error) {
 }
 
 func (r *BookRepo) GetBookById(id string) (goapi.Book, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	books.id,
 	books.name,
@@ -59,18 +61,24 @@ func (r *BookRepo) GetBookById(id string) (goapi.Book, error) {
 	books.quantity
 		FROM books 
 	WHERE books.id=?
-		`
+		`)
 
 	var book goapi.Book
 
-	err := r.db.QueryRow(query, id).Scan(
+	if err != nil {
+		return book, err
+	}
+
+	defer stmt.Close()
+
+	err = stmt.QueryRow(id).Scan(
 		&book.Id, &book.Name, &book.Publisher, &book.Description, &book.Year, &book.Quantity)
 
 	return book, err
 }
 
 func (r *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	authors.id,
 	authors.name,
@@ -81,15 +89,23 @@ func (r *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
 		FROM authors 
 			JOIN m2m_books_authors ON authors.id = m2m_books_authors.author_id
 	WHERE m2m_books_authors.book_id=?
-	`
+		`)
 
 	authors := make([]goapi.Author, 0)
-
-	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return authors, err
 	}
+
+	defer stmt.Close()
+
+	rows, err := stmt.Query(id)
+
+	if err != nil {
+		return authors, err
+	}
+
+	defer rows.Close()
 
 	for rows.Next() {
 		var item goapi.Author
@@ -106,22 +122,30 @@ func (r *BookRepo) GetAuthorsByBookId(id string) ([]goapi.Author, error) {
 }
 
 func (r *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	genres.id,
 	genres.name
 		FROM genres 
 			JOIN m2m_books_genres ON genres.id = m2m_books_genres.genre_id
 	WHERE m2m_books_genres.book_id=?
-	`
+	`)
 
 	genres := make([]goapi.Genre, 0)
-
-	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return genres, err
 	}
+
+	defer stmt.Close()
+
+	rows, err := stmt.Query(id)
+
+	if err != nil {
+		return genres, err
+	}
+
+	defer rows.Close()
 
 	for rows.Next() {
 		var item goapi.Genre
@@ -138,11 +162,17 @@ func (r *BookRepo) GetGenresByBookId(id string) ([]goapi.Genre, error) {
 }
 
 func (r *BookRepo) GetBookAmount(id string) (int, error) {
-	query := `SELECT books.quantity FROM books WHERE books.id=?`
+	stmt, err := r.db.Prepare(`SELECT books.quantity FROM books WHERE books.id=?`)
 
 	var counter int
 
-	err := r.db.QueryRow(query, id).Scan(
+	if err != nil {
+		return counter, err
+	}
+
+	defer stmt.Close()
+
+	err = stmt.QueryRow(id).Scan(
 		&counter)
 
 	if err != nil {
@@ -153,16 +183,22 @@ func (r *BookRepo) GetBookAmount(id string) (int, error) {
 }
 
 func (r *BookRepo) GetBookLeftAmount(id string) (int, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	COUNT(subscriptions.book_id) as books_remains
 		FROM subscriptions 
 	WHERE subscriptions.book_id=? AND subscriptions.is_active=true
-	`
+	`)
 
 	var counter int
 
-	err := r.db.QueryRow(query, id).Scan(
+	if err != nil {
+		return counter, err
+	}
+
+	defer stmt.Close()
+
+	err = stmt.QueryRow(id).Scan(
 		&counter)
 
 	if err != nil {
@@ -173,11 +209,17 @@ func (r *BookRepo) GetBookLeftAmount(id string) (int, error) {
 }
 
 func (r *BookRepo) GetBookTakenForAllTimeAmount(id string) (int, error) {
-	query := `SELECT COUNT(subscriptions.id) FROM subscriptions WHERE subscriptions.book_id=?`
+	stmt, err := r.db.Prepare(`SELECT COUNT(subscriptions.id) FROM subscriptions WHERE subscriptions.book_id=?`)
 
 	var counter int
 
-	err := r.db.QueryRow(query, id).Scan(
+	if err != nil {
+		return counter, err
+	}
+
+	defer stmt.Close()
+
+	err = stmt.QueryRow(id).Scan(
 		&counter)
 
 	if err != nil {

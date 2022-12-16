@@ -30,6 +30,8 @@ func (r *GenreRepo) GetAllGenres() ([]goapi.Genre, error) {
 		return genres, err
 	}
 
+	defer rows.Close()
+
 	for rows.Next() {
 		var genre goapi.Genre
 		err = rows.Scan(&genre.Id, &genre.Name)

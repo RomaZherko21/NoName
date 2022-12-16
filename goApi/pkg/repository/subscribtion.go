@@ -34,6 +34,8 @@ func (r *SubscribtionRepo) GetAllSubscribtions() ([]goapi.Subscribtion, error) {
 		return subscribtions, err
 	}
 
+	defer rows.Close()
+
 	for rows.Next() {
 		var item goapi.Subscribtion
 		err = rows.Scan(&item.Id, &item.SubscriberId, &item.BookId, &item.Start, &item.Finish, &item.IsActive)

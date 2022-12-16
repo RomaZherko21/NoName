@@ -34,6 +34,8 @@ func (r *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
 		return subscribers, err
 	}
 
+	defer rows.Close()
+
 	for rows.Next() {
 		var item goapi.Subscriber
 		err = rows.Scan(&item.Id, &item.Name, &item.Surname, &item.MiddleName, &item.DateOfBirth, &item.TelNumber)
@@ -49,7 +51,7 @@ func (r *SubscriberRepo) GetAllSubscribers() ([]goapi.Subscriber, error) {
 }
 
 func (r *SubscriberRepo) GetSubscriberById(id string) (goapi.Subscriber, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	subscribers.id,
 	subscribers.name,
@@ -59,18 +61,24 @@ func (r *SubscriberRepo) GetSubscriberById(id string) (goapi.Subscriber, error) 
     subscribers.tel_number
 		FROM subscribers
 	WHERE subscribers.id=?
-	`
+	`)
 
 	var subscriber goapi.Subscriber
 
-	err := r.db.QueryRow(query, id).Scan(
+	if err != nil {
+		return subscriber, err
+	}
+
+	defer stmt.Close()
+
+	err = stmt.QueryRow(id).Scan(
 		&subscriber.Id, &subscriber.Name, &subscriber.Surname, &subscriber.MiddleName, &subscriber.DateOfBirth, &subscriber.TelNumber)
 
 	return subscriber, err
 }
 
 func (r *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error) {
-	query := `
+	stmt, err := r.db.Prepare(`
 	SELECT 
 	DISTINCT(books.id),
 	books.name,
@@ -81,15 +89,23 @@ func (r *SubscriberRepo) GetBooksBySubscriberId(id string) ([]goapi.Book, error)
 		FROM books 
 			JOIN subscriptions ON subscriptions.book_id = books.id
 	WHERE subscriptions.subscriber_id=?
-	`
+	`)
 
 	books := make([]goapi.Book, 0)
-
-	rows, err := r.db.Query(query, id)
 
 	if err != nil {
 		return books, err
 	}
+
+	defer stmt.Close()
+
+	rows, err := stmt.Query(id)
+
+	if err != nil {
+		return books, err
+	}
+
+	defer rows.Close()
 
 	for rows.Next() {
 		var item goapi.Book
@@ -132,19 +148,35 @@ func (r *SubscriberRepo) DeleteSubscriberById(id string) error {
 }
 
 func (r *SubscriberRepo) CreateSubscriber(subscriber goapi.Subscriber) error {
-	query := `INSERT INTO subscribers(name, surname, middle_name, date_of_birth, tel_number) 
-	VALUES (?, ?, ?, ?, ?)`
+	stmt, err := r.db.Prepare(`
+	INSERT INTO subscribers(name, surname, middle_name, date_of_birth, tel_number) 
+	VALUES (?, ?, ?, ?, ?)
+	`)
 
-	_, err := r.db.Exec(query, subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber)
 
 	return err
 }
 
 func (r *SubscriberRepo) UpdateSubscriberById(subscriber goapi.Subscriber, id string) error {
-	query := `UPDATE subscribers SET name=?, surname=?, middle_name=?, date_of_birth=?, tel_number=?
-	WHERE subscribers.id=?`
+	stmt, err := r.db.Prepare(`
+	UPDATE subscribers SET name=?, surname=?, middle_name=?, date_of_birth=?, tel_number=?
+	WHERE subscribers.id=?
+	`)
 
-	_, err := r.db.Exec(query, subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber, id)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(subscriber.Name, subscriber.Surname, subscriber.MiddleName, subscriber.DateOfBirth, subscriber.TelNumber, id)
 
 	return err
 }

@@ -36,4 +36,6 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}
+
+	defer db.Close()
 }
