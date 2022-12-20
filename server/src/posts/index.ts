@@ -1,1 +1,1 @@
-export { default as posts } from './posts.routes'
+export { default as postsController } from './posts.controller'
