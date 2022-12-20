@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { useFile } from 'middlewares'
-import { postsController } from 'controllers'
+import postsController from './posts.controller'
 
 const posts = express.Router()
 
