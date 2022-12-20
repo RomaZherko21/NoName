@@ -1,1 +1,1 @@
-export { default as users } from './users.routes'
+export { default as usersController } from './users.controller'
