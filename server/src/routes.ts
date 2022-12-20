@@ -1,9 +1,9 @@
 import express from 'express'
 
-import auth from './auth.routes'
-import user from './user.routes'
-import users from './users.routes'
-import posts from './posts.routes'
+import { auth } from 'auth'
+import { user } from 'user'
+import { users } from 'users'
+import { posts } from 'posts'
 
 const router = express.Router()
 
