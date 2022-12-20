@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 
-import sequelize from '.'
+import sequelize from './init'
 
 const PostModel = sequelize.define(
   'posts',

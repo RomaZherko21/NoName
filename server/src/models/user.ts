@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 
-import sequelize from '.'
-import PostModel from './post.model'
+import sequelize from './init'
+import PostModel from './post'
 
 const UserModel = sequelize.define(
   'users',

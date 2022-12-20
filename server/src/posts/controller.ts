@@ -3,8 +3,7 @@ import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
 
-import PostModel from 'models/post.model'
-import sequelize from 'models'
+import { sequelize, PostModel } from 'models'
 
 import { getPostsQuery } from './queries'
 

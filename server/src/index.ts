@@ -5,7 +5,7 @@ import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
 import { useHttpError, useAuth } from 'middlewares'
-import sequelize from 'models'
+import { sequelize } from 'models'
 import { log } from 'shared/helpers'
 
 import router from './routes'

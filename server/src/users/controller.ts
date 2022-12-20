@@ -6,8 +6,7 @@ import fs from 'fs'
 import path from 'path'
 import { QueryTypes } from 'sequelize'
 
-import UserModel from 'models/user.model'
-import sequelize from 'models'
+import { sequelize, UserModel } from 'models'
 
 import { getUserListQuery } from './queries'
 
