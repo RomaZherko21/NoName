@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 
@@ -5,6 +6,7 @@ import IncomeAreaChart from './IncomeAreaChart'
 import MonthlyBarChart from './MonthlyBarChart'
 
 const Charts = () => {
+  const { t } = useTranslation()
   const [slot, setSlot] = useState('week')
 
   return (
@@ -13,7 +15,7 @@ const Charts = () => {
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5" color="text.primary">
-              Unique Visitor
+              {t('translation:common.uniqueVisitor')}
             </Typography>
           </Grid>
           <Grid item>
@@ -24,7 +26,7 @@ const Charts = () => {
                 color={slot === 'month' ? 'primary' : 'secondary'}
                 variant={slot === 'month' ? 'outlined' : 'text'}
               >
-                Month
+                {t('translation:fields.month')}
               </Button>
               <Button
                 size="small"
@@ -32,7 +34,7 @@ const Charts = () => {
                 color={slot === 'week' ? 'primary' : 'secondary'}
                 variant={slot === 'week' ? 'outlined' : 'text'}
               >
-                Week
+                {t('translation:fields.week')}
               </Button>
             </Stack>
           </Grid>
@@ -48,7 +50,7 @@ const Charts = () => {
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5" color="text.primary">
-              Income Overview
+              {t('translation:common.incomeOverview')}
             </Typography>
           </Grid>
           <Grid item />
@@ -57,7 +59,7 @@ const Charts = () => {
           <Box sx={{ p: 3, pb: 0 }}>
             <Stack spacing={2}>
               <Typography variant="h6" color="textSecondary">
-                This Week Statistics
+                {t('translation:common.thisWeekStatistics')}
               </Typography>
               <Typography variant="h3">$7,650</Typography>
             </Stack>

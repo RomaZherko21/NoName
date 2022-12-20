@@ -11,7 +11,21 @@
     "id": "ID",
     "emptyInput": "Enter value",
     "import": "Import",
-    "export": "Export"
+    "export": "Export",
+    "about": "About",
+    "basicDetails": "Basic details",
+    "helpAndSupport": "Help & Support Chat",
+    "typicalReplay": "Typical replay within 5 min",
+    "phoneNotification": "Phone notifications",
+    "multiFactorAuthentication": "Multi Factor Authentication",
+    "authenticatorApp": "Authenticator App",
+    "textMessage": "Text Message",
+    "thisYear": "this year",
+    "youMadeAnExtra": "You made an extra",
+    "uniqueVisitor": "Unique Visitor",
+    "incomeOverview": "Income Overview",
+    "thisWeekStatistics": "This Week Statistics",
+    "proverb": "Everyone thinks of changing the world, but no one thinks of changing himself."
   },
   "actions": {
     "add": "Add",
@@ -23,7 +37,13 @@
     "info": "Show more information",
     "goBack": "Go back",
     "download": "Download",
-    "upload": "Upload"
+    "upload": "Upload",
+    "changePassword": "Change password",
+    "off": "Off",
+    "setUp": "Set Up",
+    "post": "Post",
+    "sendMessage": "Send message",
+    "signIn": "Sign in"
   },
   "fields": {
     "name": "Name",
@@ -36,6 +56,25 @@
     "telNumber": "Telephone number",
     "amount": "Amount",
     "quantity": "Quantity",
-    "year": "Year"
+    "year": "Year",
+    "month": "Month",
+    "week": "Week"
+  },
+  "updates": {
+    "product": {
+      "title": "Product updates",
+      "text": "News, announcements, and product updates."
+    },
+    "security": {
+      "title": "Security updates",
+      "text": "Important notifications about your account security.",
+      "generateCode": "Use an authenticator app to generate one time security codes.",
+      "receiveCode": "Use your mobile phone to receive security codes via SMS."
+    }
+  },
+  "connections": {
+    "connections": "Connections",
+    "connectionInCommon": "10 connections in common",
+    "connect": "Connect"
   }
 }
