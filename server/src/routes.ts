@@ -8,6 +8,8 @@ import { useFile } from 'middlewares'
 
 const router = express.Router()
 
+console.log('sdf')
+
 const AUTH = '/auth'
 router.post(`${AUTH}/signIn`, authController.signIn)
 
