@@ -1,11 +1,11 @@
-import { Request, Express } from 'express'
+import { Request } from 'express'
 import multer, { FileFilterCallback } from 'multer'
 // import createError from 'http-errors'
 
 type FileNameCallback = (error: Error | null, filename: string) => void
 
 const validFileExtensions = ['image/png', 'image/jpg', 'image/jpeg']
-const FILE_FIELD_NAMES = {
+export const FILE_FIELD_NAMES = {
   avatar: 'avatar',
   post: 'post',
 }

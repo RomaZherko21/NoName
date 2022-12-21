@@ -1,1 +1,1 @@
-export { default as userController } from './controller'
+export * from './handler'
