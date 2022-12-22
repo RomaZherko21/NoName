@@ -40,7 +40,7 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
         sx={{ px: 1, py: 2 }}
       >
         <Typography variant="subtitle1" sx={{ ml: 1 }}>
-          {t('book:filters')}
+          {t('translation:common.filters')}
         </Typography>
         <IconButton onClick={onCloseFilter}>
           <FilterListOffIcon />
@@ -86,7 +86,7 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
           variant="outlined"
           startIcon={<ClearAllIcon />}
         >
-          {t('book:actions.clearAll')}
+          {t('translation:common.clearAll')}
         </Button>
       </Box>
     </Drawer>

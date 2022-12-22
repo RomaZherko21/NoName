@@ -15,19 +15,19 @@ function OrderStatus({ status }: Props) {
   switch (status) {
     case 0:
       color = 'warning'
-      title = {t('notification:status.pending')}
+      title = 'Pending'
       break
     case 1:
       color = 'success'
-      title = {t('notification:status.approved')}
+      title = 'Approved'
       break
     case 2:
       color = 'error'
-      title = {t('notification:status.rejected')}
+      title = 'Rejected'
       break
     default:
       color = 'primary'
-      title = {t('notification:status.none')}
+      title = 'None'
   }
 
   return (

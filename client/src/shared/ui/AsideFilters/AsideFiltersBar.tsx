@@ -32,7 +32,7 @@ const AsideFiltersBar = ({ setFilters, filters, handleOpenFilter }: Props) => {
         size="small"
       />
       <Button disableRipple color="info" endIcon={<FilterListIcon />} onClick={handleOpenFilter}>
-        {t('book:filters')}
+        {t('translation:common.filters')}
       </Button>
     </Paper>
   )

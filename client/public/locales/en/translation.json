@@ -13,9 +13,11 @@
     "import": "Import",
     "export": "Export",
     "about": "About",
-    "thisYear": "this year",
+    "thisYear": "This year",
     "youMadeAnExtra": "You made an extra",
-    "connections": "Connections"
+    "connections": "Connections",
+    "filters": "Filters",
+    "clearAll": "Clear All"
   },
   "actions": {
     "add": "Add",
