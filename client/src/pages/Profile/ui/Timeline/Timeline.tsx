@@ -43,7 +43,7 @@ const Timeline = () => {
       <Grid item xs={12} md={4}>
         <Paper sx={{ p: 2 }}>
           <Typography variant="h5" sx={{ p: 2 }}>
-            {t('translation:common.about')}
+            {t('common.about')}
           </Typography>
           <Divider />
           <Box sx={{ p: 2 }}>
@@ -108,7 +108,7 @@ const Timeline = () => {
                     <TagFacesIcon />
                   </IconButton>
                 </Stack>
-                <Button variant="contained">{t('translation:actions.post')}</Button>
+                <Button variant="contained">{t('actions.post')}</Button>
               </Stack>
             </Stack>
           </Stack>

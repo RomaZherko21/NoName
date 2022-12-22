@@ -42,7 +42,7 @@ function SignIn() {
       >
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>Logo</Avatar>
         <Typography component="h1" variant="h5">
-          {t('translation:actions.signIn')}
+          {t('actions.signIn')}
         </Typography>
         <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <Stack justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
@@ -68,7 +68,7 @@ function SignIn() {
               helperText={formik.touched.password && formik.errors.password}
             />
             <Button color="primary" variant="contained" type="submit">
-              {t('translation:common.confirm')}
+              {t('common.confirm')}
             </Button>
           </Stack>
         </form>

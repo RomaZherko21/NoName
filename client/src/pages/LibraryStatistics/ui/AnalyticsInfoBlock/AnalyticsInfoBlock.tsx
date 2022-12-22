@@ -41,7 +41,7 @@ const AnalyticsInfoBlock = ({ color = 'info', title, count, percentage, isLoss, 
       </Stack>
       <Box sx={{ pt: 2.25 }}>
         <Typography variant="caption" color="textSecondary">
-          {t('translation:common.youMadeAnExtra')}{' '}
+          {t('common.youMadeAnExtra')}{' '}
           <Typography
             component="span"
             variant="caption"
@@ -49,7 +49,7 @@ const AnalyticsInfoBlock = ({ color = 'info', title, count, percentage, isLoss, 
           >
             {extra}
           </Typography>{' '}
-          {t('translation:common.thisYear')}
+          {t('common.thisYear')}
         </Typography>
       </Box>
     </Card>

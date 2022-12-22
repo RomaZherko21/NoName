@@ -105,10 +105,10 @@ function Profile() {
                 color="primary"
                 variant="outlined"
               >
-                {t('translation:actions.connect')}
+                {t('actions.connect')}
               </Button>
               <Button startIcon={<ChatIcon fontSize="small" />} color="primary" variant="contained">
-                {t('translation:actions.sendMessage')}
+                {t('actions.sendMessage')}
               </Button>
               <IconButton aria-label="upload picture" component="label">
                 <Tooltip title="More info">

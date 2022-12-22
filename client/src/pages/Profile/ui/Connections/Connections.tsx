@@ -89,7 +89,7 @@ const Connections = () => {
                   size="small"
                   sx={{ mt: 2, width: 'fit-content' }}
                 >
-                  {t('translation:actions.connect')}
+                  {t('actions.connect')}
                 </Button>
               </Stack>
               <IconButton aria-label="upload picture" component="label">
@@ -119,7 +119,7 @@ const Connections = () => {
                   size="small"
                   sx={{ mt: 2, width: 'fit-content' }}
                 >
-                  {t('translation:actions.connect')}
+                  {t('actions.connect')}
                 </Button>
               </Stack>
               <IconButton aria-label="upload picture" component="label">

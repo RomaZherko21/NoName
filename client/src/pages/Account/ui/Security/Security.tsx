@@ -30,7 +30,7 @@ function Security() {
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Stack direction="column">
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
-                  {t('translation:actions.off')}
+                  {t('actions.off')}
                 </Typography>
                 <Typography variant="subtitle1">{t('user:authenticatorApp')}</Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -42,7 +42,7 @@ function Security() {
                   variant="outlined"
                   size="small"
                 >
-                  {t('translation:actions.setUp')}
+                  {t('actions.setUp')}
                 </Button>
               </Stack>
             </Paper>
@@ -51,7 +51,7 @@ function Security() {
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Stack direction="column">
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
-                  {t('translation:actions.off')}
+                  {t('actions.off')}
                 </Typography>
                 <Typography variant="subtitle1">{t('user:textMessage')}</Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -63,7 +63,7 @@ function Security() {
                   variant="outlined"
                   size="small"
                 >
-                  {t('translation:actions.setUp')}
+                  {t('actions.setUp')}
                 </Button>
               </Stack>
             </Paper>
