@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import { Box, Stack, Typography, useTheme } from '@mui/material'
 
 interface Props {
@@ -6,25 +7,27 @@ interface Props {
 }
 
 function OrderStatus({ status }: Props) {
+  const { t } = useTranslation()
+
   let color
   let title
 
   switch (status) {
     case 0:
       color = 'warning'
-      title = 'Pending'
+      title = {t('notification:status.pending')}
       break
     case 1:
       color = 'success'
-      title = 'Approved'
+      title = {t('notification:status.approved')}
       break
     case 2:
       color = 'error'
-      title = 'Rejected'
+      title = {t('notification:status.rejected')}
       break
     default:
       color = 'primary'
-      title = 'None'
+      title = {t('notification:status.none')}
   }
 
   return (

@@ -11,6 +11,15 @@
   "confirmPassword": "Confirm password",
   "man": "Man",
   "woman": "Women",
+  "month": "Month",
+  "week": "Week",
+  "helpAndSupport": "Help & Support Chat",
+  "basicDetails": "Basic details",
+  "typicalReplay": "Typical replay within 5 min",
+  "phoneNotification": "Phone notifications",
+  "multiFactorAuthentication": "Multi Factor Authentication",
+  "authenticatorApp": "Authenticator App",
+  "textMessage": "Text Message",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -18,5 +27,17 @@
   "actions": {
     "deleteAccount": "Delete account",
     "updateUser": "Update user"
+  },
+  "updates": {
+    "product": {
+      "title": "Product updates",
+      "text": "News, announcements, and product updates."
+    },
+    "security": {
+      "title": "Security updates",
+      "text": "Important notifications about your account security.",
+      "generateCode": "Use an authenticator app to generate one time security codes.",
+      "receiveCode": "Use your mobile phone to receive security codes via SMS."
+    }
   }
 }

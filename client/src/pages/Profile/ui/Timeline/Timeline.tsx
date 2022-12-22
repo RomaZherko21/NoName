@@ -48,7 +48,7 @@ const Timeline = () => {
           <Divider />
           <Box sx={{ p: 2 }}>
             <Typography variant="subtitle2" color="text.secondary">
-              {t('translation:common.proverb')}
+              Everyone thinks of changing the world, but no one thinks of changing himself.
             </Typography>
             <List dense>
               <ListItem sx={{ p: 0, pt: 2 }}>

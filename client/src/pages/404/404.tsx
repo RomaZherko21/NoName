@@ -32,10 +32,10 @@ const NotFound = () => {
             }}
           >
             <Typography align="center" color="textPrimary" variant="h1">
-              {t('sentence:notFound.title')}
+              {t('sentences:notFound.title')}
             </Typography>
             <Typography align="center" color="textPrimary" variant="subtitle2">
-              {t('sentence:notFound.subtitle')}
+              {t('sentences:notFound.subtitle')}
             </Typography>
             <Box sx={{ textAlign: 'center' }}>
               <img

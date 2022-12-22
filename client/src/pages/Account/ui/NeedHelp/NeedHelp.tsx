@@ -11,10 +11,10 @@ function NeedHelp() {
           <Grid item>
             <Stack>
               <Typography variant="h5" noWrap>
-                {t('translation:common.helpAndSupport')}
+                {t('user:helpAndSupport')}
               </Typography>
               <Typography variant="caption" color="secondary" noWrap>
-                {t('translation:common.typicalReplay')}
+                {t('user:typicalReplay')}
               </Typography>
             </Stack>
           </Grid>

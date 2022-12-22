@@ -30,7 +30,7 @@ const Connections = () => {
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ p: 3 }}>
-        {t('translation:connections.connections')}
+        Connections
       </Typography>
       <Divider />
       <Box sx={{ p: 3, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
@@ -51,7 +51,7 @@ const Connections = () => {
               <Stack>
                 <Typography variant="h6">Carson Darrin</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {t('translation:connections.connectionInCommon')}
+                  10 connections in common
                 </Typography>
                 <Button
                   color="primary"
@@ -81,7 +81,7 @@ const Connections = () => {
               <Stack>
                 <Typography variant="h6">Carson Darrin</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {t('translation:connections.connectionInCommon')}
+                  10 connections in common
                 </Typography>
                 <Button
                   color="primary"
@@ -89,7 +89,7 @@ const Connections = () => {
                   size="small"
                   sx={{ mt: 2, width: 'fit-content' }}
                 >
-                  {t('translation:connections.connect')}
+                  {t('translation:actions.connect')}
                 </Button>
               </Stack>
               <IconButton aria-label="upload picture" component="label">
@@ -111,7 +111,7 @@ const Connections = () => {
               <Stack>
                 <Typography variant="h6">Carson Darrin</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {t('translation:connections.connectionInCommon')}
+                  10 connections in common
                 </Typography>
                 <Button
                   color="primary"
@@ -119,7 +119,7 @@ const Connections = () => {
                   size="small"
                   sx={{ mt: 2, width: 'fit-content' }}
                 >
-                  {t('translation:connections.connect')}
+                  {t('translation:actions.connect')}
                 </Button>
               </Stack>
               <IconButton aria-label="upload picture" component="label">

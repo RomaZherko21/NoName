@@ -10,9 +10,11 @@
   "description": "Description",
   "booksLeft": "Books Left",
   "bookReadability": "Book readability",
+  "filters": "Filters",
   "actions": {
     "authorInfo": "Show more author information",
-    "addSubscriber": "New subscriber"
+    "addSubscriber": "New subscriber",
+    "clearAll": "Clear All"
   },
   "form": {
     "updateBook": "Edit book",

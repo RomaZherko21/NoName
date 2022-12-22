@@ -24,9 +24,7 @@ function Security() {
       <Paper>
         <Grid container spacing={2} sx={{ p: 4 }}>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <Typography variant="h5">
-              {t('translation:common.multiFactorAuthentication')}
-            </Typography>
+            <Typography variant="h5">{t('user:multiFactorAuthentication')}</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Paper variant="outlined" sx={{ p: 2 }}>
@@ -34,11 +32,9 @@ function Security() {
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
                   {t('translation:actions.off')}
                 </Typography>
-                <Typography variant="subtitle1">
-                  {t('translation:common.authenticatorApp')}
-                </Typography>
+                <Typography variant="subtitle1">{t('user:authenticatorApp')}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {t('translation:updates.security.generateCode')}
+                  {t('user:updates.security.generateCode')}
                 </Typography>
                 <Button
                   endIcon={<ArrowForwardIcon />}
@@ -57,9 +53,9 @@ function Security() {
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
                   {t('translation:actions.off')}
                 </Typography>
-                <Typography variant="subtitle1">{t('translation:common.textMessage')}</Typography>
+                <Typography variant="subtitle1">{t('user:textMessage')}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {t('translation:updates.security.receiveCode')}
+                  {t('user:updates.security.receiveCode')}
                 </Typography>
                 <Button
                   endIcon={<ArrowForwardIcon />}

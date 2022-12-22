@@ -105,7 +105,7 @@ function Profile() {
                 color="primary"
                 variant="outlined"
               >
-                {t('translation:connections.connect')}
+                {t('translation:actions.connect')}
               </Button>
               <Button startIcon={<ChatIcon fontSize="small" />} color="primary" variant="contained">
                 {t('translation:actions.sendMessage')}

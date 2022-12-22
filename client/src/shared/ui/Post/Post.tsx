@@ -15,19 +15,19 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import { fromMsToDate } from 'shared/helpers'
 import { COMMON_DATE_FORMAT } from 'shared/consts'
 import { PopupMenu } from 'shared/ui'
 
-import s from './Styles.module.scss'
-
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 
 import ProfileCover from 'assets/images/cover.jpg'
+
+import s from './Styles.module.scss'
 
 const Post = () => {
   return (

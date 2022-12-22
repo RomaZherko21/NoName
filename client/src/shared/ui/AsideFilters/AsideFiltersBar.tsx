@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import { Button, Paper, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import FilterListIcon from '@mui/icons-material/FilterList'
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const AsideFiltersBar = ({ setFilters, filters, handleOpenFilter }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
       <InputFilter
@@ -29,7 +32,7 @@ const AsideFiltersBar = ({ setFilters, filters, handleOpenFilter }: Props) => {
         size="small"
       />
       <Button disableRipple color="info" endIcon={<FilterListIcon />} onClick={handleOpenFilter}>
-        Filters
+        {t('book:filters')}
       </Button>
     </Paper>
   )

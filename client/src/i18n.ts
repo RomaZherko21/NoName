@@ -9,7 +9,7 @@ const namespaces = [
   'notification',
   'post',
   'page',
-  'sentence',
+  'sentences',
   'book',
 ]
 

@@ -6,6 +6,10 @@
   "status": {
     "good": "Very good",
     "neutral": "Good",
-    "warning": "Needs attention"
+    "warning": "Needs attention",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "none": "None"
   }
 }

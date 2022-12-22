@@ -15,7 +15,7 @@ const Charts = () => {
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5" color="text.primary">
-              {t('translation:common.uniqueVisitor')}
+              Unique Visitor
             </Typography>
           </Grid>
           <Grid item>
@@ -26,7 +26,7 @@ const Charts = () => {
                 color={slot === 'month' ? 'primary' : 'secondary'}
                 variant={slot === 'month' ? 'outlined' : 'text'}
               >
-                {t('translation:fields.month')}
+                {t('user:month')}
               </Button>
               <Button
                 size="small"
@@ -34,7 +34,7 @@ const Charts = () => {
                 color={slot === 'week' ? 'primary' : 'secondary'}
                 variant={slot === 'week' ? 'outlined' : 'text'}
               >
-                {t('translation:fields.week')}
+                {t('user:week')}
               </Button>
             </Stack>
           </Grid>
@@ -50,7 +50,7 @@ const Charts = () => {
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="h5" color="text.primary">
-              {t('translation:common.incomeOverview')}
+              Income Overview
             </Typography>
           </Grid>
           <Grid item />
@@ -59,7 +59,7 @@ const Charts = () => {
           <Box sx={{ p: 3, pb: 0 }}>
             <Stack spacing={2}>
               <Typography variant="h6" color="textSecondary">
-                {t('translation:common.thisWeekStatistics')}
+                This Week Statistics
               </Typography>
               <Typography variant="h3">$7,650</Typography>
             </Stack>

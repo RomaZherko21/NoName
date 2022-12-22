@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Container, Grid } from '@mui/material'
 
-import { General, Notifications, Security } from './ui'
 import { PageHeader, Tabs } from 'shared/ui'
+
+import { General, Notifications, Security } from './ui'
 
 function Kek() {
   return <>KEKEKFE</>
