@@ -32,7 +32,7 @@ const DeleteAccount = () => {
               }}
             >
               <Typography color="textPrimary" variant="body1">
-                {t('sentence:deleteAccount')}
+                {t('sentences:deleteAccount')}
               </Typography>
               <Button
                 onClick={showConfirmationModal}

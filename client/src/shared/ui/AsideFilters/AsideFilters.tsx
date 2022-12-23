@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import { Box, Stack, Button, Drawer, Divider, IconButton, Typography, Grid } from '@mui/material'
 import FilterListOffIcon from '@mui/icons-material/FilterListOff'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }: Props) => {
+  const { t } = useTranslation()
   const onClearAllFilters = () => {
     setFilters({})
   }
@@ -38,7 +40,7 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
         sx={{ px: 1, py: 2 }}
       >
         <Typography variant="subtitle1" sx={{ ml: 1 }}>
-          Filters
+          {t('common.filters')}
         </Typography>
         <IconButton onClick={onCloseFilter}>
           <FilterListOffIcon />
@@ -84,7 +86,7 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
           variant="outlined"
           startIcon={<ClearAllIcon />}
         >
-          Clear All
+          {t('common.clearAll')}
         </Button>
       </Box>
     </Drawer>

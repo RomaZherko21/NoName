@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 
@@ -5,6 +6,7 @@ import IncomeAreaChart from './IncomeAreaChart'
 import MonthlyBarChart from './MonthlyBarChart'
 
 const Charts = () => {
+  const { t } = useTranslation()
   const [slot, setSlot] = useState('week')
 
   return (
@@ -24,7 +26,7 @@ const Charts = () => {
                 color={slot === 'month' ? 'primary' : 'secondary'}
                 variant={slot === 'month' ? 'outlined' : 'text'}
               >
-                Month
+                {t('user:month')}
               </Button>
               <Button
                 size="small"
@@ -32,7 +34,7 @@ const Charts = () => {
                 color={slot === 'week' ? 'primary' : 'secondary'}
                 variant={slot === 'week' ? 'outlined' : 'text'}
               >
-                Week
+                {t('user:week')}
               </Button>
             </Stack>
           </Grid>

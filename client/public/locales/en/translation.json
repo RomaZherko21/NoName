@@ -11,7 +11,13 @@
     "id": "ID",
     "emptyInput": "Enter value",
     "import": "Import",
-    "export": "Export"
+    "export": "Export",
+    "about": "About",
+    "thisYear": "This year",
+    "youMadeAnExtra": "You made an extra",
+    "connections": "Connections",
+    "filters": "Filters",
+    "clearAll": "Clear All"
   },
   "actions": {
     "add": "Add",
@@ -23,7 +29,14 @@
     "info": "Show more information",
     "goBack": "Go back",
     "download": "Download",
-    "upload": "Upload"
+    "upload": "Upload",
+    "changePassword": "Change password",
+    "off": "Off",
+    "setUp": "Set Up",
+    "post": "Post",
+    "sendMessage": "Send message",
+    "signIn": "Sign in",
+    "connect": "Connect"
   },
   "fields": {
     "name": "Name",
@@ -35,7 +48,6 @@
     "description": "Description",
     "telNumber": "Telephone number",
     "amount": "Amount",
-    "quantity": "Quantity",
-    "year": "Year"
+    "quantity": "Quantity"
   }
 }

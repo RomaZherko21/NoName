@@ -43,12 +43,12 @@ const Timeline = () => {
       <Grid item xs={12} md={4}>
         <Paper sx={{ p: 2 }}>
           <Typography variant="h5" sx={{ p: 2 }}>
-            About
+            {t('common.about')}
           </Typography>
           <Divider />
           <Box sx={{ p: 2 }}>
             <Typography variant="subtitle2" color="text.secondary">
-              "Everyone thinks of changing the world, but no one thinks of changing himself."
+              Everyone thinks of changing the world, but no one thinks of changing himself.
             </Typography>
             <List dense>
               <ListItem sx={{ p: 0, pt: 2 }}>
@@ -108,7 +108,7 @@ const Timeline = () => {
                     <TagFacesIcon />
                   </IconButton>
                 </Stack>
-                <Button variant="contained">Post</Button>
+                <Button variant="contained">{t('actions.post')}</Button>
               </Stack>
             </Stack>
           </Stack>

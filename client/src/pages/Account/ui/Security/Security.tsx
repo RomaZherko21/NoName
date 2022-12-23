@@ -1,15 +1,18 @@
 import { Box, Button, Card, Divider, Grid, Paper, Stack, Switch, Typography } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { useTranslation } from 'react-i18next'
 
 import { InputFilter } from 'shared/ui'
 
 function Security() {
+  const { t } = useTranslation()
+
   return (
     <>
       <Paper sx={{ mb: 4 }}>
         <Grid container sx={{ p: 4 }}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h5">Change password</Typography>
+            <Typography variant="h5">1</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Stack direction="row" justifyContent="space-between">
@@ -21,17 +24,17 @@ function Security() {
       <Paper>
         <Grid container spacing={2} sx={{ p: 4 }}>
           <Grid item xs={12} sx={{ mb: 2 }}>
-            <Typography variant="h5">Multi Factor Authentication</Typography>
+            <Typography variant="h5">{t('user:multiFactorAuthentication')}</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Stack direction="column">
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
-                  Off
+                  {t('actions.off')}
                 </Typography>
-                <Typography variant="subtitle1">Authenticator App</Typography>
+                <Typography variant="subtitle1">{t('user:authenticatorApp')}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Use an authenticator app to generate one time security codes.
+                  {t('user:updates.security.generateCode')}
                 </Typography>
                 <Button
                   endIcon={<ArrowForwardIcon />}
@@ -39,7 +42,7 @@ function Security() {
                   variant="outlined"
                   size="small"
                 >
-                  Set Up
+                  {t('actions.setUp')}
                 </Button>
               </Stack>
             </Paper>
@@ -48,11 +51,11 @@ function Security() {
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Stack direction="column">
                 <Typography variant="h6" color="error" sx={{ mb: 3 }}>
-                  Off
+                  {t('actions.off')}
                 </Typography>
-                <Typography variant="subtitle1">Text Message</Typography>
+                <Typography variant="subtitle1">{t('user:textMessage')}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Use your mobile phone to receive security codes via SMS.
+                  {t('user:updates.security.receiveCode')}
                 </Typography>
                 <Button
                   endIcon={<ArrowForwardIcon />}
@@ -60,7 +63,7 @@ function Security() {
                   variant="outlined"
                   size="small"
                 >
-                  Set Up
+                  {t('actions.setUp')}
                 </Button>
               </Stack>
             </Paper>

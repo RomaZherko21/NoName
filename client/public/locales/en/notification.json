@@ -1,10 +1,15 @@
 {
   "exitConfirm": "Are you want to exit?",
   "removeConfirm": "Are you want to delete?",
+  "needHelp": "Need help?",
   "sure": "Are you sure?",
   "status": {
     "good": "Very good",
     "neutral": "Good",
-    "warning": "Needs attention"
+    "warning": "Needs attention",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "none": "None"
   }
 }

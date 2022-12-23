@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarGroup, Button, Card, Grid, Stack, Typography } from '@mui/material'
 
 function NeedHelp() {
+  const { t } = useTranslation()
+
   return (
     <Card sx={{ mt: 2 }}>
       <Stack spacing={3}>
@@ -8,10 +11,10 @@ function NeedHelp() {
           <Grid item>
             <Stack>
               <Typography variant="h5" noWrap>
-                Help & Support Chat
+                {t('user:helpAndSupport')}
               </Typography>
               <Typography variant="caption" color="secondary" noWrap>
-                Typical replay within 5 min
+                {t('user:typicalReplay')}
               </Typography>
             </Stack>
           </Grid>
@@ -25,7 +28,7 @@ function NeedHelp() {
           </Grid>
         </Grid>
         <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
-          Need Help?
+          {t('notification:needHelp')}
         </Button>
       </Stack>
     </Card>
