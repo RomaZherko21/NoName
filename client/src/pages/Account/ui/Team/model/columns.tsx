@@ -29,7 +29,7 @@ export const getColumns = (): TableColumn[] => [
   },
   {
     key: 'role',
-    title: 'Role',
+    title: i18next.t('user:role'),
     getValue: (row: User) =>
       row.role === Roles.admin ? (
         <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
