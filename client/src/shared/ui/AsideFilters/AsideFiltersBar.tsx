@@ -18,7 +18,7 @@ const AsideFiltersBar = ({ setFilters, filters, handleOpenFilter }: Props) => {
   return (
     <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
       <InputFilter
-        placeholder="Search email..."
+        placeholder={t('user:searchEmail')}
         value={filters.email || ''}
         onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
         InputProps={{

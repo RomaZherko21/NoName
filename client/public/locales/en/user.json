@@ -26,7 +26,9 @@
   },
   "actions": {
     "deleteAccount": "Delete account",
-    "updateUser": "Update user"
+    "updateUser": "Update user",
+    "searchEmail": "Search email...",
+    "inviteMembers": "Invite members"
   },
   "updates": {
     "product": {

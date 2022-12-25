@@ -4,7 +4,7 @@ import { Container, Grid } from '@mui/material'
 
 import { PageHeader, Tabs } from 'shared/ui'
 
-import { General, Notifications, Security } from './ui'
+import { General, Notifications, Security, Team } from './ui'
 
 function Kek() {
   return <>KEKEKFE</>
@@ -21,7 +21,7 @@ function Account() {
         options={[
           { label: 'General', Component: General },
           { label: 'Billing', Component: Kek },
-          { label: 'Team', Component: Kek },
+          { label: 'Team', Component: Team },
           { label: 'Notifications', Component: Notifications },
           { label: 'Security', Component: Security },
         ]}
