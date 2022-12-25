@@ -36,7 +36,8 @@
     "post": "Post",
     "sendMessage": "Send message",
     "signIn": "Sign in",
-    "connect": "Connect"
+    "connect": "Connect",
+    "sendInvite": "Send Invite"
   },
   "fields": {
     "name": "Name",

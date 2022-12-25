@@ -4,6 +4,7 @@ import { NODE_API } from 'services'
 import { User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
+
 import { UserFilters } from './filters'
 
 class UsersModel {
