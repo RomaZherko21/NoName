@@ -1,5 +1,4 @@
 import i18next from 'i18next'
-import { useTranslation } from 'react-i18next'
 import { Avatar, Box, Chip, Typography } from '@mui/material'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -10,8 +9,8 @@ import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 export const getColumns = (): TableColumn[] => [
   {
-    key: 'member',
-    title: 'Name',
+    key: 'full_name',
+    title: i18next.t('user:name'),
     getValue: ({ name, surname, middle_name, avatar }: User) => (
       <Box
         sx={{

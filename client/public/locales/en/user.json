@@ -20,17 +20,15 @@
   "multiFactorAuthentication": "Multi Factor Authentication",
   "authenticatorApp": "Authenticator App",
   "textMessage": "Text Message",
-  "searchEmail": "Search email...",
-  "inviteMembers": "Invite members",
-  "inputPlaceholder": "Add multiple addresses separated by commas",
-  "emailAddress": "Email address",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
   },
   "actions": {
     "deleteAccount": "Delete account",
-    "updateUser": "Update user"
+    "updateUser": "Update user",
+    "searchEmail": "Search email...",
+    "inviteMembers": "Invite members"
   },
   "updates": {
     "product": {
