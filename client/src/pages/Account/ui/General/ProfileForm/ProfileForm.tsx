@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Formik } from 'formik'
-import { Box, Button, Card, CardContent, CardHeader, Divider, Grid, Stack } from '@mui/material'
+import { Button, Divider, Grid, Stack } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField, SelectField, Spinner, UploadImage } from 'shared/ui'

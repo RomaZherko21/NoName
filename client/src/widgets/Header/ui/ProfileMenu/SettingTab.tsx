@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import HelpIcon from '@mui/icons-material/Help'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import HttpsIcon from '@mui/icons-material/Https'
 import FeedbackIcon from '@mui/icons-material/Feedback'
 import HistoryIcon from '@mui/icons-material/History'
@@ -22,7 +21,7 @@ const SettingTab = ({ onMenuClose }: Props) => {
 
   return (
     <List>
-      <ListItemButton>
+      <ListItemButton onClick={(event) => onChangePage(ROUTES.ACCOUNT_GENERAL, event)}>
         <ListItemIcon>
           <HelpIcon fontSize="small" />
         </ListItemIcon>

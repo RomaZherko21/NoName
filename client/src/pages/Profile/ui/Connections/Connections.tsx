@@ -4,15 +4,9 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
-  CardContent,
   Divider,
-  FormControl,
   Grid,
   IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
   Paper,
   Stack,
   TextField,
@@ -21,8 +15,6 @@ import {
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 const Connections = () => {
   const { t } = useTranslation()

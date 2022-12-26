@@ -1,13 +1,7 @@
-import { format } from 'date-fns'
 import { observer } from 'mobx-react-lite'
 import {
   Avatar,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
   Divider,
   IconButton,
   Paper,
@@ -16,11 +10,6 @@ import {
   Typography,
 } from '@mui/material'
 
-import { fromMsToDate } from 'shared/helpers'
-import { COMMON_DATE_FORMAT } from 'shared/consts'
-import { PopupMenu } from 'shared/ui'
-
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'

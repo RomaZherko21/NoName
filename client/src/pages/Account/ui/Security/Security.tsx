@@ -1,4 +1,4 @@
-import { Box, Button, Card, Divider, Grid, Paper, Stack, Switch, Typography } from '@mui/material'
+import { Button, Grid, Paper, Stack, Typography } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { useTranslation } from 'react-i18next'
 
