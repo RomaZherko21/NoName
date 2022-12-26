@@ -78,3 +78,8 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 1. From libs
 2. Absolute path
 3. Relative paths
+
+### Commit message
+- Types: feat, fix, refactor, ci, docs, style, test
+- Scope: FE-0, BE-0, ROOT-0
+- F.E. git commit -m "fix(FE-33): edit local storage hook"
