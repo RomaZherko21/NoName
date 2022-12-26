@@ -28,9 +28,21 @@ function Router() {
       <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />
       <Route path={ROUTES.SUBSCRIBER} element={<Subscriber />} />
       <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
-      <Route path={ROUTES.PROFILE} element={<Profile />} />
       <Route path={ROUTES.LIBRARY_STATISTICS} element={<LibraryStatistics />} />
-      <Route path={ROUTES.ACCOUNT} element={<Account />} />
+
+      <Route path={ROUTES.PROFILE}>
+        <Route path={ROUTES.PROFILE_TIMELINE} element={<Profile />} />
+        <Route path={ROUTES.PROFILE_CONNECTIONS} element={<Profile />} />
+      </Route>
+
+      <Route path={ROUTES.ACCOUNT}>
+        <Route path={ROUTES.ACCOUNT_GENERAL} element={<Account />} />
+        <Route path={ROUTES.ACCOUNT_BILLING} element={<Account />} />
+        <Route path={ROUTES.ACCOUNT_TEAM} element={<Account />} />
+        <Route path={ROUTES.ACCOUNT_NOTIFICATIONS} element={<Account />} />
+        <Route path={ROUTES.ACCOUNT_SECURITY} element={<Account />} />
+      </Route>
+
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} />
       <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />

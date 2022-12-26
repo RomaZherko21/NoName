@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs as MUiTabs, Typography } from '@mui/material'
-import { SyntheticEvent, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -37,32 +37,27 @@ function a11yProps(index: number) {
 const Tabs = ({
   options,
 }: {
-  options: { label: string; Component: (arg: any) => JSX.Element }[]
+  options: { label: string; to: string; Component: (arg: any) => JSX.Element }[]
 }) => {
-  const [value, setValue] = useState(0)
-
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+  let location = useLocation()
 
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <MUiTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <MUiTabs
+          value={options.findIndex((item) => item.to === location.pathname)}
+          aria-label="basic tabs example"
+        >
           {options.map((item, id) => (
-            <Tab label={item.label} {...a11yProps(id)} />
+            <Tab to={item.to} component={Link} label={item.label} {...a11yProps(id)} />
           ))}
         </MUiTabs>
       </Box>
       {options.map((item, id) => (
-        <TabPanel value={value} index={id}>
+        <TabPanel value={options.findIndex((item) => item.to === location.pathname)} index={id}>
           <item.Component />
         </TabPanel>
       ))}
-
-      {/* <TabPanel value={value} index={1}>
-        <Connections />
-      </TabPanel> */}
     </>
   )
 }

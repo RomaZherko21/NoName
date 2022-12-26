@@ -7,73 +7,27 @@ import {
   Grid,
   IconButton,
   Stack,
-  Tab,
-  Tabs,
   Tooltip,
   Typography,
 } from '@mui/material'
-
-import { Connections, Timeline } from './ui'
-import ProfileCover from 'assets/images/cover.jpg'
-// import { PageHeader } from 'shared/ui'
-
-import s from './Styles.module.scss'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { useRootStore } from 'stores'
-
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import ChatIcon from '@mui/icons-material/Chat'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import { Box } from '@mui/system'
-import { SyntheticEvent, useState } from 'react'
 
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: number
-  value: number
-}
+import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { Tabs } from 'shared/ui'
+import { useRootStore } from 'stores'
+import ProfileCover from 'assets/images/cover.jpg'
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ mt: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  )
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  }
-}
+import s from './Styles.module.scss'
+import { Connections, Timeline } from './ui'
 
 function Profile() {
   const { t } = useTranslation()
   const { user } = useRootStore()
 
-  const [value, setValue] = useState(0)
-
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
-
   return (
     <>
-      {/* <PageHeader pageName={t('page:profile')} /> */}
-
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -119,18 +73,12 @@ function Profile() {
           </Grid>
 
           <Grid item xs={12}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Timeline" {...a11yProps(0)} />
-                <Tab label="Connection" {...a11yProps(1)} />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              <Timeline />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Connections />
-            </TabPanel>
+            <Tabs
+              options={[
+                { label: 'Timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
+                { label: 'Connections', to: ROUTES.PROFILE_CONNECTIONS, Component: Connections },
+              ]}
+            />
           </Grid>
         </Grid>
       </Container>

@@ -22,18 +22,18 @@ const ProfileTab = ({ onLogout, onMenuClose }: Props) => {
 
   return (
     <List>
-      <ListItemButton onClick={(event) => onChangePage(ROUTES.ACCOUNT, event)}>
-        <ListItemIcon>
-          <BorderColorIcon fontSize="small" />
-        </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
-      </ListItemButton>
-
-      <ListItemButton onClick={(event) => onChangePage(ROUTES.PROFILE, event)}>
+      <ListItemButton onClick={(event) => onChangePage(ROUTES.PROFILE_TIMELINE, event)}>
         <ListItemIcon>
           <AccountCircleIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText primary="View Profile" />
+      </ListItemButton>
+
+      <ListItemButton onClick={(event) => onChangePage(ROUTES.ACCOUNT_GENERAL, event)}>
+        <ListItemIcon>
+          <BorderColorIcon fontSize="small" />
+        </ListItemIcon>
+        <ListItemText primary="Edit Profile" />
       </ListItemButton>
 
       <ListItemButton>
