@@ -34,8 +34,7 @@ function ProfileList() {
       <List
         component="nav"
         sx={{
-          px: 0,
-          py: 0,
+          p: 0,
           '& .MuiListItemButton-root': {
             py: 1.5,
             '& .MuiAvatar-root': avatarSX,

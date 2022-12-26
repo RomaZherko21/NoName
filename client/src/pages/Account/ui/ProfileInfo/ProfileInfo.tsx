@@ -16,8 +16,8 @@ const ProfileInfo = (props: any) => {
       <CardContent>
         <Box
           sx={{
-            alignItems: 'center',
             display: 'flex',
+            alignItems: 'center',
             flexDirection: 'column',
           }}
         >

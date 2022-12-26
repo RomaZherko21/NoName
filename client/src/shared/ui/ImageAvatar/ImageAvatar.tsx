@@ -3,11 +3,11 @@ import HideImageIcon from '@mui/icons-material/HideImage'
 
 interface Props {
   src: string
-  styles?: any
+  sx?: any
 }
 
-const ImageAvatar = ({ src, styles }: Props) => (
-  <Avatar src={src} sx={styles}>
+const ImageAvatar = ({ src, sx }: Props) => (
+  <Avatar src={src} sx={sx}>
     <HideImageIcon />
   </Avatar>
 )

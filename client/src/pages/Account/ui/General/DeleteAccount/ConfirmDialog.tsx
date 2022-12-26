@@ -17,7 +17,7 @@ function ConfirmDialog({ onClose }: Props) {
   }
 
   return (
-    <Stack direction="row" spacing={2} sx={{ padding: '20px', width: '300px' }}>
+    <Stack direction="row" spacing={2} sx={{ p: 2, width: '300px' }}>
       <Button onClick={onDeleteAccount} variant="contained" color="error" fullWidth>
         {t('actions.delete')}
       </Button>

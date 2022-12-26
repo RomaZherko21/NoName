@@ -12,9 +12,7 @@ export const useDialog = (
 
   const [showModal, hideModal] = useModal(() => (
     <Dialog onClose={() => (closable ? hideModal() : null)} open>
-      <DialogTitle
-        sx={{ background: (theme) => theme.palette.primary.main, position: 'relative', p: 3 }}
-      >
+      <DialogTitle sx={{ backgroundColor: 'primary.main', position: 'relative', p: 3 }}>
         <Typography variant="h6" color="primary.contrastText">
           {t(title)}
         </Typography>
@@ -27,7 +25,7 @@ export const useDialog = (
             transform: 'translateY(-50%)',
             padding: 0,
             right: 22,
-            color: (theme) => theme.palette.primary.contrastText,
+            color: 'primary.contrastText',
           }}
         >
           <CloseIcon />

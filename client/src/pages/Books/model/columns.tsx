@@ -42,15 +42,11 @@ export const getColumns = (): TableColumn[] => [
       >
         <ImageAvatar
           src={`${GO_API_BOOK_IMAGES_URL}/${id}.jpg`}
-          styles={{ width: 100, height: 120, mr: 2, borderRadius: '8px' }}
+          sx={{ width: 100, height: 120, mr: 2, borderRadius: '8px' }}
         />
         <Box>
           <Typography color="textPrimary">{name}</Typography>
-          <Typography
-            color="textSecondary"
-            variant="subtitle1"
-            sx={{ display: 'flex', gap: '4px' }}
-          >
+          <Typography color="textSecondary" variant="subtitle1" sx={{ display: 'flex', gap: 1 }}>
             {i18next.t('book:quantity')}
             <Typography color="secondary" variant="subtitle1">
               {quantity}

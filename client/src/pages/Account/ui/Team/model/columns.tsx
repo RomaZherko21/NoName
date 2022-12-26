@@ -14,8 +14,8 @@ export const getColumns = (): TableColumn[] => [
     getValue: ({ name, surname, middle_name, avatar }: User) => (
       <Box
         sx={{
-          alignItems: 'center',
           display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Avatar src={`${NODE_API_USER_AVATAR_URL}/${avatar}`} sx={{ mr: 2 }}>

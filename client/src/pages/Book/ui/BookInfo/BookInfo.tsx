@@ -19,10 +19,10 @@ const BookInfo = () => {
       <CardContent>
         <Box
           sx={{
-            alignItems: 'center',
             display: 'flex',
+            alignItems: 'center',
             flexDirection: 'column',
-            gap: '12px',
+            gap: 3,
           }}
         >
           {BookModel.loading.has ? (
