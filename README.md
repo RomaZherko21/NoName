@@ -5,7 +5,7 @@
 - [Client credentials](#client-credentials)
 - [phpMyAdmin credentials](#phpMyAdmin-credentials)
 - [Diagrams](#diagrams)
-- [Frontend style guide](#Frontend-style-guide)
+- [Style guide](#Style-guide)
 
 The main idea of the project is to practice with different technologies such as:\
 :white_check_mark: React\
@@ -61,7 +61,7 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 
 ![docker-services](https://github.com/RomaZherko21/NoName/blob/master/diagrams/docker-services.png?raw=true)
 
-## Frontend style guide
+## Style guide
 
 ### Order in .jsx file
 1. Libs hooks, root store hooks
