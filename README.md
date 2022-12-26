@@ -5,6 +5,7 @@
 - [Client credentials](#client-credentials)
 - [phpMyAdmin credentials](#phpMyAdmin-credentials)
 - [Diagrams](#diagrams)
+- [Frontend style guide](#Frontend-style-guide)
 
 The main idea of the project is to practice with different technologies such as:\
 :white_check_mark: React\
@@ -36,18 +37,22 @@ Client and node_api server will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `make down` or `docker compose down --remove-orphans -t 0`
+
 Stops docker containers.
 
 ## Client credentials
+
 - email: admin@gmail.com
 - password: qwerqwer
 
 ## phpMyAdmin credentials
+
 - host: mysql_db
 - name: root
 - password: qwer
 
 ## go_api swagger
+
 http://localhost:8000/swagger/index.html
 
 ## Diagrams
@@ -55,3 +60,21 @@ http://localhost:8000/swagger/index.html
 https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-services.png
 
 ![docker-services](https://github.com/RomaZherko21/NoName/blob/master/diagrams/docker-services.png?raw=true)
+
+## Frontend style guide
+
+### order in .jsx file
+1. Libs hooks, root store hooks
+2. Local state
+3. side effects
+4. functions, handlers
+
+### css styles
+- sx={{}} if there is less then 6 styles
+- Styles.module.scss if 6 and more styles
+- theme folder for change all default styles throughout the project
+
+### import order
+1. From libs
+2. Absolute path
+3. Relative paths
