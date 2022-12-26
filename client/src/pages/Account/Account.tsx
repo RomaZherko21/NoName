@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Container, Grid } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { PageHeader, Tabs } from 'shared/ui'
+import { ROUTES } from 'shared/consts'
 
 import { General, Notifications, Security, Team } from './ui'
 
@@ -19,21 +20,13 @@ function Account() {
 
       <Tabs
         options={[
-          { label: 'General', Component: General },
-          { label: 'Billing', Component: Kek },
-          { label: 'Team', Component: Team },
-          { label: 'Notifications', Component: Notifications },
-          { label: 'Security', Component: Security },
+          { label: 'General', to: ROUTES.ACCOUNT_GENERAL, Component: General },
+          { label: 'Billing', to: ROUTES.ACCOUNT_BILLING, Component: Kek },
+          { label: 'Team', to: ROUTES.ACCOUNT_TEAM, Component: Team },
+          { label: 'Notifications', to: ROUTES.ACCOUNT_NOTIFICATIONS, Component: Notifications },
+          { label: 'Security', to: ROUTES.ACCOUNT_SECURITY, Component: Security },
         ]}
       />
-
-      <Grid container spacing={3}>
-        {/* <Grid item lg={8} md={6} xs={12}>
-          <ProfileList />
-        </Grid> */}
-
-        <Grid item lg={4} xs={12}></Grid>
-      </Grid>
     </Container>
   )
 }
