@@ -63,18 +63,18 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 
 ## Frontend style guide
 
-### order in .jsx file
+### Order in .jsx file
 1. Libs hooks, root store hooks
 2. Local state
 3. side effects
 4. functions, handlers
 
-### css styles
+### CSS styles
 - sx={{}} if there is less then 6 styles
 - Styles.module.scss if 6 and more styles
 - theme folder for change all default styles throughout the project
 
-### import order
+### Import order
 1. From libs
 2. Absolute path
 3. Relative paths
