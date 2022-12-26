@@ -12,18 +12,19 @@ const namespaces = [
   'sentences',
   'book',
 ]
+const initTranslation = () => {
+  return i18n
+    .use(initReactI18next)
+    .use(Backend)
+    .init({
+      ns: namespaces,
+      fallbackLng: 'en',
+      debug: false,
+      react: {
+        useSuspense: false,
+        nsMode: 'fallback',
+      },
+    })
+}
 
-i18n
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    ns: namespaces,
-    fallbackLng: 'en',
-    debug: true,
-    react: {
-      useSuspense: false,
-      nsMode: 'fallback',
-    },
-  })
-
-export default i18n
+export default initTranslation

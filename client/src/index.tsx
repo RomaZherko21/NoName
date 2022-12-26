@@ -1,8 +1,13 @@
 import ReactDOM from 'react-dom'
 
 import App from './app/App'
+import initTranslation from './i18n'
 
-import './i18n'
 import './index.scss'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+async function init() {
+  await initTranslation()
+  ReactDOM.render(<App />, document.getElementById('root'))
+}
+
+init()
