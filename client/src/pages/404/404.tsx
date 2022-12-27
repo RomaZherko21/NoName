@@ -4,15 +4,17 @@ import { Box, Button, Container, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import notFoundImg from 'assets/images/404.svg'
+import { useNavigate } from 'react-router-dom'
 
 const NotFound = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
     <>
       <Helmet>
-        <title>404 | Page not found</title>
-        <meta name="description" content="404 | Page not found" />
+        <title>{t('page:404')}</title>
+        <meta name="description" content={t('page:404')} />
       </Helmet>
       <Box
         component="main"
@@ -50,11 +52,12 @@ const NotFound = () => {
               />
             </Box>
             <Button
-              component="a"
               startIcon={<ArrowBackIcon fontSize="small" />}
               sx={{ mt: 3 }}
               variant="contained"
-              href="/"
+              onClick={() => {
+                navigate(-1)
+              }}
             >
               {t('actions.goBack')}
             </Button>
