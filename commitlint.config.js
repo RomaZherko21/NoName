@@ -2,7 +2,7 @@ module.exports = {
   extends: ['@commitlint/config-angular'],
   rules: {
     'scope-case': () => [2, 'always', 'upper-case'],
-    'scope-regexp-validation': () => [2, 'always', /^(FE|BE|root)-[0-9]+$/],
+    'scope-regexp-validation': () => [2, 'always', /^(FE|BE|ROOT)-[0-9]+$/],
   },
   plugins: [
     {
