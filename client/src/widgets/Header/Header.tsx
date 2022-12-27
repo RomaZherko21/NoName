@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import { IconButton, AppBar, Toolbar, Tooltip, Box } from '@mui/material'
+import { IconButton, AppBar, Toolbar, Box } from '@mui/material'
 import ListIcon from '@mui/icons-material/List'
-import GroupIcon from '@mui/icons-material/Group'
 
-import { ProfileMenu, ChangeLang, NotificationsPopover } from './ui'
+import { ProfileMenu, ChangeLang, NotificationsPopover, ContactsPopover } from './ui'
 
 interface Props {
   className?: string
@@ -26,11 +25,7 @@ const Header = ({ className, toggleMenu }: Props) => {
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ChangeLang />
-          <Tooltip title="Contacts">
-            <IconButton sx={{ ml: 1 }}>
-              <GroupIcon fontSize="medium" />
-            </IconButton>
-          </Tooltip>
+          <ContactsPopover />
           <NotificationsPopover />
           <ProfileMenu />
         </Box>

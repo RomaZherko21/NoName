@@ -50,18 +50,20 @@ function TabPanel({
 
 function ProfileMenu() {
   const { user } = useRootStore()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [currentTab, setCurrentTab] = useState(0)
+  const anchorRef = useRef<any>(null)
 
   const [showConfirmationModal] = useDialog(
     'notification:exitConfirm',
     (onClose) => <ExitDialog onClose={onClose} />,
     true
   )
+
   const onLogout = () => {
     showConfirmationModal()
   }
 
-  const anchorRef = useRef<any>(null)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const onMenuClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return
@@ -69,9 +71,7 @@ function ProfileMenu() {
     setIsMenuOpen(false)
   }
 
-  const [currentTab, setCurrentTab] = useState(0)
-
-  const onTabChange = (event: any, newValue: number) => {
+  const onTabChange = (_: any, newValue: number) => {
     setCurrentTab(newValue)
   }
 

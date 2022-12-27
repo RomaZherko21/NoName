@@ -76,7 +76,7 @@ const NOTIFICATIONS = [
   },
 ]
 
-export default function NotificationsPopover() {
+export default function ContactsPopover() {
   const [notifications, setNotifications] = useState(NOTIFICATIONS)
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length
