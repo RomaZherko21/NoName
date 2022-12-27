@@ -77,16 +77,14 @@ export default function ContactsPopover() {
           {contacts.map((item: any) => (
             <ListItem
               secondaryAction={
-                item.online && (
-                  <Box
-                    sx={{
-                      backgroundColor: 'secondary.main',
-                      width: 8,
-                      height: 8,
-                      borderRadius: '50%',
-                    }}
-                  />
-                )
+                <Box
+                  sx={{
+                    backgroundColor: item.online ? 'secondary.main' : 'grey.400',
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                  }}
+                />
               }
             >
               <ListItemAvatar>
