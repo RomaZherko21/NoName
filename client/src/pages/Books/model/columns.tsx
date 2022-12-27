@@ -59,8 +59,19 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'authors',
     title: i18next.t('book:author'),
-    getValue: (row: Book) =>
-      row.authors.map((item) => getFullName(item.name, item.surname)).join(', '),
+    getValue: (row: Book) => (
+      <Box
+        sx={{
+          backgroundColor: 'grey.800',
+          width: 'fit-content',
+          p: 1,
+          borderRadius: 1,
+          color: 'grey.300',
+        }}
+      >
+        {row.authors.map((item) => getFullName(item.name, item.surname)).join(', ')}
+      </Box>
+    ),
   },
   {
     key: 'genres',

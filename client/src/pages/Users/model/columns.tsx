@@ -99,7 +99,19 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'date_of_birth',
     title: i18next.t('user:dateOfBirth'),
-    getValue: (row: User) => reformatDates(row.date_of_birth || ''),
+    getValue: (row: User) => (
+      <Box
+        sx={{
+          backgroundColor: 'grey.800',
+          width: 'fit-content',
+          p: 1,
+          borderRadius: 1,
+          color: 'grey.300',
+        }}
+      >
+        {reformatDates(row.date_of_birth || '')}
+      </Box>
+    ),
   },
   {
     key: 'tel_number',

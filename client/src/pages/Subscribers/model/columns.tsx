@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
-import { IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import InfoIcon from '@mui/icons-material/Info'
@@ -85,7 +85,19 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'date_of_birth',
     title: i18next.t('fields.dateOfBirth'),
-    getValue: (row: Subscriber) => reformatDates(row.date_of_birth || ''),
+    getValue: (row: Subscriber) => (
+      <Box
+        sx={{
+          backgroundColor: 'grey.800',
+          width: 'fit-content',
+          p: 1,
+          borderRadius: 1,
+          color: 'grey.300',
+        }}
+      >
+        {reformatDates(row.date_of_birth || '')}
+      </Box>
+    ),
   },
   {
     key: 'tel_number',
