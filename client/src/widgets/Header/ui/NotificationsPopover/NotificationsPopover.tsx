@@ -8,13 +8,14 @@ import {
   Button,
   Tooltip,
   Divider,
-  Popover,
   Typography,
   IconButton,
   ListSubheader,
 } from '@mui/material'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
+
+import { Popover } from 'shared/ui'
 
 import { NotificationItem } from './ui'
 
@@ -41,17 +42,8 @@ const NOTIFICATIONS = [
 
 function NotificationsPopover() {
   const [notifications, setNotifications] = useState(NOTIFICATIONS)
-  const [open, setOpen] = useState(null)
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length
-
-  const handleOpen = (event: any) => {
-    setOpen(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setOpen(null)
-  }
 
   const handleMarkAllAsRead = () => {
     setNotifications(
@@ -63,29 +55,18 @@ function NotificationsPopover() {
   }
 
   return (
-    <>
-      <Tooltip title="Notifications">
-        <IconButton sx={{ ml: 1 }} color={open ? 'primary' : 'default'} onClick={handleOpen}>
-          <Badge badgeContent={totalUnRead} color="error" max={999}>
-            <NotificationsIcon fontSize="medium" />
-          </Badge>
-        </IconButton>
-      </Tooltip>
-
-      <Popover
-        open={Boolean(open)}
-        anchorEl={open}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        PaperProps={{
-          sx: {
-            mt: 1.5,
-            ml: 0.75,
-            width: 360,
-          },
-        }}
-      >
+    <Popover
+      activateElement={(open, handleOpen) => (
+        <Tooltip title="Notifications">
+          <IconButton sx={{ ml: 1 }} color={open ? 'primary' : 'default'} onClick={handleOpen}>
+            <Badge badgeContent={totalUnRead} color="error" max={999}>
+              <NotificationsIcon fontSize="medium" />
+            </Badge>
+          </IconButton>
+        </Tooltip>
+      )}
+    >
+      <>
         <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle1">Notifications</Typography>
@@ -138,8 +119,8 @@ function NotificationsPopover() {
             View All
           </Button>
         </Box>
-      </Popover>
-    </>
+      </>
+    </Popover>
   )
 }
 

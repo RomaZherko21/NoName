@@ -5,7 +5,6 @@ import {
   List,
   Avatar,
   Divider,
-  Popover,
   Typography,
   ListItemText,
   ListItemAvatar,
@@ -16,6 +15,7 @@ import {
 import GroupIcon from '@mui/icons-material/Group'
 import ImageIcon from '@mui/icons-material/Image'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { Popover } from 'shared/ui'
 
 const CONTACTS = [
   {
@@ -36,38 +36,18 @@ const CONTACTS = [
 
 function ContactsPopover() {
   const [contacts] = useState(CONTACTS)
-  const [open, setOpen] = useState(null)
-
-  const handleOpen = (event: any) => {
-    setOpen(event.currentTarget)
-  }
-
-  const onMenuClose = (event: any) => {
-    setOpen(null)
-  }
 
   return (
-    <>
-      <Tooltip title="Contacts">
-        <IconButton sx={{ ml: 1 }} color={open ? 'primary' : 'default'} onClick={handleOpen}>
-          <GroupIcon fontSize="medium" />
-        </IconButton>
-      </Tooltip>
-
-      <Popover
-        open={Boolean(open)}
-        anchorEl={open}
-        onClose={onMenuClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        PaperProps={{
-          sx: {
-            mt: 1.5,
-            ml: 0.75,
-            minWidth: 250,
-          },
-        }}
-      >
+    <Popover
+      activateElement={(open, handleOpen) => (
+        <Tooltip title="Contacts">
+          <IconButton sx={{ ml: 1 }} color={open ? 'primary' : 'default'} onClick={handleOpen}>
+            <GroupIcon fontSize="medium" />
+          </IconButton>
+        </Tooltip>
+      )}
+    >
+      <>
         <Box sx={{ py: 2, px: 2.5 }}>
           <Typography variant="subtitle1">Contacts</Typography>
         </Box>
@@ -100,8 +80,8 @@ function ContactsPopover() {
             </ListItem>
           ))}
         </List>
-      </Popover>
-    </>
+      </>
+    </Popover>
   )
 }
 
