@@ -70,9 +70,9 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 4. functions, handlers
 
 ### CSS styles
-- sx={{}} if there is less then 6 styles
-- Styles.module.scss if 6 and more styles
-- theme folder for change all default styles throughout the project
+- sx={{}} if there is less then 6 lines of code
+- Styles.module.scss if 6 and more lines of code
+- theme folder to change all default styles throughout the project
 
 ### Import order
 1. From libs
@@ -81,5 +81,5 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 
 ### Commit message
 - Types: feat, fix, refactor, ci, docs, style, test
-- Scope: FE-0, BE-0, ROOT-0
+- Scope: FE-{task-number}, BE-{task-number}, ROOT-{task-number}
 - F.E. git commit -m "fix(FE-33): edit local storage hook"
