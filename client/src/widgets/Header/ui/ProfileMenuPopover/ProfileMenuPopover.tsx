@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import {
   Avatar,
   Box,
@@ -22,9 +23,7 @@ import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { useDialog } from 'shared/hooks'
 import { useRootStore } from 'stores'
 
-import ProfileTab from './ProfileTab'
-import SettingTab from './SettingTab'
-import ExitDialog from './ExitDialog'
+import { ProfileTab, SettingTab, ExitDialog } from './ui'
 import s from './Styles.module.scss'
 
 function TabPanel({
@@ -48,7 +47,7 @@ function TabPanel({
   )
 }
 
-function ProfileMenu() {
+function ProfileMenuPopover() {
   const { user } = useRootStore()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState(0)
@@ -177,4 +176,4 @@ function ProfileMenu() {
   )
 }
 
-export default ProfileMenu
+export default observer(ProfileMenuPopover)

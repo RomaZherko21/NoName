@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
@@ -12,7 +13,7 @@ interface Props {
   onMenuClose: (event: any) => void
 }
 
-const ProfileTab = ({ onLogout, onMenuClose }: Props) => {
+function ProfileTab({ onLogout, onMenuClose }: Props) {
   const navigate = useNavigate()
 
   const onChangePage = (route: string, event: any) => {
@@ -53,4 +54,4 @@ const ProfileTab = ({ onLogout, onMenuClose }: Props) => {
   )
 }
 
-export default ProfileTab
+export default observer(ProfileTab)

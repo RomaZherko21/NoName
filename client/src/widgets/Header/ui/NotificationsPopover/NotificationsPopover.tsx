@@ -1,32 +1,22 @@
-import { formatDistanceToNow, set, sub } from 'date-fns'
 import { useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { set, sub } from 'date-fns'
 import {
   Box,
   List,
   Badge,
   Button,
-  Avatar,
   Tooltip,
   Divider,
   Popover,
   Typography,
   IconButton,
-  ListItemText,
   ListSubheader,
-  ListItemAvatar,
-  ListItemButton,
 } from '@mui/material'
-import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 
-function fToNow(date: any) {
-  return date
-    ? formatDistanceToNow(new Date(date), {
-        addSuffix: true,
-      })
-    : ''
-}
+import { NotificationItem } from './ui'
 
 const NOTIFICATIONS = [
   {
@@ -40,15 +30,6 @@ const NOTIFICATIONS = [
   },
   {
     id: 2,
-    title: 'sdfsdf',
-    description: 'answered to your comment on the Minimal',
-    avatar: '/assets/images/avatars/avatar_2.jpg',
-    type: 'friend_interactive',
-    createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
-    isUnRead: true,
-  },
-  {
-    id: 3,
     title: 'You have new message',
     description: '5 unread messages',
     avatar: null,
@@ -56,32 +37,13 @@ const NOTIFICATIONS = [
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
     isUnRead: false,
   },
-  {
-    id: 4,
-    title: 'You have new mail',
-    description: 'sent from Guido Padberg',
-    avatar: null,
-    type: 'mail',
-    createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: false,
-  },
-  {
-    id: 5,
-    title: 'Delivery processing',
-    description: 'Your order is being shipped',
-    avatar: null,
-    type: 'order_shipped',
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: false,
-  },
 ]
 
-export default function ContactsPopover() {
+function NotificationsPopover() {
   const [notifications, setNotifications] = useState(NOTIFICATIONS)
+  const [open, setOpen] = useState(null)
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length
-
-  const [open, setOpen] = useState(null)
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget)
@@ -143,7 +105,6 @@ export default function ContactsPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        {/* <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}> */}
         <List
           disablePadding
           subheader={
@@ -152,9 +113,9 @@ export default function ContactsPopover() {
             </ListSubheader>
           }
         >
-          {notifications.slice(0, 2).map((notification: any) => (
-            <NotificationItem key={notification.id} notification={notification} />
-          ))}
+          {notifications.map(
+            (item) => item.isUnRead && <NotificationItem key={item.id} notification={item} />
+          )}
         </List>
 
         <List
@@ -165,11 +126,10 @@ export default function ContactsPopover() {
             </ListSubheader>
           }
         >
-          {notifications.slice(2, 5).map((notification: any) => (
-            <NotificationItem key={notification.id} notification={notification} />
-          ))}
+          {notifications.map(
+            (item) => !item.isUnRead && <NotificationItem key={item.id} notification={item} />
+          )}
         </List>
-        {/* </Scrollbar> */}
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
@@ -183,105 +143,4 @@ export default function ContactsPopover() {
   )
 }
 
-function NotificationItem({ notification }: any) {
-  const { avatar, title } = renderContent(notification)
-
-  return (
-    <ListItemButton
-      sx={{
-        py: 1.5,
-        px: 2.5,
-        mt: '1px',
-        ...(notification.isUnRead && {
-          bgcolor: 'action.selected',
-        }),
-      }}
-    >
-      <ListItemAvatar>
-        <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        primary={title}
-        secondary={
-          <Typography
-            variant="caption"
-            sx={{
-              mt: 0.5,
-              display: 'flex',
-              alignItems: 'center',
-              color: 'text.disabled',
-            }}
-          >
-            <AccountBoxIcon sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {fToNow(notification.createdAt)}
-          </Typography>
-        }
-      />
-    </ListItemButton>
-  )
-}
-
-function renderContent(notification: any) {
-  const title = (
-    <Typography variant="subtitle2">
-      {notification.title}
-      <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
-        &nbsp; {notification.description}
-      </Typography>
-    </Typography>
-  )
-
-  if (notification.type === 'order_placed') {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        />
-      ),
-      title,
-    }
-  }
-  if (notification.type === 'order_shipped') {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        />
-      ),
-      title,
-    }
-  }
-  if (notification.type === 'mail') {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        />
-      ),
-      title,
-    }
-  }
-  if (notification.type === 'chat_message') {
-    return {
-      avatar: (
-        <img
-          alt={notification.title}
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        />
-      ),
-      title,
-    }
-  }
-  return {
-    avatar: notification.avatar ? (
-      <img
-        alt={notification.title}
-        src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-      />
-    ) : null,
-    title,
-  }
-}
+export default observer(NotificationsPopover)

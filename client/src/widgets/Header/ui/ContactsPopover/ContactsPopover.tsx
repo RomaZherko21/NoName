@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import {
   Box,
   List,
@@ -33,7 +34,7 @@ const CONTACTS = [
   },
 ]
 
-export default function ContactsPopover() {
+function ContactsPopover() {
   const [contacts] = useState(CONTACTS)
   const [open, setOpen] = useState(null)
 
@@ -103,3 +104,5 @@ export default function ContactsPopover() {
     </>
   )
 }
+
+export default observer(ContactsPopover)

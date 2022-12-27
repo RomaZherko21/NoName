@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import HelpIcon from '@mui/icons-material/Help'
@@ -11,7 +12,7 @@ interface Props {
   onMenuClose: (event: any) => void
 }
 
-const SettingTab = ({ onMenuClose }: Props) => {
+function SettingTab({ onMenuClose }: Props) {
   const navigate = useNavigate()
 
   const onChangePage = (route: string, event: any) => {
@@ -52,4 +53,4 @@ const SettingTab = ({ onMenuClose }: Props) => {
   )
 }
 
-export default SettingTab
+export default observer(SettingTab)

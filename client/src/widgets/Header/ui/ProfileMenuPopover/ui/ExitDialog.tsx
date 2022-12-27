@@ -1,4 +1,5 @@
 import { Button, Stack } from '@mui/material'
+import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 
 import { useRootStore } from 'stores'
@@ -29,4 +30,4 @@ function ExitDialog({ onClose }: Props) {
   )
 }
 
-export default ExitDialog
+export default observer(ExitDialog)

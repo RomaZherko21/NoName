@@ -1,4 +1,4 @@
-export { ProfileMenu } from './ProfileMenu'
-export { ChangeLang } from './ChangeLang'
+export { ProfileMenuPopover } from './ProfileMenuPopover'
+export { ChangeLangPopup } from './ChangeLangPopup'
 export { NotificationsPopover } from './NotificationsPopover'
 export { ContactsPopover } from './ContactsPopover'

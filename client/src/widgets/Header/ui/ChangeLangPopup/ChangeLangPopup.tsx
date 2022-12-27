@@ -9,7 +9,7 @@ import { getPopupConfig } from './PopupConfig'
 import i18next from 'i18next'
 import { IconButton, Tooltip } from '@mui/material'
 
-function ChangeLang() {
+function ChangeLangPopup() {
   const popupConfig = useMemo(
     () =>
       getPopupConfig((val: string) => {
@@ -32,4 +32,4 @@ function ChangeLang() {
   )
 }
 
-export default observer(ChangeLang)
+export default observer(ChangeLangPopup)
