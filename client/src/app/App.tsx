@@ -4,6 +4,7 @@ import { ModalProvider } from 'react-modal-hook'
 import { Slide, toast } from 'react-toastify'
 import { configure } from 'mobx'
 import { observer } from 'mobx-react-lite'
+import { CssBaseline } from '@mui/material'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -37,6 +38,7 @@ function App() {
       <BrowserRouter>
         <RootStoreProvider>
           <AppThemeProvider>
+            <CssBaseline enableColorScheme />
             <ModalProvider>
               {authorization.isAuthorized ? (
                 <Layout>
