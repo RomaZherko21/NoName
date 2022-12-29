@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -15,25 +16,21 @@ import {
 import LayersIcon from '@mui/icons-material/Layers'
 import EditIcon from '@mui/icons-material/Edit'
 
-import { BillingModel, BillingStatus } from './model'
+import { BillingStatus } from 'shared/types'
+
+import { BillingModel } from './model'
 
 function Billing() {
   const { t } = useTranslation()
-  const SUBSCRIPTON_TYPES = [
-    { price: '$0', name: t('user:startup'), status: BillingStatus.startup },
-    { price: '$4.99', name: t('user:standard'), status: BillingStatus.standard },
-    { price: '$29.99', name: t('user:business'), status: BillingStatus.business },
-  ]
+  const SUBSCRIPTON_TYPES = useMemo(
+    () => [
+      { price: '$0', name: t('user:startup'), status: BillingStatus.startup },
+      { price: '$4.99', name: t('user:standard'), status: BillingStatus.standard },
+      { price: '$29.99', name: t('user:business'), status: BillingStatus.business },
+    ],
+    [t]
+  )
 
-  function changeBillingStatus(item: any) {
-    if (BillingStatus.startup === item.status) {
-      BillingModel.billingStatus = BillingStatus.startup
-    } else if (BillingStatus.standard === item.status) {
-      BillingModel.billingStatus = BillingStatus.standard
-    } else if (BillingStatus.business === item.status) {
-      BillingModel.billingStatus = BillingStatus.business
-    }
-  }
   return (
     <Paper elevation={1}>
       <Grid spacing={5} sx={{ p: 3 }}>
@@ -56,7 +53,7 @@ function Billing() {
                       : '1px solid #2d3748',
                 }}
                 onClick={() => {
-                  changeBillingStatus(item)
+                  BillingModel.billingStatus = item.status
                 }}
               >
                 <LayersIcon />

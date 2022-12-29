@@ -1,10 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-export enum BillingStatus {
-  startup = 'startup',
-  standard = 'standard',
-  business = 'business',
-}
+import { BillingStatus } from 'shared/types'
 
 class BillingModel {
   billingStatus = BillingStatus.startup

@@ -8,6 +8,12 @@ export enum Gender {
   woman = 'woman',
 }
 
+export enum BillingStatus {
+  startup = 'startup',
+  standard = 'standard',
+  business = 'business',
+}
+
 export interface User {
   id?: number
   name: string
