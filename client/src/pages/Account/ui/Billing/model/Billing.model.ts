@@ -1,38 +1,16 @@
 import { makeAutoObservable } from 'mobx'
 
+export enum BillingStatus {
+  startup = 'startup',
+  standard = 'standard',
+  business = 'business',
+}
+
 class BillingModel {
-  planStatus = {
-    isStartupActive: false,
-    isStandardActive: false,
-    isBusinessActive: false,
-  }
+  billingStatus = BillingStatus.startup
 
   constructor() {
     makeAutoObservable(this)
-  }
-
-  setIsStartupActive() {
-    this.planStatus = {
-      isStartupActive: true,
-      isStandardActive: false,
-      isBusinessActive: false,
-    }
-  }
-
-  setIsStandardActive() {
-    this.planStatus = {
-      isStartupActive: false,
-      isStandardActive: true,
-      isBusinessActive: false,
-    }
-  }
-
-  setIsBusinessActive() {
-    this.planStatus = {
-      isStartupActive: false,
-      isStandardActive: false,
-      isBusinessActive: true,
-    }
   }
 }
 
