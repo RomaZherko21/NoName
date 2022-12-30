@@ -34,6 +34,7 @@ function Popover({ children, activateElement }: Props) {
             ml: 0.75,
           },
         }}
+        disableScrollLock
       >
         {children}
       </MuiPopover>

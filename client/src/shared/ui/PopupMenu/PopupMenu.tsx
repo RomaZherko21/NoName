@@ -44,6 +44,7 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        disableScrollLock
       >
         <List style={{ minWidth: '200px', padding: 0 }}>
           {config.map((item) =>
