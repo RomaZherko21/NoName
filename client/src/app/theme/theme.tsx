@@ -1,5 +1,5 @@
 import { createContext, FC, useEffect, useMemo } from 'react'
-import { createTheme, ThemeProvider } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 import { useBoolState } from 'shared/hooks'
 
