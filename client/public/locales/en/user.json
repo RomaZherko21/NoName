@@ -20,6 +20,15 @@
   "multiFactorAuthentication": "Multi Factor Authentication",
   "authenticatorApp": "Authenticator App",
   "textMessage": "Text Message",
+  "billingAdvice": "You can upgrade and downgrade whenever you want",
+  "startup": "startup",
+  "standard": "standard",
+  "business": "business",
+  "billingDetails": "Billing details",
+  "billingName": "Billing name",
+  "cardNumber": "Card number",
+  "country": "Country",
+  "zipAndPostalCode": "Zip / Postal code",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -28,7 +37,11 @@
     "deleteAccount": "Delete account",
     "updateUser": "Update user",
     "searchEmail": "Search email...",
-    "inviteMembers": "Invite members"
+    "inviteMembers": "Invite members",
+    "changePlan": "Change plan",
+    "usingNow": "Using now",
+    "cancel": "Cancel",
+    "upgradePlan": "Upgrade plan"
   },
   "updates": {
     "product": {
