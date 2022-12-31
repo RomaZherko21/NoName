@@ -14,6 +14,7 @@ import {
   Subscriber,
   LibraryStatistics,
   Account,
+  NewBook,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -23,6 +24,7 @@ function Router() {
       <Route path={ROUTES.USERS} element={<Users />} />
       <Route path={ROUTES.BOOKS} element={<Books />} />
       <Route path={ROUTES.BOOK} element={<Book />} />
+      <Route path={ROUTES.NEW_BOOK} element={<NewBook />} />
       <Route path={ROUTES.AUTHOR} element={<Author />} />
       <Route path={ROUTES.POSTS} element={<Posts />} />
       <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />

@@ -12,7 +12,8 @@
   "bookReadability": "Book readability",
   "actions": {
     "authorInfo": "Show more author information",
-    "addSubscriber": "New subscriber"
+    "addSubscriber": "New subscriber",
+    "addBook": "Add book"
   },
   "form": {
     "updateBook": "Edit book",

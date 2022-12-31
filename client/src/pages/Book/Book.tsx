@@ -6,11 +6,11 @@ import { Box, Button, Grid } from '@mui/material'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
+import { useDialog } from 'shared/hooks'
 import { PageHeader, PercentageCircle } from 'shared/ui'
 
 import { BookInfo, BookDescription, SimilarBooks, BookForm } from './ui'
 import { BookModel } from './model'
-import { useDialog } from 'shared/hooks'
 
 function Book() {
   const { t } = useTranslation()
