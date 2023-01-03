@@ -14,21 +14,25 @@ import {
 } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import ClearIcon from '@mui/icons-material/Clear'
 import PersonIcon from '@mui/icons-material/Person'
+import DateRangeIcon from '@mui/icons-material/DateRange'
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
 
 import selectFile from 'assets/svg/selectFiles.svg'
 
 import { genres } from './model'
 
 function NewBook() {
+  const { t } = useTranslation()
   const hiddenFileInput = useRef<any>(null)
   const [image, setImage] = useState<any>(null)
-  const [quillValue, setQuillValue] = useState('')
   const [selectGenres, setSelectGenres] = useState<any>([])
+  const [quillValue, setQuillValue] = useState('')
 
   function handleChange(event: SelectChangeEvent<typeof selectGenres>) {
     const {
@@ -38,24 +42,23 @@ function NewBook() {
   }
 
   function handleUploadFile(event: any) {
-    console.log(event.target.files[0])
     setImage(event.target.files[0])
   }
 
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 3 }}>
-        New book
+        {t('page:newBook')}
       </Typography>
       <Paper elevation={1} sx={{ mb: 3 }}>
         <Grid container sx={{ p: 4, pb: 8 }}>
           <Grid item md={4}>
-            <Typography variant="h6">Basic details</Typography>
+            <Typography variant="h6">{t('user:basicDetails')}</Typography>
           </Grid>
           <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextField fullWidth type="email" label="Name of the book" sx={{ mb: 3 }} />
+            <TextField fullWidth type="email" label={t('user:nameOfTheBook')} sx={{ mb: 3 }} />
             <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
-              Description
+              {t('book:description')}
             </Typography>
             <ReactQuill
               theme="snow"
@@ -70,10 +73,10 @@ function NewBook() {
         <Grid container sx={{ p: 4 }}>
           <Grid item md={4}>
             <Typography variant="h6" sx={{ mb: 1 }}>
-              Images
+              {t('book:images')}
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              Images will appear in the store front of your website.
+              {t('book:imagesOnTheWebsite')}
             </Typography>
           </Grid>
           <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -102,10 +105,10 @@ function NewBook() {
               </Box>
               <Box>
                 <Typography variant="h6" sx={{ mb: 1 }}>
-                  Select file
+                  {t('book:actions.selectFile')}
                 </Typography>
                 <Typography variant="body1" sx={{ mb: 1 }}>
-                  Drop file browse thorough your machine
+                  {t('book:actions.selectiveHint')}
                 </Typography>
               </Box>
             </Box>
@@ -144,9 +147,9 @@ function NewBook() {
                 </Box>
                 <Box display="flex" alignItems="center" justifyContent="flex-end" gap="10px">
                   <Button variant="text" onClick={() => setImage(null)}>
-                    Remove
+                    {t('book:actions.remove')}
                   </Button>
-                  <Button variant="contained">Upload</Button>
+                  <Button variant="contained">{t('book:actions.upload')}</Button>
                 </Box>
               </>
             )}
@@ -157,10 +160,10 @@ function NewBook() {
         <Grid container sx={{ p: 4 }}>
           <Grid item md={4}>
             <Typography variant="h6" sx={{ mb: 1 }}>
-              Author
+              {t('book:author')}
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              Enter the name of the author of the book
+              {t('book:actions.authorHint')}
             </Typography>
           </Grid>
           <Grid item md={8}>
@@ -168,7 +171,7 @@ function NewBook() {
               fullWidth
               type="text"
               size="medium"
-              label="Author"
+              label={t('book:author')}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -184,10 +187,10 @@ function NewBook() {
         <Grid container sx={{ p: 4 }}>
           <Grid item md={4}>
             <Typography variant="h6" sx={{ mb: 1 }}>
-              Genres
+              {t('book:genres')}
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              Select book genres
+              {t('book:actions.genresHint')}
             </Typography>
           </Grid>
           <Grid item md={8}>
@@ -201,6 +204,71 @@ function NewBook() {
           </Grid>
         </Grid>
       </Paper>
+      <Paper elevation={1} sx={{ mb: 3 }}>
+        <Grid container sx={{ p: 4 }}>
+          <Grid item md={4}>
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              {t('book:year')}
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+              {t('book:actions.yearHint')}
+            </Typography>
+          </Grid>
+          <Grid item md={8}>
+            <TextField
+              fullWidth
+              type="number"
+              size="medium"
+              label={t('book:year')}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <DateRangeIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+      <Paper elevation={1} sx={{ mb: 3 }}>
+        <Grid container sx={{ p: 4 }}>
+          <Grid item md={4}>
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              {t('book:quantity')}
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+              {t('book:actions.quantityHint')}
+            </Typography>
+          </Grid>
+          <Grid item md={8}>
+            <TextField
+              fullWidth
+              type="number"
+              size="medium"
+              label={t('book:quantity')}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <ProductionQuantityLimitsIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+      <Box display="flex" alignItems="center" justifyContent="space-between">
+        <Box>
+          <Button variant="text" color="error">
+            {t('translation:actions.delete')}
+          </Button>
+        </Box>
+        <Box display="flex" gap="10px">
+          <Button variant="outlined">{t('user:actions.cancel')}</Button>
+          <Button variant="contained">{t('book:actions.create')}</Button>
+        </Box>
+      </Box>
     </Container>
   )
 }
