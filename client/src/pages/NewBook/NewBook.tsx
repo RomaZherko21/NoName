@@ -27,6 +27,11 @@ import selectFile from 'assets/svg/selectFiles.svg'
 
 import { NewBookModel } from './model'
 
+interface Genre {
+  id: number
+  name: string
+}
+
 function NewBook() {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<any>(null)
@@ -199,7 +204,7 @@ function NewBook() {
           <Grid item md={8}>
             <Select multiple value={selectGenres} onChange={handleChange} size="medium" fullWidth>
               {NewBookModel.genres &&
-                NewBookModel.genres.map((genre) => (
+                NewBookModel.genres.map((genre: Genre) => (
                   <MenuItem key={genre.id} value={genre.name}>
                     {genre.name}
                   </MenuItem>
