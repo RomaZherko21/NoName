@@ -1,26 +1,38 @@
 import { makeAutoObservable } from 'mobx'
 
-export const genres = [
-  'Poetry',
-  'Programming',
-  'Psychology',
-  'Science',
-  'Classic',
-  'Fantasy',
-  'Science Fiction',
-  'Dystopian',
-  'Action & Adventure',
-  'Mystery',
-  'Horror',
-  'Thriller & Suspense',
-  'Historical Fiction ',
-  'Romance',
-  'Contemporary Fiction',
-  'Fiction',
-]
+import { Genre } from 'shared/types'
+import LoadingModel from 'models/Loading'
+import { GO_API } from 'services'
+
 class NewBookModel {
+  description = ''
+
+  genres?: Genre[]
+
+  loading: LoadingModel
+
   constructor() {
     makeAutoObservable(this)
+
+    this.loading = new LoadingModel()
+  }
+
+  changeDescription(value: any) {
+    this.description = value
+  }
+
+  async fetchGenres() {
+    try {
+      this.loading.begin()
+
+      const data = await GO_API.genres.list()
+
+      this.genres = data.genres
+
+      this.loading.end()
+    } catch {
+      this.loading.reset()
+    }
   }
 }
 

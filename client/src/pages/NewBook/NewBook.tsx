@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import {
   Typography,
   Container,
@@ -8,8 +8,8 @@ import {
   Box,
   Tooltip,
   InputAdornment,
-  Select,
   Button,
+  Select,
   MenuItem,
 } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -25,14 +25,17 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 
 import selectFile from 'assets/svg/selectFiles.svg'
 
-import { genres } from './model'
+import { NewBookModel } from './model'
 
 function NewBook() {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<any>(null)
   const [image, setImage] = useState<any>(null)
   const [selectGenres, setSelectGenres] = useState<any>([])
-  const [quillValue, setQuillValue] = useState('')
+
+  useEffect(() => {
+    NewBookModel.fetchGenres()
+  }, [])
 
   function handleChange(event: SelectChangeEvent<typeof selectGenres>) {
     const {
@@ -56,14 +59,14 @@ function NewBook() {
             <Typography variant="h6">{t('user:basicDetails')}</Typography>
           </Grid>
           <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-            <TextField fullWidth type="email" label={t('user:nameOfTheBook')} sx={{ mb: 3 }} />
+            <TextField fullWidth type="email" label={t('book:nameOfTheBook')} sx={{ mb: 3 }} />
             <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
               {t('book:description')}
             </Typography>
             <ReactQuill
               theme="snow"
-              value={quillValue}
-              onChange={setQuillValue}
+              value={NewBookModel.description}
+              onChange={(e: any) => NewBookModel.changeDescription(e.target.value)}
               style={{ height: 400, borderRadius: '8px' }}
             />
           </Grid>
@@ -195,11 +198,12 @@ function NewBook() {
           </Grid>
           <Grid item md={8}>
             <Select multiple value={selectGenres} onChange={handleChange} size="medium" fullWidth>
-              {genres.map((genre) => (
-                <MenuItem key={genre} value={genre}>
-                  {genre}
-                </MenuItem>
-              ))}
+              {NewBookModel.genres &&
+                NewBookModel.genres.map((genre) => (
+                  <MenuItem key={genre.id} value={genre.name}>
+                    {genre.name}
+                  </MenuItem>
+                ))}
             </Select>
           </Grid>
         </Grid>
