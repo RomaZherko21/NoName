@@ -24,13 +24,9 @@ import DateRangeIcon from '@mui/icons-material/DateRange'
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
 
 import selectFile from 'assets/svg/selectFiles.svg'
+import { Genre } from 'shared/types'
 
 import { NewBookModel } from './model'
-
-interface Genre {
-  id: number
-  name: string
-}
 
 function NewBook() {
   const { t } = useTranslation()
