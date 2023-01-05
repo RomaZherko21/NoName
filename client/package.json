@@ -30,6 +30,7 @@
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.15.5",
     "react-modal-hook": "^3.0.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "6",
     "react-scripts": "4.0.3",
     "react-toastify": "^8.2.0",

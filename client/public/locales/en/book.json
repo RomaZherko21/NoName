@@ -2,6 +2,7 @@
   "name": "Book name",
   "author": "Author",
   "genre": "Genre",
+  "genres": "Genres",
   "publisher": "Publisher",
   "quantity": "Quantity",
   "similarBooks": "Similar books",
@@ -10,12 +11,27 @@
   "description": "Description",
   "booksLeft": "Books Left",
   "bookReadability": "Book readability",
+  "images": "Images",
+  "imagesOnTheWebsite": "Images will appear in the store front of your website.",
+  "nameOfTheBook": "Name of the book",
   "actions": {
     "authorInfo": "Show more author information",
-    "addSubscriber": "New subscriber"
+    "addSubscriber": "New subscriber",
+    "addBook": "Add book",
+    "selectFile": "Select file",
+    "remove": "Remove",
+    "upload": "Upload",
+    "create": "Create"
   },
   "form": {
     "updateBook": "Edit book",
-    "addSubscriber": "Add new subscriber"
+    "addSubscriber": "Add new subscriber",
+    "hint": {
+      "genres": "Select book genres",
+      "author": "Enter the name of the author of the book",
+      "selective": "Drop file browse thorough your machine",
+      "quantity": "Enter quantity of books",
+      "year": "Enter book year"
+    }
   }
 }
