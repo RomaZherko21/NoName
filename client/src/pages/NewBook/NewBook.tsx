@@ -21,7 +21,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange'
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
 import { Formik } from 'formik'
 
-import selectFile from 'assets/svg/selectFiles.svg'
+import selectFile from 'assets/images/selectFile.svg'
 import { MultiSelectField, PageHeader, Spinner } from 'shared/ui'
 
 import { NewBookModel } from './model'

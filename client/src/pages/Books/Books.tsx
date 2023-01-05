@@ -2,9 +2,16 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Grid, Stack, Typography, Button } from '@mui/material'
+import { Grid, Button } from '@mui/material'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import {
+  AsideFilters,
+  AsideFiltersBar,
+  CommonTable,
+  PageHeader,
+  Pagination,
+  Spinner,
+} from 'shared/ui'
 import { ROUTES } from 'shared/consts'
 
 import { BooksFilters, BooksModel, getColumns, getFiltersConfig } from './model'
@@ -34,12 +41,13 @@ function Books() {
 
   return (
     <>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-        <Typography variant="h4">{t('page:books')}</Typography>
-        <Button variant="contained" onClick={() => navigate(ROUTES.BOOK_NEW)}>
-          {t('book:actions.addBook')}
-        </Button>
-      </Stack>
+      <PageHeader pageName={t('page:books')}>
+        <Grid item>
+          <Button variant="contained" onClick={() => navigate(ROUTES.BOOK_NEW)}>
+            {t('book:actions.addBook')}
+          </Button>
+        </Grid>
+      </PageHeader>
 
       <Grid spacing={2} container direction="column">
         <Grid item>
