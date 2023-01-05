@@ -36,7 +36,7 @@ function Books() {
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
         <Typography variant="h4">{t('page:books')}</Typography>
-        <Button variant="contained" onClick={() => navigate(ROUTES.NEW_BOOK)}>
+        <Button variant="contained" onClick={() => navigate(ROUTES.BOOK_NEW)}>
           {t('book:actions.addBook')}
         </Button>
       </Stack>

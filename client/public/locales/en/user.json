@@ -31,7 +31,14 @@
   "zipAndPostalCode": "Zip / Postal code",
   "form": {
     "createNewUser": "Add user",
-    "updateUser": "Update user"
+    "updateUser": "Update user",
+    "hint": {
+      "genresHint": "Select book genres",
+      "authorHint": "Enter the name of the author of the book",
+      "selectiveHint": "Drop file browse thorough your machine",
+      "quantityHint": "Enter quantity of books",
+      "yearHint": "Enter book year"
+    }
   },
   "actions": {
     "deleteAccount": "Delete account",

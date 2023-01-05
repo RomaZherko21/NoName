@@ -7,7 +7,7 @@ import { GO_API } from 'services'
 class NewBookModel {
   description = ''
 
-  genres?: Genre[]
+  genres?: Genre[] = []
 
   loading: LoadingModel
 
@@ -17,7 +17,7 @@ class NewBookModel {
     this.loading = new LoadingModel()
   }
 
-  changeDescription(value: any) {
+  changeDescription(value: string) {
     this.description = value
   }
 

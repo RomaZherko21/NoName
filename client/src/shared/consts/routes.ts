@@ -1,8 +1,10 @@
 export const ROUTES = {
   USERS: '/users',
+
   BOOKS: '/books',
   BOOK: '/books/:id',
-  NEW_BOOK: '/books/new-book',
+  BOOK_NEW: '/books/new',
+
   AUTHOR: '/authors/:id',
   POSTS: '/posts',
   SUBSCRIBERS: '/subscribers',

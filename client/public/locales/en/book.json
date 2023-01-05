@@ -19,11 +19,6 @@
     "addSubscriber": "New subscriber",
     "addBook": "Add book",
     "selectFile": "Select file",
-    "genresHint": "Select book genres",
-    "authorHint": "Enter the name of the author of the book",
-    "selectiveHint": "Drop file browse thorough your machine",
-    "quantityHint": "Enter quantity of books",
-    "yearHint": "Enter book year",
     "remove": "Remove",
     "upload": "Upload",
     "create": "Create"
