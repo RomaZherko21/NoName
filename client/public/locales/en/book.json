@@ -25,6 +25,13 @@
   },
   "form": {
     "updateBook": "Edit book",
-    "addSubscriber": "Add new subscriber"
+    "addSubscriber": "Add new subscriber",
+    "hint": {
+      "genres": "Select book genres",
+      "author": "Enter the name of the author of the book",
+      "selective": "Drop file browse thorough your machine",
+      "quantity": "Enter quantity of books",
+      "year": "Enter book year"
+    }
   }
 }

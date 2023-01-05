@@ -7,7 +7,7 @@ import { GO_API } from 'services'
 class NewBookModel {
   description = ''
 
-  genres?: Genre[] = []
+  genres: Genre[] = []
 
   loading: LoadingModel
 
