@@ -1,9 +1,10 @@
 {
-  "validation":"Validation",
-  "error":{
-    "isRequired":"{{field}} field is required",
-    "minSymbols":"{{field}} should be of minimum {{count}} characters length",
-    "validField":"Enter a valid {{field}} field",
-    "needMatched":"{{field}} must matched"
+  "validation": "Validation",
+  "error": {
+    "isRequired": "{{field}} field is required",
+    "minSymbols": "{{field}} should be of minimum {{count}} characters length",
+    "maxSymbols": "{{field}} should be of maximum  {{count}} characters length",
+    "validField": "Enter a valid {{field}} field",
+    "needMatched": "{{field}} must matched"
   }
 }

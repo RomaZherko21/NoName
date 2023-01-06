@@ -6,7 +6,7 @@ import { GO_API } from 'services'
 
 class NewBookModel {
   description = ''
-
+  thisYear = new Date().getFullYear()
   genres: Genre[] = []
 
   loading: LoadingModel
