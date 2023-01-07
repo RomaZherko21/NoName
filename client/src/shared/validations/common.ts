@@ -17,6 +17,37 @@ export const commonStringValidation = (field: string, minSymbols: number = 1) =>
       })
     )
 
+export const commonNumberRangeValidation = ({
+  field,
+  min = Infinity,
+  max = Infinity,
+}: {
+  field: string
+  min?: number
+  max?: number
+}) =>
+  yup
+    .number()
+    .min(
+      min,
+      i18next.t('validation:error.minSymbols', {
+        field,
+        count: min,
+      })
+    )
+    .max(
+      max,
+      i18next.t('validation:error.maxSymbols', {
+        field,
+        count: max,
+      })
+    )
+    .required(
+      i18next.t('validation:error.isRequired', {
+        field,
+      })
+    )
+
 export const emailValidation = () =>
   yup
     .string()

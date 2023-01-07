@@ -1,5 +1,4 @@
 {
-  "validation": "Validation",
   "error": {
     "isRequired": "{{field}} field is required",
     "minSymbols": "{{field}} should be of minimum {{count}} characters length",

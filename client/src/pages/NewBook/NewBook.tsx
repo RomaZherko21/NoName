@@ -1,30 +1,21 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
-import {
-  Typography,
-  Container,
-  Paper,
-  Grid,
-  TextField,
-  Box,
-  Tooltip,
-  InputAdornment,
-  Button,
-} from '@mui/material'
-import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
+import { observer } from 'mobx-react-lite'
+import { Formik } from 'formik'
+import * as yup from 'yup'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import { Typography, Container, Paper, Grid, Box, Tooltip, Button } from '@mui/material'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import ClearIcon from '@mui/icons-material/Clear'
 import PersonIcon from '@mui/icons-material/Person'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
-import { Formik } from 'formik'
-import * as yup from 'yup'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 
 import selectFile from 'assets/images/selectFile.svg'
-import { MultiSelectField, PageHeader, Spinner } from 'shared/ui'
-import { commonStringValidation } from 'shared/validations'
+import { InputField, MultiSelectField, PageHeader, Spinner } from 'shared/ui'
+import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
 
 import { NewBookModel } from './model'
 
@@ -37,47 +28,14 @@ function NewBook() {
     () =>
       yup.object().shape({
         nameOfTheBook: commonStringValidation(t(`book:nameOfTheBook`), 3),
-        description: yup.string().required(
-          t('validation:error.isRequired', {
-            field: t('book:description'),
-          })
-        ),
+        description: commonStringValidation(t(`book:description`), 3),
         author: commonStringValidation(t(`book:author`), 3),
-        year: yup
-          .number()
-          .min(
-            1,
-            t('validation:error.minSymbols', {
-              field: t(`book:year`),
-              count: 1,
-            })
-          )
-          .max(
-            NewBookModel.thisYear,
-            t('validation:error.maxSymbols', {
-              field: t(`book:year`),
-              count: NewBookModel.thisYear,
-            })
-          )
-          .required(
-            t('validation:error.isRequired', {
-              field: t('book:year'),
-            })
-          ),
-        quantity: yup
-          .number()
-          .min(
-            1,
-            t('validation:error.minSymbols', {
-              field: t(`book:quantity`),
-              count: 1,
-            })
-          )
-          .required(
-            t('validation:error.isRequired', {
-              field: t('book:quantity'),
-            })
-          ),
+        year: commonNumberRangeValidation({
+          field: t(`book:year`),
+          min: 1,
+          max: new Date().getFullYear(),
+        }),
+        quantity: commonNumberRangeValidation({ field: t(`book:quantity`), min: 1 }),
       }),
     [t]
   )
@@ -97,7 +55,6 @@ function NewBook() {
   return (
     <Container>
       <PageHeader pageName={t('page:newBook')} />
-
       {NewBookModel.loading.has ? (
         <Spinner />
       ) : (
@@ -114,7 +71,7 @@ function NewBook() {
             validationSchema={validationSchema}
             onSubmit={(values) => onSubmit(values)}
           >
-            {({ handleSubmit, handleChange, values, setFieldValue, errors, touched }) => (
+            {({ handleSubmit, values, setFieldValue }) => (
               <form onSubmit={handleSubmit}>
                 <Paper elevation={1} sx={{ mb: 3 }}>
                   <Grid container sx={{ p: 4, pb: 8 }}>
@@ -122,16 +79,13 @@ function NewBook() {
                       <Typography variant="h6">{t('user:basicDetails')}</Typography>
                     </Grid>
                     <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <TextField
-                        name="nameOfTheBook"
-                        value={values.nameOfTheBook}
-                        onChange={handleChange}
-                        error={touched.nameOfTheBook && Boolean(errors.nameOfTheBook)}
-                        helperText={touched.nameOfTheBook && errors.nameOfTheBook}
-                        label={t('book:nameOfTheBook')}
-                        fullWidth
-                        sx={{ mb: 3 }}
-                      />
+                      <Box sx={{ mb: 3 }}>
+                        <InputField
+                          field="nameOfTheBook"
+                          label="book:nameOfTheBook"
+                          icon={<AutoStoriesIcon />}
+                        />
+                      </Box>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
                         {t('book:description')}
                       </Typography>
@@ -251,23 +205,7 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        name="author"
-                        value={values.author}
-                        onChange={handleChange}
-                        error={touched.author && Boolean(errors.author)}
-                        helperText={touched.author && errors.author}
-                        label={t('book:author')}
-                        fullWidth
-                        size="medium"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <InputField field="author" label="book:author" icon={<PersonIcon />} />
                     </Grid>
                   </Grid>
                 </Paper>
@@ -301,23 +239,7 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        name="year"
-                        value={values.year}
-                        onChange={handleChange}
-                        error={touched.year && Boolean(errors.year)}
-                        helperText={touched.year && errors.year}
-                        label={t('book:year')}
-                        fullWidth
-                        size="medium"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <DateRangeIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <InputField field="year" label="book:year" icon={<DateRangeIcon />} />
                     </Grid>
                   </Grid>
                 </Paper>
@@ -332,22 +254,10 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        name="quantity"
-                        value={values.quantity}
-                        onChange={handleChange}
-                        error={touched.quantity && Boolean(errors.quantity)}
-                        helperText={touched.quantity && errors.quantity}
-                        label={t('book:quantity')}
-                        fullWidth
-                        size="medium"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <ProductionQuantityLimitsIcon />
-                            </InputAdornment>
-                          ),
-                        }}
+                      <InputField
+                        field="quantity"
+                        label="book:quantity"
+                        icon={<ProductionQuantityLimitsIcon />}
                       />
                     </Grid>
                   </Grid>
