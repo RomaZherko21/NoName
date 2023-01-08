@@ -23,6 +23,7 @@
     "i18next-http-backend": "^1.3.2",
     "mobx": "^6.3.13",
     "mobx-react-lite": "^3.2.3",
+    "qs": "^6.11.0",
     "react": "^17.0.2",
     "react-apexcharts": "1.3.6",
     "react-circular-progressbar": "^2.1.0",
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@types/jest": "^28.1.3",
     "@types/node": "^18.0.0",
+    "@types/qs": "^6.9.7",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
     "@types/react-helmet": "^6.1.5",
