@@ -68,12 +68,12 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
 
 export async function createPost({ body, file }: Request, res: Response, next: NextFunction) {
   try {
-    const data = await PostModel.create({
+    await PostModel.create({
       ...body,
       image: file?.filename,
     })
 
-    res.status(200).json(data)
+    res.status(204)
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -98,13 +98,13 @@ export async function deletePostById({ params }: Request, res: Response, next: N
       }
     }
 
-    const data = await PostModel.destroy({
+    await PostModel.destroy({
       where: {
         id,
       },
     })
 
-    res.status(200).json(data)
+    res.status(204)
   } catch (err: any) {
     next(createError(500, err.message))
   }

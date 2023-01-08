@@ -39,7 +39,7 @@ export async function updateUserByEmail({ body }: Request, res: Response, next: 
 
     if (!data) return next(createError(400, 'User wasnt updated'))
 
-    return res.status(200).json(data)
+    return res.status(204)
   } catch (err: any) {
     return next(createError(500, err.message))
   }
@@ -70,13 +70,13 @@ export async function removeUserById(req: Request, res: Response, next: NextFunc
       },
     })
 
-    const data = await UserModel.destroy({
+    await UserModel.destroy({
       where: {
         id,
       },
     })
 
-    res.status(200).json(data)
+    res.status(204)
   } catch (err: any) {
     next(createError(500, err.message))
   }
