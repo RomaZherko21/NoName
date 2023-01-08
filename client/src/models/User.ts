@@ -50,7 +50,7 @@ class UserModel {
       date_of_birth = '',
       role,
       avatar = '',
-    } = await NODE_API.user.self()
+    } = await NODE_API.user.get()
 
     this.rootStore.authorization.isAuthorized = true
 
@@ -81,10 +81,10 @@ class UserModel {
     }
   }
 
-  async selfUpdate(values: User) {
+  async update(values: User) {
     this.rootStore.loading.begin()
     try {
-      await NODE_API.user.selfUpdate(values)
+      await NODE_API.user.update(values)
       await this.init()
       this.rootStore.loading.end()
     } catch {
@@ -92,10 +92,10 @@ class UserModel {
     }
   }
 
-  async selfDelete() {
+  async remove() {
     this.rootStore.loading.begin()
     try {
-      await NODE_API.user.selfDelete(this.id)
+      await NODE_API.user.remove(this.id)
       this.rootStore.authorization.unauthorize()
       this.rootStore.loading.end()
     } catch {

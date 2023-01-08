@@ -1,7 +1,7 @@
 import express from 'express'
+import { ValidationErrorItem } from 'sequelize'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import { ValidationErrorItem } from 'sequelize/dist'
 import path from 'path'
 
 import { useHttpError, useAuth } from 'middlewares'

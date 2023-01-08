@@ -26,7 +26,7 @@ export async function signIn({ body }: Request, res: Response, next: NextFunctio
     }
 
     return next(createError(401, 'Wrong password'))
-  } catch {
-    return next(createError(500))
+  } catch (err: any) {
+    return next(createError(500, err.message))
   }
 }

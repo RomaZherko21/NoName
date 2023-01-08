@@ -58,7 +58,7 @@ const ProfileForm = () => {
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          user.selfUpdate(values)
+          user.update(values)
         }}
       >
         {({ handleSubmit }) => (

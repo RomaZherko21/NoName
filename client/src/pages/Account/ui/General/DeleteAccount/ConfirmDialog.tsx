@@ -12,7 +12,7 @@ function ConfirmDialog({ onClose }: Props) {
   const { user } = useRootStore()
 
   const onDeleteAccount = async () => {
-    await user.selfDelete()
+    await user.remove()
     onClose()
   }
 

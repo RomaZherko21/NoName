@@ -18,8 +18,8 @@ export async function getUsers({ body }: Request, res: Response, next: NextFunct
     const count = await UserModel.count()
 
     res.status(200).json({ users, count })
-  } catch {
-    next(createError(500))
+  } catch (err: any) {
+    next(createError(500, err.message))
   }
 }
 
@@ -33,8 +33,8 @@ export async function createUser({ body }: Request, res: Response, next: NextFun
     })
 
     res.status(200).json(data)
-  } catch (err) {
-    next(createError(500))
+  } catch (err: any) {
+    next(createError(500, err.message))
   }
 }
 
@@ -59,7 +59,7 @@ export async function updateUserById({ body, params }: Request, res: Response, n
     if (!data) return next(createError(400, 'User wasnt updated'))
 
     return res.status(200).json(data)
-  } catch (err) {
-    return next(createError(500))
+  } catch (err: any) {
+    return next(createError(500, err.message))
   }
 }

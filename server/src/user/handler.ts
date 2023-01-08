@@ -24,8 +24,8 @@ export async function getUserByEmail(req: Request, res: Response, next: NextFunc
 
       return res.status(200).json(data)
     })
-  } catch (err) {
-    next(createError(500))
+  } catch (err: any) {
+    next(createError(500, err.message))
   }
 }
 
@@ -40,12 +40,12 @@ export async function updateUserByEmail({ body }: Request, res: Response, next: 
     if (!data) return next(createError(400, 'User wasnt updated'))
 
     return res.status(200).json(data)
-  } catch (err) {
-    return next(createError(500))
+  } catch (err: any) {
+    return next(createError(500, err.message))
   }
 }
 
-export async function deleteUserById(req: Request, res: Response, next: NextFunction) {
+export async function removeUserById(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params
     const { avatar }: any = await UserModel.findByPk(id)
@@ -77,8 +77,8 @@ export async function deleteUserById(req: Request, res: Response, next: NextFunc
     })
 
     res.status(200).json(data)
-  } catch (err) {
-    next(createError(500))
+  } catch (err: any) {
+    next(createError(500, err.message))
   }
 }
 
@@ -110,7 +110,7 @@ export async function uploadUserAvatar(req: any, res: Response, next: NextFuncti
     } else {
       next(createError(400, 'Avatar wasnt uploaded'))
     }
-  } catch (err) {
-    next(createError(500))
+  } catch (err: any) {
+    next(createError(500, err.message))
   }
 }
