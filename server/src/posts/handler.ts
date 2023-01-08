@@ -21,7 +21,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
       order_type = ORDER_TYPE,
     } = query
 
-    const results = await sequelize.query(
+    const result = await sequelize.query(
       `SELECT posts.*, users.avatar  FROM posts JOIN users 
         ON posts.user_id = users.id 
 
@@ -40,7 +40,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
 
     const count = await PostModel.count()
 
-    res.status(200).json({ posts: results, count })
+    res.status(200).json({ posts: result, count })
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -50,7 +50,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
   try {
     const { id } = params
 
-    const results = await sequelize.query(
+    const result = await sequelize.query(
       `SELECT posts.*, users.avatar  FROM posts JOIN users 
         ON posts.user_id = users.id 
 
@@ -60,7 +60,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
       }
     )
 
-    res.status(200).json(results[0])
+    res.status(200).json(result[0])
   } catch (err: any) {
     next(createError(500, err.message))
   }

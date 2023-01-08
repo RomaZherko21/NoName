@@ -1,3 +1,4 @@
+import { getQueryParams } from 'shared/helpers'
 import { User } from 'shared/types'
 
 import fetch from './fetch'
@@ -13,13 +14,9 @@ export const list = ({
   offset: number
   filters?: any
 }) =>
-  fetch.post<{ users: User[]; count: number }>(`${ENDPOINT_BASE}/list`, {
-    filters,
-    limit,
-    offset,
-  })
-
-console.log('hel')
+  fetch.get<{ users: User[]; count: number }>(
+    `${ENDPOINT_BASE}${getQueryParams({ ...filters, limit, offset })}`
+  )
 
 export const create = (user: User) => fetch.post<User>(`${ENDPOINT_BASE}`, user)
 

@@ -1,11 +1,14 @@
-import { GENDER } from 'shared/consts'
+import { GENDER, ROLES } from 'shared/consts'
 import { InputFilter, SelectFilter } from 'shared/ui'
 
 export interface UserFilters {
   id?: string
-  email?: string
   name?: string
   surname?: string
+  middle_name?: string
+  email?: string
+  gender?: string
+  role?: string
 }
 
 export const getFiltersConfig = () => [
@@ -40,5 +43,12 @@ export const getFiltersConfig = () => [
     Control: SelectFilter,
     type: 'select',
     options: GENDER,
+  },
+  {
+    key: 'role',
+    placeholder: 'user:role',
+    Control: SelectFilter,
+    type: 'select',
+    options: ROLES,
   },
 ]
