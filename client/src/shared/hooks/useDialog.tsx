@@ -12,7 +12,16 @@ export const useDialog = (
 
   const [showModal, hideModal] = useModal(() => (
     <Dialog onClose={() => (closable ? hideModal() : null)} open>
-      <DialogTitle sx={{ backgroundColor: 'primary.main', position: 'relative', p: 3 }}>
+      <DialogTitle
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          backgroundColor: 'primary.main',
+          position: 'relative',
+          p: 2,
+        }}
+      >
         <Typography variant="h6" color="primary.contrastText">
           {t(title)}
         </Typography>
@@ -20,11 +29,6 @@ export const useDialog = (
           aria-label="close"
           onClick={hideModal}
           sx={{
-            position: 'absolute',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            padding: 0,
-            right: 22,
             color: 'primary.contrastText',
           }}
         >

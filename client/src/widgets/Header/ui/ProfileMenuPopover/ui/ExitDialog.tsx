@@ -14,7 +14,7 @@ function ExitDialog({ onClose }: Props) {
   const { t } = useTranslation()
 
   return (
-    <Stack direction="row" spacing={2} sx={{ padding: 3, width: '300px' }}>
+    <Stack direction="row" spacing={2} sx={{ padding: 3 }}>
       <Button
         onClick={() => {
           authorization.unauthorize()
