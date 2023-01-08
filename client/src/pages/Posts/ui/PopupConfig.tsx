@@ -9,7 +9,7 @@ export const getPopupConfig = () => [
   {
     Icon: <AccountBoxIcon />,
     text: 'common.details',
-    linkTo: ROUTES.PROFILE,
+    linkTo: ROUTES.POST,
   },
   {
     Icon: <DeleteIcon />,

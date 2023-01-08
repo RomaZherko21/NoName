@@ -7,6 +7,7 @@ export const ROUTES = {
 
   AUTHOR: '/authors/:id',
   POSTS: '/posts',
+  POST: '/posts/:id',
   SUBSCRIBERS: '/subscribers',
   SUBSCRIBER: '/subscribers/:id',
   SUBSCRIBTIONS: '/subscribtions',
