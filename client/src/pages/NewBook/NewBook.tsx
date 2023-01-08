@@ -1,28 +1,21 @@
-import { useState, useRef, useEffect } from 'react'
-import {
-  Typography,
-  Container,
-  Paper,
-  Grid,
-  TextField,
-  Box,
-  Tooltip,
-  InputAdornment,
-  Button,
-} from '@mui/material'
-import { observer } from 'mobx-react-lite'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { observer } from 'mobx-react-lite'
+import { Formik } from 'formik'
+import * as yup from 'yup'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import { Typography, Container, Paper, Grid, Box, Tooltip, Button } from '@mui/material'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import ClearIcon from '@mui/icons-material/Clear'
 import PersonIcon from '@mui/icons-material/Person'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
-import { Formik } from 'formik'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 
 import selectFile from 'assets/images/selectFile.svg'
-import { MultiSelectField, PageHeader, Spinner } from 'shared/ui'
+import { InputField, MultiSelectField, PageHeader, Spinner } from 'shared/ui'
+import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
 
 import { NewBookModel } from './model'
 
@@ -30,6 +23,22 @@ function NewBook() {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<any>(null)
   const [image, setImage] = useState<any>(null)
+
+  const validationSchema = useMemo(
+    () =>
+      yup.object().shape({
+        nameOfTheBook: commonStringValidation(t(`book:nameOfTheBook`), 3),
+        description: commonStringValidation(t(`book:description`), 3),
+        author: commonStringValidation(t(`book:author`), 3),
+        year: commonNumberRangeValidation({
+          field: t(`book:year`),
+          min: 1,
+          max: new Date().getFullYear(),
+        }),
+        quantity: commonNumberRangeValidation({ field: t(`book:quantity`), min: 1 }),
+      }),
+    [t]
+  )
 
   useEffect(() => {
     NewBookModel.fetchGenres()
@@ -46,18 +55,23 @@ function NewBook() {
   return (
     <Container>
       <PageHeader pageName={t('page:newBook')} />
-
       {NewBookModel.loading.has ? (
         <Spinner />
       ) : (
         <>
           <Formik
             initialValues={{
+              nameOfTheBook: '',
+              description: '',
+              author: '',
               genres: [],
+              year: '',
+              quantity: '',
             }}
+            validationSchema={validationSchema}
             onSubmit={(values) => onSubmit(values)}
           >
-            {({ handleSubmit }) => (
+            {({ handleSubmit, values, setFieldValue }) => (
               <form onSubmit={handleSubmit}>
                 <Paper elevation={1} sx={{ mb: 3 }}>
                   <Grid container sx={{ p: 4, pb: 8 }}>
@@ -65,19 +79,20 @@ function NewBook() {
                       <Typography variant="h6">{t('user:basicDetails')}</Typography>
                     </Grid>
                     <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <TextField
-                        fullWidth
-                        type="email"
-                        label={t('book:nameOfTheBook')}
-                        sx={{ mb: 3 }}
-                      />
+                      <Box sx={{ mb: 3 }}>
+                        <InputField
+                          field="nameOfTheBook"
+                          label="book:nameOfTheBook"
+                          icon={<AutoStoriesIcon />}
+                        />
+                      </Box>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
                         {t('book:description')}
                       </Typography>
                       <ReactQuill
                         theme="snow"
-                        value={NewBookModel.description}
-                        onChange={(e: any) => NewBookModel.changeDescription(e.target?.value)}
+                        value={values.description}
+                        onChange={(html: string) => setFieldValue('description', html)}
                         style={{ height: 400, borderRadius: '8px' }}
                       />
                     </Grid>
@@ -190,19 +205,7 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        fullWidth
-                        type="text"
-                        size="medium"
-                        label={t('book:author')}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <InputField field="author" label="book:author" icon={<PersonIcon />} />
                     </Grid>
                   </Grid>
                 </Paper>
@@ -236,18 +239,7 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        fullWidth
-                        size="medium"
-                        label={t('book:year')}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <DateRangeIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <InputField field="year" label="book:year" icon={<DateRangeIcon />} />
                     </Grid>
                   </Grid>
                 </Paper>
@@ -262,17 +254,10 @@ function NewBook() {
                       </Typography>
                     </Grid>
                     <Grid item md={8}>
-                      <TextField
-                        fullWidth
-                        size="medium"
-                        label={t('book:quantity')}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <ProductionQuantityLimitsIcon />
-                            </InputAdornment>
-                          ),
-                        }}
+                      <InputField
+                        field="quantity"
+                        label="book:quantity"
+                        icon={<ProductionQuantityLimitsIcon />}
                       />
                     </Grid>
                   </Grid>
@@ -285,7 +270,9 @@ function NewBook() {
                   </Box>
                   <Box display="flex" gap="10px">
                     <Button variant="outlined">{t('user:actions.cancel')}</Button>
-                    <Button variant="contained">{t('book:actions.create')}</Button>
+                    <Button type="submit" variant="contained">
+                      {t('book:actions.create')}
+                    </Button>
                   </Box>
                 </Box>
               </form>
