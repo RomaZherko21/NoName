@@ -29,4 +29,6 @@ router.get(`${POSTS}/:id`, getPost)
 router.post(`${POSTS}`, useFile.single(FILE_FIELD_NAMES.post), createPost)
 router.delete(`${POSTS}/:id`, deletePostById)
 
+console.log('he')
+
 export default router
