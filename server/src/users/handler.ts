@@ -66,12 +66,12 @@ export async function createUser({ body }: Request, res: Response, next: NextFun
   try {
     const hash = await bcrypt.hash(body.password, 10)
 
-    const data = await UserModel.create({
+    await UserModel.create({
       ...body,
       password: hash,
     })
 
-    res.status(200).json(data)
+    res.status(204)
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -97,7 +97,7 @@ export async function updateUserById({ body, params }: Request, res: Response, n
 
     if (!data) return next(createError(400, 'User wasnt updated'))
 
-    return res.status(200).json(data)
+    return res.status(204)
   } catch (err: any) {
     return next(createError(500, err.message))
   }
