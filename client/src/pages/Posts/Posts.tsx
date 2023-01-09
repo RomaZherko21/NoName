@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
 import { CommonCard, PageHeader, Pagination, Spinner } from 'shared/ui'
@@ -12,8 +13,9 @@ import { PostsModel } from './model'
 
 function Posts() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
-  const popupConfig = useMemo(() => getPopupConfig(), [])
+  const popupConfig = useMemo(() => getPopupConfig(navigate), [navigate])
 
   useEffect(() => {
     PostsModel.fetch()

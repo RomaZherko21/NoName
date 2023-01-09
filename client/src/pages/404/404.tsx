@@ -2,9 +2,9 @@ import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Container, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { useNavigate } from 'react-router-dom'
 
 import notFoundImg from 'assets/images/404.svg'
-import { useNavigate } from 'react-router-dom'
 
 const NotFound = () => {
   const { t } = useTranslation()

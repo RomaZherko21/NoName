@@ -5,9 +5,10 @@ export const ROUTES = {
   BOOK: '/books/:id',
   BOOK_NEW: '/books/new',
 
-  AUTHOR: '/authors/:id',
   POSTS: '/posts',
   POST: '/posts/:id',
+
+  AUTHOR: '/authors/:id',
   SUBSCRIBERS: '/subscribers',
   SUBSCRIBER: '/subscribers/:id',
   SUBSCRIBTIONS: '/subscribtions',
