@@ -1,6 +1,15 @@
-.profileCover {
+.userAvatar {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+
+  border-radius: 3px;
+  background-size: cover;
+}
+
+.postImg {
   height: 348px;
-  width: 100%;
+  width: 90%;
 
   background-position: center center;
   background-repeat: no-repeat;

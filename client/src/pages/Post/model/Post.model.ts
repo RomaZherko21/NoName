@@ -5,13 +5,16 @@ import LoadingModel from 'models/Loading'
 import { Post } from 'shared/types'
 
 class PostsModel {
-  id?: number = 0
-  user_id?: number = 0
+  id: number | undefined
+  user_id: number | undefined
   name: string = ''
   description: string = ''
   created_at: number = 0
   image: string = ''
   avatar: string = ''
+
+  userName: string = ''
+  userSurname: string = ''
 
   loading: LoadingModel
 
@@ -28,6 +31,12 @@ class PostsModel {
       const data = await NODE_API.post.get(id)
 
       this.fromJSON(data)
+
+      if (data.user_id) {
+        const user = await NODE_API.users.getById(data.user_id)
+        this.userName = user.name
+        this.userSurname = user.surname
+      }
 
       this.loading.end()
     } catch {

@@ -12,7 +12,6 @@ export const getPopupConfig = (navigate: any) => [
     text: 'common.details',
     onClick: (id: number) => {
       navigate(generatePath(ROUTES.POST, { id: String(id) }))
-      console.log(id)
     },
   },
   {
