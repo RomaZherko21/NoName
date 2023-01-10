@@ -7,6 +7,8 @@ const ENDPOINT_BASE = '/posts'
 export const list = (limit: number, offset: number) =>
   fetch.get<{ posts: Post[]; count: number }>(`${ENDPOINT_BASE}?limit=${limit}&offset=${offset}`)
 
+export const get = (id: number) => fetch.get<Post>(`${ENDPOINT_BASE}/${id}`)
+
 export const create = async (post: any) => {
   const formData = new FormData()
 

@@ -1,0 +1,19 @@
+.userAvatar {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+
+  border-radius: 3px;
+  background-size: cover;
+}
+
+.postImg {
+  height: 348px;
+  width: 100%;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  object-fit: cover;
+}

@@ -18,6 +18,8 @@ export const list = ({
     `${ENDPOINT_BASE}${getQueryParams({ ...filters, limit, offset })}`
   )
 
+export const getById = (id: number) => fetch.get<User>(`${ENDPOINT_BASE}/${id}`)
+
 export const create = (user: User) => fetch.post<User>(`${ENDPOINT_BASE}`, user)
 
 export const update = (user: User, id: number) => fetch.put(`${ENDPOINT_BASE}/${id}`, user)
