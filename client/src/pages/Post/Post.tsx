@@ -5,9 +5,8 @@ import { observer } from 'mobx-react-lite'
 import { Box, Container, Paper, Typography, IconButton, Button, Grid } from '@mui/material'
 import CommentIcon from '@mui/icons-material/Comment'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
 
-import { PageHeader, Spinner } from 'shared/ui'
+import { PageHeader, SharedButton, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
 import styles from './Styles.module.scss'
@@ -84,9 +83,7 @@ function Post() {
                 <CommentIcon />
               </IconButton>
             </Box>
-            <IconButton aria-label="shared">
-              <ShareIcon />
-            </IconButton>
+            <SharedButton />
           </Box>
         </Paper>
       )}

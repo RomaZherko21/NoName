@@ -12,11 +12,10 @@ import {
 } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
 
 import { fromMsToDate } from 'shared/helpers'
 import { COMMON_DATE_FORMAT } from 'shared/consts'
-import { PopupMenu } from 'shared/ui'
+import { PopupMenu, SharedButton } from 'shared/ui'
 
 import s from './Styles.module.scss'
 
@@ -76,9 +75,7 @@ const CommonCard = ({
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <SharedButton id={id} />
       </CardActions>
     </Card>
   )

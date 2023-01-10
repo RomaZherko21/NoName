@@ -1,20 +1,11 @@
 import { observer } from 'mobx-react-lite'
-import {
-  Avatar,
-  Button,
-  Divider,
-  IconButton,
-  Paper,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Avatar, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
 
 import ProfileCover from 'assets/images/cover.jpg'
+import { SharedButton } from 'shared/ui'
 
 import s from './Styles.module.scss'
 
@@ -56,11 +47,7 @@ const Post = () => {
           >
             22
           </Button>
-          <IconButton color="primary" aria-label="upload picture" component="label">
-            <Tooltip title="Share">
-              <ShareIcon />
-            </Tooltip>
-          </IconButton>
+          <SharedButton />
         </Stack>
         <Divider />
       </Stack>
