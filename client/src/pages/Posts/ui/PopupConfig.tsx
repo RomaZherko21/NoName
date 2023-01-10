@@ -1,12 +1,12 @@
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { generatePath } from 'react-router-dom'
+import { generatePath, NavigateFunction } from 'react-router-dom'
 
 import { ROUTES } from 'shared/consts'
 
 import { PostsModel } from '../model'
 
-export const getPopupConfig = (navigate: any) => [
+export const getPopupConfig = (navigate: NavigateFunction) => [
   {
     Icon: <AccountBoxIcon />,
     text: 'common.details',

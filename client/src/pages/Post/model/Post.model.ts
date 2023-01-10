@@ -13,8 +13,8 @@ class PostsModel {
   image: string = ''
   avatar: string = ''
 
-  userName: string = ''
-  userSurname: string = ''
+  user_name: string = ''
+  user_surname: string = ''
 
   loading: LoadingModel
 
@@ -34,8 +34,8 @@ class PostsModel {
 
       if (data.user_id) {
         const user = await NODE_API.users.getById(data.user_id)
-        this.userName = user.name
-        this.userSurname = user.surname
+        this.user_name = user.name
+        this.user_surname = user.surname
       }
 
       this.loading.end()

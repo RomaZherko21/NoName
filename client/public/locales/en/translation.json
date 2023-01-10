@@ -49,6 +49,7 @@
     "description": "Description",
     "telNumber": "Telephone number",
     "amount": "Amount",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "createdAt": "Created at"
   }
 }

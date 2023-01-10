@@ -1,7 +1,6 @@
 {
   "name": "Name",
   "description": "Description",
-  "createdAt": "Created at",
   "form": {
     "create": "Add post"
   }
