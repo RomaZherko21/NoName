@@ -33,7 +33,7 @@ const Pagination = ({ paginationModel }: Props) => {
           }}
         >
           {paginationModel.perPageArr.map((item) => (
-            <MenuItem key={item} value={item}>
+            <MenuItem key={item} value={item} onClick={() => {paginationModel.page = 1}}>
               {item}
             </MenuItem>
           ))}

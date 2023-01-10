@@ -1,21 +1,24 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
-import { CommonCard, PageHeader, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, PageHeader, Pagination, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
-import { CreatePostForm, getPopupConfig } from './ui'
-import { PostsModel } from './model'
+import { CommonCard, CreatePostForm, getPopupConfig } from './ui'
+import { getFiltersConfig, PostsFilters, PostsModel } from './model'
 
 function Posts() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const [filters, setFilters] = useState<PostsFilters>({})
+  const [openFilter, setOpenFilter] = useState(false)
 
   const popupConfig = useMemo(() => getPopupConfig(navigate), [navigate])
+  const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   useEffect(() => {
     PostsModel.fetch()
@@ -25,6 +28,14 @@ function Posts() {
   const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
     <CreatePostForm hideModal={hideModal} />
   ))
+
+  function handleOpenFilter() {
+    setOpenFilter(true)
+  }
+
+  function handleCloseFilter() {
+    setOpenFilter(false)
+  }
 
   return (
     <>
@@ -36,7 +47,15 @@ function Posts() {
         </Grid>
       </PageHeader>
 
-      <Grid container spacing={3} direction="column" style={{ marginTop: '12px' }}>
+      <Grid container spacing={3} direction="column">
+        <Grid item>
+          <AsideFiltersBar
+            filters={filters}
+            setFilters={setFilters}
+            handleOpenFilter={handleOpenFilter}
+          />
+        </Grid>
+
         <Grid item container spacing={2}>
           {PostsModel.loading.has ? (
             <Spinner />
@@ -60,6 +79,14 @@ function Posts() {
           <Pagination paginationModel={PostsModel.pagination} />
         </Grid>
       </Grid>
+
+      <AsideFilters
+        config={filtersConfig}
+        filters={filters}
+        setFilters={setFilters}
+        openFilter={openFilter}
+        onCloseFilter={handleCloseFilter}
+      />
     </>
   )
 }

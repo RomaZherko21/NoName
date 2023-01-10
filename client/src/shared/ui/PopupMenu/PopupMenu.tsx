@@ -34,8 +34,8 @@ const PopupMenu = ({ config, ActionButton, id }: Props) => {
         id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
         keepMounted
         transformOrigin={{
