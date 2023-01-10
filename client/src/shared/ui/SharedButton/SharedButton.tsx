@@ -20,7 +20,7 @@ function SharedButton({ id }: Props) {
     } else {
       navigator.clipboard.writeText(window.location.href)
     }
-    toast('Link copied!', {
+    toast.success(`${t('translation:actions.linkCopied')}!`, {
       position: 'bottom-center',
       autoClose: 2000,
       hideProgressBar: true,
@@ -28,7 +28,7 @@ function SharedButton({ id }: Props) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'dark',
+      theme: 'colored',
     })
     setAnchorEl(null)
   }
