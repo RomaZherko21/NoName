@@ -5,10 +5,10 @@ import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
-import { CommonCard, PageHeader, Pagination, Spinner } from 'shared/ui'
+import { PageHeader, Pagination, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
-import { CreatePostForm, getPopupConfig } from './ui'
+import { CommonCard, CreatePostForm, getPopupConfig } from './ui'
 import { PostsModel } from './model'
 
 function Posts() {

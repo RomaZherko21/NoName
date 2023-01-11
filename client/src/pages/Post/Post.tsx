@@ -5,12 +5,14 @@ import { observer } from 'mobx-react-lite'
 import { Box, Container, Paper, Typography, IconButton, Button, Grid } from '@mui/material'
 import CommentIcon from '@mui/icons-material/Comment'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import ShareIcon from '@mui/icons-material/Share'
 
-import { PageHeader, SharedButton, Spinner } from 'shared/ui'
+import { PageHeader, PopupMenu, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
 import styles from './Styles.module.scss'
 import PostModel from './model/Post.model'
+import { getPopupConfig } from './PopupConfig'
 
 function Post() {
   const { t } = useTranslation()
@@ -83,7 +85,13 @@ function Post() {
                 <CommentIcon />
               </IconButton>
             </Box>
-            <SharedButton />
+            <IconButton>
+              <PopupMenu
+                id={PostModel.id}
+                ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
+                config={getPopupConfig(window.location.href, t)}
+              />
+            </IconButton>
           </Box>
         </Paper>
       )}

@@ -1,15 +1,19 @@
 import { observer } from 'mobx-react-lite'
-import { Avatar, Button, Divider, Paper, Stack, Typography } from '@mui/material'
-
+import { useTranslation } from 'react-i18next'
+import { Avatar, Button, Divider, Paper, Stack, Typography, IconButton } from '@mui/material'
+import ShareIcon from '@mui/icons-material/Share'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
 import ProfileCover from 'assets/images/cover.jpg'
-import { SharedButton } from 'shared/ui'
+import { PopupMenu } from 'shared/ui'
 
 import s from './Styles.module.scss'
+import { getPopupConfig } from './PopupConfig'
 
 const Post = () => {
+  const { t } = useTranslation()
+
   return (
     <Paper sx={{ p: 4, mt: 2 }}>
       <Stack direction="row" spacing={1.2} alignItems="start">
@@ -47,7 +51,12 @@ const Post = () => {
           >
             22
           </Button>
-          <SharedButton />
+          <IconButton>
+            <PopupMenu
+              ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
+              config={getPopupConfig(window.location.href, t)}
+            />
+          </IconButton>
         </Stack>
         <Divider />
       </Stack>

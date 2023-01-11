@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import {
   Avatar,
@@ -12,12 +13,14 @@ import {
 } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import ShareIcon from '@mui/icons-material/Share'
 
 import { fromMsToDate } from 'shared/helpers'
 import { COMMON_DATE_FORMAT } from 'shared/consts'
-import { PopupMenu, SharedButton } from 'shared/ui'
+import { PopupMenu } from 'shared/ui'
 
 import s from './Styles.module.scss'
+import { getPopupConfig } from './PopupConfig'
 
 interface Props {
   id?: number
@@ -43,6 +46,8 @@ const CommonCard = ({
   creatorAvatarUrl,
   popupConfig,
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Card sx={{ height: 380 }} key={id}>
       <CardHeader
@@ -75,7 +80,13 @@ const CommonCard = ({
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <SharedButton id={id} />
+        <IconButton>
+          <PopupMenu
+            id={id}
+            ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
+            config={getPopupConfig(window.location.href, t)}
+          />
+        </IconButton>
       </CardActions>
     </Card>
   )

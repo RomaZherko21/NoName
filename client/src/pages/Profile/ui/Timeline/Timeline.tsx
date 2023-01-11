@@ -25,7 +25,7 @@ import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { useRootStore } from 'stores'
-import { Post } from 'shared/ui'
+import { Post } from './ui'
 
 const Timeline = () => {
   const { t } = useTranslation()
