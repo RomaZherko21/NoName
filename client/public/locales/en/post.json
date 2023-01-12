@@ -1,6 +1,8 @@
 {
   "name": "Name",
   "description": "Description",
+  "postAddedSuccessfully": "Post added successfully",
+  "postSuccessfullyDeleted": "Post successfully deleted",
   "form": {
     "create": "Add post"
   }

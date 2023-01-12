@@ -1,6 +1,8 @@
+import { generatePath, NavigateFunction } from 'react-router-dom'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { generatePath, NavigateFunction } from 'react-router-dom'
 
 import { ROUTES } from 'shared/consts'
 
@@ -19,6 +21,7 @@ export const getPopupConfig = (navigate: NavigateFunction) => [
     text: 'actions.delete',
     onClick: (id: number) => {
       PostsModel.remove(id)
+      toast.success(i18next.t('post:postSuccessfullyDeleted'))
     },
   },
 ]

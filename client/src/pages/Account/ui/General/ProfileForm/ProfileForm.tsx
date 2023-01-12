@@ -1,8 +1,9 @@
-import * as yup from 'yup'
 import { useMemo } from 'react'
+import * as yup from 'yup'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Formik } from 'formik'
+import { toast } from 'react-toastify'
 import { Button, Divider, Grid, Stack } from '@mui/material'
 
 import { useRootStore } from 'stores'
@@ -59,6 +60,7 @@ const ProfileForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           user.update(values)
+          toast.success(t('user:yourAccountDetailsHaveBeenSaved'))
         }}
       >
         {({ handleSubmit }) => (

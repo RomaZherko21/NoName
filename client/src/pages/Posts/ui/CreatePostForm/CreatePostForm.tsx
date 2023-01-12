@@ -3,6 +3,7 @@ import * as yup from 'yup'
 import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import { Button, Grid, TextField } from '@mui/material'
 
 import { commonStringValidation } from 'shared/validations'
@@ -43,6 +44,7 @@ function CreatePostForm({ hideModal }: any) {
       onSubmit: (value: FormValues) => {
         PostsModel.create({ ...value, user_id: user.id })
         hideModal()
+        toast.success(t('post:postAddedSuccessfully'))
       },
     })
 

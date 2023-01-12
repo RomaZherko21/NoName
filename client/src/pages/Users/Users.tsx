@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 import { Box, Button, Grid } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
@@ -44,6 +45,7 @@ function Users() {
       onSubmit={(value: User) => {
         UsersModel.create(value)
         hideModal()
+        toast.success(t('user:successfullySaved'))
       }}
     />
   ))
