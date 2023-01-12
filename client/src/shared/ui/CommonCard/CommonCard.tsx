@@ -67,7 +67,7 @@ const CommonCard = ({
         sx={{ objectFit: 'fill' }}
         alt={imageUrl}
       />
-      <CardContent>
+      <CardContent sx={{ pb: 0.5 }}>
         <Typography className={s.ellipsis} variant="body2" color="text.secondary">
           {description}
         </Typography>
