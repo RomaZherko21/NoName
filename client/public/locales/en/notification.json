@@ -13,13 +13,13 @@
     "none": "None"
   },
   "successful": {
-    "successfullyCreated": "Successfully created!",
-    "successfullyUpdated": "Successfully updated!",
-    "successfullyDeleted": "Successfully deleted!"
+    "created": "Successfully created!",
+    "updated": "Successfully updated!",
+    "deleted": "Successfully deleted!"
   },
   "failed": {
-    "failedToCreate": "Failed to create!",
-    "failedToUpdate": "Failed to update!",
-    "failedToDelete": "Failed to delete!"
+    "create": "Failed to create!",
+    "update": "Failed to update!",
+    "delete": "Failed to delete!"
   }
 }

@@ -60,7 +60,7 @@ const ProfileForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           user.update(values)
-          toast.success(t('notification:successful.successfullyUpdated'))
+          toast.success(t('notification:successful.updated'))
         }}
       >
         {({ handleSubmit }) => (
