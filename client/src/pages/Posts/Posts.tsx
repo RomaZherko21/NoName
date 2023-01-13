@@ -21,7 +21,7 @@ function Posts() {
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   useEffect(() => {
-    PostsModel.debounceFetch()
+    PostsModel.fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
 
