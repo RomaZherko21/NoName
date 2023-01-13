@@ -1,11 +1,22 @@
+import { getQueryParams } from 'shared/helpers'
 import { Post } from 'shared/types'
 
 import fetch from './fetch'
 
 const ENDPOINT_BASE = '/posts'
 
-export const list = (limit: number, offset: number) =>
-  fetch.get<{ posts: Post[]; count: number }>(`${ENDPOINT_BASE}?limit=${limit}&offset=${offset}`)
+export const list = ({
+  limit,
+  offset,
+  filters,
+}: {
+  limit: number
+  offset: number
+  filters?: any
+}) =>
+  fetch.get<{ posts: Post[]; count: number }>(
+    `${ENDPOINT_BASE}${getQueryParams({ ...filters, limit, offset })}`
+  )
 
 export const get = (id: number) => fetch.get<Post>(`${ENDPOINT_BASE}/${id}`)
 

@@ -4,6 +4,7 @@ import { NODE_API } from 'services'
 import { User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
+import { debounce } from '@mui/material'
 
 import { UserFilters } from './filters'
 
@@ -20,6 +21,12 @@ class UsersModel {
     this.pagination = new PaginationModel()
     this.loading = new LoadingModel()
   }
+
+  changeFilters(filters: UserFilters) {
+    this.debounceFetch(filters)
+  }
+
+  debounceFetch = debounce(this.fetch, 500)
 
   set users(data: User[]) {
     this._users = data
