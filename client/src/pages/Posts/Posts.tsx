@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid } from '@mui/material'
+import { Button, Grid, Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
@@ -58,7 +58,9 @@ function Posts() {
 
         <Grid item container spacing={2}>
           {PostsModel.loading.has ? (
-            <Spinner />
+            <Container>
+              <Spinner />
+            </Container>
           ) : (
             PostsModel.posts.map((post) => (
               <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
