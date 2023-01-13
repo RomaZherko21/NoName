@@ -1,9 +1,12 @@
 import { makeAutoObservable } from 'mobx'
+import { debounce } from '@mui/material'
 
 import { NODE_API } from 'services'
+import { Post } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { Post } from 'shared/types'
+
+import { PostsFilters } from './filters'
 
 class PostsModel {
   private _posts: Post[] = []
@@ -19,6 +22,12 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
+  changeFilters(filters: PostsFilters) {
+    this.debounceFetch(filters)
+  }
+
+  debounceFetch = debounce(this.fetch, 500)
+
   set posts(data: Post[]) {
     this._posts = data
   }
@@ -27,11 +36,15 @@ class PostsModel {
     return this._posts
   }
 
-  async fetch() {
+  async fetch(filters?: PostsFilters) {
     try {
       this.loading.begin()
 
-      const data = await NODE_API.post.list(this.pagination.perPage, this.pagination.offset)
+      const data = await NODE_API.post.list({
+        limit: this.pagination.perPage,
+        offset: this.pagination.offset,
+        filters,
+      })
 
       this.posts = data.posts
       this.pagination.count = data.count
