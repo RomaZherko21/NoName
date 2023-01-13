@@ -45,7 +45,7 @@ function Users() {
       onSubmit={(value: User) => {
         UsersModel.create(value)
         hideModal()
-        toast.success(t('user:successfullySaved'))
+        toast.success(t('notification:successful.successfullyCreated'))
       }}
     />
   ))

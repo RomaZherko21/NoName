@@ -11,5 +11,15 @@
     "approved": "Approved",
     "rejected": "Rejected",
     "none": "None"
+  },
+  "successful": {
+    "successfullyCreated": "Successfully created!",
+    "successfullyUpdated": "Successfully updated!",
+    "successfullyDeleted": "Successfully deleted!"
+  },
+  "failed": {
+    "failedToCreate": "Failed to create!",
+    "failedToUpdate": "Failed to update!",
+    "failedToDelete": "Failed to delete!"
   }
 }

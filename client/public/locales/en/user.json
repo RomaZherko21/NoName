@@ -29,8 +29,6 @@
   "cardNumber": "Card number",
   "country": "Country",
   "zipAndPostalCode": "Zip / Postal code",
-  "successfullySaved": "Successfully saved",
-  "yourAccountDetailsHaveBeenSaved": "Your account details have been saved",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
