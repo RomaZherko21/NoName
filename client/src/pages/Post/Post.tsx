@@ -7,11 +7,12 @@ import CommentIcon from '@mui/icons-material/Comment'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 
-import { PageHeader, Spinner } from 'shared/ui'
+import { PageHeader, PopupMenu, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
 import styles from './Styles.module.scss'
 import PostModel from './model/Post.model'
+import { getPopupConfig } from './PopupConfig'
 
 function Post() {
   const { t } = useTranslation()
@@ -84,8 +85,12 @@ function Post() {
                 <CommentIcon />
               </IconButton>
             </Box>
-            <IconButton aria-label="shared">
-              <ShareIcon />
+            <IconButton>
+              <PopupMenu
+                id={PostModel.id}
+                ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
+                config={getPopupConfig(window.location.href, t)}
+              />
             </IconButton>
           </Box>
         </Paper>
