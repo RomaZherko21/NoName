@@ -73,7 +73,7 @@ class UserModel {
   async uploadPhoto(file: File) {
     this.rootStore.loading.begin()
     try {
-      const { url } = await NODE_API.user.uploadPhoto(file, this.id)
+      const { url } = await NODE_API.user.uploadPhoto(file)
       this.avatar.setFileData(file, url)
       this.rootStore.loading.end()
     } catch {
@@ -95,7 +95,7 @@ class UserModel {
   async remove() {
     this.rootStore.loading.begin()
     try {
-      await NODE_API.user.remove(this.id)
+      await NODE_API.user.remove()
       this.rootStore.authorization.unauthorize()
       this.rootStore.loading.end()
     } catch {

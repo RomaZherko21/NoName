@@ -71,7 +71,7 @@ export async function createUser({ body }: Request, res: Response, next: NextFun
       password: hash,
     })
 
-    res.status(204)
+    res.status(204).send()
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -97,7 +97,7 @@ export async function updateUserById({ body, params }: Request, res: Response, n
 
     if (!data) return next(createError(400, 'User wasnt updated'))
 
-    return res.status(204)
+    res.status(204).send()
   } catch (err: any) {
     return next(createError(500, err.message))
   }

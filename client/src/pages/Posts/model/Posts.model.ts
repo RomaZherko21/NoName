@@ -33,6 +33,8 @@ class PostsModel {
 
       const data = await NODE_API.post.list(this.pagination.perPage, this.pagination.offset)
 
+      await NODE_API.post.like(1, 1)
+
       this.posts = data.posts
       this.pagination.count = data.count
 

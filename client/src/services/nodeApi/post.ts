@@ -20,3 +20,6 @@ export const create = async (post: any) => {
 }
 
 export const remove = async (id: number) => fetch.delete<Post>(`${ENDPOINT_BASE}/${id}`)
+
+export const like = async (id: number, user_id: number) =>
+  fetch.put<Post>(`${ENDPOINT_BASE}/${id}/likes`, { user_id })

@@ -10,8 +10,10 @@ const useAuth = (req: Request, res: Response, next: NextFunction) => {
 
   if (!token) return next(createError(403))
 
-  return jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any) => {
+  return jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, decoded: any) => {
     if (err) return next(createError(403))
+
+    res.locals.authorization_id = decoded.id
 
     return next()
   })
