@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, Container } from '@mui/material'
+import { Button, Grid, Skeleton, CardHeader, Card, CardContent } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
-import { AsideFilters, AsideFiltersBar, PageHeader, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, PageHeader, Pagination } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import { CommonCard, CreatePostForm, getPopupConfig } from './ui'
@@ -61,25 +61,49 @@ function Posts() {
         </Grid>
 
         <Grid item container spacing={2}>
-          {PostsModel.loading.has ? (
-            <Container>
-              <Spinner />
-            </Container>
-          ) : (
-            PostsModel.posts.map((post) => (
-              <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
-                <CommonCard
-                  id={post.id}
-                  name={post.name}
-                  description={post.description}
-                  imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
-                  creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
-                  createdAt={post.created_at}
-                  popupConfig={popupConfig}
-                />
-              </Grid>
-            ))
-          )}
+          {PostsModel.loading.has
+            ? [1, 2, 3, 4].map((item) => {
+                return (
+                  <Grid key={item} item md={4} lg={3} sx={{ width: '100%' }}>
+                    <Card>
+                      <CardHeader
+                        avatar={
+                          <Skeleton animation="wave" variant="circular" width={40} height={40} />
+                        }
+                        title={
+                          <Skeleton
+                            animation="wave"
+                            height={10}
+                            width="80%"
+                            style={{ marginBottom: 6 }}
+                          />
+                        }
+                        subheader={<Skeleton animation="wave" height={10} width="40%" />}
+                      />
+                      <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+                      <CardContent>
+                        <React.Fragment>
+                          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+                          <Skeleton animation="wave" height={10} width="80%" />
+                        </React.Fragment>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              })
+            : PostsModel.posts.map((post) => (
+                <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+                  <CommonCard
+                    id={post.id}
+                    name={post.name}
+                    description={post.description}
+                    imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
+                    creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
+                    createdAt={post.created_at}
+                    popupConfig={popupConfig}
+                  />
+                </Grid>
+              ))}
         </Grid>
         <Grid item>
           <Pagination paginationModel={PostsModel.pagination} />
