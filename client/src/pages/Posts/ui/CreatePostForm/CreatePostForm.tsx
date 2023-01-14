@@ -1,14 +1,16 @@
+import { useMemo, useRef } from 'react'
 import { observer } from 'mobx-react-lite'
 import * as yup from 'yup'
-import { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { Button, Grid, TextField } from '@mui/material'
+import { Button, Grid, TextField, Box, Typography, Tooltip } from '@mui/material'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import ClearIcon from '@mui/icons-material/Clear'
 
 import { commonStringValidation } from 'shared/validations'
 import { useRootStore } from 'stores'
-import { UploadImage } from 'shared/ui'
+import selectFile from 'assets/images/selectFile.svg'
 
 import { PostsModel } from '../../model'
 import styles from './Styles.module.scss'
@@ -21,6 +23,7 @@ interface FormValues {
 
 function CreatePostForm({ hideModal }: any) {
   const { t } = useTranslation()
+  const hiddenFileInput = useRef<any>(null)
 
   const { user } = useRootStore()
 
@@ -75,15 +78,72 @@ function CreatePostForm({ hideModal }: any) {
             helperText={touched.description && errors.description}
           />
         </Grid>
-        <Grid item style={{ width: 'fit-content' }}>
-          <UploadImage
-            handleUploadClick={(event: any) => {
-              setFieldValue('post', event.target.files[0])
+        <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              p: 2,
+              border: (theme) => `1px dashed ${theme.palette.grey[500]}`,
+              cursor: 'pointer',
             }}
-            width={50}
-            height={50}
-            imageUrl={values.post && URL.createObjectURL(values.post)}
-          />
+            onClick={() => hiddenFileInput.current.click()}
+          >
+            <input
+              id="upload-file"
+              name="avatar"
+              type="file"
+              accept="image/*"
+              ref={hiddenFileInput}
+              onChange={(event: any) => setFieldValue('post', event.target.files[0])}
+              style={{ display: 'none' }}
+            />
+            <Box>
+              <img alt="Select file" src={selectFile} style={{ height: 50, width: 50 }} />
+            </Box>
+            <Box>
+              <Typography variant="body1" sx={{ mb: 0.5 }}>
+                {t('book:actions.selectFile')}
+              </Typography>
+              <Typography variant="subtitle1" sx={{ mb: 0.5 }}>
+                {t('book:form.hint.selective')}
+              </Typography>
+            </Box>
+          </Box>
+          {values.post && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                p: 2,
+                mt: 2,
+                mb: 3,
+                border: (theme) => `1px solid ${theme.palette.grey[500]}`,
+                borderRadius: '8px',
+              }}
+            >
+              <Box display="flex" gap="8px">
+                <Box display="flex" alignItems="center">
+                  <ContentCopyIcon fontSize="small" color="action" />
+                </Box>
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="subtitle2">{values.post.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {values.post.size} KB
+                  </Typography>
+                </Box>
+              </Box>
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Tooltip title="Remove" placement="bottom">
+                  <Button onClick={() => setFieldValue('post', '')}>
+                    <ClearIcon fontSize="medium" color="action" />
+                  </Button>
+                </Tooltip>
+              </Box>
+            </Box>
+          )}
         </Grid>
         <Grid item>
           <Button color="primary" variant="contained" fullWidth type="submit">
