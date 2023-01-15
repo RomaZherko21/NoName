@@ -104,10 +104,10 @@ function CreatePostForm({ hideModal }: any) {
             </Box>
             <Box>
               <Typography variant="body1" sx={{ mb: 0.5 }}>
-                {t('book:actions.selectFile')}
+                {t('post:actions.selectFile')}
               </Typography>
               <Typography variant="subtitle1" sx={{ mb: 0.5 }}>
-                {t('book:form.hint.selective')}
+                {t('post:form.selectiveHint')}
               </Typography>
             </Box>
           </Box>
