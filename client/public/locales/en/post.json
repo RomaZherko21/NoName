@@ -2,7 +2,7 @@
   "name": "Name",
   "description": "Description",
   "actions": {
-    "readMore": "Read more"
+    "readMore": "Read more.."
   },
   "form": {
     "create": "Add post"

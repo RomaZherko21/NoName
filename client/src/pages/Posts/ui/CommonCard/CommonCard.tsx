@@ -98,7 +98,7 @@ const CommonCard = ({
             variant="text"
             onClick={() => navigate(generatePath(ROUTES.POST, { id: String(id) }))}
           >
-            {`${t('post:actions.readMore')}..`}
+            {t('post:actions.readMore')}
           </Button>
         </Box>
       </CardActions>
