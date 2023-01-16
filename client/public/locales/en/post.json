@@ -2,9 +2,11 @@
   "name": "Name",
   "description": "Description",
   "actions": {
+    "selectFile": "Select file",
     "readMore": "Read more.."
   },
   "form": {
-    "create": "Add post"
+    "create": "Add post",
+    "selectiveHint": "Drop file browse thorough your machine"
   }
 }
