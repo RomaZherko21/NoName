@@ -1,54 +1,41 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
-import jwt from 'jsonwebtoken'
 import fs from 'fs'
 import path from 'path'
 
 import { UserModel, PostModel } from 'models'
 
-export async function getUserByEmail(req: Request, res: Response, next: NextFunction) {
+export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const authHeader = req.headers.authorization
-    const token = authHeader && authHeader.split(' ')[1]
+    const data = await UserModel.findByPk(res.locals.authorization_id)
 
-    jwt.verify(token || '', process.env.TOKEN_SECRET as string, async (err: any, user: any) => {
-      if (err) return next(createError(403))
+    if (!data) return next(createError(403))
 
-      const data = await UserModel.findOne({
-        where: {
-          email: user.email,
-        },
-      })
-
-      if (!data) return next(createError(400, 'User wasnt deleted'))
-
-      return res.status(200).json(data)
-    })
+    return res.status(200).json(data)
   } catch (err: any) {
     next(createError(500, err.message))
   }
 }
 
-export async function updateUserByEmail({ body }: Request, res: Response, next: NextFunction) {
+export async function updateUserSelf({ body }: Request, res: Response, next: NextFunction) {
   try {
     const data = await UserModel.update(body, {
       where: {
-        email: body.email,
+        id: res.locals.authorization_id,
       },
     })
 
     if (!data) return next(createError(400, 'User wasnt updated'))
 
-    return res.status(204)
+    res.status(204).send()
   } catch (err: any) {
     return next(createError(500, err.message))
   }
 }
 
-export async function removeUserById(req: Request, res: Response, next: NextFunction) {
+export async function removeUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = req.params
-    const { avatar }: any = await UserModel.findByPk(id)
+    const { avatar }: any = await UserModel.findByPk(res.locals.authorization_id)
 
     if (avatar) {
       const filePath = path.join(
@@ -66,17 +53,17 @@ export async function removeUserById(req: Request, res: Response, next: NextFunc
 
     await PostModel.destroy({
       where: {
-        user_id: id,
+        user_id: res.locals.authorization_id,
       },
     })
 
     await UserModel.destroy({
       where: {
-        id,
+        id: res.locals.authorization_id,
       },
     })
 
-    res.status(204)
+    res.status(204).send()
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -85,10 +72,9 @@ export async function removeUserById(req: Request, res: Response, next: NextFunc
 export async function uploadUserAvatar(req: any, res: Response, next: NextFunction) {
   try {
     const { file } = req
-    const { id } = req.body
 
-    if (file && id) {
-      const data: any = await UserModel.findByPk(id)
+    if (file) {
+      const data: any = await UserModel.findByPk(res.locals.authorization_id)
 
       if (data.avatar) {
         const filePath = path.join(
@@ -104,7 +90,10 @@ export async function uploadUserAvatar(req: any, res: Response, next: NextFuncti
         }
       }
 
-      await UserModel.update({ avatar: file.filename }, { where: { id } })
+      await UserModel.update(
+        { avatar: file.filename },
+        { where: { id: res.locals.authorization_id } }
+      )
 
       res.status(200).json({ url: file.filename })
     } else {

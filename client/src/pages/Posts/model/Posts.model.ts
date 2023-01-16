@@ -46,6 +46,8 @@ class PostsModel {
         filters,
       })
 
+      await NODE_API.post.like(1, 1)
+
       this.posts = data.posts
       this.pagination.count = data.count
 

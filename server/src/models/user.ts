@@ -57,4 +57,18 @@ UserModel.hasMany(PostModel, {
   foreignKey: 'user_id',
 })
 
+UserModel.belongsToMany(PostModel, {
+  through: 'm2m_users_posts_likes',
+  as: 'users',
+  foreignKey: 'user_id',
+  onDelete: 'cascade',
+})
+
+PostModel.belongsToMany(UserModel, {
+  through: 'm2m_users_posts_likes',
+  as: 'posts',
+  foreignKey: 'post_id',
+  onDelete: 'cascade',
+})
+
 export default UserModel

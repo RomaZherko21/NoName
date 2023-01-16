@@ -38,6 +38,30 @@ VALUES
   (2,'MacBook','The MacBook is a brand of Macintosh notebook computers designed and marketed by Apple Inc. that use Apples macOS operating system since 2006. It replaced the PowerBook and iBook brands during the Mac transition to Intel processors, announced in 2005. The current lineup consists of the MacBook Air (2008–present) and the MacBook Pro (2006–present). Two different lines simply named "MacBook" existed from 2006 to 2012 and 2015 to 2019.',1664611922672,'1663318230998.jpg'),
   (3,'Book','A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.[1] The technical term for this physical arrangement is codex (plural, codices). In the history of hand-held physical supports for extended written compositions or records, the codex replaces its predecessor, the scroll. A single sheet in a codex is a leaf and each side of a leaf is a page.',1664491922672,'1663318230999.jpg');
 
+CREATE TABLE IF NOT EXISTS `m2m_users_posts_likes` (
+  `user_id` int NOT NULL,
+  `post_id` int NOT NULL,
+  PRIMARY KEY (`user_id`, `post_id`),
+  CONSTRAINT `Constr_m2m_users_posts_likes_user_fk`
+      FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Constr_m2m_users_posts_likes_post_fk`
+      FOREIGN KEY (`post_id`) REFERENCES posts(`id`)
+      ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO `m2m_users_posts_likes` (user_id, post_id) 
+VALUES
+	(1,1),
+  (1,2),
+  (1,3),
+  (2,1),
+  (2,2),
+  (2,3),
+  (2,4),
+  (3,2),
+  (4,4);
+
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255),
