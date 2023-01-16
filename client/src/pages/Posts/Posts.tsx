@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, Container } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
-import { AsideFilters, AsideFiltersBar, PageHeader, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, PageHeader, Pagination } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
-import { CommonCard, CreatePostForm, getPopupConfig } from './ui'
+import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
 import { getFiltersConfig, PostsFilters, PostsModel } from './model'
 
 function Posts() {
@@ -61,25 +61,23 @@ function Posts() {
         </Grid>
 
         <Grid item container spacing={2}>
-          {PostsModel.loading.has ? (
-            <Container>
-              <Spinner />
-            </Container>
-          ) : (
-            PostsModel.posts.map((post) => (
-              <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
-                <CommonCard
-                  id={post.id}
-                  name={post.name}
-                  description={post.description}
-                  imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
-                  creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
-                  createdAt={post.created_at}
-                  popupConfig={popupConfig}
-                />
-              </Grid>
-            ))
-          )}
+          {PostsModel.loading.has
+            ? [1, 2, 3, 4].map((item) => {
+                return <PostLoader key={item} />
+              })
+            : PostsModel.posts.map((post) => (
+                <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+                  <CommonCard
+                    id={post.id}
+                    name={post.name}
+                    description={post.description}
+                    imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
+                    creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
+                    createdAt={post.created_at}
+                    popupConfig={popupConfig}
+                  />
+                </Grid>
+              ))}
         </Grid>
         <Grid item>
           <Pagination paginationModel={PostsModel.pagination} />
