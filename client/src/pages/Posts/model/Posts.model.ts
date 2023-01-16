@@ -2,14 +2,14 @@ import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
 
 import { NODE_API } from 'services'
-import { Post } from 'shared/types'
+import { Posts } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
 import { PostsFilters } from './filters'
 
 class PostsModel {
-  private _posts: Post[] = []
+  private _posts: Posts[] = []
 
   pagination: PaginationModel
 
@@ -28,12 +28,25 @@ class PostsModel {
 
   debounceFetch = debounce(this.fetch, 500)
 
-  set posts(data: Post[]) {
+  set posts(data: Posts[]) {
     this._posts = data
   }
 
   get posts() {
     return this._posts
+  }
+
+  async toggleLike(id: number, filters?: PostsFilters) {
+    await NODE_API.post.like(id, 1)
+
+    const data = await NODE_API.post.list({
+      limit: this.pagination.perPage,
+      offset: this.pagination.offset,
+      filters,
+    })
+
+    this.posts = data.posts
+    this.pagination.count = data.count
   }
 
   async fetch(filters?: PostsFilters) {
@@ -45,8 +58,6 @@ class PostsModel {
         offset: this.pagination.offset,
         filters,
       })
-
-      await NODE_API.post.like(1, 1)
 
       this.posts = data.posts
       this.pagination.count = data.count

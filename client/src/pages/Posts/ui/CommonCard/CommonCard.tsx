@@ -26,12 +26,15 @@ import s from './Styles.module.scss'
 import { getPopupConfig } from './PopupConfig'
 
 interface Props {
-  id?: number
+  id: number
   name: string
   description: string
   createdAt: number
   imageUrl: string
   creatorAvatarUrl: string
+  likes: number
+  isLiked: boolean
+  toggleLike: (id: number) => void
   popupConfig: Array<{
     Icon: JSX.Element
     text: string
@@ -48,6 +51,9 @@ const CommonCard = ({
   imageUrl,
   creatorAvatarUrl,
   popupConfig,
+  likes,
+  isLiked,
+  toggleLike,
 }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -81,10 +87,21 @@ const CommonCard = ({
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
+        <Box display="flex" alignItems="center">
+          <Button
+            onClick={() => toggleLike(id)}
+            startIcon={
+              <FavoriteIcon
+                sx={{
+                  color: (theme) => (isLiked ? 'red' : theme.palette.action.active),
+                }}
+              />
+            }
+          >
+            <Typography variant="subtitle1" color="textSecondary" sx={{ mr: 1 }}>
+              {likes}
+            </Typography>
+          </Button>
           <IconButton>
             <PopupMenu
               id={id}

@@ -5,16 +5,18 @@ import LoadingModel from 'models/Loading'
 import { Post } from 'shared/types'
 
 class PostsModel {
-  id: number | undefined
-  user_id: number | undefined
+  id: number = 0
+  user_id: number = 0
   name: string = ''
   description: string = ''
   created_at: number = 0
   image: string = ''
-  avatar: string = ''
+  likes_count: number = 0
+  isLiked: boolean = false
 
   user_name: string = ''
   user_surname: string = ''
+  user_avatar: string | undefined = ''
 
   loading: LoadingModel
 
@@ -24,6 +26,14 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
+  async toggleLike(id: number) {
+    await NODE_API.post.like(id, 1)
+
+    const data = await NODE_API.post.get(id)
+
+    this.fromJSON(data)
+  }
+
   async fetchPost(id: any) {
     try {
       this.loading.begin()
@@ -31,12 +41,6 @@ class PostsModel {
       const data = await NODE_API.post.get(id)
 
       this.fromJSON(data)
-
-      if (data.user_id) {
-        const user = await NODE_API.users.getById(data.user_id)
-        this.user_name = user.name
-        this.user_surname = user.surname
-      }
 
       this.loading.end()
     } catch {
@@ -51,7 +55,12 @@ class PostsModel {
     this.description = post.description
     this.created_at = post.created_at
     this.image = post.image
-    this.avatar = post.avatar
+    this.likes_count = post.likes_count
+    this.isLiked = post.isLiked
+
+    this.user_avatar = post.user.avatar
+    this.user_name = post.user.name
+    this.user_surname = post.user.surname
   }
 }
 

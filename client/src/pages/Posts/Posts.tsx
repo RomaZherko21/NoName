@@ -41,6 +41,10 @@ function Posts() {
     setOpenFilter(false)
   }
 
+  function toggleLike(id: number) {
+    PostsModel.toggleLike(id)
+  }
+
   return (
     <>
       <PageHeader pageName={t('page:posts')}>
@@ -71,6 +75,9 @@ function Posts() {
                     id={post.id}
                     name={post.name}
                     description={post.description}
+                    likes={post.likes_count}
+                    isLiked={post.isLiked}
+                    toggleLike={toggleLike}
                     imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
                     creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
                     createdAt={post.created_at}
