@@ -1,6 +1,9 @@
 {
   "name": "Name",
   "description": "Description",
+  "actions": {
+    "readMore": "Read more.."
+  },
   "form": {
     "create": "Add post"
   }
