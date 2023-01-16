@@ -2,7 +2,8 @@
   "name": "Name",
   "description": "Description",
   "actions": {
-    "selectFile": "Select file"
+    "selectFile": "Select file",
+    "readMore": "Read more.."
   },
   "form": {
     "create": "Add post",

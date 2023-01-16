@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
+import { generatePath, useNavigate } from 'react-router-dom'
 import {
   Avatar,
   Card,
@@ -10,13 +11,15 @@ import {
   CardMedia,
   IconButton,
   Typography,
+  Box,
+  Button,
 } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 
 import { fromMsToDate } from 'shared/helpers'
-import { COMMON_DATE_FORMAT } from 'shared/consts'
+import { COMMON_DATE_FORMAT, ROUTES } from 'shared/consts'
 import { PopupMenu } from 'shared/ui'
 
 import s from './Styles.module.scss'
@@ -47,6 +50,7 @@ const CommonCard = ({
   popupConfig,
 }: Props) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
     <Card sx={{ height: 380 }} key={id}>
@@ -76,17 +80,27 @@ const CommonCard = ({
           {description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton>
-          <PopupMenu
-            id={id}
-            ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
-            config={getPopupConfig(window.location.href, t)}
-          />
-        </IconButton>
+      <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton>
+            <PopupMenu
+              id={id}
+              ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
+              config={getPopupConfig(window.location.href, t)}
+            />
+          </IconButton>
+        </Box>
+        <Box>
+          <Button
+            variant="text"
+            onClick={() => navigate(generatePath(ROUTES.POST, { id: String(id) }))}
+          >
+            {t('post:actions.readMore')}
+          </Button>
+        </Box>
       </CardActions>
     </Card>
   )
