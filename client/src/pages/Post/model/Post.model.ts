@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { NODE_API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Post } from 'shared/types'
+import { Post, User } from 'shared/types'
 
 class PostsModel {
   id: number = 0
@@ -12,7 +12,7 @@ class PostsModel {
   created_at: number = 0
   image: string = ''
   likes_count: number = 0
-  isLiked: boolean = false
+  is_liked: boolean = false
 
   user_name: string = ''
   user_surname: string = ''
@@ -26,29 +26,29 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
-  async toggleLike(id: number) {
-    await NODE_API.post.like(id, 1)
+  async toggleLike() {
+    await NODE_API.post.like(this.id)
 
-    const data = await NODE_API.post.get(id)
-
-    this.fromJSON(data)
+    this.fetch({ id: this.id, hidden: true })
   }
 
-  async fetchPost(id: any) {
+  async fetch({ id, hidden = false }: { id: number; hidden?: boolean }) {
     try {
-      this.loading.begin()
+      if (!hidden) {
+        this.loading.begin()
+      }
 
       const data = await NODE_API.post.get(id)
 
       this.fromJSON(data)
 
-      this.loading.end()
+      this.loading.reset()
     } catch {
       this.loading.reset()
     }
   }
 
-  private fromJSON(post: Post) {
+  private fromJSON(post: Post & { user: User }) {
     this.id = post.id
     this.user_id = post.user_id
     this.name = post.name
@@ -56,7 +56,7 @@ class PostsModel {
     this.created_at = post.created_at
     this.image = post.image
     this.likes_count = post.likes_count
-    this.isLiked = post.isLiked
+    this.is_liked = post.is_liked
 
     this.user_avatar = post.user.avatar
     this.user_name = post.user.name

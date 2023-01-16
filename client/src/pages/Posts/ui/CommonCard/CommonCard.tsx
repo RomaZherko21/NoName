@@ -33,7 +33,7 @@ interface Props {
   imageUrl: string
   creatorAvatarUrl: string
   likes: number
-  isLiked: boolean
+  is_liked: boolean
   toggleLike: (id: number) => void
   popupConfig: Array<{
     Icon: JSX.Element
@@ -52,7 +52,7 @@ const CommonCard = ({
   creatorAvatarUrl,
   popupConfig,
   likes,
-  isLiked,
+  is_liked,
   toggleLike,
 }: Props) => {
   const { t } = useTranslation()
@@ -90,17 +90,17 @@ const CommonCard = ({
         <Box display="flex" alignItems="center">
           <Button
             onClick={() => toggleLike(id)}
+            variant="outlined"
             startIcon={
               <FavoriteIcon
                 sx={{
-                  color: (theme) => (isLiked ? 'red' : theme.palette.action.active),
+                  color: (theme) =>
+                    is_liked ? theme.palette.error.dark : theme.palette.action.active,
                 }}
               />
             }
           >
-            <Typography variant="subtitle1" color="textSecondary" sx={{ mr: 1 }}>
-              {likes}
-            </Typography>
+            {likes}
           </Button>
           <IconButton>
             <PopupMenu

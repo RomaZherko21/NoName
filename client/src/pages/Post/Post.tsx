@@ -20,7 +20,7 @@ function Post() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    PostModel.fetchPost(id)
+    PostModel.fetch({ id: Number(id) })
   }, [id])
 
   return (
@@ -76,18 +76,18 @@ function Post() {
           <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ p: 3 }}>
             <Box display="flex" alignItems="center">
               <Button
-                onClick={() => PostModel.toggleLike(PostModel.id)}
+                onClick={() => PostModel.toggleLike()}
                 startIcon={
                   <FavoriteIcon
                     sx={{
-                      color: (theme) => (PostModel.isLiked ? 'red' : theme.palette.action.active),
+                      color: (theme) =>
+                        PostModel.is_liked ? theme.palette.error.dark : theme.palette.action.active,
                     }}
                   />
                 }
+                variant="outlined"
               >
-                <Typography variant="subtitle1" color="textSecondary" sx={{ mr: 1 }}>
-                  {PostModel.likes_count}
-                </Typography>
+                {PostModel.likes_count}
               </Button>
               <IconButton aria-label="comment">
                 <CommentIcon />

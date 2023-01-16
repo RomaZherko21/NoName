@@ -21,12 +21,12 @@ function Posts() {
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   useEffect(() => {
-    PostsModel.fetch()
+    PostsModel.fetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
 
   useEffect(() => {
-    PostsModel.debounceFetch(filters)
+    PostsModel.debounceFetch({ filters })
   }, [filters])
 
   const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
@@ -76,7 +76,7 @@ function Posts() {
                     name={post.name}
                     description={post.description}
                     likes={post.likes_count}
-                    isLiked={post.isLiked}
+                    is_liked={post.is_liked}
                     toggleLike={toggleLike}
                     imageUrl={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
                     creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}

@@ -2,14 +2,14 @@ import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
 
 import { NODE_API } from 'services'
-import { Posts } from 'shared/types'
+import { Post } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
 import { PostsFilters } from './filters'
 
 class PostsModel {
-  private _posts: Posts[] = []
+  private _posts: Post[] = []
 
   pagination: PaginationModel
 
@@ -23,12 +23,12 @@ class PostsModel {
   }
 
   changeFilters(filters: PostsFilters) {
-    this.debounceFetch(filters)
+    this.debounceFetch({ filters })
   }
 
   debounceFetch = debounce(this.fetch, 500)
 
-  set posts(data: Posts[]) {
+  set posts(data: Post[]) {
     this._posts = data
   }
 
@@ -37,21 +37,16 @@ class PostsModel {
   }
 
   async toggleLike(id: number, filters?: PostsFilters) {
-    await NODE_API.post.like(id, 1)
+    await NODE_API.post.like(id)
 
-    const data = await NODE_API.post.list({
-      limit: this.pagination.perPage,
-      offset: this.pagination.offset,
-      filters,
-    })
-
-    this.posts = data.posts
-    this.pagination.count = data.count
+    this.fetch({ filters, hidden: true })
   }
 
-  async fetch(filters?: PostsFilters) {
+  async fetch({ filters, hidden = false }: { filters?: PostsFilters; hidden?: boolean }) {
     try {
-      this.loading.begin()
+      if (!hidden) {
+        this.loading.begin()
+      }
 
       const data = await NODE_API.post.list({
         limit: this.pagination.perPage,
@@ -62,7 +57,7 @@ class PostsModel {
       this.posts = data.posts
       this.pagination.count = data.count
 
-      this.loading.end()
+      this.loading.reset()
     } catch {
       this.loading.reset()
     }
@@ -75,7 +70,7 @@ class PostsModel {
       const created_at = Date.now()
 
       await NODE_API.post.create({ ...post, created_at })
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {
@@ -88,7 +83,7 @@ class PostsModel {
       this.loading.begin()
 
       await NODE_API.post.remove(id)
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {

@@ -42,7 +42,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
 
     result = result.map((item: any) => ({
       ...item,
-      isLiked: item.liked_users.includes(res.locals.authorization_id),
+      is_liked: item.liked_users.includes(res.locals.authorization_id),
       first_liked_users: item.liked_users.slice(0, 3),
     }))
 
@@ -72,7 +72,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
 
     post = {
       ...post,
-      isLiked: post.liked_users.includes(res.locals.authorization_id),
+      is_liked: post.liked_users.includes(res.locals.authorization_id),
       first_liked_users: post.liked_users.slice(0, 3),
     }
 

@@ -1,5 +1,5 @@
 import { getQueryParams } from 'shared/helpers'
-import { Posts, Post } from 'shared/types'
+import { Post, User } from 'shared/types'
 
 import fetch from './fetch'
 
@@ -14,11 +14,11 @@ export const list = ({
   offset: number
   filters?: any
 }) =>
-  fetch.get<{ posts: Posts[]; count: number }>(
+  fetch.get<{ posts: Post[]; count: number }>(
     `${ENDPOINT_BASE}${getQueryParams({ ...filters, limit, offset })}`
   )
 
-export const get = (id: number) => fetch.get<Post>(`${ENDPOINT_BASE}/${id}`)
+export const get = (id: number) => fetch.get<Post & { user: User }>(`${ENDPOINT_BASE}/${id}`)
 
 export const create = async (post: any) => {
   const formData = new FormData()
@@ -27,10 +27,9 @@ export const create = async (post: any) => {
     formData.append(key, post[key])
   }
 
-  return fetch.post<Posts>(`${ENDPOINT_BASE}`, formData)
+  return fetch.post(`${ENDPOINT_BASE}`, formData)
 }
 
-export const remove = async (id: number) => fetch.delete<Posts>(`${ENDPOINT_BASE}/${id}`)
+export const remove = async (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)
 
-export const like = async (id: number, user_id: number) =>
-  fetch.put<Post>(`${ENDPOINT_BASE}/${id}/likes`, { user_id })
+export const like = async (id: number) => fetch.put(`${ENDPOINT_BASE}/${id}/likes`)
