@@ -23,7 +23,7 @@ class PostsModel {
   }
 
   changeFilters(filters: PostsFilters) {
-    this.debounceFetch(filters)
+    this.debounceFetch({ filters })
   }
 
   debounceFetch = debounce(this.fetch, 500)
@@ -36,9 +36,17 @@ class PostsModel {
     return this._posts
   }
 
-  async fetch(filters?: PostsFilters) {
+  async toggleLike(id: number, filters?: PostsFilters) {
+    await NODE_API.post.like(id)
+
+    this.fetch({ filters, hidden: true })
+  }
+
+  async fetch({ filters, hidden = false }: { filters?: PostsFilters; hidden?: boolean }) {
     try {
-      this.loading.begin()
+      if (!hidden) {
+        this.loading.begin()
+      }
 
       const data = await NODE_API.post.list({
         limit: this.pagination.perPage,
@@ -46,12 +54,10 @@ class PostsModel {
         filters,
       })
 
-      await NODE_API.post.like(1, 1)
-
       this.posts = data.posts
       this.pagination.count = data.count
 
-      this.loading.end()
+      this.loading.reset()
     } catch {
       this.loading.reset()
     }
@@ -64,7 +70,7 @@ class PostsModel {
       const created_at = Date.now()
 
       await NODE_API.post.create({ ...post, created_at })
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {
@@ -77,7 +83,7 @@ class PostsModel {
       this.loading.begin()
 
       await NODE_API.post.remove(id)
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {

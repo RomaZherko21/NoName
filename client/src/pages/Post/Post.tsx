@@ -20,7 +20,7 @@ function Post() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    PostModel.fetchPost(id)
+    PostModel.fetch({ id: Number(id) })
   }, [id])
 
   return (
@@ -40,7 +40,7 @@ function Post() {
             <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
               <img
                 className={styles.userAvatar}
-                src={`${NODE_API_USER_AVATAR_URL}/${PostModel.avatar}`}
+                src={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
                 alt="User cover"
               />
               <Typography variant="subtitle2" color="textSecondary" sx={{ mr: 1 }}>
@@ -75,12 +75,20 @@ function Post() {
           </Box>
           <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ p: 3 }}>
             <Box display="flex" alignItems="center">
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <Typography variant="subtitle1" color="textSecondary" sx={{ mr: 1 }}>
-                0
-              </Typography>
+              <Button
+                onClick={() => PostModel.toggleLike()}
+                startIcon={
+                  <FavoriteIcon
+                    sx={{
+                      color: (theme) =>
+                        PostModel.is_liked ? theme.palette.error.dark : theme.palette.action.active,
+                    }}
+                  />
+                }
+                variant="outlined"
+              >
+                {PostModel.likes_count}
+              </Button>
               <IconButton aria-label="comment">
                 <CommentIcon />
               </IconButton>
