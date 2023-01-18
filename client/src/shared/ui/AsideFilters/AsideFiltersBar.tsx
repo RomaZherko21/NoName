@@ -7,20 +7,22 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { InputFilter } from '../Filters'
 
 interface Props {
-  setFilters: (pre: any) => void
-  filters: any
+  onChange: (e: any) => void
   handleOpenFilter: () => void
+  filters: any
+  placeholder: string
+  name: string
 }
 
-const AsideFiltersBar = ({ setFilters, filters, handleOpenFilter }: Props) => {
+const AsideFiltersBar = ({ onChange, filters, handleOpenFilter, placeholder, name }: Props) => {
   const { t } = useTranslation()
 
   return (
     <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
       <InputFilter
-        placeholder={t('user:searchEmail')}
-        value={filters.email || ''}
-        onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
+        placeholder={t(placeholder)}
+        value={filters[name]}
+        onChange={onChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

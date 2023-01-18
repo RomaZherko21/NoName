@@ -11,5 +11,14 @@ export const getInitials = (name = '') =>
 export const getFullName = (name = '', surname = '', middleName = '') =>
   middleName ? `${name} ${middleName} ${surname}` : `${name} ${surname}`
 
-export const getQueryParams = (obj: any): string =>
-  qs.stringify(obj, { addQueryPrefix: true, arrayFormat: 'repeat' })
+export const getQueryParams = (obj: any): string => {
+  let result: any = {}
+
+  Object.entries(obj).forEach(([key, value]: any) => {
+    if (value !== '' && !isNaN(value) && value !== undefined && value !== null) {
+      result[key] = value
+    }
+  })
+
+  return qs.stringify(result, { addQueryPrefix: true, arrayFormat: 'repeat' })
+}

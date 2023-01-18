@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Stack, Button, Drawer, Divider, IconButton, Typography, Grid } from '@mui/material'
 import FilterListOffIcon from '@mui/icons-material/FilterListOff'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
+import { getTime } from 'date-fns'
 
 interface Props {
   config: {
@@ -53,7 +54,16 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
         <Grid container spacing={3}>
           {config.map((item) => (
             <Grid item key={item.key} sx={{ width: '100%' }}>
-              {item.type === 'select' ? (
+              {item.type === 'input' && (
+                <item.Control
+                  placeholder={item.placeholder}
+                  value={filters[item.key] || ''}
+                  onChange={(e: any) => {
+                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
+                  }}
+                />
+              )}
+              {item.type === 'select' && (
                 <item.Control
                   label={item.placeholder}
                   options={item.options || {}}
@@ -62,12 +72,22 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
                     setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
                   }}
                 />
-              ) : (
+              )}
+              {item.type === 'date' && (
                 <item.Control
-                  placeholder={item.placeholder}
-                  value={filters[item.key] || ''}
+                  label={item.placeholder}
+                  value={filters[item.key] || null}
+                  onChange={(e: number) => {
+                    setFilters((pre: any) => ({ ...pre, [item.key]: getTime(e) }))
+                  }}
+                />
+              )}
+              {item.type === 'check' && (
+                <item.Control
+                  label={item.placeholder}
+                  checked={filters[item.key] || false}
                   onChange={(e: any) => {
-                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
+                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.checked }))
                   }}
                 />
               )}

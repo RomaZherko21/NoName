@@ -79,8 +79,10 @@ function Users() {
         <Grid item>
           <AsideFiltersBar
             filters={filters}
-            setFilters={setFilters}
+            onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
             handleOpenFilter={handleOpenFilter}
+            placeholder="user:actions.searchEmail"
+            name="email"
           />
         </Grid>
         <Grid item>
