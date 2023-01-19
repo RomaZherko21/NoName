@@ -5,18 +5,18 @@ import fs from 'fs'
 import path from 'path'
 
 import { sequelize, PostModel, UserModel } from 'models'
-import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE } from 'shared/consts'
+import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
 
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
   try {
     const {
-      id = '',
+      id = ID,
       name = '',
       description = '',
       created_from = MIN_LIMIT,
       created_to = MAX_LIMIT,
-      limit,
-      offset,
+      limit = LIMIT,
+      offset = OFFSET,
       order_by = 'created_at',
       order_type = ORDER_TYPE,
     } = query
@@ -116,11 +116,12 @@ export async function createPost({ body, file }: Request, res: Response, next: N
 export async function togglePostLikes({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
+    const authorization_id = res.locals.authorization_id
 
     const [result]: any = await sequelize.query(
       `SELECT  post_id, user_id  from m2m_users_posts_likes
 
-        WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${res.locals.authorization_id} 
+        WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${authorization_id} 
         `,
       {
         type: QueryTypes.SELECT,
@@ -132,7 +133,7 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
       await sequelize.query(
         `DELETE  from m2m_users_posts_likes
   
-          WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${res.locals.authorization_id} 
+          WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${authorization_id} 
           `,
         {
           type: QueryTypes.DELETE,
@@ -141,7 +142,7 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
     } else {
       await sequelize.query(
         `INSERT INTO  m2m_users_posts_likes(post_id, user_id)
-        VALUES (${id}, ${res.locals.authorization_id})
+        VALUES (${id}, ${authorization_id})
           `,
         {
           type: QueryTypes.INSERT,

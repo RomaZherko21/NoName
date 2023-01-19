@@ -35,7 +35,9 @@ export async function updateUserSelf({ body }: Request, res: Response, next: Nex
 
 export async function removeUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const { avatar }: any = await UserModel.findByPk(res.locals.authorization_id)
+    const authorization_id = res.locals.authorization_id
+
+    const { avatar }: any = await UserModel.findByPk(authorization_id)
 
     if (avatar) {
       const filePath = path.join(
@@ -53,13 +55,13 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
 
     await PostModel.destroy({
       where: {
-        user_id: res.locals.authorization_id,
+        user_id: authorization_id,
       },
     })
 
     await UserModel.destroy({
       where: {
-        id: res.locals.authorization_id,
+        id: authorization_id,
       },
     })
 

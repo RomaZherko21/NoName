@@ -4,13 +4,14 @@ import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
+import { ID, LIMIT, OFFSET } from 'shared/consts'
 
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
     const {
-      offset,
-      limit,
-      id = '',
+      offset = OFFSET,
+      limit = LIMIT,
+      id = ID,
       name = '',
       surname = '',
       middle_name = '',
