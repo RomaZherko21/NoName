@@ -3,10 +3,12 @@
   "description": "Description",
   "actions": {
     "selectFile": "Select file",
-    "readMore": "Read more.."
+    "readMore": "Read more..",
+    "searchName": "Search name.."
   },
   "form": {
     "create": "Add post",
-    "selectiveHint": "Drop file browse thorough your machine"
+    "selectiveHint": "Drop file browse thorough your machine",
+    "isLiked": "Is liked?"
   }
 }

@@ -13,26 +13,31 @@ export const getFiltersConfig = () => [
     key: 'id',
     Control: InputFilter,
     placeholder: 'common.id',
+    type: 'input',
   },
   {
     key: 'name',
     Control: InputFilter,
     placeholder: 'user:name',
+    type: 'input',
   },
   {
     key: 'surname',
     Control: InputFilter,
     placeholder: 'user:surname',
+    type: 'input',
   },
   {
     key: 'middle_name',
     Control: InputFilter,
     placeholder: 'user:middleName',
+    type: 'input',
   },
   {
     key: 'email',
     Control: InputFilter,
     placeholder: 'user:email',
+    type: 'input',
   },
   {
     key: 'gender',

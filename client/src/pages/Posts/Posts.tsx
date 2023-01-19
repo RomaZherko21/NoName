@@ -59,8 +59,10 @@ function Posts() {
         <Grid item>
           <AsideFiltersBar
             filters={filters}
-            setFilters={setFilters}
+            onChange={(e: any) => setFilters((pre: any) => ({ ...pre, name: e.target.value }))}
             handleOpenFilter={handleOpenFilter}
+            placeholder="post:actions.searchName"
+            name="name"
           />
         </Grid>
 

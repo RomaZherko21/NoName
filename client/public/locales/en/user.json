@@ -36,7 +36,7 @@
   "actions": {
     "deleteAccount": "Delete account",
     "updateUser": "Update user",
-    "searchEmail": "Search email...",
+    "searchEmail": "Search email..",
     "inviteMembers": "Invite members",
     "changePlan": "Change plan",
     "usingNow": "Using now",
