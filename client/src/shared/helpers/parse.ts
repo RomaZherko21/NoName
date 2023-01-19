@@ -15,7 +15,7 @@ export const getQueryParams = (obj: any): string => {
   let result: any = {}
 
   Object.entries(obj).forEach(([key, value]: any) => {
-    if (value || !isNaN(value)) {
+    if (value || value > 0) {
       result[key] = value
     }
   })

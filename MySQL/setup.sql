@@ -88,21 +88,22 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS `user_connections` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_user_id` int NOT NULL,
-  `second_user_id` int NOT NULL,
+  `status` ENUM('pending', 'decline', 'accept'),
+  `sender_id` int NOT NULL,
+  `recipient_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`first_user_id`) REFERENCES users(`id`),
-  FOREIGN KEY (`second_user_id`) REFERENCES users(`id`)
+  FOREIGN KEY (`sender_id`) REFERENCES users(`id`),
+  FOREIGN KEY (`recipient_id`) REFERENCES users(`id`)
 );
 
-INSERT INTO `user_connections` (first_user_id, second_user_id) 
+INSERT INTO `user_connections` (sender_id, recipient_id, status) 
 VALUES
-	(1, 2),
-	(1, 3),
-	(1, 4),
-	(2, 4),
-	(2, 3),
-	(3, 4);
+	(1, 2,'accept'),
+	(1, 3,'decline'),
+	(1, 4,'pending'),
+	(2, 4,'accept'),
+	(2, 3,'pending'),
+	(3, 4,'pending');
 
 
 CREATE TABLE IF NOT EXISTS `books` (

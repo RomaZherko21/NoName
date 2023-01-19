@@ -12,6 +12,10 @@ const UserConnectionModel = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.ENUM('pending', 'decline', 'accept'),
+      allowNull: false,
+    },
   },
   {
     tableName: 'user_connections',
@@ -19,11 +23,11 @@ const UserConnectionModel = sequelize.define(
 )
 
 UserConnectionModel.belongsTo(UserModel, {
-  foreignKey: 'first_user_id',
+  foreignKey: 'sender_id',
 })
 
 UserConnectionModel.belongsTo(UserModel, {
-  foreignKey: 'second_user_id',
+  foreignKey: 'recipient_id',
 })
 
 export default UserConnectionModel
