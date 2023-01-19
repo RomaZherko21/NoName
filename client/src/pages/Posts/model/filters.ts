@@ -31,13 +31,13 @@ export const getFiltersConfig = () => [
   {
     key: 'created_from',
     Control: DatePickerFilter,
-    placeholder: 'post:form.createdFrom',
+    placeholder: 'fields.createdFrom',
     type: 'date',
   },
   {
     key: 'created_to',
     Control: DatePickerFilter,
-    placeholder: 'post:form.createdTo',
+    placeholder: 'fields.createdTo',
     type: 'date',
   },
   {

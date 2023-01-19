@@ -53,6 +53,8 @@
     "telNumber": "Telephone number",
     "amount": "Amount",
     "quantity": "Quantity",
-    "createdAt": "Created at"
+    "createdAt": "Created at",
+    "createdFrom": "Created from",
+    "createdTo": "Created to"
   }
 }
