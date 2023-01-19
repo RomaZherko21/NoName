@@ -59,7 +59,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     const { id } = params
 
     let [post]: any = await sequelize.query(
-      `SELECT posts.*, COUNT(posts.id) as likes_count, JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users  FROM posts 
+      `SELECT posts.*, COUNT(posts.id) as likes_count, JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users  FROM posts 
         JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
 
         GROUP BY posts.id
@@ -70,10 +70,24 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
       }
     )
 
+    const comments: any = await sequelize.query(
+      `SELECT post_comments.*, users.avatar as user_avatar  FROM post_comments 
+        JOIN users ON post_comments.user_id = users.id 
+
+        WHERE post_comments.post_id=${post.id}
+
+        GROUP BY post_comments.id
+        `,
+      {
+        type: QueryTypes.SELECT,
+      }
+    )
+
     post = {
       ...post,
       is_liked: post.liked_users.includes(res.locals.authorization_id),
       first_liked_users: post.liked_users.slice(0, 3),
+      comments,
     }
 
     const user = await UserModel.findByPk(post.user_id, {

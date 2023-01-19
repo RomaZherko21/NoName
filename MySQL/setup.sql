@@ -62,6 +62,31 @@ VALUES
   (3,2),
   (4,4);
 
+CREATE TABLE IF NOT EXISTS `post_comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `message` text,
+  `created_at` bigint,
+   `post_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`post_id`) REFERENCES posts(`id`),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+);
+
+INSERT INTO `post_comments` (user_id, post_id, message, created_at) 
+VALUES
+	(1, 1, 'So deep...1', 1664011922672),
+	(1, 2, 'So deep...2', 1664022922672),
+	(1, 3, 'So deep...3', 1664019922672),
+	(2, 1, 'So deep...4', 1664088922672),
+	(2, 2, 'So deep...5', 1664014922672),
+	(2, 2, 'So deep...6', 1664014922672),
+	(3, 1, 'So deep...7', 1664011922672),
+	(3, 2, 'So deep...8', 1664017722672),
+	(4, 4, 'So deep...8', 1664017722672),
+	(4, 4, 'So deep...8', 1664017722672);
+
+
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255),
