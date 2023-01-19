@@ -86,6 +86,24 @@ VALUES
 	(4, 4, 'So deep...8', 1664017722672),
 	(4, 4, 'So deep...8', 1664017722672);
 
+CREATE TABLE IF NOT EXISTS `user_connections` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_user_id` int NOT NULL,
+  `second_user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`first_user_id`) REFERENCES users(`id`),
+  FOREIGN KEY (`second_user_id`) REFERENCES users(`id`)
+);
+
+INSERT INTO `user_connections` (first_user_id, second_user_id) 
+VALUES
+	(1, 2),
+	(1, 3),
+	(1, 4),
+	(2, 4),
+	(2, 3),
+	(3, 4);
+
 
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,

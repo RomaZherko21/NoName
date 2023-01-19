@@ -4,6 +4,7 @@ import { signIn } from 'auth'
 import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'user'
 import { createPost, deletePostById, getPost, getPosts, togglePostLikes } from 'posts'
 import { createUser, getUser, getUsers, updateUserById } from 'users'
+import { deleteConnectionById, getConnections } from 'connections'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
@@ -30,5 +31,9 @@ router.get(`${POSTS}/:id`, getPost)
 router.post(`${POSTS}`, useFile.single(FILE_FIELD_NAMES.post), createPost)
 router.delete(`${POSTS}/:id`, deletePostById)
 router.put(`${POSTS}/:id/likes`, togglePostLikes)
+
+const CONNECTIONS = '/connections'
+router.get(`${CONNECTIONS}`, getConnections)
+router.delete(`${CONNECTIONS}/:id`, deleteConnectionById)
 
 export default router
