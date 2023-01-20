@@ -116,7 +116,7 @@ function Post() {
           {PostModel.comments.length && (
             <>
               <Box pl={4} pr={4} mb={4}>
-                <Divider sx={{ width: '100%', borderColor: '#2d3748' }} />
+                <Divider sx={{ width: '100%', borderColor: (theme) => theme.palette.grey[700] }} />
               </Box>
               {PostModel.comments.map((comment) => (
                 <Comment comment={comment} />
@@ -124,7 +124,7 @@ function Post() {
             </>
           )}
           <Box pl={4} pr={4} mt={4}>
-            <Divider sx={{ width: '100%', borderColor: '#2d3748' }} />
+            <Divider sx={{ width: '100%', borderColor: (theme) => theme.palette.grey[700] }} />
           </Box>
           <Stack alignItems="start" direction="row" width="100%" spacing={3} padding={4}>
             <Avatar

@@ -1,9 +1,13 @@
 import { Box, Typography, Stack, Avatar } from '@mui/material'
 
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { Comment as Props } from 'shared/types'
+import { Comment as CommentT } from 'shared/types'
 
-function Comment({ comment }: { comment: Props }) {
+interface Props {
+  comment: CommentT
+}
+
+function Comment({ comment }: Props) {
   return (
     <Box m={4} mt={3} mb={2} key={comment.id}>
       <Stack alignItems="start" direction="row" spacing={3}>
