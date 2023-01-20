@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { NODE_API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Post, User } from 'shared/types'
+import { Comment, Post, User } from 'shared/types'
 
 class PostsModel {
   id: number = 0
@@ -13,6 +13,7 @@ class PostsModel {
   image: string = ''
   likes_count: number = 0
   is_liked: boolean = false
+  comments: Comment[] = []
 
   user_name: string = ''
   user_surname: string = ''
@@ -57,6 +58,7 @@ class PostsModel {
     this.image = post.image
     this.likes_count = post.likes_count
     this.is_liked = post.is_liked
+    this.comments = post.comments
 
     this.user_avatar = post.user.avatar
     this.user_name = post.user.name

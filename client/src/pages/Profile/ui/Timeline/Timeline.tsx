@@ -82,7 +82,7 @@ const Timeline = () => {
             />
 
             <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-              <TextField placeholder="Whats on your mind" fullWidth multiline rows={3} />
+              <TextField placeholder={t('user:whatsOnYourMind')} fullWidth multiline rows={3} />
               <Stack
                 direction="row"
                 sx={{ mt: 2 }}
