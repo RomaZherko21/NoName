@@ -2,17 +2,32 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import { Box, Container, Paper, Typography, IconButton, Button, Grid } from '@mui/material'
-import CommentIcon from '@mui/icons-material/Comment'
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  IconButton,
+  Button,
+  Grid,
+  Divider,
+  Stack,
+  Avatar,
+  TextField,
+} from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
+import TagFacesIcon from '@mui/icons-material/TagFaces'
+import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
 import { PageHeader, PopupMenu, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
-import styles from './Styles.module.scss'
 import PostModel from './model/Post.model'
 import { getPopupConfig } from './PopupConfig'
+import styles from './Styles.module.scss'
+import { Comment } from './ui'
 
 function Post() {
   const { t } = useTranslation()
@@ -89,9 +104,6 @@ function Post() {
               >
                 {PostModel.likes_count}
               </Button>
-              <IconButton aria-label="comment">
-                <CommentIcon />
-              </IconButton>
             </Box>
             <IconButton>
               <PopupMenu
@@ -101,6 +113,49 @@ function Post() {
               />
             </IconButton>
           </Box>
+          {PostModel.comments.length && (
+            <>
+              <Box pl={4} pr={4} mb={4}>
+                <Divider sx={{ width: '100%', borderColor: '#2d3748' }} />
+              </Box>
+              {PostModel.comments.map((comment) => (
+                <Comment comment={comment} />
+              ))}
+            </>
+          )}
+          <Box pl={4} pr={4} mt={4}>
+            <Divider sx={{ width: '100%', borderColor: '#2d3748' }} />
+          </Box>
+          <Stack alignItems="start" direction="row" width="100%" spacing={3} padding={4}>
+            <Avatar
+              alt="User avatar"
+              sx={{ cursor: 'pointer', width: 40, height: 40 }}
+              src={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
+            />
+            <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
+              <TextField placeholder={t('actions.writeYourComment')} fullWidth multiline rows={3} />
+              <Stack
+                direction="row"
+                sx={{ mt: 2 }}
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Stack direction="row">
+                  <IconButton aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file" />
+                    <AddAPhotoIcon />
+                  </IconButton>
+                  <IconButton aria-label="link" component="label">
+                    <InsertLinkIcon />
+                  </IconButton>
+                  <IconButton aria-label="choose emoji" component="label">
+                    <TagFacesIcon />
+                  </IconButton>
+                </Stack>
+                <Button variant="contained">{t('actions.post')}</Button>
+              </Stack>
+            </Stack>
+          </Stack>
         </Paper>
       )}
     </Container>

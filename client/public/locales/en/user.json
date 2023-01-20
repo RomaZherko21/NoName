@@ -29,6 +29,7 @@
   "cardNumber": "Card number",
   "country": "Country",
   "zipAndPostalCode": "Zip / Postal code",
+  "whatsOnYourMind": "Whats on your mind",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
