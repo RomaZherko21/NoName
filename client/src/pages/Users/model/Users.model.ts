@@ -27,7 +27,7 @@ class UsersModel {
   }
 
   debounceFetch = debounce(this.fetch, 500)
-  debounceRequestFetch = debounce(this.fetchRequest, 500)
+  debounceConnectionRequest = debounce(this.connectionRequest, 500)
 
   set users(data: User[]) {
     this._users = data
@@ -37,10 +37,10 @@ class UsersModel {
     return this._users
   }
 
-  async fetchRequest(id: number) {
+  async connectionRequest(id: number) {
     await NODE_API.connection.update(id, ConnectionStatus.pending)
 
-    await NODE_API.connection.get({ status: ConnectionStatus.pending })
+    this.fetch()
   }
 
   async fetch(filters?: UserFilters) {

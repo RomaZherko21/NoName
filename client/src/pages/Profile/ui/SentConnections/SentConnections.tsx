@@ -26,18 +26,18 @@ const SentConnections = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    ProfileModel.sentRequestsFetch()
+    ProfileModel.fetch({ isSent: true, isReceived: false })
   }, [])
 
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ p: 3 }}>
-        Sent Connections
+        {t('page:sentConnections')}
       </Typography>
       <Divider />
       <Box sx={{ p: 3, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
         <SearchIcon />
-        <TextField id="input-with-sx" label="Search connections" variant="standard" />
+        <TextField id="input-with-sx" label={t('user:actions.searchName')} variant="standard" />
       </Box>
       <Divider />
 
@@ -67,7 +67,7 @@ const SentConnections = () => {
                         {item.name} {item.surname}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
-                        Email: {item.email}
+                        {t('user:email')}: {item.email}
                       </Typography>
                       <Button
                         color="primary"
@@ -76,12 +76,12 @@ const SentConnections = () => {
                         sx={{ mt: 2, width: 'fit-content' }}
                         onClick={() => ProfileModel.removeRequest(item.user_id)}
                       >
-                        Сancel sending
+                        {t('user:actions.cancelSending')}
                       </Button>
                     </Stack>
                   </Box>
                   <IconButton aria-label="upload picture" component="label">
-                    <Tooltip title="More info">
+                    <Tooltip title={t('user:moreInfo')}>
                       <MoreHorizIcon />
                     </Tooltip>
                   </IconButton>

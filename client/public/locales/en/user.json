@@ -30,6 +30,7 @@
   "country": "Country",
   "zipAndPostalCode": "Zip / Postal code",
   "whatsOnYourMind": "Whats on your mind",
+  "moreInfo": "More info",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -42,7 +43,11 @@
     "changePlan": "Change plan",
     "usingNow": "Using now",
     "cancel": "Cancel",
-    "upgradePlan": "Upgrade plan"
+    "upgradePlan": "Upgrade plan",
+    "searchName": "Search name..",
+    "cancelSending": "Сancel sending",
+    "accept": "Accept",
+    "declain": "Declain"
   },
   "updates": {
     "product": {

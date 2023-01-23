@@ -4,6 +4,11 @@ import { Connection, ConnectionStatus } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { NODE_API } from 'services'
 
+interface Props {
+  isSent: boolean
+  isReceived: boolean
+}
+
 class ProfileModel {
   private _connections: Connection[] = []
 
@@ -23,13 +28,20 @@ class ProfileModel {
     return this._connections
   }
 
-  async sentRequestsFetch() {
+  async connectionRequest({ id, status }: { id: number; status: ConnectionStatus }) {
+    await NODE_API.connection.update(id, status)
+
+    this.fetch({ isSent: false, isReceived: true })
+  }
+
+  async fetch({ isSent, isReceived }: Props) {
     try {
       this.loading.begin()
 
       const data = await NODE_API.connection.get({
         status: ConnectionStatus.pending,
-        isReceived: false,
+        isReceived: isReceived,
+        isSent: isSent,
       })
 
       this.connections = data
@@ -43,7 +55,7 @@ class ProfileModel {
   async removeRequest(id: number) {
     await NODE_API.connection.remove(id)
 
-    this.sentRequestsFetch()
+    this.fetch({ isSent: true, isReceived: false })
   }
 }
 

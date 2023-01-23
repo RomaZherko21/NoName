@@ -10,9 +10,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ManIcon from '@mui/icons-material/Man'
 import WomanIcon from '@mui/icons-material/Woman'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import PersonIcon from '@mui/icons-material/Person'
+import ScheduleSendIcon from '@mui/icons-material/ScheduleSend'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, Roles, User, Gender } from 'shared/types'
+import { TableColumn, Roles, User, Gender, ConnectionStatus } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
@@ -44,7 +46,7 @@ const ActionButtons = observer(({ user }: { user: User }) => {
 
   function sentRequest() {
     if (user.id) {
-      UsersModel.debounceRequestFetch(user.id)
+      UsersModel.debounceConnectionRequest(user.id)
     }
   }
 
@@ -60,11 +62,34 @@ const ActionButtons = observer(({ user }: { user: User }) => {
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      <Tooltip title={t('actions.sendRequest') || 'Send request'} placement="top">
-        <IconButton aria-label="delete" size="small" onClick={sentRequest}>
-          <PersonAddIcon fontSize="inherit" />
-        </IconButton>
-      </Tooltip>
+      {user.connection_status === null && (
+        <Tooltip title={t('actions.sendRequest')} placement="top">
+          <IconButton size="small" onClick={sentRequest}>
+            <PersonAddIcon fontSize="inherit" color="secondary" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {user.connection_status === ConnectionStatus.accept && (
+        <Tooltip title={t('common.yourFriend')} placement="top">
+          <IconButton size="small">
+            <PersonIcon fontSize="inherit" color="secondary" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {user.connection_status === ConnectionStatus.decline && (
+        <Tooltip title={t('common.userCanceledRequest')} placement="top">
+          <IconButton size="small">
+            <PersonIcon fontSize="inherit" color="error" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {user.connection_status === ConnectionStatus.pending && (
+        <Tooltip title={t('common.requestPending')} placement="top">
+          <IconButton size="small">
+            <ScheduleSendIcon fontSize="inherit" />
+          </IconButton>
+        </Tooltip>
+      )}
     </>
   )
 })

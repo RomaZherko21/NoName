@@ -11,6 +11,7 @@ export interface User {
   gender?: Gender
   confirmPassword?: string
   avatar?: string
+  connection_status?: ConnectionStatus | null
 }
 
 export interface Connection {
