@@ -1,5 +1,5 @@
 import { getQueryParams } from 'shared/helpers'
-import { ConnectionStatus, User } from 'shared/types'
+import { Connection, ConnectionStatus } from 'shared/types'
 
 import fetch from './fetch'
 
@@ -13,7 +13,7 @@ export const get = ({
   status: ConnectionStatus
   isReceived?: boolean
   isSent?: boolean
-}) => fetch.get<User>(`${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent })}`)
+}) => fetch.get<Connection[]>(`${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent })}`)
 
 export const update = (id: number, status: ConnectionStatus) =>
   fetch.put(`${ENDPOINT_BASE}/${id}`, { status })

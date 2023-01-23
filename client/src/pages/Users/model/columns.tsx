@@ -9,6 +9,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ManIcon from '@mui/icons-material/Man'
 import WomanIcon from '@mui/icons-material/Woman'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 import { useDialog } from 'shared/hooks'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
@@ -41,6 +42,12 @@ const ActionButtons = observer(({ user }: { user: User }) => {
     true
   )
 
+  function sentRequest() {
+    if (user.id) {
+      UsersModel.debounceRequestFetch(user.id)
+    }
+  }
+
   return (
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
@@ -51,6 +58,11 @@ const ActionButtons = observer(({ user }: { user: User }) => {
       <Tooltip title={t('actions.delete') || 'delete'} placement="top">
         <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
           <DeleteIcon color="error" fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('actions.sendRequest') || 'Send request'} placement="top">
+        <IconButton aria-label="delete" size="small" onClick={sentRequest}>
+          <PersonAddIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
     </>

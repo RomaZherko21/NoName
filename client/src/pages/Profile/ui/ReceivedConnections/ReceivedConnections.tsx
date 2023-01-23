@@ -16,7 +16,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
-const Connections = () => {
+const ReceivedConnections = () => {
   const { t } = useTranslation()
 
   return (
@@ -127,4 +127,4 @@ const Connections = () => {
   )
 }
 
-export default observer(Connections)
+export default observer(ReceivedConnections)

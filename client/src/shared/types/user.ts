@@ -13,6 +13,17 @@ export interface User {
   avatar?: string
 }
 
+export interface Connection {
+  user_id: number
+  name: string
+  middle_name: string
+  surname: string
+  avatar: string
+  email: string
+  tel_number: string
+  status: string
+}
+
 export enum Roles {
   admin = 'admin',
   user = 'user',

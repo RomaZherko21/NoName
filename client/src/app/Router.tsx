@@ -43,7 +43,8 @@ function Router() {
 
       <Route path={ROUTES.PROFILE}>
         <Route path={ROUTES.PROFILE_TIMELINE} element={<Profile />} />
-        <Route path={ROUTES.PROFILE_CONNECTIONS} element={<Profile />} />
+        <Route path={ROUTES.PROFILE_RECEIVED_CONNECTIONS} element={<Profile />} />
+        <Route path={ROUTES.PROFILE_SENT_CONNECTIONS} element={<Profile />} />
       </Route>
 
       <Route path={ROUTES.ACCOUNT}>

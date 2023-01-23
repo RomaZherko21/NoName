@@ -41,7 +41,8 @@
     "copyLink": "Copy link",
     "share": "Share",
     "linkCopied": "Link copied",
-    "writeYourComment": "Write your comment"
+    "writeYourComment": "Write your comment",
+    "sendRequest": "Send request"
   },
   "fields": {
     "name": "Name",
