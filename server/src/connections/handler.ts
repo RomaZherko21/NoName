@@ -6,18 +6,28 @@ import { QueryTypes } from 'sequelize'
 
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const { status, isReceived, isSent } = query
+    const { status, isReceived, isSent, name = '', surname = '' } = query
     const authorization_id = res.locals.authorization_id
 
     let connections: any = []
 
     if (isReceived) {
       const result: any = await sequelize.query(
-        `SELECT user_connections.status ,users.id as user_id, users.name, users.surname, users.middle_name, users.avatar, users.email, users.tel_number  
-            FROM user_connections 
-              JOIN users ON (user_connections.sender_id = users.id)
+        `SELECT user_connections.status,
+            users.id as user_id, 
+            users.name, 
+            users.surname, 
+            users.middle_name, 
+            users.avatar, 
+            users.email, 
+            users.tel_number
+        FROM user_connections 
+        JOIN users ON (user_connections.sender_id = users.id)
+
+        WHERE users.name LIKE '%${name}%'
+        AND users.surname LIKE '%${surname}%'
   
-          WHERE user_connections.recipient_id=${authorization_id} AND user_connections.status='${status}'
+        WHERE user_connections.recipient_id=${authorization_id} AND user_connections.status='${status}'
           `,
         {
           type: QueryTypes.SELECT,
@@ -29,9 +39,19 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
 
     if (isSent) {
       const result: any = await sequelize.query(
-        `SELECT user_connections.status ,users.id as user_id, users.name, users.surname, users.middle_name, users.avatar, users.email, users.tel_number  
-            FROM user_connections 
-              JOIN users ON (user_connections.recipient_id = users.id)
+        `SELECT user_connections.status,
+            users.id as user_id,
+            users.name, 
+            users.surname, 
+            users.middle_name, 
+            users.avatar, 
+            users.email, 
+            users.tel_number  
+          FROM user_connections 
+          JOIN users ON (user_connections.recipient_id = users.id)
+
+          WHERE users.name LIKE '%${name}%'
+          AND users.surname LIKE '%${surname}%'
   
           WHERE user_connections.sender_id=${authorization_id} AND user_connections.status='${status}'
           `,

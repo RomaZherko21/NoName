@@ -18,18 +18,25 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
       email = '',
       role = '',
       gender = '',
+      connection_status = '',
     } = query
+    const authorization_id = res.locals.authorization_id
 
     const users = await sequelize.query(
-      `SELECT *  FROM users
+      `SELECT users.*,
+        user_connections.status as connection_status
+      FROM users 
+      LEFT JOIN user_connections ON (${authorization_id} = user_connections.sender_id AND users.id= user_connections.recipient_id
+        OR ${authorization_id} = user_connections.recipient_id AND users.id = user_connections.sender_id)
 
-        WHERE id LIKE '%${id}%'
-        AND name LIKE '%${name}%'
-        AND surname LIKE '%${surname}%'
-        AND middle_name LIKE '%${middle_name}%'
-        AND email LIKE '%${email}%'
-        AND role LIKE '%${role}%'
-        AND gender LIKE '%${gender}%'
+        WHERE users.id LIKE '%${id}%'
+        AND users.name LIKE '%${name}%'
+        AND users.surname LIKE '%${surname}%'
+        AND users.middle_name LIKE '%${middle_name}%'
+        AND users.email LIKE '%${email}%'
+        AND users.role LIKE '%${role}%'
+        AND users.gender LIKE '%${gender}%'
+        AND (user_connections.status LIKE '%${connection_status}%' OR user_connections.status IS NULL)
 
         LIMIT ${limit} OFFSET ${offset};`,
       {

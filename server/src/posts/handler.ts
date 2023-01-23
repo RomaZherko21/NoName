@@ -4,7 +4,7 @@ import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
 
-import { sequelize, PostModel, UserModel } from 'models'
+import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
 
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
@@ -59,9 +59,12 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     const { id } = params
 
     let [post]: any = await sequelize.query(
-      `SELECT posts.*, COUNT(posts.id) as likes_count, JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users  FROM posts 
-        JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
-
+      `SELECT posts.*, 
+          COUNT(posts.id) as likes_count, 
+          JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
+      FROM posts 
+      JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+        
         GROUP BY posts.id
         HAVING posts.id=${id}
         `,
@@ -71,8 +74,13 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     )
 
     const comments: any = await sequelize.query(
-      `SELECT post_comments.*, users.avatar as user_avatar  FROM post_comments 
-        JOIN users ON post_comments.user_id = users.id 
+      `SELECT post_comments.*, 
+          users.avatar as user_avatar, 
+          users.name as user_name, 
+          users.surname  as user_surname, 
+          users.middle_name  as user_middle_name 
+        FROM post_comments 
+      JOIN users ON post_comments.user_id = users.id 
 
         WHERE post_comments.post_id=${post.id}
 
@@ -180,6 +188,76 @@ export async function deletePostById({ params }: Request, res: Response, next: N
         id,
       },
     })
+
+    res.status(204).send()
+  } catch (err: any) {
+    next(createError(500, err.message))
+  }
+}
+
+export async function createPostComment(
+  { body, params }: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { post_id } = params
+    const authorization_id = res.locals.authorization_id
+
+    await PostCommentModel.create({
+      ...body,
+      post_id,
+      user_id: authorization_id,
+    })
+
+    res.status(204).send()
+  } catch (err: any) {
+    next(createError(500, err.message))
+  }
+}
+
+export async function deletePostComment({ params }: Request, res: Response, next: NextFunction) {
+  try {
+    const { post_id, comment_id } = params
+    const authorization_id = res.locals.authorization_id
+
+    await PostCommentModel.destroy({
+      where: {
+        post_id,
+        user_id: authorization_id,
+        id: comment_id,
+      },
+    })
+
+    res.status(204).send()
+  } catch (err: any) {
+    next(createError(500, err.message))
+  }
+}
+
+export async function updatePostComment(
+  { params, body }: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { post_id, comment_id } = params
+    const authorization_id = res.locals.authorization_id
+
+    await PostCommentModel.destroy({})
+
+    await PostCommentModel.update(
+      {
+        ...body,
+      },
+      {
+        where: {
+          post_id,
+          user_id: authorization_id,
+          id: comment_id,
+        },
+      }
+    )
 
     res.status(204).send()
   } catch (err: any) {
