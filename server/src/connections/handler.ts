@@ -24,10 +24,10 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
         FROM user_connections 
         JOIN users ON (user_connections.sender_id = users.id)
 
-        WHERE users.name LIKE '%${name}%'
+        WHERE user_connections.recipient_id=${authorization_id} 
+        AND user_connections.status='${status}' 
+        AND users.name LIKE '%${name}%'
         AND users.surname LIKE '%${surname}%'
-  
-        WHERE user_connections.recipient_id=${authorization_id} AND user_connections.status='${status}'
           `,
         {
           type: QueryTypes.SELECT,
@@ -50,10 +50,10 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
           FROM user_connections 
           JOIN users ON (user_connections.recipient_id = users.id)
 
-          WHERE users.name LIKE '%${name}%'
+          WHERE user_connections.sender_id=${authorization_id} 
+          AND user_connections.status='${status}'
+          AND users.name LIKE '%${name}%'
           AND users.surname LIKE '%${surname}%'
-  
-          WHERE user_connections.sender_id=${authorization_id} AND user_connections.status='${status}'
           `,
         {
           type: QueryTypes.SELECT,
