@@ -15,8 +15,8 @@ export const ROUTES = {
 
   PROFILE: '/profile',
   PROFILE_TIMELINE: '/profile/timeline',
-  PROFILE_SENT_CONNECTIONS: '/profile/connections/sent',
-  PROFILE_RECEIVED_CONNECTIONS: '/profile/connections/received',
+  PROFILE_SENT_CONNECTIONS: '/profile/sent-connections',
+  PROFILE_RECEIVED_CONNECTIONS: '/profile/received-connections',
 
   ACCOUNT: '/account',
   ACCOUNT_GENERAL: '/account/general',

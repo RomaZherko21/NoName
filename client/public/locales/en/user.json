@@ -31,6 +31,10 @@
   "zipAndPostalCode": "Zip / Postal code",
   "whatsOnYourMind": "Whats on your mind",
   "moreInfo": "More info",
+  "clearAll": "Clear All",
+  "yourFriend": "Your friend",
+  "userCanceledRequest": "User canceled request",
+  "requestPending": "Request pending",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -47,6 +51,8 @@
     "searchName": "Search name..",
     "cancelSending": "Сancel sending",
     "accept": "Accept",
+    "writeYourComment": "Write your comment",
+    "sendRequest": "Send request",
     "declain": "Declain"
   },
   "updates": {

@@ -27,7 +27,6 @@ class UsersModel {
   }
 
   debounceFetch = debounce(this.fetch, 500)
-  debounceConnectionRequest = debounce(this.connectionRequest, 500)
 
   set users(data: User[]) {
     this._users = data

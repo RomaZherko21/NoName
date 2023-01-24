@@ -77,7 +77,7 @@ const ReceivedConnections = () => {
                           size="small"
                           sx={{ mt: 1 }}
                           onClick={() =>
-                            ProfileModel.connectionRequest({
+                            ProfileModel.updateConnectionStatus({
                               id: item.user_id,
                               status: ConnectionStatus.accept,
                             })
@@ -91,7 +91,7 @@ const ReceivedConnections = () => {
                           size="small"
                           sx={{ mt: 1 }}
                           onClick={() =>
-                            ProfileModel.connectionRequest({
+                            ProfileModel.updateConnectionStatus({
                               id: item.user_id,
                               status: ConnectionStatus.decline,
                             })

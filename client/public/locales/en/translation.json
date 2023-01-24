@@ -16,11 +16,7 @@
     "thisYear": "This year",
     "youMadeAnExtra": "You made an extra",
     "connections": "Connections",
-    "filters": "Filters",
-    "clearAll": "Clear All",
-    "yourFriend": "Your friend",
-    "userCanceledRequest": "User canceled request",
-    "requestPending": "Request pending"
+    "filters": "Filters"
   },
   "actions": {
     "add": "Add",
@@ -43,9 +39,7 @@
     "sendInvite": "Send Invite",
     "copyLink": "Copy link",
     "share": "Share",
-    "linkCopied": "Link copied",
-    "writeYourComment": "Write your comment",
-    "sendRequest": "Send request"
+    "linkCopied": "Link copied"
   },
   "fields": {
     "name": "Name",

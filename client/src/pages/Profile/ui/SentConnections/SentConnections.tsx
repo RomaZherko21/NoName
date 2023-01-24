@@ -74,7 +74,7 @@ const SentConnections = () => {
                         variant="outlined"
                         size="small"
                         sx={{ mt: 2, width: 'fit-content' }}
-                        onClick={() => ProfileModel.removeRequest(item.user_id)}
+                        onClick={() => ProfileModel.removeConnectionRequest(item.user_id)}
                       >
                         {t('user:actions.cancelSending')}
                       </Button>
