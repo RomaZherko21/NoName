@@ -47,6 +47,31 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         }
       )
 
+    result = await Promise.all(
+      result.map(async (item: any) => {
+        const comments: any = await sequelize.query(
+          `SELECT 
+            post_comments.*, 
+            users.avatar as user_avatar, 
+            users.name as user_name, 
+            users.surname  as user_surname, 
+            users.middle_name  as user_middle_name 
+          FROM post_comments 
+            JOIN users ON post_comments.user_id = users.id 
+    
+            WHERE post_comments.post_id=${item.id}
+    
+            GROUP BY post_comments.id
+            `,
+          {
+            type: QueryTypes.SELECT,
+          }
+        )
+
+        return { ...item, comments }
+      })
+    )
+
     result = result.map((item) => ({
       ...item,
       is_liked: item.liked_users.includes(res.locals.authorization_id),
