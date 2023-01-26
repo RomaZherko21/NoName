@@ -19,6 +19,11 @@ class PostsModel {
   user_surname: string = ''
   user_avatar: string | undefined = ''
 
+  isEditActive: boolean = false
+  editCommentId: number = 0
+
+  comment: string = ''
+
   loading: LoadingModel
 
   constructor() {
@@ -47,6 +52,40 @@ class PostsModel {
     } catch {
       this.loading.reset()
     }
+  }
+
+  async addNewComment() {
+    await NODE_API.post.createComment(this.id, {
+      created_at: new Date().getTime(),
+      message: this.comment,
+    })
+
+    this.comment = ''
+
+    this.fetch({ id: this.id })
+  }
+
+  async editComment() {
+    await NODE_API.post.editComment({
+      post_id: this.id,
+      comment_id: this.editCommentId,
+      comment: {
+        created_at: new Date().getTime(),
+        message: this.comment,
+      },
+    })
+
+    this.isEditActive = false
+    this.comment = ''
+    this.editCommentId = 0
+
+    this.fetch({ id: this.id })
+  }
+
+  async deleteComment(comment_id: number) {
+    await NODE_API.post.deleteComment(this.id, comment_id)
+
+    this.fetch({ id: this.id })
   }
 
   private fromJSON(post: Post & { user: User }) {

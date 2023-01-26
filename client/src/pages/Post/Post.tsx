@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
@@ -13,7 +13,6 @@ import {
   Divider,
   Stack,
   Avatar,
-  TextField,
 } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
@@ -21,8 +20,9 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
-import { PageHeader, PopupMenu, Spinner } from 'shared/ui'
+import { InputFilter, PageHeader, PopupMenu, Spinner } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { useRootStore } from 'stores'
 
 import PostModel from './model/Post.model'
 import { getPopupConfig } from './PopupConfig'
@@ -33,6 +33,8 @@ function Post() {
   const { t } = useTranslation()
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useRootStore()
+  const inputRef = useRef<any>(null)
 
   useEffect(() => {
     PostModel.fetch({ id: Number(id) })
@@ -130,14 +132,15 @@ function Post() {
             <Avatar
               alt="User avatar"
               sx={{ cursor: 'pointer', width: 40, height: 40 }}
-              src={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
+              src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
             />
             <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-              <TextField
-                placeholder={t('user:actions.writeYourComment')}
-                fullWidth
-                multiline
+              <InputFilter
+                placeholder="actions.writeYourComment"
+                multiline={true}
                 rows={3}
+                value={PostModel.comment}
+                onChange={(e: any) => (PostModel.comment = e.target.value)}
               />
               <Stack
                 direction="row"
@@ -157,7 +160,21 @@ function Post() {
                     <TagFacesIcon />
                   </IconButton>
                 </Stack>
-                <Button variant="contained">{t('actions.post')}</Button>
+                {PostModel.isEditActive ? (
+                  <Button
+                    onClick={() => {
+                      inputRef.current?.focus()
+                      PostModel.editComment()
+                    }}
+                    variant="contained"
+                  >
+                    {t('actions.save')}
+                  </Button>
+                ) : (
+                  <Button onClick={() => PostModel.addNewComment()} variant="contained">
+                    {t('actions.post')}
+                  </Button>
+                )}
               </Stack>
             </Stack>
           </Stack>

@@ -18,4 +18,7 @@ export interface Comment {
   created_at: number
   user_avatar: string
   message: string
+  user_name: string
+  user_surname: string
+  user_middle_name: string
 }
