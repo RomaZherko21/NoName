@@ -25,7 +25,7 @@ export async function updateUserSelf({ body }: Request, res: Response, next: Nex
       },
     })
 
-    if (!data) return next(createError(400, 'User wasnt updated'))
+    if (!data) return next(createError(400, "User wasn't updated"))
 
     res.status(204).send()
   } catch (err: any) {
@@ -71,7 +71,7 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
   }
 }
 
-export async function uploadUserAvatar(req: any, res: Response, next: NextFunction) {
+export async function uploadUserAvatar(req: Request, res: Response, next: NextFunction) {
   try {
     const { file } = req
 

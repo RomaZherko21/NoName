@@ -1,28 +1,15 @@
 export interface User {
-  id?: number
+  id: number
   name: string
   surname: string
   middle_name: string
   email: string
-  password?: string
+  password: string
   role: Roles
-  date_of_birth?: string
-  tel_number?: string
-  gender?: Gender
-  confirmPassword?: string
-  avatar?: string
-  connection_status?: ConnectionStatus | null
-}
-
-export interface Connection {
-  user_id: number
-  name: string
-  middle_name: string
-  surname: string
-  avatar: string
-  email: string
+  date_of_birth: string
   tel_number: string
-  status: string
+  gender: Gender
+  avatar: string
 }
 
 export enum Roles {

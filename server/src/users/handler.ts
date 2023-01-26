@@ -5,6 +5,7 @@ import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET } from 'shared/consts'
+import { User } from 'shared/types'
 
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
@@ -22,7 +23,7 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
     } = query
     const authorization_id = res.locals.authorization_id
 
-    const users = await sequelize.query(
+    const users: User[] = await sequelize.query(
       `SELECT users.*,
         user_connections.status as connection_status
       FROM users 
@@ -56,7 +57,7 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
   try {
     const { id } = params
 
-    const result = await sequelize.query(
+    const result: User[] = await sequelize.query(
       `SELECT *  FROM users 
         WHERE users.id=${id}`,
       {
@@ -91,7 +92,7 @@ export async function updateUserById({ body, params }: Request, res: Response, n
 
     const hash = await bcrypt.hash(body.password, 10)
 
-    const data = await UserModel.update(
+    await UserModel.update(
       {
         ...body,
         password: hash,
@@ -102,8 +103,6 @@ export async function updateUserById({ body, params }: Request, res: Response, n
         },
       }
     )
-
-    if (!data) return next(createError(400, 'User wasnt updated'))
 
     res.status(204).send()
   } catch (err: any) {

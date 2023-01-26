@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Grid,
   IconButton,
@@ -17,22 +18,21 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
-import { Spinner } from 'shared/ui'
-import { ConnectionStatus } from 'shared/types'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
+import { Spinner } from 'shared/ui'
+import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
-const Connections = () => {
+const SentConnections = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    ProfileModel.fetch({ isSent: true, isReceived: true, status: ConnectionStatus.accept })
+    ProfileModel.fetch({ isSent: true, isReceived: false })
   }, [])
 
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ p: 3 }}>
-        {t('page:connections')}
+        {t('page:sentConnections')}
       </Typography>
       <Divider />
       <Box sx={{ p: 3, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
@@ -69,6 +69,15 @@ const Connections = () => {
                       <Typography variant="body2" color="textSecondary">
                         {t('user:email')}: {item.email}
                       </Typography>
+                      <Button
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                        sx={{ mt: 2, width: 'fit-content' }}
+                        onClick={() => ProfileModel.removeConnectionRequest(item.user_id)}
+                      >
+                        {t('user:actions.cancelSending')}
+                      </Button>
                     </Stack>
                   </Box>
                   <IconButton aria-label="upload picture" component="label">
@@ -86,4 +95,4 @@ const Connections = () => {
   )
 }
 
-export default observer(Connections)
+export default observer(SentConnections)

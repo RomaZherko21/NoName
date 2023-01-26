@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import { NODE_API } from 'services'
-import { User } from 'shared/types'
+import { ConnectionStatus, User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { debounce } from '@mui/material'
@@ -34,6 +34,12 @@ class UsersModel {
 
   get users() {
     return this._users
+  }
+
+  async connectionRequest(id: number) {
+    await NODE_API.connection.update(id, ConnectionStatus.pending)
+
+    this.fetch()
   }
 
   async fetch(filters?: UserFilters) {

@@ -81,7 +81,12 @@ const Post = () => {
             src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
           />
           <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-            <TextField placeholder={t('actions.writeYourComment')} fullWidth multiline rows={3} />
+            <TextField
+              placeholder={t('user:actions.writeYourComment')}
+              fullWidth
+              multiline
+              rows={3}
+            />
             <Stack
               direction="row"
               sx={{ mt: 2 }}

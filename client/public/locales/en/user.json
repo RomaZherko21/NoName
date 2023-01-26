@@ -30,6 +30,10 @@
   "country": "Country",
   "zipAndPostalCode": "Zip / Postal code",
   "whatsOnYourMind": "Whats on your mind",
+  "moreInfo": "More info",
+  "yourFriend": "Your friend",
+  "userCanceledRequest": "User canceled request",
+  "requestPending": "Request pending",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -42,7 +46,13 @@
     "changePlan": "Change plan",
     "usingNow": "Using now",
     "cancel": "Cancel",
-    "upgradePlan": "Upgrade plan"
+    "upgradePlan": "Upgrade plan",
+    "searchName": "Search name..",
+    "cancelSending": "Сancel sending",
+    "accept": "Accept",
+    "writeYourComment": "Write your comment",
+    "sendRequest": "Send request",
+    "declain": "Declain"
   },
   "updates": {
     "product": {
