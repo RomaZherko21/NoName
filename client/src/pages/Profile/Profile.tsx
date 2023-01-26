@@ -19,8 +19,8 @@ import { Tabs } from 'shared/ui'
 import { useRootStore } from 'stores'
 import ProfileCover from 'assets/images/cover.jpg'
 
+import { FriendConnections, ReceivedConnections, SentConnections, Timeline } from './ui'
 import s from './Styles.module.scss'
-import { ReceivedConnections, SentConnections, Timeline } from './ui'
 
 function Profile() {
   const { t } = useTranslation()
@@ -76,6 +76,11 @@ function Profile() {
             <Tabs
               options={[
                 { label: 'Timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
+                {
+                  label: 'Friend Connections',
+                  to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
+                  Component: FriendConnections,
+                },
                 {
                   label: 'Sent Connections',
                   to: ROUTES.PROFILE_SENT_CONNECTIONS,

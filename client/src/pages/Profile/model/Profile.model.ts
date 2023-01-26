@@ -29,12 +29,20 @@ class ProfileModel {
     this.fetch({ isSent: false, isReceived: true })
   }
 
-  async fetch({ isSent, isReceived }: { isSent: boolean; isReceived: boolean }) {
+  async fetch({
+    isSent,
+    isReceived,
+    status = ConnectionStatus.pending,
+  }: {
+    isSent: boolean
+    isReceived: boolean
+    status?: ConnectionStatus
+  }) {
     try {
       this.loading.begin()
 
       const data = await NODE_API.connection.get({
-        status: ConnectionStatus.pending,
+        status: status,
         isReceived: isReceived,
         isSent: isSent,
       })
