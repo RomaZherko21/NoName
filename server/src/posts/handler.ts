@@ -6,6 +6,7 @@ import path from 'path'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
+import { Post } from 'shared/types'
 
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
   try {
@@ -21,26 +22,32 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
       order_type = ORDER_TYPE,
     } = query
 
-    let result = await sequelize.query(
-      `SELECT posts.*, users.avatar, COUNT(posts.id) as likes_count, JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users  FROM posts 
-          JOIN users ON posts.user_id = users.id 
-          JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+    let result: (Post & { liked_users: number[]; likes_count: number; avatar: string })[] =
+      await sequelize.query(
+        `SELECT 
+        posts.*,
+        users.avatar,
+        COUNT(posts.id) as likes_count,
+        JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users
+      FROM posts 
+        JOIN users ON posts.user_id = users.id 
+        JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
           
-          WHERE posts.id LIKE '%${id}%'
-          AND posts.name LIKE '%${name}%'
-          AND posts.description LIKE '%${description}%'
-          AND posts.created_at >= ${created_from}
-          AND posts.created_at <= ${created_to}
+        WHERE posts.id LIKE '%${id}%'
+        AND posts.name LIKE '%${name}%'
+        AND posts.description LIKE '%${description}%'
+        AND posts.created_at >= ${created_from}
+        AND posts.created_at <= ${created_to}
           
         GROUP BY posts.id
         ORDER BY posts.${order_by} ${order_type}
         LIMIT ${limit} OFFSET ${offset};`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    )
+        {
+          type: QueryTypes.SELECT,
+        }
+      )
 
-    result = result.map((item: any) => ({
+    result = result.map((item) => ({
       ...item,
       is_liked: item.liked_users.includes(res.locals.authorization_id),
       first_liked_users: item.liked_users.slice(0, 3),
@@ -58,12 +65,17 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
   try {
     const { id } = params
 
-    let [post]: any = await sequelize.query(
-      `SELECT posts.*, 
-          COUNT(posts.id) as likes_count, 
-          JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
+    let [post]: (Post & {
+      liked_users: number[]
+      likes_count: number
+      first_liked_users: number[]
+    })[] = await sequelize.query(
+      `SELECT 
+        posts.*, 
+        COUNT(posts.id) as likes_count, 
+        JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
       FROM posts 
-      JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+        JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
         
         GROUP BY posts.id
         HAVING posts.id=${id}
@@ -74,13 +86,14 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     )
 
     const comments: any = await sequelize.query(
-      `SELECT post_comments.*, 
-          users.avatar as user_avatar, 
-          users.name as user_name, 
-          users.surname  as user_surname, 
-          users.middle_name  as user_middle_name 
-        FROM post_comments 
-      JOIN users ON post_comments.user_id = users.id 
+      `SELECT 
+        post_comments.*, 
+        users.avatar as user_avatar, 
+        users.name as user_name, 
+        users.surname  as user_surname, 
+        users.middle_name  as user_middle_name 
+      FROM post_comments 
+        JOIN users ON post_comments.user_id = users.id 
 
         WHERE post_comments.post_id=${post.id}
 
@@ -126,10 +139,14 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
     const { id } = params
     const authorization_id = res.locals.authorization_id
 
-    const [result]: any = await sequelize.query(
-      `SELECT  post_id, user_id  from m2m_users_posts_likes
+    const [result]: { post_id: number; user_id: number }[] = await sequelize.query(
+      `SELECT  
+        post_id, 
+        user_id  
+      FROM m2m_users_posts_likes
 
-        WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${authorization_id} 
+        WHERE m2m_users_posts_likes.post_id=${id} 
+        AND m2m_users_posts_likes.user_id=${authorization_id} 
         `,
       {
         type: QueryTypes.SELECT,
@@ -139,9 +156,11 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
     // there is MySQL toggle query
     if (result) {
       await sequelize.query(
-        `DELETE  from m2m_users_posts_likes
+        `DELETE 
+        FROM m2m_users_posts_likes
   
-          WHERE m2m_users_posts_likes.post_id=${id} AND m2m_users_posts_likes.user_id=${authorization_id} 
+          WHERE m2m_users_posts_likes.post_id=${id} 
+          AND m2m_users_posts_likes.user_id=${authorization_id} 
           `,
         {
           type: QueryTypes.DELETE,
@@ -149,7 +168,8 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
       )
     } else {
       await sequelize.query(
-        `INSERT INTO  m2m_users_posts_likes(post_id, user_id)
+        `INSERT 
+        INTO  m2m_users_posts_likes(post_id, user_id)
         VALUES (${id}, ${authorization_id})
           `,
         {
