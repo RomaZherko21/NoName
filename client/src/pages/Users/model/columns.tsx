@@ -9,37 +9,48 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ManIcon from '@mui/icons-material/Man'
 import WomanIcon from '@mui/icons-material/Woman'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import PersonIcon from '@mui/icons-material/Person'
+import ScheduleSendIcon from '@mui/icons-material/ScheduleSend'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, Roles, User, Gender } from 'shared/types'
+import { TableColumn, Roles, User, Gender, ConnectionStatus } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { useRootStore } from 'stores'
 
 import UsersModel from './Users.model'
 import { UserForm, DeleteUserDialog } from '../ui'
 
-const ActionButtons = observer(({ user }: { user: User }) => {
+const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
+  const { user } = useRootStore()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
-      user={user}
+      user={data}
       onSubmit={(value: User) => {
-        if (user.id) {
-          UsersModel.update(value, user.id)
+        if (data.id) {
+          UsersModel.update(value, data.id)
           hideModal()
         }
       }}
     />
   ))
 
-  const removeUser = useCallback(() => user.id && UsersModel.remove(user.id), [user.id])
+  const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
 
   const [showConfirmationModal] = useDialog(
     'notification:removeConfirm',
     (onClose) => <DeleteUserDialog onSubmit={removeUser} onClose={onClose} />,
     true
   )
+
+  function sendConnectionRequest() {
+    if (data.id) {
+      UsersModel.connectionRequest(data.id)
+    }
+  }
 
   return (
     <>
@@ -53,6 +64,34 @@ const ActionButtons = observer(({ user }: { user: User }) => {
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
       </Tooltip>
+      {data.id !== user.id && data.connection_status === null && (
+        <Tooltip title={t('user:actions.sendRequest')} placement="top">
+          <IconButton size="small" onClick={sendConnectionRequest}>
+            <PersonAddIcon fontSize="inherit" color="secondary" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {data.id !== user.id && data.connection_status === ConnectionStatus.accept && (
+        <Tooltip title={t('user:yourFriend')} placement="top">
+          <IconButton size="small">
+            <PersonIcon fontSize="inherit" color="secondary" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {data.id !== user.id && data.connection_status === ConnectionStatus.decline && (
+        <Tooltip title={t('user:userCanceledRequest')} placement="top">
+          <IconButton size="small">
+            <PersonIcon fontSize="inherit" color="error" />
+          </IconButton>
+        </Tooltip>
+      )}
+      {data.id !== user.id && data.connection_status === ConnectionStatus.pending && (
+        <Tooltip title={t('user:requestPending')} placement="top">
+          <IconButton size="small">
+            <ScheduleSendIcon fontSize="inherit" />
+          </IconButton>
+        </Tooltip>
+      )}
     </>
   )
 })

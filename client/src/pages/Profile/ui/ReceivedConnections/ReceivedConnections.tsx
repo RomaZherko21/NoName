@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Grid,
   IconButton,
@@ -22,17 +23,17 @@ import { ConnectionStatus } from 'shared/types'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
 
-const Connections = () => {
+const ReceivedConnections = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    ProfileModel.fetch({ isSent: true, isReceived: true, status: ConnectionStatus.accept })
+    ProfileModel.fetch({ isSent: false, isReceived: true })
   }, [])
 
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ p: 3 }}>
-        {t('page:connections')}
+        {t('page:receivedConnections')}
       </Typography>
       <Divider />
       <Box sx={{ p: 3, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
@@ -69,6 +70,36 @@ const Connections = () => {
                       <Typography variant="body2" color="textSecondary">
                         {t('user:email')}: {item.email}
                       </Typography>
+                      <Box display="flex" alignItems="center" gap={1}>
+                        <Button
+                          color="secondary"
+                          variant="outlined"
+                          size="small"
+                          sx={{ mt: 1 }}
+                          onClick={() =>
+                            ProfileModel.updateConnectionStatus({
+                              id: item.user_id,
+                              status: ConnectionStatus.accept,
+                            })
+                          }
+                        >
+                          {t('user:actions.accept')}
+                        </Button>
+                        <Button
+                          color="error"
+                          variant="outlined"
+                          size="small"
+                          sx={{ mt: 1 }}
+                          onClick={() =>
+                            ProfileModel.updateConnectionStatus({
+                              id: item.user_id,
+                              status: ConnectionStatus.decline,
+                            })
+                          }
+                        >
+                          {t('user:actions.declain')}
+                        </Button>
+                      </Box>
                     </Stack>
                   </Box>
                   <IconButton aria-label="upload picture" component="label">
@@ -86,4 +117,4 @@ const Connections = () => {
   )
 }
 
-export default observer(Connections)
+export default observer(ReceivedConnections)

@@ -11,6 +11,18 @@ export interface User {
   gender?: Gender
   confirmPassword?: string
   avatar?: string
+  connection_status?: ConnectionStatus | null
+}
+
+export interface Connection {
+  user_id: number
+  name: string
+  middle_name: string
+  surname: string
+  avatar: string
+  email: string
+  tel_number: string
+  status: string
 }
 
 export enum Roles {

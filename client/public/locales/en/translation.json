@@ -16,8 +16,8 @@
     "thisYear": "This year",
     "youMadeAnExtra": "You made an extra",
     "connections": "Connections",
-    "filters": "Filters",
-    "clearAll": "Clear All"
+    "clearAll": "Clear all",
+    "filters": "Filters"
   },
   "actions": {
     "add": "Add",
@@ -40,8 +40,7 @@
     "sendInvite": "Send Invite",
     "copyLink": "Copy link",
     "share": "Share",
-    "linkCopied": "Link copied",
-    "writeYourComment": "Write your comment"
+    "linkCopied": "Link copied"
   },
   "fields": {
     "name": "Name",
