@@ -10,7 +10,7 @@ import { log } from 'shared/helpers'
 
 import router from './routes'
 
-const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, NODE_API_HOST, NODE_API_PORT } = process.env
+const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT_INNER } = process.env
 
 const app = express()
 const corsOptions = {
@@ -24,17 +24,17 @@ app.use(cors())
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/node-api/uploads', express.static(path.join('uploads')))
+app.use('/api/uploads', express.static(path.join('uploads')))
 
 app.use(useAuth)
 
-app.use('/node-api', router)
+app.use('/api', router)
 
 sequelize
   .sync()
   .then(() => {
-    app.listen(Number(NODE_API_PORT), String(NODE_API_HOST), () => {
-      log.positive(`Server has been started: ${NODE_API_HOST}:${NODE_API_PORT}`)
+    app.listen(Number(SERVER_PORT_INNER), String(SERVER_HOST), () => {
+      log.positive(`Server has been started: ${SERVER_HOST}:${SERVER_PORT_INNER}`)
     })
   })
   .catch((err: ValidationErrorItem) => log.negative(`Server has not been started: ${err.message}`))

@@ -1,6 +1,7 @@
 const { REACT_APP_SERVER_API, REACT_APP_SERVER_GO_API } = process.env
 
-export const NODE_API_URL = REACT_APP_SERVER_API
+// export const NODE_API_URL = REACT_APP_SERVER_API
+export const NODE_API_URL = 'http://localhost/api'
 export const GO_API_URL = REACT_APP_SERVER_GO_API
 
 export const NODE_API_USER_AVATAR_URL = `${NODE_API_URL}/uploads/avatar`

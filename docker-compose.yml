@@ -9,9 +9,10 @@ x-my-sql-variables: &my-sql-variables
   MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
 x-node-api-variables: &node-api-variables
-  NODE_API_PROTOCOL: ${NODE_API_PROTOCOL}
-  NODE_API_HOST: ${NODE_API_HOST}
-  NODE_API_PORT: ${NODE_API_PORT}
+  SERVER_PROTOCOL: ${SERVER_PROTOCOL}
+  SERVER_HOST: ${SERVER_HOST}
+  SERVER_PORT_INNER: ${SERVER_PORT_INNER}
+  SERVER_PORT_OUTER: ${SERVER_PORT_OUTER}
   ACCESS_TOKEN_EXPIRED_TIME: ${ACCESS_TOKEN_EXPIRED_TIME}
   TOKEN_SECRET: ${TOKEN_SECRET}
 
@@ -34,18 +35,6 @@ services:
     environment:
       <<: *my-sql-variables
 
-  nginx:
-    container_name: nginx
-    build:
-      context: ./nginx
-    depends_on:
-      - node_api
-      - go_api
-      - client
-    restart: always
-    ports:
-      - ${NGINX_PORT_OUTER}:80
-
   node_api:
     container_name: node_api
     build:
@@ -56,22 +45,11 @@ services:
       - ./server:/app
     depends_on:
       - mysql_db
+    ports:
+      - ${SERVER_PORT_OUTER}:${SERVER_PORT_INNER}
     environment:
       <<: [*my-sql-variables, *node-api-variables, *client-variables]
       MYSQL_HOST_IP: mysql_db
-  
-  go_api:
-    container_name: go_api
-    build:
-      context: ./goApi
-      target: go_api
-    depends_on:
-      - mysql_db
-    ports:
-      - ${GO_API_PORT_OUTER}:${GO_API_PORT_INNER}
-    environment:
-      <<: *my-sql-variables
-      GO_API_PORT_INNER: ${GO_API_PORT_INNER}
 
   client:
     container_name: client
@@ -82,8 +60,11 @@ services:
       - client_volume:/app/node_modules
       - ./client:/app
     stdin_open: true
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      <<: [*client-variables]
+      CHOKIDAR_USEPOLLING: true
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -100,4 +81,3 @@ volumes:
   mySQL_db_volume:
   client_volume:
   node_api_volume:
-  go_api_volume:
