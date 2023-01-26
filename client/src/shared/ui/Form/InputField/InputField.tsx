@@ -8,10 +8,11 @@ interface Props {
   label: string
   type?: string
   multiline?: boolean
+  rows?: number
   icon?: JSX.Element
 }
 
-const InputField = ({ field, label, type, multiline = false, icon }: Props) => {
+const InputField = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<any>()
@@ -28,6 +29,7 @@ const InputField = ({ field, label, type, multiline = false, icon }: Props) => {
       error={touched[field] && Boolean(errors[field])}
       helperText={touched[field] && errors[field]}
       multiline={multiline}
+      rows={rows}
       InputProps={
         icon && {
           startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,

@@ -12,6 +12,7 @@ interface Props {
   }>
   ActionButton: (args: any) => ReactNode
   id?: number
+  post_id?: number
 }
 
 const PopupMenu = ({ config, ActionButton, id }: Props) => {

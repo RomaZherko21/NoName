@@ -1,5 +1,5 @@
 import { getQueryParams } from 'shared/helpers'
-import { Post, User } from 'shared/types'
+import { Comment, Post, User } from 'shared/types'
 
 import fetch from './fetch'
 
@@ -29,6 +29,22 @@ export const create = async (post: any) => {
 
   return fetch.post(`${ENDPOINT_BASE}`, formData)
 }
+
+export const createComment = (id: number, comment: any) =>
+  fetch.post<Comment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
+
+export const editComment = ({
+  post_id,
+  comment_id,
+  comment,
+}: {
+  post_id: number
+  comment_id: number
+  comment: { created_at: number; message: string }
+}) => fetch.put<Comment>(`${ENDPOINT_BASE}/${post_id}/comments/${comment_id}`, comment)
+
+export const deleteComment = (post_id: number, id: number) =>
+  fetch.delete(`${ENDPOINT_BASE}/${post_id}/comments/${id}`)
 
 export const remove = async (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)
 

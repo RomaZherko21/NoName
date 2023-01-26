@@ -244,8 +244,6 @@ export async function updatePostComment(
     const { post_id, comment_id } = params
     const authorization_id = res.locals.authorization_id
 
-    await PostCommentModel.destroy({})
-
     await PostCommentModel.update(
       {
         ...body,

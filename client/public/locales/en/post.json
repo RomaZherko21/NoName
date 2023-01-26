@@ -1,6 +1,7 @@
 {
   "name": "Name",
   "description": "Description",
+  "comment": "Comment",
   "actions": {
     "selectFile": "Select file",
     "readMore": "Read more..",
