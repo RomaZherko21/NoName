@@ -106,7 +106,7 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
           variant="outlined"
           startIcon={<ClearAllIcon />}
         >
-          {t('user:clearAll')}
+          {t('common:clearAll')}
         </Button>
       </Box>
     </Drawer>

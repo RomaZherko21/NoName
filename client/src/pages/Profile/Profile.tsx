@@ -19,7 +19,7 @@ import { Tabs } from 'shared/ui'
 import { useRootStore } from 'stores'
 import ProfileCover from 'assets/images/cover.jpg'
 
-import { FriendConnections, ReceivedConnections, SentConnections, Timeline } from './ui'
+import { Connections, ReceivedConnections, SentConnections, Timeline } from './ui'
 import s from './Styles.module.scss'
 
 function Profile() {
@@ -79,7 +79,7 @@ function Profile() {
                 {
                   label: 'Friend Connections',
                   to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
-                  Component: FriendConnections,
+                  Component: Connections,
                 },
                 {
                   label: 'Sent Connections',

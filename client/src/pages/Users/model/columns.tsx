@@ -22,23 +22,23 @@ import { useRootStore } from 'stores'
 import UsersModel from './Users.model'
 import { UserForm, DeleteUserDialog } from '../ui'
 
-const ActionButtons = observer(({ user: userr }: { user: User }) => {
+const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
   const { user } = useRootStore()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
-      user={userr}
+      user={data}
       onSubmit={(value: User) => {
-        if (userr.id) {
-          UsersModel.update(value, userr.id)
+        if (data.id) {
+          UsersModel.update(value, data.id)
           hideModal()
         }
       }}
     />
   ))
 
-  const removeUser = useCallback(() => userr.id && UsersModel.remove(userr.id), [userr.id])
+  const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
 
   const [showConfirmationModal] = useDialog(
     'notification:removeConfirm',
@@ -47,8 +47,8 @@ const ActionButtons = observer(({ user: userr }: { user: User }) => {
   )
 
   function sendConnectionRequest() {
-    if (userr.id) {
-      UsersModel.connectionRequest(userr.id)
+    if (data.id) {
+      UsersModel.connectionRequest(data.id)
     }
   }
 
@@ -64,28 +64,28 @@ const ActionButtons = observer(({ user: userr }: { user: User }) => {
           <DeleteIcon color="error" fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      {userr.id !== user.id && userr.connection_status === null && (
+      {data.id !== user.id && data.connection_status === null && (
         <Tooltip title={t('user:actions.sendRequest')} placement="top">
           <IconButton size="small" onClick={sendConnectionRequest}>
             <PersonAddIcon fontSize="inherit" color="secondary" />
           </IconButton>
         </Tooltip>
       )}
-      {userr.id !== user.id && userr.connection_status === ConnectionStatus.accept && (
+      {data.id !== user.id && data.connection_status === ConnectionStatus.accept && (
         <Tooltip title={t('user:yourFriend')} placement="top">
           <IconButton size="small">
             <PersonIcon fontSize="inherit" color="secondary" />
           </IconButton>
         </Tooltip>
       )}
-      {userr.id !== user.id && userr.connection_status === ConnectionStatus.decline && (
+      {data.id !== user.id && data.connection_status === ConnectionStatus.decline && (
         <Tooltip title={t('user:userCanceledRequest')} placement="top">
           <IconButton size="small">
             <PersonIcon fontSize="inherit" color="error" />
           </IconButton>
         </Tooltip>
       )}
-      {userr.id !== user.id && userr.connection_status === ConnectionStatus.pending && (
+      {data.id !== user.id && data.connection_status === ConnectionStatus.pending && (
         <Tooltip title={t('user:requestPending')} placement="top">
           <IconButton size="small">
             <ScheduleSendIcon fontSize="inherit" />

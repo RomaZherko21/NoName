@@ -1,4 +1,4 @@
 export { ReceivedConnections } from './ReceivedConnections'
-export { FriendConnections } from './FriendConnections'
+export { Connections } from './Connections'
 export { SentConnections } from './SentConnections'
 export { Timeline } from './Timeline'

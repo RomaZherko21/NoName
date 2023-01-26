@@ -22,7 +22,7 @@ import { ConnectionStatus } from 'shared/types'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
 
-const FriendConnections = () => {
+const Connections = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const FriendConnections = () => {
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ p: 3 }}>
-        {t('page:friendConnections')}
+        {t('page:connections')}
       </Typography>
       <Divider />
       <Box sx={{ p: 3, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
@@ -86,4 +86,4 @@ const FriendConnections = () => {
   )
 }
 
-export default observer(FriendConnections)
+export default observer(Connections)
