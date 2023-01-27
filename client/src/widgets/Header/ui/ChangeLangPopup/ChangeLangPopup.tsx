@@ -23,7 +23,7 @@ function ChangeLangPopup() {
       ActionButton={(btnProps: any) => (
         <Tooltip title="Change language">
           <IconButton>
-            <img width="20px" alt="uk" src={ukIcon} {...btnProps} />
+            <img width="24px" alt="en" src={ukIcon} {...btnProps} />
           </IconButton>
         </Tooltip>
       )}

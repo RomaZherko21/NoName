@@ -23,18 +23,16 @@ const ListItemLink = ({ icon, primary, to }: ListItemLinkProps) => {
   const active = location.pathname.includes(to)
 
   return (
-    <li>
-      <ListItem
-        sx={{ backgroundColor: active ? 'action.focus' : 'inherit' }}
-        button
-        component={renderLink}
-      >
-        {icon && (
-          <ListItemIcon sx={{ color: active ? 'secondary.main' : 'inherit' }}>{icon}</ListItemIcon>
-        )}
-        <ListItemText sx={{ color: active ? 'secondary.main' : 'inherit' }} primary={primary} />
-      </ListItem>
-    </li>
+    <ListItem
+      sx={{ backgroundColor: active ? 'action.focus' : 'inherit', p: 0.6, borderRadius: 1 }}
+      button
+      component={renderLink}
+    >
+      {icon && (
+        <ListItemIcon sx={{ color: active ? 'secondary.main' : 'inherit' }}>{icon}</ListItemIcon>
+      )}
+      <ListItemText sx={{ color: active ? 'secondary.main' : 'inherit' }} primary={primary} />
+    </ListItem>
   )
 }
 

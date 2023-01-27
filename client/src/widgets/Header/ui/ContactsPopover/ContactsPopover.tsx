@@ -15,7 +15,7 @@ import {
 import ImageIcon from '@mui/icons-material/Image'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { Popover } from 'shared/ui'
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined'
+import { HiOutlineUsers } from 'react-icons/hi'
 
 const CONTACTS = [
   {
@@ -39,10 +39,14 @@ function ContactsPopover() {
 
   return (
     <Popover
-      activateElement={(open, handleOpen) => (
+      activateElement={(_, handleOpen) => (
         <Tooltip title="Contacts">
-          <IconButton color={open ? 'primary' : 'default'} onClick={handleOpen}>
-            <PeopleAltOutlinedIcon fontSize="medium" />
+          <IconButton
+            size="medium"
+            sx={{ color: (theme) => theme.palette.grey[500] }}
+            onClick={handleOpen}
+          >
+            <HiOutlineUsers />
           </IconButton>
         </Tooltip>
       )}

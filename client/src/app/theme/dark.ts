@@ -59,12 +59,13 @@ const darkTheme = {
       200: '#E5E7EB',
       300: '#D1D5DB',
       400: '#9CA3AF',
-      500: '#6B7280',
+      500: '#6c737f',
       600: '#4B5563',
       700: '#374151',
       800: '#1F2937',
       900: '#111827',
     },
+    divider: 'rgb(45, 55, 72)',
   },
   components: {
     MuiOutlinedInput: {

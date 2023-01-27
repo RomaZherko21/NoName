@@ -1,4 +1,4 @@
-import { Tooltip } from '@mui/material'
+import { IconButton } from '@mui/material'
 
 import { ListItemLink } from 'shared/ui'
 
@@ -11,9 +11,9 @@ interface AsideItemLinkProps {
 const AsideItemLink = ({ icon, title, to }: AsideItemLinkProps) => (
   <ListItemLink
     icon={
-      <Tooltip title={title} placement="right">
+      <IconButton sx={{ color: (theme) => theme.palette.grey[500], fontSize: '20px' }}>
         {icon}
-      </Tooltip>
+      </IconButton>
     }
     primary={title}
     to={to}

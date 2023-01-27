@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import AddBoxIcon from '@mui/icons-material/AddBox'
-import { Badge, Box, Drawer, List } from '@mui/material'
-import GroupIcon from '@mui/icons-material/Group'
-import NewspaperIcon from '@mui/icons-material/Newspaper'
+import { Box, Drawer, List } from '@mui/material'
+import { HiOutlineUsers } from 'react-icons/hi'
+import { IoNewspaperOutline } from 'react-icons/io5'
 
 import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
 
 import AsideItemLink from './AsideItemLink'
+
+import logo from 'assets/images/logo/white-transparent-logo.svg'
 
 const Aside = () => {
   const { t } = useTranslation()
@@ -25,24 +26,22 @@ const Aside = () => {
             boxSizing: 'border-box',
             width: DRAWER_WIDTH,
             backgroundColor: 'background.rare',
+            p: 2,
           },
         }}
         open
       >
-        <List sx={{ '& .MuiListItemIcon-root': { minWidth: 52 } }}>
-          <AsideItemLink icon={<GroupIcon />} title={t('page:users')} to={ROUTES.USERS} />
+        <img
+          alt="Under development"
+          src={logo}
+          style={{
+            width: 120,
+          }}
+        />
+        <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <AsideItemLink icon={<HiOutlineUsers />} title={t('page:users')} to={ROUTES.USERS} />
 
-          <AsideItemLink icon={<NewspaperIcon />} title={t('page:posts')} to={ROUTES.POSTS} />
-
-          <AsideItemLink
-            icon={
-              <Badge badgeContent={10} color="secondary" max={999}>
-                <AddBoxIcon />
-              </Badge>
-            }
-            title={t('page:reports')}
-            to={ROUTES.NOT_FOUND}
-          />
+          <AsideItemLink icon={<IoNewspaperOutline />} title={t('page:posts')} to={ROUTES.POSTS} />
         </List>
       </Drawer>
     </Box>

@@ -12,8 +12,8 @@ import {
   IconButton,
   ListSubheader,
 } from '@mui/material'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
+import { MdOutlineNotificationsNone } from 'react-icons/md'
 
 import { Popover } from 'shared/ui'
 
@@ -56,11 +56,15 @@ function NotificationsPopover() {
 
   return (
     <Popover
-      activateElement={(open, handleOpen) => (
+      activateElement={(_, handleOpen) => (
         <Tooltip title="Notifications">
-          <IconButton color={open ? 'primary' : 'default'} onClick={handleOpen}>
+          <IconButton
+            size="medium"
+            sx={{ color: (theme) => theme.palette.grey[500] }}
+            onClick={handleOpen}
+          >
             <Badge badgeContent={totalUnRead} color="error" max={999}>
-              <NotificationsIcon fontSize="medium" />
+              <MdOutlineNotificationsNone />
             </Badge>
           </IconButton>
         </Tooltip>
