@@ -1,9 +1,9 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      NODE_API_PROTOCOL: string
-      NODE_API_HOST: string
-      NODE_API_PORT: string
+      SERVER_PROTOCOL: string
+      SERVER_HOST: string
+      SERVER_PORT_INNER: string
 
       CLIENT_PROTOCOL: string
       CLIENT_HOST: string
