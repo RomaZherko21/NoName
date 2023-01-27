@@ -12,10 +12,10 @@ import {
   IconButton,
   ListItem,
 } from '@mui/material'
-import GroupIcon from '@mui/icons-material/Group'
 import ImageIcon from '@mui/icons-material/Image'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { Popover } from 'shared/ui'
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined'
 
 const CONTACTS = [
   {
@@ -41,8 +41,8 @@ function ContactsPopover() {
     <Popover
       activateElement={(open, handleOpen) => (
         <Tooltip title="Contacts">
-          <IconButton sx={{ ml: 1 }} color={open ? 'primary' : 'default'} onClick={handleOpen}>
-            <GroupIcon fontSize="medium" />
+          <IconButton color={open ? 'primary' : 'default'} onClick={handleOpen}>
+            <PeopleAltOutlinedIcon fontSize="medium" />
           </IconButton>
         </Tooltip>
       )}

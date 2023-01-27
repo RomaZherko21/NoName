@@ -1,25 +1,32 @@
 import { observer } from 'mobx-react-lite'
+import { Box, Toolbar } from '@mui/material'
 
 import { Aside, Header } from 'widgets'
-import { useBoolState } from 'shared/hooks'
-
-import styles from './Layout.module.sass'
+import { DRAWER_WIDTH } from 'shared/consts'
 
 interface Props {
   children: JSX.Element
 }
 
 const Layout = ({ children }: Props) => {
-  const [isOpenMenu, , , toggleMenu] = useBoolState(false)
-
   return (
-    <div className={styles.root}>
-      <Header className={styles.header} toggleMenu={toggleMenu} />
+    <Box sx={{ display: 'flex' }}>
+      <Header />
 
-      <Aside className={styles.aside} isOpen={isOpenMenu} />
+      <Aside />
 
-      <div className={styles.content}>{children}</div>
-    </div>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` },
+        }}
+      >
+        <Toolbar />
+        {children}
+      </Box>
+    </Box>
   )
 }
 

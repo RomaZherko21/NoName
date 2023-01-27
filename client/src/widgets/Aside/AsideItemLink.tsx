@@ -4,21 +4,16 @@ import { ListItemLink } from 'shared/ui'
 
 interface AsideItemLinkProps {
   icon: JSX.Element
-  isOpen: boolean
   title: string
   to: string
 }
 
-const AsideItemLink = ({ icon, title, to, isOpen }: AsideItemLinkProps) => (
+const AsideItemLink = ({ icon, title, to }: AsideItemLinkProps) => (
   <ListItemLink
     icon={
-      isOpen ? (
-        icon
-      ) : (
-        <Tooltip title={title} placement="right">
-          {icon}
-        </Tooltip>
-      )
+      <Tooltip title={title} placement="right">
+        {icon}
+      </Tooltip>
     }
     primary={title}
     to={to}

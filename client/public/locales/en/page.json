@@ -1,8 +1,5 @@
 {
   "users": "Users",
-  "books": "Books",
-  "book": "Book",
-  "newBook": "New book",
   "posts": "Posts",
   "post": "Post",
   "profile": "Profile",
@@ -10,9 +7,5 @@
   "sentConnections": "Sent Connections",
   "receivedConnections": "Received Connections",
   "account": "Account",
-  "subscribers": "Subscribers",
-  "subscriber": "Subscriber",
-  "subscribtions": "Subscribtions",
-  "libraryStatistics": "Library statistics",
   "404": "404 | Page not found"
 }

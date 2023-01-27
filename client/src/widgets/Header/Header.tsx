@@ -1,32 +1,27 @@
 import { observer } from 'mobx-react-lite'
-import { IconButton, AppBar, Toolbar, Box } from '@mui/material'
-import ListIcon from '@mui/icons-material/List'
+import { AppBar, Toolbar, Box } from '@mui/material'
+
+import { DRAWER_WIDTH } from 'shared/consts'
 
 import { ProfileMenuPopover, ChangeLangPopup, NotificationsPopover, ContactsPopover } from './ui'
 
-interface Props {
-  className?: string
-  toggleMenu: () => void
-}
-
-function Header({ className, toggleMenu }: Props) {
+function Header() {
   return (
     <AppBar
       sx={{
-        backgroundColor: 'background.paper',
+        backgroundColor: 'rgba(14, 19, 32, 0.8)',
+        width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+        ml: { sm: `${DRAWER_WIDTH}px` },
+        backdropFilter: 'blur(6px)',
+        boxShadow: 'none',
       }}
-      position="static"
-      className={className}
+      position="fixed"
     >
-      <Toolbar disableGutters sx={{ px: 2, py: 0, justifyContent: 'space-between' }}>
-        <IconButton edge="start" color="default" aria-label="menu" onClick={toggleMenu}>
-          <ListIcon />
-        </IconButton>
-
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Toolbar disableGutters sx={{ px: 2, py: 0, justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
           <ChangeLangPopup />
-          <ContactsPopover />
           <NotificationsPopover />
+          <ContactsPopover />
           <ProfileMenuPopover />
         </Box>
       </Toolbar>
