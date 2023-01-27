@@ -68,15 +68,12 @@ function ProfileMenuPopover() {
     <Popover
       activateElement={(open, handleOpen) => (
         <ButtonBase onClick={handleOpen}>
-          <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
+          <Stack>
             <Avatar
               alt="User avatar"
               sx={{ cursor: 'pointer' }}
               src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
             />
-            <Typography variant="subtitle2" color="textPrimary">
-              {user.name} {user.surname}
-            </Typography>
           </Stack>
         </ButtonBase>
       )}

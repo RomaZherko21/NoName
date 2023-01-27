@@ -9,8 +9,9 @@ const darkTheme = {
       disabled: 'rgba(55, 65, 81, 0.26)',
     },
     background: {
-      default: '#0B0F19',
-      paper: '#111827',
+      default: '#0E1320',
+      paper: '#111927',
+      rare: '#1C2536',
     },
     primary: {
       main: '#7582EB',
