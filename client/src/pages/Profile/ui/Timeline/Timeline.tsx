@@ -23,8 +23,11 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
+import { ProfileModel } from 'pages/Profile/model'
+import { Spinner } from 'shared/ui'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { useRootStore } from 'stores'
+
 import { Post } from './ui'
 
 const Timeline = () => {
@@ -106,7 +109,15 @@ const Timeline = () => {
             </Stack>
           </Stack>
         </Paper>
-        <Post />
+        {ProfileModel.loading.has ? (
+          <Spinner />
+        ) : (
+          <>
+            {ProfileModel.posts.map((post) => (
+              <Post post={post} />
+            ))}
+          </>
+        )}
       </Grid>
     </Grid>
   )

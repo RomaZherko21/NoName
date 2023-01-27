@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import {
@@ -18,13 +19,20 @@ import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { Tabs } from 'shared/ui'
 import { useRootStore } from 'stores'
 import ProfileCover from 'assets/images/cover.jpg'
+import { PostsFilters } from 'pages/Posts/model'
 
 import { Connections, ReceivedConnections, SentConnections, Timeline } from './ui'
 import s from './Styles.module.scss'
+import { ProfileModel } from './model'
 
 function Profile() {
   const { t } = useTranslation()
   const { user } = useRootStore()
+  const [filters] = useState<PostsFilters>({ user_id: user.id })
+
+  useEffect(() => {
+    ProfileModel.fetchPosts({ filters })
+  }, [filters])
 
   return (
     <>
@@ -77,7 +85,7 @@ function Profile() {
               options={[
                 { label: 'Timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
                 {
-                  label: 'Friend Connections',
+                  label: 'Connections',
                   to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
                   Component: Connections,
                 },

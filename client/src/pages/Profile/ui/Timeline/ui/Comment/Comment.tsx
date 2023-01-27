@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, Typography, Stack, Avatar, IconButton } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
@@ -9,6 +9,7 @@ import { useRootStore } from 'stores'
 import { PopupMenu } from 'shared/ui'
 
 import { getCommentPopupConfig } from './CommentPopupConfig'
+import { PostsFilters } from 'pages/Posts/model'
 
 interface Props {
   comment: CommentT
@@ -16,9 +17,17 @@ interface Props {
 
 function Comment({ comment }: Props) {
   const { user } = useRootStore()
+  const [filters] = useState<PostsFilters>({ user_id: user.id })
+
   const popupConfig = useMemo(
-    () => getCommentPopupConfig(comment.id, comment.message),
-    [comment.id, comment.message]
+    () =>
+      getCommentPopupConfig({
+        post_id: comment.post_id,
+        comment_id: comment.id,
+        comment_value: comment.message,
+        filters: filters,
+      }),
+    [comment.id, comment.message, filters, comment.post_id]
   )
 
   return (

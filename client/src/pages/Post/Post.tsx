@@ -120,9 +120,11 @@ function Post() {
               <Box pl={4} pr={4} mb={4}>
                 <Divider sx={{ width: '100%', borderColor: (theme) => theme.palette.grey[700] }} />
               </Box>
-              {PostModel.comments.map((comment) => (
-                <Comment comment={comment} />
-              ))}
+              <Box m={4}>
+                {PostModel.comments.map((comment) => (
+                  <Comment comment={comment} />
+                ))}
+              </Box>
             </>
           )}
           <Box pl={4} pr={4} mt={4}>
@@ -136,7 +138,7 @@ function Post() {
             />
             <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
               <InputFilter
-                placeholder="actions.writeYourComment"
+                placeholder="user:actions.writeYourComment"
                 multiline={true}
                 rows={3}
                 value={PostModel.comment}
