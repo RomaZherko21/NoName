@@ -13,6 +13,7 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
+        
         <title>{t('page:404')}</title>
         <meta name="description" content={t('page:404')} />
       </Helmet>
