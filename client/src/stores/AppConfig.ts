@@ -1,9 +1,9 @@
 interface AppConfigValues {
-  NODE_API_URL: string
+  API_URL: string
 }
 
 class AppConfig implements AppConfigValues {
-  NODE_API_URL = ''
+  API_URL = ''
 
   init() {}
 }

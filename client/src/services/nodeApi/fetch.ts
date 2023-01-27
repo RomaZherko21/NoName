@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
-import { NODE_API_URL } from 'shared/consts'
+import { API_URL } from 'shared/consts'
 
 import {
   extractDataInterceptor,
@@ -22,7 +22,7 @@ export class FetchService {
     this.instance.interceptors.request.use(setAuthInterceptor)
     this.instance.interceptors.response.use(extractDataInterceptor)
     this.instance.interceptors.response.use(undefined, unauthorizedInterceptor)
-    this.instance.defaults.baseURL = NODE_API_URL
+    this.instance.defaults.baseURL = API_URL
   }
 
   public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {

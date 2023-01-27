@@ -1,22 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import {
-  Users,
-  Books,
-  Book,
-  Profile,
-  Posts,
-  NotFound,
-  Author,
-  Subscribers,
-  Subscribtions,
-  Subscriber,
-  LibraryStatistics,
-  Account,
-  NewBook,
-  Post,
-} from 'pages'
+import { Users, Profile, Posts, NotFound, Account, Post } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 function Router() {
@@ -24,22 +9,10 @@ function Router() {
     <Routes>
       <Route path={ROUTES.USERS} element={<Users />} />
 
-      <Route path={ROUTES.BOOKS}>
-        <Route path={ROUTES.BOOKS} element={<Books />} />
-        <Route path={ROUTES.BOOK} element={<Book />} />
-        <Route path={ROUTES.BOOK_NEW} element={<NewBook />} />
-      </Route>
-
       <Route path={ROUTES.POSTS}>
         <Route path={ROUTES.POSTS} element={<Posts />} />
         <Route path={ROUTES.POST} element={<Post />} />
       </Route>
-
-      <Route path={ROUTES.AUTHOR} element={<Author />} />
-      <Route path={ROUTES.SUBSCRIBERS} element={<Subscribers />} />
-      <Route path={ROUTES.SUBSCRIBER} element={<Subscriber />} />
-      <Route path={ROUTES.SUBSCRIBTIONS} element={<Subscribtions />} />
-      <Route path={ROUTES.LIBRARY_STATISTICS} element={<LibraryStatistics />} />
 
       <Route path={ROUTES.PROFILE}>
         <Route path={ROUTES.PROFILE_TIMELINE} element={<Profile />} />

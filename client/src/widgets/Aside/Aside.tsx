@@ -5,10 +5,6 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Badge, Drawer, List } from '@mui/material'
 import GroupIcon from '@mui/icons-material/Group'
 import NewspaperIcon from '@mui/icons-material/Newspaper'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn'
-import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import { ROUTES } from 'shared/consts'
 
@@ -55,37 +51,9 @@ const Aside = ({ className, isOpen }: AsideProps) => {
         />
 
         <AsideItemLink
-          icon={<MenuBookIcon />}
-          title={t('page:books')}
-          to={ROUTES.BOOKS}
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
           icon={<NewspaperIcon />}
           title={t('page:posts')}
           to={ROUTES.POSTS}
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<AssignmentIndIcon />}
-          title={t('page:subscribers')}
-          to={ROUTES.SUBSCRIBERS}
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<AssignmentTurnedInIcon />}
-          title={t('page:subscribtions')}
-          to={ROUTES.SUBSCRIBTIONS}
-          isOpen={isOpen}
-        />
-
-        <AsideItemLink
-          icon={<QueryStatsIcon />}
-          title={t('page:libraryStatistics')}
-          to={ROUTES.LIBRARY_STATISTICS}
           isOpen={isOpen}
         />
 

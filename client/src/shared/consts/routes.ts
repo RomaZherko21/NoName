@@ -1,17 +1,8 @@
 export const ROUTES = {
   USERS: '/users',
 
-  BOOKS: '/books',
-  BOOK: '/books/:id',
-  BOOK_NEW: '/books/new',
-
   POSTS: '/posts',
   POST: '/posts/:id',
-
-  AUTHOR: '/authors/:id',
-  SUBSCRIBERS: '/subscribers',
-  SUBSCRIBER: '/subscribers/:id',
-  SUBSCRIBTIONS: '/subscribtions',
 
   PROFILE: '/profile',
   PROFILE_TIMELINE: '/profile/timeline',
@@ -26,6 +17,5 @@ export const ROUTES = {
   ACCOUNT_NOTIFICATIONS: '/account/notifications',
   ACCOUNT_SECURITY: '/account/security',
 
-  LIBRARY_STATISTICS: '/library-statistics',
   NOT_FOUND: '/notFound',
 }
