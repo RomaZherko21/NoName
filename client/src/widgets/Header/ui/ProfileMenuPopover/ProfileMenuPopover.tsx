@@ -71,7 +71,7 @@ function ProfileMenuPopover() {
           <Stack>
             <Avatar
               alt="User avatar"
-              sx={{ cursor: 'pointer' }}
+              sx={{ cursor: 'pointer', width: 32, height: 32 }}
               src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
             />
           </Stack>
