@@ -12,6 +12,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
   try {
     const {
       id = ID,
+      user_id = ID,
       name = '',
       description = '',
       created_from = MIN_LIMIT,
@@ -34,6 +35,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
           
         WHERE posts.id LIKE '%${id}%'
+        AND posts.user_id LIKE '%${user_id}%'
         AND posts.name LIKE '%${name}%'
         AND posts.description LIKE '%${description}%'
         AND posts.created_at >= ${created_from}

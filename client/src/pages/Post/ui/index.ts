@@ -1,2 +1,2 @@
 export { Comment } from './Comment'
-export { getCommentPopupConfig } from './CommentPopupConfig'
+export { getCommentPopupConfig } from './Comment/CommentPopupConfig'

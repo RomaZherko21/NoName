@@ -1,15 +1,7 @@
+import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import {
-  Avatar,
-  Button,
-  Divider,
-  Paper,
-  Stack,
-  Typography,
-  IconButton,
-  TextField,
-} from '@mui/material'
+import { Avatar, Button, Divider, Paper, Stack, Typography, IconButton, Box } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -17,17 +9,25 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
-import ProfileCover from 'assets/images/cover.jpg'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { PopupMenu } from 'shared/ui'
+import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { InputFilter, PopupMenu } from 'shared/ui'
 import { useRootStore } from 'stores'
+import { Post as Postt } from 'shared/types'
+import { PostsFilters } from 'pages/Posts/model'
+import { ProfileModel } from 'pages/Profile/model'
 
-import s from './Styles.module.scss'
 import { getPopupConfig } from './PopupConfig'
+import s from './Styles.module.scss'
+import { Comment } from '../Comment'
 
-const Post = () => {
+interface Props {
+  post: Postt
+}
+
+const Post = ({ post }: Props) => {
   const { t } = useTranslation()
   const { user } = useRootStore()
+  const [filters] = useState<PostsFilters>({ user_id: user.id })
 
   return (
     <Paper sx={{ p: 4, mt: 2 }}>
@@ -35,37 +35,54 @@ const Post = () => {
         <Avatar
           alt="User avatar"
           sx={{ width: 54, height: 54 }}
-          src={`https://material-kit-pro-react.devias.io/static/mock-images/avatars/avatar-carson_darrin.png`}
+          src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
         />
-        <Stack spacing={1}>
-          <Typography variant="body2">Anika Visser</Typography>
+        <Stack spacing={0.5}>
+          <Typography variant="subtitle1">
+            {user.name} {user.surname}
+          </Typography>
           <Typography
             variant="body2"
             color="textSecondary"
             sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
           >
-            <AccessTimeIcon /> 4 hours ago
+            <AccessTimeIcon /> {t('translation:fields.createdAt')}:{' '}
+            {new Date(post.created_at).toLocaleDateString()}
           </Typography>
         </Stack>
       </Stack>
-      <Stack direction="column" spacing={2} sx={{ mt: 4 }} alignItems="start">
-        <Typography variant="body1">
-          Just made this overview screen for a project, what-cha thinkin?
-        </Typography>
-        <img className={s.profileCover} src={ProfileCover} alt="profile cover" />
+      <Stack direction="column" spacing={2} sx={{ mt: 3 }} alignItems="start">
+        <Typography variant="body1">{post.name}</Typography>
+        <img
+          className={s.profileCover}
+          src={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
+          alt="post cover"
+        />
+        <Box display="flex" alignItems="center" justifyContent="center" sx={{ p: 5, pt: 2, pb: 2 }}>
+          <Typography variant="body2">{post.description}</Typography>
+        </Box>
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
           sx={{ width: '100%' }}
         >
-          <Button
-            color="inherit"
-            startIcon={<FavoriteIcon color="error" fontSize="small" />}
-            variant="text"
-          >
-            22
-          </Button>
+          <Box display="flex" alignItems="center">
+            <Button
+              onClick={() => ProfileModel.toggleLike({ post_id: post.id, filters: filters })}
+              startIcon={
+                <FavoriteIcon
+                  sx={{
+                    color: (theme) =>
+                      post.is_liked ? theme.palette.error.dark : theme.palette.action.active,
+                  }}
+                />
+              }
+              variant="outlined"
+            >
+              {post.likes_count}
+            </Button>
+          </Box>
           <IconButton>
             <PopupMenu
               ActionButton={(btnProps: any) => <ShareIcon {...btnProps} />}
@@ -73,19 +90,30 @@ const Post = () => {
             />
           </IconButton>
         </Stack>
-        <Divider sx={{ width: '100%', borderColor: '#2d3748' }} />
-        <Stack direction="row" width="100%" spacing={3} alignItems="start">
+        <Divider sx={{ width: '100%', borderColor: (theme) => theme.palette.grey[700] }} />
+        {post.comments.length && (
+          <>
+            <Box minWidth="100%">
+              {post.comments.map((comment) => (
+                <Comment comment={comment} />
+              ))}
+            </Box>
+          </>
+        )}
+        <Divider sx={{ width: '100%', borderColor: (theme) => theme.palette.grey[700] }} />
+        <Stack alignItems="start" direction="row" width="100%" spacing={3}>
           <Avatar
             alt="User avatar"
             sx={{ cursor: 'pointer', width: 40, height: 40 }}
             src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
           />
           <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-            <TextField
-              placeholder={t('user:actions.writeYourComment')}
-              fullWidth
-              multiline
+            <InputFilter
+              placeholder="user:actions.writeYourComment"
+              multiline={true}
               rows={3}
+              value={ProfileModel.comment}
+              onChange={(e: any) => (ProfileModel.comment = e.target.value)}
             />
             <Stack
               direction="row"
@@ -105,7 +133,23 @@ const Post = () => {
                   <TagFacesIcon />
                 </IconButton>
               </Stack>
-              <Button variant="contained">{t('actions.post')}</Button>
+              {ProfileModel.isEditActive ? (
+                <Button
+                  onClick={() => {
+                    ProfileModel.editComment({ post_id: post.id, filters: filters })
+                  }}
+                  variant="contained"
+                >
+                  {t('actions.save')}
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => ProfileModel.addNewComment({ post_id: post.id, filters: filters })}
+                  variant="contained"
+                >
+                  {t('actions.post')}
+                </Button>
+              )}
             </Stack>
           </Stack>
         </Stack>

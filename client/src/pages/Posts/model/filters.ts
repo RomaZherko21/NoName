@@ -2,6 +2,7 @@ import { InputFilter, CheckBoxFilter, DatePickerFilter } from 'shared/ui'
 
 export interface PostsFilters {
   id?: string
+  user_id?: number
   name?: string
   description?: string
   created_from?: number
