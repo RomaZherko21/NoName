@@ -2,8 +2,8 @@ const darkTheme = {
   palette: {
     action: {
       active: '#9CA3AF',
-      focus: 'rgba(55, 65, 81, 0.12)',
-      hover: 'rgba(55, 65, 81, 0.04)',
+      focus: '#252E3E',
+      hover: '#252E3E',
       selected: 'rgba(55, 65, 81, 0.08)',
       disabledBackground: 'rgba(55, 65, 81, 0.12)',
       disabled: 'rgba(55, 65, 81, 0.26)',

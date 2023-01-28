@@ -41,7 +41,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
 
   return (
     <>
-      <ListItemButton sx={{ p: 0.6, borderRadius: 1 }} onClick={onItemClick}>
+      <ListItemButton sx={{ py: 0.6, px: 1, borderRadius: 1 }} onClick={onItemClick}>
         <ListItemIcon
           sx={{
             color: ({ palette }) => (active ? palette.primary.main : palette.text.secondary),
