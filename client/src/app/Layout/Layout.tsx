@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { Box, Toolbar } from '@mui/material'
 
-import { Aside, Header } from 'widgets'
+import { NavBar, Header } from 'widgets'
 import { DRAWER_WIDTH } from 'shared/consts'
 
 interface Props {
@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
     <Box sx={{ display: 'flex' }}>
       <Header />
 
-      <Aside />
+      <NavBar />
 
       <Box
         component="main"

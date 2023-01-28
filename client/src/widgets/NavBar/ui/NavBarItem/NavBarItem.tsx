@@ -1,14 +1,14 @@
-import { forwardRef, ReactElement, useMemo } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'
-import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { IconButton, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
-interface ListItemLinkProps {
-  icon?: ReactElement
-  primary: string
+interface Props {
+  icon: JSX.Element
+  title: string
   to: string
 }
 
-const ListItemLink = ({ icon, primary, to }: ListItemLinkProps) => {
+const NavBarItem = ({ icon, title, to }: Props) => {
   const location = useLocation()
 
   const renderLink = useMemo(
@@ -29,11 +29,15 @@ const ListItemLink = ({ icon, primary, to }: ListItemLinkProps) => {
       component={renderLink}
     >
       {icon && (
-        <ListItemIcon sx={{ color: active ? 'secondary.main' : 'inherit' }}>{icon}</ListItemIcon>
+        <ListItemIcon sx={{ color: active ? 'secondary.main' : 'inherit' }}>
+          <IconButton sx={{ color: (theme) => theme.palette.grey[500], fontSize: '20px' }}>
+            {icon}
+          </IconButton>
+        </ListItemIcon>
       )}
-      <ListItemText sx={{ color: active ? 'secondary.main' : 'inherit' }} primary={primary} />
+      <ListItemText sx={{ color: active ? 'secondary.main' : 'inherit' }} primary={title} />
     </ListItem>
   )
 }
 
-export default ListItemLink
+export default NavBarItem

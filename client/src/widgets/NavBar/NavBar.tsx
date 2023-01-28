@@ -6,11 +6,11 @@ import { IoNewspaperOutline } from 'react-icons/io5'
 
 import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
 
-import AsideItemLink from './AsideItemLink'
+import { NavBarItem } from './ui'
 
 import logo from 'assets/images/logo/white-transparent-logo.svg'
 
-const Aside = () => {
+const NavBar = () => {
   const { t } = useTranslation()
 
   return (
@@ -39,13 +39,13 @@ const Aside = () => {
           }}
         />
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <AsideItemLink icon={<HiOutlineUsers />} title={t('page:users')} to={ROUTES.USERS} />
+          <NavBarItem icon={<HiOutlineUsers />} title={t('page:users')} to={ROUTES.USERS} />
 
-          <AsideItemLink icon={<IoNewspaperOutline />} title={t('page:posts')} to={ROUTES.POSTS} />
+          <NavBarItem icon={<IoNewspaperOutline />} title={t('page:posts')} to={ROUTES.POSTS} />
         </List>
       </Drawer>
     </Box>
   )
 }
 
-export default observer(Aside)
+export default observer(NavBar)

@@ -1,2 +1,2 @@
 export { Header } from './Header'
-export { Aside } from './Aside'
+export { NavBar } from './NavBar'
