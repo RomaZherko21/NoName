@@ -59,7 +59,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
           {title}
         </ListItemText>
         {!to && (
-          <IconButton sx={{ color: ({ palette }) => palette.text.secondary, fontSize: 12 }}>
+          <IconButton sx={{ color: ({ palette }) => palette.grey[600], fontSize: 12 }}>
             {isOpen ? <AiOutlineDown /> : <AiOutlineRight />}
           </IconButton>
         )}
