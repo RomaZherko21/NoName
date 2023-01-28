@@ -1,7 +1,9 @@
 export const ROUTES = {
   USERS: '/users',
+  USERS_CREATE: '/users/create',
 
   POSTS: '/posts',
+  POSTS_CREATE: '/posts/create',
   POST: '/posts/:id',
 
   PROFILE: '/profile',

@@ -51,7 +51,7 @@ const darkTheme = {
     },
     text: {
       primary: '#FFFFFF',
-      secondary: '#9CA1AA',
+      secondary: 'rgb(160, 174, 192)',
       disabled: 'rgba(55, 65, 81, 0.48)',
     },
     grey: {

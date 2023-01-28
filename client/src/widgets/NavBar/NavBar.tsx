@@ -39,9 +39,37 @@ const NavBar = () => {
           }}
         />
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <NavBarItem icon={<HiOutlineUsers />} title={t('page:users')} to={ROUTES.USERS} />
+          <NavBarItem
+            icon={<HiOutlineUsers />}
+            title={t('page:users')}
+            collapsedItems={[
+              {
+                text: 'List',
+                to: ROUTES.USERS,
+              },
+              {
+                text: 'Create',
+                to: ROUTES.USERS_CREATE,
+              },
+            ]}
+          />
 
-          <NavBarItem icon={<IoNewspaperOutline />} title={t('page:posts')} to={ROUTES.POSTS} />
+          <NavBarItem
+            icon={<IoNewspaperOutline />}
+            title={t('page:posts')}
+            collapsedItems={[
+              {
+                text: 'List',
+                to: ROUTES.POSTS,
+              },
+              {
+                text: 'Create',
+                to: ROUTES.POSTS_CREATE,
+              },
+            ]}
+          />
+
+          <NavBarItem icon={<IoNewspaperOutline />} title={t('page:smth')} to={ROUTES.PROFILE} />
         </List>
       </Drawer>
     </Box>

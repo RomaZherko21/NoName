@@ -1,42 +1,102 @@
-import { forwardRef, useMemo } from 'react'
-import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'
-import { IconButton, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  Collapse,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import { Box } from '@mui/system'
+import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 
 interface Props {
   icon: JSX.Element
   title: string
-  to: string
+  to?: string
+  collapsedItems?: { to: string; text: string }[]
 }
 
-const NavBarItem = ({ icon, title, to }: Props) => {
+const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
   const location = useLocation()
+  const navigate = useNavigate()
 
-  const renderLink = useMemo(
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onItemClick = () => {
+    if (to) {
+      navigate(to)
+    } else {
+      setIsOpen((pre) => !pre)
+    }
+  }
+
+  const active = useMemo(
     () =>
-      forwardRef<any, Omit<NavLinkProps, 'to'>>((itemProps, ref) => (
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        <NavLink to={to} ref={ref} {...itemProps} />
-      )),
-    [to]
+      to ? location.pathname === to : collapsedItems.find((item) => location.pathname === item.to),
+    [to, location, collapsedItems]
   )
 
-  const active = location.pathname.includes(to)
-
   return (
-    <ListItem
-      sx={{ backgroundColor: active ? 'action.focus' : 'inherit', p: 0.6, borderRadius: 1 }}
-      button
-      component={renderLink}
-    >
-      {icon && (
-        <ListItemIcon sx={{ color: active ? 'secondary.main' : 'inherit' }}>
-          <IconButton sx={{ color: (theme) => theme.palette.grey[500], fontSize: '20px' }}>
-            {icon}
-          </IconButton>
+    <>
+      <ListItemButton sx={{ p: 0.6, borderRadius: 1 }} onClick={onItemClick}>
+        <ListItemIcon
+          sx={{
+            color: ({ palette }) => (active ? palette.primary.main : palette.text.secondary),
+            fontSize: 20,
+          }}
+        >
+          {icon}
         </ListItemIcon>
+        <ListItemText
+          sx={{
+            color: ({ palette }) => (active ? palette.text.primary : palette.text.secondary),
+          }}
+          primary={title}
+        />
+        {!to && (
+          <IconButton sx={{ color: ({ palette }) => palette.text.secondary, fontSize: '12px' }}>
+            {isOpen ? <AiOutlineDown /> : <AiOutlineRight />}
+          </IconButton>
+        )}
+      </ListItemButton>
+
+      {!to && (
+        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+          {collapsedItems.map((item) => (
+            <List component="div" disablePadding>
+              <ListItemButton
+                sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
+                onClick={() => {
+                  navigate(item.to)
+                }}
+              >
+                {location.pathname === item.to && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      width: '6px',
+                      height: '6px',
+                      backgroundColor: 'primary.main',
+                      borderRadius: 50,
+                      left: 10,
+                    }}
+                  ></Box>
+                )}
+                <ListItemText
+                  primary={item.text}
+                  sx={{
+                    color: ({ palette }) =>
+                      location.pathname === item.to ? palette.text.primary : palette.text.secondary,
+                  }}
+                />
+              </ListItemButton>
+            </List>
+          ))}
+        </Collapse>
       )}
-      <ListItemText sx={{ color: active ? 'secondary.main' : 'inherit' }} primary={title} />
-    </ListItem>
+    </>
   )
 }
 
