@@ -18,9 +18,11 @@ const commonTheme = {
     },
     body1: {
       fontFamily: PRIMARY_FONT,
+      fontSize: 14,
     },
     body2: {
       fontFamily: PRIMARY_FONT,
+      fontSize: 13,
     },
     caption: {
       fontFamily: SECONDARY_FONT,

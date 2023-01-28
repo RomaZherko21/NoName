@@ -38,7 +38,7 @@ const NavBar = () => {
             width: 120,
           }}
         />
-        <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <List sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 3 }}>
           <NavBarItem
             icon={<HiOutlineUsers />}
             title={t('page:users')}

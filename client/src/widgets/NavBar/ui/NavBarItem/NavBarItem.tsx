@@ -7,6 +7,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
@@ -52,18 +53,20 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
         <ListItemText
           sx={{
             color: ({ palette }) => (active ? palette.text.primary : palette.text.secondary),
+            fontSize: ({ typography }) => typography.body1.fontSize,
           }}
-          primary={title}
-        />
+        >
+          {title}
+        </ListItemText>
         {!to && (
-          <IconButton sx={{ color: ({ palette }) => palette.text.secondary, fontSize: '12px' }}>
+          <IconButton sx={{ color: ({ palette }) => palette.text.secondary, fontSize: 12 }}>
             {isOpen ? <AiOutlineDown /> : <AiOutlineRight />}
           </IconButton>
         )}
       </ListItemButton>
 
       {!to && (
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} sx={{ mt: 0 }} timeout="auto" unmountOnExit>
           {collapsedItems.map((item) => (
             <List component="div" disablePadding>
               <ListItemButton
@@ -84,13 +87,12 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
                     }}
                   ></Box>
                 )}
-                <ListItemText
-                  primary={item.text}
-                  sx={{
-                    color: ({ palette }) =>
-                      location.pathname === item.to ? palette.text.primary : palette.text.secondary,
-                  }}
-                />
+                <Typography
+                  variant="body2"
+                  color={location.pathname === item.to ? 'text.primary' : 'text.secondary'}
+                >
+                  {item.text}
+                </Typography>
               </ListItemButton>
             </List>
           ))}
