@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Container, Typography } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useNavigate } from 'react-router-dom'
 
-import notFoundImg from 'assets/images/404.svg'
+import notFoundImg from 'assets/images/error-404.png'
 
 const NotFound = () => {
   const { t } = useTranslation()
@@ -12,8 +11,7 @@ const NotFound = () => {
 
   return (
     <>
-      <Helmet>
-        
+      <Helmet>        
         <title>{t('page:404')}</title>
         <meta name="description" content={t('page:404')} />
       </Helmet>
@@ -34,28 +32,27 @@ const NotFound = () => {
               flexDirection: 'column',
             }}
           >
-            <Typography align="center" color="textPrimary" variant="h1">
-              {t('sentences:notFound.title')}
-            </Typography>
-            <Typography align="center" color="textPrimary" variant="subtitle2">
-              {t('sentences:notFound.subtitle')}
-            </Typography>
             <Box sx={{ textAlign: 'center' }}>
               <img
                 alt="Under development"
                 src={notFoundImg}
                 style={{
-                  marginTop: 50,
+                  marginBottom: 50,
                   display: 'inline-block',
                   maxWidth: '100%',
-                  width: 560,
+                  width: 350,
                 }}
               />
             </Box>
+            <Typography align="center" color="textPrimary" variant="h3">
+              {t('sentences:notFound.title')}
+            </Typography>
+            <Typography align="center" color="rgb(160, 174, 192)" variant="subtitle2">
+              {t('sentences:notFound.subtitle')}
+            </Typography>
             <Button
-              startIcon={<ArrowBackIcon fontSize="small" />}
-              sx={{ mt: 3 }}
-              variant="contained"
+              sx={{ mt: 6 }}
+              variant="text"
               onClick={() => {
                 navigate(-1)
               }}
