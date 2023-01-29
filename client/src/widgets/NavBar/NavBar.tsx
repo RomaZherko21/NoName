@@ -21,6 +21,7 @@ const NavBar = () => {
             width: DRAWER_WIDTH,
             backgroundColor: 'background.rare',
             p: 2,
+            border: 'none',
           },
         }}
         open

@@ -6,8 +6,8 @@ const commonTheme = {
     appBar: 1250,
   },
   typography: {
-    htmlFontSize: 18,
-    fontSize: 16,
+    htmlFontSize: 16,
+    fontSize: 14,
     fontFamily: PRIMARY_FONT,
 
     subtitle1: {
@@ -18,11 +18,9 @@ const commonTheme = {
     },
     body1: {
       fontFamily: PRIMARY_FONT,
-      fontSize: 14,
     },
     body2: {
       fontFamily: PRIMARY_FONT,
-      fontSize: 13,
     },
     caption: {
       fontFamily: SECONDARY_FONT,
