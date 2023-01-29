@@ -43,7 +43,7 @@ function ContactsPopover() {
         <Tooltip title="Contacts">
           <IconButton
             size="medium"
-            sx={{ color: (theme) => theme.palette.grey[500] }}
+            sx={{ color: (theme) => theme.palette.text.secondary }}
             onClick={handleOpen}
           >
             <HiOutlineUsers />

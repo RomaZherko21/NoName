@@ -34,6 +34,8 @@
   "yourFriend": "Your friend",
   "userCanceledRequest": "User canceled request",
   "requestPending": "Request pending",
+  "socialProfile": "Social Profile",
+  "editProfile": "Edit Profile",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

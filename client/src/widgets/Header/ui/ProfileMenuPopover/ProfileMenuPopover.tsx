@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   Box,
@@ -13,40 +14,20 @@ import {
   Tabs,
   Typography,
 } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications'
-import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import { CgProfile } from 'react-icons/cg'
+import { IoSettingsOutline } from 'react-icons/io5'
+import { ImExit } from 'react-icons/im'
 
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { useDialog } from 'shared/hooks'
+import { Popover, TabPanel } from 'shared/ui'
 import { useRootStore } from 'stores'
 
-import { ProfileTab, SettingTab, ExitDialog } from './ui'
+import { ProfileTab, SettingsTab, ExitDialog } from './ui'
 import s from './Styles.module.scss'
-import { Popover } from 'shared/ui'
-
-function TabPanel({
-  children,
-  value,
-  index,
-}: {
-  children: JSX.Element
-  value: number
-  index: number
-}) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`profile-tabpanel-${index}`}
-      aria-labelledby={`profile-tab-${index}`}
-    >
-      {value === index && children}
-    </div>
-  )
-}
 
 function ProfileMenuPopover() {
+  const { t } = useTranslation()
   const { user } = useRootStore()
   const [currentTab, setCurrentTab] = useState(0)
 
@@ -66,7 +47,7 @@ function ProfileMenuPopover() {
 
   return (
     <Popover
-      activateElement={(open, handleOpen) => (
+      activateElement={(_, handleOpen) => (
         <ButtonBase onClick={handleOpen}>
           <Stack>
             <Avatar
@@ -102,13 +83,15 @@ function ProfileMenuPopover() {
                 </Stack>
               </Stack>
             </Grid>
+
             <Grid item>
-              <IconButton size="large" onClick={onLogout}>
-                <ExitToAppIcon />
+              <IconButton size="small" onClick={onLogout}>
+                <ImExit />
               </IconButton>
             </Grid>
           </Grid>
         </CardContent>
+
         <Box>
           <Tabs
             variant="fullWidth"
@@ -118,21 +101,31 @@ function ProfileMenuPopover() {
           >
             <Tab
               className={s.profileTab}
-              icon={<AccountCircleIcon fontSize="small" className={s.tabIcon} />}
-              label="Profile"
+              icon={
+                <IconButton sx={{ p: 0 }} size="medium">
+                  <CgProfile />
+                </IconButton>
+              }
+              label={t('common.profile')}
             />
             <Tab
               className={s.profileTab}
-              icon={<SettingsApplicationsIcon fontSize="small" className={s.tabIcon} />}
-              label="Setting"
+              icon={
+                <IconButton sx={{ p: 0 }} size="medium">
+                  <IoSettingsOutline />
+                </IconButton>
+              }
+              label={t('common.settings')}
             />
           </Tabs>
         </Box>
+
         <TabPanel value={currentTab} index={0}>
           <ProfileTab onLogout={onLogout} onMenuClose={() => {}} />
         </TabPanel>
+
         <TabPanel value={currentTab} index={1}>
-          <SettingTab onMenuClose={() => {}} />
+          <SettingsTab onMenuClose={() => {}} />
         </TabPanel>
       </Paper>
     </Popover>

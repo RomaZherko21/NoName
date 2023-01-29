@@ -1,24 +1,18 @@
-import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, Drawer, List } from '@mui/material'
-import { HiOutlineUsers } from 'react-icons/hi'
-import { IoNewspaperOutline } from 'react-icons/io5'
 
-import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
-
-import { NavBarItem } from './ui'
-
+import { DRAWER_WIDTH } from 'shared/consts'
 import logo from 'assets/images/logo/white-transparent-logo.svg'
 
+import { NavBarItem } from './ui'
+import { config } from './config'
+
 const NavBar = () => {
-  const { t } = useTranslation()
+  const navBarConfig = useMemo(() => config, [])
 
   return (
-    <Box
-      component="nav"
-      sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-      aria-label="mailbox folders"
-    >
+    <Box component="nav" sx={{ width: DRAWER_WIDTH }}>
       <Drawer
         variant="permanent"
         sx={{
@@ -32,44 +26,21 @@ const NavBar = () => {
         open
       >
         <img
-          alt="Under development"
+          alt="NoName logo"
           src={logo}
           style={{
             width: 120,
           }}
         />
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 3 }}>
-          <NavBarItem
-            icon={<HiOutlineUsers />}
-            title={t('page:users')}
-            collapsedItems={[
-              {
-                text: 'List',
-                to: ROUTES.USERS,
-              },
-              {
-                text: 'Create',
-                to: ROUTES.USERS_CREATE,
-              },
-            ]}
-          />
-
-          <NavBarItem
-            icon={<IoNewspaperOutline />}
-            title={t('page:posts')}
-            collapsedItems={[
-              {
-                text: 'List',
-                to: ROUTES.POSTS,
-              },
-              {
-                text: 'Create',
-                to: ROUTES.POSTS_CREATE,
-              },
-            ]}
-          />
-
-          <NavBarItem icon={<IoNewspaperOutline />} title={t('page:smth')} to={ROUTES.PROFILE} />
+          {navBarConfig.map((item) => (
+            <NavBarItem
+              icon={item.icon}
+              title={item.title}
+              collapsedItems={item?.collapsedItems}
+              to={item?.to}
+            />
+          ))}
         </List>
       </Drawer>
     </Box>

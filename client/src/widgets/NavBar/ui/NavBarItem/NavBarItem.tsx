@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   Collapse,
   IconButton,
@@ -8,8 +9,8 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  Box,
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 
 interface Props {
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
+  const { t } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -50,14 +52,16 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
         >
           {icon}
         </ListItemIcon>
-        <ListItemText
-          sx={{
-            color: ({ palette }) => (active ? palette.text.primary : palette.text.secondary),
-            fontSize: ({ typography }) => typography.body1.fontSize,
-          }}
-        >
-          {title}
+
+        <ListItemText>
+          <Typography
+            variant="body2"
+            color={({ palette }) => (active ? palette.text.primary : palette.text.secondary)}
+          >
+            {t(title)}
+          </Typography>
         </ListItemText>
+
         {!to && (
           <IconButton sx={{ color: ({ palette }) => palette.grey[600], fontSize: 12 }}>
             {isOpen ? <AiOutlineDown /> : <AiOutlineRight />}
@@ -66,7 +70,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
       </ListItemButton>
 
       {!to && (
-        <Collapse in={isOpen} sx={{ mt: 0 }} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} timeout="auto" mountOnEnter unmountOnExit>
           {collapsedItems.map((item) => (
             <List component="div" disablePadding>
               <ListItemButton
@@ -87,11 +91,12 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
                     }}
                   ></Box>
                 )}
+
                 <Typography
                   variant="body2"
                   color={location.pathname === item.to ? 'text.primary' : 'text.secondary'}
                 >
-                  {item.text}
+                  {t(item.text)}
                 </Typography>
               </ListItemButton>
             </List>

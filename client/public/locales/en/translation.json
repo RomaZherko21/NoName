@@ -17,7 +17,8 @@
     "youMadeAnExtra": "You made an extra",
     "connections": "Connections",
     "clearAll": "Clear all",
-    "filters": "Filters"
+    "filters": "Filters",
+    "settings": "Settings"
   },
   "actions": {
     "add": "Add",
@@ -26,6 +27,7 @@
     "update": "Update",
     "save": "Save",
     "exit": "Exit",
+    "logout": "Logout",
     "info": "Show more information",
     "goBack": "Go back",
     "download": "Download",
@@ -40,7 +42,9 @@
     "sendInvite": "Send Invite",
     "copyLink": "Copy link",
     "share": "Share",
-    "linkCopied": "Link copied"
+    "linkCopied": "Link copied",
+    "search": "Search",
+    "changeLanguage": "Change language"
   },
   "fields": {
     "name": "Name",

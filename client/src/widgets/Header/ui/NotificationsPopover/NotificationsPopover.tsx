@@ -58,11 +58,7 @@ function NotificationsPopover() {
     <Popover
       activateElement={(_, handleOpen) => (
         <Tooltip title="Notifications">
-          <IconButton
-            size="medium"
-            sx={{ color: (theme) => theme.palette.grey[500] }}
-            onClick={handleOpen}
-          >
+          <IconButton size="medium" onClick={handleOpen}>
             <Badge badgeContent={totalUnRead} color="error" max={999}>
               <MdOutlineNotificationsNone />
             </Badge>

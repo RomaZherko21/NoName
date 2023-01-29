@@ -1,11 +1,15 @@
 import { observer } from 'mobx-react-lite'
-import { AppBar, Toolbar, Box } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { AppBar, Toolbar, Box, Tooltip, IconButton } from '@mui/material'
+import { BiSearchAlt2 } from 'react-icons/bi'
 
 import { DRAWER_WIDTH } from 'shared/consts'
 
 import { ProfileMenuPopover, ChangeLangPopup, NotificationsPopover, ContactsPopover } from './ui'
 
 function Header() {
+  const { t } = useTranslation()
+
   return (
     <AppBar
       sx={{
@@ -17,7 +21,15 @@ function Header() {
       }}
       position="fixed"
     >
-      <Toolbar disableGutters sx={{ px: 2, py: 0, justifyContent: 'flex-end' }}>
+      <Toolbar disableGutters sx={{ px: 2, py: 0, justifyContent: 'space-between' }}>
+        <Box>
+          <Tooltip title={t('actions.search')}>
+            <IconButton>
+              <BiSearchAlt2 />
+            </IconButton>
+          </Tooltip>
+        </Box>
+
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
           <ChangeLangPopup />
           <NotificationsPopover />

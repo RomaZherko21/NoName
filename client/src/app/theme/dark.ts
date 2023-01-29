@@ -50,7 +50,7 @@ const darkTheme = {
       contrastText: '#FFFFFF',
     },
     text: {
-      primary: '#FFFFFF',
+      primary: 'rgb(237, 242, 247)',
       secondary: 'rgb(160, 174, 192)',
       disabled: 'rgba(55, 65, 81, 0.48)',
     },
