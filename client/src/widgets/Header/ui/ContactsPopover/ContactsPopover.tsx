@@ -41,11 +41,7 @@ function ContactsPopover() {
     <Popover
       activateElement={(_, handleOpen) => (
         <Tooltip title="Contacts">
-          <IconButton
-            size="medium"
-            sx={{ color: (theme) => theme.palette.text.secondary }}
-            onClick={handleOpen}
-          >
+          <IconButton size="medium" onClick={handleOpen}>
             <HiOutlineUsers />
           </IconButton>
         </Tooltip>

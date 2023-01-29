@@ -1,10 +1,11 @@
 import { CgProfile } from 'react-icons/cg'
 import { RiUserSettingsLine } from 'react-icons/ri'
 import { ImExit } from 'react-icons/im'
+import { BiSupport } from 'react-icons/bi'
 
 import { ROUTES } from 'shared/consts'
 
-export const getConfig = ({ onLogout }: { onLogout: () => void }) => [
+export const getProfileConfig = ({ onLogout }: { onLogout: () => void }) => [
   {
     icon: <CgProfile />,
     text: 'user:socialProfile',
@@ -19,5 +20,18 @@ export const getConfig = ({ onLogout }: { onLogout: () => void }) => [
     icon: <ImExit />,
     text: 'actions.logout',
     onClick: onLogout,
+  },
+]
+
+export const getSettingsConfig = () => [
+  {
+    icon: <BiSupport />,
+    text: 'Edit Profile',
+    to: ROUTES.PROFILE_TIMELINE,
+  },
+  {
+    icon: <BiSupport />,
+    text: 'Social Profile',
+    to: ROUTES.ACCOUNT_GENERAL,
   },
 ]

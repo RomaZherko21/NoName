@@ -23,7 +23,8 @@ import { useDialog } from 'shared/hooks'
 import { Popover, TabPanel } from 'shared/ui'
 import { useRootStore } from 'stores'
 
-import { ProfileTab, SettingsTab, ExitDialog } from './ui'
+import { ExitDialog, TabContent } from './ui'
+import { getProfileConfig, getSettingsConfig } from './config'
 import s from './Styles.module.scss'
 
 function ProfileMenuPopover() {
@@ -121,11 +122,11 @@ function ProfileMenuPopover() {
         </Box>
 
         <TabPanel value={currentTab} index={0}>
-          <ProfileTab onLogout={onLogout} onMenuClose={() => {}} />
+          <TabContent getConfig={getProfileConfig} onLogout={onLogout} onMenuClose={() => {}} />
         </TabPanel>
 
         <TabPanel value={currentTab} index={1}>
-          <SettingsTab onMenuClose={() => {}} />
+          <TabContent getConfig={getSettingsConfig} onMenuClose={() => {}} />
         </TabPanel>
       </Paper>
     </Popover>
