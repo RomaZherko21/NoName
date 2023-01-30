@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { Users, Profile, Posts, NotFound, Account, Post } from 'pages'
+import { Users, Profile, Posts, NotFound, Account, Post, CreatePost } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 function Router() {
@@ -12,6 +12,7 @@ function Router() {
       <Route path={ROUTES.POSTS}>
         <Route path={ROUTES.POSTS} element={<Posts />} />
         <Route path={ROUTES.POST} element={<Post />} />
+        <Route path={ROUTES.POSTS_CREATE} element={<CreatePost />} />
       </Route>
 
       <Route path={ROUTES.PROFILE}>

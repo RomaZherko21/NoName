@@ -2,6 +2,10 @@
   "name": "Name",
   "description": "Description",
   "comment": "Comment",
+  "basicDetails": "Basic details",
+  "shortDescription": "Short Description",
+  "postTitle": "Post Title",
+  "postCover": "Post cover",
   "actions": {
     "selectFile": "Select file",
     "readMore": "Read more..",
