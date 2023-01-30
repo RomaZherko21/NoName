@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   ButtonBase,
@@ -21,7 +20,6 @@ import { ExitDialog, TabContent } from './ui'
 import { getProfileConfig, getSettingsConfig } from './config'
 
 function ProfileMenuPopover() {
-  const { t } = useTranslation()
   const { user } = useRootStore()
 
   const [showConfirmationModal] = useDialog(
@@ -84,7 +82,7 @@ function ProfileMenuPopover() {
         <Tabs
           options={[
             {
-              label: t('common.profile'),
+              label: 'common.profile',
               Component: () => (
                 <TabContent
                   getConfig={getProfileConfig}
@@ -94,7 +92,7 @@ function ProfileMenuPopover() {
               ),
             },
             {
-              label: t('common.settings'),
+              label: 'common.settings',
               Component: () => <TabContent getConfig={getSettingsConfig} onMenuClose={() => {}} />,
             },
           ]}

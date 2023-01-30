@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
 import { AsideFilters, AsideFiltersBar, PageHeader, Pagination } from 'shared/ui'
-import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
 import { getFiltersConfig, PostsFilters, PostsModel } from './model'

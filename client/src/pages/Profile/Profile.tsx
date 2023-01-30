@@ -83,19 +83,19 @@ function Profile() {
           <Grid item xs={12}>
             <Tabs
               options={[
-                { label: 'Timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
+                { label: 'page:timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
                 {
-                  label: 'Connections',
+                  label: 'page:connections',
                   to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
                   Component: Connections,
                 },
                 {
-                  label: 'Sent Connections',
+                  label: 'page:sentConnections',
                   to: ROUTES.PROFILE_SENT_CONNECTIONS,
                   Component: SentConnections,
                 },
                 {
-                  label: 'Received Connections',
+                  label: 'page:receivedConnections',
                   to: ROUTES.PROFILE_RECEIVED_CONNECTIONS,
                   Component: ReceivedConnections,
                 },

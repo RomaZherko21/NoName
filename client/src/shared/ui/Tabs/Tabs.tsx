@@ -1,6 +1,7 @@
 import { Box, Tab, Tabs as MUiTabs } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import TabPanel from './TabPanel'
@@ -12,7 +13,8 @@ const Tabs = ({
   options: { label: string; to?: string; Component: (arg: any) => JSX.Element }[]
   variant?: 'standard' | 'scrollable' | 'fullWidth'
 }) => {
-  let location = useLocation()
+  const { t } = useTranslation()
+  const location = useLocation()
   const navigate = useNavigate()
 
   const [currentTab, setCurrentTab] = useState(0)
@@ -39,7 +41,7 @@ const Tabs = ({
                   navigate(item.to)
                 }
               }}
-              label={item.label}
+              label={t(item.label)}
               {...{ [id]: `simple-tab-${id}`, 'aria-controls': `simple-tabpanel-${id}` }}
             />
           ))}
