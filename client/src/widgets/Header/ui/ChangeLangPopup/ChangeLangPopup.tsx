@@ -10,7 +10,7 @@ import i18next from 'i18next'
 import { IconButton, Tooltip } from '@mui/material'
 
 function ChangeLangPopup() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const popupConfig = useMemo(
     () =>
@@ -29,6 +29,7 @@ function ChangeLangPopup() {
           </IconButton>
         </Tooltip>
       )}
+      selectCondition={i18n.language}
       config={popupConfig}
     />
   )

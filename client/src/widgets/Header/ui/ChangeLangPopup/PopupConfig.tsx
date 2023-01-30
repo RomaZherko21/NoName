@@ -9,6 +9,7 @@ export const getPopupConfig = (changeLang: (lang: string) => void) => [
     onClick: () => {
       changeLang('en')
     },
+    key: 'en',
   },
   {
     Icon: <img width="20px" alt="de" src={deIcon} />,
@@ -16,6 +17,7 @@ export const getPopupConfig = (changeLang: (lang: string) => void) => [
     onClick: () => {
       changeLang('de')
     },
+    key: 'de',
   },
   {
     Icon: <img width="20px" alt="ru" src={ruIcon} />,
@@ -23,5 +25,6 @@ export const getPopupConfig = (changeLang: (lang: string) => void) => [
     onClick: () => {
       changeLang('ru')
     },
+    key: 'ru',
   },
 ]
