@@ -1,4 +1,5 @@
 {
+  "home": "Home",
   "users": "Users",
   "posts": "Posts",
   "post": "Post",
@@ -7,5 +8,10 @@
   "sentConnections": "Sent Connections",
   "receivedConnections": "Received Connections",
   "account": "Account",
-  "404": "404 | Page not found"
+  "404": "404 | Page not found",
+  "subPage": {
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit"
+  }
 }

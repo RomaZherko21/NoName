@@ -36,6 +36,7 @@
   "requestPending": "Request pending",
   "socialProfile": "Social Profile",
   "editProfile": "Edit Profile",
+  "connections": "Connections",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

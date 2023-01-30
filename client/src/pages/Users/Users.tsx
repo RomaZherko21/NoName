@@ -59,7 +59,10 @@ function Users() {
 
   return (
     <>
-      <PageHeader pageName={t('page:users')}>
+      <PageHeader
+        pageName={t('page:users')}
+        breadcrumbs={[{ text: 'page:users' }, { text: 'page:subPage.create' }]}
+      >
         <Grid item>
           <Box sx={{ m: 1 }}>
             <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>

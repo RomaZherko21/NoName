@@ -19,7 +19,8 @@ const Layout = ({ children }: Props) => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          py: 7,
+          px: 4,
           width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` },
         }}
       >

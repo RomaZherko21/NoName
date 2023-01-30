@@ -12,7 +12,7 @@ function Account() {
 
   return (
     <Container maxWidth="lg">
-      <PageHeader pageName={t('page:account')} />
+      <PageHeader pageName={t('page:account')} breadcrumbs={[{ text: 'page:account' }]} />
       <Tabs
         options={[
           { label: 'General', to: ROUTES.ACCOUNT_GENERAL, Component: General },
