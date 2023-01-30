@@ -2,6 +2,7 @@ import { CgProfile } from 'react-icons/cg'
 import { RiUserSettingsLine } from 'react-icons/ri'
 import { ImExit } from 'react-icons/im'
 import { BiSupport } from 'react-icons/bi'
+import { HiOutlineUsers } from 'react-icons/hi'
 
 import { ROUTES } from 'shared/consts'
 
@@ -10,6 +11,11 @@ export const getProfileConfig = ({ onLogout }: { onLogout: () => void }) => [
     icon: <CgProfile />,
     text: 'user:socialProfile',
     to: ROUTES.PROFILE_TIMELINE,
+  },
+  {
+    icon: <HiOutlineUsers />,
+    text: 'common:connections',
+    to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
   },
   {
     icon: <RiUserSettingsLine />,
