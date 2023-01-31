@@ -17,7 +17,9 @@
     "youMadeAnExtra": "You made an extra",
     "clearAll": "Clear all",
     "filters": "Filters",
-    "settings": "Settings"
+    "settings": "Settings",
+    "basicDetails": "Basic details",
+    "content": "Content"
   },
   "actions": {
     "add": "Add",
@@ -26,6 +28,7 @@
     "update": "Update",
     "save": "Save",
     "exit": "Exit",
+    "cancel": "Cancel",
     "logout": "Logout",
     "info": "Show more information",
     "goBack": "Go back",
