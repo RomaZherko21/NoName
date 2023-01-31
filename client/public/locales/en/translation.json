@@ -41,8 +41,11 @@
     "sendInvite": "Send Invite",
     "copyLink": "Copy link",
     "share": "Share",
-    "linkCopied": "Link copied",
+    "like": "Like",
+    "unlike": "Unlike",
+    "linkCopied": "Link copied!",
     "search": "Search",
+    "send": "Send",
     "changeLanguage": "Change language"
   },
   "fields": {

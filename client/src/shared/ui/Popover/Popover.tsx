@@ -5,9 +5,10 @@ import { Popover as MuiPopover } from '@mui/material'
 interface Props {
   children: JSX.Element
   activateElement: (open: any, handleOpen: (event: any) => void) => JSX.Element
+  selfClosed?: boolean
 }
 
-function Popover({ children, activateElement }: Props) {
+function Popover({ children, activateElement, selfClosed = false }: Props) {
   const [open, setOpen] = useState(null)
 
   const handleOpen = (event: any) => {
@@ -26,6 +27,7 @@ function Popover({ children, activateElement }: Props) {
         open={Boolean(open)}
         anchorEl={open}
         onClose={handleClose}
+        onClick={() => selfClosed && handleClose()}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{

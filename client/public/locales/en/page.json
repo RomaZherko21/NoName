@@ -15,9 +15,10 @@
   "notifications": "Notifications",
   "security": "Security",
   "404": "404 | Page not found",
-  "subPage": {
+  "sub": {
     "list": "List",
     "create": "Create",
-    "edit": "Edit"
+    "edit": "Edit",
+    "details": "Details"
   }
 }

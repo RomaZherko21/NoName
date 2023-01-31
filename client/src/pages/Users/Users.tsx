@@ -61,7 +61,7 @@ function Users() {
     <>
       <PageHeader
         pageName={t('page:users')}
-        breadcrumbs={[{ text: 'page:users' }, { text: 'page:subPage.create' }]}
+        breadcrumbs={[{ text: 'page:users' }, { text: 'page:sub.create' }]}
       >
         <Grid item>
           <Box sx={{ m: 1 }}>

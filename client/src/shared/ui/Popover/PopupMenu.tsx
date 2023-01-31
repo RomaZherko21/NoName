@@ -31,7 +31,10 @@ const PopupMenu = ({ config, ActionButton, id, selectCondition }: Props) => {
 
   return (
     <>
-      <Popover activateElement={(_, handleOpen) => ActionButton({ onClick: handleOpen })}>
+      <Popover
+        activateElement={(_, handleOpen) => ActionButton({ onClick: handleOpen })}
+        selfClosed
+      >
         <List sx={{ minWidth: 200, p: 0 }}>
           {config.map((item) => (
             <ListItem disablePadding key={item.text}>
@@ -45,7 +48,7 @@ const PopupMenu = ({ config, ActionButton, id, selectCondition }: Props) => {
                 }}
                 sx={{ px: 1, py: 0.5 }}
               >
-                <ListItemIcon>{item.Icon}</ListItemIcon>
+                <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>
                 <ListItemText>
                   <Typography
                     variant="body2"

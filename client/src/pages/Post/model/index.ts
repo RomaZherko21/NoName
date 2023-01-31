@@ -1,1 +1,1 @@
-export { default as PostsModel } from './Post.model'
+export { default as PostModel } from './Post.model'

@@ -49,7 +49,7 @@ function Posts() {
     <>
       <PageHeader
         pageName={t('page:posts')}
-        breadcrumbs={[{ text: 'page:posts' }, { text: 'page:subPage.list' }]}
+        breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.list' }]}
       >
         <Grid item>
           <Button variant="contained" color="primary" onClick={showCreateItemModal}>

@@ -4,7 +4,7 @@ import { NODE_API } from 'services'
 import LoadingModel from 'models/Loading'
 import { Comment, Post, User } from 'shared/types'
 
-class PostsModel {
+class PostModel {
   id: number = 0
   user_id: number = 0
   name: string = ''
@@ -19,10 +19,9 @@ class PostsModel {
   user_surname: string = ''
   user_avatar: string | undefined = ''
 
+  commentInputValue: string = ''
   isEditActive: boolean = false
   editCommentId: number = 0
-
-  comment: string = ''
 
   loading: LoadingModel
 
@@ -30,12 +29,6 @@ class PostsModel {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
-  }
-
-  async toggleLike() {
-    await NODE_API.post.like(this.id)
-
-    this.fetch({ id: this.id, hidden: true })
   }
 
   async fetch({ id, hidden = false }: { id: number; hidden?: boolean }) {
@@ -54,13 +47,25 @@ class PostsModel {
     }
   }
 
+  onEditComment({ value, id }: { value: string; id: number }) {
+    this.isEditActive = true
+    this.commentInputValue = value
+    this.editCommentId = id
+  }
+
+  async toggleLike() {
+    await NODE_API.post.like(this.id)
+
+    this.fetch({ id: this.id, hidden: true })
+  }
+
   async addNewComment() {
     await NODE_API.post.createComment(this.id, {
       created_at: new Date().getTime(),
-      message: this.comment,
+      message: this.commentInputValue,
     })
 
-    this.comment = ''
+    this.commentInputValue = ''
 
     this.fetch({ id: this.id })
   }
@@ -71,12 +76,12 @@ class PostsModel {
       comment_id: this.editCommentId,
       comment: {
         created_at: new Date().getTime(),
-        message: this.comment,
+        message: this.commentInputValue,
       },
     })
 
     this.isEditActive = false
-    this.comment = ''
+    this.commentInputValue = ''
     this.editCommentId = 0
 
     this.fetch({ id: this.id })
@@ -105,4 +110,4 @@ class PostsModel {
   }
 }
 
-export default new PostsModel()
+export default new PostModel()

@@ -1,3 +1,5 @@
+const PRIMARY_TEXT = 'rgb(237, 242, 247)'
+
 const darkTheme = {
   palette: {
     action: {
@@ -17,41 +19,41 @@ const darkTheme = {
     primary: {
       main: '#7582EB',
       light: '#828DF8',
-      dark: '#3832A0',
-      contrastText: '#111827',
+      dark: 'rgb(99, 102, 241)',
+      contrastText: PRIMARY_TEXT,
     },
     secondary: {
       main: '#10B981',
       light: '#3FC79A',
       dark: '#0B815A',
-      contrastText: '#FFFFFF',
+      contrastText: PRIMARY_TEXT,
     },
     success: {
       main: '#14B8A6',
       light: '#43C6B7',
       dark: '#0E8074',
-      contrastText: '#FFFFFF',
+      contrastText: PRIMARY_TEXT,
     },
     info: {
       main: '#2196F3',
       light: '#64B6F7',
       dark: '#0B79D0',
-      contrastText: '#FFFFFF',
+      contrastText: PRIMARY_TEXT,
     },
     warning: {
       main: '#FFB020',
       light: '#FFBF4C',
       dark: '#B27B16',
-      contrastText: '#FFFFFF',
+      contrastText: PRIMARY_TEXT,
     },
     error: {
       main: '#D14343',
       light: '#DA6868',
       dark: '#922E2E',
-      contrastText: '#FFFFFF',
+      contrastText: PRIMARY_TEXT,
     },
     text: {
-      primary: 'rgb(237, 242, 247)',
+      primary: PRIMARY_TEXT,
       secondary: 'rgb(160, 174, 192)',
       disabled: 'rgba(55, 65, 81, 0.48)',
     },

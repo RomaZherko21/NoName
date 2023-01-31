@@ -89,7 +89,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
                       borderRadius: 50,
                       left: 10,
                     }}
-                  ></Box>
+                  />
                 )}
 
                 <Typography

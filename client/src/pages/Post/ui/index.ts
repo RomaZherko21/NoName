@@ -1,2 +1,2 @@
-export { Comment } from './Comment'
-export { getCommentPopupConfig } from './Comment/CommentPopupConfig'
+export { Comments } from './Comments'
+export { PostContent } from './PostContent'
