@@ -1,5 +1,5 @@
 .postCover {
-  height: 348px;
+  height: 250px;
   width: 100%;
 
   background-position: center center;
@@ -7,4 +7,21 @@
   background-size: cover;
   border-radius: 8px;
   object-fit: cover;
+}
+
+.uploadedPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+}
+
+.uploadPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 160px;
+  cursor: pointer;
 }

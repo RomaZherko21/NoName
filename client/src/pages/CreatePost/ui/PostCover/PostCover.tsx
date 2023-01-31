@@ -1,10 +1,10 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useFormikContext } from 'formik'
 import { Avatar, Box, Button, Grid, Paper, Typography } from '@mui/material'
-import { FiUpload } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
+import { FiUpload } from 'react-icons/fi'
 
-import styles from './Styles.module.scss'
+import s from './Styles.module.scss'
 
 function PostCover() {
   const { t } = useTranslation()
@@ -27,34 +27,17 @@ function PostCover() {
         </Grid>
 
         <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-          {cover ? (
-            <>
-              <img alt="post cover" className={styles.postCover} src={URL.createObjectURL(cover)} />
-              <Button
-                size="large"
-                sx={{
-                  alignSelf: 'flex-start',
-                  color: (theme) => theme.palette.secondary.contrastText,
-                }}
-                onClick={() => setFieldValue('cover', null)}
-              >
-                {t('post:actions.removePhoto')}
-              </Button>
-            </>
-          ) : (
-            <>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  border: (theme) => `1px dashed ${theme.palette.divider}`,
-                  borderRadius: '8px',
-                  p: 2,
-                  minHeight: '240px',
-                }}
-              >
+          <Box
+            sx={{
+              border: (theme) => (!cover ? `1px dashed ${theme.palette.divider}` : ''),
+              borderRadius: 1,
+            }}
+            className={s.uploadedPhoto}
+          >
+            {cover ? (
+              <img alt="post cover" className={s.postCover} src={URL.createObjectURL(cover)} />
+            ) : (
+              <>
                 <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.secondary }}>
                   {t('post:actions.selectCoverImage')}
                 </Typography>
@@ -64,31 +47,33 @@ function PostCover() {
                 >
                   {t('post:whereImagesAreUsed')}
                 </Typography>
-              </Box>
-              <Button
-                disabled
-                size="large"
-                sx={{
-                  alignSelf: 'flex-start',
-                  color: (theme) => theme.palette.text.disabled,
-                }}
-              >
-                {t('post:actions.removePhoto')}
-              </Button>
-            </>
-          )}
-          <Box
+              </>
+            )}
+          </Box>
+
+          <Button
+            onClick={() => setFieldValue('cover', null)}
+            size="large"
+            disabled={!cover}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              p: 3,
-              border: (theme) => `1px dashed ${theme.palette.divider}`,
-              borderRadius: '8px',
-              minHeight: '160px',
-              cursor: 'pointer',
+              alignSelf: 'flex-start',
+              color: (theme) => theme.palette.secondary.contrastText,
             }}
+          >
+            {t('post:actions.removePhoto')}
+          </Button>
+
+          <Box
             onClick={() => hiddenFileInput.current.click()}
+            sx={{
+              border: (theme) => `1px dashed ${theme.palette.divider}`,
+              borderRadius: 1,
+              '&:hover': {
+                backgroundColor: (theme) => theme.palette.action.hover,
+                opacity: 0.6,
+              },
+            }}
+            className={s.uploadPhoto}
           >
             <input
               id="upload-file"
@@ -99,29 +84,27 @@ function PostCover() {
               onChange={handleUploadFile}
               style={{ display: 'none' }}
             />
-            <Box display="flex" alignItems="center" justifyContent="space-between">
-              <Avatar
-                variant="circular"
-                sx={{
-                  width: '64px',
-                  height: '64px',
-                  backgroundColor: (theme) => theme.palette.grey[300],
-                  mr: 2,
-                }}
+            <Avatar
+              variant="circular"
+              sx={{
+                width: '64px',
+                height: '64px',
+                backgroundColor: (theme) => theme.palette.grey[300],
+                mr: 2,
+              }}
+            >
+              <FiUpload />
+            </Avatar>
+            <Box>
+              <Typography variant="body1" sx={{ mb: 1 }}>
+                {t('post:hint.uploadFile')}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                sx={{ color: (theme) => theme.palette.text.secondary }}
               >
-                <FiUpload />
-              </Avatar>
-              <Box>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  {t('post:hint.uploadFile')}
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ color: (theme) => theme.palette.text.secondary }}
-                >
-                  {t('post:hint.filePermissions')}
-                </Typography>
-              </Box>
+                {t('post:hint.filePermissions')}
+              </Typography>
             </Box>
           </Box>
         </Grid>

@@ -15,6 +15,7 @@ import { useRootStore } from 'stores'
 
 import { CreatePostModel } from './model'
 import { PostCover } from './ui'
+import { ROUTES } from 'shared/consts'
 
 function CreatePost() {
   const { t } = useTranslation()
@@ -50,14 +51,17 @@ function CreatePost() {
           post: values.cover || '',
           user_id: user.id,
         })
-        navigate('/posts')
-        toast.success(t('notification:successful.created'))
+        navigate(ROUTES.POSTS)
+        toast.success(t('notification:success.created'))
       }}
     >
       {({ handleSubmit, values, setFieldValue }) => (
         <form onSubmit={handleSubmit}>
           <Container maxWidth="xl">
-            <PageHeader pageName={t('page:createNewPost')} />
+            <PageHeader
+              pageName={t('page:createPost')}
+              breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.create' }]}
+            />
 
             <Paper elevation={1} sx={{ mb: 3 }}>
               <Grid container sx={{ p: 4 }}>
@@ -98,41 +102,26 @@ function CreatePost() {
                 <Grid item md={4}>
                   <Typography variant="h6">{t('common.meta')}</Typography>
                 </Grid>
-                <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <Box sx={{ mb: 1 }}>
-                    <Typography variant="subtitle1">{t('post:hint.readingTime')}</Typography>
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
+                <Grid item md={8}>
+                  <Box>
                     <InputField field="readingTime" label="post:readingTime" />
                   </Box>
                 </Grid>
               </Grid>
             </Paper>
 
-            <Paper elevation={16} sx={{ mb: 3 }}>
+            <Paper elevation={1}>
               <Box
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'flex-end',
                   p: 2.5,
-                  pl: 3.5,
                   gap: 1,
                 }}
               >
-                <Button
-                  size="medium"
-                  sx={{ color: (theme) => theme.palette.text.primary }}
-                  onClick={() => navigate('/posts')}
-                >
-                  {t('common.cancel')}
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="medium"
-                  sx={{ color: (theme) => theme.palette.text.primary }}
-                >
+                <Button onClick={() => navigate(ROUTES.POSTS)}>{t('actions.cancel')}</Button>
+                <Button type="submit" variant="contained">
                   {t('post:actions.publishChanges')}
                 </Button>
               </Box>

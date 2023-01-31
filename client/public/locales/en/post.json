@@ -5,7 +5,7 @@
   "shortDescription": "Short Description",
   "postTitle": "Post Title",
   "postCover": "Post cover",
-  "readingTime": "Reading time",
+  "readingTime": "Reading time (minute)",
   "whereImagesAreUsed": "Image used for the blog post cover and also for Open Graph meta",
   "actions": {
     "selectFile": "Select file",
@@ -21,7 +21,6 @@
     "isLiked": "Is liked?"
   },
   "hint": {
-    "readingTime": "Write how long it takes to read your post in minutes.",
     "uploadFile": "Click to upload select file or drag and drop.",
     "filePermissions": "(SVG, JPG, PNG, or gif maximum 900x400)"
   }

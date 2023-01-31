@@ -8,7 +8,7 @@ const darkTheme = {
       hover: '#252E3E',
       selected: 'rgba(55, 65, 81, 0.08)',
       disabledBackground: 'rgba(55, 65, 81, 0.12)',
-      disabled: 'rgba(55, 65, 81, 0.26)',
+      disabled: 'rgba(243, 244, 246, 0.38)',
     },
     background: {
       default: 'rgba(14, 19, 32)',

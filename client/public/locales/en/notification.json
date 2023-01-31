@@ -3,7 +3,7 @@
   "removeConfirm": "Are you want to delete?",
   "needHelp": "Need help?",
   "sure": "Are you sure?",
-  "successful": {
+  "success": {
     "created": "Successfully created!",
     "updated": "Successfully updated!",
     "deleted": "Successfully deleted!"
