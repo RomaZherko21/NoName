@@ -1,0 +1,28 @@
+.quill {
+  .ql-toolbar {
+    border: 1px solid rgb(45, 55, 72);
+    border-radius: 10px 10px 0 0;
+    color: white;
+
+    .ql-stroke {
+      fill: none;
+      stroke: #fff;
+    }
+
+    .ql-fill {
+      fill: #fff;
+      stroke: none;
+    }
+
+    .ql-picker {
+      color: #fff;
+    }
+  }
+
+  .ql-container {
+    border: 1px solid rgb(45, 55, 72);
+    border-radius: 0 0 10px 10px;
+
+    height: 300px;
+  }
+}

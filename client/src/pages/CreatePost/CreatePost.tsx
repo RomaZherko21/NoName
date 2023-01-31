@@ -6,16 +6,14 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 
 import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
 import { InputField, PageHeader } from 'shared/ui'
 import { useRootStore } from 'stores'
+import { ROUTES } from 'shared/consts'
 
 import { CreatePostModel } from './model'
-import { PostCover } from './ui'
-import { ROUTES } from 'shared/consts'
+import { PostCover, QuillField } from './ui'
 
 function CreatePost() {
   const { t } = useTranslation()
@@ -57,58 +55,43 @@ function CreatePost() {
     >
       {({ handleSubmit, values, setFieldValue }) => (
         <form onSubmit={handleSubmit}>
-          <Container maxWidth="xl">
+          <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <PageHeader
               pageName={t('page:createPost')}
               breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.create' }]}
             />
 
-            <Paper elevation={1} sx={{ mb: 3 }}>
-              <Grid container sx={{ p: 4 }}>
-                <Grid item md={4}>
-                  <Typography variant="h6">{t('common.basicDetails')}</Typography>
-                </Grid>
-                <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <Box sx={{ mb: 3 }}>
-                    <InputField field="postTitle" label="post:postTitle" />
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <InputField field="shortDescription" label="post:shortDescription" />
-                  </Box>
-                </Grid>
+            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+              <Grid item md={4}>
+                <Typography variant="h6">{t('common.basicDetails')}</Typography>
               </Grid>
-            </Paper>
+              <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <InputField field="postTitle" label="post:postTitle" />
+                <InputField field="shortDescription" label="post:shortDescription" />
+              </Grid>
+            </Grid>
 
             <PostCover />
 
-            <Paper elevation={1} sx={{ mb: 3 }}>
-              <Grid container sx={{ p: 4, pb: 10 }}>
-                <Grid item md={4}>
-                  <Typography variant="h6">{t('common.content')}</Typography>
-                </Grid>
-                <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <ReactQuill
-                    theme="snow"
-                    value={values.description}
-                    onChange={(html: string) => setFieldValue('description', html)}
-                    style={{ height: 400 }}
-                  />
-                </Grid>
+            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+              <Grid item md={4}>
+                <Typography variant="h6">{t('common.content')}</Typography>
               </Grid>
-            </Paper>
+              <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
+                <QuillField />
+              </Grid>
+            </Grid>
 
-            <Paper elevation={1} sx={{ mb: 3 }}>
-              <Grid container sx={{ p: 4 }}>
-                <Grid item md={4}>
-                  <Typography variant="h6">{t('common.meta')}</Typography>
-                </Grid>
-                <Grid item md={8}>
-                  <Box>
-                    <InputField field="readingTime" label="post:readingTime" />
-                  </Box>
-                </Grid>
+            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+              <Grid item md={4}>
+                <Typography variant="h6">{t('common.meta')}</Typography>
               </Grid>
-            </Paper>
+              <Grid item md={8}>
+                <Box>
+                  <InputField field="readingTime" label="post:readingTime" />
+                </Box>
+              </Grid>
+            </Grid>
 
             <Paper elevation={1}>
               <Box
