@@ -21,7 +21,7 @@ export const getPopupConfig = (navigate: NavigateFunction) => [
     text: 'actions.delete',
     onClick: (id: number) => {
       PostsModel.remove(id)
-      toast.success(i18next.t('notification:successful.deleted'))
+      toast.success(i18next.t('notification:success.deleted'))
     },
   },
 ]

@@ -47,7 +47,7 @@ function CreatePostForm({ hideModal }: any) {
       onSubmit: (value: FormValues) => {
         PostsModel.create({ ...value, user_id: user.id })
         hideModal()
-        toast.success(t('notification:successful.created'))
+        toast.success(t('notification:success.created'))
       },
     })
 
