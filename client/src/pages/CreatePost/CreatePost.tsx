@@ -112,12 +112,14 @@ function CreatePost() {
 
               <Paper elevation={16} sx={{ mb: 3 }}>
                 <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="flex-end"
-                  p={2.5}
-                  pl={3.5}
-                  gap={1}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    p: 2.5,
+                    pl: 3.5,
+                    gap: 1,
+                  }}
                 >
                   <Button
                     size="medium"
