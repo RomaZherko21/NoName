@@ -19,7 +19,8 @@
     "filters": "Filters",
     "settings": "Settings",
     "basicDetails": "Basic details",
-    "content": "Content"
+    "content": "Content",
+    "meta": "Meta"
   },
   "actions": {
     "add": "Add",

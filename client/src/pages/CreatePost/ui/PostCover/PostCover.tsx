@@ -1,21 +1,22 @@
 import React, { useRef } from 'react'
+import { useFormikContext } from 'formik'
 import { Avatar, Box, Button, Grid, Paper, Typography } from '@mui/material'
 import { FiUpload } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 
 import styles from './Styles.module.scss'
 
-interface Props {
-  cover: File | null
-  setCover: (value: React.SetStateAction<null>) => void
-}
-
-function PostCover({ cover, setCover }: Props) {
+function PostCover() {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<any>(null)
 
+  const {
+    values: { cover },
+    setFieldValue,
+  } = useFormikContext<any>()
+
   function handleUploadFile(event: any) {
-    setCover(event.target.files[0])
+    setFieldValue('cover', event.target.files[0])
   }
 
   return (
@@ -35,7 +36,7 @@ function PostCover({ cover, setCover }: Props) {
                   alignSelf: 'flex-start',
                   color: (theme) => theme.palette.secondary.contrastText,
                 }}
-                onClick={() => setCover(null)}
+                onClick={() => setFieldValue('cover', null)}
               >
                 {t('post:actions.removePhoto')}
               </Button>
