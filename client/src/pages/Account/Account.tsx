@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Container } from '@mui/material'
 
-import { PageHeader, Tabs } from 'shared/ui'
+import { Tabs } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
+import { PageHeader } from 'widgets'
 
 import { Billing, General, Notifications, Security, Team } from './ui'
 import { useLocation } from 'react-router-dom'

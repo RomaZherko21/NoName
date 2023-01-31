@@ -6,14 +6,8 @@ import { Box, Button, Grid } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
-import {
-  AsideFilters,
-  AsideFiltersBar,
-  CommonTable,
-  PageHeader,
-  Pagination,
-  Spinner,
-} from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import { PageHeader } from 'widgets'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 

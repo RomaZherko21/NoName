@@ -8,9 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
 
 import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
-import { InputField, PageHeader } from 'shared/ui'
+import { InputField } from 'shared/ui'
 import { useRootStore } from 'stores'
 import { ROUTES } from 'shared/consts'
+import { PageHeader } from 'widgets'
 
 import { CreatePostModel } from './model'
 import { PostCover, QuillField } from './ui'

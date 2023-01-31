@@ -2,7 +2,7 @@ import { Button, Grid, Paper, Stack, Typography } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { useTranslation } from 'react-i18next'
 
-import { InputFilter } from 'shared/ui'
+import { Input } from 'shared/ui'
 
 function Security() {
   const { t } = useTranslation()
@@ -16,7 +16,7 @@ function Security() {
           </Grid>
           <Grid item xs={12} md={6}>
             <Stack direction="row" justifyContent="space-between">
-              <InputFilter placeholder="Password" />
+              <Input placeholder="Password" />
             </Stack>
           </Grid>
         </Grid>

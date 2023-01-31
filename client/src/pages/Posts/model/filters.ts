@@ -1,4 +1,4 @@
-import { InputFilter, CheckBoxFilter, DatePickerFilter } from 'shared/ui'
+import { Input, Checkbox, DatePicker } from 'shared/ui'
 
 export interface PostsFilters {
   id?: string
@@ -13,37 +13,37 @@ export interface PostsFilters {
 export const getFiltersConfig = () => [
   {
     key: 'id',
-    Control: InputFilter,
+    Control: Input,
     placeholder: 'common.id',
     type: 'input',
   },
   {
     key: 'name',
-    Control: InputFilter,
+    Control: Input,
     placeholder: 'user:name',
     type: 'input',
   },
   {
     key: 'description',
-    Control: InputFilter,
+    Control: Input,
     placeholder: 'post:description',
     type: 'input',
   },
   {
     key: 'created_from',
-    Control: DatePickerFilter,
+    Control: DatePicker,
     placeholder: 'fields.createdFrom',
     type: 'date',
   },
   {
     key: 'created_to',
-    Control: DatePickerFilter,
+    Control: DatePicker,
     placeholder: 'fields.createdTo',
     type: 'date',
   },
   {
     key: 'is_liked',
-    Control: CheckBoxFilter,
+    Control: Checkbox,
     placeholder: 'post:form.isLiked',
     type: 'check',
   },

@@ -4,7 +4,7 @@ import { Button, Paper, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import FilterListIcon from '@mui/icons-material/FilterList'
 
-import { InputFilter } from '../Filters'
+import { Input } from '../NoForm'
 
 interface Props {
   onChange: (e: any) => void
@@ -19,7 +19,7 @@ const AsideFiltersBar = ({ onChange, filters, handleOpenFilter, placeholder, nam
 
   return (
     <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
-      <InputFilter
+      <Input
         placeholder={t(placeholder)}
         value={filters[name]}
         onChange={onChange}

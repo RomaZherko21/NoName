@@ -1,2 +1,2 @@
-export { InputField } from './InputField'
-export { SelectField } from './SelectField'
+export { default as FormInput } from './FormInput'
+export { default as FormSelect } from './FormSelect'

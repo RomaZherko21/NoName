@@ -6,7 +6,7 @@ interface Props {
   size?: 'small' | 'medium' | undefined
 }
 
-export const InputFilter = (props: Props & any) => {
+const Input = (props: Props & any) => {
   const { t } = useTranslation()
 
   const { placeholder = 'common.emptyInput', size = 'small' } = props
@@ -22,3 +22,5 @@ export const InputFilter = (props: Props & any) => {
     />
   )
 }
+
+export default Input

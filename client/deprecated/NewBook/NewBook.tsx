@@ -14,8 +14,9 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 
 import selectFile from 'assets/images/selectFile.svg'
-import { InputField, MultiSelectField, PageHeader, Spinner } from 'shared/ui'
+import { InputField, MultiSelectField, Spinner } from 'shared/ui'
 import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
+import { PageHeader } from 'widgets'
 
 import { NewBookModel } from './model'
 

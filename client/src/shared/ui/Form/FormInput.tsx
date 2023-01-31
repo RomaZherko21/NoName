@@ -12,7 +12,7 @@ interface Props {
   icon?: JSX.Element
 }
 
-const InputField = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
+const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<any>()
@@ -39,4 +39,4 @@ const InputField = ({ field, label, type, multiline = false, icon, rows = 0 }: P
   )
 }
 
-export default observer(InputField)
+export default observer(FormInput)

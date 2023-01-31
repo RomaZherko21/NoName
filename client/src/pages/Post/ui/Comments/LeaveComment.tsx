@@ -5,7 +5,7 @@ import { MdOutlinePhotoCameraBack } from 'react-icons/md'
 import { FiLink } from 'react-icons/fi'
 import { MdOutlineEmojiEmotions } from 'react-icons/md'
 
-import { InputFilter } from 'shared/ui'
+import { Input } from 'shared/ui'
 import { useRootStore } from 'stores'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
@@ -23,7 +23,7 @@ function LeaveComment() {
         src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
       />
       <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-        <InputFilter
+        <Input
           value={PostModel.commentInputValue}
           onChange={(e: any) => {
             PostModel.commentInputValue = e.target.value

@@ -10,7 +10,7 @@ import TagFacesIcon from '@mui/icons-material/TagFaces'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { InputFilter, PopupMenu } from 'shared/ui'
+import { Input, PopupMenu } from 'shared/ui'
 import { useRootStore } from 'stores'
 import { Post as Postt } from 'shared/types'
 import { PostsFilters } from 'pages/Posts/model'
@@ -108,7 +108,7 @@ const Post = ({ post }: Props) => {
             src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
           />
           <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
-            <InputFilter
+            <Input
               placeholder="user:actions.writeYourComment"
               multiline={true}
               rows={3}

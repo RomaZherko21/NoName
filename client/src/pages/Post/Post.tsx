@@ -4,8 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Container, Button, Grid } from '@mui/material'
 
-import { PageHeader, Spinner } from 'shared/ui'
+import { Spinner } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
+import { PageHeader } from 'widgets'
 
 import { PostModel } from './model'
 import { Comments, PostContent } from './ui'

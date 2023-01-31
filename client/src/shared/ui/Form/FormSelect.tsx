@@ -9,7 +9,7 @@ interface Props {
   options: any
 }
 
-const SelectField = ({ field, label, options }: Props) => {
+const FormSelect = ({ field, label, options }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, setFieldValue } = useFormikContext<any>()
@@ -35,4 +35,4 @@ const SelectField = ({ field, label, options }: Props) => {
   )
 }
 
-export default observer(SelectField)
+export default observer(FormSelect)
