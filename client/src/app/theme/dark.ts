@@ -74,7 +74,7 @@ const darkTheme = {
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#9CA3AF',
+          borderColor: '#2d3748',
         },
       },
     },
