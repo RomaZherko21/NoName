@@ -15,14 +15,21 @@ interface Props {
   }[]
   openFilter: boolean
   onCloseFilter: () => void
-  setFilters: (pre: any) => void
-  filters: any
+  setSearchParams: (pre: any) => void
+  searchParams: any
 }
 
-const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }: Props) => {
+const AsideFilters = ({
+  openFilter,
+  onCloseFilter,
+  config,
+  setSearchParams,
+  searchParams,
+}: Props) => {
   const { t } = useTranslation()
+
   const onClearAllFilters = () => {
-    setFilters({})
+    setSearchParams('')
   }
 
   return (
@@ -57,9 +64,10 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
               {item.type === 'input' && (
                 <item.Control
                   placeholder={item.placeholder}
-                  value={filters[item.key] || ''}
+                  value={searchParams.get(item.key) || ''}
                   onChange={(e: any) => {
-                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
+                    searchParams.set(item.key, e.target.value)
+                    setSearchParams(searchParams)
                   }}
                 />
               )}
@@ -67,27 +75,30 @@ const AsideFilters = ({ openFilter, onCloseFilter, config, setFilters, filters }
                 <item.Control
                   label={item.placeholder}
                   options={item.options || {}}
-                  value={filters[item.key] || ''}
+                  value={searchParams.get(item.key) || ''}
                   onChange={(e: any) => {
-                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.value }))
+                    searchParams.set(item.key, e.target.value)
+                    setSearchParams(searchParams)
                   }}
                 />
               )}
               {item.type === 'date' && (
                 <item.Control
                   label={item.placeholder}
-                  value={filters[item.key] || null}
+                  value={Number(searchParams.get(item.key)) || null}
                   onChange={(e: number) => {
-                    setFilters((pre: any) => ({ ...pre, [item.key]: getTime(e) }))
+                    searchParams.set(item.key, String(getTime(e)))
+                    setSearchParams(searchParams)
                   }}
                 />
               )}
               {item.type === 'check' && (
                 <item.Control
                   label={item.placeholder}
-                  checked={filters[item.key] || false}
+                  checked={searchParams.get(item.key) === 'true' || false}
                   onChange={(e: any) => {
-                    setFilters((pre: any) => ({ ...pre, [item.key]: e.target.checked }))
+                    searchParams.set(item.key, e.target.checked)
+                    setSearchParams(searchParams)
                   }}
                 />
               )}

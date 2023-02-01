@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
+import { useSearchParams } from 'react-router-dom'
 import { Box, Button, Grid } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
@@ -12,12 +13,13 @@ import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
 import { UserForm } from './ui'
-import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
+import { UsersModel, getFiltersConfig, getColumns } from './model'
 
 function Users() {
   const { t } = useTranslation()
 
   const [openFilter, setOpenFilter] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const handleOpenFilter = () => {
     setOpenFilter(true)
@@ -27,16 +29,14 @@ function Users() {
     setOpenFilter(false)
   }
 
-  const [filters, setFilters] = useState<UserFilters>({})
-
   useEffect(() => {
     UsersModel.fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [UsersModel.pagination.page, UsersModel.pagination.perPage])
 
   useEffect(() => {
-    UsersModel.changeFilters(filters)
-  }, [filters])
+    UsersModel.changeFilters({})
+  }, [searchParams])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
     <UserForm
@@ -75,11 +75,13 @@ function Users() {
       <Grid spacing={1} container direction="column">
         <Grid item>
           <AsideFiltersBar
-            filters={filters}
-            onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
+            value={searchParams.get('email') || ''}
+            onChange={(e: any) => {
+              searchParams.set('email', e.target.value)
+              setSearchParams(searchParams)
+            }}
             handleOpenFilter={handleOpenFilter}
             placeholder="user:actions.searchEmail"
-            name="email"
           />
         </Grid>
         <Grid item>
@@ -96,8 +98,8 @@ function Users() {
 
       <AsideFilters
         config={filtersConfig}
-        filters={filters}
-        setFilters={setFilters}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
         openFilter={openFilter}
         onCloseFilter={handleCloseFilter}
       />

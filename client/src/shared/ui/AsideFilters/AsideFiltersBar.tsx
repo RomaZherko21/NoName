@@ -9,19 +9,18 @@ import { Input } from '../NoForm'
 interface Props {
   onChange: (e: any) => void
   handleOpenFilter: () => void
-  filters: any
   placeholder: string
-  name: string
+  value: string
 }
 
-const AsideFiltersBar = ({ onChange, filters, handleOpenFilter, placeholder, name }: Props) => {
+const AsideFiltersBar = ({ value, onChange, handleOpenFilter, placeholder }: Props) => {
   const { t } = useTranslation()
 
   return (
     <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
       <Input
         placeholder={t(placeholder)}
-        value={filters[name]}
+        value={value}
         onChange={onChange}
         InputProps={{
           startAdornment: (

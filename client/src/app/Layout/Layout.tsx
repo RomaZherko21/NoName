@@ -1,14 +1,11 @@
 import { observer } from 'mobx-react-lite'
+import { Outlet } from 'react-router-dom'
 import { Box, Toolbar } from '@mui/material'
 
 import { NavBar, Header } from 'widgets'
 import { DRAWER_WIDTH } from 'shared/consts'
 
-interface Props {
-  children: JSX.Element
-}
-
-const Layout = ({ children }: Props) => {
+const Layout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Header />
@@ -25,7 +22,7 @@ const Layout = ({ children }: Props) => {
         }}
       >
         <Toolbar />
-        {children}
+        <Outlet />
       </Box>
     </Box>
   )

@@ -11,9 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { SignIn } from 'pages'
 import { useRootStore, RootStoreProvider } from 'stores'
 
-import { Layout } from './Layout'
 import Router from './Router'
-
 import AppThemeProvider from './theme'
 
 configure({
@@ -39,15 +37,7 @@ function App() {
         <RootStoreProvider>
           <AppThemeProvider>
             <CssBaseline enableColorScheme />
-            <ModalProvider>
-              {authorization.isAuthorized ? (
-                <Layout>
-                  <Router />
-                </Layout>
-              ) : (
-                <SignIn />
-              )}
-            </ModalProvider>
+            <ModalProvider>{authorization.isAuthorized ? <Router /> : <SignIn />}</ModalProvider>
           </AppThemeProvider>
         </RootStoreProvider>
       </BrowserRouter>

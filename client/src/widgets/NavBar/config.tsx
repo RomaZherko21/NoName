@@ -14,7 +14,7 @@ export const config = [
       },
       {
         text: 'Create',
-        to: ROUTES.USERS_CREATE,
+        to: ROUTES.USERS_NEW,
       },
     ],
   },
@@ -28,7 +28,7 @@ export const config = [
       },
       {
         text: 'Create',
-        to: ROUTES.POSTS_CREATE,
+        to: ROUTES.POSTS_NEW,
       },
     ],
   },

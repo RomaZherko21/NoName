@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   Collapse,
@@ -35,7 +35,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
     }
   }
 
-  const active = useMemo(
+  const isActive = useMemo(
     () =>
       to ? location.pathname === to : collapsedItems.find((item) => location.pathname === item.to),
     [to, location, collapsedItems]
@@ -46,7 +46,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
       <ListItemButton sx={{ py: 0.6, px: 1, borderRadius: 1 }} onClick={onItemClick}>
         <ListItemIcon
           sx={{
-            color: ({ palette }) => (active ? palette.primary.main : palette.text.secondary),
+            color: ({ palette }) => (isActive ? palette.primary.main : palette.text.secondary),
             fontSize: 20,
           }}
         >
@@ -56,7 +56,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
         <ListItemText>
           <Typography
             variant="body2"
-            color={({ palette }) => (active ? palette.text.primary : palette.text.secondary)}
+            color={({ palette }) => (isActive ? palette.text.primary : palette.text.secondary)}
           >
             {t(title)}
           </Typography>
@@ -73,12 +73,7 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
         <Collapse in={isOpen} timeout="auto" mountOnEnter unmountOnExit>
           {collapsedItems.map((item) => (
             <List component="div" disablePadding>
-              <ListItemButton
-                sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
-                onClick={() => {
-                  navigate(item.to)
-                }}
-              >
+              <ListItemButton component={Link} to={item.to} sx={{ p: 0.6, borderRadius: 1, pl: 5 }}>
                 {location.pathname === item.to && (
                   <Box
                     sx={{

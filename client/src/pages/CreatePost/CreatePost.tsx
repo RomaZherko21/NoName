@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
 
@@ -54,7 +54,7 @@ function CreatePost() {
         toast.success(t('notification:success.created'))
       }}
     >
-      {({ handleSubmit, values, setFieldValue }) => (
+      {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <PageHeader
@@ -104,7 +104,9 @@ function CreatePost() {
                   gap: 1,
                 }}
               >
-                <Button onClick={() => navigate(ROUTES.POSTS)}>{t('actions.cancel')}</Button>
+                <Button component={Link} to={ROUTES.POSTS}>
+                  {t('actions.cancel')}
+                </Button>
                 <Button type="submit" variant="contained">
                   {t('post:actions.publishChanges')}
                 </Button>

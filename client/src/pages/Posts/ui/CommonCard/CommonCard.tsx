@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { generatePath, useNavigate } from 'react-router-dom'
+import { generatePath, Link } from 'react-router-dom'
 import {
   Avatar,
   Card,
@@ -56,7 +56,6 @@ const CommonCard = ({
   toggleLike,
 }: Props) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
 
   return (
     <Card sx={{ height: 380 }} key={id}>
@@ -113,7 +112,8 @@ const CommonCard = ({
         <Box>
           <Button
             variant="text"
-            onClick={() => navigate(generatePath(ROUTES.POST, { id: String(id) }))}
+            component={Link}
+            to={generatePath(ROUTES.POST, { id: String(id) })}
           >
             {t('post:actions.readMore')}
           </Button>

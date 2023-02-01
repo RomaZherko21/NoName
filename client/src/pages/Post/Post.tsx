@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite'
 import { Container, Button, Grid } from '@mui/material'
 
 import { Spinner } from 'shared/ui'
-import { ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
 
 import { PostModel } from './model'
@@ -27,7 +26,7 @@ function Post() {
         breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.details' }]}
       >
         <Grid item>
-          <Button variant="text" size="large" onClick={() => navigate(ROUTES.POSTS)}>
+          <Button variant="text" size="large" onClick={() => navigate(-1)}>
             {t('translation:actions.goBack')}
           </Button>
         </Grid>

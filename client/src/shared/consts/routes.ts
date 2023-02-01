@@ -1,12 +1,12 @@
 export const ROUTES = {
-  HOME: '/users',
+  HOME: '/',
 
   USERS: '/users',
-  USERS_CREATE: '/users/create',
+  USERS_NEW: '/users/new',
 
   POSTS: '/posts',
-  POSTS_CREATE: '/posts/create',
   POST: '/posts/:id',
+  POSTS_NEW: '/posts/new',
 
   PROFILE: '/profile',
   PROFILE_TIMELINE: '/profile/timeline',
