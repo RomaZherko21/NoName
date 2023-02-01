@@ -1,1 +1,1 @@
-export const COMMON_DATE_FORMAT = 'dd.MM.yyyy - HH:mm'
+export const COMMON_DATE_FORMAT = 'MMM dd, yyyy'

@@ -11,6 +11,7 @@ import { PageHeader } from 'widgets'
 
 import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
 import { getFiltersConfig, PostsModel } from './model'
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 
 function Posts() {
   const { t } = useTranslation()
@@ -68,13 +69,13 @@ function Posts() {
           />
         </Grid>
 
-        <Grid item container spacing={2}>
+        <Grid2 container direction="row" spacing={4} sx={{pt: 3, pl: 3}}>
           {PostsModel.loading.has
             ? [1, 2, 3, 4].map((item) => {
                 return <PostLoader key={item} />
               })
             : PostsModel.posts.map((post) => (
-                <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+                <Grid2 key={post.id} direction="row" xs={12} md={6}>
                   <CommonCard
                     id={post.id}
                     name={post.name}
@@ -87,9 +88,9 @@ function Posts() {
                     createdAt={post.created_at}
                     popupConfig={popupConfig}
                   />
-                </Grid>
+                </Grid2>
               ))}
-        </Grid>
+        </Grid2>
         <Grid item>
           <Pagination paginationModel={PostsModel.pagination} />
         </Grid>
