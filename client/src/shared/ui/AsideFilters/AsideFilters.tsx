@@ -65,10 +65,12 @@ const AsideFilters = ({
                 <item.Control
                   placeholder={item.placeholder}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: any) => {
-                    searchParams.set(item.key, e.target.value)
-                    setSearchParams(searchParams)
-                  }}
+                  onChange={(e: any) =>
+                    setSearchParams((searchParams: URLSearchParams) => {
+                      searchParams.set(item.key, e.target.value)
+                      return searchParams
+                    })
+                  }
                 />
               )}
               {item.type === 'select' && (
@@ -76,30 +78,36 @@ const AsideFilters = ({
                   label={item.placeholder}
                   options={item.options || {}}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: any) => {
-                    searchParams.set(item.key, e.target.value)
-                    setSearchParams(searchParams)
-                  }}
+                  onChange={(e: any) =>
+                    setSearchParams((searchParams: URLSearchParams) => {
+                      searchParams.set(item.key, e.target.value)
+                      return searchParams
+                    })
+                  }
                 />
               )}
               {item.type === 'date' && (
                 <item.Control
                   label={item.placeholder}
                   value={Number(searchParams.get(item.key)) || null}
-                  onChange={(e: number) => {
-                    searchParams.set(item.key, String(getTime(e)))
-                    setSearchParams(searchParams)
-                  }}
+                  onChange={(e: number) =>
+                    setSearchParams((searchParams: URLSearchParams) => {
+                      searchParams.set(item.key, String(getTime(e)))
+                      return searchParams
+                    })
+                  }
                 />
               )}
               {item.type === 'check' && (
                 <item.Control
                   label={item.placeholder}
                   checked={searchParams.get(item.key) === 'true' || false}
-                  onChange={(e: any) => {
-                    searchParams.set(item.key, e.target.checked)
-                    setSearchParams(searchParams)
-                  }}
+                  onChange={(e: any) =>
+                    setSearchParams((searchParams: URLSearchParams) => {
+                      searchParams.set(item.key, e.target.checked)
+                      return searchParams
+                    })
+                  }
                 />
               )}
             </Grid>

@@ -22,12 +22,6 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
-  changeFilters(filters: PostsFilters) {
-    this.debounceFetch({ filters })
-  }
-
-  debounceFetch = debounce(this.fetch, 500)
-
   set posts(data: Post[]) {
     this._posts = data
   }
@@ -36,11 +30,11 @@ class PostsModel {
     return this._posts
   }
 
-  async toggleLike(id: number, filters?: PostsFilters) {
-    await NODE_API.post.like(id)
-
-    this.fetch({ filters, hidden: true })
+  changeFilters(filters: PostsFilters) {
+    this.debounceFetch({ filters })
   }
+
+  debounceFetch = debounce(this.fetch, 500)
 
   async fetch({ filters, hidden = false }: { filters?: PostsFilters; hidden?: boolean }) {
     try {
@@ -89,6 +83,12 @@ class PostsModel {
     } catch {
       this.loading.reset()
     }
+  }
+
+  async toggleLike(id: number, filters?: PostsFilters) {
+    await NODE_API.post.like(id)
+
+    this.fetch({ filters, hidden: true })
   }
 }
 

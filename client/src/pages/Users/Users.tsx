@@ -30,13 +30,10 @@ function Users() {
   }
 
   useEffect(() => {
-    UsersModel.fetch()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [UsersModel.pagination.page, UsersModel.pagination.perPage])
+    UsersModel.debounceFetch({})
 
-  useEffect(() => {
-    UsersModel.changeFilters({})
-  }, [searchParams])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [UsersModel.pagination.page, UsersModel.pagination.perPage, searchParams])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
     <UserForm

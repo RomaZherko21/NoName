@@ -22,13 +22,9 @@ function Posts() {
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   useEffect(() => {
-    PostsModel.fetch({})
+    PostsModel.debounceFetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
-
-  useEffect(() => {
-    PostsModel.debounceFetch({}) // searchParams
-  }, [searchParams])
+  }, [PostsModel.pagination.page, PostsModel.pagination.perPage, searchParams])
 
   const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
     <CreatePostForm hideModal={hideModal} />

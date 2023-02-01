@@ -22,12 +22,6 @@ class UsersModel {
     this.loading = new LoadingModel()
   }
 
-  changeFilters(filters: UserFilters) {
-    this.debounceFetch(filters)
-  }
-
-  debounceFetch = debounce(this.fetch, 500)
-
   set users(data: User[]) {
     this._users = data
   }
@@ -41,6 +35,8 @@ class UsersModel {
 
     this.fetch()
   }
+
+  debounceFetch = debounce(this.fetch, 500)
 
   async fetch(filters?: UserFilters) {
     try {

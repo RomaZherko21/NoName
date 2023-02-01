@@ -1,5 +1,4 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from 'react-modal-hook'
 import { Slide, toast } from 'react-toastify'
 import { configure } from 'mobx'
@@ -33,14 +32,12 @@ function App() {
 
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <RootStoreProvider>
-          <AppThemeProvider>
-            <CssBaseline enableColorScheme />
-            <ModalProvider>{authorization.isAuthorized ? <Router /> : <SignIn />}</ModalProvider>
-          </AppThemeProvider>
-        </RootStoreProvider>
-      </BrowserRouter>
+      <RootStoreProvider>
+        <AppThemeProvider>
+          <CssBaseline enableColorScheme />
+          <ModalProvider>{authorization.isAuthorized ? <Router /> : <SignIn />}</ModalProvider>
+        </AppThemeProvider>
+      </RootStoreProvider>
     </React.StrictMode>
   )
 }
