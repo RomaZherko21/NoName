@@ -37,6 +37,8 @@
   "socialProfile": "Social Profile",
   "editProfile": "Edit Profile",
   "connections": "Connections",
+  "friends": "Friends",
+  "thatsYou": "That's you!",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

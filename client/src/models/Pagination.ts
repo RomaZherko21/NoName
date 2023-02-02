@@ -1,15 +1,13 @@
 import { makeAutoObservable } from 'mobx'
 
 class PaginationModel {
-  private _pageCount: number = 1
+  private _totalCount: number = 0
 
-  private _perPage: number = 10
+  private _limit: number = 10
 
-  private _page: number = 1
+  private _page: number = 0
 
   private _offset: number = 0
-
-  private _count: number = 0
 
   perPageArr: number[] = [2, 10, 15, 20]
 
@@ -17,12 +15,12 @@ class PaginationModel {
     makeAutoObservable(this)
   }
 
-  get count() {
-    return this._count
+  get totalCount() {
+    return this._totalCount
   }
 
-  set count(data: number) {
-    this._count = data
+  set totalCount(data: number) {
+    this._totalCount = data
   }
 
   get page() {
@@ -30,23 +28,19 @@ class PaginationModel {
   }
 
   set page(page: number) {
-    this._page = page || 1
+    this._page = page || 0
   }
 
-  get perPage() {
-    return this._perPage
+  get limit() {
+    return this._limit
   }
 
-  set perPage(perPage: number) {
-    this._perPage = perPage || 1
-  }
-
-  get pageCount() {
-    return Math.ceil(this._count / this.perPage) || 1
+  set limit(perPage: number) {
+    this._limit = perPage || 10
   }
 
   get offset() {
-    return this._perPage * (this._page - 1)
+    return this._limit * this._page
   }
 }
 

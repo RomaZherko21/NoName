@@ -2,18 +2,19 @@ import { useTranslation } from 'react-i18next'
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@mui/material'
 
 interface Props {
-  field: string
+  field?: string
   label: string
   options: any
   value: string
+  size?: 'small' | 'medium'
   onChange: (e: any) => void
 }
 
-const Select = ({ label, options, onChange, value }: Props) => {
+const Select = ({ label, options, onChange, value, size = 'small' }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <FormControl fullWidth size="small">
+    <FormControl fullWidth size={size}>
       <InputLabel>{t(label)}</InputLabel>
       <MuiSelect fullWidth label={t(label)} onChange={onChange} value={value}>
         {Object.values(options).map((value: any) => (

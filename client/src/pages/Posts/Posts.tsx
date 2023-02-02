@@ -24,7 +24,7 @@ function Posts() {
   useEffect(() => {
     PostsModel.debounceFetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PostsModel.pagination.page, PostsModel.pagination.perPage, searchParams])
+  }, [PostsModel.pagination.page, PostsModel.pagination.limit, searchParams])
 
   const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
     <CreatePostForm hideModal={hideModal} />

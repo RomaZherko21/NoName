@@ -1,4 +1,4 @@
-const PRIMARY_FONT = ['Noto Sans Mono', 'Arial', 'sans-serif'].join(',')
+const PRIMARY_FONT = ['Roboto', 'Arial', 'sans-serif'].join(',')
 const SECONDARY_FONT = ['Manrope', 'Arial', 'sans-serif'].join(',')
 
 const commonTheme = {
