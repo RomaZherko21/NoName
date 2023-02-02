@@ -1,25 +1,23 @@
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { generatePath, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Avatar,
   Card,
-  CardActions,
   CardContent,
-  CardHeader,
   CardMedia,
   IconButton,
   Typography,
   Box,
-  Button,
   Chip,
-  Link as MuiLink
+  Link as MuiLink,
+  Tooltip
 } from '@mui/material'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 import { fromMsToDate } from 'shared/helpers'
-import { COMMON_DATE_FORMAT, ROUTES } from 'shared/consts'
+import { COMMON_DATE_FORMAT } from 'shared/consts'
 
 import s from './Styles.module.scss'
 
@@ -33,6 +31,7 @@ interface Props {
   likes: number
   is_liked: boolean
   toggleLike: (id: number) => void
+  pathToPost: string
   popupConfig: Array<{
     Icon: JSX.Element
     text: string
@@ -48,10 +47,10 @@ const CommonCard = ({
   createdAt,
   imageUrl,
   creatorAvatarUrl,
-  popupConfig,
   likes,
   is_liked,
   toggleLike,
+  pathToPost,
 }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -65,9 +64,10 @@ const CommonCard = ({
         sx={{ objectFit: 'fill', cursor: 'pointer' }}
         alt={imageUrl}
         onClick={() => {
-          navigate(generatePath(ROUTES.POST, { id: String(id) }))
+          navigate(pathToPost)
         }}
       />
+
       <CardContent sx={{ p: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb:2 }}>
           <Chip label="Programming" sx={{backgroundColor:(theme)=>theme.palette.grey[700]}} />
@@ -75,12 +75,14 @@ const CommonCard = ({
             5 min read
           </Typography>
         </Box>
-        <MuiLink component={Link} to={generatePath(ROUTES.POST, { id: String(id) })} variant="h5" color="text.primary" underline="hover" >
+
+        <MuiLink component={Link} to={pathToPost} variant="h5" color="text.primary" underline="hover" >
           {name}
         </MuiLink>
         <Typography className={s.ellipsis} variant="body1" color="text.secondary" mt={1}>
           {description}
         </Typography>
+
         <Box sx={{ mt:2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Avatar sx={{ cursor: 'pointer', objectFit: 'fill' }} src={creatorAvatarUrl} />
@@ -92,25 +94,35 @@ const CommonCard = ({
                   height: '6px',
                   backgroundColor: 'text.primary',
                   borderRadius: 50,
+                  m: 1
                 }}
               />
               {format(fromMsToDate(createdAt), COMMON_DATE_FORMAT)} 
             </Typography>
           </Box>
-          <Button
-            onClick={() => toggleLike(id)}
-            variant="outlined"
-            startIcon={
-              <FavoriteIcon
+
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+            <Tooltip
+              title={is_liked ? t('actions.unlike') : t('actions.like')}
+              placement="bottom"
+            >
+              <IconButton
+                onClick={() => toggleLike(id)}
                 sx={{
                   color: (theme) =>
                     is_liked ? theme.palette.error.dark : theme.palette.action.active,
+                  fontSize: 22,
+                  p: 0,
                 }}
-              />
-            }
-          >
-            {likes}
-          </Button>
+              >
+                {is_liked ? <AiFillHeart /> : <AiOutlineHeart />}
+              </IconButton>
+            </Tooltip>
+
+            <Typography variant="body2" color="text.secondary">
+              {likes}
+            </Typography>
+          </Box>
         </Box>
       </CardContent>
     </Card>
