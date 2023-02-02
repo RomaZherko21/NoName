@@ -28,11 +28,11 @@ function PostContent() {
           <Avatar
             alt="User avatar"
             sx={{ cursor: 'pointer' }}
-            src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+            src={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
           />
           <Box>
             <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-              {user.name} {user.surname}{' '}
+              {PostModel.user_name} {PostModel.user_surname}{' '}
               <Box
                 sx={{
                   width: '6px',

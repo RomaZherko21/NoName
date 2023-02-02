@@ -2,11 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { generatePath, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useDialog } from 'shared/hooks'
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
-import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
 
 import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
@@ -68,13 +68,13 @@ function Posts() {
           />
         </Grid>
 
-        <Grid item container spacing={2}>
+        <Grid item container spacing={4}>
           {PostsModel.loading.has
             ? [1, 2, 3, 4].map((item) => {
                 return <PostLoader key={item} />
               })
             : PostsModel.posts.map((post) => (
-                <Grid key={post.id} item sm={6} md={4} lg={3} sx={{ width: '100%' }}>
+                <Grid key={post.id} item xs={12} md={6} sx={{ width: '100%' }}>
                   <CommonCard
                     id={post.id}
                     name={post.name}
@@ -86,6 +86,7 @@ function Posts() {
                     creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
                     createdAt={post.created_at}
                     popupConfig={popupConfig}
+                    pathTo={generatePath(ROUTES.POST, { id: String(post.id) })}
                   />
                 </Grid>
               ))}
