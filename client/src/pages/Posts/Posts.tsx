@@ -11,7 +11,6 @@ import { PageHeader } from 'widgets'
 
 import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
 import { getFiltersConfig, PostsModel } from './model'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 
 function Posts() {
   const { t } = useTranslation()
@@ -69,13 +68,13 @@ function Posts() {
           />
         </Grid>
 
-        <Grid2 container direction="row" spacing={4} sx={{pt: 3, pl: 3}}>
+        <Grid item container spacing={4}>
           {PostsModel.loading.has
             ? [1, 2, 3, 4].map((item) => {
                 return <PostLoader key={item} />
               })
             : PostsModel.posts.map((post) => (
-                <Grid2 key={post.id} direction="row" xs={12} md={6}>
+                <Grid key={post.id} item xs={12} md={6} sx={{ width: '100%' }}>
                   <CommonCard
                     id={post.id}
                     name={post.name}
@@ -87,11 +86,11 @@ function Posts() {
                     creatorAvatarUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
                     createdAt={post.created_at}
                     popupConfig={popupConfig}
-                    pathToPost={generatePath(ROUTES.POST, { id: String(post.id) })}
+                    pathTo={generatePath(ROUTES.POST, { id: String(post.id) })}
                   />
-                </Grid2>
+                </Grid>
               ))}
-        </Grid2>
+        </Grid>
         <Grid item>
           <Pagination paginationModel={PostsModel.pagination} />
         </Grid>

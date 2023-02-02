@@ -31,7 +31,7 @@ interface Props {
   likes: number
   is_liked: boolean
   toggleLike: (id: number) => void
-  pathToPost: string
+  pathTo: string
   popupConfig: Array<{
     Icon: JSX.Element
     text: string
@@ -50,7 +50,7 @@ const CommonCard = ({
   likes,
   is_liked,
   toggleLike,
-  pathToPost,
+  pathTo,
 }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -64,7 +64,7 @@ const CommonCard = ({
         sx={{ objectFit: 'fill', cursor: 'pointer' }}
         alt={imageUrl}
         onClick={() => {
-          navigate(pathToPost)
+          navigate(pathTo)
         }}
       />
 
@@ -76,7 +76,7 @@ const CommonCard = ({
           </Typography>
         </Box>
 
-        <MuiLink component={Link} to={pathToPost} variant="h5" color="text.primary" underline="hover" >
+        <MuiLink component={Link} to={pathTo} variant="h5" color="text.primary" underline="hover" >
           {name}
         </MuiLink>
         <Typography className={s.ellipsis} variant="body1" color="text.secondary" mt={1}>
