@@ -33,7 +33,7 @@ Start an app in the development mode.
 - Open [http://localhost:80](http://localhost:80) to view client in the browser.
 - Open [http://localhost:8000/swagger/index.html](http://localhost:8000/swagger/index.html) to view swagger of go_api.
 
-Client and node_api server will reload if you make edits.\
+Client and api server will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `make down` or `docker compose down --remove-orphans -t 0`
@@ -64,22 +64,26 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 ## Style guide
 
 ### Order in .jsx file
+
 1. Libs hooks, root store hooks
 2. Local state
 3. side effects
 4. functions, handlers
 
 ### CSS styles
+
 - sx={{}} if there is less then 6 lines of code
 - Styles.module.scss if 6 and more lines of code
 - theme folder to change all default styles throughout the project
 
 ### Import order
+
 1. From libs
 2. Absolute path
 3. Relative paths
 
 ### Commit message
+
 - Types: feat, fix, refactor, ci, docs, style, test
 - Scope: FE-{task-number}, BE-{task-number}, ROOT-{task-number}
 - F.E. git commit -m "fix(FE-33): edit local storage hook"
