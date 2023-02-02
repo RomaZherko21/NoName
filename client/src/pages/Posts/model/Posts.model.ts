@@ -49,13 +49,13 @@ class PostsModel {
       }
 
       const data = await NODE_API.post.list({
-        limit: this.pagination.perPage,
+        limit: this.pagination.limit,
         offset: this.pagination.offset,
         filters,
       })
 
       this.posts = data.posts
-      this.pagination.count = data.count
+      this.pagination.totalCount = data.count
 
       this.loading.reset()
     } catch {

@@ -24,7 +24,7 @@ function Posts() {
   useEffect(() => {
     PostsModel.fetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PostsModel.pagination.page, PostsModel.pagination.perPage])
+  }, [PostsModel.pagination.page, PostsModel.pagination.limit])
 
   useEffect(() => {
     PostsModel.debounceFetch({ filters })

@@ -3,15 +3,17 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Avatar, Box, Chip, IconButton, Tooltip, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
+
+import ManIcon from '@mui/icons-material/Man'
+import WomanIcon from '@mui/icons-material/Woman'
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import ManIcon from '@mui/icons-material/Man'
-import WomanIcon from '@mui/icons-material/Woman'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import PersonIcon from '@mui/icons-material/Person'
-import ScheduleSendIcon from '@mui/icons-material/ScheduleSend'
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import ScheduleSendOutlinedIcon from '@mui/icons-material/ScheduleSendOutlined'
+import PersonPinOutlinedIcon from '@mui/icons-material/PersonPinOutlined'
 
 import { useDialog } from 'shared/hooks'
 import { TableColumn, Roles, User, Gender, ConnectionStatus } from 'shared/types'
@@ -24,7 +26,6 @@ import { UserForm, DeleteUserDialog } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
-  const { user } = useRootStore()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
@@ -46,6 +47,26 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
     true
   )
 
+  return (
+    <>
+      <Tooltip title={t('actions.edit') || 'edit'} placement="top">
+        <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
+          <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('actions.delete') || 'delete'} placement="top">
+        <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
+          <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
+        </IconButton>
+      </Tooltip>
+    </>
+  )
+})
+
+const Friends = observer(({ user: data }: { user: User }) => {
+  const { t } = useTranslation()
+  const { user } = useRootStore()
+
   function sendConnectionRequest() {
     if (data.id) {
       UsersModel.connectionRequest(data.id)
@@ -54,41 +75,38 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
 
   return (
     <>
-      <Tooltip title={t('actions.edit') || 'edit'} placement="top">
-        <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
-          <EditOutlinedIcon color="secondary" fontSize="inherit" />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title={t('actions.delete') || 'delete'} placement="top">
-        <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
-          <DeleteIcon color="error" fontSize="inherit" />
-        </IconButton>
-      </Tooltip>
+      {data.id === user.id && (
+        <Tooltip title={t('user:thatsYou')} placement="top">
+          <IconButton size="small" onClick={sendConnectionRequest}>
+            <PersonPinOutlinedIcon fontSize="medium" color="info" />
+          </IconButton>
+        </Tooltip>
+      )}
       {data.id !== user.id && data.connection_status === null && (
         <Tooltip title={t('user:actions.sendRequest')} placement="top">
           <IconButton size="small" onClick={sendConnectionRequest}>
-            <PersonAddIcon fontSize="inherit" color="secondary" />
+            <PersonAddAltOutlinedIcon fontSize="medium" sx={{ color: 'grey.500' }} />
           </IconButton>
         </Tooltip>
       )}
       {data.id !== user.id && data.connection_status === ConnectionStatus.accept && (
         <Tooltip title={t('user:yourFriend')} placement="top">
           <IconButton size="small">
-            <PersonIcon fontSize="inherit" color="secondary" />
+            <PersonOutlineOutlinedIcon fontSize="medium" color="secondary" />
           </IconButton>
         </Tooltip>
       )}
       {data.id !== user.id && data.connection_status === ConnectionStatus.decline && (
         <Tooltip title={t('user:userCanceledRequest')} placement="top">
           <IconButton size="small">
-            <PersonIcon fontSize="inherit" color="error" />
+            <PersonOutlineOutlinedIcon fontSize="medium" color="error" />
           </IconButton>
         </Tooltip>
       )}
       {data.id !== user.id && data.connection_status === ConnectionStatus.pending && (
         <Tooltip title={t('user:requestPending')} placement="top">
           <IconButton size="small">
-            <ScheduleSendIcon fontSize="inherit" />
+            <ScheduleSendOutlinedIcon fontSize="medium" />
           </IconButton>
         </Tooltip>
       )}
@@ -97,10 +115,6 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
 })
 
 export const getColumns = (): TableColumn[] => [
-  {
-    key: 'id',
-    title: 'id',
-  },
   {
     key: 'name',
     title: i18next.t('user:name'),
@@ -139,17 +153,7 @@ export const getColumns = (): TableColumn[] => [
     key: 'date_of_birth',
     title: i18next.t('user:dateOfBirth'),
     getValue: (row: User) => (
-      <Box
-        sx={{
-          backgroundColor: 'grey.800',
-          width: 'fit-content',
-          p: 1,
-          borderRadius: 1,
-          color: 'grey.300',
-        }}
-      >
-        {reformatDates(row.date_of_birth || '')}
-      </Box>
+      <Box color="text.primary">{reformatDates(row.date_of_birth || '')}</Box>
     ),
   },
   {
@@ -165,6 +169,11 @@ export const getColumns = (): TableColumn[] => [
       ) : (
         <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
       ),
+  },
+  {
+    key: 'friends',
+    title: i18next.t('user:friends'),
+    getValue: (row: User) => <Friends user={row} />,
   },
   {
     key: 'actions',

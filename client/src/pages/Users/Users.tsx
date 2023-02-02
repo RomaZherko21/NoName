@@ -6,12 +6,12 @@ import { Box, Button, Grid } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, CommonTable, Spinner } from 'shared/ui'
 import { PageHeader } from 'widgets'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
-import { UserForm } from './ui'
+import { TableHeaderActions, UserForm } from './ui'
 import { UsersModel, getFiltersConfig, UserFilters, getColumns } from './model'
 
 function Users() {
@@ -32,7 +32,7 @@ function Users() {
   useEffect(() => {
     UsersModel.fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [UsersModel.pagination.page, UsersModel.pagination.perPage])
+  }, [UsersModel.pagination.page, UsersModel.pagination.limit])
 
   useEffect(() => {
     UsersModel.changeFilters(filters)
@@ -72,25 +72,18 @@ function Users() {
         </Grid>
       </PageHeader>
 
-      <Grid spacing={1} container direction="column">
-        <Grid item>
-          <AsideFiltersBar
-            filters={filters}
-            onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
-            handleOpenFilter={handleOpenFilter}
-            placeholder="user:actions.searchEmail"
-            name="email"
-          />
-        </Grid>
+      <Grid container direction="column">
+        <TableHeaderActions
+          handleOpenFilter={handleOpenFilter}
+          filters={filters}
+          onChange={(e: any) => setFilters((pre: any) => ({ ...pre, email: e.target.value }))}
+        />
         <Grid item>
           {UsersModel.loading.has ? (
             <Spinner />
           ) : (
             <CommonTable data={UsersModel.users} columns={columns} />
           )}
-        </Grid>
-        <Grid item>
-          <Pagination paginationModel={UsersModel.pagination} />
         </Grid>
       </Grid>
 

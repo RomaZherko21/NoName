@@ -10,6 +10,8 @@ import {
 } from '@mui/material'
 
 import { TableColumn } from 'shared/types'
+import { UsersModel } from 'pages/Users/model'
+import { Pagination } from 'shared/ui'
 
 interface Props {
   data: any
@@ -18,30 +20,33 @@ interface Props {
 
 const CommonTable = ({ data, columns }: Props) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell key={column.key} align={column.align || 'left'}>
-                {column.title}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row: any) => (
-            <TableRow key={row.id}>
+    <>
+      <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+        <Table>
+          <TableHead>
+            <TableRow>
               {columns.map((column) => (
                 <TableCell key={column.key} align={column.align || 'left'}>
-                  {column.getValue ? column.getValue(row) : row[column.key]}
+                  {column.title}
                 </TableCell>
               ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.map((row: any) => (
+              <TableRow key={row.id}>
+                {columns.map((column) => (
+                  <TableCell key={column.key} align={column.align || 'left'}>
+                    {column.getValue ? column.getValue(row) : row[column.key]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Pagination paginationModel={UsersModel.pagination} />
+      </TableContainer>
+    </>
   )
 }
 

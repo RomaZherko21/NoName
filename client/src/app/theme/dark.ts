@@ -81,10 +81,17 @@ const darkTheme = {
     MuiTableHead: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1F2937',
+          backgroundColor: '#1C2536',
           '.MuiTableCell-root': {
             color: '#9CA1AA',
           },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          borderBottom: '1px solid #1C2536',
         },
       },
     },
