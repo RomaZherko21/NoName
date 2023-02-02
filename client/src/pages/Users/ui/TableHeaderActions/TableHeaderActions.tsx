@@ -50,7 +50,7 @@ function TableHeaderActions({ handleOpenFilter, value, onChange }: Props) {
           options={[
             'Last update (newest)',
             'Last update (oldest)',
-            'Total orders(highest)',
+            'Total orrders(highest)',
             'Total orders(lowest)',
           ]}
         />
