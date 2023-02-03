@@ -1,11 +1,20 @@
 import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Paper, Grid, Typography, Divider, TextField, Button, Stack } from '@mui/material'
+import {
+  Paper,
+  Grid,
+  Typography,
+  Divider,
+  TextField,
+  Button,
+  Stack,
+  TableContainer,
+} from '@mui/material'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import InputAdornment from '@mui/material/InputAdornment'
 
-import { CommonTable, Spinner } from 'shared/ui'
+import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
 import { getColumns, TeamModel } from './model'
 
@@ -53,7 +62,10 @@ function Team() {
         {TeamModel.loading.has ? (
           <Spinner />
         ) : (
-          <CommonTable data={TeamModel.users} columns={columns} />
+          <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+            <CommonTable data={TeamModel.users} columns={columns} />
+            <Pagination paginationModel={TeamModel.pagination} />
+          </TableContainer>
         )}
       </Grid>
     </Paper>

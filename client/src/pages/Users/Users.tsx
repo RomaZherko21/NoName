@@ -3,16 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
 import { useSearchParams } from 'react-router-dom'
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Paper, TableContainer } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
-import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { PageHeader } from 'widgets'
 import { useDialog } from 'shared/hooks'
 import { User } from 'shared/types'
 
-import { UserForm } from './ui'
+import { TableHeaderActions, UserForm } from './ui'
 import { UsersModel, getFiltersConfig, getColumns } from './model'
 
 function Users() {
@@ -33,7 +33,7 @@ function Users() {
     UsersModel.debounceFetch({})
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [UsersModel.pagination.page, UsersModel.pagination.perPage, searchParams])
+  }, [UsersModel.pagination.page, UsersModel.pagination.limit, searchParams])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
     <UserForm
@@ -69,27 +69,24 @@ function Users() {
         </Grid>
       </PageHeader>
 
-      <Grid spacing={1} container direction="column">
-        <Grid item>
-          <AsideFiltersBar
-            value={searchParams.get('email') || ''}
-            onChange={(e: any) => {
-              searchParams.set('email', e.target.value)
-              setSearchParams(searchParams)
-            }}
-            handleOpenFilter={handleOpenFilter}
-            placeholder="user:actions.searchEmail"
-          />
-        </Grid>
+      <Grid container direction="column">
+        <TableHeaderActions
+          handleOpenFilter={handleOpenFilter}
+          value={searchParams.get('email') || ''}
+          onChange={(e: any) => {
+            searchParams.set('email', e.target.value)
+            setSearchParams(searchParams)
+          }}
+        />
         <Grid item>
           {UsersModel.loading.has ? (
             <Spinner />
           ) : (
-            <CommonTable data={UsersModel.users} columns={columns} />
+            <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+              <CommonTable data={UsersModel.users} columns={columns} />
+              <Pagination paginationModel={UsersModel.pagination} />
+            </TableContainer>
           )}
-        </Grid>
-        <Grid item>
-          <Pagination paginationModel={UsersModel.pagination} />
         </Grid>
       </Grid>
 

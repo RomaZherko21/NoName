@@ -3,28 +3,22 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Avatar, Box, Chip, IconButton, Tooltip, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
+
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import ManIcon from '@mui/icons-material/Man'
-import WomanIcon from '@mui/icons-material/Woman'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import PersonIcon from '@mui/icons-material/Person'
-import ScheduleSendIcon from '@mui/icons-material/ScheduleSend'
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined'
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, Roles, User, Gender, ConnectionStatus } from 'shared/types'
+import { TableColumn, Roles, User, Gender } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { useRootStore } from 'stores'
 
 import UsersModel from './Users.model'
-import { UserForm, DeleteUserDialog } from '../ui'
+import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
-  const { user } = useRootStore()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
@@ -46,61 +40,23 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
     true
   )
 
-  function sendConnectionRequest() {
-    if (data.id) {
-      UsersModel.connectionRequest(data.id)
-    }
-  }
-
   return (
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
         <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
-          <EditOutlinedIcon color="secondary" fontSize="inherit" />
+          <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
       <Tooltip title={t('actions.delete') || 'delete'} placement="top">
         <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
-          <DeleteIcon color="error" fontSize="inherit" />
+          <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
-      {data.id !== user.id && data.connection_status === null && (
-        <Tooltip title={t('user:actions.sendRequest')} placement="top">
-          <IconButton size="small" onClick={sendConnectionRequest}>
-            <PersonAddIcon fontSize="inherit" color="secondary" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.accept && (
-        <Tooltip title={t('user:yourFriend')} placement="top">
-          <IconButton size="small">
-            <PersonIcon fontSize="inherit" color="secondary" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.decline && (
-        <Tooltip title={t('user:userCanceledRequest')} placement="top">
-          <IconButton size="small">
-            <PersonIcon fontSize="inherit" color="error" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.pending && (
-        <Tooltip title={t('user:requestPending')} placement="top">
-          <IconButton size="small">
-            <ScheduleSendIcon fontSize="inherit" />
-          </IconButton>
-        </Tooltip>
-      )}
     </>
   )
 })
 
 export const getColumns = (): TableColumn[] => [
-  {
-    key: 'id',
-    title: 'id',
-  },
   {
     key: 'name',
     title: i18next.t('user:name'),
@@ -125,31 +81,28 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:email'),
   },
   {
-    key: 'gender',
-    title: i18next.t('user:gender'),
-    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    key: 'role',
+    title: i18next.t('user:role'),
     getValue: (row: User) =>
-      row.gender === Gender.man ? (
-        <Chip label={row.gender} icon={<ManIcon />} color="primary" />
+      row.role === Roles.admin ? (
+        <Chip
+          label={row.role}
+          icon={<AdminPanelSettingsOutlinedIcon fontSize="small" />}
+          color="primary"
+        />
       ) : (
-        <Chip label={row.gender} icon={<WomanIcon />} color="primary" />
+        <Chip
+          label={row.role}
+          icon={<AccountCircleOutlinedIcon fontSize="small" />}
+          color="secondary"
+        />
       ),
   },
   {
     key: 'date_of_birth',
     title: i18next.t('user:dateOfBirth'),
     getValue: (row: User) => (
-      <Box
-        sx={{
-          backgroundColor: 'grey.800',
-          width: 'fit-content',
-          p: 1,
-          borderRadius: 1,
-          color: 'grey.300',
-        }}
-      >
-        {reformatDates(row.date_of_birth || '')}
-      </Box>
+      <Box color="text.primary">{reformatDates(row.date_of_birth || '')}</Box>
     ),
   },
   {
@@ -157,14 +110,19 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:telephoneNumber'),
   },
   {
-    key: 'role',
-    title: i18next.t('user:role'),
-    getValue: (row: User) =>
-      row.role === Roles.admin ? (
-        <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
-      ) : (
-        <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
-      ),
+    key: 'gender',
+    title: i18next.t('user:gender'),
+    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    getValue: (row: User) => (
+      <Box color="text.primary">
+        {row.gender === Gender.man ? i18next.t('user:man') : i18next.t('user:woman')}
+      </Box>
+    ),
+  },
+  {
+    key: 'friends',
+    title: i18next.t('user:friends'),
+    getValue: (row: User) => <ConnectionStatus user={row} />,
   },
   {
     key: 'actions',
