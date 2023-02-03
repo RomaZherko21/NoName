@@ -5,7 +5,6 @@ import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ command, mode, ssrBuild }): any => {
   if (command === 'serve') {
-    // dev
     return {
       plugins: [
         react(),

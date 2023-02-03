@@ -4,7 +4,7 @@ node_modules/
 # static files
 uploads/
 
-# static files
+# build files
 dist/
 
 # eslint
