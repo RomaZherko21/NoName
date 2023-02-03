@@ -1,18 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import viteTsconfigPaths from 'vite-tsconfig-paths'
-import svgrPlugin from 'vite-plugin-svgr'
+import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ command, mode, ssrBuild }): any => {
   if (command === 'serve') {
     // dev
     return {
-      plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
+      plugins: [
+        react(),
+        viteTsconfigPaths(),
+        checker({
+          typescript: true,
+        }),
+      ],
       server: {
-        // watch: {
-        //   usePolling: true,
-        // },
-        // host: '0.0.0.0',
         host: 'localhost',
         port: '3000',
         strictPort: true,
@@ -22,13 +24,20 @@ export default defineConfig(({ command, mode, ssrBuild }): any => {
             target: 'http://localhost:80/api',
             changeOrigin: true,
             ws: true,
-            rewrite: (path) => path.replace(/^\/api/, ''),
+            rewrite: (path: any) => path.replace(/^\/api/, ''),
           },
         },
       },
     }
   } else {
-    // build
-    return {}
+    return {
+      plugins: [
+        react(),
+        viteTsconfigPaths(),
+        checker({
+          typescript: true,
+        }),
+      ],
+    }
   }
 })

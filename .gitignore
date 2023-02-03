@@ -4,6 +4,9 @@ node_modules/
 # static files
 uploads/
 
+# static files
+dist/
+
 # eslint
 *.eslintcache
 
