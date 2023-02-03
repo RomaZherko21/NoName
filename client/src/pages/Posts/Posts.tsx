@@ -2,14 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
-import { useDialog } from 'shared/hooks'
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
 import { PageHeader } from 'widgets'
 
-import { CommonCard, CreatePostForm, getPopupConfig, PostLoader } from './ui'
+import { PostCard, getPopupConfig, PostLoader } from './ui'
 import { getFiltersConfig, PostsModel } from './model'
+import { ROUTES } from 'shared/consts'
 
 function Posts() {
   const { t } = useTranslation()
@@ -24,10 +24,6 @@ function Posts() {
     PostsModel.debounceFetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PostsModel.pagination.page, PostsModel.pagination.limit, searchParams])
-
-  const [showCreateItemModal] = useDialog('post:form.create', (hideModal) => (
-    <CreatePostForm hideModal={hideModal} />
-  ))
 
   function handleOpenFilter() {
     setOpenFilter(true)
@@ -48,7 +44,13 @@ function Posts() {
         breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.list' }]}
       >
         <Grid item>
-          <Button variant="contained" color="primary" onClick={showCreateItemModal}>
+          <Button
+            component={Link}
+            to={ROUTES.POSTS_NEW}
+            size="small"
+            variant="contained"
+            color="primary"
+          >
             {t('post:form.create')}
           </Button>
         </Grid>
@@ -74,7 +76,7 @@ function Posts() {
               })
             : PostsModel.posts.map((post) => (
                 <Grid key={post.id} item xs={12} md={6} sx={{ width: '100%' }}>
-                  <CommonCard post={post} toggleLike={toggleLike} popupConfig={popupConfig} />
+                  <PostCard post={post} toggleLike={toggleLike} popupConfig={popupConfig} />
                 </Grid>
               ))}
         </Grid>

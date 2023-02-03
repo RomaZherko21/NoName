@@ -7,17 +7,25 @@ import { Comment, Post, User } from 'shared/types'
 class PostModel {
   id: number = 0
   user_id: number = 0
+  genre_id: number = 0
+
   name: string = ''
   description: string = ''
-  created_at: number = 0
+  short_description: string = ''
+  genre: string = ''
   image: string = ''
+  reading_time: number = 0
+
   likes_count: number = 0
   is_liked: boolean = false
+  first_liked_users: number[] = []
   comments: Comment[] = []
 
   user_name: string = ''
   user_surname: string = ''
   user_avatar: string | undefined = ''
+
+  created_at: number = 0
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -96,17 +104,25 @@ class PostModel {
   private fromJSON(post: Post & { user: User }) {
     this.id = post.id
     this.user_id = post.user_id
+    this.genre_id = post.genre_id
+
     this.name = post.name
     this.description = post.description
-    this.created_at = post.created_at
+    this.short_description = post.short_description
+    this.genre = post.genre
     this.image = post.image
+    this.reading_time = post.reading_time
+
     this.likes_count = post.likes_count
     this.is_liked = post.is_liked
+    this.first_liked_users = post.first_liked_users
     this.comments = post.comments
 
     this.user_avatar = post.user.avatar
     this.user_name = post.user.name
     this.user_surname = post.user.surname
+
+    this.created_at = post.created_at
   }
 }
 

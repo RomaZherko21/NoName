@@ -1,16 +1,16 @@
+import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Typography, IconButton, Stack, Avatar, Tooltip } from '@mui/material'
+import { Box, Typography, IconButton, Stack, Avatar, Tooltip, Chip } from '@mui/material'
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from 'react-icons/ai'
 
 import { PopupMenu } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { useRootStore } from 'stores'
 
-import { PostModel } from '../../model'
 import { getPopupConfig } from './PopupConfig'
-import styles from './Styles.module.scss'
-import { format } from 'date-fns'
+import { PostModel } from '../../model'
+import s from './Styles.module.scss'
 
 function PostContent() {
   const { t } = useTranslation()
@@ -18,13 +18,17 @@ function PostContent() {
 
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection: 'column', py: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', py: 2, gap: 2 }}>
+        <Chip
+          label={t(`post:genre.${PostModel.genre}`)}
+          sx={{ backgroundColor: (theme) => theme.palette.grey[700], width: 'fit-content' }}
+        />
         <Typography variant="h4">{PostModel.name}</Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-          {PostModel.name}
+        <Typography variant="body2" color="text.secondary">
+          {PostModel.short_description}
         </Typography>
 
-        <Stack direction="row" spacing={1.25} alignItems="center" sx={{ mt: 2 }}>
+        <Stack direction="row" spacing={1.25} alignItems="center">
           <Avatar
             alt="User avatar"
             sx={{ cursor: 'pointer' }}
@@ -45,7 +49,7 @@ function PostContent() {
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              {user.role}
+              {t('post:readingTime', { minute: PostModel.reading_time })}
             </Typography>
           </Box>
         </Stack>
@@ -53,7 +57,7 @@ function PostContent() {
 
       <Box display="flex" alignItems="center" justifyContent="center">
         <img
-          className={styles.postImg}
+          className={s.postImg}
           src={`${NODE_API_POST_IMAGES_URL}/${PostModel.image}`}
           alt="Post cover"
         />

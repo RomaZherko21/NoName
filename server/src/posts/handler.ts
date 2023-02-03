@@ -101,10 +101,12 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     })[] = await sequelize.query(
       `SELECT 
         posts.*, 
+        genres.name as genre,
         COUNT(posts.id) as likes_count, 
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
       FROM posts 
         JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+        JOIN genres ON posts.genre_id = genres.id 
         
         GROUP BY posts.id
         HAVING posts.id=${id}

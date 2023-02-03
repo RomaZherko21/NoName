@@ -38,7 +38,7 @@ interface Props {
   }>
 }
 
-const CommonCard = ({ post, toggleLike }: Props) => {
+const PostCard = ({ post, toggleLike }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -132,4 +132,4 @@ const CommonCard = ({ post, toggleLike }: Props) => {
   )
 }
 
-export default observer(CommonCard)
+export default observer(PostCard)
