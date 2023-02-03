@@ -2,22 +2,21 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
-import { PageHeader } from 'widgets'
-
-import { PostCard, getPopupConfig, PostLoader } from './ui'
-import { getFiltersConfig, PostsModel } from './model'
 import { ROUTES } from 'shared/consts'
+import { PageHeader } from 'widgets'
+import { PostCard } from 'features'
+
+import { PostLoader } from './ui'
+import { getFiltersConfig, PostsModel } from './model'
 
 function Posts() {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [openFilter, setOpenFilter] = useState(false)
 
-  const popupConfig = useMemo(() => getPopupConfig(navigate), [navigate])
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   useEffect(() => {
@@ -33,9 +32,7 @@ function Posts() {
     setOpenFilter(false)
   }
 
-  function toggleLike(id: number) {
-    PostsModel.toggleLike(id)
-  }
+  function toggleLike(id: number) {}
 
   return (
     <>
@@ -76,7 +73,7 @@ function Posts() {
               })
             : PostsModel.posts.map((post) => (
                 <Grid key={post.id} item xs={12} md={6} sx={{ width: '100%' }}>
-                  <PostCard post={post} toggleLike={toggleLike} popupConfig={popupConfig} />
+                  <PostCard post={post} toggleLike={() => PostsModel.toggleLike(post.id)} />
                 </Grid>
               ))}
         </Grid>

@@ -11,15 +11,16 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import ChatIcon from '@mui/icons-material/Chat'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
+import { HiOutlineUserAdd } from 'react-icons/hi'
+import { FiMoreVertical } from 'react-icons/fi'
+import { RiMessage2Fill } from 'react-icons/ri'
+
+import { useRootStore } from 'stores'
 import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { Tabs } from 'shared/ui'
-import { useRootStore } from 'stores'
-import ProfileCover from 'assets/images/cover.jpg'
 import { PostsFilters } from 'pages/Posts/model'
+import ProfileCover from 'assets/images/cover.jpg'
 
 import { Connections, ReceivedConnections, SentConnections, Timeline } from './ui'
 import s from './Styles.module.scss'
@@ -63,18 +64,24 @@ function Profile() {
             </Stack>
             <Stack direction="row" spacing={1.25} alignItems="center">
               <Button
-                startIcon={<PersonAddIcon fontSize="small" />}
+                startIcon={<HiOutlineUserAdd fontSize="small" />}
                 color="primary"
                 variant="outlined"
+                size="small"
               >
                 {t('actions.connect')}
               </Button>
-              <Button startIcon={<ChatIcon fontSize="small" />} color="primary" variant="contained">
+              <Button
+                startIcon={<RiMessage2Fill fontSize="small" />}
+                color="primary"
+                variant="contained"
+                size="small"
+              >
                 {t('actions.sendMessage')}
               </Button>
-              <IconButton aria-label="upload picture" component="label">
+              <IconButton size="small" aria-label="upload picture" component="label">
                 <Tooltip title="More info">
-                  <MoreHorizIcon />
+                  <FiMoreVertical />
                 </Tooltip>
               </IconButton>
             </Stack>

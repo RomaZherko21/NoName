@@ -30,12 +30,6 @@ import { Post } from 'shared/types'
 interface Props {
   post: Post
   toggleLike: (id: number) => void
-  popupConfig: Array<{
-    Icon: JSX.Element
-    text: string
-    linkTo?: string
-    onClick?: (args?: any) => void
-  }>
 }
 
 const PostCard = ({ post, toggleLike }: Props) => {
