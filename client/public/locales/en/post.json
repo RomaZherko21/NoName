@@ -5,7 +5,7 @@
   "shortDescription": "Short Description",
   "postTitle": "Post Title",
   "postCover": "Post cover",
-  "readingTime": "Reading time (minute)",
+  "readingTime": "{{minute}} minute read",
   "whereImagesAreUsed": "Image used for the blog post cover and also for Open Graph meta",
   "actions": {
     "selectFile": "Select file",
@@ -23,5 +23,23 @@
   "hint": {
     "uploadFile": "Click to upload select file or drag and drop.",
     "filePermissions": "(SVG, JPG, PNG, or gif maximum 900x400)"
+  },
+  "genre": {
+    "Poetry": "Poetry",
+    "Programming": "Programming",
+    "Psychology": "Psychology",
+    "Science": "Science",
+    "Classic": "Classic",
+    "Fantasy": "Fantasy",
+    "Science Fiction": "Science Fiction",
+    "Dystopian": "Dystopian",
+    "Action & Adventure": "Action & Adventure",
+    "Mystery": "Mystery",
+    "Horror": "Horror",
+    "Thriller & Suspense": "Thriller & Suspense",
+    "Historical Fiction": "Historical Fiction",
+    "Romance": "Romance",
+    "Contemporary": "Contemporary Fiction",
+    "Fiction": "Fiction"
   }
 }

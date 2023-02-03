@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
 
+import GenreModel from './genre'
 import sequelize from './init'
 
 const PostModel = sequelize.define(
@@ -17,6 +18,12 @@ const PostModel = sequelize.define(
     description: {
       type: DataTypes.TEXT,
     },
+    short_description: {
+      type: DataTypes.TEXT,
+    },
+    reading_time: {
+      type: DataTypes.INTEGER,
+    },
     created_at: {
       type: DataTypes.BIGINT,
     },
@@ -28,5 +35,9 @@ const PostModel = sequelize.define(
     tableName: 'posts', // You can simply tell DataTypes the name of the table directly
   }
 )
+
+PostModel.hasMany(GenreModel, {
+  foreignKey: 'genre_id',
+})
 
 export default PostModel

@@ -1,14 +1,22 @@
 export interface Post {
   id: number
   user_id: number
+  genre_id: number
+
   name: string
   description: string
-  created_at: number
+  short_description: string
+  genre: string
   image: string
+  reading_time: number
+
+  avatar?: string
   likes_count: number
   is_liked: boolean
-  avatar?: string
+  first_liked_users: number[]
   comments: Comment[]
+
+  created_at: number
 }
 
 export interface Comment {
