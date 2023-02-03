@@ -1,4 +1,4 @@
-FROM node:14.18.0 as node_api
+FROM node:14.18.0 as api
 
 WORKDIR /app
 

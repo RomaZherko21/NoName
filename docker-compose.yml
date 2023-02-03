@@ -8,7 +8,7 @@ x-my-sql-variables: &my-sql-variables
   MYSQL_HOST: ${MYSQL_HOST}
   MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
-x-node-api-variables: &node-api-variables
+x-api-variables: &api-variables
   SERVER_PROTOCOL: ${SERVER_PROTOCOL}
   SERVER_HOST: ${SERVER_HOST}
   SERVER_PORT_INNER: ${SERVER_PORT_INNER}
@@ -35,36 +35,21 @@ services:
     environment:
       <<: *my-sql-variables
 
-  node_api:
-    container_name: node_api
+  api:
+    container_name: api
     build:
       context: ./server
-      target: node_api
+      target: api
     volumes:
-      - node_api_volume:/app/node_modules
+      - api_volume:/app/node_modules
       - ./server:/app
     depends_on:
       - mysql_db
     ports:
       - ${SERVER_PORT_OUTER}:${SERVER_PORT_INNER}
     environment:
-      <<: [*my-sql-variables, *node-api-variables, *client-variables]
+      <<: [*my-sql-variables, *api-variables, *client-variables]
       MYSQL_HOST_IP: mysql_db
-
-  client:
-    container_name: client
-    build:
-      context: ./client
-      target: client
-    volumes:
-      - client_volume:/app/node_modules
-      - ./client:/app
-    stdin_open: true
-    ports:
-      - ${CLIENT_PORT}:${CLIENT_PORT}
-    environment:
-      <<: [*client-variables]
-      CHOKIDAR_USEPOLLING: true
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -79,5 +64,4 @@ services:
 
 volumes:
   mySQL_db_volume:
-  client_volume:
-  node_api_volume:
+  api_volume:
