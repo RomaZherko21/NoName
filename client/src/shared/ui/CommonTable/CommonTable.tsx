@@ -1,24 +1,11 @@
 import { observer } from 'mobx-react-lite'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 
-import { TableColumn, User, Roles, Gender } from 'shared/types'
+import { TableColumn } from 'shared/types'
 
 interface Props {
-  data: User[]
+  data: any[]
   columns: TableColumn[]
-}
-
-interface Row {
-  name: string
-  full_name?: string
-  id?: number
-  email: string
-  role: Roles
-  date_of_birth?: string
-  tel_number?: string
-  gender?: Gender
-  friends?: string
-  actions?: string
 }
 
 const CommonTable = ({ data, columns }: Props) => {
@@ -34,7 +21,7 @@ const CommonTable = ({ data, columns }: Props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((row: Row) => (
+        {data.map((row: any) => (
           <TableRow key={row.id}>
             {columns.map((column) => (
               <TableCell key={column.key} align={column.align || 'left'}>

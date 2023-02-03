@@ -4,12 +4,10 @@ import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Avatar, Box, Chip, IconButton, Tooltip, Typography } from '@mui/material'
 
-import ManIcon from '@mui/icons-material/Man'
-import WomanIcon from '@mui/icons-material/Woman'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined'
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 
 import { useDialog } from 'shared/hooks'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
@@ -83,14 +81,21 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:email'),
   },
   {
-    key: 'gender',
-    title: i18next.t('user:gender'),
-    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    key: 'role',
+    title: i18next.t('user:role'),
     getValue: (row: User) =>
-      row.gender === Gender.man ? (
-        <Chip label={row.gender} icon={<ManIcon />} color="primary" />
+      row.role === Roles.admin ? (
+        <Chip
+          label={row.role}
+          icon={<AdminPanelSettingsOutlinedIcon fontSize="small" />}
+          color="primary"
+        />
       ) : (
-        <Chip label={row.gender} icon={<WomanIcon />} color="primary" />
+        <Chip
+          label={row.role}
+          icon={<AccountCircleOutlinedIcon fontSize="small" />}
+          color="secondary"
+        />
       ),
   },
   {
@@ -105,14 +110,14 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:telephoneNumber'),
   },
   {
-    key: 'role',
-    title: i18next.t('user:role'),
-    getValue: (row: User) =>
-      row.role === Roles.admin ? (
-        <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
-      ) : (
-        <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
-      ),
+    key: 'gender',
+    title: i18next.t('user:gender'),
+    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
+    getValue: (row: User) => (
+      <Box color="text.primary">
+        {row.gender === Gender.man ? i18next.t('user:man') : i18next.t('user:woman')}
+      </Box>
+    ),
   },
   {
     key: 'friends',

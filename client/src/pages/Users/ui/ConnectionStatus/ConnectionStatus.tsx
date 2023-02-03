@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { IconButton, Tooltip } from '@mui/material'
+import { Button, Chip } from '@mui/material'
 
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
@@ -28,51 +28,55 @@ function ConnectionStatus({ user: data }: Props) {
 
   if (data.id === user.id) {
     return (
-      <Tooltip title={t('user:thatsYou')} placement="top">
-        <IconButton size="small" onClick={sendConnectionRequest}>
-          <PersonPinOutlinedIcon fontSize="medium" color="info" />
-        </IconButton>
-      </Tooltip>
+      <Chip
+        label={t('user:thatsYou')}
+        icon={<PersonPinOutlinedIcon fontSize="small" />}
+        color="info"
+      />
     )
   }
 
   if (data.id !== user.id && data.connection_status === null) {
     return (
-      <Tooltip title={t('user:actions.sendRequest')} placement="top">
-        <IconButton size="small" onClick={sendConnectionRequest}>
-          <PersonAddAltOutlinedIcon fontSize="medium" sx={{ color: 'grey.500' }} />
-        </IconButton>
-      </Tooltip>
+      <Button
+        onClick={sendConnectionRequest}
+        variant="contained"
+        size="small"
+        startIcon={<PersonAddAltOutlinedIcon fontSize="small" />}
+        sx={{ borderRadius: '16px' }}
+      >
+        {t('user:actions.sendRequest')}
+      </Button>
     )
   }
 
   if (data.id !== user.id && data.connection_status === ConnectionStatuss.accept) {
     return (
-      <Tooltip title={t('user:yourFriend')} placement="top">
-        <IconButton size="small">
-          <PersonOutlineOutlinedIcon fontSize="medium" color="secondary" />
-        </IconButton>
-      </Tooltip>
+      <Chip
+        label={t('user:yourFriend')}
+        icon={<PersonOutlineOutlinedIcon fontSize="small" />}
+        color="secondary"
+      />
     )
   }
 
   if (data.id !== user.id && data.connection_status === ConnectionStatuss.decline) {
     return (
-      <Tooltip title={t('user:userCanceledRequest')} placement="top">
-        <IconButton size="small">
-          <PersonOutlineOutlinedIcon fontSize="medium" color="error" />
-        </IconButton>
-      </Tooltip>
+      <Chip
+        label={t('user:userCanceledRequest')}
+        icon={<PersonOutlineOutlinedIcon fontSize="small" />}
+        color="error"
+      />
     )
   }
 
   if (data.id !== user.id && data.connection_status === ConnectionStatuss.pending) {
     return (
-      <Tooltip title={t('user:requestPending')} placement="top">
-        <IconButton size="small">
-          <ScheduleSendOutlinedIcon fontSize="medium" />
-        </IconButton>
-      </Tooltip>
+      <Chip
+        label={t('user:requestPending')}
+        icon={<ScheduleSendOutlinedIcon fontSize="small" />}
+        color="info"
+      />
     )
   }
 

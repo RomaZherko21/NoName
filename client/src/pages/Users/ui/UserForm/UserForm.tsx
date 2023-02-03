@@ -13,9 +13,9 @@ import {
 } from 'shared/validations'
 import { User, Roles, Gender } from 'shared/types'
 import { GENDER, ROLES } from 'shared/consts'
+import { InputField, SelectField } from 'shared/ui'
 
 import styles from './Styles.module.scss'
-import { InputField, SelectField } from 'shared/ui'
 
 function UserForm({ onSubmit, user }: { onSubmit: (value: User) => void; user?: User }) {
   const { t } = useTranslation()
