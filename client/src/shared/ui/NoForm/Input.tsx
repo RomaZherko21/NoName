@@ -13,12 +13,12 @@ const Input = (props: Props & any) => {
 
   return (
     <TextField
+      {...props}
       fullWidth
       placeholder={t(placeholder)}
       label={t(placeholder)}
       variant="outlined"
       size={size}
-      {...props}
     />
   )
 }

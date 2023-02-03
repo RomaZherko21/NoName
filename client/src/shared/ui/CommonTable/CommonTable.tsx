@@ -1,52 +1,50 @@
 import { observer } from 'mobx-react-lite'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@mui/material'
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 
-import { TableColumn } from 'shared/types'
-import { UsersModel } from 'pages/Users/model'
-import { Pagination } from 'shared/ui'
+import { TableColumn, User, Roles, Gender } from 'shared/types'
 
 interface Props {
-  data: any
+  data: User[]
   columns: TableColumn[]
+}
+
+interface Row {
+  name: string
+  full_name?: string
+  id?: number
+  email: string
+  role: Roles
+  date_of_birth?: string
+  tel_number?: string
+  gender?: Gender
+  friends?: string
+  actions?: string
 }
 
 const CommonTable = ({ data, columns }: Props) => {
   return (
-    <>
-      <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={column.key} align={column.align || 'left'}>
-                  {column.title}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row: any) => (
-              <TableRow key={row.id}>
-                {columns.map((column) => (
-                  <TableCell key={column.key} align={column.align || 'left'}>
-                    {column.getValue ? column.getValue(row) : row[column.key]}
-                  </TableCell>
-                ))}
-              </TableRow>
+    <Table>
+      <TableHead>
+        <TableRow>
+          {columns.map((column) => (
+            <TableCell key={column.key} align={column.align || 'left'}>
+              {column.title}
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((row: Row) => (
+          <TableRow key={row.id}>
+            {columns.map((column) => (
+              <TableCell key={column.key} align={column.align || 'left'}>
+                {column.getValue ? column.getValue(row) : row[column.key]}
+              </TableCell>
             ))}
-          </TableBody>
-        </Table>
-        <Pagination paginationModel={UsersModel.pagination} />
-      </TableContainer>
-    </>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   )
 }
 

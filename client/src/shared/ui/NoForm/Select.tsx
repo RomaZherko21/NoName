@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next'
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@mui/material'
 
 interface Props {
-  field?: string
   label: string
   options: any
   value: string

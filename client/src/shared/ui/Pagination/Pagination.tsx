@@ -16,7 +16,6 @@ const Pagination = ({ paginationModel }: Props) => {
       rowsPerPage={paginationModel.limit}
       page={paginationModel.page}
       onPageChange={(event: unknown, newPage: number) => {
-        console.log(newPage)
         paginationModel.page = newPage
       }}
       onRowsPerPageChange={(event: React.ChangeEvent<HTMLInputElement>) => {

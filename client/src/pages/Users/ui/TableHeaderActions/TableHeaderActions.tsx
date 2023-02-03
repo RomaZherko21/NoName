@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Grid, InputAdornment, Paper, Box } from '@mui/material'
+import { Button, Grid, InputAdornment, Paper, Box, TextField } from '@mui/material'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { FiSearch } from 'react-icons/fi'
 
-import { Input, Select } from 'shared/ui'
+import { Select } from 'shared/ui'
 
 interface Props {
   handleOpenFilter: () => void
@@ -29,13 +29,12 @@ function TableHeaderActions({ handleOpenFilter, value, onChange }: Props) {
         borderRadius: '20px 20px 0 0',
       }}
     >
-      <Input
+      <TextField
         value={value}
         onChange={onChange}
+        fullWidth
         size="small"
         placeholder={t('user:actions.searchEmail')}
-        label=""
-        fullWidth
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">{<FiSearch size="24px" />}</InputAdornment>

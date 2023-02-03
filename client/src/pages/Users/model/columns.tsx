@@ -10,19 +10,14 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
-import ScheduleSendOutlinedIcon from '@mui/icons-material/ScheduleSendOutlined'
-import PersonPinOutlinedIcon from '@mui/icons-material/PersonPinOutlined'
 
 import { useDialog } from 'shared/hooks'
-import { TableColumn, Roles, User, Gender, ConnectionStatus } from 'shared/types'
+import { TableColumn, Roles, User, Gender } from 'shared/types'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { useRootStore } from 'stores'
 
 import UsersModel from './Users.model'
-import { UserForm, DeleteUserDialog } from '../ui'
+import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
@@ -59,57 +54,6 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
           <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
-    </>
-  )
-})
-
-const Friends = observer(({ user: data }: { user: User }) => {
-  const { t } = useTranslation()
-  const { user } = useRootStore()
-
-  function sendConnectionRequest() {
-    if (data.id) {
-      UsersModel.connectionRequest(data.id)
-    }
-  }
-
-  return (
-    <>
-      {data.id === user.id && (
-        <Tooltip title={t('user:thatsYou')} placement="top">
-          <IconButton size="small" onClick={sendConnectionRequest}>
-            <PersonPinOutlinedIcon fontSize="medium" color="info" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === null && (
-        <Tooltip title={t('user:actions.sendRequest')} placement="top">
-          <IconButton size="small" onClick={sendConnectionRequest}>
-            <PersonAddAltOutlinedIcon fontSize="medium" sx={{ color: 'grey.500' }} />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.accept && (
-        <Tooltip title={t('user:yourFriend')} placement="top">
-          <IconButton size="small">
-            <PersonOutlineOutlinedIcon fontSize="medium" color="secondary" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.decline && (
-        <Tooltip title={t('user:userCanceledRequest')} placement="top">
-          <IconButton size="small">
-            <PersonOutlineOutlinedIcon fontSize="medium" color="error" />
-          </IconButton>
-        </Tooltip>
-      )}
-      {data.id !== user.id && data.connection_status === ConnectionStatus.pending && (
-        <Tooltip title={t('user:requestPending')} placement="top">
-          <IconButton size="small">
-            <ScheduleSendOutlinedIcon fontSize="medium" />
-          </IconButton>
-        </Tooltip>
-      )}
     </>
   )
 })
@@ -173,7 +117,7 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'friends',
     title: i18next.t('user:friends'),
-    getValue: (row: User) => <Friends user={row} />,
+    getValue: (row: User) => <ConnectionStatus user={row} />,
   },
   {
     key: 'actions',
