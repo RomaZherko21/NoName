@@ -1,14 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Pagination as MUiPagination,
-  Select,
-  SelectChangeEvent,
-} from '@mui/material'
-import Stack from '@mui/material/Stack'
+import { TablePagination } from '@mui/material'
 
 import PaginationModel from 'models/Pagination'
 
@@ -17,38 +8,21 @@ interface Props {
 }
 
 const Pagination = ({ paginationModel }: Props) => {
-  const { t } = useTranslation()
-
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <FormControl style={{ minWidth: '100px' }}>
-        <InputLabel id="perPage">{t('fields.amount')}</InputLabel>
-        <Select
-          labelId="perPage"
-          id="perPage"
-          value={String(paginationModel.perPage)}
-          label={t('fields.amount')}
-          onChange={(event: SelectChangeEvent) => {
-            paginationModel.perPage = Number(event.target.value)
-          }}
-        >
-          {paginationModel.perPageArr.map((item) => (
-            <MenuItem key={item} value={item} onClick={() => {paginationModel.page = 1}}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <MUiPagination
-        count={paginationModel.pageCount}
-        defaultPage={paginationModel.page}
-        color="primary"
-        onChange={(event: React.ChangeEvent<unknown>, page: number) => {
-          paginationModel.page = page
-        }}
-      />
-    </Stack>
+    <TablePagination
+      rowsPerPageOptions={paginationModel.perPageArr}
+      component="div"
+      count={paginationModel.totalCount}
+      rowsPerPage={paginationModel.limit}
+      page={paginationModel.page}
+      onPageChange={(event: unknown, newPage: number) => {
+        paginationModel.page = newPage
+      }}
+      onRowsPerPageChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        paginationModel.limit = Number(event.target.value)
+        paginationModel.page = 0
+      }}
+    />
   )
 }
 

@@ -43,12 +43,12 @@ class UsersModel {
       this.loading.begin()
 
       const data = await NODE_API.users.list({
-        limit: this.pagination.perPage,
+        limit: this.pagination.limit,
         offset: this.pagination.offset,
         filters,
       })
       this.users = data.users
-      this.pagination.count = data.count
+      this.pagination.totalCount = data.count
 
       this.loading.end()
     } catch {
