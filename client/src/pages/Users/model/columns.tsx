@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
-import { Avatar, Box, Chip, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, Chip, IconButton, Tooltip } from '@mui/material'
 
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
@@ -16,6 +16,7 @@ import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import UsersModel from './Users.model'
 import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
+import { InformativeImage } from 'shared/ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
@@ -60,25 +61,14 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('user:name'),
-    getValue: ({ name, surname, middle_name, avatar }: User) => (
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-        }}
-      >
-        <Avatar src={`${NODE_API_USER_AVATAR_URL}/${avatar}`} sx={{ mr: 2 }}>
-          {getInitials(`${name} ${surname}`)}
-        </Avatar>
-        <Typography color="textPrimary" variant="body1">
-          {getFullName(name, surname, middle_name)}
-        </Typography>
-      </Box>
+    getValue: ({ name, surname, middle_name, email, avatar }: User) => (
+      <InformativeImage
+        imgUrl={`${NODE_API_USER_AVATAR_URL}/${avatar}`}
+        imgPlaceholder={getInitials(`${name} ${surname}`)}
+        PrimaryText={getFullName(name, surname, middle_name)}
+        SecondaryText={email}
+      />
     ),
-  },
-  {
-    key: 'email',
-    title: i18next.t('user:email'),
   },
   {
     key: 'role',

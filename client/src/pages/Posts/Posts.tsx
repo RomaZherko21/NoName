@@ -32,8 +32,6 @@ function Posts() {
     setOpenFilter(false)
   }
 
-  function toggleLike(id: number) {}
-
   return (
     <>
       <PageHeader

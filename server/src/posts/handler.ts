@@ -28,6 +28,10 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         `SELECT 
         posts.*,
         genres.name as genre,
+        users.name as user_name, 
+        users.surname  as user_surname, 
+        users.middle_name  as user_middle_name,
+        users.email  as user_email,
         users.avatar,
         COUNT(posts.id) as likes_count,
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users

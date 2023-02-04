@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import { formatDistanceToNow } from 'date-fns'
-import { Avatar, Typography, ListItemText, ListItemAvatar, ListItemButton } from '@mui/material'
+import { Typography, ListItemButton } from '@mui/material'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
+
+import { InformativeImage } from 'shared/ui'
 
 function NotificationItem({ notification }: any) {
   return (
@@ -13,22 +15,17 @@ function NotificationItem({ notification }: any) {
         bgcolor: notification.isUnRead && 'action.selected',
       }}
     >
-      <ListItemAvatar>
-        <Avatar
-          sx={{ bgcolor: 'background.neutral' }}
-          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        />
-      </ListItemAvatar>
-      <ListItemText
-        primary={
-          <Typography variant="subtitle2">
+      <InformativeImage
+        imgUrl="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+        PrimaryText={
+          <Typography variant="body2">
             {notification.title}
-            <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
               &nbsp; {notification.description}
             </Typography>
           </Typography>
         }
-        secondary={
+        SecondaryText={
           <Typography
             variant="caption"
             sx={{

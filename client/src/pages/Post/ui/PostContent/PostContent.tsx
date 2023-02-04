@@ -1,12 +1,11 @@
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Box, Typography, IconButton, Stack, Avatar, Tooltip, Chip } from '@mui/material'
+import { Box, Typography, IconButton, Tooltip, Chip } from '@mui/material'
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from 'react-icons/ai'
 
-import { PopupMenu } from 'shared/ui'
+import { CircleDevider, InformativeImage, PopupMenu } from 'shared/ui'
 import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { useRootStore } from 'stores'
 
 import { getPopupConfig } from './PopupConfig'
 import { PostModel } from '../../model'
@@ -14,7 +13,6 @@ import s from './Styles.module.scss'
 
 function PostContent() {
   const { t } = useTranslation()
-  const { user } = useRootStore()
 
   return (
     <>
@@ -28,31 +26,16 @@ function PostContent() {
           {PostModel.short_description}
         </Typography>
 
-        <Stack direction="row" spacing={1.25} alignItems="center">
-          <Avatar
-            alt="User avatar"
-            sx={{ cursor: 'pointer' }}
-            src={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
-          />
-          <Box>
-            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-              {PostModel.user_name} {PostModel.user_surname}{' '}
-              <Box
-                sx={{
-                  width: '6px',
-                  height: '6px',
-                  backgroundColor: 'text.primary',
-                  borderRadius: 50,
-                }}
-              />
+        <InformativeImage
+          imgUrl={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
+          PrimaryText={
+            <>
+              {PostModel.user_name} {PostModel.user_surname} <CircleDevider />
               {format(PostModel.created_at, 'MMMM dd, yyyy')}
-            </Typography>
-
-            <Typography variant="body2" color="text.secondary">
-              {t('post:readingTime', { minute: PostModel.reading_time })}
-            </Typography>
-          </Box>
-        </Stack>
+            </>
+          }
+          SecondaryText={t('post:readingTime', { minute: PostModel.reading_time })}
+        />
       </Box>
 
       <Box display="flex" alignItems="center" justifyContent="center">

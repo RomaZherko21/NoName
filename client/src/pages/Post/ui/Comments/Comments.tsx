@@ -3,9 +3,11 @@ import { Box, Divider } from '@mui/material'
 
 import { Comment as CommentT } from 'shared/types'
 
-import Comment from './Comment'
 import { useRootStore } from 'stores'
-import LeaveComment from './LeaveComment'
+import { LeaveComment } from 'shared/ui'
+import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+
+import Comment from './Comment'
 
 interface Props {
   comments: CommentT[]
@@ -28,7 +30,10 @@ function Comments({ comments = [] }: Props) {
       )}
       <Divider sx={{ my: 4 }} />
 
-      <LeaveComment />
+      <LeaveComment
+        avatarUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+        label="user:actions.writeYourComment"
+      />
     </>
   )
 }

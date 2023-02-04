@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { generatePath, Link, useNavigate } from 'react-router-dom'
 import {
-  Avatar,
   Card,
   CardContent,
   CardMedia,
@@ -25,10 +24,12 @@ import {
 } from 'shared/consts'
 
 import s from './Styles.module.scss'
-import { Post } from 'shared/types'
+import { Post, User } from 'shared/types'
+import { InformativeImage } from 'shared/ui'
+import { CircleDevider } from 'shared/ui/CircleDevider'
 
 interface Props {
-  post: Post
+  post: Post | any
   toggleLike: (id: number) => void
 }
 
@@ -75,28 +76,17 @@ const PostCard = ({ post, toggleLike }: Props) => {
         </Typography>
 
         <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar
-              sx={{ cursor: 'pointer', objectFit: 'fill' }}
-              src={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
-            />
-            <Typography
-              variant="subtitle2"
-              sx={{ color: 'text.primary', ml: 2, display: 'flex', alignItems: 'center' }}
-            >
-              By
-              <Box
-                sx={{
-                  width: '6px',
-                  height: '6px',
-                  backgroundColor: 'text.primary',
-                  borderRadius: 50,
-                  m: 1,
-                }}
-              />
-              {format(fromMsToDate(post.created_at), COMMON_DATE_FORMAT)}
-            </Typography>
-          </Box>
+          <InformativeImage
+            imgUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
+            PrimaryText={
+              <>
+                By {post.user_name} {post.user_surname}
+                <CircleDevider />
+                {format(fromMsToDate(post.created_at), COMMON_DATE_FORMAT)}
+              </>
+            }
+            SecondaryText={post.user_email}
+          />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
             <Tooltip

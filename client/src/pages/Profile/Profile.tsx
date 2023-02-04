@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import {
-  Avatar,
-  Button,
-  Container,
-  Grid,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Button, Container, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 
 import { HiOutlineUserAdd } from 'react-icons/hi'
 import { FiMoreVertical } from 'react-icons/fi'
@@ -18,7 +9,7 @@ import { RiMessage2Fill } from 'react-icons/ri'
 
 import { useRootStore } from 'stores'
 import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
-import { Tabs } from 'shared/ui'
+import { InformativeImage, Tabs } from 'shared/ui'
 import { PostsFilters } from 'pages/Posts/model'
 import ProfileCover from 'assets/images/cover.jpg'
 
@@ -47,21 +38,12 @@ function Profile() {
             xs={12}
             sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Stack direction="row" spacing={1.25} alignItems="center">
-              <Avatar
-                alt="User avatar"
-                sx={{ cursor: 'pointer', width: 64, height: 64 }}
-                src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
-              />
-              <Stack>
-                <Typography variant="h6" color="textPrimary">
-                  {user.name} {user.surname}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {user.role}
-                </Typography>
-              </Stack>
-            </Stack>
+            <InformativeImage
+              imgUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+              PrimaryText={`${user.name} ${user.surname}`}
+              SecondaryText={user.role}
+              size="large"
+            />
             <Stack direction="row" spacing={1.25} alignItems="center">
               <Button
                 startIcon={<HiOutlineUserAdd fontSize="small" />}

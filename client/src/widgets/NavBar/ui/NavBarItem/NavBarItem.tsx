@@ -12,6 +12,7 @@ import {
   Box,
 } from '@mui/material'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
+import { CircleDevider } from 'shared/ui'
 
 interface Props {
   icon: JSX.Element
@@ -75,13 +76,10 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
             <List component="div" disablePadding>
               <ListItemButton component={Link} to={item.to} sx={{ p: 0.6, borderRadius: 1, pl: 5 }}>
                 {location.pathname === item.to && (
-                  <Box
+                  <CircleDevider
                     sx={{
                       position: 'absolute',
-                      width: '6px',
-                      height: '6px',
                       backgroundColor: 'primary.main',
-                      borderRadius: 50,
                       left: 10,
                     }}
                   />

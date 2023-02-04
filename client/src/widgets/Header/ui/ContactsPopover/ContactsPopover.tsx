@@ -1,20 +1,9 @@
 import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import {
-  Box,
-  List,
-  Avatar,
-  Divider,
-  Typography,
-  ListItemText,
-  ListItemAvatar,
-  Tooltip,
-  IconButton,
-  ListItem,
-} from '@mui/material'
-import ImageIcon from '@mui/icons-material/Image'
+import { Box, List, Divider, Typography, Tooltip, IconButton } from '@mui/material'
+
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { Popover } from 'shared/ui'
+import { InformativeImage, Popover } from 'shared/ui'
 import { HiOutlineUsers } from 'react-icons/hi'
 
 const CONTACTS = [
@@ -54,30 +43,33 @@ function ContactsPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <List disablePadding>
+        <List sx={{ display: 'flex', flexDirection: 'column', width: '100%', p: 2, gap: 2 }}>
           {contacts.map((item: any) => (
-            <ListItem
-              secondaryAction={
+            <InformativeImage
+              imgUrl={`${NODE_API_USER_AVATAR_URL}/${item.avatar}`}
+              PrimaryText={
                 <Box
                   sx={{
-                    backgroundColor: item.online ? 'secondary.main' : 'grey.400',
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: 2,
                   }}
-                />
+                >
+                  {' '}
+                  {item.name}{' '}
+                  <Box
+                    sx={{
+                      backgroundColor: item.online ? 'secondary.main' : 'grey.400',
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                    }}
+                  />
+                </Box>
               }
-            >
-              <ListItemAvatar>
-                <Avatar src={`${NODE_API_USER_AVATAR_URL}/${item.avatar}`}>
-                  <ImageIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={item.name}
-                secondary={item.last_login ? item.last_login : ''}
-              />
-            </ListItem>
+              SecondaryText={item.last_login ? item.last_login : ''}
+            />
           ))}
         </List>
       </>
