@@ -89,7 +89,7 @@ function CreatePost() {
               </Grid>
               <Grid item md={8}>
                 <Box>
-                  <InputField field="readingTime" label="post:readingTime" />
+                  <InputField field="readingTime" label="post:form.readingTime" />
                 </Box>
               </Grid>
             </Grid>
@@ -104,10 +104,10 @@ function CreatePost() {
                   gap: 1,
                 }}
               >
-                <Button component={Link} to={ROUTES.POSTS}>
+                <Button size="small" component={Link} to={ROUTES.POSTS}>
                   {t('actions.cancel')}
                 </Button>
-                <Button type="submit" variant="contained">
+                <Button size="small" type="submit" variant="contained">
                   {t('post:actions.publishChanges')}
                 </Button>
               </Box>

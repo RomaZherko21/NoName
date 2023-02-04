@@ -42,7 +42,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
         component="img"
         height="220"
         image={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
-        sx={{ objectFit: 'fill', cursor: 'pointer' }}
+        sx={{ objectFit: 'cover', cursor: 'pointer' }}
         alt={post.name}
         onClick={() => {
           navigate(generatePath(ROUTES.POST, { id: String(post.id) }))

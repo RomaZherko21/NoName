@@ -24,8 +24,8 @@ function ChangeLangPopup() {
     <PopupMenu
       ActionButton={(btnProps: any) => (
         <Tooltip title={t('actions.changeLanguage')}>
-          <IconButton>
-            <img width="24px" alt="en" src={flagIcon} {...btnProps} />
+          <IconButton sx={{ fontSize: '20px' }}>
+            <img width="20px" alt="en" src={flagIcon} {...btnProps} />
           </IconButton>
         </Tooltip>
       )}

@@ -41,7 +41,7 @@ function ContactsPopover() {
     <Popover
       activateElement={(_, handleOpen) => (
         <Tooltip title="Contacts">
-          <IconButton size="medium" onClick={handleOpen}>
+          <IconButton onClick={handleOpen} sx={{ fontSize: '20px' }}>
             <HiOutlineUsers />
           </IconButton>
         </Tooltip>
