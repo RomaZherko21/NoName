@@ -8,7 +8,7 @@ import {
 
 import { observer } from 'mobx-react-lite'
 
-import { Users, Profile, Posts, NotFound, Account, Post, CreatePost } from 'pages'
+import { Users, Profile, Posts, NotFound, Account, Post, CreatePost, EditUser } from 'pages'
 import { ROUTES } from 'shared/consts'
 import { Layout } from './Layout'
 
@@ -16,6 +16,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.HOME} element={<Layout />}>
       <Route path={ROUTES.USERS} element={<Users />} />
+      <Route path={ROUTES.USERS_EDIT} element={<EditUser />} />
 
       <Route path={ROUTES.POSTS} element={<Posts />} />
       <Route path={ROUTES.POST} element={<Post />} />

@@ -24,7 +24,7 @@ import {
 } from 'shared/consts'
 
 import s from './Styles.module.scss'
-import { Post, User } from 'shared/types'
+import { Post } from 'shared/types'
 import { InformativeImage } from 'shared/ui'
 import { CircleDevider } from 'shared/ui/CircleDevider'
 

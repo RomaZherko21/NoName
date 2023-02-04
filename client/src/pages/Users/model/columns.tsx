@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { generatePath, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Box, Chip, IconButton, Tooltip } from '@mui/material'
@@ -10,16 +11,17 @@ import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettin
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 
 import { useDialog } from 'shared/hooks'
+import { InformativeImage } from 'shared/ui'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
+import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 
 import UsersModel from './Users.model'
 import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
-import { InformativeImage } from 'shared/ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
@@ -44,7 +46,11 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
   return (
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
-        <IconButton aria-label="edit" size="small" onClick={showUpdateUserModal}>
+        <IconButton
+          aria-label="edit"
+          size="small"
+          onClick={() => navigate(generatePath(ROUTES.USERS_EDIT, { id: String(data.id) }))}
+        >
           <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>

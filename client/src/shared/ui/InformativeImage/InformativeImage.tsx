@@ -7,6 +7,36 @@ interface Props {
   imgPlaceholder?: string
   SecondaryText?: JSX.Element | string
   size?: 'large' | 'medium'
+  PrimaryTextVariant?:
+    | 'button'
+    | 'caption'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'inherit'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'overline'
+  SecondaryTextVariant?:
+    | 'button'
+    | 'caption'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'inherit'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'overline'
 }
 
 function InformativeImage({
@@ -15,6 +45,8 @@ function InformativeImage({
   PrimaryText,
   SecondaryText,
   size = 'medium',
+  PrimaryTextVariant = 'body2',
+  SecondaryTextVariant = 'subtitle2',
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -30,9 +62,9 @@ function InformativeImage({
         {imgPlaceholder}
       </Avatar>
       <Stack>
-        <Typography variant="body2">{PrimaryText}</Typography>
+        <Typography variant={PrimaryTextVariant}>{PrimaryText}</Typography>
         {SecondaryText && (
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant={SecondaryTextVariant} color="textSecondary">
             {SecondaryText}
           </Typography>
         )}

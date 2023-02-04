@@ -37,6 +37,7 @@
   "socialProfile": "Social Profile",
   "editProfile": "Edit Profile",
   "connections": "Connections",
+  "thatsYou": "That's you!",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -55,7 +56,8 @@
     "accept": "Accept",
     "writeYourComment": "Write your comment",
     "sendRequest": "Send request",
-    "declain": "Declain"
+    "declain": "Declain",
+    "editUser": "Edit user"
   },
   "updates": {
     "product": {
