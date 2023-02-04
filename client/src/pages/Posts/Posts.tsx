@@ -7,7 +7,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
-import { PostCard } from 'features'
+import { PostCard } from 'entities'
 
 import { PostLoader } from './ui'
 import { getFiltersConfig, PostsModel } from './model'

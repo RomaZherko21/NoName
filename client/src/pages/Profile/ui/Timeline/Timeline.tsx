@@ -16,7 +16,7 @@ import { IoBusinessOutline, IoHomeOutline } from 'react-icons/io5'
 import { BsEnvelopeOpen } from 'react-icons/bs'
 
 import { useRootStore } from 'stores'
-import { PostCard } from 'features'
+import { PostCard } from 'entities'
 import { LeaveComment, Spinner } from 'shared/ui'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
