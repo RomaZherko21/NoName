@@ -12,7 +12,6 @@ import {
   TextField,
   Tooltip,
   Typography,
-  Container,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -42,9 +41,7 @@ const SentConnections = () => {
 
       <Grid container spacing={3} sx={{ p: 3 }}>
         {ProfileModel.loading.has ? (
-          <Container>
-            <Spinner />
-          </Container>
+          <Spinner />
         ) : (
           ProfileModel.connections.map((item) => (
             <Grid item xs={12} md={6}>

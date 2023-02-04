@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import { Container, Button, Grid } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 
 import { Spinner } from 'shared/ui'
 import { PageHeader } from 'widgets'
@@ -20,7 +20,7 @@ function Post() {
   }, [id])
 
   return (
-    <Container maxWidth="xl">
+    <>
       <PageHeader
         pageName={t('page:post')}
         breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.details' }]}
@@ -40,7 +40,7 @@ function Post() {
           <Comments comments={PostModel.comments} />
         </>
       )}
-    </Container>
+    </>
   )
 }
 

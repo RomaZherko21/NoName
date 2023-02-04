@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 
 import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
 import { InputField } from 'shared/ui'
@@ -56,7 +56,7 @@ function CreatePost() {
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box maxWidth="xl" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <PageHeader
               pageName={t('page:createPost')}
               breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.create' }]}
@@ -112,7 +112,7 @@ function CreatePost() {
                 </Button>
               </Box>
             </Paper>
-          </Container>
+          </Box>
         </form>
       )}
     </Formik>

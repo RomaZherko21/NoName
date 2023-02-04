@@ -2,7 +2,7 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Avatar, Button, Container, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { emailValidation, passwordValidation } from 'shared/validations'
@@ -31,7 +31,7 @@ function SignIn() {
   })
 
   return (
-    <Container maxWidth="xs" sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>
       <Paper
         sx={{
           width: '100%',
@@ -73,7 +73,7 @@ function SignIn() {
           </Stack>
         </form>
       </Paper>
-    </Container>
+    </Box>
   )
 }
 

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { Outlet } from 'react-router-dom'
-import { Box, Toolbar } from '@mui/material'
+import { Box, Container, Toolbar } from '@mui/material'
 
 import { NavBar, Header } from 'widgets'
 import { DRAWER_WIDTH } from 'shared/consts'
@@ -12,8 +12,9 @@ const Layout = () => {
 
       <NavBar />
 
-      <Box
+      <Container
         component="main"
+        maxWidth="lg"
         sx={{
           flexGrow: 1,
           py: 7,
@@ -23,7 +24,7 @@ const Layout = () => {
       >
         <Toolbar />
         <Outlet />
-      </Box>
+      </Container>
     </Box>
   )
 }

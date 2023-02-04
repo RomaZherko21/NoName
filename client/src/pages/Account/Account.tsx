@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Container } from '@mui/material'
 
 import { Tabs } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
@@ -19,7 +18,7 @@ function Account() {
   }, [location])
 
   return (
-    <Container maxWidth="lg">
+    <>
       <PageHeader pageName={t('page:account')} breadcrumbs={breadcrumbs} />
       <Tabs
         options={[
@@ -34,7 +33,7 @@ function Account() {
           { label: 'page:security', to: ROUTES.ACCOUNT_SECURITY, Component: Security },
         ]}
       />
-    </Container>
+    </>
   )
 }
 
