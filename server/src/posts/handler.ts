@@ -48,7 +48,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         AND posts.created_at <= ${created_to}
           
         GROUP BY posts.id
-        ORDER BY posts.${order_by} ${order_type}
+        ORDER BY ${order_by} ${order_type}
         LIMIT ${limit} OFFSET ${offset};`,
         {
           type: QueryTypes.SELECT,

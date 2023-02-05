@@ -18,8 +18,8 @@
   "sort": {
     "nameASC": "Name (ASC)",
     "nameDESC": "Name (DESC)",
-    "authorASC": "Author (ASC)",
-    "authorDESC": "Author (DESC)",
+    "emailASC": "Email (ASC)",
+    "emailDESC": "Email (DESC)",
     "createdAtASC": "Created at (ASC)",
     "createdAtDESC": "Created at (DESC)"
   },

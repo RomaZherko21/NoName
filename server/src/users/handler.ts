@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
-import { ID, LIMIT, OFFSET } from 'shared/consts'
+import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
 import { User } from 'shared/types'
 
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
@@ -20,6 +20,8 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
       role = '',
       gender = '',
       connection_status = '',
+      order_by = 'email',
+      order_type = ORDER_TYPE,
     } = query
     const authorization_id = res.locals.authorization_id
 
@@ -39,6 +41,7 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
         AND users.gender LIKE '%${gender}%'
         AND (user_connections.status LIKE '%${connection_status}%' OR user_connections.status IS NULL)
 
+        ORDER BY ${order_by} ${order_type}
         LIMIT ${limit} OFFSET ${offset};`,
       {
         type: QueryTypes.SELECT,
