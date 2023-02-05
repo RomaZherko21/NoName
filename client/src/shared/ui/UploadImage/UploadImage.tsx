@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react-lite'
-import EditIcon from '@mui/icons-material/Edit'
-import { Avatar } from '@mui/material'
+import { useTranslation } from 'react-i18next';
+import { Avatar, Box, Typography } from '@mui/material'
+import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
 
 import s from './Styles.module.scss'
 
 interface Props {
   handleUploadClick: (event: any) => void
   imageUrl: string
-  width?: number
+  width?: number 
   height?: number
   borderRadius?: string
 }
@@ -19,6 +20,8 @@ const UploadImage = ({
   height = 100,
   borderRadius = '50%',
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <label htmlFor="upload-file">
       <input
@@ -36,7 +39,10 @@ const UploadImage = ({
           src={imageUrl}
           sx={{ width, height, borderRadius }}
         />
-        <EditIcon className={s.editIcon} />
+        <Box className={s.cameraIcon} > 
+          <PhotoCameraOutlinedIcon/>
+          <Typography variant="subtitle2">{t('actions.select')}</Typography>
+        </Box>
       </div>
     </label>
   )

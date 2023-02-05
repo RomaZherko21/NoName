@@ -2,7 +2,7 @@
   position: relative;
   width: fit-content;
 
-  .editIcon {
+  .cameraIcon {
     display: none;
     position: absolute;
     left: 50%;
@@ -17,8 +17,10 @@
       filter: brightness(70%);
     }
 
-    .editIcon {
-      display: block;
+    .cameraIcon {
+      display: flex;
+      align-items: center;
+      gap: 4px
     }
   }
 }
