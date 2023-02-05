@@ -2,17 +2,18 @@ import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
 
 import { NODE_API } from 'services'
-import { Post } from 'shared/types'
+import { Post, SortParams } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
 import { PostsFilters } from './filters'
 
+type SearchParams = PostsFilters & SortParams
+
 class PostsModel {
   private _posts: Post[] = []
 
   pagination: PaginationModel
-
   loading: LoadingModel
 
   constructor() {
@@ -22,21 +23,18 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
-  set posts(data: Post[]) {
-    this._posts = data
-  }
-
   get posts() {
     return this._posts
   }
 
-  changeFilters(filters: PostsFilters) {
-    this.debounceFetch({ filters })
+  set posts(data: Post[]) {
+    this._posts = data
   }
 
   debounceFetch = debounce(this.fetch, 500)
 
-  async fetch({ filters, hidden = false }: { filters?: PostsFilters; hidden?: boolean }) {
+  async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
+    console.log(searchParams)
     try {
       if (!hidden) {
         this.loading.begin()
@@ -45,7 +43,7 @@ class PostsModel {
       const data = await NODE_API.post.list({
         limit: this.pagination.limit,
         offset: this.pagination.offset,
-        filters,
+        searchParams,
       })
 
       this.posts = data.posts
@@ -85,10 +83,10 @@ class PostsModel {
     }
   }
 
-  async toggleLike(id: number, filters?: PostsFilters) {
+  async toggleLike(id: number, searchParams?: SearchParams) {
     await NODE_API.post.like(id)
 
-    this.fetch({ filters, hidden: true })
+    this.fetch({ searchParams, hidden: true })
   }
 }
 

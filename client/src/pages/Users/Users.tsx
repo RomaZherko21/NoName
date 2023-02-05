@@ -7,30 +7,26 @@ import { Box, Button, Grid, Paper, TableContainer } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
-import { AsideFilters, CommonTable, Pagination, Spinner } from 'shared/ui'
+import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
 import { PageHeader } from 'widgets'
 import { useDialog } from 'shared/hooks'
+import { getSearchParamsObj } from 'shared/helpers'
 import { User } from 'shared/types'
 
-import { TableHeaderActions, UserForm } from './ui'
-import { UsersModel, getFiltersConfig, getColumns } from './model'
+import { UserForm } from './ui'
+import { UsersModel, getFiltersConfig, getColumns, sortConfig } from './model'
 
 function Users() {
   const { t } = useTranslation()
-
   const [openFilter, setOpenFilter] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const handleOpenFilter = () => {
-    setOpenFilter(true)
-  }
-
-  const handleCloseFilter = () => {
-    setOpenFilter(false)
-  }
+  const columns = useMemo(() => getColumns(), [])
+  const filtersConfig = useMemo(() => getFiltersConfig(), [])
+  const sortOptions = useMemo(() => sortConfig, [])
 
   useEffect(() => {
-    UsersModel.debounceFetch({})
+    UsersModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [UsersModel.pagination.page, UsersModel.pagination.limit, searchParams])
@@ -44,9 +40,6 @@ function Users() {
       }}
     />
   ))
-
-  const columns = useMemo(() => getColumns(), [])
-  const filtersConfig = useMemo(() => getFiltersConfig(), [])
 
   return (
     <>
@@ -70,13 +63,27 @@ function Users() {
       </PageHeader>
 
       <Grid container direction="column">
-        <TableHeaderActions
-          handleOpenFilter={handleOpenFilter}
-          value={searchParams.get('email') || ''}
-          onChange={(e: any) => {
-            searchParams.set('email', e.target.value)
+        <AsideFiltersBar
+          inputValue={searchParams.get('name') || ''}
+          onInputChange={(e: any) => {
+            searchParams.set('name', e.target.value)
             setSearchParams(searchParams)
           }}
+          handleOpenFilter={() => {
+            setOpenFilter(true)
+          }}
+          inputPlaceholder="post:actions.searchName"
+          selectValue={`${searchParams.get('order_by')} ${searchParams.get('order_type')}` || ''}
+          onSelectChange={(e: any) => {
+            const [field, orderType] = e.target.value.split(' ')
+
+            searchParams.set('order_by', field)
+            searchParams.set('order_type', orderType)
+
+            setSearchParams(searchParams)
+          }}
+          sortOptions={sortOptions}
+          isTablePart
         />
         <Grid item>
           {UsersModel.loading.has ? (
@@ -95,7 +102,7 @@ function Users() {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         openFilter={openFilter}
-        onCloseFilter={handleCloseFilter}
+        onCloseFilter={() => setOpenFilter(false)}
       />
     </>
   )

@@ -50,7 +50,8 @@
     "linkCopied": "Link copied!",
     "search": "Search",
     "send": "Send",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "sortBy": "Sort by"
   },
   "fields": {
     "name": "Name",

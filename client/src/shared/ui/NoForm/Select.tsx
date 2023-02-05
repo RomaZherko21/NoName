@@ -3,22 +3,24 @@ import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@mui/mat
 
 interface Props {
   label: string
-  options: any
+  options: { [key: string]: string }
   value: string
   size?: 'small' | 'medium'
   onChange: (e: any) => void
+  [key: string]: any
 }
 
-const Select = ({ label, options, onChange, value, size = 'small' }: Props) => {
+const Select = (props: Props) => {
+  const { label, options, onChange, value, size = 'small' } = props
   const { t } = useTranslation()
 
   return (
-    <FormControl fullWidth size={size}>
+    <FormControl {...props} fullWidth size={size}>
       <InputLabel>{t(label)}</InputLabel>
       <MuiSelect fullWidth label={t(label)} onChange={onChange} value={value}>
-        {Object.values(options).map((value: any) => (
-          <MenuItem key={value} value={value}>
-            {value}
+        {Object.entries(options).map(([key, text]) => (
+          <MenuItem key={key} value={key}>
+            {t(text)}
           </MenuItem>
         ))}
       </MuiSelect>

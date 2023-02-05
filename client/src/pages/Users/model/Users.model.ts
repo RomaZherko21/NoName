@@ -1,13 +1,14 @@
 import { makeAutoObservable } from 'mobx'
 
 import { NODE_API } from 'services'
-import { ConnectionStatus, User } from 'shared/types'
+import { ConnectionStatus, SortParams, User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { debounce } from '@mui/material'
 
 import { UserFilters } from './filters'
 
+type SearchParams = UserFilters & SortParams
 class UsersModel {
   private _users: User[] = []
 
@@ -33,19 +34,21 @@ class UsersModel {
   async connectionRequest(id: number) {
     await NODE_API.connection.update(id, ConnectionStatus.pending)
 
-    this.fetch()
+    this.fetch({})
   }
 
   debounceFetch = debounce(this.fetch, 500)
 
-  async fetch(filters?: UserFilters) {
+  async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
     try {
-      this.loading.begin()
+      if (!hidden) {
+        this.loading.begin()
+      }
 
       const data = await NODE_API.users.list({
         limit: this.pagination.limit,
         offset: this.pagination.offset,
-        filters,
+        searchParams,
       })
       this.users = data.users
       this.pagination.totalCount = data.count
@@ -61,7 +64,7 @@ class UsersModel {
       this.loading.begin()
 
       await NODE_API.users.create(user)
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {
@@ -74,7 +77,7 @@ class UsersModel {
       this.loading.begin()
 
       await NODE_API.users.remove(id)
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {
@@ -87,7 +90,7 @@ class UsersModel {
       this.loading.begin()
 
       await NODE_API.users.update(user, id)
-      this.fetch()
+      this.fetch({})
 
       this.loading.end()
     } catch {

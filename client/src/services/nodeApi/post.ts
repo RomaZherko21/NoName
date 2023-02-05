@@ -8,14 +8,14 @@ const ENDPOINT_BASE = '/posts'
 export const list = ({
   limit,
   offset,
-  filters,
+  searchParams,
 }: {
   limit: number
   offset: number
-  filters?: any
+  searchParams?: any
 }) =>
   fetch.get<{ posts: Post[]; count: number }>(
-    `${ENDPOINT_BASE}${getQueryParams({ ...filters, limit, offset })}`
+    `${ENDPOINT_BASE}${getQueryParams({ ...searchParams, limit, offset })}`
   )
 
 export const get = (id: number) => fetch.get<Post & { user: User }>(`${ENDPOINT_BASE}/${id}`)

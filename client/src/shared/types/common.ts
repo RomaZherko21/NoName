@@ -5,3 +5,8 @@ export interface TableColumn {
   getValue?: (post?: any) => any
   actions?: () => JSX.Element
 }
+
+export interface SortParams {
+  order_by?: string
+  order_type?: string
+}

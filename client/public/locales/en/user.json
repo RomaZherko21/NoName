@@ -41,6 +41,16 @@
     "createNewUser": "Add user",
     "updateUser": "Update user"
   },
+  "sort": {
+    "nameASC": "Name (ASC)",
+    "nameDESC": "Name (DESC)",
+    "emailASC": "Email (ASC)",
+    "emailDESC": "Email (DESC)",
+    "roleASC": "Role (ASC)",
+    "roleDESC": "Role (DESC)",
+    "dateOfBirthASC": "Date of birth (ASC)",
+    "dateOfBirthDESC": "Date of birth (DESC)"
+  },
   "actions": {
     "deleteAccount": "Delete account",
     "updateUser": "Update user",

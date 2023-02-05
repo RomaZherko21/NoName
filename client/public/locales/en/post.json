@@ -9,11 +9,19 @@
   "whereImagesAreUsed": "Image used for the blog post cover and also for Open Graph meta",
   "actions": {
     "selectFile": "Select file",
-    "readMore": "Read more..",
-    "searchName": "Search name..",
+    "readMore": "Read more...",
+    "searchName": "Search by name...",
     "publishChanges": "Publish changes",
     "removePhoto": "Remove photo",
     "selectCoverImage": "Select a cover image"
+  },
+  "sort": {
+    "nameASC": "Name (ASC)",
+    "nameDESC": "Name (DESC)",
+    "authorASC": "Author (ASC)",
+    "authorDESC": "Author (DESC)",
+    "createdAtASC": "Created at (ASC)",
+    "createdAtDESC": "Created at (DESC)"
   },
   "form": {
     "create": "Add post",
