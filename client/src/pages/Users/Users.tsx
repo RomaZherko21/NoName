@@ -66,8 +66,10 @@ function Users() {
         <AsideFiltersBar
           inputValue={searchParams.get('name') || ''}
           onInputChange={(e: any) => {
-            searchParams.set('name', e.target.value)
-            setSearchParams(searchParams)
+            setSearchParams((searchParams: URLSearchParams) => {
+              searchParams.set('name', e.target.value)
+              return searchParams
+            })
           }}
           handleOpenFilter={() => {
             setOpenFilter(true)
@@ -77,10 +79,11 @@ function Users() {
           onSelectChange={(e: any) => {
             const [field, orderType] = e.target.value.split(' ')
 
-            searchParams.set('order_by', field)
-            searchParams.set('order_type', orderType)
-
-            setSearchParams(searchParams)
+            setSearchParams((searchParams: URLSearchParams) => {
+              searchParams.set('order_by', field)
+              searchParams.set('order_type', orderType)
+              return searchParams
+            })
           }}
           sortOptions={sortOptions}
           isTablePart
