@@ -1,14 +1,14 @@
 import { makeAutoObservable } from 'mobx'
 
 import { NODE_API } from 'services'
-import { ConnectionStatus, SortParams, User } from 'shared/types'
+import { ConnectionStatus, QueryPaginationParams, QuerySortParams, User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 import { debounce } from '@mui/material'
 
 import { UserFilters } from './filters'
 
-type SearchParams = UserFilters & SortParams
+type SearchParams = UserFilters & QuerySortParams & QueryPaginationParams
 class UsersModel {
   private _users: User[] = []
 
@@ -46,8 +46,6 @@ class UsersModel {
       }
 
       const data = await NODE_API.users.list({
-        limit: this.pagination.limit,
-        offset: this.pagination.offset,
         searchParams,
       })
       this.users = data.users

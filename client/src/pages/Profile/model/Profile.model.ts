@@ -84,8 +84,6 @@ class ProfileModel {
       }
 
       const data = await NODE_API.post.list({
-        limit: 20,
-        offset: 0,
         searchParams,
       })
 
