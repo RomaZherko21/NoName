@@ -14,13 +14,13 @@ const Pagination = ({ paginationModel }: Props) => {
       component="div"
       count={paginationModel.totalCount}
       rowsPerPage={paginationModel.limit}
-      page={paginationModel.page}
+      page={paginationModel.currentPage}
       onPageChange={(event: unknown, newPage: number) => {
-        paginationModel.page = newPage
+        paginationModel.currentPage = newPage
       }}
       onRowsPerPageChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         paginationModel.limit = Number(event.target.value)
-        paginationModel.page = 0
+        paginationModel.currentPage = 0
       }}
     />
   )

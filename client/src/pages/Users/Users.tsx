@@ -29,7 +29,7 @@ function Users() {
     UsersModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [UsersModel.pagination.page, UsersModel.pagination.limit, searchParams])
+  }, [UsersModel.pagination.currentPage, UsersModel.pagination.limit, searchParams])
 
   const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
     <UserForm

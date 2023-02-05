@@ -25,7 +25,7 @@ function Posts() {
     PostsModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PostsModel.pagination.page, PostsModel.pagination.limit, searchParams])
+  }, [PostsModel.pagination.currentPage, PostsModel.pagination.limit, searchParams])
 
   return (
     <>
