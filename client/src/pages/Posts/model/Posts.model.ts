@@ -2,13 +2,13 @@ import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
 
 import { NODE_API } from 'services'
-import { Post, SortParams } from 'shared/types'
+import { QueryPaginationParams, Post, QuerySortParams } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
 import { PostsFilters } from './filters'
 
-type SearchParams = PostsFilters & SortParams
+type SearchParams = PostsFilters & QuerySortParams & QueryPaginationParams
 
 class PostsModel {
   private _posts: Post[] = []
@@ -41,8 +41,6 @@ class PostsModel {
       }
 
       const data = await NODE_API.post.list({
-        limit: this.pagination.limit,
-        offset: this.pagination.offset,
         searchParams,
       })
 

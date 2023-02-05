@@ -1,21 +1,16 @@
 import { getQueryParams } from 'shared/helpers'
-import { User } from 'shared/types'
+import { QueryParams, User } from 'shared/types'
 
 import fetch from './fetch'
 
 const ENDPOINT_BASE = '/users'
 
-export const list = ({
-  limit,
-  offset,
-  searchParams,
-}: {
-  limit: number
-  offset: number
-  searchParams?: any
-}) =>
+export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
   fetch.get<{ users: User[]; count: number }>(
-    `${ENDPOINT_BASE}${getQueryParams({ ...searchParams, limit, offset })}`
+    `${ENDPOINT_BASE}${getQueryParams({
+      ...searchParams,
+      offset: Number(searchParams?.limit) * Number(searchParams?.page),
+    })}`
   )
 
 export const getById = (id: number) => fetch.get<User>(`${ENDPOINT_BASE}/${id}`)

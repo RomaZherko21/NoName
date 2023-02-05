@@ -6,7 +6,14 @@ export interface TableColumn {
   actions?: () => JSX.Element
 }
 
-export interface SortParams {
+export interface QuerySortParams {
   order_by?: string
   order_type?: string
 }
+
+export interface QueryPaginationParams {
+  limit?: string
+  page?: string
+}
+
+export type QueryParams = { [key: string]: any } & QuerySortParams & QueryPaginationParams

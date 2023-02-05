@@ -1,21 +1,16 @@
 import { getQueryParams } from 'shared/helpers'
-import { Comment, Post, User } from 'shared/types'
+import { Comment, Post, QueryParams, User } from 'shared/types'
 
 import fetch from './fetch'
 
 const ENDPOINT_BASE = '/posts'
 
-export const list = ({
-  limit,
-  offset,
-  searchParams,
-}: {
-  limit: number
-  offset: number
-  searchParams?: any
-}) =>
+export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
   fetch.get<{ posts: Post[]; count: number }>(
-    `${ENDPOINT_BASE}${getQueryParams({ ...searchParams, limit, offset })}`
+    `${ENDPOINT_BASE}${getQueryParams({
+      ...searchParams,
+      offset: Number(searchParams?.limit) * Number(searchParams?.page),
+    })}`
   )
 
 export const get = (id: number) => fetch.get<Post & { user: User }>(`${ENDPOINT_BASE}/${id}`)
