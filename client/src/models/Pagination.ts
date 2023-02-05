@@ -5,9 +5,7 @@ class PaginationModel {
 
   private _limit: number = 10
 
-  private _page: number = 0
-
-  private _offset: number = 0
+  private _currentPage: number = 0
 
   perPageArr: number[] = [2, 10, 15, 20]
 
@@ -23,12 +21,12 @@ class PaginationModel {
     this._totalCount = data
   }
 
-  get page() {
-    return this._page
+  get currentPage() {
+    return this._currentPage
   }
 
-  set page(page: number) {
-    this._page = page || 0
+  set currentPage(page: number) {
+    this._currentPage = page || 0
   }
 
   get limit() {
@@ -40,7 +38,7 @@ class PaginationModel {
   }
 
   get offset() {
-    return this._limit * this._page
+    return this._limit * this._currentPage
   }
 }
 

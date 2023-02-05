@@ -1,41 +1,81 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Paper, InputAdornment } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
+import { Button, Grid, InputAdornment, Paper, Box, TextField } from '@mui/material'
 import FilterListIcon from '@mui/icons-material/FilterList'
+import { FiSearch } from 'react-icons/fi'
 
-import { Input } from '../NoForm'
+import { Select } from 'shared/ui'
 
 interface Props {
-  onChange: (e: any) => void
   handleOpenFilter: () => void
-  placeholder: string
-  value: string
+
+  inputValue: string
+  onInputChange: (e: any) => void
+  inputPlaceholder: string
+
+  selectValue: string
+  onSelectChange: (e: any) => void
+
+  sortOptions: { [key: string]: string }
+  isTablePart?: boolean
 }
 
-const AsideFiltersBar = ({ value, onChange, handleOpenFilter, placeholder }: Props) => {
+function AsideFiltersBar({
+  handleOpenFilter,
+  inputValue,
+  onInputChange,
+  inputPlaceholder: inputLabel,
+  selectValue,
+  onSelectChange,
+  sortOptions,
+  isTablePart = false,
+}: Props) {
   const { t } = useTranslation()
 
   return (
-    <Paper sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
-      <Input
-        placeholder={t(placeholder)}
-        value={value}
-        onChange={onChange}
+    <Grid
+      component={Paper}
+      item
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        p: 3,
+        gap: 1,
+        borderRadius: isTablePart ? '20px 20px 0 0' : 1,
+      }}
+    >
+      <TextField
+        value={inputValue}
+        onChange={onInputChange}
+        fullWidth
+        size="small"
+        placeholder={t(inputLabel)}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
+            <InputAdornment position="start">{<FiSearch size="16px" />}</InputAdornment>
           ),
         }}
-        sx={{ width: '200px' }}
-        size="small"
       />
-      <Button disableRipple color="info" endIcon={<FilterListIcon />} onClick={handleOpenFilter}>
-        {t('common.filters')}
-      </Button>
-    </Paper>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Select
+          value={selectValue}
+          onChange={onSelectChange}
+          label="actions.sortBy"
+          options={sortOptions}
+          sx={{ width: '160px' }}
+        />
+        <Button
+          onClick={handleOpenFilter}
+          sx={{ px: 1 }}
+          size="small"
+          color="info"
+          endIcon={<FilterListIcon />}
+        >
+          {t('common.filters')}
+        </Button>
+      </Box>
+    </Grid>
   )
 }
 

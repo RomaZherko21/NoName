@@ -71,7 +71,13 @@ class ProfileModel {
     }
   }
 
-  async fetchPosts({ filters, hidden = false }: { filters?: PostsFilters; hidden?: boolean }) {
+  async fetchPosts({
+    filters: searchParams,
+    hidden = false,
+  }: {
+    filters?: PostsFilters
+    hidden?: boolean
+  }) {
     try {
       if (!hidden) {
         this.loading.begin()
@@ -80,7 +86,7 @@ class ProfileModel {
       const data = await NODE_API.post.list({
         limit: 20,
         offset: 0,
-        filters,
+        searchParams,
       })
 
       this.posts = data.posts

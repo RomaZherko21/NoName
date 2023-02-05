@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
-import { Link, useSearchParams } from 'react-router-dom'
 
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
+import { getSearchParamsObj } from 'shared/helpers'
 import { ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
 import { PostCard } from 'entities'
 
 import { PostLoader } from './ui'
-import { getFiltersConfig, PostsModel } from './model'
+import { getFiltersConfig, PostsModel, sortConfig } from './model'
 
 function Posts() {
   const { t } = useTranslation()
@@ -18,19 +19,13 @@ function Posts() {
   const [openFilter, setOpenFilter] = useState(false)
 
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
+  const sortOptions = useMemo(() => sortConfig, [])
 
   useEffect(() => {
-    PostsModel.debounceFetch({})
+    PostsModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PostsModel.pagination.page, PostsModel.pagination.limit, searchParams])
-
-  function handleOpenFilter() {
-    setOpenFilter(true)
-  }
-
-  function handleCloseFilter() {
-    setOpenFilter(false)
-  }
+  }, [PostsModel.pagination.currentPage, PostsModel.pagination.limit, searchParams])
 
   return (
     <>
@@ -54,13 +49,28 @@ function Posts() {
       <Grid container spacing={3} direction="column">
         <Grid item>
           <AsideFiltersBar
-            value={searchParams.get('name') || ''}
-            onChange={(e: any) => {
-              searchParams.set('name', e.target.value)
-              setSearchParams(searchParams)
+            inputValue={searchParams.get('name') || ''}
+            onInputChange={(e: any) => {
+              setSearchParams((searchParams: URLSearchParams) => {
+                searchParams.set('name', e.target.value)
+                return searchParams
+              })
             }}
-            handleOpenFilter={handleOpenFilter}
-            placeholder="post:actions.searchName"
+            handleOpenFilter={() => {
+              setOpenFilter(true)
+            }}
+            inputPlaceholder="post:actions.searchName"
+            selectValue={`${searchParams.get('order_by')} ${searchParams.get('order_type')}` || ''}
+            onSelectChange={(e: any) => {
+              const [field, orderType] = e.target.value.split(' ')
+
+              setSearchParams((searchParams: URLSearchParams) => {
+                searchParams.set('order_by', field)
+                searchParams.set('order_type', orderType)
+                return searchParams
+              })
+            }}
+            sortOptions={sortOptions}
           />
         </Grid>
 
@@ -75,6 +85,7 @@ function Posts() {
                 </Grid>
               ))}
         </Grid>
+
         <Grid item>
           <Pagination paginationModel={PostsModel.pagination} />
         </Grid>
@@ -85,7 +96,9 @@ function Posts() {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         openFilter={openFilter}
-        onCloseFilter={handleCloseFilter}
+        onCloseFilter={() => {
+          setOpenFilter(false)
+        }}
       />
     </>
   )
