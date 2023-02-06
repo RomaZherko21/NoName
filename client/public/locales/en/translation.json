@@ -51,6 +51,8 @@
     "search": "Search",
     "send": "Send",
     "changeLanguage": "Change language",
+    "change": "Change",
+    "select": "Select",
     "sortBy": "Sort by"
   },
   "fields": {
