@@ -50,7 +50,7 @@ VALUES
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `genre_id` int NOT NULL,
+  `genre_id` int,
   `name` varchar(255),
   `description` text,
   `short_description` text,

@@ -12,6 +12,7 @@ import {
   togglePostLikes,
   updatePostComment,
 } from 'posts'
+import { getGenres } from 'genres'
 import { createUser, getUser, getUsers, updateUserById } from 'users'
 import { deleteConnectionById, getConnections, updateConnectionStatusById } from 'connections'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
@@ -40,6 +41,9 @@ router.get(`${POSTS}/:id`, getPost)
 router.post(`${POSTS}`, useFile.single(FILE_FIELD_NAMES.post), createPost)
 router.delete(`${POSTS}/:id`, deletePostById)
 router.put(`${POSTS}/:id/likes`, togglePostLikes)
+
+const GENRES = '/genres'
+router.get(`${GENRES}`, getGenres)
 
 const COMMENTS = '/comments'
 router.post(`${POSTS}/:post_id${COMMENTS}`, createPostComment)

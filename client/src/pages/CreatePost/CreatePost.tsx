@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Formik } from 'formik'
 import * as yup from 'yup'
@@ -8,8 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 
 import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
-import { InputField } from 'shared/ui'
-import { useRootStore } from 'stores'
+import { InputField, SelectField } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
 
@@ -18,16 +17,21 @@ import { PostCover, QuillField } from './ui'
 
 function CreatePost() {
   const { t } = useTranslation()
-  const { user } = useRootStore()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    CreatePostModel.fetch()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        postTitle: commonStringValidation(t(`post:postTitle`), 3),
-        shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
-        description: commonStringValidation(t(`post:description`), 10),
-        readingTime: commonNumberRangeValidation({ field: t(`post:readingTime`), min: 1, max: 60 }),
+        // postTitle: commonStringValidation(t(`post:postTitle`), 3),
+        // shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
+        // description: commonStringValidation(t(`post:description`), 10),
+        // readingTime: commonNumberRangeValidation({ field: t(`post:readingTime`), min: 1, max: 60 }),
       }),
     [t]
   )
@@ -37,6 +41,7 @@ function CreatePost() {
       initialValues={{
         postTitle: '',
         shortDescription: '',
+        genre: '',
         description: '',
         postCover: '',
         readingTime: '',
@@ -46,11 +51,12 @@ function CreatePost() {
       onSubmit={(values) => {
         CreatePostModel.create({
           name: values.postTitle,
-          description: values.shortDescription,
+          short_description: values.shortDescription,
+          genre_id: Number(values.genre),
+          description: values.description,
           post: values.cover || '',
-          user_id: user.id,
+          reading_time: Number(values.readingTime),
         })
-        navigate(ROUTES.POSTS)
         toast.success(t('notification:success.created'))
       }}
     >
@@ -69,6 +75,11 @@ function CreatePost() {
               <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <InputField field="postTitle" label="post:postTitle" />
                 <InputField field="shortDescription" label="post:shortDescription" />
+                <SelectField
+                  field="genre"
+                  label="post:genres"
+                  options={CreatePostModel.getGenresOptions()}
+                />
               </Grid>
             </Grid>
 

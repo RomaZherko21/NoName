@@ -6,7 +6,7 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/
 interface Props {
   field: string
   label: string
-  options: any
+  options: { [key: string]: string }
 }
 
 const FormSelect = ({ field, label, options }: Props) => {
@@ -24,9 +24,9 @@ const FormSelect = ({ field, label, options }: Props) => {
         label={t(label)}
         onChange={(e) => setFieldValue(field, e.target.value)}
       >
-        {Object.values(options).map((value: any) => (
-          <MenuItem key={value} value={value}>
-            {value}
+        {Object.entries(options).map(([key, text]) => (
+          <MenuItem key={key} value={key}>
+            {t(text)}
           </MenuItem>
         ))}
       </Select>
