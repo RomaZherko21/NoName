@@ -23,6 +23,7 @@ import { useRootStore } from 'stores'
 
 import { EditUserModel } from './model'
 import s from './Styles.module.scss'
+import { PageHeader } from 'widgets'
 
 function EditUser() {
   const { t } = useTranslation()
@@ -48,15 +49,10 @@ function EditUser() {
   )
   return (
     <>
-      <Button
-        to={ROUTES.USERS}
-        component={Link}
-        sx={{ color: (theme) => theme.palette.text.primary, mb: 3 }}
-        startIcon={<ArrowBackIcon fontSize="large" />}
-        size="large"
-      >
-        <Typography variant="h6">{t('page:users')}</Typography>
-      </Button>
+      <PageHeader
+        pageName={t('page:editUser')}
+        breadcrumbs={[{ text: 'page:users' }, { text: 'page:sub.edit' }]}
+      />
 
       {EditUserModel.loading.has ? (
         <Spinner />
@@ -73,6 +69,7 @@ function EditUser() {
                 user_id:{' '}
                 <Chip
                   label={Number(id)}
+                  size="small"
                   sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
                 />
               </Typography>

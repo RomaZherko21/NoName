@@ -72,11 +72,6 @@ const darkTheme = {
   },
   components: {
     MuiOutlinedInput: {
-      defaultProps: {
-        sx: {
-          fontSize: 16,
-        },
-      },
       styleOverrides: {
         notchedOutline: {
           borderColor: '#2d3748',

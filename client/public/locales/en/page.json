@@ -1,6 +1,7 @@
 {
   "home": "Home",
   "users": "Users",
+  "editUser": "Edit user",
   "posts": "Posts",
   "post": "Post",
   "createPost": "Create a new post",
