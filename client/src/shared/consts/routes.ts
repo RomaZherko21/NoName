@@ -3,6 +3,7 @@ export const ROUTES = {
 
   USERS: '/users',
   USERS_NEW: '/users/new',
+  USERS_EDIT: '/users/:id/edit',
 
   POSTS: '/posts',
   POST: '/posts/:id',

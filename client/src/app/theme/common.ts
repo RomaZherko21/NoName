@@ -75,6 +75,13 @@ const commonTheme = {
     borderRadius: 10,
   },
   components: {
+    MuiOutlinedInput: {
+      defaultProps: {
+        sx: {
+          fontSize: 14,
+        },
+      },
+    },
     MuiTableHead: {
       styleOverrides: {
         root: {

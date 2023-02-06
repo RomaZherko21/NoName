@@ -92,3 +92,12 @@ export const confirmPasswordValidation = () =>
         field: i18next.t('user:confirmPassword'),
       })
     )
+
+export const fullNameValidation = () =>
+  yup
+    .string()
+    .required(
+      i18next.t('validation:error.isRequired', {
+        field: i18next.t('user:fullName'),
+      })
+    )

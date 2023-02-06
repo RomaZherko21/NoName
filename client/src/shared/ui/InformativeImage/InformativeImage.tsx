@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { Avatar, Stack, Typography } from '@mui/material'
+import { Variant } from '@mui/material/styles/createTypography'
 
 interface Props {
   imgUrl: string
@@ -7,6 +8,8 @@ interface Props {
   imgPlaceholder?: string
   SecondaryText?: JSX.Element | string
   size?: 'large' | 'medium'
+  PrimaryVariant?: Variant
+  SecondaryVariant?: Variant
 }
 
 function InformativeImage({
@@ -15,6 +18,8 @@ function InformativeImage({
   PrimaryText,
   SecondaryText,
   size = 'medium',
+  PrimaryVariant = 'body2',
+  SecondaryVariant = 'subtitle2',
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -30,9 +35,9 @@ function InformativeImage({
         {imgPlaceholder}
       </Avatar>
       <Stack>
-        <Typography variant="body2">{PrimaryText}</Typography>
+        <Typography variant={PrimaryVariant}>{PrimaryText}</Typography>
         {SecondaryText && (
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant={SecondaryVariant} color="textSecondary">
             {SecondaryText}
           </Typography>
         )}
