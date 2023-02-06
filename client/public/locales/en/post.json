@@ -6,6 +6,7 @@
   "postTitle": "Post Title",
   "postCover": "Post cover",
   "readingTime": "{{minute}} minute read",
+  "genres": "Genre",
   "whereImagesAreUsed": "Image used for the blog post cover and also for Open Graph meta",
   "actions": {
     "selectFile": "Select file",
