@@ -2,6 +2,7 @@
   "name": "Name",
   "surname": "Surname",
   "middleName": "Middle name",
+  "fullName": "Full name",
   "email": "Email",
   "gender": "Gender",
   "dateOfBirth": "Date of birth",

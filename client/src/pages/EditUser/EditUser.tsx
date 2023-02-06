@@ -4,28 +4,31 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Typography, Grid, Paper, Divider } from '@mui/material'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Button, Typography, Grid, Paper, Divider, Chip, Box, Switch } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { GENDER, NODE_API_USER_AVATAR_URL, ROLES, ROUTES } from 'shared/consts'
 import { InformativeImage, InputField, SelectField, Spinner } from 'shared/ui'
-import { getInitials } from 'shared/helpers'
+import { getFullName, getInitials, getSplitName } from 'shared/helpers'
 import { Gender, Roles } from 'shared/types'
 import {
   commonStringValidation,
   confirmPasswordValidation,
   emailValidation,
+  fullNameValidation,
   passwordValidation,
 } from 'shared/validations'
+import { useRootStore } from 'stores'
 
-import styles from './Styles.module.scss'
 import { EditUserModel } from './model'
+import s from './Styles.module.scss'
 
 function EditUser() {
   const { t } = useTranslation()
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useRootStore()
 
   useEffect(() => {
     EditUserModel.fetchUser(Number(id))
@@ -34,8 +37,7 @@ function EditUser() {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation(t(`user:name`), 3),
-        surname: commonStringValidation(t(`user:surname`), 3),
+        full_name: fullNameValidation(),
         email: emailValidation(),
         role: commonStringValidation(t(`user:role`)),
         date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
@@ -44,11 +46,11 @@ function EditUser() {
       }),
     [t]
   )
-
   return (
     <>
       <Button
-        onClick={() => navigate(ROUTES.USERS)}
+        to={ROUTES.USERS}
+        component={Link}
         sx={{ color: (theme) => theme.palette.text.primary, mb: 3 }}
         startIcon={<ArrowBackIcon fontSize="large" />}
         size="large"
@@ -65,16 +67,23 @@ function EditUser() {
             imgPlaceholder={getInitials(`${EditUserModel.name} ${EditUserModel.surname}`)}
             PrimaryText={EditUserModel.email}
             size="large"
-            PrimaryTextVariant="h4"
-            SecondaryText={`user_id: ${Number(id)}`}
-            SecondaryTextVariant="subtitle1"
+            PrimaryVariant="h4"
+            SecondaryText={
+              <Typography variant="subtitle2" color={'text.primary'}>
+                user_id:{' '}
+                <Chip
+                  label={Number(id)}
+                  sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
+                />
+              </Typography>
+            }
           />
 
           <Formik
             initialValues={{
-              name: EditUserModel?.name || '',
-              surname: EditUserModel?.surname || '',
-              middle_name: EditUserModel?.middle_name || '',
+              full_name:
+                getFullName(EditUserModel.name, EditUserModel.surname, EditUserModel.middle_name) ||
+                '',
               email: EditUserModel?.email || '',
               tel_number: EditUserModel?.tel_number || '',
               role: EditUserModel?.role || Roles.user,
@@ -85,26 +94,32 @@ function EditUser() {
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              EditUserModel.updateUser(values, Number(id))
+              EditUserModel.updateUser(
+                {
+                  ...getSplitName(values.full_name),
+                  email: values.email,
+                  tel_number: values.tel_number,
+                  role: values.role,
+                  gender: values.gender,
+                  date_of_birth: values.date_of_birth,
+                  password: values.password,
+                  confirmPassword: values.confirmPassword,
+                },
+                Number(id)
+              )
               navigate(ROUTES.USERS)
               toast.success(t('notification:success.updated'))
             }}
           >
             {({ handleSubmit }) => (
               <Paper sx={{ mt: 4 }}>
-                <form onSubmit={handleSubmit} className={styles.centered}>
+                <form onSubmit={handleSubmit} className={s.centered}>
                   <Grid container spacing={3}>
                     <Grid item xs={12}>
                       <Typography variant="h6">{t('user:actions.editUser')}</Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <InputField field="name" label="user:name" />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <InputField field="surname" label="user:surname" />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <InputField field="middle_name" label="user:middleName" />
+                      <InputField field="full_name" label="user:fullName" />
                     </Grid>
                     <Grid item xs={6}>
                       <InputField field="tel_number" label="user:telephoneNumber" />
@@ -131,6 +146,26 @@ function EditUser() {
                         type="password"
                       />
                     </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Box>
+                        <Typography variant="h6" mb={1}>
+                          Make Contact Info Public
+                        </Typography>
+                        <Typography color={'text.secondary'} variant="body2">
+                          Means that anyone viewing your profile will be able to see your contacts
+                          details
+                        </Typography>
+                      </Box>
+                      <Switch />
+                    </Grid>
                     <Grid item xs={12}>
                       <Divider sx={{ color: (theme) => theme.palette.divider }} />
                     </Grid>
@@ -138,7 +173,7 @@ function EditUser() {
                       <Button variant="contained" type="submit" sx={{ mr: 2 }}>
                         {t('actions.update')}
                       </Button>
-                      <Button onClick={() => navigate(ROUTES.USERS)} color="inherit">
+                      <Button to={ROUTES.USERS} component={Link} color="inherit">
                         {t('actions.cancel')}
                       </Button>
                     </Grid>

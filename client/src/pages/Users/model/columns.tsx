@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generatePath, useNavigate } from 'react-router-dom'
+import { generatePath, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Box, Chip, IconButton, Tooltip } from '@mui/material'
@@ -21,7 +21,6 @@ import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
 
   const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
     <UserForm
@@ -47,9 +46,10 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
     <>
       <Tooltip title={t('actions.edit') || 'edit'} placement="top">
         <IconButton
+          component={Link}
+          to={generatePath(ROUTES.USERS_EDIT, { id: String(data.id) })}
           aria-label="edit"
           size="small"
-          onClick={() => navigate(generatePath(ROUTES.USERS_EDIT, { id: String(data.id) }))}
         >
           <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>

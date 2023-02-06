@@ -1,4 +1,5 @@
 import qs from 'qs'
+import { User } from 'shared/types'
 
 export const getInitials = (name = '') =>
   name
@@ -10,6 +11,12 @@ export const getInitials = (name = '') =>
 
 export const getFullName = (name = '', surname = '', middleName = '') =>
   middleName ? `${name} ${middleName} ${surname}` : `${name} ${surname}`
+
+export const getSplitName = (full_name: string, user?: User) => {
+  const [firstName, middleName, lastName] = full_name.split(' ')
+
+  return { name: firstName, middle_name: middleName, surname: lastName }
+}
 
 export const getQueryParams = (obj: any): string => {
   let result: any = {}

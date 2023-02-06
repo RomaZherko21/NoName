@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { Avatar, Stack, Typography } from '@mui/material'
+import { Variant } from '@mui/material/styles/createTypography'
 
 interface Props {
   imgUrl: string
@@ -7,36 +8,8 @@ interface Props {
   imgPlaceholder?: string
   SecondaryText?: JSX.Element | string
   size?: 'large' | 'medium'
-  PrimaryTextVariant?:
-    | 'button'
-    | 'caption'
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'inherit'
-    | 'subtitle1'
-    | 'subtitle2'
-    | 'body1'
-    | 'body2'
-    | 'overline'
-  SecondaryTextVariant?:
-    | 'button'
-    | 'caption'
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'inherit'
-    | 'subtitle1'
-    | 'subtitle2'
-    | 'body1'
-    | 'body2'
-    | 'overline'
+  PrimaryVariant?: Variant
+  SecondaryVariant?: Variant
 }
 
 function InformativeImage({
@@ -45,8 +18,8 @@ function InformativeImage({
   PrimaryText,
   SecondaryText,
   size = 'medium',
-  PrimaryTextVariant = 'body2',
-  SecondaryTextVariant = 'subtitle2',
+  PrimaryVariant = 'body2',
+  SecondaryVariant = 'subtitle2',
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -62,9 +35,9 @@ function InformativeImage({
         {imgPlaceholder}
       </Avatar>
       <Stack>
-        <Typography variant={PrimaryTextVariant}>{PrimaryText}</Typography>
+        <Typography variant={PrimaryVariant}>{PrimaryText}</Typography>
         {SecondaryText && (
-          <Typography variant={SecondaryTextVariant} color="textSecondary">
+          <Typography variant={SecondaryVariant} color="textSecondary">
             {SecondaryText}
           </Typography>
         )}
