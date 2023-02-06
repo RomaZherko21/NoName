@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
+import parse from 'html-react-parser'
 import { Box, Typography, IconButton, Tooltip, Chip } from '@mui/material'
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from 'react-icons/ai'
 
@@ -48,7 +49,7 @@ function PostContent() {
 
       <Box display="flex" alignItems="center" justifyContent="center" sx={{ pt: 2, pb: 2 }}>
         <Typography variant="body2" sx={{ width: '80%' }}>
-          {PostModel.description}
+          {parse(PostModel.description)}
         </Typography>
       </Box>
 

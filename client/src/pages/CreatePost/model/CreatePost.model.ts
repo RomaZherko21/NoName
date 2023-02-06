@@ -1,9 +1,12 @@
 import { makeAutoObservable } from 'mobx'
 import LoadingModel from 'models/Loading'
 import { NODE_API } from 'services'
+import { Genre } from 'shared/types'
 
 class CreatePostModel {
   loading: LoadingModel
+
+  genres: Genre[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -11,7 +14,34 @@ class CreatePostModel {
     this.loading = new LoadingModel()
   }
 
-  async create(post: { name: string; description: string; post: File | ''; user_id: number }) {
+  async fetch() {
+    try {
+      this.loading.begin()
+
+      const genres = await NODE_API.genres.get()
+
+      this.genres = genres
+
+      this.loading.reset()
+    } catch {
+      console.log('FUCK')
+
+      this.loading.reset()
+    }
+  }
+
+  getGenresOptions() {
+    return this.genres.reduce((acc, item) => ({ ...acc, [item.id]: item.name }), {})
+  }
+
+  async create(post: {
+    name: string
+    short_description: string
+    genre_id: number
+    description: string
+    post: any
+    reading_time: number
+  }) {
     try {
       this.loading.begin()
 

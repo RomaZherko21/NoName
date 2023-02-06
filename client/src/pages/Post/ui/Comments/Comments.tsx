@@ -19,16 +19,16 @@ function Comments({ comments = [] }: Props) {
   return (
     <>
       <Divider sx={{ my: 4 }} />
-      {comments.length && (
+      {comments.length ? (
         <>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {comments.map((comment) => (
               <Comment comment={comment} isOwner={user.id === comment.user_id} />
             ))}
           </Box>
+          <Divider sx={{ my: 4 }} />
         </>
-      )}
-      <Divider sx={{ my: 4 }} />
+      ) : null}
 
       <LeaveComment
         avatarUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}

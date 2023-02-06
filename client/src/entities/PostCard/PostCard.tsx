@@ -24,7 +24,7 @@ import {
 } from 'shared/consts'
 
 import s from './Styles.module.scss'
-import { Post, User } from 'shared/types'
+import { Post } from 'shared/types'
 import { InformativeImage } from 'shared/ui'
 import { CircleDevider } from 'shared/ui/CircleDevider'
 
@@ -72,7 +72,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
         </MuiLink>
 
         <Typography className={s.ellipsis} variant="body1" color="text.secondary" mt={1}>
-          {post.description}
+          {post.short_description}
         </Typography>
 
         <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

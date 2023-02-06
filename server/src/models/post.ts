@@ -36,7 +36,7 @@ const PostModel = sequelize.define(
   }
 )
 
-PostModel.hasMany(GenreModel, {
+GenreModel.hasMany(PostModel, {
   foreignKey: 'genre_id',
 })
 

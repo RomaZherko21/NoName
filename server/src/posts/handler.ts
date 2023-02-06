@@ -33,11 +33,11 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         users.middle_name  as user_middle_name,
         users.email  as user_email,
         users.avatar,
-        COUNT(posts.id) as likes_count,
+        COUNT(m2m_users_posts_likes.post_id ) as likes_count,
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users
       FROM posts 
         JOIN users ON posts.user_id = users.id 
-        JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+        LEFT JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
         JOIN genres ON posts.genre_id = genres.id 
           
         WHERE posts.id LIKE '%${id}%'
@@ -109,7 +109,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
         COUNT(posts.id) as likes_count, 
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
       FROM posts 
-        JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
+       LEFT JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
         JOIN genres ON posts.genre_id = genres.id 
         
         GROUP BY posts.id
@@ -158,9 +158,12 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
 
 export async function createPost({ body, file }: Request, res: Response, next: NextFunction) {
   try {
+    const authorization_id = res.locals.authorization_id
+
     await PostModel.create({
       ...body,
       image: file?.filename,
+      user_id: authorization_id,
     })
 
     res.status(204).send()
