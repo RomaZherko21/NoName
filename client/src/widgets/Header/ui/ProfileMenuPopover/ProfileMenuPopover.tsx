@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { Avatar, ButtonBase, CardContent, Grid, IconButton, Paper, Stack } from '@mui/material'
 import { ImExit } from 'react-icons/im'
 
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { useDialog } from 'shared/hooks'
 import { InformativeImage, Popover, Tabs } from 'shared/ui'
 import { useRootStore } from 'stores'
@@ -31,7 +31,7 @@ function ProfileMenuPopover() {
             <Avatar
               alt="User avatar"
               sx={{ cursor: 'pointer', width: 32, height: 32 }}
-              src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+              src={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
             />
           </Stack>
         </ButtonBase>
@@ -46,7 +46,7 @@ function ProfileMenuPopover() {
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
               <InformativeImage
-                imgUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+                imgUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
                 PrimaryText={`${user.name} ${user.surname}`}
                 SecondaryText={user.role}
               />

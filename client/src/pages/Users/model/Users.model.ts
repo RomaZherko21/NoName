@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import { ConnectionStatus, QueryPaginationParams, QuerySortParams, User } from 'shared/types'
@@ -10,7 +11,7 @@ import { UserFilters } from './filters'
 
 type SearchParams = UserFilters & QuerySortParams & QueryPaginationParams
 class UsersModel {
-  private _users: User[] = []
+  users: User[] = []
 
   pagination: PaginationModel
 
@@ -21,20 +22,6 @@ class UsersModel {
 
     this.pagination = new PaginationModel()
     this.loading = new LoadingModel()
-  }
-
-  set users(data: User[]) {
-    this._users = data
-  }
-
-  get users() {
-    return this._users
-  }
-
-  async connectionRequest(id: number) {
-    await API.connections.update(id, ConnectionStatus.pending)
-
-    this.fetch({})
   }
 
   debounceFetch = debounce(this.fetch, 500)
@@ -50,9 +37,9 @@ class UsersModel {
       })
       this.users = data.users
       this.pagination.totalCount = data.count
-
-      this.loading.end()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
@@ -62,11 +49,12 @@ class UsersModel {
       this.loading.begin()
 
       await API.users.create(user)
-      this.fetch({})
 
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
     }
   }
 
@@ -75,11 +63,12 @@ class UsersModel {
       this.loading.begin()
 
       await API.users.remove(id)
-      this.fetch({})
 
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
     }
   }
 
@@ -88,11 +77,22 @@ class UsersModel {
       this.loading.begin()
 
       await API.users.update(user, id)
-      this.fetch({})
 
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
+    }
+  }
+
+  async connectionRequest(id: number) {
+    try {
+      await API.connections.update(id, ConnectionStatus.pending)
+
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
     }
   }
 }

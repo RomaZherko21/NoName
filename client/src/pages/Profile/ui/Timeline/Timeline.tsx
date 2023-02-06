@@ -18,7 +18,7 @@ import { BsEnvelopeOpen } from 'react-icons/bs'
 import { useRootStore } from 'stores'
 import { PostCard } from 'entities'
 import { LeaveComment, Spinner } from 'shared/ui'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
 
 const Timeline = () => {
@@ -70,7 +70,7 @@ const Timeline = () => {
       </Grid>
       <Grid item xs={12} md={8}>
         <LeaveComment
-          avatarUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+          avatarUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
           label="user:whatsOnYourMind"
           filledBackground
         />

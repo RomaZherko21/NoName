@@ -13,7 +13,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { useDialog } from 'shared/hooks'
 import { InformativeImage } from 'shared/ui'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
-import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
 import UsersModel from './Users.model'
@@ -69,7 +69,7 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:name'),
     getValue: ({ name, surname, middle_name, email, avatar }: User) => (
       <InformativeImage
-        imgUrl={`${NODE_API_USER_AVATAR_URL}/${avatar}`}
+        imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
         PrimaryText={getFullName(name, surname, middle_name)}
         SecondaryText={email}

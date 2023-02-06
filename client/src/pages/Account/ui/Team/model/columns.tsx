@@ -5,7 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import { Roles, TableColumn, User } from 'shared/types'
 import { getFullName, getInitials } from 'shared/helpers'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { InformativeImage } from 'shared/ui'
 
 export const getColumns = (): TableColumn[] => [
@@ -14,7 +14,7 @@ export const getColumns = (): TableColumn[] => [
     title: i18next.t('user:name'),
     getValue: ({ name, surname, middle_name, avatar }: User) => (
       <InformativeImage
-        imgUrl={`${NODE_API_USER_AVATAR_URL}/${avatar}`}
+        imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
         PrimaryText={getFullName(name, surname, middle_name)}
       />

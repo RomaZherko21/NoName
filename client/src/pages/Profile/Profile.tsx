@@ -8,7 +8,7 @@ import { FiMoreVertical } from 'react-icons/fi'
 import { RiMessage2Fill } from 'react-icons/ri'
 
 import { useRootStore } from 'stores'
-import { NODE_API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { InformativeImage, Tabs } from 'shared/ui'
 import { PostsFilters } from 'pages/Posts/model'
 import ProfileCover from 'assets/images/cover.jpg'
@@ -37,7 +37,7 @@ function Profile() {
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
       >
         <InformativeImage
-          imgUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+          imgUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
           PrimaryText={`${user.name} ${user.surname}`}
           SecondaryText={user.role}
           size="large"

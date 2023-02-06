@@ -18,7 +18,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
 import { ProfileModel } from 'pages/Profile/model'
 import { InformativeImage, Spinner } from 'shared/ui'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 const SentConnections = () => {
   const { t } = useTranslation()
@@ -55,7 +55,7 @@ const SentConnections = () => {
                   <Box display="flex" gap={2}>
                     <Stack>
                       <InformativeImage
-                        imgUrl={`${NODE_API_USER_AVATAR_URL}/${item.avatar}`}
+                        imgUrl={`${API_USER_AVATAR_URL}/${item.avatar}`}
                         PrimaryText={`${item.name} ${item.surname}`}
                         SecondaryText={item.email}
                       />

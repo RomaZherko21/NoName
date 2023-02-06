@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Box, Typography, Avatar, IconButton } from '@mui/material'
 import { FiMoreVertical } from 'react-icons/fi'
 
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { Comment as CommentT } from 'shared/types'
 import { PopupMenu } from 'shared/ui'
 
@@ -25,7 +25,7 @@ function Comment({ comment, isOwner }: Props) {
       <Avatar
         alt="User avatar"
         sx={{ width: 40, height: 40 }}
-        src={`${NODE_API_USER_AVATAR_URL}/${comment.user_avatar}`}
+        src={`${API_USER_AVATAR_URL}/${comment.user_avatar}`}
       />
       <Box
         sx={{

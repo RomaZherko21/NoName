@@ -10,7 +10,7 @@ import { useRootStore } from 'stores'
 import { InputField, SelectField, Spinner, UploadImage } from 'shared/ui'
 import { commonStringValidation, emailValidation } from 'shared/validations'
 import { getFullName } from 'shared/helpers'
-import { GENDER, ROLES } from 'shared/consts'
+import { GENDER, API_USER_AVATAR_URL, ROLES } from 'shared/consts'
 
 const ProfileForm = () => {
   const { t } = useTranslation()
@@ -72,7 +72,7 @@ const ProfileForm = () => {
                           width={80}
                           height={80}
                           handleUploadClick={handleUploadClick}
-                          imageUrl={user.getPhotoUrl()}
+                          imageUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
                         />
                       </Box>
                       <Button

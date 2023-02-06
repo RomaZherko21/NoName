@@ -17,7 +17,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
 import { InformativeImage, Spinner } from 'shared/ui'
 import { ConnectionStatus } from 'shared/types'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
 
 const Connections = () => {
@@ -53,7 +53,7 @@ const Connections = () => {
                   justifyContent="space-between"
                 >
                   <InformativeImage
-                    imgUrl={`${NODE_API_USER_AVATAR_URL}/${item.avatar}`}
+                    imgUrl={`${API_USER_AVATAR_URL}/${item.avatar}`}
                     PrimaryText={`${item.name} ${item.surname}`}
                     SecondaryText={item.email}
                   />

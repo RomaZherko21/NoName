@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
@@ -8,9 +9,10 @@ class EditUserModel {
   name: string = ''
   surname: string = ''
   middle_name: string = ''
-  email: string = ''
   password?: string = ''
   confirmPassword?: string = ''
+
+  email: string = ''
   role: Roles = Roles.user
   date_of_birth?: string = ''
   tel_number?: string = ''
@@ -32,10 +34,10 @@ class EditUserModel {
       const data = await API.users.getById(id)
 
       this.fromJSON(data)
-
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
     }
   }
 
@@ -44,10 +46,10 @@ class EditUserModel {
       this.loading.begin()
 
       await API.users.update(user, id)
-
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
     }
   }
 

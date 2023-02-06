@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import { RootStore } from 'stores/Root'
@@ -8,9 +9,9 @@ const ACCESS_TOKEN = 'ACCESS_TOKEN'
 class AuthorizationModel {
   readonly rootStore: RootStore
 
-  private _isAuthorized: boolean = true
+  isAuthorized: boolean = true
 
-  private _accessToken: string | null = null
+  accessToken: string | null = null
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
@@ -19,20 +20,8 @@ class AuthorizationModel {
     this.init()
   }
 
-  set isAuthorized(data: boolean) {
-    this._isAuthorized = data
-  }
-
-  get isAuthorized() {
-    return this._isAuthorized
-  }
-
-  get accessToken() {
-    return this._accessToken
-  }
-
   init() {
-    this._accessToken = this.getAccessToken()
+    this.accessToken = this.getAccessToken()
   }
 
   getAccessToken() {
@@ -40,7 +29,7 @@ class AuthorizationModel {
   }
 
   setAccessToken(value: string) {
-    this._accessToken = value
+    this.accessToken = value
     localStorage.setItem(ACCESS_TOKEN, value)
   }
 
@@ -50,12 +39,19 @@ class AuthorizationModel {
   }
 
   async signIn(value: { email: string; password: string }) {
-    const data = await API.auth.signIn(value.email, value.password)
-    this.rootStore.user.init()
+    try {
+      this.rootStore.loading.begin()
 
-    this.setAccessToken(data.accessToken)
-    this.isAuthorized = true
-    // this.rootStore.user.init()
+      const data = await API.auth.signIn(value.email, value.password)
+      this.rootStore.user.init()
+
+      this.setAccessToken(data.accessToken)
+      this.isAuthorized = true
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.rootStore.loading.end()
+    }
   }
 }
 

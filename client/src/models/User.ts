@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import { RootStore } from 'stores'
 import { API } from 'services'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
-import { ConnectionStatus, Gender, Roles, User } from 'shared/types'
+import { Gender, Roles, User } from 'shared/types'
 
 import FileModel from './File'
 
@@ -39,70 +39,75 @@ class UserModel {
   }
 
   async init() {
-    const {
-      id = 0,
-      name,
-      surname,
-      middle_name,
-      email,
-      gender = Gender.man,
-      tel_number = '',
-      date_of_birth = '',
-      role,
-      avatar = '',
-    } = await API.user.get()
+    try {
+      this.rootStore.loading.begin()
 
-    await API.connections.get({ status: ConnectionStatus.pending })
+      const user = await API.user.get()
 
-    this.rootStore.authorization.isAuthorized = true
+      this.fromJSON(user)
 
-    this.id = id
-    this.name = name
-    this.surname = surname
-    this.middle_name = middle_name
-    this.date_of_birth = date_of_birth
-    this.tel_number = tel_number
-    this.gender = gender
-    this.email = email
-    this.role = role
-    this.avatar.url = avatar
-  }
-
-  getPhotoUrl() {
-    return `${NODE_API_USER_AVATAR_URL}/${this.avatar.url}`
+      this.rootStore.authorization.isAuthorized = true
+    } catch (err: any) {
+      console.log(err)
+      toast.error(err)
+    } finally {
+      this.rootStore.loading.end()
+    }
   }
 
   async uploadPhoto(file: File) {
-    this.rootStore.loading.begin()
     try {
+      this.rootStore.loading.begin()
+
       const { url } = await API.user.uploadPhoto(file)
+
       this.avatar.setFileData(file, url)
-      this.rootStore.loading.end()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.rootStore.loading.end()
     }
   }
 
   async update(values: User) {
-    this.rootStore.loading.begin()
     try {
+      this.rootStore.loading.begin()
+
       await API.user.update(values)
+
       await this.init()
-      this.rootStore.loading.end()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.rootStore.loading.end()
     }
   }
 
   async remove() {
-    this.rootStore.loading.begin()
     try {
+      this.rootStore.loading.begin()
+
       await API.user.remove()
+
       this.rootStore.authorization.unauthorize()
-      this.rootStore.loading.end()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.rootStore.loading.end()
     }
+  }
+
+  private fromJSON(user: User) {
+    this.id = user.id || 0
+    this.name = user.name
+    this.surname = user.surname
+    this.middle_name = user.middle_name
+    this.date_of_birth = user.date_of_birth || ''
+    this.tel_number = user.tel_number || ''
+    this.gender = user.gender || Gender.man
+    this.email = user.email
+    this.role = user.role
+    this.avatar.url = user.avatar || ''
   }
 }
 

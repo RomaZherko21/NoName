@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
+import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import { QueryPaginationParams, Post, QuerySortParams } from 'shared/types'
@@ -11,7 +12,7 @@ import { PostsFilters } from './filters'
 type SearchParams = PostsFilters & QuerySortParams & QueryPaginationParams
 
 class PostsModel {
-  private _posts: Post[] = []
+  posts: Post[] = []
 
   pagination: PaginationModel
   loading: LoadingModel
@@ -23,18 +24,9 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
-  get posts() {
-    return this._posts
-  }
-
-  set posts(data: Post[]) {
-    this._posts = data
-  }
-
   debounceFetch = debounce(this.fetch, 500)
 
   async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
-    console.log(searchParams)
     try {
       if (!hidden) {
         this.loading.begin()
@@ -48,7 +40,9 @@ class PostsModel {
       this.pagination.totalCount = data.count
 
       this.loading.reset()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
@@ -60,10 +54,11 @@ class PostsModel {
       const created_at = Date.now()
 
       await API.posts.create({ ...post, created_at })
-      this.fetch({})
 
-      this.loading.end()
-    } catch {
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
@@ -73,18 +68,23 @@ class PostsModel {
       this.loading.begin()
 
       await API.posts.remove(id)
-      this.fetch({})
 
-      this.loading.end()
-    } catch {
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
 
   async toggleLike(id: number, searchParams?: SearchParams) {
-    await API.posts.like(id)
+    try {
+      await API.posts.like(id)
 
-    this.fetch({ searchParams, hidden: true })
+      this.fetch({ searchParams, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 }
 

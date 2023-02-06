@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Typography, Grid, Paper, Divider, Chip, Box, Switch } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-import { GENDER, NODE_API_USER_AVATAR_URL, ROLES, ROUTES } from 'shared/consts'
+import { GENDER, API_USER_AVATAR_URL, ROLES, ROUTES } from 'shared/consts'
 import { InformativeImage, InputField, SelectField, Spinner } from 'shared/ui'
 import { getFullName, getInitials, getSplitName } from 'shared/helpers'
 import { Gender, Roles } from 'shared/types'
@@ -59,7 +59,7 @@ function EditUser() {
       ) : (
         <>
           <InformativeImage
-            imgUrl={`${NODE_API_USER_AVATAR_URL}/${EditUserModel.avatar}`}
+            imgUrl={`${API_USER_AVATAR_URL}/${EditUserModel.avatar}`}
             imgPlaceholder={getInitials(`${EditUserModel.name} ${EditUserModel.surname}`)}
             PrimaryText={EditUserModel.email}
             size="large"

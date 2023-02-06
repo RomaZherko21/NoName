@@ -16,12 +16,7 @@ import {
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 import { fromMsToDate } from 'shared/helpers'
-import {
-  COMMON_DATE_FORMAT,
-  NODE_API_POST_IMAGES_URL,
-  NODE_API_USER_AVATAR_URL,
-  ROUTES,
-} from 'shared/consts'
+import { COMMON_DATE_FORMAT, API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
 import s from './Styles.module.scss'
 import { Post } from 'shared/types'
@@ -42,7 +37,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
       <CardMedia
         component="img"
         height="220"
-        image={`${NODE_API_POST_IMAGES_URL}/${post.image}`}
+        image={`${API_POST_IMAGES_URL}/${post.image}`}
         sx={{ objectFit: 'cover', cursor: 'pointer' }}
         alt={post.name}
         onClick={() => {
@@ -77,7 +72,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
 
         <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <InformativeImage
-            imgUrl={`${NODE_API_USER_AVATAR_URL}/${post.avatar}`}
+            imgUrl={`${API_USER_AVATAR_URL}/${post.avatar}`}
             PrimaryText={
               <>
                 By {post.user_name} {post.user_surname}

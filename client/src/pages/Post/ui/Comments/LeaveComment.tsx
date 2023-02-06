@@ -7,7 +7,7 @@ import { MdOutlineEmojiEmotions } from 'react-icons/md'
 
 import { Input } from 'shared/ui'
 import { useRootStore } from 'stores'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 import { PostModel } from '../../model'
 
@@ -20,7 +20,7 @@ function LeaveComment() {
       <Avatar
         alt="User avatar"
         sx={{ width: 40, height: 40 }}
-        src={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+        src={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
       />
       <Stack direction="column" spacing={3} sx={{ width: '100%' }}>
         <Input

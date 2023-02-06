@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import LoadingModel from 'models/Loading'
@@ -48,9 +49,9 @@ class PostModel {
       const data = await API.posts.get(id)
 
       this.fromJSON(data)
-
-      this.loading.reset()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
@@ -62,43 +63,59 @@ class PostModel {
   }
 
   async toggleLike() {
-    await API.posts.like(this.id)
+    try {
+      await API.posts.like(this.id)
 
-    this.fetch({ id: this.id, hidden: true })
+      this.fetch({ id: this.id, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async addNewComment() {
-    await API.posts.createComment(this.id, {
-      created_at: new Date().getTime(),
-      message: this.commentInputValue,
-    })
+    try {
+      await API.posts.createComment(this.id, {
+        created_at: new Date().getTime(),
+        message: this.commentInputValue,
+      })
 
-    this.commentInputValue = ''
+      this.commentInputValue = ''
 
-    this.fetch({ id: this.id })
+      this.fetch({ id: this.id })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async editComment() {
-    await API.posts.editComment({
-      post_id: this.id,
-      comment_id: this.editCommentId,
-      comment: {
-        created_at: new Date().getTime(),
-        message: this.commentInputValue,
-      },
-    })
+    try {
+      await API.posts.editComment({
+        post_id: this.id,
+        comment_id: this.editCommentId,
+        comment: {
+          created_at: new Date().getTime(),
+          message: this.commentInputValue,
+        },
+      })
 
-    this.isEditActive = false
-    this.commentInputValue = ''
-    this.editCommentId = 0
+      this.isEditActive = false
+      this.commentInputValue = ''
+      this.editCommentId = 0
 
-    this.fetch({ id: this.id })
+      this.fetch({ id: this.id })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async deleteComment(comment_id: number) {
-    await API.posts.deleteComment(this.id, comment_id)
+    try {
+      await API.posts.deleteComment(this.id, comment_id)
 
-    this.fetch({ id: this.id })
+      this.fetch({ id: this.id })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   private fromJSON(post: Post & { user: User }) {

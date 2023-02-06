@@ -1,12 +1,14 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
+
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { Genre } from 'shared/types'
 
 class CreatePostModel {
-  loading: LoadingModel
-
   genres: Genre[] = []
+
+  loading: LoadingModel
 
   constructor() {
     makeAutoObservable(this)
@@ -21,12 +23,10 @@ class CreatePostModel {
       const genres = await API.genres.get()
 
       this.genres = genres
-
-      this.loading.reset()
-    } catch {
-      console.log('FUCK')
-
-      this.loading.reset()
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
     }
   }
 
@@ -48,10 +48,10 @@ class CreatePostModel {
       const created_at = Date.now()
 
       await API.posts.create({ ...post, created_at })
-
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.end()
-    } catch {
-      this.loading.reset()
     }
   }
 }

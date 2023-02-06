@@ -3,6 +3,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material'
 
 import { Spinner, UploadImage } from 'shared/ui'
 import { useRootStore } from 'stores'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 const ProfileInfo = (props: any) => {
   const { user, loading } = useRootStore()
@@ -24,7 +25,10 @@ const ProfileInfo = (props: any) => {
           {loading.has ? (
             <Spinner />
           ) : (
-            <UploadImage handleUploadClick={handleUploadClick} imageUrl={user.getPhotoUrl()} />
+            <UploadImage
+              handleUploadClick={handleUploadClick}
+              imageUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
+            />
           )}
           <Typography color="textPrimary" gutterBottom textAlign="center" variant="h5">
             {user.name}

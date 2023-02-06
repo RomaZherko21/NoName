@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, List, Divider, Typography, Tooltip, IconButton } from '@mui/material'
 
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 import { InformativeImage, Popover } from 'shared/ui'
 import { HiOutlineUsers } from 'react-icons/hi'
 
@@ -46,7 +46,7 @@ function ContactsPopover() {
         <List sx={{ display: 'flex', flexDirection: 'column', width: '100%', p: 2, gap: 2 }}>
           {contacts.map((item: any) => (
             <InformativeImage
-              imgUrl={`${NODE_API_USER_AVATAR_URL}/${item.avatar}`}
+              imgUrl={`${API_USER_AVATAR_URL}/${item.avatar}`}
               PrimaryText={
                 <Box
                   sx={{

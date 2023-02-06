@@ -13,12 +13,12 @@ const Pagination = ({ paginationModel }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
-    paginationModel.currentPage = Number(searchParams.get('page'))
-    paginationModel.limit = Number(searchParams.get('limit'))
+    paginationModel.currentPage = Number(searchParams.get('page')) || 0
+    paginationModel.limit = Number(searchParams.get('limit')) || 10
   }, [])
 
   function onPageChange(event: unknown, newPage: number) {
-    paginationModel.currentPage = newPage
+    paginationModel.currentPage = newPage || 0
 
     setSearchParams((searchParams: URLSearchParams) => {
       searchParams.set('page', String(newPage))
@@ -27,7 +27,7 @@ const Pagination = ({ paginationModel }: Props) => {
   }
 
   function onRowsPerPageChange(event: React.ChangeEvent<HTMLInputElement>) {
-    paginationModel.limit = Number(event.target.value)
+    paginationModel.limit = Number(event.target.value) || 10
     paginationModel.currentPage = 0
 
     setSearchParams((searchParams: URLSearchParams) => {

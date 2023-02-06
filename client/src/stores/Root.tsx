@@ -14,12 +14,13 @@ export class RootStore {
   readonly loading: LoadingModel
 
   constructor() {
+    this.loading = new LoadingModel()
+
     this.init()
 
     this.authorization = new AuthorizationModel(this)
-    this.user = new UserModel(this)
 
-    this.loading = new LoadingModel()
+    this.user = new UserModel(this)
   }
 
   async init() {

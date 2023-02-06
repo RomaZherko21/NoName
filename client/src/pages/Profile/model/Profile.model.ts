@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import { Connection, ConnectionStatus } from 'shared/types'
 import LoadingModel from 'models/Loading'
@@ -7,13 +8,12 @@ import { PostsFilters } from 'pages/Posts/model'
 import { Post } from 'shared/types'
 
 class ProfileModel {
-  private _connections: Connection[] = []
-  private _posts: Post[] = []
-
-  isEditActive: boolean = false
-  editCommentId: number = 0
+  connections: Connection[] = []
+  posts: Post[] = []
 
   comment: string = ''
+  editCommentId: number = 0
+  isEditActive: boolean = false
 
   loading: LoadingModel
 
@@ -21,28 +21,6 @@ class ProfileModel {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
-  }
-
-  set connections(data: Connection[]) {
-    this._connections = data
-  }
-
-  get connections() {
-    return this._connections
-  }
-
-  set posts(data: Post[]) {
-    this._posts = data
-  }
-
-  get posts() {
-    return this._posts
-  }
-
-  async updateConnectionStatus({ id, status }: { id: number; status: ConnectionStatus }) {
-    await API.connections.update(id, status)
-
-    this.fetch({ isSent: false, isReceived: true })
   }
 
   async fetch({
@@ -64,9 +42,9 @@ class ProfileModel {
       })
 
       this.connections = data
-
-      this.loading.reset()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
@@ -88,45 +66,67 @@ class ProfileModel {
       })
 
       this.posts = data.posts
-
-      this.loading.reset()
-    } catch {
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
       this.loading.reset()
     }
   }
 
-  async removeConnectionRequest(id: number) {
-    await API.connections.remove(id)
+  async updateConnectionStatus({ id, status }: { id: number; status: ConnectionStatus }) {
+    try {
+      await API.connections.update(id, status)
 
-    this.fetch({ isSent: true, isReceived: false })
+      this.fetch({ isSent: false, isReceived: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async removeConnectionRequest(id: number) {
+    try {
+      await API.connections.remove(id)
+
+      this.fetch({ isSent: true, isReceived: false })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async addNewComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await API.posts.createComment(post_id, {
-      created_at: new Date().getTime(),
-      message: this.comment,
-    })
+    try {
+      await API.posts.createComment(post_id, {
+        created_at: new Date().getTime(),
+        message: this.comment,
+      })
 
-    this.comment = ''
+      this.comment = ''
 
-    this.fetchPosts({ filters })
+      this.fetchPosts({ filters })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async editComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await API.posts.editComment({
-      post_id: post_id,
-      comment_id: this.editCommentId,
-      comment: {
-        created_at: new Date().getTime(),
-        message: this.comment,
-      },
-    })
+    try {
+      await API.posts.editComment({
+        post_id: post_id,
+        comment_id: this.editCommentId,
+        comment: {
+          created_at: new Date().getTime(),
+          message: this.comment,
+        },
+      })
 
-    this.isEditActive = false
-    this.comment = ''
-    this.editCommentId = 0
+      this.isEditActive = false
+      this.comment = ''
+      this.editCommentId = 0
 
-    this.fetchPosts({ filters })
+      this.fetchPosts({ filters })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async deleteComment({
@@ -138,15 +138,23 @@ class ProfileModel {
     post_id: number
     filters: PostsFilters
   }) {
-    await API.posts.deleteComment(post_id, comment_id)
+    try {
+      await API.posts.deleteComment(post_id, comment_id)
 
-    this.fetchPosts({ filters })
+      this.fetchPosts({ filters })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   async toggleLike({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await API.posts.like(post_id)
+    try {
+      await API.posts.like(post_id)
 
-    this.fetchPosts({ filters: filters, hidden: true })
+      this.fetchPosts({ filters: filters, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 }
 

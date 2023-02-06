@@ -6,7 +6,7 @@ import { Box, Typography, IconButton, Tooltip, Chip } from '@mui/material'
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from 'react-icons/ai'
 
 import { CircleDevider, InformativeImage, PopupMenu } from 'shared/ui'
-import { NODE_API_POST_IMAGES_URL, NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_POST_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
 
 import { getPopupConfig } from './PopupConfig'
 import { PostModel } from '../../model'
@@ -28,7 +28,7 @@ function PostContent() {
         </Typography>
 
         <InformativeImage
-          imgUrl={`${NODE_API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
+          imgUrl={`${API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
           PrimaryText={
             <>
               {PostModel.user_name} {PostModel.user_surname} <CircleDevider />
@@ -42,7 +42,7 @@ function PostContent() {
       <Box display="flex" alignItems="center" justifyContent="center">
         <img
           className={s.postImg}
-          src={`${NODE_API_POST_IMAGES_URL}/${PostModel.image}`}
+          src={`${API_POST_IMAGES_URL}/${PostModel.image}`}
           alt="Post cover"
         />
       </Box>

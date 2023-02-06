@@ -5,7 +5,7 @@ import { Comment as CommentT } from 'shared/types'
 
 import { useRootStore } from 'stores'
 import { LeaveComment } from 'shared/ui'
-import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 import Comment from './Comment'
 
@@ -31,7 +31,7 @@ function Comments({ comments = [] }: Props) {
       ) : null}
 
       <LeaveComment
-        avatarUrl={`${NODE_API_USER_AVATAR_URL}/${user.avatar.url}`}
+        avatarUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
         label="user:actions.writeYourComment"
       />
     </>
