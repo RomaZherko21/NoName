@@ -9,9 +9,8 @@ const ACCESS_TOKEN = 'ACCESS_TOKEN'
 class AuthorizationModel {
   readonly rootStore: RootStore
 
-  isAuthorized: boolean = true
-
   accessToken: string | null = null
+  isAuthorized: boolean = true
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)

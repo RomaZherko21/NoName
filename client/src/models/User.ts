@@ -11,23 +11,15 @@ class UserModel {
   readonly rootStore: typeof RootStore
 
   id: number = 0
-
   name: string = ''
-
   surname: string = ''
-
   middle_name: string = ''
 
   tel_number: string = ''
-
   gender: Gender = Gender.man
-
   date_of_birth: string = ''
-
   email: string = ''
-
   avatar: FileModel
-
   role: Roles = Roles.user
 
   constructor(rootStore: typeof RootStore) {

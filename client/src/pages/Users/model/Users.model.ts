@@ -14,7 +14,6 @@ class UsersModel {
   users: User[] = []
 
   pagination: PaginationModel
-
   loading: LoadingModel
 
   constructor() {
