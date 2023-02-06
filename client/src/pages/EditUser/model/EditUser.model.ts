@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import LoadingModel from 'models/Loading'
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { User, Roles, Gender } from 'shared/types'
 
 class EditUserModel {
@@ -29,7 +29,7 @@ class EditUserModel {
     try {
       this.loading.begin()
 
-      const data = await NODE_API.users.getById(id)
+      const data = await API.users.getById(id)
 
       this.fromJSON(data)
 
@@ -43,7 +43,7 @@ class EditUserModel {
     try {
       this.loading.begin()
 
-      await NODE_API.users.update(user, id)
+      await API.users.update(user, id)
 
       this.loading.end()
     } catch {

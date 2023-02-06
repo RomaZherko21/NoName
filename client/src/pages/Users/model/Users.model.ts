@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { ConnectionStatus, QueryPaginationParams, QuerySortParams, User } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
@@ -32,7 +32,7 @@ class UsersModel {
   }
 
   async connectionRequest(id: number) {
-    await NODE_API.connection.update(id, ConnectionStatus.pending)
+    await API.connections.update(id, ConnectionStatus.pending)
 
     this.fetch({})
   }
@@ -45,7 +45,7 @@ class UsersModel {
         this.loading.begin()
       }
 
-      const data = await NODE_API.users.list({
+      const data = await API.users.list({
         searchParams,
       })
       this.users = data.users
@@ -61,7 +61,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await NODE_API.users.create(user)
+      await API.users.create(user)
       this.fetch({})
 
       this.loading.end()
@@ -74,7 +74,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await NODE_API.users.remove(id)
+      await API.users.remove(id)
       this.fetch({})
 
       this.loading.end()
@@ -87,7 +87,7 @@ class UsersModel {
     try {
       this.loading.begin()
 
-      await NODE_API.users.update(user, id)
+      await API.users.update(user, id)
       this.fetch({})
 
       this.loading.end()

@@ -1,1 +1,1 @@
-export { default as NODE_API } from './nodeApi'
+export { default as API } from './api'

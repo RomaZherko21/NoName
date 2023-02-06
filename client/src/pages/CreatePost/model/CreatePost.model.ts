@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import LoadingModel from 'models/Loading'
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { Genre } from 'shared/types'
 
 class CreatePostModel {
@@ -18,7 +18,7 @@ class CreatePostModel {
     try {
       this.loading.begin()
 
-      const genres = await NODE_API.genres.get()
+      const genres = await API.genres.get()
 
       this.genres = genres
 
@@ -47,7 +47,7 @@ class CreatePostModel {
 
       const created_at = Date.now()
 
-      await NODE_API.post.create({ ...post, created_at })
+      await API.posts.create({ ...post, created_at })
 
       this.loading.end()
     } catch {

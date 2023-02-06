@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { Connection, ConnectionStatus } from 'shared/types'
 import LoadingModel from 'models/Loading'
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
 import { Post } from 'shared/types'
 
@@ -40,7 +40,7 @@ class ProfileModel {
   }
 
   async updateConnectionStatus({ id, status }: { id: number; status: ConnectionStatus }) {
-    await NODE_API.connection.update(id, status)
+    await API.connections.update(id, status)
 
     this.fetch({ isSent: false, isReceived: true })
   }
@@ -57,7 +57,7 @@ class ProfileModel {
     try {
       this.loading.begin()
 
-      const data = await NODE_API.connection.get({
+      const data = await API.connections.get({
         status: status,
         isReceived: isReceived,
         isSent: isSent,
@@ -83,7 +83,7 @@ class ProfileModel {
         this.loading.begin()
       }
 
-      const data = await NODE_API.post.list({
+      const data = await API.posts.list({
         searchParams,
       })
 
@@ -96,13 +96,13 @@ class ProfileModel {
   }
 
   async removeConnectionRequest(id: number) {
-    await NODE_API.connection.remove(id)
+    await API.connections.remove(id)
 
     this.fetch({ isSent: true, isReceived: false })
   }
 
   async addNewComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await NODE_API.post.createComment(post_id, {
+    await API.posts.createComment(post_id, {
       created_at: new Date().getTime(),
       message: this.comment,
     })
@@ -113,7 +113,7 @@ class ProfileModel {
   }
 
   async editComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await NODE_API.post.editComment({
+    await API.posts.editComment({
       post_id: post_id,
       comment_id: this.editCommentId,
       comment: {
@@ -138,13 +138,13 @@ class ProfileModel {
     post_id: number
     filters: PostsFilters
   }) {
-    await NODE_API.post.deleteComment(post_id, comment_id)
+    await API.posts.deleteComment(post_id, comment_id)
 
     this.fetchPosts({ filters })
   }
 
   async toggleLike({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    await NODE_API.post.like(post_id)
+    await API.posts.like(post_id)
 
     this.fetchPosts({ filters: filters, hidden: true })
   }

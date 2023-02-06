@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { debounce } from '@mui/material'
 
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { QueryPaginationParams, Post, QuerySortParams } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
@@ -40,7 +40,7 @@ class PostsModel {
         this.loading.begin()
       }
 
-      const data = await NODE_API.post.list({
+      const data = await API.posts.list({
         searchParams,
       })
 
@@ -59,7 +59,7 @@ class PostsModel {
 
       const created_at = Date.now()
 
-      await NODE_API.post.create({ ...post, created_at })
+      await API.posts.create({ ...post, created_at })
       this.fetch({})
 
       this.loading.end()
@@ -72,7 +72,7 @@ class PostsModel {
     try {
       this.loading.begin()
 
-      await NODE_API.post.remove(id)
+      await API.posts.remove(id)
       this.fetch({})
 
       this.loading.end()
@@ -82,7 +82,7 @@ class PostsModel {
   }
 
   async toggleLike(id: number, searchParams?: SearchParams) {
-    await NODE_API.post.like(id)
+    await API.posts.like(id)
 
     this.fetch({ searchParams, hidden: true })
   }

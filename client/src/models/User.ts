@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import { RootStore } from 'stores'
-import { NODE_API } from 'services'
+import { API } from 'services'
 import { NODE_API_USER_AVATAR_URL } from 'shared/consts'
 import { ConnectionStatus, Gender, Roles, User } from 'shared/types'
 
@@ -50,9 +50,9 @@ class UserModel {
       date_of_birth = '',
       role,
       avatar = '',
-    } = await NODE_API.user.get()
+    } = await API.user.get()
 
-    await NODE_API.connection.get({ status: ConnectionStatus.pending })
+    await API.connections.get({ status: ConnectionStatus.pending })
 
     this.rootStore.authorization.isAuthorized = true
 
@@ -75,7 +75,7 @@ class UserModel {
   async uploadPhoto(file: File) {
     this.rootStore.loading.begin()
     try {
-      const { url } = await NODE_API.user.uploadPhoto(file)
+      const { url } = await API.user.uploadPhoto(file)
       this.avatar.setFileData(file, url)
       this.rootStore.loading.end()
     } catch {
@@ -86,7 +86,7 @@ class UserModel {
   async update(values: User) {
     this.rootStore.loading.begin()
     try {
-      await NODE_API.user.update(values)
+      await API.user.update(values)
       await this.init()
       this.rootStore.loading.end()
     } catch {
@@ -97,7 +97,7 @@ class UserModel {
   async remove() {
     this.rootStore.loading.begin()
     try {
-      await NODE_API.user.remove()
+      await API.user.remove()
       this.rootStore.authorization.unauthorize()
       this.rootStore.loading.end()
     } catch {

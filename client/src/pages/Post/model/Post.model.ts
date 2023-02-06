@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { NODE_API } from 'services'
+import { API } from 'services'
 import LoadingModel from 'models/Loading'
 import { Comment, Post, User } from 'shared/types'
 
@@ -45,7 +45,7 @@ class PostModel {
         this.loading.begin()
       }
 
-      const data = await NODE_API.post.get(id)
+      const data = await API.posts.get(id)
 
       this.fromJSON(data)
 
@@ -62,13 +62,13 @@ class PostModel {
   }
 
   async toggleLike() {
-    await NODE_API.post.like(this.id)
+    await API.posts.like(this.id)
 
     this.fetch({ id: this.id, hidden: true })
   }
 
   async addNewComment() {
-    await NODE_API.post.createComment(this.id, {
+    await API.posts.createComment(this.id, {
       created_at: new Date().getTime(),
       message: this.commentInputValue,
     })
@@ -79,7 +79,7 @@ class PostModel {
   }
 
   async editComment() {
-    await NODE_API.post.editComment({
+    await API.posts.editComment({
       post_id: this.id,
       comment_id: this.editCommentId,
       comment: {
@@ -96,7 +96,7 @@ class PostModel {
   }
 
   async deleteComment(comment_id: number) {
-    await NODE_API.post.deleteComment(this.id, comment_id)
+    await API.posts.deleteComment(this.id, comment_id)
 
     this.fetch({ id: this.id })
   }
