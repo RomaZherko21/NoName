@@ -23,12 +23,15 @@ I also recommend you to install "Make", it is a tool which controls the generati
 
 ## CMD:
 
-### `make run` or `docker-compose up --build`
 
-Start an app in the development mode.
 
-- Open [http://localhost:3000](http://localhost:3000) to view client in the browser.
+### In the project root folder (/NoName) run `make run` or `docker-compose up --build`
+Start docker services in development mode.
 - Open [http://localhost:8080](http://localhost:8080) to view phpMyAdmin.
+
+### In the client folder (/NoName/client) run `yarn start`
+Start client in development mode.
+- Open [http://localhost:3000](http://localhost:3000) to view client in the browser.
 
 Client and api server will reload if you make edits.\
 You will also see any lint errors in the console.
