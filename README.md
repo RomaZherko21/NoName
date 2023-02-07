@@ -3,7 +3,7 @@
 - [How to start](#how-to-start)
 - [CMD](#cmd)
 - [Client credentials](#client-credentials)
-- [phpMyAdmin credentials](#phpMyAdmin-credentials)
+- [Php my admin credentials](#php-my-admin-credentials)
 - [Diagrams](#diagrams)
 - [Style guide](#Style-guide)
 
@@ -11,13 +11,10 @@ The main idea of the project is to practice with different technologies such as:
 :white_check_mark: React\
 :white_check_mark: MobX\
 :white_check_mark: Express\
-:black_square_button: GoLang\
-:black_square_button: Gin\
-:black_square_button: MySQL queries\
-:black_square_button: Docker\
+:white_check_mark: MySQL queries\
+:white_check_mark: Docker\
 :black_square_button: Git-hub actions\
-:black_square_button: REST\
-:black_square_button: SOLID
+:white_check_mark: REST
 
 ## How to start
 
@@ -30,8 +27,8 @@ I also recommend you to install "Make", it is a tool which controls the generati
 
 Start an app in the development mode.
 
-- Open [http://localhost:80](http://localhost:80) to view client in the browser.
-- Open [http://localhost:8000/swagger/index.html](http://localhost:8000/swagger/index.html) to view swagger of go_api.
+- Open [http://localhost:3000](http://localhost:3000) to view client in the browser.
+- Open [http://localhost:8080](http://localhost:8080) to view phpMyAdmin.
 
 Client and api server will reload if you make edits.\
 You will also see any lint errors in the console.
@@ -40,20 +37,16 @@ You will also see any lint errors in the console.
 
 Stops docker containers.
 
-## Client credentials
+## Client credentials:
 
 - email: admin@gmail.com
 - password: qwerqwer
 
-## phpMyAdmin credentials
+## Php my admin credentials:
 
 - host: mysql_db
 - name: root
 - password: qwer
-
-## go_api swagger
-
-http://localhost:8000/swagger/index.html
 
 ## Diagrams
 
