@@ -1,19 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { toast } from 'react-toastify'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Box, Button, Grid, Paper, TableContainer } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
 import { AsideFilters, AsideFiltersBar, CommonTable, Pagination, Spinner } from 'shared/ui'
-import { PageHeader } from 'widgets'
-import { useDialog } from 'shared/hooks'
 import { getSearchParamsObj } from 'shared/helpers'
-import { User } from 'shared/types'
+import { ROUTES } from 'shared/consts'
+import { PageHeader } from 'widgets'
 
-import { UserForm } from './ui'
 import { UsersModel, getFiltersConfig, getColumns, sortConfig } from './model'
 
 function Users() {
@@ -31,16 +28,6 @@ function Users() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [UsersModel.pagination.currentPage, UsersModel.pagination.limit, searchParams])
 
-  const [showCreateUserModal] = useDialog('user:form.createNewUser', (hideModal) => (
-    <UserForm
-      onSubmit={(value: User) => {
-        UsersModel.create(value)
-        hideModal()
-        toast.success(t('notification:success.created'))
-      }}
-    />
-  ))
-
   return (
     <>
       <PageHeader
@@ -55,7 +42,7 @@ function Users() {
             <Button startIcon={<FileDownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
               {t('common.export')}
             </Button>
-            <Button variant="contained" color="primary" onClick={showCreateUserModal}>
+            <Button component={Link} to={ROUTES.USERS_NEW} variant="contained" color="primary">
               {t('user:form.createNewUser')}
             </Button>
           </Box>

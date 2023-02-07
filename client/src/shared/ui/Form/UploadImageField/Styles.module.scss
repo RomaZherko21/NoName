@@ -1,8 +1,8 @@
-.avatar {
+.image {
   position: relative;
   width: fit-content;
 
-  .editIcon {
+  .cameraIcon {
     display: none;
     position: absolute;
     left: 50%;
@@ -12,13 +12,15 @@
   }
 
   &:hover {
-    img {
+    &>div {
       transition: 0.3s ease;
-      filter: brightness(70%);
+      // filter: brightness(70%);
     }
 
-    .editIcon {
-      display: block;
+    .cameraIcon {
+      display: flex;
+      align-items: center;
+      gap: 4px
     }
   }
 }

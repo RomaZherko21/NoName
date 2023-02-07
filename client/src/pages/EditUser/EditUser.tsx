@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Typography, Grid, Paper, Divider, Chip, Box, Switch } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { GENDER, API_USER_AVATAR_URL, ROLES, ROUTES } from 'shared/consts'
 import { InformativeImage, InputField, SelectField, Spinner } from 'shared/ui'
@@ -19,7 +18,6 @@ import {
   fullNameValidation,
   passwordValidation,
 } from 'shared/validations'
-import { useRootStore } from 'stores'
 
 import { EditUserModel } from './model'
 import s from './Styles.module.scss'
@@ -29,7 +27,6 @@ function EditUser() {
   const { t } = useTranslation()
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user } = useRootStore()
 
   useEffect(() => {
     EditUserModel.fetchUser(Number(id))

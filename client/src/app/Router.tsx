@@ -7,7 +7,17 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { Users, Profile, Posts, NotFound, Account, Post, CreatePost, EditUser } from 'pages'
+import {
+  Users,
+  Profile,
+  Posts,
+  NotFound,
+  Account,
+  Post,
+  CreatePost,
+  EditUser,
+  CreateUser,
+} from 'pages'
 import { ROUTES } from 'shared/consts'
 
 import { Layout } from './Layout'
@@ -16,6 +26,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.HOME} element={<Layout />}>
       <Route path={ROUTES.USERS} element={<Users />} />
+      <Route path={ROUTES.USERS_NEW} element={<CreateUser />} />
       <Route path={ROUTES.USERS_EDIT} element={<EditUser />} />
 
       <Route path={ROUTES.POSTS} element={<Posts />} />

@@ -1,5 +1,6 @@
 export { SignIn } from './SignIn'
 export { Users } from './Users'
+export { CreateUser } from './CreateUser'
 export { EditUser } from './EditUser'
 export { Profile } from './Profile'
 export { Posts } from './Posts'

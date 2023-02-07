@@ -7,18 +7,14 @@ import { toast } from 'react-toastify'
 import { Button, Grid, Paper, Stack, Typography, Box } from '@mui/material'
 
 import { useRootStore } from 'stores'
-import { InputField, SelectField, Spinner, UploadImage } from 'shared/ui'
+import { InputField, SelectField, UploadImageField } from 'shared/ui'
 import { commonStringValidation, emailValidation } from 'shared/validations'
 import { getFullName } from 'shared/helpers'
 import { GENDER, API_USER_AVATAR_URL, ROLES } from 'shared/consts'
 
 const ProfileForm = () => {
   const { t } = useTranslation()
-  const { user, loading } = useRootStore()
-
-  const handleUploadClick = async (event: any) => {
-    await user.uploadPhoto(event.target.files[0])
-  }
+  const { user } = useRootStore()
 
   const validationSchema = useMemo(
     () =>
@@ -61,29 +57,11 @@ const ProfileForm = () => {
 
               <Grid item xs={12} md={8}>
                 <Stack sx={{ mb: 3, width: 'fit-content' }}>
-                  {loading.has ? (
-                    <Spinner />
-                  ) : (
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Box
-                        sx={{ borderStyle: 'dashed', borderWidth: 1, borderRadius: '50%', p: 0.5 }}
-                      >
-                        <UploadImage
-                          width={80}
-                          height={80}
-                          handleUploadClick={handleUploadClick}
-                          imageUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
-                        />
-                      </Box>
-                      <Button
-                        variant="text"
-                        size="small"
-                        sx={{ color: (theme) => theme.palette.primary.contrastText }}
-                      >
-                        {t('actions.change')}
-                      </Button>
-                    </Box>
-                  )}
+                  <UploadImageField
+                    imageUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
+                    field="avatar"
+                    imgSx={{ width: 80, height: 80 }}
+                  />
                 </Stack>
 
                 <Grid container spacing={3}>
