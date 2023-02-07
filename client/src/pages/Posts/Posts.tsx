@@ -8,9 +8,8 @@ import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
 import { getSearchParamsObj } from 'shared/helpers'
 import { ROUTES } from 'shared/consts'
 import { PageHeader } from 'widgets'
-import { PostCard } from 'entities'
+import { PostCard, PostCardSceleton } from 'entities'
 
-import { PostLoader } from './ui'
 import { getFiltersConfig, PostsModel, sortConfig } from './model'
 
 function Posts() {
@@ -26,6 +25,12 @@ function Posts() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PostsModel.pagination.currentPage, PostsModel.pagination.limit, searchParams])
+
+  useEffect(() => {
+    return () => {
+      PostsModel.cleanModel()
+    }
+  }, [])
 
   return (
     <>
@@ -76,12 +81,14 @@ function Posts() {
 
         <Grid item container spacing={4}>
           {PostsModel.loading.has
-            ? [1, 2, 3, 4].map((item) => {
-                return <PostLoader key={item} />
-              })
+            ? [1, 2, 3, 4].map((item) => (
+                <Grid key={item} item xs={12} md={6} sx={{ width: '100%' }}>
+                  <PostCardSceleton />
+                </Grid>
+              ))
             : PostsModel.posts.map((post) => (
-                <Grid key={post.id} item xs={12} md={6} sx={{ width: '100%' }}>
-                  <PostCard post={post} toggleLike={() => PostsModel.toggleLike(post.id)} />
+                <Grid key={post?.id} item xs={12} md={6} sx={{ width: '100%' }}>
+                  <PostCard post={post} toggleLike={() => PostsModel.toggleLike(post?.id)} />
                 </Grid>
               ))}
         </Grid>

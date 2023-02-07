@@ -16,8 +16,8 @@ import { IoBusinessOutline, IoHomeOutline } from 'react-icons/io5'
 import { BsEnvelopeOpen } from 'react-icons/bs'
 
 import { useRootStore } from 'stores'
-import { PostCard } from 'entities'
-import { LeaveComment, Spinner } from 'shared/ui'
+import { PostCard, PostCardSceleton } from 'entities'
+import { LeaveComment } from 'shared/ui'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
 
@@ -75,18 +75,21 @@ const Timeline = () => {
           filledBackground
         />
 
-        {ProfileModel.loading.has ? (
-          <Spinner />
-        ) : (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {ProfileModel.posts.map((post) => (
-              <PostCard
-                post={post}
-                toggleLike={() => ProfileModel.toggleLike({ post_id: post.id })}
-              />
-            ))}
-          </Box>
-        )}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {ProfileModel.loading.has
+            ? [1, 2].map((item) => (
+                <Box key={item}>
+                  {' '}
+                  <PostCardSceleton />
+                </Box>
+              ))
+            : ProfileModel.posts.map((post) => (
+                <PostCard
+                  post={post}
+                  toggleLike={() => ProfileModel.toggleLike({ post_id: post.id })}
+                />
+              ))}
+        </Box>
       </Grid>
     </Grid>
   )

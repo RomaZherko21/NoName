@@ -24,6 +24,10 @@ class PostsModel {
     this.loading = new LoadingModel()
   }
 
+  cleanModel() {
+    this.posts = []
+  }
+
   debounceFetch = debounce(this.fetch, 500)
 
   async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
