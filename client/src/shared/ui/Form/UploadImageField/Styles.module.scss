@@ -12,15 +12,17 @@
   }
 
   &:hover {
-    &>div {
-      transition: 0.3s ease;
-      // filter: brightness(70%);
-    }
-
     .cameraIcon {
       display: flex;
       align-items: center;
       gap: 4px
     }
+  }
+}
+
+.imageHover {
+  &:hover {
+    transition: 0.3s ease;
+    filter: brightness(50%);
   }
 }

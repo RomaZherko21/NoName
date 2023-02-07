@@ -21,6 +21,7 @@ import {
 } from 'shared/validations'
 
 import { CreateUserModel } from './model'
+import { PageHeader } from 'widgets'
 
 function CreateUser() {
   const { t } = useTranslation()
@@ -46,6 +47,10 @@ function CreateUser() {
 
   return (
     <>
+      <PageHeader
+        pageName={t('page:createUser')}
+        breadcrumbs={[{ text: 'page:users' }, { text: 'page:sub.create' }]}
+      />
       <Formik
         initialValues={{
           full_name: '',

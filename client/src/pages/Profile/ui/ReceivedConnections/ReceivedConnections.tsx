@@ -25,7 +25,7 @@ const ReceivedConnections = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    ProfileModel.fetch({ isSent: false, isReceived: true })
+    ProfileModel.fetchConnections({ isSent: false, isReceived: true })
   }, [])
 
   return (

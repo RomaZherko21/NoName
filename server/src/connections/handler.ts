@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
-import { sequelize } from 'models'
+import { sequelize, UserConnectionModel } from 'models'
 import { QueryTypes } from 'sequelize'
 import { ConnectionStatus, User } from 'shared/types'
 
@@ -102,17 +102,25 @@ export async function updateConnectionStatusById(
     const { status } = body
     const authorization_id = res.locals.authorization_id
 
-    await sequelize.query(
-      `UPDATE user_connections
-        SET user_connections.status = '${status}'
-      
-        WHERE user_connections.sender_id=${authorization_id} AND user_connections.recipient_id=${id}
-        OR user_connections.sender_id=${id} AND user_connections.recipient_id=${authorization_id}
-        `,
-      {
-        type: QueryTypes.DELETE,
-      }
-    )
+    if (status === 'pending') {
+      await UserConnectionModel.create({
+        sender_id: authorization_id,
+        recipient_id: id,
+        status,
+      })
+    } else {
+      await sequelize.query(
+        `UPDATE user_connections
+          SET user_connections.status = '${status}'
+        
+          WHERE user_connections.sender_id=${authorization_id} AND user_connections.recipient_id=${id}
+          OR user_connections.sender_id=${id} AND user_connections.recipient_id=${authorization_id}
+          `,
+        {
+          type: QueryTypes.DELETE,
+        }
+      )
+    }
 
     return res.status(204).send()
   } catch (err: any) {

@@ -67,7 +67,7 @@ function CreatePost() {
           short_description: values.shortDescription,
           genre_id: Number(values.genre),
           description: values.description,
-          post: values.cover || '',
+          post: values.cover,
           reading_time: Number(values.readingTime),
         })
         navigate(ROUTES.POSTS)

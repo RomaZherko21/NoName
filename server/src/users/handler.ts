@@ -74,13 +74,14 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
   }
 }
 
-export async function createUser({ body }: Request, res: Response, next: NextFunction) {
+export async function createUser({ body, file }: Request, res: Response, next: NextFunction) {
   try {
     const hash = await bcrypt.hash(body.password, 10)
 
     await UserModel.create({
       ...body,
       password: hash,
+      avatar: file?.filename,
     })
 
     res.status(204).send()

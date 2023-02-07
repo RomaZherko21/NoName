@@ -30,7 +30,7 @@ router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uplo
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)
-router.post(`${USERS}`, createUser)
+router.post(`${USERS}`, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
 router.get(`${USERS}/:id`, getUser)
 router.put(`${USERS}/:id`, updateUserById)
 router.delete(`${USERS}/:id`, removeUserSelf)

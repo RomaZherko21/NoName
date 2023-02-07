@@ -23,6 +23,10 @@ class UsersModel {
     this.loading = new LoadingModel()
   }
 
+  cleanModel() {
+    this.users = []
+  }
+
   debounceFetch = debounce(this.fetch, 500)
 
   async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
@@ -43,20 +47,6 @@ class UsersModel {
     }
   }
 
-  async create(user: User) {
-    try {
-      this.loading.begin()
-
-      await API.users.create(user)
-
-      this.fetch({})
-    } catch (err: any) {
-      toast.error(err)
-    } finally {
-      this.loading.end()
-    }
-  }
-
   async remove(id: number) {
     try {
       this.loading.begin()
@@ -71,25 +61,11 @@ class UsersModel {
     }
   }
 
-  async update(user: User, id: number) {
-    try {
-      this.loading.begin()
-
-      await API.users.update(user, id)
-
-      this.fetch({})
-    } catch (err: any) {
-      toast.error(err)
-    } finally {
-      this.loading.end()
-    }
-  }
-
   async connectionRequest(id: number) {
     try {
       await API.connections.update(id, ConnectionStatus.pending)
 
-      this.fetch({})
+      this.fetch({ hidden: true })
     } catch (err: any) {
       toast.error(err)
     }

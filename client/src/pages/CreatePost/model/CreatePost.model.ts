@@ -16,6 +16,10 @@ class CreatePostModel {
     this.loading = new LoadingModel()
   }
 
+  getGenresOptions() {
+    return this.genres.reduce((acc, item) => ({ ...acc, [item.id]: item.name }), {})
+  }
+
   async fetch() {
     try {
       this.loading.begin()
@@ -30,16 +34,12 @@ class CreatePostModel {
     }
   }
 
-  getGenresOptions() {
-    return this.genres.reduce((acc, item) => ({ ...acc, [item.id]: item.name }), {})
-  }
-
   async create(post: {
     name: string
     short_description: string
     genre_id: number
     description: string
-    post: any
+    post: File | null
     reading_time: number
   }) {
     try {

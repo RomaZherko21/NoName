@@ -23,17 +23,21 @@ class ProfileModel {
     this.loading = new LoadingModel()
   }
 
-  async fetch({
+  async fetchConnections({
     isSent,
     isReceived,
     status = ConnectionStatus.pending,
+    hidden = false,
   }: {
     isSent: boolean
     isReceived: boolean
     status?: ConnectionStatus
+    hidden?: boolean
   }) {
     try {
-      this.loading.begin()
+      if (!hidden) {
+        this.loading.begin()
+      }
 
       const data = await API.connections.get({
         status: status,
@@ -77,7 +81,7 @@ class ProfileModel {
     try {
       await API.connections.update(id, status)
 
-      this.fetch({ isSent: false, isReceived: true })
+      this.fetchConnections({ isSent: false, isReceived: true, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -87,61 +91,7 @@ class ProfileModel {
     try {
       await API.connections.remove(id)
 
-      this.fetch({ isSent: true, isReceived: false })
-    } catch (err: any) {
-      toast.error(err)
-    }
-  }
-
-  async addNewComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    try {
-      await API.posts.createComment(post_id, {
-        created_at: new Date().getTime(),
-        message: this.comment,
-      })
-
-      this.comment = ''
-
-      this.fetchPosts({ filters })
-    } catch (err: any) {
-      toast.error(err)
-    }
-  }
-
-  async editComment({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
-    try {
-      await API.posts.editComment({
-        post_id: post_id,
-        comment_id: this.editCommentId,
-        comment: {
-          created_at: new Date().getTime(),
-          message: this.comment,
-        },
-      })
-
-      this.isEditActive = false
-      this.comment = ''
-      this.editCommentId = 0
-
-      this.fetchPosts({ filters })
-    } catch (err: any) {
-      toast.error(err)
-    }
-  }
-
-  async deleteComment({
-    comment_id,
-    post_id,
-    filters,
-  }: {
-    comment_id: number
-    post_id: number
-    filters: PostsFilters
-  }) {
-    try {
-      await API.posts.deleteComment(post_id, comment_id)
-
-      this.fetchPosts({ filters })
+      this.fetchConnections({ isSent: true, isReceived: false, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }

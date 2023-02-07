@@ -45,6 +45,7 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
             alt="Upload"
             src={values[field] ? URL.createObjectURL(values[field]) : imageUrl}
             sx={{ width: 100, height: 100, ...imgSx }}
+            className={s.imageHover}
           >
             <IconButton
               sx={{
