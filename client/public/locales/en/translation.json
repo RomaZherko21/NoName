@@ -20,7 +20,8 @@
     "settings": "Settings",
     "basicDetails": "Basic details",
     "content": "Content",
-    "meta": "Meta"
+    "meta": "Meta",
+    "file": "File"
   },
   "actions": {
     "add": "Add",

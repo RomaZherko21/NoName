@@ -26,3 +26,26 @@
     height: 300px;
   }
 }
+
+.error {
+  .ql-toolbar {
+    border-color: #922E2E;
+    color: #922E2E;
+
+    .ql-stroke {
+      stroke: #922E2E;
+    }
+
+    .ql-fill {
+      fill: #922E2E;
+    }
+
+    .ql-picker {
+      color: #922E2E;
+    }
+  }
+
+  .ql-container {
+    border-color: #922E2E;
+  }
+}
