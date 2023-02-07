@@ -33,7 +33,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         users.middle_name  as user_middle_name,
         users.email  as user_email,
         users.avatar,
-        COUNT(m2m_users_posts_likes.post_id ) as likes_count,
+        COUNT(m2m_users_posts_likes.post_id) as likes_count,
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users
       FROM posts 
         JOIN users ON posts.user_id = users.id 
@@ -106,7 +106,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
       `SELECT 
         posts.*, 
         genres.name as genre,
-        COUNT(posts.id) as likes_count, 
+        COUNT(m2m_users_posts_likes.post_id) as likes_count, 
         JSON_ARRAYAGG(m2m_users_posts_likes.user_id)  as liked_users   
       FROM posts 
        LEFT JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 

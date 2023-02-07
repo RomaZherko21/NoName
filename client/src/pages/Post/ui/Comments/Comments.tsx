@@ -9,12 +9,22 @@ import { API_USER_AVATAR_URL } from 'shared/consts'
 
 import Comment from './Comment'
 
+import { PostModel } from '../../model'
+
 interface Props {
   comments: CommentT[]
 }
 
 function Comments({ comments = [] }: Props) {
   const { user } = useRootStore()
+
+  function onSendComment() {
+    if (PostModel.isEditActive) {
+      PostModel.editComment()
+    } else {
+      PostModel.addNewComment()
+    }
+  }
 
   return (
     <>
@@ -31,8 +41,14 @@ function Comments({ comments = [] }: Props) {
       ) : null}
 
       <LeaveComment
+        inputValue={PostModel.commentInputValue}
+        onInputChange={(e: any) => {
+          PostModel.commentInputValue = e.target.value
+        }}
+        onSend={onSendComment}
         avatarUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
         label="user:actions.writeYourComment"
+        buttonText={PostModel.isEditActive ? 'actions.save' : 'actions.send'}
       />
     </>
   )

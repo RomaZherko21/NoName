@@ -70,6 +70,9 @@ const Timeline = () => {
       </Grid>
       <Grid item xs={12} md={8}>
         <LeaveComment
+          inputValue=""
+          onInputChange={(e: any) => {}}
+          onSend={() => {}}
           avatarUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
           label="user:whatsOnYourMind"
           filledBackground

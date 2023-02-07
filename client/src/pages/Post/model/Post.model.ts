@@ -81,7 +81,7 @@ class PostModel {
 
       this.commentInputValue = ''
 
-      this.fetch({ id: this.id })
+      this.fetch({ id: this.id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -102,7 +102,7 @@ class PostModel {
       this.commentInputValue = ''
       this.editCommentId = 0
 
-      this.fetch({ id: this.id })
+      this.fetch({ id: this.id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -112,7 +112,7 @@ class PostModel {
     try {
       await API.posts.deleteComment(this.id, comment_id)
 
-      this.fetch({ id: this.id })
+      this.fetch({ id: this.id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }

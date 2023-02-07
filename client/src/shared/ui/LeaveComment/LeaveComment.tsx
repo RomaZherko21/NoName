@@ -6,12 +6,24 @@ import { BsLink, BsEmojiSmile } from 'react-icons/bs'
 import { MdOutlinePhotoCameraBack } from 'react-icons/md'
 
 interface Props {
+  inputValue: string
+  onInputChange: (e: any) => void
+  onSend: () => void
   avatarUrl: string
   label: string
   filledBackground?: boolean
+  buttonText?: string
 }
 
-const LeaveComment = ({ avatarUrl, label, filledBackground = false }: Props) => {
+const LeaveComment = ({
+  inputValue,
+  onInputChange,
+  onSend,
+  avatarUrl,
+  label,
+  filledBackground = false,
+  buttonText = 'actions.post',
+}: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -29,7 +41,14 @@ const LeaveComment = ({ avatarUrl, label, filledBackground = false }: Props) => 
       <Avatar alt="Avatar" sx={{ cursor: 'pointer', width: 40, height: 40 }} src={avatarUrl} />
 
       <Stack sx={{ width: '100%', gap: 2 }}>
-        <TextField placeholder={t(label)} fullWidth multiline rows={3} />
+        <TextField
+          value={inputValue}
+          onChange={onInputChange}
+          placeholder={t(label)}
+          fullWidth
+          multiline
+          rows={3}
+        />
 
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Stack direction="row">
@@ -47,8 +66,8 @@ const LeaveComment = ({ avatarUrl, label, filledBackground = false }: Props) => 
             </IconButton>
           </Stack>
 
-          <Button size="small" variant="contained">
-            {t('actions.post')}
+          <Button size="small" variant="contained" onClick={() => onSend()}>
+            {t(buttonText)}
           </Button>
         </Box>
       </Stack>
