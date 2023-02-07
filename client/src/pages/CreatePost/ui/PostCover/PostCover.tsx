@@ -6,17 +6,20 @@ import { FiUpload } from 'react-icons/fi'
 
 import s from './Styles.module.scss'
 
-function PostCover() {
+interface Props {
+  field: string
+}
+
+function PostCover({ field }: Props) {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<HTMLInputElement>(null)
 
-  const {
-    values: { cover },
-    setFieldValue,
-  } = useFormikContext<any>()
+  const { values, touched, errors, setFieldValue } = useFormikContext<any>()
+
+  const hasError = touched[field] && errors[field]
 
   function handleUploadFile(event: any) {
-    setFieldValue('cover', event.target.files[0])
+    setFieldValue(field, event.target.files[0])
   }
 
   return (
@@ -28,13 +31,13 @@ function PostCover() {
       <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box
           sx={{
-            border: (theme) => (!cover ? `1px dashed ${theme.palette.divider}` : ''),
+            border: (theme) => (!values[field] ? `1px dashed ${theme.palette.divider}` : ''),
             borderRadius: 1,
           }}
           className={s.uploadedPhoto}
         >
-          {cover ? (
-            <img alt="post cover" className={s.postCover} src={URL.createObjectURL(cover)} />
+          {values[field] ? (
+            <img alt="image" className={s.postCover} src={URL.createObjectURL(values[field])} />
           ) : (
             <>
               <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.secondary }}>
@@ -51,8 +54,8 @@ function PostCover() {
         </Box>
 
         <Button
-          onClick={() => setFieldValue('cover', null)}
-          disabled={!cover}
+          onClick={() => setFieldValue(field, null)}
+          disabled={!values[field]}
           size="large"
           sx={{
             alignSelf: 'flex-start',
@@ -65,7 +68,8 @@ function PostCover() {
         <Box
           onClick={() => hiddenFileInput.current?.click()}
           sx={{
-            border: (theme) => `1px dashed ${theme.palette.divider}`,
+            border: (theme) =>
+              `1px dashed ${hasError ? theme.palette.error.main : theme.palette.divider}`,
             borderRadius: 1,
             '&:hover': {
               backgroundColor: (theme) => theme.palette.action.hover,
@@ -89,7 +93,8 @@ function PostCover() {
             sx={{
               width: '64px',
               height: '64px',
-              backgroundColor: (theme) => theme.palette.grey[300],
+              backgroundColor: (theme) =>
+                hasError ? theme.palette.error.main : theme.palette.grey[300],
               mr: 2,
             }}
           >
@@ -97,12 +102,19 @@ function PostCover() {
           </Avatar>
 
           <Box>
-            <Typography variant="body1">{t('post:hint.uploadFile')}</Typography>
-            <Typography variant="subtitle2" sx={{ color: (theme) => theme.palette.text.secondary }}>
+            <Typography variant="body1" color={hasError ? 'error.main' : 'text.primary'}>
+              {t('post:hint.uploadFile')}
+            </Typography>
+            <Typography variant="subtitle2" color={hasError ? 'error.main' : 'text.secondary'}>
               {t('post:hint.filePermissions')}
             </Typography>
           </Box>
         </Box>
+        {hasError && (
+          <Typography sx={{ ml: 2 }} color="error.main" variant="subtitle2">
+            {errors[field]}
+          </Typography>
+        )}
       </Grid>
     </Grid>
   )

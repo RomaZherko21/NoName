@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import {
   Route,
   Navigate,
@@ -6,10 +7,9 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { observer } from 'mobx-react-lite'
-
 import { Users, Profile, Posts, NotFound, Account, Post, CreatePost, EditUser } from 'pages'
 import { ROUTES } from 'shared/consts'
+
 import { Layout } from './Layout'
 
 const router = createBrowserRouter(

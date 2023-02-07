@@ -1,9 +1,10 @@
-import * as yup from 'yup'
+import * as Yup from 'yup'
 import i18next from 'i18next'
 
+import { MB } from 'shared/consts'
+
 export const commonStringValidation = (field: string, minSymbols: number = 1) =>
-  yup
-    .string()
+  Yup.string()
     .min(
       minSymbols,
       i18next.t('validation:error.minSymbols', {
@@ -26,8 +27,7 @@ export const commonNumberRangeValidation = ({
   min?: number
   max?: number
 }) =>
-  yup
-    .number()
+  Yup.number()
     .min(
       min,
       i18next.t('validation:error.minSymbols', {
@@ -49,8 +49,7 @@ export const commonNumberRangeValidation = ({
     )
 
 export const emailValidation = () =>
-  yup
-    .string()
+  Yup.string()
     .email(
       i18next.t('validation:error.validField', {
         field: i18next.t('user:email'),
@@ -63,8 +62,7 @@ export const emailValidation = () =>
     )
 
 export const passwordValidation = () =>
-  yup
-    .string()
+  Yup.string()
     .min(
       8,
       i18next.t('validation:error.minSymbols', {
@@ -79,10 +77,9 @@ export const passwordValidation = () =>
     )
 
 export const confirmPasswordValidation = () =>
-  yup
-    .string()
+  Yup.string()
     .oneOf(
-      [yup.ref('password'), null],
+      [Yup.ref('password'), null],
       i18next.t('validation:error.needMatched', {
         field: i18next.t('user:password'),
       })
@@ -94,10 +91,40 @@ export const confirmPasswordValidation = () =>
     )
 
 export const fullNameValidation = () =>
-  yup
-    .string()
-    .required(
+  Yup.string().required(
+    i18next.t('validation:error.isRequired', {
+      field: i18next.t('user:fullName'),
+    })
+  )
+
+export const fileValidation = ({
+  field,
+  maxSize,
+  fileFormats,
+}: {
+  field: string
+  maxSize: number
+  fileFormats: string[]
+}) =>
+  Yup.mixed()
+    .test(
+      field,
       i18next.t('validation:error.isRequired', {
-        field: i18next.t('user:fullName'),
-      })
+        field: i18next.t('common.file'),
+      }),
+      (value) => Boolean(value)
+    )
+    .test(
+      field,
+      i18next.t('validation:error.largeFile', {
+        max: maxSize / MB,
+      }),
+      (value) => value?.size <= maxSize
+    )
+    .test(
+      field,
+      i18next.t('validation:error.correctFileFormats', {
+        formats: fileFormats.join(', ').replace(/\//g, '.'),
+      }),
+      (value) => fileFormats.includes(value?.type)
     )
