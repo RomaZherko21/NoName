@@ -9,17 +9,17 @@ import { Button, Grid, Paper, Typography } from '@mui/material'
 
 import { Gender, Roles } from 'shared/types'
 import { getSplitName } from 'shared/helpers'
-import { GENDER, ROLES, ROUTES } from 'shared/consts'
-import { InputField, SelectField, Spinner } from 'shared/ui'
+import { GENDER, MAX_IMAGE_SIZE, ROLES, ROUTES, SUPPORTED_IMAGE_FORMATS } from 'shared/consts'
+import { InputField, SelectField, Spinner, UploadImageField } from 'shared/ui'
 import {
   commonStringValidation,
   confirmPasswordValidation,
   emailValidation,
+  fileValidation,
   fullNameValidation,
   passwordValidation,
 } from 'shared/validations'
 
-import { UserAvatar } from './ui'
 import { CreateUserModel } from './model'
 
 function CreateUser() {
@@ -35,6 +35,11 @@ function CreateUser() {
         date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
+        avatar: fileValidation({
+          field: 'avatar',
+          maxSize: MAX_IMAGE_SIZE,
+          fileFormats: SUPPORTED_IMAGE_FORMATS,
+        }),
       }),
     [t]
   )
@@ -82,7 +87,7 @@ function CreateUser() {
                   </Grid>
 
                   <Grid item xs={12} md={8}>
-                    <UserAvatar />
+                    <UploadImageField field="avatar" />
 
                     <Grid container spacing={3}>
                       <Grid item xs={12}>
