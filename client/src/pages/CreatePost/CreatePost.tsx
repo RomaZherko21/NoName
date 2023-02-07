@@ -57,6 +57,7 @@ function CreatePost() {
           post: values.cover || '',
           reading_time: Number(values.readingTime),
         })
+        navigate(ROUTES.POSTS)
         toast.success(t('notification:success.created'))
       }}
     >

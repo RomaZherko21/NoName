@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 import { Avatar, Box, Typography } from '@mui/material'
-import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
+import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined'
 
 import s from './Styles.module.scss'
 
 interface Props {
   handleUploadClick: (event: any) => void
   imageUrl: string
-  width?: number 
+  width?: number
   height?: number
   borderRadius?: string
 }
@@ -39,8 +39,8 @@ const UploadImage = ({
           src={imageUrl}
           sx={{ width, height, borderRadius }}
         />
-        <Box className={s.cameraIcon} > 
-          <PhotoCameraOutlinedIcon/>
+        <Box className={s.cameraIcon}>
+          <PhotoCameraOutlinedIcon />
           <Typography variant="subtitle2">{t('actions.select')}</Typography>
         </Box>
       </div>

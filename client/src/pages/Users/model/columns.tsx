@@ -17,22 +17,10 @@ import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
 import UsersModel from './Users.model'
-import { UserForm, DeleteUserDialog, ConnectionStatus } from '../ui'
+import { DeleteUserDialog, ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
-
-  const [showUpdateUserModal] = useDialog('user:form.updateUser', (hideModal) => (
-    <UserForm
-      user={data}
-      onSubmit={(value: User) => {
-        if (data.id) {
-          UsersModel.update(value, data.id)
-          hideModal()
-        }
-      }}
-    />
-  ))
 
   const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
 

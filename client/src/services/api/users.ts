@@ -15,7 +15,15 @@ export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
 
 export const getById = (id: number) => fetch.get<User>(`${ENDPOINT_BASE}/${id}`)
 
-export const create = (user: User) => fetch.post<User>(`${ENDPOINT_BASE}`, user)
+export const create = async (user: any) => {
+  const formData = new FormData()
+
+  for (const key in user) {
+    formData.append(key, user[key])
+  }
+
+  return fetch.post(`${ENDPOINT_BASE}`, formData)
+}
 
 export const update = (user: User, id: number) => fetch.put(`${ENDPOINT_BASE}/${id}`, user)
 

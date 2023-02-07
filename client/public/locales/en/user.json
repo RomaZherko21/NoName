@@ -40,6 +40,7 @@
   "editProfile": "Edit Profile",
   "connections": "Connections",
   "thatsYou": "That's you!",
+  "security": "Security",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
