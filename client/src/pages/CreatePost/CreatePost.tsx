@@ -7,13 +7,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 
-import { commonNumberRangeValidation, commonStringValidation } from 'shared/validations'
-import { InputField, SelectField } from 'shared/ui'
-import { ROUTES } from 'shared/consts'
+import {
+  commonNumberRangeValidation,
+  commonStringValidation,
+  fileValidation,
+} from 'shared/validations'
+import { InputField, QuillField, SelectField } from 'shared/ui'
+import { MAX_IMAGE_SIZE, ROUTES, SUPPORTED_IMAGE_FORMATS } from 'shared/consts'
 import { PageHeader } from 'widgets'
 
 import { CreatePostModel } from './model'
-import { PostCover, QuillField } from './ui'
+import { PostCover } from './ui'
 
 function CreatePost() {
   const { t } = useTranslation()
@@ -28,10 +32,20 @@ function CreatePost() {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        // postTitle: commonStringValidation(t(`post:postTitle`), 3),
-        // shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
-        // description: commonStringValidation(t(`post:description`), 10),
-        // readingTime: commonNumberRangeValidation({ field: t(`post:readingTime`), min: 1, max: 60 }),
+        postTitle: commonStringValidation(t(`post:postTitle`), 3),
+        shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
+        genre: commonStringValidation(t(`post:genres`)),
+        description: commonStringValidation(t(`post:description`), 30),
+        readingTime: commonNumberRangeValidation({
+          field: t(`post:form.readingTime`),
+          min: 1,
+          max: 60,
+        }),
+        cover: fileValidation({
+          field: 'cover',
+          maxSize: MAX_IMAGE_SIZE,
+          fileFormats: SUPPORTED_IMAGE_FORMATS,
+        }),
       }),
     [t]
   )
@@ -43,7 +57,6 @@ function CreatePost() {
         shortDescription: '',
         genre: '',
         description: '',
-        postCover: '',
         readingTime: '',
         cover: null,
       }}
@@ -84,14 +97,14 @@ function CreatePost() {
               </Grid>
             </Grid>
 
-            <PostCover />
+            <PostCover field="cover" />
 
             <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
               <Grid item md={4}>
                 <Typography variant="h6">{t('common.content')}</Typography>
               </Grid>
               <Grid item md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
-                <QuillField />
+                <QuillField field="description" />
               </Grid>
             </Grid>
 
@@ -120,7 +133,7 @@ function CreatePost() {
                   {t('actions.cancel')}
                 </Button>
                 <Button size="small" type="submit" variant="contained">
-                  {t('post:actions.publishChanges')}
+                  {t('actions.post')}
                 </Button>
               </Box>
             </Paper>

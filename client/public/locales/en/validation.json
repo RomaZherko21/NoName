@@ -4,6 +4,8 @@
     "minSymbols": "{{field}} should be of minimum {{count}} characters length",
     "maxSymbols": "{{field}} should be of maximum  {{count}} characters length",
     "validField": "Enter a valid {{field}} field",
-    "needMatched": "{{field}} must matched"
+    "needMatched": "{{field}} must matched",
+    "largeFile": "The file is too large, max {{max}} MB",
+    "correctFileFormats": "File format may consists of {{formats}}"
   }
 }

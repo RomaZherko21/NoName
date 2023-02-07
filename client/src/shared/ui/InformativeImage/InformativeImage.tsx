@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Avatar, Stack, Typography } from '@mui/material'
+import { Avatar, Skeleton, Stack, Typography } from '@mui/material'
 import { Variant } from '@mui/material/styles/createTypography'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   size?: 'large' | 'medium'
   PrimaryVariant?: Variant
   SecondaryVariant?: Variant
+  isLoaded?: boolean
 }
 
 function InformativeImage({
@@ -20,25 +21,36 @@ function InformativeImage({
   size = 'medium',
   PrimaryVariant = 'body2',
   SecondaryVariant = 'subtitle2',
+  isLoaded = true,
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
-      <Avatar
-        alt="Image"
-        sx={{
-          cursor: 'pointer',
-          width: size === 'large' ? 64 : 40,
-          height: size === 'large' ? 64 : 40,
-        }}
-        src={imgUrl}
-      >
-        {imgPlaceholder}
-      </Avatar>
+      {isLoaded ? (
+        <Avatar
+          alt="Image"
+          sx={{
+            cursor: 'pointer',
+            width: size === 'large' ? 64 : 40,
+            height: size === 'large' ? 64 : 40,
+          }}
+          src={imgUrl}
+        >
+          {imgPlaceholder}
+        </Avatar>
+      ) : (
+        <Skeleton
+          variant="circular"
+          width={size === 'large' ? 64 : 40}
+          height={size === 'large' ? 64 : 40}
+        />
+      )}
       <Stack>
-        <Typography variant={PrimaryVariant}>{PrimaryText}</Typography>
+        <Typography variant={PrimaryVariant}>
+          {isLoaded ? PrimaryText : <Skeleton width={120} />}
+        </Typography>
         {SecondaryText && (
           <Typography variant={SecondaryVariant} color="textSecondary">
-            {SecondaryText}
+            {isLoaded ? SecondaryText : <Skeleton width={70} />}
           </Typography>
         )}
       </Stack>

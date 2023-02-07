@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import {
   Route,
   Navigate,
@@ -5,7 +6,6 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom'
-import { observer } from 'mobx-react-lite'
 
 import {
   Users,

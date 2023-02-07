@@ -1,7 +1,7 @@
 export { CommonTable } from './CommonTable'
 export { Pagination } from './Pagination'
 export { Spinner } from './Spinner'
-export { FormInput as InputField, FormSelect as SelectField } from './Form'
+export { FormInput as InputField, FormSelect as SelectField, QuillField } from './Form'
 export { MultiSelectField } from './MultiSelectField'
 export { UploadImage } from './UploadImage'
 export { AsideFilters, AsideFiltersBar } from './AsideFilters'

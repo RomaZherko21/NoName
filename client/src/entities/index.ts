@@ -1,1 +1,1 @@
-export { PostCard } from './PostCard'
+export { PostCard, PostCardSceleton } from './PostCard'
