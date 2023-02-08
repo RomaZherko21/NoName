@@ -13,7 +13,7 @@ import { InformativeImage, Tabs } from 'shared/ui'
 import { PostsFilters } from 'pages/Posts/model'
 import ProfileCover from 'assets/images/cover.jpg'
 
-import { Connections, ReceivedConnections, SentConnections, Timeline } from './ui'
+import { Connections, Timeline } from './ui'
 import s from './Styles.module.scss'
 import { ProfileModel } from './model'
 
@@ -73,18 +73,8 @@ function Profile() {
             { label: 'page:timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
             {
               label: 'page:connections',
-              to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
+              to: ROUTES.PROFILE_CONNECTIONS,
               Component: Connections,
-            },
-            {
-              label: 'page:sentConnections',
-              to: ROUTES.PROFILE_SENT_CONNECTIONS,
-              Component: SentConnections,
-            },
-            {
-              label: 'page:receivedConnections',
-              to: ROUTES.PROFILE_RECEIVED_CONNECTIONS,
-              Component: ReceivedConnections,
             },
           ]}
         />

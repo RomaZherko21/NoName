@@ -15,12 +15,34 @@ class ProfileModel {
   editCommentId: number = 0
   isEditActive: boolean = false
 
+  connectionStatus: string = 'connections'
+
   loading: LoadingModel
 
   constructor() {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
+  }
+
+  onConnectionStatusChange(status: string) {
+    if (status === 'connections') {
+      this.connectionStatus = 'connections'
+      this.fetchConnections({
+        isSent: true,
+        isReceived: true,
+        status: ConnectionStatus.accept,
+        hidden: true,
+      })
+    }
+    if (status === 'sentConnections') {
+      this.connectionStatus = 'sentConnections'
+      this.fetchConnections({ isSent: true, isReceived: false, hidden: true })
+    }
+    if (status === 'receivedConnections') {
+      this.connectionStatus = 'receivedConnections'
+      this.fetchConnections({ isSent: false, isReceived: true, hidden: true })
+    }
   }
 
   async fetchConnections({

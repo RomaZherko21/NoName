@@ -34,9 +34,7 @@ const router = createBrowserRouter(
       <Route path={ROUTES.POSTS_NEW} element={<CreatePost />} />
 
       <Route path={ROUTES.PROFILE_TIMELINE} element={<Profile />} />
-      <Route path={ROUTES.PROFILE_FRIEND_CONNECTIONS} element={<Profile />} />
-      <Route path={ROUTES.PROFILE_RECEIVED_CONNECTIONS} element={<Profile />} />
-      <Route path={ROUTES.PROFILE_SENT_CONNECTIONS} element={<Profile />} />
+      <Route path={ROUTES.PROFILE_CONNECTIONS} element={<Profile />} />
 
       <Route path={ROUTES.ACCOUNT_GENERAL} element={<Account />} />
       <Route path={ROUTES.ACCOUNT_BILLING} element={<Account />} />

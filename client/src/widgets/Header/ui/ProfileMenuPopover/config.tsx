@@ -15,7 +15,7 @@ export const getProfileConfig = ({ onLogout }: { onLogout: () => void }) => [
   {
     icon: <HiOutlineUsers />,
     text: 'user:connections',
-    to: ROUTES.PROFILE_FRIEND_CONNECTIONS,
+    to: ROUTES.PROFILE_CONNECTIONS,
   },
   {
     icon: <RiUserSettingsLine />,

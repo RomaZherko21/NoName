@@ -42,6 +42,8 @@
   "thatsYou": "That's you!",
   "security": "Security",
   "dontHaveAccount": "Don't have an account?",
+  "sentConnections": "Sent connections",
+  "receivedConnections": "Received connections",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
