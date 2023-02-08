@@ -7,8 +7,8 @@ export {
   FormDatePicker,
   QuillField,
   UploadImageField,
+  MultiSelect,
 } from './Form'
-export { MultiSelectField } from './MultiSelectField'
 export { AsideFilters, AsideFiltersBar } from './AsideFilters'
 export { Input, Select, DatePicker, Checkbox } from './NoForm'
 export { Tabs } from './Tabs'
