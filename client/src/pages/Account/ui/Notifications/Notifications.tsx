@@ -6,24 +6,26 @@ function Notifications() {
 
   return (
     <>
-      <Card sx={{ mt: 2 }}>
-        <Grid container sx={{ p: 4 }}>
+      <Card sx={{ p: 4 }}>
+        <Grid container sx={{ p: 1.5 }}>
           <Grid item xs={12} md={4}>
-            <Typography variant="h5">{t('user:email')}</Typography>
+            <Typography variant="h6">{t('user:email')}</Typography>
           </Grid>
           <Grid item xs={12} md={8}>
             <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
               <Box>
-                <Typography variant="h6">{t('user:updates.product.title')}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}></Typography>
+                <Typography variant="subtitle1">{t('user:updates.product.title')}</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                  {t('user:updates.product.text')}
+                </Typography>
               </Box>
               <Switch defaultChecked />
             </Stack>
             <Divider />
             <Stack direction="row" justifyContent="space-between" sx={{ mt: 3 }}>
               <Box>
-                <Typography variant="h6">{t('user:updates.security.title')}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+                <Typography variant="subtitle1">{t('user:updates.security.title')}</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   {t('user:updates.security.text')}
                 </Typography>
               </Box>
@@ -31,18 +33,17 @@ function Notifications() {
             </Stack>
           </Grid>
         </Grid>
-      </Card>
-      <Card sx={{ mt: 2 }}>
-        <Grid container sx={{ p: 4 }}>
+        <Divider sx={{ mt: 2, mb: 2 }} />
+        <Grid container sx={{ p: 1.5 }}>
           <Grid item xs={12} md={4}>
-            <Typography variant="h5">{t('user:phoneNotification')}</Typography>
+            <Typography variant="h6">{t('user:phoneNotification')}</Typography>
           </Grid>
           <Grid item xs={12} md={8}>
-            <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
+            <Stack direction="row" justifyContent="space-between">
               <Box>
-                <Typography variant="h6">{t('user:updates.product.title')}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                  {t('user:updates.product.text')}
+                <Typography variant="subtitle1">{t('user:updates.security.title')}</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                  {t('user:updates.security.text')}
                 </Typography>
               </Box>
               <Switch defaultChecked />
