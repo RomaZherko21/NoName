@@ -1,79 +1,89 @@
 import * as yup from 'yup'
-import { useFormik } from 'formik'
+import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Avatar, Button, Container, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box, Alert } from '@mui/material'
 
 import { useRootStore } from 'stores'
+import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
+import logo from 'assets/images/logo/white-transparent-logo.svg'
 
-const validationSchema = yup.object().shape({
-  email: emailValidation(),
-  password: passwordValidation(),
-})
+import s from './Styles.module.scss'
 
 function SignIn() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
 
-  const formik = useFormik<{
-    email: string
-    password: string
-  }>({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema,
-    onSubmit: (values: { email: string; password: string }) => {
-      authorization.signIn(values)
-    },
+  const validationSchema = yup.object().shape({
+    email: emailValidation(),
+    password: passwordValidation(),
   })
 
   return (
-    <Container maxWidth="xs" sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>
-      <Paper
+    <Box className={s.backgroundImg}>
+      <Container
+        maxWidth="lg"
         sx={{
-          width: '100%',
+          height: '100vh',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
+          flexDirection: 'column',
+          gap: 15,
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>Logo</Avatar>
-        <Typography component="h1" variant="h5">
-          {t('actions.signIn')}
-        </Typography>
-        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-          <Stack justifyContent="center" spacing={2} sx={{ padding: '20px' }}>
-            <TextField
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-              fullWidth
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-            <Button color="primary" variant="contained" type="submit">
-              {t('common.confirm')}
+        <img src={logo} className={s.logo} />
+
+        <Box>
+          <Paper
+            elevation={16}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              minWidth: 550,
+              p: 3,
+            }}
+          >
+            <Box mb={3}>
+              <Typography variant="h5">{t('actions.signIn')}</Typography>
+              <Typography color="text.secondary" variant="body2">
+                {t('user:dontHaveAccount')}
+                <Button color="primary">{t('actions.register')}</Button>
+              </Typography>
+            </Box>
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+              }}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                authorization.signIn(values)
+              }}
+            >
+              {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+                  <Stack justifyContent="center" spacing={2}>
+                    <InputField field="email" label="user:email" />
+                    <InputField field="password" label="user:password" type="password" />
+                    <Button color="primary" variant="contained" type="submit">
+                      {t('actions.signIn')}
+                    </Button>
+                  </Stack>
+                </form>
+              )}
+            </Formik>
+            <Button color="primary" sx={{ mt: 1 }}>
+              {t('actions.forgotPassword')}
             </Button>
-          </Stack>
-        </form>
-      </Paper>
-    </Container>
+          </Paper>
+
+          <Alert severity="error" sx={{ mt: 2.5 }}>
+            You can use <strong>"admin@gmail.com"</strong> and password <strong>"qwerqwer"</strong>
+          </Alert>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 
