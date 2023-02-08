@@ -4,6 +4,7 @@ export { Spinner } from './Spinner'
 export {
   FormInput as InputField,
   FormSelect as SelectField,
+  FormDatePicker,
   QuillField,
   UploadImageField,
 } from './Form'

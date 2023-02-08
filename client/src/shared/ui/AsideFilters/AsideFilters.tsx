@@ -1,9 +1,20 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Box, Stack, Button, Drawer, Divider, IconButton, Typography, Grid } from '@mui/material'
-import FilterListOffIcon from '@mui/icons-material/FilterListOff'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
+import {
+  Box,
+  Stack,
+  Button,
+  Drawer,
+  Divider,
+  IconButton,
+  Typography,
+  Grid,
+  Tooltip,
+  Theme,
+} from '@mui/material'
 import { getTime } from 'date-fns'
+import { BsFilterRight } from 'react-icons/bs'
+import { MdOutlineClearAll } from 'react-icons/md'
 
 interface Props {
   config: {
@@ -50,9 +61,11 @@ const AsideFilters = ({
         <Typography variant="subtitle1" sx={{ ml: 1 }}>
           {t('common.filters')}
         </Typography>
-        <IconButton onClick={onCloseFilter}>
-          <FilterListOffIcon />
-        </IconButton>
+        <Tooltip title={t('actions.close')} placement="bottom">
+          <IconButton onClick={onCloseFilter}>
+            <BsFilterRight />
+          </IconButton>
+        </Tooltip>
       </Stack>
 
       <Divider />
@@ -98,7 +111,7 @@ const AsideFilters = ({
                   }
                 />
               )}
-              {item.type === 'check' && (
+              {item.type === 'checkbox' && (
                 <item.Control
                   label={item.placeholder}
                   checked={searchParams.get(item.key) === 'true' || false}
@@ -108,6 +121,7 @@ const AsideFilters = ({
                       return searchParams
                     })
                   }
+                  sx={{ color: ({ palette }: Theme) => palette.text.secondary, ml: 1 }}
                 />
               )}
             </Grid>
@@ -115,17 +129,23 @@ const AsideFilters = ({
         </Grid>
       </Stack>
 
-      <Box sx={{ p: 3, flexGrow: 1, display: 'flex', alignItems: 'flex-end' }}>
+      <Box
+        sx={{
+          p: 3,
+          flexGrow: 1,
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-end',
+        }}
+      >
         <Button
           onClick={onClearAllFilters}
-          fullWidth
-          size="large"
+          size="medium"
           type="submit"
           color="inherit"
-          variant="outlined"
-          startIcon={<ClearAllIcon />}
+          startIcon={<MdOutlineClearAll />}
         >
-          {t('common:clearAll')}
+          {t('actions.clear')}
         </Button>
       </Box>
     </Drawer>

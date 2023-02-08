@@ -45,6 +45,6 @@ export const getFiltersConfig = () => [
     key: 'is_liked',
     Control: Checkbox,
     placeholder: 'post:form.isLiked',
-    type: 'check',
+    type: 'checkbox',
   },
 ]

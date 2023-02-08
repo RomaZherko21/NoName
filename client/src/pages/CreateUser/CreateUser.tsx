@@ -10,7 +10,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material'
 import { Gender, Roles } from 'shared/types'
 import { getSplitName } from 'shared/helpers'
 import { GENDER, MAX_IMAGE_SIZE, ROLES, ROUTES, SUPPORTED_IMAGE_FORMATS } from 'shared/consts'
-import { InputField, SelectField, Spinner, UploadImageField } from 'shared/ui'
+import { FormDatePicker, InputField, SelectField, Spinner, UploadImageField } from 'shared/ui'
 import {
   commonStringValidation,
   confirmPasswordValidation,
@@ -18,6 +18,7 @@ import {
   fileValidation,
   fullNameValidation,
   passwordValidation,
+  required,
 } from 'shared/validations'
 
 import { CreateUserModel } from './model'
@@ -33,7 +34,7 @@ function CreateUser() {
         full_name: fullNameValidation(),
         email: emailValidation(),
         role: commonStringValidation(t(`user:role`)),
-        date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
+        date_of_birth: required(t(`user:dateOfBirth`)),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
         avatar: fileValidation({
@@ -58,26 +59,30 @@ function CreateUser() {
           tel_number: '',
           role: Roles.user,
           gender: Gender.man,
-          date_of_birth: '',
+          date_of_birth: null,
           password: '',
           confirmPassword: '',
           avatar: null,
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          CreateUserModel.fetch({
-            ...getSplitName(values.full_name),
-            email: values.email,
-            tel_number: values.tel_number,
-            role: values.role,
-            gender: values.gender,
-            date_of_birth: values.date_of_birth,
-            password: values.password,
-            confirmPassword: values.confirmPassword,
-            avatar: values.avatar,
-          })
-          navigate(ROUTES.USERS)
-          toast.success(t('notification:success.created'))
+          CreateUserModel.create(
+            {
+              ...getSplitName(values.full_name),
+              email: values.email,
+              tel_number: values.tel_number,
+              role: values.role,
+              gender: values.gender,
+              date_of_birth: values.date_of_birth || '',
+              password: values.password,
+              confirmPassword: values.confirmPassword,
+              avatar: values.avatar,
+            },
+            () => {
+              navigate(ROUTES.USERS)
+              toast.success(t('notification:success.created'))
+            }
+          )
         }}
       >
         {({ handleSubmit }) => (
@@ -99,10 +104,10 @@ function CreateUser() {
                         <InputField field="full_name" label="user:fullName" />
                       </Grid>
                       <Grid item xs={12}>
-                        <InputField field="tel_number" label="user:telephoneNumber" />
+                        <InputField type="tel" field="tel_number" label="user:telephoneNumber" />
                       </Grid>
                       <Grid item xs={12}>
-                        <InputField field="email" label="user:email" />
+                        <InputField type="email" field="email" label="user:email" />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -121,7 +126,7 @@ function CreateUser() {
                       <SelectField field="role" label="user:role" options={ROLES} />
                     </Grid>
                     <Grid item md={12} xs={12}>
-                      <InputField field="date_of_birth" label="user:dateOfBirth" />
+                      <FormDatePicker field="date_of_birth" label="user:dateOfBirth" />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -133,10 +138,14 @@ function CreateUser() {
 
                   <Grid container spacing={3} xs={12} md={8}>
                     <Grid item md={12} xs={12}>
-                      <InputField field="password" label="user:password" />
+                      <InputField type="password" field="password" label="user:password" />
                     </Grid>
                     <Grid item md={12} xs={12}>
-                      <InputField field="confirmPassword" label="user:confirmPassword" />
+                      <InputField
+                        type="password"
+                        field="confirmPassword"
+                        label="user:confirmPassword"
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

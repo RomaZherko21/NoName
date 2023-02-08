@@ -14,23 +14,28 @@ class CreateUserModel {
     this.loading = new LoadingModel()
   }
 
-  async fetch(user: {
-    name: string
-    middle_name: string
-    surname: string
-    email: string
-    tel_number: string
-    role: Roles
-    gender: Gender
-    date_of_birth: string
-    password: string
-    confirmPassword: string
-    avatar: any
-  }) {
+  async create(
+    user: {
+      name: string
+      middle_name: string
+      surname: string
+      email: string
+      tel_number: string
+      role: Roles
+      gender: Gender
+      date_of_birth: string
+      password: string
+      confirmPassword: string
+      avatar: any
+    },
+    onSuccess: () => void
+  ) {
     try {
       this.loading.begin()
 
       await API.users.create(user)
+
+      onSuccess()
     } catch (err: any) {
       toast.error(err)
     } finally {

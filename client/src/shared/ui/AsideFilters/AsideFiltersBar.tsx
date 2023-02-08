@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Button, Grid, InputAdornment, Paper, Box, TextField } from '@mui/material'
-import FilterListIcon from '@mui/icons-material/FilterList'
 import { FiSearch } from 'react-icons/fi'
+import { BsFilter } from 'react-icons/bs'
 
 import { Select } from 'shared/ui'
 
@@ -70,7 +70,7 @@ function AsideFiltersBar({
           sx={{ px: 1 }}
           size="small"
           color="info"
-          endIcon={<FilterListIcon />}
+          endIcon={<BsFilter />}
         >
           {t('common.filters')}
         </Button>

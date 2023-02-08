@@ -22,6 +22,7 @@ const Pagination = ({ paginationModel }: Props) => {
 
     setSearchParams((searchParams: URLSearchParams) => {
       searchParams.set('page', String(newPage))
+      searchParams.set('limit', String(paginationModel.limit))
       return searchParams
     })
   }

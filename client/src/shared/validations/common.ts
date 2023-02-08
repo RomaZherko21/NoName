@@ -3,6 +3,15 @@ import i18next from 'i18next'
 
 import { MB } from 'shared/consts'
 
+export const required = (field: string) =>
+  Yup.string()
+    .required(
+      i18next.t('validation:error.isRequired', {
+        field,
+      })
+    )
+    .nullable(true)
+
 export const commonStringValidation = (field: string, minSymbols: number = 1) =>
   Yup.string()
     .min(

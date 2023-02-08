@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import {default as MuiCheckbox} from '@mui/material/Checkbox'
+import { default as MuiCheckbox } from '@mui/material/Checkbox'
 
 interface Props {
   checked: boolean
@@ -8,12 +8,14 @@ interface Props {
   onChange: (e: any) => void
 }
 
-function Checkbox({ checked, label, onChange }: Props) {
+function Checkbox(props: Props) {
+  const { checked, label, onChange } = props
   const { t } = useTranslation()
 
   return (
     <FormControlLabel
-      control={<MuiCheckbox defaultChecked size="medium" checked={checked} onChange={onChange} />}
+      {...props}
+      control={<MuiCheckbox defaultChecked size="small" checked={checked} onChange={onChange} />}
       label={t(label)}
     />
   )

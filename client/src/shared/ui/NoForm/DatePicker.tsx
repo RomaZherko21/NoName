@@ -9,12 +9,14 @@ interface Props {
   onChange: (e: any) => void
 }
 
-function DatePicker({ label, value, onChange }: Props) {
+function DatePicker(props: Props) {
+  const { label, value, onChange } = props
   const { t } = useTranslation()
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MuiDatePicker
+        {...props}
         label={t(label)}
         value={value}
         onChange={onChange}
