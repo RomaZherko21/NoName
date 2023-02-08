@@ -95,6 +95,15 @@ const darkTheme = {
         },
       },
     },
+    MuiAlert: {
+      styleOverrides: {
+        standardError: {
+          backgroundColor: '#191616',
+          color: PRIMARY_TEXT,
+          fontSize: 16,
+        },
+      },
+    },
     MuiListItemIcon: {
       styleOverrides: {
         root: {

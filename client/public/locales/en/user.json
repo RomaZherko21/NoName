@@ -41,6 +41,7 @@
   "connections": "Connections",
   "thatsYou": "That's you!",
   "security": "Security",
+  "dontHaveAccount": "Don't have an account?",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
