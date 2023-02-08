@@ -38,9 +38,9 @@ function SignIn() {
           <Paper
             elevation={16}
             sx={{
-              minWidth: '550px',
               display: 'flex',
               flexDirection: 'column',
+              minWidth: 550,
               p: 3,
             }}
           >
@@ -79,7 +79,7 @@ function SignIn() {
           </Paper>
 
           <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>admin@gmail.com</strong> and password <strong>qwerqwer</strong>!
+            You can use <strong>"admin@gmail.com"</strong> and password <strong>"qwerqwer"</strong>
           </Alert>
         </Box>
       </Container>
