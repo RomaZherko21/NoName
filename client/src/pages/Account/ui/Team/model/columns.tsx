@@ -11,7 +11,7 @@ import { InformativeImage } from 'shared/ui'
 export const getColumns = (): TableColumn[] => [
   {
     key: 'full_name',
-    title: i18next.t('user:name'),
+    title: i18next.t('user:member'),
     getValue: ({ name, surname, middle_name, avatar }: User) => (
       <InformativeImage
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}

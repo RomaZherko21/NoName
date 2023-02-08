@@ -24,7 +24,7 @@ function Billing() {
   const { t } = useTranslation()
   const SUBSCRIPTON_TYPES = useMemo(
     () => [
-      { price: '$0', name: t('user:startup'), status: BillingStatus.startup },
+      { price: '$0.00', name: t('user:startup'), status: BillingStatus.startup },
       { price: '$4.99', name: t('user:standard'), status: BillingStatus.standard },
       { price: '$29.99', name: t('user:business'), status: BillingStatus.business },
     ],
@@ -40,13 +40,13 @@ function Billing() {
             {t('user:billingAdvice')}
           </Typography>
         </Grid>
-        <Grid container spacing={5} direction="row">
+        <Grid container spacing={2} direction="row">
           {SUBSCRIPTON_TYPES.map((item) => (
             <Grid item xs={4}>
               <CardContent
                 sx={{
                   p: 4,
-                  borderRadius: '8px',
+                  borderRadius: '20px',
                   border:
                     BillingModel.billingStatus === item.status
                       ? '2px solid #7582eb'
@@ -70,7 +70,12 @@ function Billing() {
                     {item.name}
                   </Typography>
                   {BillingModel.billingStatus === item.status && (
-                    <Typography variant="caption">{t('user:actions.usingNow')}</Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ ml: 3, color: ({ palette }) => palette.primary.dark }}
+                    >
+                      {t('user:actions.usingNow')}
+                    </Typography>
                   )}
                 </Box>
               </CardContent>
@@ -80,32 +85,40 @@ function Billing() {
         <Divider variant="fullWidth" sx={{ mt: 3, mb: 3 }} />
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
           <Typography variant="h6">{t('user:billingDetails')}</Typography>
-          <Button>
-            <EditIcon fontSize="small" />
+          <Button sx={{ color: 'inherit' }}>
+            <EditIcon fontSize="small" sx={{ mr: 1 }} />
             {t('actions.edit')}
           </Button>
         </Stack>
-        <List sx={{ border: '1px solid #2d3748', borderRadius: '8px', mb: 2 }}>
+        <List sx={{ border: '1px solid #2d3748', borderRadius: '8px', mb: 2, pt: 0, pb: 0 }}>
           <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-            <Typography variant="subtitle2">{t('user:billingName')}</Typography>
+            <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+              {t('user:billingName')}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               John Doe
             </Typography>
           </ListItem>
           <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-            <Typography variant="subtitle2">{t('user:cardNumber')}</Typography>
+            <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+              {t('user:cardNumber')}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               **** 1111
             </Typography>
           </ListItem>
-          <ListItem sx={{ borderBottom: '1px solid #2d3748', minWidth: '180px', gap: 5 }}>
-            <Typography variant="subtitle2">{t('user:country')}</Typography>
+          <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
+            <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+              {t('user:country')}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               Germany
             </Typography>
           </ListItem>
           <ListItem sx={{ gap: 5 }}>
-            <Typography variant="subtitle2">{t('user:zipAndPostalCode')}</Typography>
+            <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+              {t('user:zipAndPostalCode')}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               667123
             </Typography>

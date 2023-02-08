@@ -12,7 +12,7 @@
   "confirmPassword": "Confirm password",
   "man": "Man",
   "woman": "Women",
-  "month": "Month",
+  "month": "mo",
   "week": "Week",
   "helpAndSupport": "Help & Support Chat",
   "basicDetails": "Basic details",
@@ -44,6 +44,7 @@
   "dontHaveAccount": "Don't have an account?",
   "sentConnections": "Sent connections",
   "receivedConnections": "Received connections",
+  "member": "Member",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

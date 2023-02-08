@@ -10,6 +10,7 @@ import {
   Button,
   Stack,
   TableContainer,
+  Input,
 } from '@mui/material'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -24,18 +25,16 @@ function Team() {
   const columns = useMemo(() => getColumns(), [])
   return (
     <Paper elevation={1}>
-      <Grid container sx={{ gap: 1, p: 3 }}>
-        <Grid xs={12}>
-          <Stack spacing={2} sx={{ mb: 3 }}>
-            <Typography variant="h6">{t('user:actions.inviteMembers')}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              You currently pay for 2 Editor Seats.
-            </Typography>
-          </Stack>
-          <Divider light={true} />
+      <Grid container sx={{ p: 3 }}>
+        <Grid item xs={12} md={4} spacing={2}>
+          <Typography variant="h6">{t('user:actions.inviteMembers')}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            You currently pay for 2 Editor Seats.
+          </Typography>
         </Grid>
-        <Grid container direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-          <Grid item xs={10} alignItems="center">
+
+        <Grid item xs={12} md={8} sx={{ mt: 1 }}>
+          <Stack direction="row">
             <TextField
               fullWidth
               type="email"
@@ -50,12 +49,10 @@ function Team() {
                 ),
               }}
             />
-          </Grid>
-          <Grid item alignItems="center" justifyContent="center">
-            <Button size="medium" variant="contained" type="button">
+            <Button size="medium" variant="contained" sx={{ minWidth: '110px', ml: 3 }}>
               {t('actions.sendInvite')}
             </Button>
-          </Grid>
+          </Stack>
         </Grid>
       </Grid>
       <Grid>
