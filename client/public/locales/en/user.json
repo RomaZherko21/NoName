@@ -45,6 +45,10 @@
   "sentConnections": "Sent connections",
   "receivedConnections": "Received connections",
   "member": "Member",
+  "loginHistory": "Login history",
+  "loginType": "Login type",
+  "ipAddress": "Ip address",
+  "client": "Client",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

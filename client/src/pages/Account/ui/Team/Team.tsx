@@ -24,7 +24,7 @@ function Team() {
 
   const columns = useMemo(() => getColumns(), [])
   return (
-    <Paper elevation={1}>
+    <Paper elevation={16}>
       <Grid container sx={{ p: 3 }}>
         <Grid item xs={12} md={4} spacing={2}>
           <Typography variant="h6">{t('user:actions.inviteMembers')}</Typography>

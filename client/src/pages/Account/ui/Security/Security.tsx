@@ -1,15 +1,18 @@
-import { Button, Grid, Paper, Stack, Typography } from '@mui/material'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
+import { Button, Grid, Paper, Stack, Typography, TableContainer } from '@mui/material'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
-import { CircleDevider, Input } from 'shared/ui'
+import { CircleDevider, CommonTable, Input, Pagination, Spinner } from 'shared/ui'
+import { getColumns, SecurityModel } from './model'
 
 function Security() {
   const { t } = useTranslation()
 
+  const columns = useMemo(() => getColumns(), [])
   return (
     <>
-      <Paper sx={{ mb: 4, borderRadius: '20px' }}>
+      <Paper elevation={16} sx={{ mb: 4, borderRadius: '20px' }}>
         <Grid container sx={{ p: 4 }}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6">{t('translation:actions.changePassword')}</Typography>
@@ -24,7 +27,8 @@ function Security() {
           </Grid>
         </Grid>
       </Paper>
-      <Paper sx={{ borderRadius: '20px' }}>
+
+      <Paper elevation={16} sx={{ mb: 2, borderRadius: '20px' }}>
         <Grid container spacing={2} sx={{ p: 4, pt: 2 }}>
           <Grid item xs={12}>
             <Typography variant="h6">{t('user:multiFactorAuthentication')}</Typography>
@@ -85,6 +89,25 @@ function Security() {
               </Stack>
             </Paper>
           </Grid>
+        </Grid>
+      </Paper>
+
+      <Paper elevation={16} sx={{ borderRadius: '20px' }}>
+        <Grid item xs={12} md={4} spacing={2} sx={{ p: 3 }}>
+          <Typography variant="h6">{t('user:loginHistory')}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            Your recent login activity
+          </Typography>
+        </Grid>
+        <Grid>
+          {SecurityModel.loading.has ? (
+            <Spinner />
+          ) : (
+            <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+              <CommonTable data={SecurityModel.entrances} columns={columns} />
+              <Pagination paginationModel={SecurityModel.pagination} />
+            </TableContainer>
+          )}
         </Grid>
       </Paper>
     </>

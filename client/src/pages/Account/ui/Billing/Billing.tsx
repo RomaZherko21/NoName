@@ -32,7 +32,7 @@ function Billing() {
   )
 
   return (
-    <Paper elevation={1}>
+    <Paper elevation={16}>
       <Grid spacing={5} sx={{ p: 3 }}>
         <Grid sx={{ mb: 2 }}>
           <Typography variant="h6">{t('user:actions.changePlan')}</Typography>

@@ -6,7 +6,7 @@ function Notifications() {
 
   return (
     <>
-      <Card sx={{ p: 4 }}>
+      <Card elevation={16} sx={{ p: 4 }}>
         <Grid container sx={{ p: 1.5 }}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6">{t('user:email')}</Typography>
