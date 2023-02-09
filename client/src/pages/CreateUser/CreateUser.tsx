@@ -8,15 +8,23 @@ import { toast } from 'react-toastify'
 import { Button, Grid, Paper, Typography } from '@mui/material'
 
 import { Gender, Roles } from 'shared/types'
-import { getSplitName } from 'shared/helpers'
+import { getSplitName, normalizePhone } from 'shared/helpers'
 import { GENDER, MAX_IMAGE_SIZE, ROLES, ROUTES, SUPPORTED_IMAGE_FORMATS } from 'shared/consts'
-import { FormDatePicker, InputField, SelectField, Spinner, UploadImageField } from 'shared/ui'
+import {
+  FormDatePicker,
+  InputField,
+  FormPhoneNumber,
+  SelectField,
+  Spinner,
+  UploadImageField,
+} from 'shared/ui'
 import {
   commonStringValidation,
   confirmPasswordValidation,
   emailValidation,
   fileValidation,
   fullNameValidation,
+  phoneNumberValidation,
   passwordValidation,
   required,
 } from 'shared/validations'
@@ -34,6 +42,7 @@ function CreateUser() {
         full_name: fullNameValidation(),
         email: emailValidation(),
         role: commonStringValidation(t(`user:role`)),
+        tel_number: phoneNumberValidation(t(`fields.phone`)),
         date_of_birth: required(t(`user:dateOfBirth`)),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
@@ -70,7 +79,7 @@ function CreateUser() {
             {
               ...getSplitName(values.full_name),
               email: values.email,
-              tel_number: values.tel_number,
+              tel_number: normalizePhone(values.tel_number),
               role: values.role,
               gender: values.gender,
               date_of_birth: values.date_of_birth || '',
@@ -104,7 +113,7 @@ function CreateUser() {
                         <InputField field="full_name" label="user:fullName" />
                       </Grid>
                       <Grid item xs={12}>
-                        <InputField type="tel" field="tel_number" label="user:telephoneNumber" />
+                        <FormPhoneNumber label="fields.phone" field="tel_number" />
                       </Grid>
                       <Grid item xs={12}>
                         <InputField type="email" field="email" label="user:email" />

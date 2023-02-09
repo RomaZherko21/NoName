@@ -39,3 +39,5 @@ export const getSearchParamsObj = (searchParams: URLSearchParams) => {
 
   return params
 }
+
+export const normalizePhone = (phone: string) => `+${phone.replace(/[^\d]/g, '')}`

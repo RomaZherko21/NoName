@@ -15,21 +15,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (name, surname,middle_name,email,gender,date_of_birth, tel_number, password, role, avatar) 
 VALUES
-  ('Tamaz','Gela','Gela','admin@gmail.com','man','1995-04-21','+375-25-709-67-14', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
-  ('Adam','Keizer','David','user@gmail.com','man','1995-12-01','+375-25-709-67-17', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
-  ('Alexa','Richardson','William','lexa@gmail.com','woman','1991-08-13','+375-25-709-67-18', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
-  ('Cao','Yu','Jr.','chao@gmail.com','man','1956-03-13','+375-25-709-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
-  ('Mila','Kunis','Jr.','	mila@kunis.com','man','1966-03-13','+375-25-809-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
-  ('George','Clooney','Jr.','marlon@brando.com','man','1926-03-13','+375-25-909-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
-  ('Ryan','Gossling','Jr.','jack@nicholson','man','1936-03-13','+375-25-109-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
-  ('Badri','Gabriel','Jr.','humphrey@bogart.com','man','1936-03-13','+375-25-209-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
-  ('Revaz','Imeda','Jr.', 'spencer@tracy','man','1946-03-13','+375-25-309-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
-  ('Grigol','Tornike','Jr.','marlo2n@brando.com','man','1966-03-13','+375-25-409-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
-  ('Temur','Lidia','Jr.','lidia@brando.com','man','1976-03-13','+375-25-509-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
-  ('Tedore','Merab','Jr.','Merab@gmail.com','man','1976-03-13','+375-25-519-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
-  ('Stepane','Daviti','Jr.','Daviti@gmail.com','man','2001-04-13','+375-25-529-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
-  ('Keto','Liana','Jr.','Liana@gmail.com','woman','2005-05-13','+375-25-539-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
-  ('Zurab','Tamar','Jr.','Tamar@gmail.com','man','2003-06-13','+375-25-549-67-19', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
+  ('Tamaz','Gela','Gela','admin@gmail.com','man','1995-04-21','+375257096714', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
+  ('Adam','Keizer','David','user@gmail.com','man','1995-12-01','+375257096717', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
+  ('Alexa','Richardson','William','lexa@gmail.com','woman','1991-08-13','+375257096718', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
+  ('Cao','Yu','Jr.','chao@gmail.com','man','1956-03-13','+375257096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
+  ('Mila','Kunis','Jr.','	mila@kunis.com','man','1966-03-13','+375258096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
+  ('George','Clooney','Jr.','marlon@brando.com','man','1926-03-13','+375259096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
+  ('Ryan','Gossling','Jr.','jack@nicholson','man','1936-03-13','+375251096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
+  ('Badri','Gabriel','Jr.','humphrey@bogart.com','man','1936-03-13','+375252096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
+  ('Revaz','Imeda','Jr.', 'spencer@tracy','man','1946-03-13','+375253096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
+  ('Grigol','Tornike','Jr.','marlo2n@brando.com','man','1966-03-13','+375254096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
+  ('Temur','Lidia','Jr.','lidia@brando.com','man','1976-03-13','+375255096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
+  ('Tedore','Merab','Jr.','Merab@gmail.com','man','1976-03-13','+375255196719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
+  ('Stepane','Daviti','Jr.','Daviti@gmail.com','man','2001-04-13','+375255296719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
+  ('Keto','Liana','Jr.','Liana@gmail.com','woman','2005-05-13','+375255396719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
+  ('Zurab','Tamar','Jr.','Tamar@gmail.com','man','2003-06-13','+375255496719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
 
 CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,

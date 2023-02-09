@@ -8,15 +8,24 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Typography, Grid, Paper, Divider, Chip, Box, Switch } from '@mui/material'
 
 import { GENDER, API_USER_AVATAR_URL, ROLES, ROUTES } from 'shared/consts'
-import { InformativeImage, InputField, SelectField, Spinner } from 'shared/ui'
-import { getFullName, getInitials, getSplitName } from 'shared/helpers'
+import {
+  InformativeImage,
+  InputField,
+  FormPhoneNumber,
+  SelectField,
+  Spinner,
+  FormDatePicker,
+} from 'shared/ui'
+import { getFullName, getInitials, getSplitName, normalizePhone } from 'shared/helpers'
 import { Gender, Roles } from 'shared/types'
 import {
   commonStringValidation,
   confirmPasswordValidation,
   emailValidation,
   fullNameValidation,
+  phoneNumberValidation,
   passwordValidation,
+  required,
 } from 'shared/validations'
 
 import { EditUserModel } from './model'
@@ -38,7 +47,8 @@ function EditUser() {
         full_name: fullNameValidation(),
         email: emailValidation(),
         role: commonStringValidation(t(`user:role`)),
-        date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
+        tel_number: phoneNumberValidation(t(`fields.phone`)),
+        date_of_birth: required(t(`user:dateOfBirth`)),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
       }),
@@ -82,7 +92,7 @@ function EditUser() {
               tel_number: EditUserModel?.tel_number || '',
               role: EditUserModel?.role || Roles.user,
               gender: EditUserModel?.gender || Gender.man,
-              date_of_birth: EditUserModel?.date_of_birth || '1999-04-21',
+              date_of_birth: EditUserModel?.date_of_birth || '',
               password: '',
               confirmPassword: '',
             }}
@@ -92,7 +102,7 @@ function EditUser() {
                 {
                   ...getSplitName(values.full_name),
                   email: values.email,
-                  tel_number: values.tel_number,
+                  tel_number: normalizePhone(values.tel_number),
                   role: values.role,
                   gender: values.gender,
                   date_of_birth: values.date_of_birth,
@@ -116,7 +126,7 @@ function EditUser() {
                       <InputField field="full_name" label="user:fullName" />
                     </Grid>
                     <Grid item xs={6}>
-                      <InputField field="tel_number" label="user:telephoneNumber" />
+                      <FormPhoneNumber label="fields.phone" field="tel_number" />
                     </Grid>
                     <Grid item xs={6}>
                       <SelectField field="gender" label="user:gender" options={GENDER} />
@@ -128,7 +138,7 @@ function EditUser() {
                       <SelectField field="role" label="user:role" options={ROLES} />
                     </Grid>
                     <Grid item xs={6}>
-                      <InputField field="date_of_birth" label="user:dateOfBirth" />
+                      <FormDatePicker field="date_of_birth" label="user:dateOfBirth" />
                     </Grid>
                     <Grid item xs={6}>
                       <InputField field="password" label="user:password" type="password" />

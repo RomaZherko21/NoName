@@ -1,34 +1,12 @@
 import { useFormikContext } from 'formik'
-import { format } from 'date-fns'
+import { format, isValid } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { FormControl, FormHelperText, TextField, Theme } from '@mui/material'
+import { FormControl, FormHelperText, TextField } from '@mui/material'
 
 import { DEFAULT_DATE_FORMAT } from 'shared/consts'
-
-const formFieldErrorStyles = {
-  input: {
-    color: ({ palette }: Theme) => palette.error.main,
-  },
-  svg: {
-    color: ({ palette }: Theme) => palette.error.main,
-  },
-  label: {
-    color: ({ palette }: Theme) => palette.error.main,
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: ({ palette }: Theme) => palette.error.main,
-    },
-    '&:hover fieldset': {
-      borderColor: ({ palette }: Theme) => palette.error.main,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: ({ palette }: Theme) => palette.error.main,
-    },
-  },
-}
+import { formFieldErrorStyles } from './errorStyles'
 
 interface Props {
   label: string
@@ -45,7 +23,7 @@ function FormDatePicker(props: Props) {
   const hasError = touched[field] && Boolean(errors[field])
 
   return (
-    <FormControl fullWidth error={hasError}>
+    <FormControl fullWidth error={hasError} sx={hasError ? formFieldErrorStyles : {}}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopDatePicker
           {...props}
@@ -53,11 +31,11 @@ function FormDatePicker(props: Props) {
           inputFormat={dateFormat}
           value={values[field]}
           onChange={(newValue: Date | null) =>
-            newValue && setFieldValue(field, format(newValue, DEFAULT_DATE_FORMAT))
+            newValue &&
+            isValid(newValue) &&
+            setFieldValue(field, format(newValue, DEFAULT_DATE_FORMAT))
           }
-          renderInput={(params) => (
-            <TextField {...params} sx={hasError ? formFieldErrorStyles : {}} />
-          )}
+          renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
       {touched[field] && <FormHelperText>{errors[field]}</FormHelperText>}

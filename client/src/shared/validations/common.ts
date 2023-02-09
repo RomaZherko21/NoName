@@ -2,6 +2,7 @@ import * as Yup from 'yup'
 import i18next from 'i18next'
 
 import { MB } from 'shared/consts'
+import { normalizePhone } from 'shared/helpers'
 
 export const required = (field: string) =>
   Yup.string()
@@ -136,4 +137,17 @@ export const fileValidation = ({
         formats: fileFormats.join(', ').replace(/\//g, '.'),
       }),
       (value) => fileFormats.includes(value?.type)
+    )
+
+export const phoneNumberValidation = (field: string) =>
+  Yup.string()
+    .test(
+      field,
+      i18next.t('validation:error.phoneLength'),
+      (value) => typeof value === 'string' && normalizePhone(value).length >= 10
+    )
+    .required(
+      i18next.t('validation:error.isRequired', {
+        field,
+      })
     )
