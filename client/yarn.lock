@@ -1144,6 +1144,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+country-flag-icons@^1.4.10:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.5.tgz#04a41c83e2ea38ea28054d4e3eff9d1ce16aec1c"
+  integrity sha512-k4WXZ/WvWOSiYXRG1n8EYHNr1m/IX0GffKqAidaet5DrJsDOmJ8Q/8JvvONhZNnKYg24s4lvsm+9og1HcuIU/g==
+
 cross-fetch@3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
@@ -1870,6 +1875,14 @@ magic-string@^0.27.0:
   integrity sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.13"
+
+material-ui-phone-number@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/material-ui-phone-number/-/material-ui-phone-number-3.0.0.tgz#4ea0d045f50af26db0994816520095be57d20dc1"
+  integrity sha512-wZX1PYv990nJUBko93AQxIfvFARHfMtnV/UT1/hVnbJP5x/K7MDuT5T2/ckIG6xyqTZ/wCcHdEK1P60uTOORwA==
+  dependencies:
+    country-flag-icons "^1.4.10"
+    lodash "^4.17.21"
 
 merge-stream@^2.0.0:
   version "2.0.0"
