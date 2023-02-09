@@ -4,6 +4,6 @@
         "title": "404: The page you are looking for isn’t here",
         "subtitle": "You either tried some shady route or you came here by mistake. Whichever it is, try using the navigation"
     },
-    "deleteAccount": "Delete your account and all of your source data. This is irreversible.",
+    "deleteAccount": "By deleting your account, you delete all original data. This is irreversible.",
     "confirm": "Confirm your data."
 }

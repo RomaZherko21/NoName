@@ -89,6 +89,22 @@ class UserModel {
     }
   }
 
+  async removeById(id: number) {
+    try {
+      this.rootStore.loading.begin()
+
+      await API.users.remove(id)
+
+      if (this.id === id) {
+        this.rootStore.authorization.unauthorize()
+      }
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.rootStore.loading.end()
+    }
+  }
+
   private fromJSON(user: User) {
     this.id = user.id || 0
     this.name = user.name

@@ -44,6 +44,7 @@
   "dontHaveAccount": "Don't have an account?",
   "sentConnections": "Sent connections",
   "receivedConnections": "Received connections",
+  "payment": "Payment",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -74,6 +75,12 @@
     "sendRequest": "Send request",
     "declain": "Declain",
     "editUser": "Edit user"
+  },
+  "bankCard": {
+    "number": "Card number",
+    "holderName": "Cardholder name",
+    "expirationDate": "Expiration date",
+    "cvv": "CVV"
   },
   "updates": {
     "product": {
