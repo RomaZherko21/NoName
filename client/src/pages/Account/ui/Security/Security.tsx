@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 import { Button, Grid, Paper, Stack, Typography, TableContainer } from '@mui/material'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 
 import { CircleDevider, CommonTable, Input, Pagination, Spinner } from 'shared/ui'
 
@@ -50,7 +50,7 @@ function Security() {
                   {t('user:updates.security.generateCode')}
                 </Typography>
                 <Button
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<AiOutlineArrowRight />}
                   sx={{ mt: 4, width: 'fit-content' }}
                   variant="outlined"
                   size="medium"
@@ -78,7 +78,7 @@ function Security() {
                   {t('user:updates.security.receiveCode')}
                 </Typography>
                 <Button
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<AiOutlineArrowRight />}
                   sx={{ mt: 4, width: 'fit-content' }}
                   variant="outlined"
                   size="medium"

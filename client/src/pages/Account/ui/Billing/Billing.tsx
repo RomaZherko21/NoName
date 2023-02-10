@@ -13,8 +13,8 @@ import {
   List,
   ListItem,
 } from '@mui/material'
-import LayersIcon from '@mui/icons-material/Layers'
-import EditIcon from '@mui/icons-material/Edit'
+import { BsFillLayersFill } from 'react-icons/bs'
+import { MdOutlineModeEditOutline } from 'react-icons/md'
 
 import { BillingStatus } from 'shared/types'
 
@@ -55,7 +55,7 @@ function Billing() {
                 BillingModel.billingStatus = item.status
               }}
             >
-              <LayersIcon />
+              <BsFillLayersFill />
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <Typography variant="h5">{item.price}</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -82,8 +82,7 @@ function Billing() {
       <Divider variant="fullWidth" sx={{ mt: 3, mb: 3 }} />
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
         <Typography variant="h6">{t('user:billingDetails')}</Typography>
-        <Button color="inherit">
-          <EditIcon fontSize="small" sx={{ mr: 1 }} />
+        <Button startIcon={<MdOutlineModeEditOutline />} color="inherit">
           {t('actions.edit')}
         </Button>
       </Stack>

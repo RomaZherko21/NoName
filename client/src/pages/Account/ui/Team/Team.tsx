@@ -1,9 +1,17 @@
 import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Paper, Grid, Typography, TextField, Button, Stack, TableContainer } from '@mui/material'
-import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import InputAdornment from '@mui/material/InputAdornment'
+import {
+  Paper,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  TableContainer,
+  InputAdornment,
+} from '@mui/material'
+import { AiOutlineMail } from 'react-icons/ai'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
@@ -34,7 +42,7 @@ function Team() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <MailOutlineIcon />
+                    <AiOutlineMail />
                   </InputAdornment>
                 ),
               }}
