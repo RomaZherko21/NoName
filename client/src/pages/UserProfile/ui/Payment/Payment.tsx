@@ -23,7 +23,7 @@ function Payment({ user }: Props) {
   return (
     <Paper elevation={1} sx={{ width: '100%', p: 0 }}>
       <CardHeader
-        titleTypographyProps={{ variant: 'h5' }}
+        titleTypographyProps={{ variant: 'h6' }}
         title={t('user:payment')}
         sx={{ pb: 0 }}
       />
@@ -36,7 +36,7 @@ function Payment({ user }: Props) {
             sx={{ display: 'flex', alignItems: 'center' }}
           />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText
             primary={t('user:bankCard.expirationDate')}
@@ -45,7 +45,7 @@ function Payment({ user }: Props) {
             sx={{ display: 'flex', alignItems: 'center' }}
           />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText
             primary={t('user:bankCard.cvv')}
@@ -54,7 +54,7 @@ function Payment({ user }: Props) {
             sx={{ display: 'flex', alignItems: 'center' }}
           />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText
             primary={t('user:bankCard.holderName')}
@@ -63,10 +63,10 @@ function Payment({ user }: Props) {
             sx={{ display: 'flex', alignItems: 'center' }}
           />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
       </List>
-      <CardActions sx={{ p: 1 }}>
-        <Button variant="outlined" size="large">
+      <CardActions>
+        <Button size="small" sx={{ color: ({ palette }) => palette.text.primary }}>
           {t('actions.edit')}
         </Button>
       </CardActions>

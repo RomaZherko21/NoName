@@ -6,6 +6,7 @@ import { API } from 'services'
 import { User, Roles, Gender } from 'shared/types'
 
 class UserProfileModel {
+  id: number = 0
   name: string = ''
   surname: string = ''
   middle_name: string = ''
@@ -33,7 +34,21 @@ class UserProfileModel {
 
       const data = await API.users.getById(id)
 
+      this.id = id
+
       this.fromJSON(data)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
+
+  async removeById() {
+    try {
+      this.loading.begin()
+
+      await API.users.remove(this.id)
     } catch (err: any) {
       toast.error(err)
     } finally {

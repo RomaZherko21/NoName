@@ -7,15 +7,15 @@ import { useDialog } from 'shared/hooks'
 import ConfirmDialog from './ConfirmDialog'
 
 interface Props {
-  id: number
+  onDelete: () => void
 }
 
-const DeleteAccount = ({ id }: Props) => {
+const DeleteAccount = ({ onDelete }: Props) => {
   const { t } = useTranslation()
 
   const [showConfirmationModal] = useDialog(
     'notification:sure',
-    (onClose) => <ConfirmDialog id={id} onClose={onClose} />,
+    (onClose) => <ConfirmDialog onClose={onClose} onDelete={onDelete} />,
     true
   )
 

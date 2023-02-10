@@ -22,35 +22,35 @@ function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
 
   return (
-    <Paper elevation={1} sx={{ minWidth: '330px', maxHeight: '410px' }}>
+    <Paper elevation={1} sx={{ minWidth: '330px', height: 'fit-content' }}>
       <CardHeader
         titleTypographyProps={{ variant: 'h6' }}
         title={t('user:basicDetails')}
         sx={{ pb: 0 }}
       />
-      <List>
+      <List sx={{ p: 0 }}>
         <ListItem>
           <ListItemText
             primary={t('user:fullName')}
             secondary={getFullName(user.name, user.surname, user.middle_name)}
           />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText primary={t('user:email')} secondary={user.email} />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText primary={t('user:telephoneNumber')} secondary={user.tel_number} />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
         <ListItem>
           <ListItemText primary={t('user:country')} secondary="USA" />
         </ListItem>
-        <Divider sx={{ color: (theme) => theme.palette.divider }} />
+        <Divider />
       </List>
-      <CardActions sx={{ p: 1 }}>
-        <Button variant="outlined" size="large">
+      <CardActions>
+        <Button size="small" sx={{ color: ({ palette }) => palette.text.primary }}>
           {t('actions.edit')}
         </Button>
       </CardActions>

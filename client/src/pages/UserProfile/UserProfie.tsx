@@ -52,15 +52,19 @@ function UserProfie() {
               }
             />
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <Button color="inherit">{t('actions.edit')}</Button>
-              <Button variant="contained">{t('common.actions')}</Button>
+              <Button color="inherit" size="small">
+                {t('actions.edit')}
+              </Button>
+              <Button variant="contained" size="small">
+                {t('common.actions')}
+              </Button>
             </Box>
           </Box>
           <Box sx={{ display: 'flex', gap: 5 }}>
             <UserBasicDetails user={UserProfileModel} />
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
               <Payment user={UserProfileModel} />
-              <DeleteAccount id={Number(id)} />
+              <DeleteAccount onDelete={UserProfileModel.removeById} />
             </Box>
           </Box>
         </>

@@ -11,7 +11,7 @@ const General = () => {
   return (
     <>
       <ProfileForm />
-      <DeleteAccount id={user.id} />
+      <DeleteAccount onDelete={user.remove} />
     </>
   )
 }
