@@ -17,6 +17,7 @@ import {
   CreatePost,
   EditUser,
   CreateUser,
+  UserProfile,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.HOME} element={<Layout />}>
       <Route path={ROUTES.USERS} element={<Users />} />
+      <Route path={ROUTES.USERS_PROFILE} element={<UserProfile />} />
       <Route path={ROUTES.USERS_NEW} element={<CreateUser />} />
       <Route path={ROUTES.USERS_EDIT} element={<EditUser />} />
 

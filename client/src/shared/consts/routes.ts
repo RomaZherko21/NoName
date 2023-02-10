@@ -4,6 +4,7 @@ export const ROUTES = {
   USERS: '/users',
   USERS_NEW: '/users/new',
   USERS_EDIT: '/users/:id/edit',
+  USERS_PROFILE: '/users/:id',
 
   POSTS: '/posts',
   POST: '/posts/:id',

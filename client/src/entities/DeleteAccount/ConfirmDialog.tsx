@@ -1,18 +1,17 @@
-import { Button, Stack } from '@mui/material'
+import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-
-import { useRootStore } from 'stores'
+import { Button, Stack } from '@mui/material'
 
 interface Props {
   onClose: () => void
+  onDelete: () => void
 }
 
-function ConfirmDialog({ onClose }: Props) {
+function ConfirmDialog({ onClose, onDelete }: Props) {
   const { t } = useTranslation()
-  const { user } = useRootStore()
 
   const onDeleteAccount = async () => {
-    await user.remove()
+    onDelete()
     onClose()
   }
 
@@ -25,4 +24,4 @@ function ConfirmDialog({ onClose }: Props) {
   )
 }
 
-export default ConfirmDialog
+export default observer(ConfirmDialog)

@@ -96,7 +96,7 @@ const ProfileForm = () => {
               </Grid>
             </Grid>
 
-            <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 1 }} container>
+            <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
               <Grid item lg={4} md={6} xs={12}>
                 <Typography color="textPrimary" variant="h6">
                   {t('common.confirm')}

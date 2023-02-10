@@ -49,6 +49,7 @@
   "loginType": "Login type",
   "ipAddress": "Ip address",
   "client": "Client",
+  "payment": "Payment",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -79,6 +80,12 @@
     "sendRequest": "Send request",
     "declain": "Declain",
     "editUser": "Edit user"
+  },
+  "bankCard": {
+    "number": "Card number",
+    "holderName": "Cardholder name",
+    "expirationDate": "Expiration date",
+    "cvv": "CVV"
   },
   "updates": {
     "product": {
