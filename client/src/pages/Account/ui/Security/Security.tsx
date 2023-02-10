@@ -4,6 +4,7 @@ import { Button, Grid, Paper, Stack, Typography, TableContainer } from '@mui/mat
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 import { CircleDevider, CommonTable, Input, Pagination, Spinner } from 'shared/ui'
+
 import { getColumns, SecurityModel } from './model'
 
 function Security() {
@@ -12,21 +13,19 @@ function Security() {
   const columns = useMemo(() => getColumns(), [])
   return (
     <>
-      <Paper elevation={16} sx={{ mb: 4, borderRadius: '20px' }}>
-        <Grid container sx={{ p: 4 }}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6">{t('translation:actions.changePassword')}</Typography>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Stack direction="row" justifyContent="space-between">
-              <Input placeholder="Password" />
-              <Button size="small" variant="text" sx={{ ml: 2 }}>
-                {t('actions.edit')}
-              </Button>
-            </Stack>
-          </Grid>
+      <Grid component={Paper} elevation={16} container sx={{ p: 4, mb: 4, borderRadius: '20px' }}>
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6">{t('translation:actions.changePassword')}</Typography>
         </Grid>
-      </Paper>
+        <Grid item xs={12} md={8}>
+          <Stack direction="row" justifyContent="space-between">
+            <Input placeholder="Password" />
+            <Button size="small" variant="text" sx={{ ml: 2 }}>
+              {t('actions.edit')}
+            </Button>
+          </Stack>
+        </Grid>
+      </Grid>
 
       <Paper elevation={16} sx={{ mb: 2, borderRadius: '20px' }}>
         <Grid container spacing={2} sx={{ p: 4, pt: 2 }}>
