@@ -18,8 +18,8 @@ function PostCover({ field }: Props) {
 
   const hasError = touched[field] && errors[field]
 
-  function handleUploadFile(event: any) {
-    setFieldValue(field, event.target.files[0])
+  function handleUploadFile(e: React.ChangeEvent<HTMLInputElement>) {
+    setFieldValue(field, e.target.files?.[0])
   }
 
   return (

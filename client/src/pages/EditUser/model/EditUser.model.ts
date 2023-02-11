@@ -6,11 +6,10 @@ import { API } from 'services'
 import { User, Roles, Gender } from 'shared/types'
 
 class EditUserModel {
+  id: number = 0
   name: string = ''
   surname: string = ''
   middle_name: string = ''
-  password?: string = ''
-  confirmPassword?: string = ''
 
   email: string = ''
   role: Roles = Roles.user
@@ -18,6 +17,9 @@ class EditUserModel {
   tel_number?: string = ''
   gender?: Gender = Gender.man
   avatar?: string = ''
+
+  password?: string = ''
+  confirmPassword?: string = ''
 
   loading: LoadingModel
 
@@ -54,17 +56,20 @@ class EditUserModel {
   }
 
   private fromJSON(user: User) {
+    this.id = user.id || 0
     this.name = user.name
     this.surname = user.surname
     this.middle_name = user.middle_name
+
     this.email = user.email
-    this.password = user.password
-    this.confirmPassword = user.confirmPassword
     this.role = user.role
     this.date_of_birth = user.date_of_birth
     this.tel_number = user.tel_number
     this.gender = user.gender
     this.avatar = user.avatar
+
+    this.password = user.password
+    this.confirmPassword = user.confirmPassword
   }
 }
 

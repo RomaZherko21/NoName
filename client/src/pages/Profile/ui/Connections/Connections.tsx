@@ -54,7 +54,9 @@ const Connections = () => {
         {user.isAuthorizedUser(ProfileModel.id) && (
           <Select
             value={ProfileModel.connectionStatus}
-            onChange={(event: any) => ProfileModel.onConnectionStatusChange(event.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              ProfileModel.onConnectionStatusChange(e.target.value as CONNECTION_OPTIONS)
+            }
             label="actions.sortBy"
             options={{
               [CONNECTION_OPTIONS.connections]: 'page:connections',

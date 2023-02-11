@@ -18,8 +18,6 @@ class ProfileModel {
   name: string = ''
   surname: string = ''
   middle_name: string = ''
-  password?: string = ''
-  confirmPassword?: string = ''
 
   email: string = ''
   role: Roles = Roles.user
@@ -211,9 +209,6 @@ class ProfileModel {
     this.name_on_card = user.name_on_card
     this.valid_thru = user.valid_thru
     this.cvv = user.cvv
-
-    this.password = user.password
-    this.confirmPassword = user.confirmPassword
   }
 }
 

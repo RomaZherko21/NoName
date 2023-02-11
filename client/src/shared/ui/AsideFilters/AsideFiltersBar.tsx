@@ -10,11 +10,11 @@ interface Props {
   handleOpenFilter: () => void
 
   inputValue: string
-  onInputChange: (e: any) => void
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   inputPlaceholder: string
 
   selectValue: string
-  onSelectChange: (e: any) => void
+  onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 
   sortOptions: { [key: string]: string }
   isTablePart?: boolean

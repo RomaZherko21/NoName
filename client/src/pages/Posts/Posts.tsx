@@ -55,7 +55,7 @@ function Posts() {
         <Grid item>
           <AsideFiltersBar
             inputValue={searchParams.get('name') || ''}
-            onInputChange={(e: any) => {
+            onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setSearchParams((searchParams: URLSearchParams) => {
                 searchParams.set('name', e.target.value)
                 return searchParams
@@ -66,7 +66,7 @@ function Posts() {
             }}
             inputPlaceholder="post:actions.searchName"
             selectValue={`${searchParams.get('order_by')} ${searchParams.get('order_type')}` || ''}
-            onSelectChange={(e: any) => {
+            onSelectChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               const [field, orderType] = e.target.value.split(' ')
 
               setSearchParams((searchParams: URLSearchParams) => {

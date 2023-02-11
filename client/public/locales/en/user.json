@@ -83,8 +83,7 @@
     "accept": "Accept",
     "writeYourComment": "Write your comment",
     "sendRequest": "Send request",
-    "declain": "Declain",
-    "editUser": "Edit user"
+    "declain": "Declain"
   },
   "bankCard": {
     "number": "Card number",

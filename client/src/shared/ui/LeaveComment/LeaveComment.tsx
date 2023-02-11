@@ -7,7 +7,7 @@ import { MdOutlinePhotoCameraBack } from 'react-icons/md'
 
 interface Props {
   inputValue: string
-  onInputChange: (e: any) => void
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onSend: () => void
   avatarUrl: string
   label: string

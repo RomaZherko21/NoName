@@ -79,7 +79,9 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
         name={field}
         type="file"
         accept="image/*"
-        onChange={(event: any) => setFieldValue(field, event.target.files![0])}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setFieldValue(field, e.target.files?.[0])
+        }
         style={{ display: 'none' }}
       />
     </>

@@ -24,7 +24,7 @@ import { InformativeImage } from 'shared/ui'
 import { CircleDevider } from 'shared/ui/CircleDevider'
 
 interface Props {
-  post: Post | any
+  post: Post
   toggleLike: (id: number) => void
 }
 

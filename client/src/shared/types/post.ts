@@ -1,6 +1,5 @@
-export interface Post {
+export interface Post extends Creator {
   id: number
-  user_id: number
   genre_id: number
 
   name: string
@@ -19,14 +18,19 @@ export interface Post {
   created_at: number
 }
 
-export interface Comment {
+export interface Comment extends Creator {
   id: number
   post_id: number
-  user_id: number
   created_at: number
-  user_avatar: string
   message: string
+}
+
+export interface Creator {
+  user_id: number
   user_name: string
   user_surname: string
   user_middle_name: string
+
+  user_avatar: string
+  user_email: string
 }
