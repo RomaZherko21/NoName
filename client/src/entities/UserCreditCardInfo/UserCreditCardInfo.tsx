@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -9,16 +10,18 @@ import {
   CardActions,
   Button,
   Divider,
+  ListItemIcon,
+  Typography,
 } from '@mui/material'
 
-import { User } from 'shared/types'
+import { getListConfig } from './getListConfig'
 
-interface Props {
-  user: User
-}
+interface Props {}
 
-function UserCreditCardInfo({ user }: Props) {
+function UserCreditCardInfo(props: any) {
   const { t } = useTranslation()
+
+  const listConfig = useMemo(() => getListConfig(props), [props])
 
   return (
     <Paper elevation={1} sx={{ width: '100%', p: 0 }}>
@@ -28,42 +31,29 @@ function UserCreditCardInfo({ user }: Props) {
         sx={{ pb: 0 }}
       />
       <List>
-        <ListItem>
-          <ListItemText
-            primary={t('user:bankCard.number')}
-            secondary="1234 1234 1234 1234 1234"
-            primaryTypographyProps={{ width: '180px' }}
-            sx={{ display: 'flex', alignItems: 'center' }}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText
-            primary={t('user:bankCard.expirationDate')}
-            secondary="12/23"
-            primaryTypographyProps={{ width: '180px' }}
-            sx={{ display: 'flex', alignItems: 'center' }}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText
-            primary={t('user:bankCard.cvv')}
-            secondary="123"
-            primaryTypographyProps={{ width: '180px' }}
-            sx={{ display: 'flex', alignItems: 'center' }}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText
-            primary={t('user:bankCard.holderName')}
-            secondary="Vasya Petrov"
-            primaryTypographyProps={{ width: '180px' }}
-            sx={{ display: 'flex', alignItems: 'center' }}
-          />
-        </ListItem>
-        <Divider />
+        {listConfig.map(({ Icon, text, title }) => (
+          <>
+            <ListItem key={text}>
+              <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
+                <Icon />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2" sx={{ width: 180 }}>
+                    {t(title)}
+                  </Typography>
+                }
+                secondary={
+                  <Typography variant="body2" color="text.secondary">
+                    {text}
+                  </Typography>
+                }
+                sx={{ display: 'flex', alignItems: 'center' }}
+              />
+            </ListItem>
+            <Divider />
+          </>
+        ))}
       </List>
       <CardActions>
         <Button size="small" sx={{ color: ({ palette }) => palette.text.primary }}>

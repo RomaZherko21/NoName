@@ -3,15 +3,28 @@ export interface User {
   name: string
   surname: string
   middle_name: string
+
   email: string
-  password?: string
   role: Roles
   date_of_birth?: string
   tel_number?: string
   gender?: Gender
-  confirmPassword?: string
   avatar?: string
+  job_title?: string
   connection_status?: ConnectionStatus | null
+
+  native_country?: string
+  native_city?: string
+  residence_country?: string
+  residence_city?: string
+
+  card_number?: string
+  name_on_card?: string
+  valid_thru?: string
+  cvv?: string
+
+  password?: string
+  confirmPassword?: string
 }
 
 export interface Connection {

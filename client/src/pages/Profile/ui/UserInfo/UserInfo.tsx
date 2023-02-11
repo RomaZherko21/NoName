@@ -20,7 +20,12 @@ function UserInfo() {
             <UserBasicInfo user={ProfileModel} />
           </Grid>
           <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <UserCreditCardInfo user={ProfileModel} />
+            <UserCreditCardInfo
+              cardNumber={ProfileModel.card_number}
+              nameOnCard={ProfileModel.name_on_card}
+              validThru={ProfileModel.valid_thru}
+              cvv={ProfileModel.cvv}
+            />
 
             {user.isAuthorizedUser(ProfileModel.id) && (
               <DeleteAccount onDelete={ProfileModel.removeById} />
