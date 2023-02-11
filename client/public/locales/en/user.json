@@ -52,6 +52,9 @@
   "payment": "Payment",
   "userPosts": "Your posts",
   "userId": "user_id",
+  "nativeLocation": "Native location",
+  "residenceLocation": "Residence location",
+  "jobTitle": "Job title",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
