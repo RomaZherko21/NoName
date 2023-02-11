@@ -50,6 +50,7 @@
   "ipAddress": "Ip address",
   "client": "Client",
   "payment": "Payment",
+  "userPosts": "Your posts",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

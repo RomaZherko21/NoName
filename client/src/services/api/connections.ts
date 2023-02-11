@@ -9,11 +9,16 @@ export const get = ({
   status,
   isReceived = true,
   isSent = true,
+  user_id,
 }: {
   status: ConnectionStatus
   isReceived?: boolean
   isSent?: boolean
-}) => fetch.get<Connection[]>(`${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent })}`)
+  user_id: number
+}) =>
+  fetch.get<Connection[]>(
+    `${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent, user_id })}`
+  )
 
 export const update = (id: number, status: ConnectionStatus) =>
   fetch.put(`${ENDPOINT_BASE}/${id}`, { status })

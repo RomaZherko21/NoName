@@ -30,6 +30,10 @@ class UserModel {
     this.init()
   }
 
+  isAuthorizedUser(id: number) {
+    return this.id === id
+  }
+
   async init() {
     try {
       this.rootStore.loading.begin()

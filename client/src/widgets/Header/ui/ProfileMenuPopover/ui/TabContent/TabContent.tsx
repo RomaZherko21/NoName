@@ -5,22 +5,19 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 
 interface Props {
-  getConfig: (value: any) => {
+  config: {
     icon: JSX.Element
     text: string
     to?: string
     onClick?: () => void
   }[]
   onMenuClose: (event: any) => void
-  onLogout?: () => void
 }
 
-function TabContent({ onLogout, onMenuClose, getConfig }: Props) {
+function TabContent({ onMenuClose, config }: Props) {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-
-  const tabsConfig = useMemo(() => getConfig({ onLogout }), [onLogout, getConfig])
 
   const onChangePage = (route: string, event: any) => {
     navigate(route)
@@ -29,7 +26,7 @@ function TabContent({ onLogout, onMenuClose, getConfig }: Props) {
 
   return (
     <List sx={{ p: 0 }}>
-      {tabsConfig.map((item) => (
+      {config.map((item) => (
         <ListItemButton
           onClick={(event) => {
             if (item.to) {

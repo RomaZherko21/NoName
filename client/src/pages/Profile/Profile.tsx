@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { generatePath, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material'
+import { Button, Chip, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 
 import { HiOutlineUserAdd } from 'react-icons/hi'
 import { FiMoreVertical } from 'react-icons/fi'
@@ -9,22 +10,22 @@ import { RiMessage2Fill } from 'react-icons/ri'
 
 import { useRootStore } from 'stores'
 import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { getInitials } from 'shared/helpers'
 import { InformativeImage, Tabs } from 'shared/ui'
-import { PostsFilters } from 'pages/Posts/model'
 import ProfileCover from 'assets/images/cover.jpg'
 
-import { Connections, Timeline } from './ui'
+import { Connections, Posts, UserInfo } from './ui'
 import s from './Styles.module.scss'
 import { ProfileModel } from './model'
 
 function Profile() {
   const { t } = useTranslation()
+  const { id } = useParams()
   const { user } = useRootStore()
-  const [filters] = useState<PostsFilters>({ user_id: user.id })
 
   useEffect(() => {
-    ProfileModel.fetchPosts({ filters })
-  }, [filters])
+    ProfileModel.fetchUser(Number(id))
+  }, [id])
 
   return (
     <Grid container spacing={3}>
@@ -37,44 +38,66 @@ function Profile() {
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
       >
         <InformativeImage
-          imgUrl={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
-          PrimaryText={`${user.name} ${user.surname}`}
-          SecondaryText={user.role}
+          imgUrl={`${API_USER_AVATAR_URL}/${ProfileModel.avatar}`}
+          imgPlaceholder={getInitials(`${ProfileModel.name} ${ProfileModel.surname}`)}
+          PrimaryText={ProfileModel.email}
           size="large"
+          PrimaryVariant="h4"
+          SecondaryText={
+            <Typography variant="subtitle2" color={'text.primary'}>
+              user_id:{' '}
+              <Chip
+                label={Number(id)}
+                size="small"
+                sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
+              />
+            </Typography>
+          }
         />
-        <Stack direction="row" spacing={1.25} alignItems="center">
-          <Button
-            startIcon={<HiOutlineUserAdd fontSize="small" />}
-            color="primary"
-            variant="outlined"
-            size="small"
-          >
-            {t('actions.connect')}
-          </Button>
-          <Button
-            startIcon={<RiMessage2Fill fontSize="small" />}
-            color="primary"
-            variant="contained"
-            size="small"
-          >
-            {t('actions.sendMessage')}
-          </Button>
-          <IconButton size="small" aria-label="upload picture" component="label">
+        {!user.isAuthorizedUser(ProfileModel.id) && (
+          <Stack direction="row" spacing={1.25} alignItems="center">
+            <Button
+              startIcon={<HiOutlineUserAdd fontSize="small" />}
+              color="primary"
+              variant="outlined"
+              size="small"
+            >
+              {t('actions.connect')}
+            </Button>
+            <Button
+              startIcon={<RiMessage2Fill fontSize="small" />}
+              color="primary"
+              variant="contained"
+              size="small"
+            >
+              {t('actions.sendMessage')}
+            </Button>
             <Tooltip title="More info">
-              <FiMoreVertical />
+              <IconButton size="small" aria-label="upload picture" component="label">
+                <FiMoreVertical />
+              </IconButton>
             </Tooltip>
-          </IconButton>
-        </Stack>
+          </Stack>
+        )}
       </Grid>
 
       <Grid item xs={12}>
         <Tabs
           options={[
-            { label: 'page:timeline', to: ROUTES.PROFILE_TIMELINE, Component: Timeline },
+            {
+              label: 'page:profile',
+              to: generatePath(ROUTES.USERS_PROFILE, { id: ProfileModel.id }),
+              Component: UserInfo,
+            },
             {
               label: 'page:connections',
-              to: ROUTES.PROFILE_CONNECTIONS,
+              to: generatePath(ROUTES.USERS_CONNECTIONS, { id: ProfileModel.id }),
               Component: Connections,
+            },
+            {
+              label: 'page:posts',
+              to: generatePath(ROUTES.USERS_POSTS, { id: ProfileModel.id }),
+              Component: Posts,
             },
           ]}
         />

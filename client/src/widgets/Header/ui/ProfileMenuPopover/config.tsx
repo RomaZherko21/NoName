@@ -1,21 +1,28 @@
 import { CgProfile } from 'react-icons/cg'
 import { RiUserSettingsLine } from 'react-icons/ri'
+import { generatePath } from 'react-router-dom'
 import { ImExit } from 'react-icons/im'
 import { BiSupport } from 'react-icons/bi'
 import { HiOutlineUsers } from 'react-icons/hi'
+import { IoNewspaperOutline } from 'react-icons/io5'
 
 import { ROUTES } from 'shared/consts'
 
-export const getProfileConfig = ({ onLogout }: { onLogout: () => void }) => [
+export const getProfileConfig = ({ id, onLogout }: { id: number; onLogout: () => void }) => [
   {
     icon: <CgProfile />,
     text: 'user:socialProfile',
-    to: ROUTES.PROFILE_TIMELINE,
+    to: generatePath(ROUTES.USERS_PROFILE, { id }),
   },
   {
     icon: <HiOutlineUsers />,
     text: 'user:connections',
-    to: ROUTES.PROFILE_CONNECTIONS,
+    to: generatePath(ROUTES.USERS_CONNECTIONS, { id }),
+  },
+  {
+    icon: <IoNewspaperOutline />,
+    text: 'user:userPosts',
+    to: generatePath(ROUTES.USERS_POSTS, { id }),
   },
   {
     icon: <RiUserSettingsLine />,
@@ -33,7 +40,7 @@ export const getSettingsConfig = () => [
   {
     icon: <BiSupport />,
     text: 'Edit Profile',
-    to: ROUTES.PROFILE_TIMELINE,
+    to: ROUTES.USERS_PROFILE,
   },
   {
     icon: <BiSupport />,

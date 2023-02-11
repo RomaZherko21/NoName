@@ -9,6 +9,7 @@ import { useRootStore } from 'stores'
 
 import { ExitDialog, TabContent } from './ui'
 import { getProfileConfig, getSettingsConfig } from './config'
+import { useMemo } from 'react'
 
 function ProfileMenuPopover() {
   const { user } = useRootStore()
@@ -22,6 +23,13 @@ function ProfileMenuPopover() {
   const onLogout = () => {
     showConfirmationModal()
   }
+
+  const profileConfig = useMemo(
+    () => getProfileConfig({ onLogout, id: user.id }),
+    [onLogout, getProfileConfig]
+  )
+
+  const settingsConfig = useMemo(() => getSettingsConfig(), [getSettingsConfig])
 
   return (
     <Popover
@@ -64,17 +72,11 @@ function ProfileMenuPopover() {
           options={[
             {
               label: 'common.profile',
-              Component: () => (
-                <TabContent
-                  getConfig={getProfileConfig}
-                  onLogout={onLogout}
-                  onMenuClose={() => {}}
-                />
-              ),
+              Component: () => <TabContent config={profileConfig} onMenuClose={() => {}} />,
             },
             {
               label: 'common.settings',
-              Component: () => <TabContent getConfig={getSettingsConfig} onMenuClose={() => {}} />,
+              Component: () => <TabContent config={settingsConfig} onMenuClose={() => {}} />,
             },
           ]}
           variant="fullWidth"

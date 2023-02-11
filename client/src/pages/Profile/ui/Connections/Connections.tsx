@@ -20,8 +20,10 @@ import { ConnectionStatus } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
 import { ProfileModel, CONNECTION_OPTIONS } from '../../model'
+import { useRootStore } from 'stores'
 
 const Connections = () => {
+  const { user } = useRootStore()
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -48,17 +50,19 @@ const Connections = () => {
         }}
       >
         <Input icon={<SearchIcon />} placeholder={t('user:actions.searchName')} />
-        <Select
-          value={ProfileModel.connectionStatus}
-          onChange={(event: any) => ProfileModel.onConnectionStatusChange(event.target.value)}
-          label="actions.sortBy"
-          options={{
-            [CONNECTION_OPTIONS.connections]: 'page:connections',
-            [CONNECTION_OPTIONS.sentConnections]: 'user:sentConnections',
-            [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections',
-          }}
-          sx={{ width: '160px' }}
-        />
+        {user.isAuthorizedUser(ProfileModel.id) && (
+          <Select
+            value={ProfileModel.connectionStatus}
+            onChange={(event: any) => ProfileModel.onConnectionStatusChange(event.target.value)}
+            label="actions.sortBy"
+            options={{
+              [CONNECTION_OPTIONS.connections]: 'page:connections',
+              [CONNECTION_OPTIONS.sentConnections]: 'user:sentConnections',
+              [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections',
+            }}
+            sx={{ width: '160px' }}
+          />
+        )}
       </Box>
 
       <Divider />

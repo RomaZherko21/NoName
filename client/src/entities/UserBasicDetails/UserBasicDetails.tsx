@@ -22,7 +22,7 @@ function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
 
   return (
-    <Paper elevation={1} sx={{ minWidth: '330px', height: 'fit-content' }}>
+    <Paper elevation={1} sx={{ height: 'fit-content' }}>
       <CardHeader
         titleTypographyProps={{ variant: 'h6' }}
         title={t('user:basicDetails')}

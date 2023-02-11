@@ -17,7 +17,6 @@ import {
   CreatePost,
   EditUser,
   CreateUser,
-  UserProfile,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -27,16 +26,16 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={ROUTES.HOME} element={<Layout />}>
       <Route path={ROUTES.USERS} element={<Users />} />
-      <Route path={ROUTES.USERS_PROFILE} element={<UserProfile />} />
       <Route path={ROUTES.USERS_NEW} element={<CreateUser />} />
       <Route path={ROUTES.USERS_EDIT} element={<EditUser />} />
+
+      <Route path={ROUTES.USERS_PROFILE} element={<Profile />} />
+      <Route path={ROUTES.USERS_CONNECTIONS} element={<Profile />} />
+      <Route path={ROUTES.USERS_POSTS} element={<Profile />} />
 
       <Route path={ROUTES.POSTS} element={<Posts />} />
       <Route path={ROUTES.POST} element={<Post />} />
       <Route path={ROUTES.POSTS_NEW} element={<CreatePost />} />
-
-      <Route path={ROUTES.PROFILE_TIMELINE} element={<Profile />} />
-      <Route path={ROUTES.PROFILE_CONNECTIONS} element={<Profile />} />
 
       <Route path={ROUTES.ACCOUNT_GENERAL} element={<Account />} />
       <Route path={ROUTES.ACCOUNT_BILLING} element={<Account />} />
