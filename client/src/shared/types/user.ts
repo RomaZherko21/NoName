@@ -46,3 +46,10 @@ export enum ConnectionStatus {
   decline = 'decline',
   accept = 'accept',
 }
+
+export interface Entrances {
+  login_type: string
+  date: string
+  ip_address: string
+  client: string
+}

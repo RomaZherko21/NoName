@@ -5,15 +5,13 @@ import {
   Paper,
   Grid,
   Typography,
-  Divider,
   TextField,
   Button,
   Stack,
   TableContainer,
-  Input,
+  InputAdornment,
 } from '@mui/material'
-import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import InputAdornment from '@mui/material/InputAdornment'
+import { AiOutlineMail } from 'react-icons/ai'
 
 import { CommonTable, Pagination, Spinner } from 'shared/ui'
 
@@ -24,7 +22,7 @@ function Team() {
 
   const columns = useMemo(() => getColumns(), [])
   return (
-    <Paper elevation={1}>
+    <Paper elevation={16}>
       <Grid container sx={{ p: 3 }}>
         <Grid item xs={12} md={4} spacing={2}>
           <Typography variant="h6">{t('user:actions.inviteMembers')}</Typography>
@@ -44,7 +42,7 @@ function Team() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <MailOutlineIcon />
+                    <AiOutlineMail />
                   </InputAdornment>
                 ),
               }}

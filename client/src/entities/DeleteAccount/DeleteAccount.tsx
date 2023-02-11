@@ -6,21 +6,23 @@ import { useDialog } from 'shared/hooks'
 
 import ConfirmDialog from './ConfirmDialog'
 
-const DeleteAccount = () => {
+interface Props {
+  onDelete: () => void
+}
+
+const DeleteAccount = ({ onDelete }: Props) => {
   const { t } = useTranslation()
 
   const [showConfirmationModal] = useDialog(
     'notification:sure',
-    (onClose) => <ConfirmDialog onClose={onClose} />,
+    (onClose) => <ConfirmDialog onClose={onClose} onDelete={onDelete} />,
     true
   )
 
   return (
-    <Grid component={Paper} sx={{ p: 4, width: '100%', mt: 2 }} container>
+    <Grid component={Paper} sx={{ p: 3, width: '100%' }} container>
       <Grid item lg={4} md={6} xs={12}>
-        <Typography color="textPrimary" variant="h6">
-          {t('user:actions.deleteAccount')}
-        </Typography>
+        <Typography variant="h6">{t('user:actions.deleteAccount')}</Typography>
       </Grid>
       <Grid item lg={8} md={6} xs={12}>
         <Box
@@ -29,9 +31,7 @@ const DeleteAccount = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography color="textPrimary" variant="body1">
-            {t('sentences:deleteAccount')}
-          </Typography>
+          <Typography variant="body1">{t('sentences:deleteAccount')}</Typography>
           <Button
             onClick={showConfirmationModal}
             sx={{ mt: 3, width: 'fit-content' }}

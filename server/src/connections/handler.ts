@@ -7,8 +7,7 @@ import { ConnectionStatus, User } from 'shared/types'
 
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const { status, isReceived, isSent, name = '', surname = '' } = query
-    const authorization_id = res.locals.authorization_id
+    const { status, isReceived, isSent, name = '', surname = '', user_id } = query
 
     let connections: (User & { status: ConnectionStatus })[] = []
 
@@ -25,7 +24,7 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
         FROM user_connections 
         JOIN users ON (user_connections.sender_id = users.id)
 
-        WHERE user_connections.recipient_id=${authorization_id} 
+        WHERE user_connections.recipient_id=${user_id} 
         AND user_connections.status='${status}' 
         AND users.name LIKE '%${name}%'
         AND users.surname LIKE '%${surname}%'
@@ -51,7 +50,7 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
           FROM user_connections 
           JOIN users ON (user_connections.recipient_id = users.id)
 
-          WHERE user_connections.sender_id=${authorization_id} 
+          WHERE user_connections.sender_id=${user_id} 
           AND user_connections.status='${status}'
           AND users.name LIKE '%${name}%'
           AND users.surname LIKE '%${surname}%'

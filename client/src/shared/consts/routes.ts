@@ -5,13 +5,13 @@ export const ROUTES = {
   USERS_NEW: '/users/new',
   USERS_EDIT: '/users/:id/edit',
 
+  USERS_PROFILE: '/users/:id/profile',
+  USERS_CONNECTIONS: '/users/:id/connections',
+  USERS_POSTS: '/users/:id/posts',
+
   POSTS: '/posts',
   POST: '/posts/:id',
   POSTS_NEW: '/posts/new',
-
-  PROFILE: '/profile',
-  PROFILE_TIMELINE: '/profile/timeline',
-  PROFILE_CONNECTIONS: '/profile/connections',
 
   ACCOUNT: '/account',
   ACCOUNT_GENERAL: '/account/general',

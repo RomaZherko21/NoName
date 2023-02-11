@@ -9,6 +9,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined'
 
 import { useDialog } from 'shared/hooks'
 import { InformativeImage } from 'shared/ui'
@@ -40,6 +41,15 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
           size="small"
         >
           <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('page:userProfile') || 'User profile'} placement="top">
+        <IconButton
+          component={Link}
+          to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}
+          size="small"
+        >
+          <ArrowForwardOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
       <Tooltip title={t('actions.delete') || 'delete'} placement="top">

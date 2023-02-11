@@ -35,6 +35,6 @@ export const config = [
   {
     icon: <IoNewspaperOutline />,
     title: 'page:smth',
-    to: ROUTES.PROFILE,
+    to: ROUTES.HOME,
   },
 ]

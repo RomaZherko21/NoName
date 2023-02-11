@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
-import { Connection, ConnectionStatus } from 'shared/types'
+import { Connection, ConnectionStatus, Gender, Roles, User } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
@@ -14,6 +14,20 @@ export enum CONNECTION_OPTIONS {
 }
 
 class ProfileModel {
+  id: number = 0
+  name: string = ''
+  surname: string = ''
+  middle_name: string = ''
+  password?: string = ''
+  confirmPassword?: string = ''
+
+  email: string = ''
+  role: Roles = Roles.user
+  date_of_birth?: string = ''
+  tel_number?: string = ''
+  gender?: Gender = Gender.man
+  avatar?: string = ''
+
   connections: Connection[] = []
   posts: Post[] = []
 
@@ -51,6 +65,22 @@ class ProfileModel {
     }
   }
 
+  async fetchUser(id: number) {
+    try {
+      this.loading.begin()
+
+      const data = await API.users.getById(id)
+
+      this.id = id
+
+      this.fromJSON(data)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
+
   async fetchConnections({
     isSent,
     isReceived,
@@ -71,6 +101,7 @@ class ProfileModel {
         status: status,
         isReceived: isReceived,
         isSent: isSent,
+        user_id: this.id,
       })
 
       this.connections = data
@@ -94,7 +125,7 @@ class ProfileModel {
       }
 
       const data = await API.posts.list({
-        searchParams,
+        searchParams: { ...searchParams, user_id: String(this.id) },
       })
 
       this.posts = data.posts
@@ -133,6 +164,32 @@ class ProfileModel {
     } catch (err: any) {
       toast.error(err)
     }
+  }
+
+  async removeById() {
+    try {
+      this.loading.begin()
+
+      await API.users.remove(this.id)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
+
+  private fromJSON(user: User) {
+    this.name = user.name
+    this.surname = user.surname
+    this.middle_name = user.middle_name
+    this.email = user.email
+    this.password = user.password
+    this.confirmPassword = user.confirmPassword
+    this.role = user.role
+    this.date_of_birth = user.date_of_birth
+    this.tel_number = user.tel_number
+    this.gender = user.gender
+    this.avatar = user.avatar
   }
 }
 

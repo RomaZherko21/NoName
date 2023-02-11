@@ -1,2 +1,3 @@
 export { Connections } from './Connections'
-export { Timeline } from './Timeline'
+export { Posts } from './Posts'
+export { UserInfo } from './UserInfo'
