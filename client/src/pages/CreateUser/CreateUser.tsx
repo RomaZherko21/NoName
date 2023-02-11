@@ -83,9 +83,9 @@ function CreateUser() {
               role: values.role,
               gender: values.gender,
               date_of_birth: values.date_of_birth || '',
+              avatar: values.avatar || '',
               password: values.password,
               confirmPassword: values.confirmPassword,
-              avatar: values.avatar,
             },
             () => {
               navigate(ROUTES.USERS)

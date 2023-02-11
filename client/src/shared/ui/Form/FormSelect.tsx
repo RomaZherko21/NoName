@@ -12,7 +12,7 @@ interface Props {
 const FormSelect = ({ field, label, options }: Props) => {
   const { t } = useTranslation()
 
-  const { touched, values, errors, setFieldValue } = useFormikContext<any>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   return (
     <FormControl fullWidth error={touched[field] && Boolean(errors[field])}>

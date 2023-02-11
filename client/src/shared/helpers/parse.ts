@@ -18,10 +18,10 @@ export const getSplitName = (full_name: string, user?: User) => {
   return { name: firstName, middle_name: middleName, surname: lastName }
 }
 
-export const getQueryParams = (obj: any): string => {
-  let result: any = {}
+export const getQueryParams = (obj: { [key: string]: any }): string => {
+  let result: { [key: string]: any } = {}
 
-  Object.entries(obj).forEach(([key, value]: any) => {
+  Object.entries(obj).forEach(([key, value]) => {
     if (value || value > 0) {
       result[key] = value
     }

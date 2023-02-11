@@ -79,7 +79,7 @@ function PostContent() {
 
         <PopupMenu
           id={PostModel.id}
-          ActionButton={(btnProps: any) => (
+          ActionButton={(btnProps) => (
             <Tooltip title={t('actions.share')} placement="bottom">
               <IconButton
                 {...btnProps}

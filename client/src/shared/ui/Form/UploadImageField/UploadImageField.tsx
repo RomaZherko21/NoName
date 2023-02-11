@@ -18,7 +18,7 @@ interface Props {
 function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
   const { t } = useTranslation()
   const inputRef = useRef<any>()
-  const { touched, values, errors, setFieldValue } = useFormikContext<any>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   const hasError = touched[field] && errors[field]
 

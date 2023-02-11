@@ -14,7 +14,7 @@ function PostCover({ field }: Props) {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<HTMLInputElement>(null)
 
-  const { values, touched, errors, setFieldValue } = useFormikContext<any>()
+  const { values, touched, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   const hasError = touched[field] && errors[field]
 
