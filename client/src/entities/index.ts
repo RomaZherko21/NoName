@@ -1,3 +1,4 @@
 export { PostCard, PostCardSceleton } from './PostCard'
-export { UserBasicDetails } from './UserBasicDetails'
+export { UserBasicInfo } from './UserBasicInfo'
 export { DeleteAccount } from './DeleteAccount'
+export { UserCreditCardInfo } from './UserCreditCardInfo'

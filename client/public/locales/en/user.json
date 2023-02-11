@@ -51,6 +51,7 @@
   "client": "Client",
   "payment": "Payment",
   "userPosts": "Your posts",
+  "userId": "user_id",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"

@@ -17,7 +17,7 @@ interface Props {
   user: User
 }
 
-function Payment({ user }: Props) {
+function UserCreditCardInfo({ user }: Props) {
   const { t } = useTranslation()
 
   return (
@@ -74,4 +74,4 @@ function Payment({ user }: Props) {
   )
 }
 
-export default observer(Payment)
+export default observer(UserCreditCardInfo)
