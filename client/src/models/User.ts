@@ -21,6 +21,17 @@ class UserModel {
   email: string = ''
   avatar: FileModel
   role: Roles = Roles.user
+  job_title: string = ''
+
+  native_country: string = ''
+  native_city: string = ''
+  residence_country: string = ''
+  residence_city: string = ''
+
+  card_number: string = ''
+  name_on_card: string = ''
+  valid_thru: string = ''
+  cvv: string = ''
 
   constructor(rootStore: typeof RootStore) {
     makeAutoObservable(this)
@@ -98,12 +109,24 @@ class UserModel {
     this.name = user.name
     this.surname = user.surname
     this.middle_name = user.middle_name
+
     this.date_of_birth = user.date_of_birth || ''
     this.tel_number = user.tel_number || ''
     this.gender = user.gender || Gender.man
     this.email = user.email
     this.role = user.role
     this.avatar.url = user.avatar || ''
+    this.job_title = user.job_title = ''
+
+    this.native_country = user.native_country || ''
+    this.native_city = user.native_city || ''
+    this.residence_country = user.residence_country || ''
+    this.residence_city = user.residence_city || ''
+
+    this.card_number = user.card_number || ''
+    this.name_on_card = user.name_on_card || ''
+    this.valid_thru = user.valid_thru || ''
+    this.cvv = user.cvv || ''
   }
 }
 

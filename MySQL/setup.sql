@@ -1,35 +1,72 @@
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
+
   `name` varchar(255),
   `surname` varchar(255),
   `middle_name` varchar(255),
-  `gender` ENUM('man', 'woman'),
-  `date_of_birth` DATE,
+
   `email` varchar(255) NOT NULL UNIQUE,
   `tel_number` varchar(255) UNIQUE,
-  `password` varchar(255) NOT NULL,
+  `job_title` varchar(255),
+  `gender` ENUM('man', 'woman'),
+  `date_of_birth` DATE,
   `role` ENUM('admin', 'user') NOT NULL,
   `avatar` varchar(255),
+  `profile_background` varchar(255),
+
+  `native_country` varchar(255),
+  `native_city` varchar(255),
+  `residence_country` varchar(255),
+  `residence_city` varchar(255),
+
+  `card_number` varchar(255),
+  `name_on_card` varchar(255),
+  `valid_thru` varchar(255),
+  `cvv` varchar(255),
+
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `users` (name, surname,middle_name,email,gender,date_of_birth, tel_number, password, role, avatar) 
+INSERT INTO `users` (
+name, 
+surname,
+middle_name,
+job_title,
+
+native_country, 
+native_city, 
+residence_country, 
+residence_city, 
+
+card_number,
+name_on_card,
+valid_thru,
+cvv,
+
+email,
+gender,
+date_of_birth, 
+tel_number, 
+password, 
+role, 
+avatar) 
 VALUES
-  ('Tamaz','Gela','Gela','admin@gmail.com','man','1995-04-21','+375257096714', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
-  ('Adam','Keizer','David','user@gmail.com','man','1995-12-01','+375257096717', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
-  ('Alexa','Richardson','William','lexa@gmail.com','woman','1991-08-13','+375257096718', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
-  ('Cao','Yu','Jr.','chao@gmail.com','man','1956-03-13','+375257096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
-  ('Mila','Kunis','Jr.','	mila@kunis.com','man','1966-03-13','+375258096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
-  ('George','Clooney','Jr.','marlon@brando.com','man','1926-03-13','+375259096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
-  ('Ryan','Gossling','Jr.','jack@nicholson','man','1936-03-13','+375251096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
-  ('Badri','Gabriel','Jr.','humphrey@bogart.com','man','1936-03-13','+375252096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
-  ('Revaz','Imeda','Jr.', 'spencer@tracy','man','1946-03-13','+375253096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
-  ('Grigol','Tornike','Jr.','marlo2n@brando.com','man','1966-03-13','+375254096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
-  ('Temur','Lidia','Jr.','lidia@brando.com','man','1976-03-13','+375255096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
-  ('Tedore','Merab','Jr.','Merab@gmail.com','man','1976-03-13','+375255196719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
-  ('Stepane','Daviti','Jr.','Daviti@gmail.com','man','2001-04-13','+375255296719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
-  ('Keto','Liana','Jr.','Liana@gmail.com','woman','2005-05-13','+375255396719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
-  ('Zurab','Tamar','Jr.','Tamar@gmail.com','man','2003-06-13','+375255496719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
+  ('Tamaz','Gela','Gela','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','admin@gmail.com','man','1995-04-21','+375257096714', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
+  ('Adam','Keizer','David','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','user@gmail.com','man','1995-12-01','+375257096717', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
+  ('Alexa','Richardson','William','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lexa@gmail.com','woman','1991-08-13','+375257096718', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
+  ('Cao','Yu','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','chao@gmail.com','man','1956-03-13','+375257096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
+  ('Mila','Kunis','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','	mila@kunis.com','man','1966-03-13','+375258096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
+  ('George','Clooney','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlon@brando.com','man','1926-03-13','+375259096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
+  ('Ryan','Gossling','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','jack@nicholson','man','1936-03-13','+375251096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
+  ('Badri','Gabriel','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','humphrey@bogart.com','man','1936-03-13','+375252096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
+  ('Revaz','Imeda','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575', 'spencer@tracy','man','1946-03-13','+375253096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
+  ('Grigol','Tornike','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlo2n@brando.com','man','1966-03-13','+375254096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
+  ('Temur','Lidia','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lidia@brando.com','man','1976-03-13','+375255096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
+  ('Tedore','Merab','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Merab@gmail.com','man','1976-03-13','+375255196719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
+  ('Stepane','Daviti','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Daviti@gmail.com','man','2001-04-13','+375255296719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
+  ('Keto','Liana','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Liana@gmail.com','woman','2005-05-13','+375255396719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
+  ('Zurab','Tamar','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Tamar@gmail.com','man','2003-06-13','+375255496719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
 
 CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,

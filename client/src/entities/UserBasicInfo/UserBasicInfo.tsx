@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,7 +13,8 @@ import {
 } from '@mui/material'
 
 import { User } from 'shared/types'
-import { getFullName } from 'shared/helpers'
+
+import { getListConfig } from './getListConfig'
 
 interface Props {
   user: User
@@ -20,6 +22,8 @@ interface Props {
 
 function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
+
+  const listConfig = useMemo(() => getListConfig(user), [user])
 
   return (
     <Paper elevation={1} sx={{ height: 'fit-content' }}>
@@ -29,25 +33,14 @@ function UserBasicDetails({ user }: Props) {
         sx={{ pb: 0 }}
       />
       <List sx={{ p: 0 }}>
-        <ListItem>
-          <ListItemText
-            primary={t('user:fullName')}
-            secondary={getFullName(user.name, user.surname, user.middle_name)}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText primary={t('user:email')} secondary={user.email} />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText primary={t('user:telephoneNumber')} secondary={user.tel_number} />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText primary={t('user:country')} secondary="USA" />
-        </ListItem>
-        <Divider />
+        {listConfig.map(({ title, text }) => (
+          <>
+            <ListItem>
+              <ListItemText primary={t(title)} secondary={text} />
+            </ListItem>
+            <Divider />
+          </>
+        ))}
       </List>
       <CardActions>
         <Button size="small" sx={{ color: ({ palette }) => palette.text.primary }}>
