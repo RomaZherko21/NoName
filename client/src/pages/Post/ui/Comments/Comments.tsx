@@ -42,7 +42,7 @@ function Comments({ comments = [] }: Props) {
 
       <LeaveComment
         inputValue={PostModel.commentInputValue}
-        onInputChange={(e: any) => {
+        onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           PostModel.commentInputValue = e.target.value
         }}
         onSend={onSendComment}

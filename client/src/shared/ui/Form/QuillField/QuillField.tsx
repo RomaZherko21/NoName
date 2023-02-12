@@ -11,7 +11,7 @@ interface Props {
 }
 
 function QuillField({ field }: Props) {
-  const { touched, values, errors, setFieldValue } = useFormikContext<any>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   return (
     <>

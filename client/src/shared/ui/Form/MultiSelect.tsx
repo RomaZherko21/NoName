@@ -27,7 +27,7 @@ interface Props {
 const MultiSelectField = ({ field, label, options }: Props) => {
   const { t } = useTranslation()
 
-  const { touched, values, errors, setFieldValue } = useFormikContext<any>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     setFieldValue(field, event.target.value)

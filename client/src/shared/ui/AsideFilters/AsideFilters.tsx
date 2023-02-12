@@ -78,7 +78,7 @@ const AsideFilters = ({
                 <item.Control
                   placeholder={item.placeholder}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: any) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
@@ -91,7 +91,7 @@ const AsideFilters = ({
                   label={item.placeholder}
                   options={item.options || {}}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: any) =>
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
@@ -115,7 +115,7 @@ const AsideFilters = ({
                 <item.Control
                   label={item.placeholder}
                   checked={searchParams.get(item.key) === 'true' || false}
-                  onChange={(e: any) =>
+                  onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.checked)
                       return searchParams

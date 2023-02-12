@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 interface Props {
   label: string
   value: string
-  onChange: (e: any) => void
+  onChange: (e: number | null) => void
 }
 
 function DatePicker(props: Props) {

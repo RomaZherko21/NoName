@@ -18,9 +18,11 @@ export const get = (id: number) => fetch.get<Post & { user: User }>(`${ENDPOINT_
 export const create = async (post: any) => {
   const formData = new FormData()
 
-  for (const key in post) {
-    formData.append(key, post[key])
-  }
+  Object.entries(post).forEach(([key, value]: any) => {
+    if (value) {
+      formData.append(key, value)
+    }
+  })
 
   return fetch.post(`${ENDPOINT_BASE}`, formData)
 }

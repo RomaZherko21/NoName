@@ -25,7 +25,7 @@ const Posts = () => {
         {user.isAuthorizedUser(ProfileModel.id) && (
           <LeaveComment
             inputValue=""
-            onInputChange={(e: any) => {}}
+            onInputChange={() => {}}
             onSend={() => {}}
             avatarUrl={`${API_USER_AVATAR_URL}/${ProfileModel.avatar}`}
             label="user:whatsOnYourMind"

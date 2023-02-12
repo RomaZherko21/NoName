@@ -11,7 +11,7 @@ interface Props {
     to?: string
     onClick?: () => void
   }[]
-  onMenuClose: (event: any) => void
+  onMenuClose: (e: any) => void
 }
 
 function TabContent({ onMenuClose, config }: Props) {
@@ -19,9 +19,9 @@ function TabContent({ onMenuClose, config }: Props) {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const onChangePage = (route: string, event: any) => {
+  const onChangePage = (route: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     navigate(route)
-    onMenuClose(event)
+    onMenuClose(e)
   }
 
   return (

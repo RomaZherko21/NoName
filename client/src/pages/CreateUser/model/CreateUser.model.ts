@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
 import { API } from 'services'
-import { Gender, Roles } from 'shared/types'
+import { UserBasic, UserMeta, UserPassword } from 'shared/types'
 import LoadingModel from 'models/Loading'
 
 class CreateUserModel {
@@ -14,22 +14,7 @@ class CreateUserModel {
     this.loading = new LoadingModel()
   }
 
-  async create(
-    user: {
-      name: string
-      middle_name: string
-      surname: string
-      email: string
-      tel_number: string
-      role: Roles
-      gender: Gender
-      date_of_birth: string
-      password: string
-      confirmPassword: string
-      avatar: any
-    },
-    onSuccess: () => void
-  ) {
+  async create(user: UserBasic & UserMeta & UserPassword, onSuccess: () => void) {
     try {
       this.loading.begin()
 

@@ -15,7 +15,7 @@ interface Props {
 const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
   const { t } = useTranslation()
 
-  const { touched, values, errors, handleChange } = useFormikContext<any>()
+  const { touched, values, errors, handleChange } = useFormikContext<{ [key: string]: any }>()
 
   return (
     <TextField

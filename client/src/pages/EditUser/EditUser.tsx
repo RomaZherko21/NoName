@@ -120,7 +120,7 @@ function EditUser() {
                 <form onSubmit={handleSubmit} className={s.centered}>
                   <Grid container spacing={3}>
                     <Grid item xs={12}>
-                      <Typography variant="h6">{t('user:actions.editUser')}</Typography>
+                      <Typography variant="h6">{t('page:editUser')}</Typography>
                     </Grid>
                     <Grid item xs={6}>
                       <InputField field="full_name" label="user:fullName" />

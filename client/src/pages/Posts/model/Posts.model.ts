@@ -51,36 +51,6 @@ class PostsModel {
     }
   }
 
-  async create(post: { name: string; description: string; post: File | ''; user_id: number }) {
-    try {
-      this.loading.begin()
-
-      const created_at = Date.now()
-
-      await API.posts.create({ ...post, created_at })
-
-      this.fetch({})
-    } catch (err: any) {
-      toast.error(err)
-    } finally {
-      this.loading.reset()
-    }
-  }
-
-  async remove(id: number) {
-    try {
-      this.loading.begin()
-
-      await API.posts.remove(id)
-
-      this.fetch({})
-    } catch (err: any) {
-      toast.error(err)
-    } finally {
-      this.loading.reset()
-    }
-  }
-
   async toggleLike(id: number, searchParams?: SearchParams) {
     try {
       await API.posts.like(id)

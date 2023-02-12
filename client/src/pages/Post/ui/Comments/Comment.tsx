@@ -47,7 +47,7 @@ function Comment({ comment, isOwner }: Props) {
             </Typography>
             {isOwner && (
               <PopupMenu
-                ActionButton={(btnProps: any) => (
+                ActionButton={(btnProps) => (
                   <IconButton {...btnProps} aria-label="settings" sx={{ p: 0.25, fontSize: 18 }}>
                     <FiMoreVertical />
                   </IconButton>

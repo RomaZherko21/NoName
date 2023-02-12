@@ -4,15 +4,15 @@ import { Popover as MuiPopover } from '@mui/material'
 
 interface Props {
   children: JSX.Element
-  activateElement: (open: any, handleOpen: (event: any) => void) => JSX.Element
+  activateElement: (open: any, handleOpen: (e: any) => void) => JSX.Element
   selfClosed?: boolean
 }
 
 function Popover({ children, activateElement, selfClosed = false }: Props) {
   const [open, setOpen] = useState(null)
 
-  const handleOpen = (event: any) => {
-    setOpen(event.currentTarget)
+  const handleOpen = (e: any) => {
+    setOpen(e.currentTarget)
   }
 
   const handleClose = () => {

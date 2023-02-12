@@ -18,7 +18,7 @@ function FormDatePicker(props: Props) {
   const { label, field, dateFormat = DEFAULT_DATE_FORMAT } = props
   const { t } = useTranslation()
 
-  const { touched, values, errors, setFieldValue } = useFormikContext<any>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   const hasError = touched[field] && Boolean(errors[field])
 

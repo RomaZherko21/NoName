@@ -14,12 +14,12 @@ function PostCover({ field }: Props) {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<HTMLInputElement>(null)
 
-  const { values, touched, errors, setFieldValue } = useFormikContext<any>()
+  const { values, touched, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
 
   const hasError = touched[field] && errors[field]
 
-  function handleUploadFile(event: any) {
-    setFieldValue(field, event.target.files[0])
+  function handleUploadFile(e: React.ChangeEvent<HTMLInputElement>) {
+    setFieldValue(field, e.target.files?.[0])
   }
 
   return (

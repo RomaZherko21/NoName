@@ -1,11 +1,15 @@
-export interface User {
+export type User = UserBasic & UserMeta & UserPassword & CreditCard
+
+export interface UserBasic {
   id?: number
   name: string
   surname: string
   middle_name: string
-
   email: string
   role: Roles
+}
+
+export interface UserMeta {
   date_of_birth?: string
   tel_number?: string
   gender?: Gender
@@ -17,14 +21,18 @@ export interface User {
   native_city?: string
   residence_country?: string
   residence_city?: string
+}
 
+export interface UserPassword {
+  password?: string
+  confirmPassword?: string
+}
+
+export interface CreditCard {
   card_number?: string
   name_on_card?: string
   valid_thru?: string
   cvv?: string
-
-  password?: string
-  confirmPassword?: string
 }
 
 export interface Connection {
@@ -32,6 +40,7 @@ export interface Connection {
   name: string
   middle_name: string
   surname: string
+
   avatar: string
   email: string
   tel_number: string
