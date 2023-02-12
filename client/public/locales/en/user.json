@@ -58,6 +58,11 @@
   "verifStatuses": "Verification statuses",
   "emailVerif": "Email verification",
   "phoneVerif": "Phone number verification",
+  "chats": "Chats",
+  "group": "Group",
+  "conversationHint": "Start meaningful conversations!",
+  "contactNameTip": "Tip. Enter a contact name",
+  "matchesDontFoundHint": "We couldn't find any matches for '{{value}}'. Try checking for typos or using complete words.",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -86,7 +91,8 @@
     "accept": "Accept",
     "writeYourComment": "Write your comment",
     "sendRequest": "Send request",
-    "declain": "Declain"
+    "declain": "Declain",
+    "searchContacts": "Search contacts"
   },
   "bankCard": {
     "number": "Card number",
