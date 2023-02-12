@@ -12,19 +12,8 @@ const Layout = () => {
 
       <NavBar />
 
-      <Container
-        component="main"
-        maxWidth="lg"
-        sx={{
-          flexGrow: 1,
-          py: 7,
-          px: 4,
-          width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` },
-        }}
-      >
-        <Toolbar />
-        <Outlet />
-      </Container>
+      <Toolbar />
+      <Outlet />
     </Box>
   )
 }

@@ -20,5 +20,7 @@ export const ROUTES = {
   ACCOUNT_NOTIFICATIONS: '/account/notifications',
   ACCOUNT_SECURITY: '/account/security',
 
+  CHAT: '/chat',
+
   NOT_FOUND: '/notFound',
 }
