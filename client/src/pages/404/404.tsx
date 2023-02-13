@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-import notFoundImg from 'assets/images/404.png'
+import notFoundImg from 'shared/assets/images/404.png'
 
 const NotFound = () => {
   const { t } = useTranslation()

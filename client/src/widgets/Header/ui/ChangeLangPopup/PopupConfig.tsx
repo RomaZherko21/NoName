@@ -1,6 +1,6 @@
-import ruIcon from 'assets/images/lang/ru.svg'
-import deIcon from 'assets/images/lang/de.svg'
-import ukIcon from 'assets/images/lang/uk.svg'
+import ruIcon from 'shared/assets/images/lang/ru.svg'
+import deIcon from 'shared/assets/images/lang/de.svg'
+import ukIcon from 'shared/assets/images/lang/uk.svg'
 
 export const getPopupConfig = (changeLang: (lang: string) => void) => [
   {
