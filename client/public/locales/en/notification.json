@@ -3,6 +3,7 @@
   "removeConfirm": "Are you want to delete?",
   "needHelp": "Need help?",
   "sure": "Are you sure?",
+  "verification": "Verification",
   "success": {
     "created": "Successfully created!",
     "updated": "Successfully updated!",

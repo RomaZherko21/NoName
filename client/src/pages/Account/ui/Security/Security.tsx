@@ -75,7 +75,7 @@ function Security() {
                   {t('user:textMessage')}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {t('user:updates.security.receiveCode')}
+                  {t('user:updates.security.receiveSmsCode')}
                 </Typography>
                 <Button
                   endIcon={<AiOutlineArrowRight />}

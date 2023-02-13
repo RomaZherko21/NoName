@@ -55,6 +55,9 @@
   "nativeLocation": "Native location",
   "residenceLocation": "Residence location",
   "jobTitle": "Job title",
+  "verifStatuses": "Verification statuses",
+  "emailVerif": "Email verification",
+  "phoneVerif": "Phone number verification",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -100,7 +103,10 @@
       "title": "Security updates",
       "text": "Important notifications about your account security.",
       "generateCode": "Use an authenticator app to generate one time security codes.",
-      "receiveCode": "Use your mobile phone to receive security codes via SMS."
+      "receiveSmsCode": "Use your mobile phone to receive security codes via SMS.",
+      "receiveEmailCode": "Use your email account to receive security code.",
+      "sentEmailCode": "We have sent a verification code. For any changes you need to confirm the email",
+      "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number"
     }
   }
 }

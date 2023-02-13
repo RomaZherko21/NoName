@@ -18,7 +18,7 @@ const generateInputValuesArr = (num: number) =>
     value: null,
   }))
 
-function VerificationCode({ length = 6, onSubmit, error = null, setError = () => {} }: Props) {
+function VerificationCode({ length = 6, onSubmit, error = null, setError = () => {}, sx }: Props) {
   const [inputValues, setInputValues] = useState(() => generateInputValuesArr(length))
 
   const changeInputValue = useCallback(
@@ -45,7 +45,7 @@ function VerificationCode({ length = 6, onSubmit, error = null, setError = () =>
   }, [error, setError])
 
   return (
-    <Box>
+    <Box sx={sx}>
       <Box sx={{ display: 'flex', gap: 1 }}>
         {inputValues.map((element) => (
           <TextField
@@ -58,7 +58,7 @@ function VerificationCode({ length = 6, onSubmit, error = null, setError = () =>
             onFocus={handleFocus}
             sx={{ width: 45 }}
             InputProps={{
-              sx: { fontSize: 24 },
+              sx: { fontSize: 18 },
             }}
           />
         ))}

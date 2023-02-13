@@ -1,13 +1,13 @@
+import { useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 
+import { PageHeader } from 'widgets'
 import { Tabs } from 'shared/ui'
 import { ROUTES } from 'shared/consts'
-import { PageHeader } from 'widgets'
 
-import { Billing, General, Notifications, Security, Team } from './ui'
-import { useLocation } from 'react-router-dom'
-import { useMemo } from 'react'
+import { Billing, General, Notifications, Security, Team, Verification } from './ui'
 
 function Account() {
   const { t } = useTranslation()
@@ -31,6 +31,7 @@ function Account() {
             Component: Notifications,
           },
           { label: 'page:security', to: ROUTES.ACCOUNT_SECURITY, Component: Security },
+          { label: 'page:verification', to: ROUTES.ACCOUNT_VERIFICATION, Component: Verification },
         ]}
       />
     </>
