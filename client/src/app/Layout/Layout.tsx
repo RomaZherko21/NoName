@@ -11,9 +11,10 @@ const Layout = () => {
       <Header />
 
       <NavBar />
-
-      <Toolbar />
-      <Outlet />
+      <Box sx={{ width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` } }}>
+        <Toolbar />
+        <Outlet />
+      </Box>
     </Box>
   )
 }

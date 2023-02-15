@@ -1,6 +1,7 @@
 import { HiOutlineUsers } from 'react-icons/hi'
 import { IoNewspaperOutline } from 'react-icons/io5'
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
+import { HiOutlineNewspaper } from 'react-icons/hi2'
 
 import { ROUTES } from 'shared/consts'
 
@@ -20,7 +21,7 @@ export const config = [
     ],
   },
   {
-    icon: <IoNewspaperOutline />,
+    icon: <HiOutlineNewspaper />,
     title: 'page:posts',
     collapsedItems: [
       {

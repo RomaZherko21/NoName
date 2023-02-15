@@ -1,0 +1,16 @@
+.img {
+  width: 120px;
+  height: 120px;
+}
+
+.chatBackground {
+  // background-image: url('src/assets/images/chat-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.userImg {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
