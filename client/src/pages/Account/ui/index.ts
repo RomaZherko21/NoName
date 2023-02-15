@@ -1,6 +1,6 @@
-export { ProfileForm } from './General/ProfileForm'
 export { General } from './General'
 export { Notifications } from './Notifications'
 export { Security } from './Security'
 export { Team } from './Team'
 export { Billing } from './Billing'
+export { Verification } from './Verification'

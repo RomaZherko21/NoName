@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom'
 
-import App from './app/App'
-import initTranslation from './i18n'
+import { App, initTranslation } from './app'
 
 async function init() {
   await initTranslation()

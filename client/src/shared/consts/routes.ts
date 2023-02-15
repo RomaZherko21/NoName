@@ -19,8 +19,10 @@ export const ROUTES = {
   ACCOUNT_TEAM: '/account/team',
   ACCOUNT_NOTIFICATIONS: '/account/notifications',
   ACCOUNT_SECURITY: '/account/security',
+  ACCOUNT_VERIFICATION: '/account/verification',
 
   CHAT: '/chat',
 
   NOT_FOUND: '/notFound',
+  HELP: '/help',
 }

@@ -43,6 +43,7 @@ const router = createBrowserRouter(
       <Route path={ROUTES.ACCOUNT_TEAM} element={<Account />} />
       <Route path={ROUTES.ACCOUNT_NOTIFICATIONS} element={<Account />} />
       <Route path={ROUTES.ACCOUNT_SECURITY} element={<Account />} />
+      <Route path={ROUTES.ACCOUNT_VERIFICATION} element={<Account />} />
 
       <Route path={ROUTES.CHAT} element={<Chat />} />
 
