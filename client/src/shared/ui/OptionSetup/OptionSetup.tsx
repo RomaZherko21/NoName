@@ -16,7 +16,7 @@ function OptionSetup({ title, subtitle, onClick, buttonText, disabled }: Props) 
   const { t } = useTranslation()
 
   return (
-    <Paper variant="outlined" sx={{ p: 4, borderRadius: 2 }}>
+    <Paper variant="outlined" sx={{ p: 4, borderRadius: 2, width: '100%' }}>
       <Typography
         variant="body2"
         color={true ? 'error' : 'success.main'}

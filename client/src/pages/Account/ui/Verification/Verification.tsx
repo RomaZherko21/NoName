@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Paper, Typography } from '@mui/material'
+import { Box, Card, Grid, Paper, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { OptionSetup } from 'shared/ui'
@@ -22,17 +22,9 @@ function Verification() {
 
   return (
     <>
-      <Grid
-        component={Paper}
-        elevation={16}
-        container
-        spacing={2}
-        sx={{ p: 2, borderRadius: 2, width: 'fit-content', m: '0 auto' }}
-      >
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <Typography variant="h6">{t('user:verifStatuses')}</Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
+      <Card elevation={16} sx={{ p: 4 }}>
+        <Typography variant="h6">{t('user:verifStatuses')}</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 3 }}>
           <OptionSetup
             title={t('user:emailVerif')}
             subtitle={t('user:updates.security.receiveEmailCode')}
@@ -45,9 +37,7 @@ function Verification() {
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
           />
-        </Grid>
 
-        <Grid item xs={12} md={6}>
           <OptionSetup
             title={t('user:phoneVerif')}
             subtitle={t('user:updates.security.receiveSmsCode')}
@@ -60,8 +50,8 @@ function Verification() {
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Card>
 
       <VerificationCodeModal
         open={isOpenModal}

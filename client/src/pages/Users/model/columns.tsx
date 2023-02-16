@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { generatePath, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
@@ -11,25 +11,21 @@ import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettin
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined'
 
-import { useDialog } from 'shared/hooks'
 import { InformativeImage } from 'shared/ui'
+import { ConfirmDialog } from 'entities'
 import { TableColumn, Roles, User, Gender } from 'shared/types'
 import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
 import UsersModel from './Users.model'
-import { DeleteUserDialog, ConnectionStatus } from '../ui'
+import { ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
 
-  const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
-  const [showConfirmationModal] = useDialog(
-    'notification:removeConfirm',
-    (onClose) => <DeleteUserDialog onSubmit={removeUser} onClose={onClose} />,
-    true
-  )
+  const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
 
   return (
     <>
@@ -53,10 +49,18 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
         </IconButton>
       </Tooltip>
       <Tooltip title={t('actions.delete') || 'delete'} placement="top">
-        <IconButton aria-label="delete" size="small" onClick={showConfirmationModal}>
+        <IconButton aria-label="delete" size="small" onClick={() => setIsOpenModal(true)}>
           <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
+
+      <ConfirmDialog
+        open={isOpenModal}
+        handleClose={() => {
+          setIsOpenModal(false)
+        }}
+        onDelete={removeUser}
+      />
     </>
   )
 })

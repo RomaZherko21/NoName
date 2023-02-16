@@ -13,7 +13,7 @@ function Security() {
   const columns = useMemo(() => getColumns(), [])
   return (
     <>
-      <Grid component={Paper} elevation={16} container sx={{ p: 4, mb: 4, borderRadius: '20px' }}>
+      <Grid component={Paper} elevation={16} container sx={{ p: 4, mb: 4, borderRadius: 2 }}>
         <Grid item xs={12} md={4}>
           <Typography variant="h6">{t('translation:actions.changePassword')}</Typography>
         </Grid>
