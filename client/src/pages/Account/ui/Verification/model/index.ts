@@ -1,1 +1,1 @@
-export { default as BillingModel } from './Billing.model'
+export { default as VerificationModel } from './Verification.model'

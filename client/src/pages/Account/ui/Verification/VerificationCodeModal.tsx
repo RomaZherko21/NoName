@@ -1,64 +1,103 @@
 import { Trans, useTranslation } from 'react-i18next'
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 
 import { ROUTES } from 'shared/consts'
-import { VerificationCode } from 'shared/ui'
+import { Modal, VerificationCode } from 'shared/ui'
+import { useNavigate } from 'react-router-dom'
 
 export enum SEND_TYPE {
   email = 'email',
-  number = 'number',
+  phone = 'phone',
 }
 
 interface Props {
+  open: boolean
+  handleClose: () => void
   sendTo: string
-  sendType: SEND_TYPE
-  onClose: () => void
+  subtitle: string
+  timeLeft: number
+  onSubmit: (code: string) => void
+  onSendCodeAgain: () => void
+  isTimerEnded: boolean
 }
 
-function VerificationCodeModal({ sendTo, sendType }: Props) {
+function VerificationCodeModal({
+  open,
+  handleClose,
+  sendTo,
+  subtitle,
+  timeLeft,
+  onSubmit,
+  onSendCodeAgain,
+  isTimerEnded,
+}: Props) {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
-    <Box
-      sx={{
-        px: 6,
-        py: 3,
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '80%',
-        m: '0 auto',
-      }}
+    <Modal
+      open={open}
+      handleClose={handleClose}
+      closable={false}
+      title={t('notification:verification')}
+      footer={
+        <Typography variant="subtitle2" color="text.secondary">
+          <Trans i18nKey="sentences:support">
+            <Typography
+              onClick={() => {
+                navigate(ROUTES.HELP)
+              }}
+              variant="subtitle2"
+              color="primary.main"
+              sx={{ display: 'inline', cursor: 'pointer' }}
+            >
+              Help
+            </Typography>
+          </Trans>
+        </Typography>
+      }
     >
-      <Typography variant="h5">{sendTo}</Typography>
-      <Typography sx={{ mt: 1 }} variant="subtitle2" color="text.secondary">
-        {sendType === SEND_TYPE.email
-          ? t('user:updates.security.sentEmailCode')
-          : t('user:updates.security.sentSmsCode')}
-      </Typography>
-      <VerificationCode
-        sx={{ mt: 4 }}
-        onSubmit={(value) => {
-          console.log(value)
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          p: 4,
         }}
-      />
-      <Typography sx={{ mt: 5 }} variant="subtitle2" color="text.secondary">
-        <Trans i18nKey="sentences:support">
-          <Typography
+      >
+        <Typography variant="h5">{sendTo}</Typography>
+        <Typography sx={{ mt: 1 }} variant="subtitle2" color="text.secondary">
+          {subtitle}
+        </Typography>
+        <VerificationCode
+          sx={{ mt: 4 }}
+          onSubmit={(value) => {
+            onSubmit(value)
+            handleClose()
+          }}
+        />
+
+        {isTimerEnded ? (
+          <Button
             onClick={() => {
-              window.location.href = ROUTES.HELP
+              onSendCodeAgain()
             }}
-            variant="subtitle2"
-            color="primary.main"
-            sx={{ display: 'inline', cursor: 'pointer' }}
+            sx={{
+              mt: 4,
+              width: 'fit-content',
+              color: ({ palette }) => palette.text.primary,
+            }}
+            size="small"
           >
-            Help
+            {t('actions.sendCodeAgain')}
+          </Button>
+        ) : (
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 6 }}>
+            {t('user:codeSecondsLeft', { timeLeft })}
           </Typography>
-        </Trans>
-      </Typography>
-    </Box>
+        )}
+      </Box>
+    </Modal>
   )
 }
 

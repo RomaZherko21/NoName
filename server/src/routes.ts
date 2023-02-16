@@ -1,7 +1,16 @@
 import express from 'express'
 
 import { signIn } from 'auth'
-import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'user'
+import {
+  removeUserSelf,
+  getUserSelf,
+  updateUserSelf,
+  uploadUserAvatar,
+  verifyUserEmailByCode,
+  sendEmailVerificationCode,
+  verifyUserPhoneByCode,
+  sendPhoneVerificationCode,
+} from 'user'
 import {
   createPost,
   createPostComment,
@@ -27,6 +36,12 @@ router.get(`${USER}`, getUserSelf)
 router.put(`${USER}`, updateUserSelf)
 router.delete(`${USER}`, removeUserSelf)
 router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+
+const VERIFICATION = '/verification'
+router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
+router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
+router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
+router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)
