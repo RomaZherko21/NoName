@@ -6,10 +6,10 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import ScheduleSendOutlinedIcon from '@mui/icons-material/ScheduleSendOutlined'
 
-import { User, ConnectionStatus as ConnectionStatuss } from 'shared/types'
+import { ConnectionStatus as TConnectionStatus } from 'shared/types'
 import { useRootStore } from 'stores'
 
-import { UsersModel } from '../../model'
+import { UsersModel, User } from '../../model'
 
 interface Props {
   user: User
@@ -38,7 +38,7 @@ function ConnectionStatus({ user: data }: Props) {
           {t('user:actions.sendRequest')}
         </Button>
       )
-    case ConnectionStatuss.accept:
+    case TConnectionStatus.accept:
       return (
         <Chip
           label={t('user:yourFriend')}
@@ -46,7 +46,7 @@ function ConnectionStatus({ user: data }: Props) {
           color="secondary"
         />
       )
-    case ConnectionStatuss.decline:
+    case TConnectionStatus.decline:
       return (
         <Chip
           label={t('user:userCanceledRequest')}
@@ -54,7 +54,7 @@ function ConnectionStatus({ user: data }: Props) {
           color="error"
         />
       )
-    case ConnectionStatuss.pending:
+    case TConnectionStatus.pending:
       return (
         <Chip
           label={t('user:requestPending')}

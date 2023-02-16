@@ -6,6 +6,7 @@ import { QueryTypes } from 'sequelize'
 import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
 import { User } from 'shared/types'
+import { prettifyUserData } from 'shared/helpers'
 
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
@@ -68,7 +69,7 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
       }
     )
 
-    res.status(200).json(result[0])
+    res.status(200).json(prettifyUserData(result[0]))
   } catch (err: any) {
     next(createError(500, err.message))
   }

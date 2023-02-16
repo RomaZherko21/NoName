@@ -1,7 +1,7 @@
 import { getFullName } from 'shared/helpers'
-import { User } from 'shared/types'
+import { UserBasic, UserMeta, UserPlace } from 'shared/types'
 
-export const getListConfig = (user: User) => [
+export const getListConfig = (user: UserBasic & UserMeta & UserPlace) => [
   { title: 'user:fullName', text: getFullName(user.name, user.surname, user.middle_name) },
   { title: 'user:email', text: user.email },
   { title: 'user:telephoneNumber', text: user.tel_number },

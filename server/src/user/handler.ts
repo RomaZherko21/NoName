@@ -4,14 +4,15 @@ import fs from 'fs'
 import path from 'path'
 
 import { UserModel, PostModel } from 'models'
+import { prettifyUserData } from 'shared/helpers'
 
 export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = await UserModel.findByPk(res.locals.authorization_id)
+    const data: any = await UserModel.findByPk(res.locals.authorization_id)
 
     if (!data) return next(createError(403))
 
-    return res.status(200).json(data)
+    return res.status(200).json(prettifyUserData(data))
   } catch (err: any) {
     next(createError(500, err.message))
   }
@@ -103,61 +104,5 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
     }
   } catch (err: any) {
     next(createError(500, err.message))
-  }
-}
-
-export async function sendEmailVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    // send code to email
-
-    res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
-  }
-}
-
-export async function verifyUserEmailByCode({ body }: Request, res: Response, next: NextFunction) {
-  try {
-    const { code } = body
-
-    if (code === '111111') {
-      res.status(204).send()
-    } else {
-      throw new Error('Wrong email verification code')
-    }
-  } catch (err: any) {
-    return next(createError(500, err.message))
-  }
-}
-
-export async function sendPhoneVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    // send code to phone number
-
-    res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
-  }
-}
-
-export async function verifyUserPhoneByCode({ body }: Request, res: Response, next: NextFunction) {
-  try {
-    const { code } = body
-
-    if (code === '111111') {
-      res.status(204).send()
-    } else {
-      throw new Error('Wrong phone verification code')
-    }
-  } catch (err: any) {
-    return next(createError(500, err.message))
   }
 }

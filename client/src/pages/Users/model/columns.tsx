@@ -13,11 +13,11 @@ import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined'
 
 import { InformativeImage } from 'shared/ui'
 import { ConfirmDialog } from 'entities'
-import { TableColumn, Roles, User, Gender } from 'shared/types'
+import { TableColumn, Roles, Gender } from 'shared/types'
 import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
 
-import UsersModel from './Users.model'
+import UsersModel, { User } from './Users.model'
 import { ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {

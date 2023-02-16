@@ -6,7 +6,7 @@ import fetch from './fetch'
 const ENDPOINT_BASE = '/users'
 
 export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
-  fetch.get<{ users: User[]; count: number }>(
+  fetch.get<{ users: (UserBasic & UserMeta)[]; count: number }>(
     `${ENDPOINT_BASE}${getQueryParams({
       ...searchParams,
       offset: Number(searchParams?.limit) * Number(searchParams?.page),
@@ -25,6 +25,7 @@ export const create = async (user: UserBasic & UserMeta & UserPassword) => {
   return fetch.post(`${ENDPOINT_BASE}`, formData)
 }
 
-export const update = (user: User, id: number) => fetch.put(`${ENDPOINT_BASE}/${id}`, user)
+export const update = (user: UserBasic & UserMeta & UserPassword, id: number) =>
+  fetch.put(`${ENDPOINT_BASE}/${id}`, user)
 
 export const remove = (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)

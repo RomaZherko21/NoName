@@ -1,16 +1,7 @@
 import express from 'express'
 
 import { signIn } from 'auth'
-import {
-  removeUserSelf,
-  getUserSelf,
-  updateUserSelf,
-  uploadUserAvatar,
-  verifyUserEmailByCode,
-  sendEmailVerificationCode,
-  verifyUserPhoneByCode,
-  sendPhoneVerificationCode,
-} from 'user'
+import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'user'
 import {
   createPost,
   createPostComment,
@@ -24,6 +15,12 @@ import {
 import { getGenres } from 'genres'
 import { createUser, getUser, getUsers, updateUserById } from 'users'
 import { deleteConnectionById, getConnections, updateConnectionStatusById } from 'connections'
+import {
+  sendEmailVerificationCode,
+  sendPhoneVerificationCode,
+  verifyUserEmailByCode,
+  verifyUserPhoneByCode,
+} from 'verification'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
