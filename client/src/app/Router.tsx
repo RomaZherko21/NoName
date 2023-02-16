@@ -17,6 +17,7 @@ import {
   CreatePost,
   EditUser,
   CreateUser,
+  FileManager,
   Chat,
 } from 'pages'
 import { ROUTES } from 'shared/consts'
@@ -46,6 +47,8 @@ const router = createBrowserRouter(
       <Route path={ROUTES.ACCOUNT_VERIFICATION} element={<Account />} />
 
       <Route path={ROUTES.CHAT} element={<Chat />} />
+
+      <Route path={ROUTES.FILE_MANAGER} element={<FileManager />} />
 
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} />
