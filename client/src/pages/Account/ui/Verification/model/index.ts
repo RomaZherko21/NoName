@@ -1,1 +1,1 @@
-export { default as VerificationModel } from './Verification.model'
+export { default as VerificationModel, SEND_TYPE } from './Verification.model'

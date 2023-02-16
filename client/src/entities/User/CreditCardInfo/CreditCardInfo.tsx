@@ -18,7 +18,7 @@ import { getListConfig } from './getListConfig'
 
 interface Props {}
 
-function UserCreditCardInfo(props: any) {
+function CreditCardInfo(props: any) {
   const { t } = useTranslation()
 
   const listConfig = useMemo(() => getListConfig(props), [props])
@@ -64,4 +64,4 @@ function UserCreditCardInfo(props: any) {
   )
 }
 
-export default observer(UserCreditCardInfo)
+export default observer(CreditCardInfo)

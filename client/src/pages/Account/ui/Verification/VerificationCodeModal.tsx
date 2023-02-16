@@ -1,35 +1,30 @@
+import { useNavigate } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { Box, Button, Typography } from '@mui/material'
 
 import { ROUTES } from 'shared/consts'
 import { Modal, VerificationCode } from 'shared/ui'
-import { useNavigate } from 'react-router-dom'
-
-export enum SEND_TYPE {
-  email = 'email',
-  phone = 'phone',
-}
 
 interface Props {
   open: boolean
   handleClose: () => void
-  sendTo: string
+  title: string
   subtitle: string
   timeLeft: number
+  isTimerEnded: boolean
   onSubmit: (code: string) => void
   onSendCodeAgain: () => void
-  isTimerEnded: boolean
 }
 
 function VerificationCodeModal({
   open,
   handleClose,
-  sendTo,
+  title,
   subtitle,
   timeLeft,
+  isTimerEnded,
   onSubmit,
   onSendCodeAgain,
-  isTimerEnded,
 }: Props) {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -65,7 +60,7 @@ function VerificationCodeModal({
           p: 4,
         }}
       >
-        <Typography variant="h5">{sendTo}</Typography>
+        <Typography variant="h5">{title}</Typography>
         <Typography sx={{ mt: 1 }} variant="subtitle2" color="text.secondary">
           {subtitle}
         </Typography>

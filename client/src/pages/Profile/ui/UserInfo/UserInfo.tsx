@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { Grid } from '@mui/material'
 
 import { useRootStore } from 'stores'
-import { DeleteAccount, UserBasicInfo, UserCreditCardInfo } from 'entities'
+import { DeleteAccount, BasicInfo, CreditCardInfo } from 'entities'
 import { Spinner } from 'shared/ui'
 
 import { ProfileModel } from '../../model'
@@ -17,10 +17,10 @@ function UserInfo() {
       ) : (
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <UserBasicInfo user={ProfileModel} />
+            <BasicInfo user={ProfileModel} />
           </Grid>
           <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <UserCreditCardInfo
+            <CreditCardInfo
               cardNumber={ProfileModel.card_number}
               nameOnCard={ProfileModel.name_on_card}
               validThru={ProfileModel.valid_thru}
