@@ -7,7 +7,7 @@ import { Button, Container, Paper, Stack, Typography, Box, Alert } from '@mui/ma
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
-import logo from 'assets/images/logo/white-transparent-logo.svg'
+import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import s from './Styles.module.scss'
 

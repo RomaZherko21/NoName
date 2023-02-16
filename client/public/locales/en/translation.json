@@ -40,6 +40,7 @@
     "changePassword": "Change password",
     "forgotPassword": "Forgot password?",
     "off": "Off",
+    "on": "On",
     "setUp": "Set Up",
     "post": "Post",
     "sendMessage": "Send message",
@@ -57,7 +58,8 @@
     "changeLanguage": "Change language",
     "change": "Change",
     "select": "Select",
-    "sortBy": "Sort by"
+    "sortBy": "Sort by",
+    "sendCode": "Send code"
   },
   "fields": {
     "name": "Name",

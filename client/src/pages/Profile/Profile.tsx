@@ -12,7 +12,7 @@ import { useRootStore } from 'stores'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 import { getInitials } from 'shared/helpers'
 import { InformativeImage, Tabs } from 'shared/ui'
-import ProfileCover from 'assets/images/cover.jpg'
+import ProfileCover from 'shared/assets/images/cover.jpg'
 
 import s from './Styles.module.scss'
 import { ProfileModel } from './model'

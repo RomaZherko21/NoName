@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 
 import { PopupMenu } from 'shared/ui'
-import flagIcon from 'assets/images/lang/uk.svg'
+import flagIcon from 'shared/assets/images/lang/uk.svg'
 
 import { getPopupConfig } from './PopupConfig'
 import i18next from 'i18next'

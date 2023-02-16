@@ -1,7 +1,7 @@
 import { useModal } from 'react-modal-hook'
 import { useTranslation } from 'react-i18next'
 import { Dialog, DialogTitle, IconButton, Typography } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
+import { IoCloseSharp } from 'react-icons/io5'
 
 export const useDialog = (
   title: string,
@@ -17,22 +17,25 @@ export const useDialog = (
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          backgroundColor: 'primary.main',
+          backgroundColor: 'background.rare',
           position: 'relative',
-          p: 2,
+          p: 1,
+          gap: 5,
         }}
       >
-        <Typography variant="h6" color="primary.contrastText">
+        <Typography variant="body2" color="text.primary">
           {t(title)}
         </Typography>
         <IconButton
           aria-label="close"
           onClick={hideModal}
           sx={{
-            color: 'primary.contrastText',
+            color: 'text.secondary',
+            fontSize: '16px',
+            p: 0.25,
           }}
         >
-          <CloseIcon />
+          <IoCloseSharp />
         </IconButton>
       </DialogTitle>
       {body(hideModal)}
