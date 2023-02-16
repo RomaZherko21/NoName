@@ -7,7 +7,11 @@ import { DRAWER_WIDTH } from 'shared/consts'
 
 const Layout = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box
+      sx={{
+        display: 'flex',
+      }}
+    >
       <Header />
 
       <NavBar />

@@ -1,7 +1,9 @@
 import { makeAutoObservable } from 'mobx'
+import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
 import PaginationModel from 'models/Pagination'
+import { API } from 'services'
 
 class SecurityModel {
   entrances: any = [
@@ -27,6 +29,14 @@ class SecurityModel {
 
     this.loading = new LoadingModel()
     this.pagination = new PaginationModel()
+  }
+
+  async getQRCode() {
+    try {
+      await API.verification.sendPhoneVerificationCode()
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 }
 
