@@ -18,6 +18,7 @@
   "chat": "Chat",
   "404": "404 | Page not found",
   "verification": "Verification",
+  "fileManager": "File Manager",
   "sub": {
     "list": "List",
     "create": "Create",

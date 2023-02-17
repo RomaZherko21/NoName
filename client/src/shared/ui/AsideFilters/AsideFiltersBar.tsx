@@ -7,7 +7,8 @@ import { BsFilter } from 'react-icons/bs'
 import { Select } from 'shared/ui'
 
 interface Props {
-  handleOpenFilter: () => void
+  handleOpenFilter?: () => void
+  isShowFilter?: boolean
 
   inputValue: string
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -18,6 +19,7 @@ interface Props {
 
   sortOptions: { [key: string]: string }
   isTablePart?: boolean
+  children?: JSX.Element
 }
 
 function AsideFiltersBar({
@@ -29,6 +31,8 @@ function AsideFiltersBar({
   onSelectChange,
   sortOptions,
   isTablePart = false,
+  isShowFilter = true,
+  children,
 }: Props) {
   const { t } = useTranslation()
 
@@ -63,17 +67,20 @@ function AsideFiltersBar({
           onChange={onSelectChange}
           label="actions.sortBy"
           options={sortOptions}
-          sx={{ width: '160px' }}
+          sx={{ minWidth: '160px' }}
         />
-        <Button
-          onClick={handleOpenFilter}
-          sx={{ px: 1 }}
-          size="small"
-          color="info"
-          endIcon={<BsFilter />}
-        >
-          {t('common.filters')}
-        </Button>
+        {isShowFilter && (
+          <Button
+            onClick={handleOpenFilter}
+            sx={{ px: 1 }}
+            size="small"
+            color="info"
+            endIcon={<BsFilter />}
+          >
+            {t('common.filters')}
+          </Button>
+        )}
+        {children}
       </Box>
     </Grid>
   )

@@ -1,7 +1,7 @@
 import { HiOutlineUsers } from 'react-icons/hi'
-import { IoNewspaperOutline } from 'react-icons/io5'
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
 import { HiOutlineNewspaper } from 'react-icons/hi2'
+import { AiOutlineFileJpg } from 'react-icons/ai'
 
 import { ROUTES } from 'shared/consts'
 
@@ -40,8 +40,8 @@ export const config = [
     to: ROUTES.CHAT,
   },
   {
-    icon: <IoNewspaperOutline />,
-    title: 'page:smth',
-    to: ROUTES.HOME,
+    icon: <AiOutlineFileJpg />,
+    title: 'page:fileManager',
+    to: ROUTES.FILE_MANAGER,
   },
 ]

@@ -11,3 +11,9 @@ export const sendPhoneVerificationCode = () => fetch.put(`${ENDPOINT_BASE}/phone
 
 export const verifyPhoneVerificationCode = (code: string) =>
   fetch.post(`${ENDPOINT_BASE}/phone`, { code })
+
+export const getQrCode = () =>
+  fetch.get<{
+    qrCodeUrl: string
+    secret: string
+  }>(`${ENDPOINT_BASE}/qr`)

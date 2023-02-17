@@ -1,0 +1,13 @@
+{
+  "createdAt": "Created at {{date}}",
+  "fileItems": "{{count}} items",
+  "actions": {
+    "upgradePlan": "Upgrade Plan"
+  },
+  "storage": {
+    "title": "Storage",
+    "subheader": "Upgrade before reaching it",
+    "limit": "You've almost reached your limit",
+    "availableStorage": "You have used {{percent}} of your available storage."
+  }
+}

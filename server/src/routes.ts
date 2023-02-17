@@ -20,6 +20,7 @@ import {
   updateConnectionStatusById,
 } from 'services/connections'
 import {
+  getQrCode,
   sendEmailVerificationCode,
   sendPhoneVerificationCode,
   verifyUserEmailByCode,
@@ -43,6 +44,7 @@ router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
 router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
 router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
 router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
+router.get(`${VERIFICATION}/qr`, getQrCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)
