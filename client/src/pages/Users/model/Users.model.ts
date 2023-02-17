@@ -1,5 +1,6 @@
-import { makeAutoObservable } from 'mobx'
+import { debounce } from '@mui/material'
 import { toast } from 'react-toastify'
+import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
 import {
@@ -11,7 +12,6 @@ import {
 } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { debounce } from '@mui/material'
 
 import { UserFilters } from './filters'
 
