@@ -4,14 +4,14 @@ import { debounce } from '@mui/material'
 
 import { API } from 'services'
 import LoadingModel from 'models/Loading'
-import { UserBasic, UserMeta } from 'shared/types'
+import { BasicUserInfo, MetaUserInfo } from 'shared/types'
 
 interface UserFilters {
   name?: string
 }
 
 class ChatModel {
-  users: (UserBasic & UserMeta)[] = []
+  users: (BasicUserInfo & MetaUserInfo)[] = []
 
   loading: LoadingModel
 

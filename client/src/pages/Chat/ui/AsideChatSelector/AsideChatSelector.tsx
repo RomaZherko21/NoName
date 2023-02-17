@@ -15,13 +15,13 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { FiSearch } from 'react-icons/fi'
 import { HiOutlineLightBulb } from 'react-icons/hi2'
 
-import { UserBasic, UserMeta } from 'shared/types'
+import { BasicUserInfo, MetaUserInfo } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
 interface Props {
   inputValue: string
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  contacts: (UserBasic & UserMeta)[] | []
+  contacts: (BasicUserInfo & MetaUserInfo)[] | []
   clearContacts: () => void
 }
 
