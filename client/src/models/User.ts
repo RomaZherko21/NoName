@@ -33,6 +33,13 @@ class UserModel {
   valid_thru: string = ''
   cvv: string = ''
 
+  is_email_verified: boolean = false
+  is_phone_verified: boolean = false
+
+  is_two_factor_auth_active: boolean = false
+  is_sms_alerts_active: boolean = false
+  is_email_alerts_active: boolean = false
+
   constructor(rootStore: typeof RootStore) {
     makeAutoObservable(this)
     this.rootStore = rootStore
@@ -127,6 +134,13 @@ class UserModel {
     this.name_on_card = user.credit_card.name_on_card || ''
     this.valid_thru = user.credit_card.valid_thru || ''
     this.cvv = user.credit_card.cvv || ''
+
+    this.is_email_verified = user.security.is_email_verified
+    this.is_phone_verified = user.security.is_phone_verified
+
+    this.is_two_factor_auth_active = user.security.is_two_factor_auth_active
+    this.is_sms_alerts_active = user.security.is_sms_alerts_active
+    this.is_email_alerts_active = user.security.is_email_alerts_active
   }
 }
 

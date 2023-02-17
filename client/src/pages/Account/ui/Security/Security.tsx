@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { Button, Grid, Paper, Stack, Typography, TableContainer, Box } from '@mui/material'
 
+import { useRootStore } from 'stores'
 import { CommonTable, Input, OptionSetup, Pagination, Spinner } from 'shared/ui'
 import { useTimer } from 'shared/hooks'
 
@@ -9,6 +10,7 @@ import { getColumns, SecurityModel } from './model'
 
 function Security() {
   const { t } = useTranslation()
+  const { user } = useRootStore()
 
   const [isOpenModal, setIsOpenModal] = useState(false)
   const { timeLeft, setTimeLeft, isTimerEnded } = useTimer()
@@ -54,6 +56,7 @@ function Security() {
             }}
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
+            isActive={user.is_two_factor_auth_active}
           />
 
           <OptionSetup
@@ -64,6 +67,7 @@ function Security() {
             }}
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
+            isActive={user.is_sms_alerts_active}
           />
         </Box>
       </Paper>
