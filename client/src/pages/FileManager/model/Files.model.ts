@@ -1,16 +1,43 @@
 import { makeAutoObservable } from 'mobx'
-import { debounce } from '@mui/material'
 import { toast } from 'react-toastify'
+import { debounce } from '@mui/material'
 
-import { API } from 'services'
-import { QueryPaginationParams, Post, QuerySortParams } from 'shared/types'
+import { QueryPaginationParams, QuerySortParams, File } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
 
 type SearchParams = QuerySortParams & QueryPaginationParams
 
 class FilesModel {
-  posts: Post[] = []
+  files: File[] = [
+    {
+      id: 0,
+      name: 'AWS Credentials',
+      type: 'folder',
+      size: '503.9 MB',
+      count: 12,
+      created_at: 'Feb 13, 2023',
+      is_favourite: false,
+    },
+    {
+      id: 1,
+      name: ' Credentials 22',
+      type: 'folder',
+      size: '403.9 MB',
+      count: 9,
+      created_at: 'Feb 13, 2023',
+      is_favourite: false,
+    },
+    {
+      id: 2,
+      name: 'AWS',
+      type: 'folder',
+      size: '303.9 MB',
+      count: 11,
+      created_at: 'Feb 13, 2023',
+      is_favourite: true,
+    },
+  ]
 
   pagination: PaginationModel
   loading: LoadingModel
@@ -23,7 +50,11 @@ class FilesModel {
   }
 
   cleanModel() {
-    this.posts = []
+    // this.files = []
+  }
+
+  toggleFavourite(id: number) {
+    console.log('toggleFavourite request')
   }
 
   debounceFetch = debounce(this.fetch, 500)
@@ -34,12 +65,12 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const data = await API.posts.list({
-        searchParams,
-      })
+      // const data = await API.posts.list({
+      //   searchParams,
+      // })
 
-      this.posts = data.posts
-      this.pagination.totalCount = data.count
+      // this.files = data.posts
+      // this.pagination.totalCount = data.count
 
       this.loading.reset()
     } catch (err: any) {

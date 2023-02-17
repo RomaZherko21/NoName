@@ -8,6 +8,7 @@ import { Select } from 'shared/ui'
 
 interface Props {
   handleOpenFilter?: () => void
+  isShowFilter?: boolean
 
   inputValue: string
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -18,7 +19,6 @@ interface Props {
 
   sortOptions: { [key: string]: string }
   isTablePart?: boolean
-  isShowFilter?: boolean
   children?: JSX.Element
 }
 
@@ -67,9 +67,9 @@ function AsideFiltersBar({
           onChange={onSelectChange}
           label="actions.sortBy"
           options={sortOptions}
-          sx={{ width: '160px' }}
+          sx={{ minWidth: '160px' }}
         />
-        {isShowFilter ? (
+        {isShowFilter && (
           <Button
             onClick={handleOpenFilter}
             sx={{ px: 1 }}
@@ -79,9 +79,8 @@ function AsideFiltersBar({
           >
             {t('common.filters')}
           </Button>
-        ) : (
-          <>{children}</>
         )}
+        {children}
       </Box>
     </Grid>
   )
