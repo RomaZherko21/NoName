@@ -5,7 +5,6 @@ import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
-import { User } from 'shared/types'
 import { prettifyUserData } from 'shared/helpers'
 
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
@@ -26,7 +25,7 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
     } = query
     const authorization_id = res.locals.authorization_id
 
-    const users: User[] = await sequelize.query(
+    const users: any = await sequelize.query(
       `SELECT users.*,
         user_connections.status as connection_status
       FROM users 
@@ -61,7 +60,7 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
   try {
     const { id } = params
 
-    const result: User[] = await sequelize.query(
+    const result: any = await sequelize.query(
       `SELECT *  FROM users 
         WHERE users.id=${id}`,
       {

@@ -6,7 +6,6 @@ import path from 'path'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
-import { Post } from 'shared/types'
 
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
   try {
@@ -23,9 +22,8 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
       order_type = ORDER_TYPE,
     } = query
 
-    let result: (Post & { liked_users: number[]; likes_count: number; avatar: string })[] =
-      await sequelize.query(
-        `SELECT 
+    let result: any = await sequelize.query(
+      `SELECT 
         posts.*,
         genres.name as genre,
         users.name as user_name, 
@@ -50,10 +48,10 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
         GROUP BY posts.id
         ORDER BY ${order_by} ${order_type}
         LIMIT ${limit} OFFSET ${offset};`,
-        {
-          type: QueryTypes.SELECT,
-        }
-      )
+      {
+        type: QueryTypes.SELECT,
+      }
+    )
 
     result = await Promise.all(
       result.map(async (item: any) => {
@@ -80,7 +78,7 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
       })
     )
 
-    result = result.map((item) => ({
+    result = result.map((item: any) => ({
       ...item,
       is_liked: item.liked_users.includes(res.locals.authorization_id),
       first_liked_users: item.liked_users.slice(0, 3),
@@ -98,11 +96,7 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
   try {
     const { id } = params
 
-    let [post]: (Post & {
-      liked_users: number[]
-      likes_count: number
-      first_liked_users: number[]
-    })[] = await sequelize.query(
+    let [post]: any = await sequelize.query(
       `SELECT 
         posts.*, 
         genres.name as genre,

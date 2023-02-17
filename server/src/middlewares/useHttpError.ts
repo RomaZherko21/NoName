@@ -1,7 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { HttpException } from '../shared/types'
-import { log } from '../shared/helpers'
+import { log } from 'shared/helpers'
+export interface HttpException {
+  status: number
+  message: string
+}
 
 const useHttpError = (error: HttpException, req: Request, res: Response, next: NextFunction) => {
   log.negative(`${error.status}: ${error.message}`)

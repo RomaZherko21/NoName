@@ -34,6 +34,15 @@ export const prettifyUserData = (user: any) => {
       residence_city: user.residence_city,
     },
 
+    security: {
+      is_email_verified: Boolean(user.is_email_verified),
+      is_phone_verified: Boolean(user.is_phone_verified),
+
+      is_two_factor_auth_active: Boolean(user.is_two_factor_auth_active),
+      is_sms_alerts_active: Boolean(user.is_sms_alerts_active),
+      is_email_alerts_active: Boolean(user.is_email_alerts_active),
+    },
+
     password: user.password,
   }
 }

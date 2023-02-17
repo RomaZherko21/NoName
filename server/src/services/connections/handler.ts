@@ -1,18 +1,17 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
-import { sequelize, UserConnectionModel } from 'models'
+import { ConnectionStatus, sequelize, UserConnectionModel } from 'models'
 import { QueryTypes } from 'sequelize'
-import { ConnectionStatus, User } from 'shared/types'
 
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
     const { status, isReceived, isSent, name = '', surname = '', user_id } = query
 
-    let connections: (User & { status: ConnectionStatus })[] = []
+    let connections: any = []
 
     if (isReceived) {
-      const result: (User & { status: ConnectionStatus })[] = await sequelize.query(
+      const result = await sequelize.query(
         `SELECT user_connections.status,
             users.id as user_id, 
             users.name, 
@@ -38,7 +37,7 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
     }
 
     if (isSent) {
-      const result: (User & { status: ConnectionStatus })[] = await sequelize.query(
+      const result = await sequelize.query(
         `SELECT user_connections.status,
             users.id as user_id,
             users.name, 

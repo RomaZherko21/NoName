@@ -1,7 +1,7 @@
 import express from 'express'
 
-import { signIn } from 'auth'
-import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'user'
+import { signIn } from 'services/auth'
+import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'services/user'
 import {
   createPost,
   createPostComment,
@@ -11,16 +11,20 @@ import {
   getPosts,
   togglePostLikes,
   updatePostComment,
-} from 'posts'
-import { getGenres } from 'genres'
-import { createUser, getUser, getUsers, updateUserById } from 'users'
-import { deleteConnectionById, getConnections, updateConnectionStatusById } from 'connections'
+} from 'services/posts'
+import { getGenres } from 'services/genres'
+import { createUser, getUser, getUsers, updateUserById } from 'services/users'
+import {
+  deleteConnectionById,
+  getConnections,
+  updateConnectionStatusById,
+} from 'services/connections'
 import {
   sendEmailVerificationCode,
   sendPhoneVerificationCode,
   verifyUserEmailByCode,
   verifyUserPhoneByCode,
-} from 'verification'
+} from 'services/verification'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
