@@ -19,7 +19,7 @@ function LeaveMessage() {
         pl: 4,
         gap: 2,
         width: '100%',
-        height: `71px`,
+        height: 71,
         borderRadius: 0,
       }}
     >

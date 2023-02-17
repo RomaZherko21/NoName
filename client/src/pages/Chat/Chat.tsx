@@ -10,10 +10,10 @@ import { ChatModel } from './model'
 
 function Chat() {
   const [searchParams, setSearchParams] = useSearchParams()
+
   useEffect(() => {
-    {
-      searchParams.get('name') &&
-        ChatModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
+    if (searchParams.get('name')) {
+      ChatModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
     }
 
     return () => {
@@ -22,10 +22,7 @@ function Chat() {
   }, [searchParams])
 
   return (
-    <Box
-      display="flex"
-      sx={{ display: 'flex', borderTop: (theme) => `1px solid ${theme.palette.divider}` }}
-    >
+    <Box sx={{ display: 'flex', borderTop: (theme) => `1px solid ${theme.palette.divider}` }}>
       <AsideChatSelector
         inputValue={searchParams.get('name') || ''}
         onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {

@@ -3,14 +3,14 @@ import { Paper, Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import conversationNotFound from 'assets/images/404.png'
-import { Message as MessageE } from 'shared/types'
-import { ChatModel } from 'pages/Chat/model'
+import { Message as TMessage } from 'shared/types'
 
+import { ChatModel } from '../../model'
 import s from './Styles.module.scss'
 import { Message } from './ui'
 
 interface Props {
-  messages: MessageE[]
+  messages: TMessage[]
 }
 
 function Messages({ messages }: Props) {
@@ -23,7 +23,6 @@ function Messages({ messages }: Props) {
 
   return (
     <Paper
-      className={s.chatBackground}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -35,9 +34,10 @@ function Messages({ messages }: Props) {
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: 0,
       }}
+      className={s.chatBackground}
     >
       {messages.map((message) => (
-        <Message key={message.message_id} messagesEndRef={messagesEndRef} message={message} />
+        <Message key={message.id} messagesEndRef={messagesEndRef} message={message} />
       ))}
     </Paper>
     // <Paper sx={{ width: '100%', height: `calc(100vh - 130px)`, borderRadius: 0 }}>

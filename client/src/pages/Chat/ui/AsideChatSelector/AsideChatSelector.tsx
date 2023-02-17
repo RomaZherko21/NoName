@@ -15,22 +15,22 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { FiSearch } from 'react-icons/fi'
 import { HiOutlineLightBulb } from 'react-icons/hi2'
 
-import { User } from 'shared/types'
+import { UserBasic, UserMeta } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
 interface Props {
   inputValue: string
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  contacts: User[] | []
+  contacts: (UserBasic & UserMeta)[] | []
   clearContacts: () => void
 }
 
 function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts }: Props) {
   const { t } = useTranslation()
-  const [tip, setTip] = useState(false)
+  const [showTip, setShowTip] = useState(false)
 
   function onBlur() {
-    setTip(false)
+    setShowTip(false)
     clearContacts()
   }
 
@@ -39,7 +39,7 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minWidth: '380px',
+        minWidth: 380,
         p: 2,
         gap: 2.5,
         borderRadius: 0,
@@ -56,7 +56,7 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
         <TextField
           value={inputValue}
           onChange={onInputChange}
-          onFocus={() => setTip(true)}
+          onFocus={() => setShowTip(true)}
           onBlur={onBlur}
           fullWidth
           placeholder={t('user:actions.searchContacts')}
@@ -67,7 +67,7 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
             ),
           }}
         />
-        {tip && !inputValue && (
+        {showTip && !inputValue && (
           <Box
             sx={{
               display: 'flex',

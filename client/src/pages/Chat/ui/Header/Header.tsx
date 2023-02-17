@@ -1,11 +1,26 @@
+import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { Paper, Stack, Avatar, Typography, Box, IconButton } from '@mui/material'
 import { BsTelephone } from 'react-icons/bs'
 import { FiMoreVertical, FiSearch } from 'react-icons/fi'
 
-import { ROUTES } from 'shared/consts'
+import { COMMON_DATE_FORMAT, ROUTES } from 'shared/consts'
+import { fromMsToDate } from 'shared/helpers'
 
-function Header() {
+interface Props {
+  user_avatar?: string
+  user_name?: string
+  user_surname?: string
+  was_online?: number
+}
+
+function Header({
+  user_avatar = '',
+  user_name = 'Miron',
+  user_surname = 'Vitold',
+  was_online = 1632131232111,
+}: Props) {
   return (
     <Paper
       sx={{
@@ -15,7 +30,7 @@ function Header() {
         p: 2,
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: 0,
-        height: '66px',
+        height: 66,
         width: `100%`,
       }}
     >
@@ -24,13 +39,13 @@ function Header() {
         to={ROUTES.USERS}
         sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none' }}
       >
-        <Avatar sx={{ height: '32px', width: '32px' }} />
+        <Avatar sx={{ height: 32, width: 32 }} src={user_avatar} />
         <Stack>
           <Typography variant="subtitle2" color="text.primary">
-            Miron Vitold
+            {`${user_name} ${user_surname}`}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            Last active 4 hours ago
+            {format(fromMsToDate(was_online), COMMON_DATE_FORMAT)}
           </Typography>
         </Stack>
       </Box>
@@ -56,4 +71,4 @@ function Header() {
   )
 }
 
-export default Header
+export default observer(Header)

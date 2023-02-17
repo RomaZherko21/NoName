@@ -16,7 +16,7 @@ const commonTheme = {
     },
     subtitle2: {
       fontFamily: SECONDARY_FONT,
-      fontSize: '0.875rem',
+      fontSize: '0.775rem',
     },
     body1: {
       fontFamily: PRIMARY_FONT,

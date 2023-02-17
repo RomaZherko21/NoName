@@ -6,17 +6,18 @@ import { format } from 'date-fns'
 
 import { useRootStore } from 'stores'
 import { fromMsToDate } from 'shared/helpers'
-import { Message as Messagee } from 'shared/types'
+import { Message as TMessage } from 'shared/types'
 import { API_USER_AVATAR_URL, COMMON_DATE_FORMAT } from 'shared/consts'
 
 interface Props {
   messagesEndRef: React.MutableRefObject<HTMLDivElement | null>
-  message: Messagee
+  message: TMessage
 }
 
 function Message({ messagesEndRef, message }: Props) {
   const { user } = useRootStore()
   const { t } = useTranslation()
+  const isCurrentUser = user.id === message.user_id ? true : false
 
   return (
     <Box
@@ -24,42 +25,39 @@ function Message({ messagesEndRef, message }: Props) {
       sx={{
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: message.isCurrentUser ? 'flex-end' : 'flex-start',
+        justifyContent: isCurrentUser ? 'flex-end' : 'flex-start',
         gap: 1,
       }}
     >
-      {!message.isCurrentUser && <Avatar sx={{ width: '32px', height: '32px' }} />}
+      {!isCurrentUser && <Avatar sx={{ width: '32px', height: '32px' }} />}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Paper
           elevation={3}
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            p: '0.5rem 1rem',
+            p: '8px 16px',
             gap: 1,
             maxWidth: '450px',
             wordWrap: 'break-word',
-            backgroundColor: (theme) => (message.isCurrentUser ? theme.palette.primary.dark : ''),
+            backgroundColor: (theme) => (isCurrentUser ? theme.palette.primary.dark : ''),
           }}
         >
           <Typography variant="subtitle2">
-            {message.isCurrentUser ? t('user:me') : `${message.user_name} ${message.user_surname}`}
+            {isCurrentUser ? t('user:me') : `${message.user_name} ${message.user_surname}`}
           </Typography>
-          <Typography variant="body1">{message.message}</Typography>
+          <Typography variant="body1">{message.text}</Typography>
         </Paper>
         <Typography
-          sx={message.isCurrentUser ? { mr: 2, mt: 1, alignSelf: 'flex-end' } : { ml: 2, mt: 1 }}
+          sx={isCurrentUser ? { mr: 2, mt: 1, alignSelf: 'flex-end' } : { ml: 2, mt: 1 }}
           variant="caption"
           color="text.secondary"
         >
-          {format(fromMsToDate(message.received_at), COMMON_DATE_FORMAT)}
+          {format(fromMsToDate(message.created_at), COMMON_DATE_FORMAT)}
         </Typography>
       </Box>
-      {message.isCurrentUser && (
-        <Avatar
-          src={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
-          sx={{ width: '32px', height: '32px' }}
-        />
+      {isCurrentUser && (
+        <Avatar src={`${API_USER_AVATAR_URL}/${user.avatar.url}`} sx={{ width: 32, height: 32 }} />
       )}
     </Box>
   )
