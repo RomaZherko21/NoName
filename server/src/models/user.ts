@@ -38,6 +38,13 @@ interface User {
   valid_thru: string | null
   cvv: string | null
 
+  is_email_verified: boolean
+  is_phone_verified: boolean
+
+  is_two_factor_auth_active: boolean
+  is_sms_alerts_active: boolean
+  is_email_alerts_active: boolean
+
   password: string
 }
 
@@ -119,6 +126,26 @@ UserModel.init(
     },
     cvv: {
       type: DataTypes.STRING,
+    },
+    is_email_verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    is_phone_verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    is_two_factor_auth_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    is_sms_alerts_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    is_email_alerts_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

@@ -1,8 +1,13 @@
 import { DataTypes, Model, Optional } from 'sequelize'
-import { ConnectionStatus } from 'shared/types'
 
 import sequelize from './init'
 import UserModel from './user'
+
+export enum ConnectionStatus {
+  pending = 'pending',
+  decline = 'decline',
+  accept = 'accept',
+}
 
 interface UserConnection {
   id: number

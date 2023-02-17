@@ -36,6 +36,7 @@ function Verification() {
             }}
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
+            isActive={user.is_email_verified}
           />
 
           <OptionSetup
@@ -49,6 +50,7 @@ function Verification() {
             }}
             buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
             disabled={!isTimerEnded}
+            isActive={user.is_phone_verified}
           />
         </Box>
       </Card>

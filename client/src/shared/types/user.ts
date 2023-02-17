@@ -3,6 +3,7 @@ export type User = {
   meta: MetaUserInfo
   place: UserLocation
   credit_card: CreditCard
+  security: UserSecurity
 } & UserCredentials
 
 export interface BasicUserInfo {
@@ -28,6 +29,15 @@ export interface UserLocation {
   native_city?: string
   residence_country?: string
   residence_city?: string
+}
+
+export interface UserSecurity {
+  is_email_verified: boolean
+  is_phone_verified: boolean
+
+  is_two_factor_auth_active: boolean
+  is_sms_alerts_active: boolean
+  is_email_alerts_active: boolean
 }
 
 export interface UserCredentials {

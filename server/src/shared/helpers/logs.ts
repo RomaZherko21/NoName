@@ -1,6 +1,5 @@
 /*eslint-disable no-console*/
-// eslint-disable-next-line import/no-extraneous-dependencies
-const chalk = require('chalk')
+import chalk from 'chalk'
 
 class Log {
   positive(msg: string) {

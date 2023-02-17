@@ -4,7 +4,7 @@ help:
 
 .PHONY: run
 run: ## Runs the whole app in docker containers ( --abort-on-container-exit ) 
-	docker-compose up --build
+	docker compose up --build
 
 .PHONY: down
 down: ## Stops containers, networks, volumes, and images created by up

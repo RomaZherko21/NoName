@@ -24,6 +24,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `valid_thru` varchar(255),
   `cvv` varchar(255),
 
+  `is_email_verified` BOOLEAN,
+  `is_phone_verified` BOOLEAN,
+
+  `is_two_factor_auth_active` BOOLEAN,
+  `is_sms_alerts_active` BOOLEAN,
+  `is_email_alerts_active` BOOLEAN,
+
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -33,6 +40,13 @@ name,
 surname,
 middle_name,
 job_title,
+
+is_email_verified,
+is_phone_verified,
+
+is_two_factor_auth_active,
+is_sms_alerts_active,
+is_email_alerts_active,
 
 native_country, 
 native_city, 
@@ -52,21 +66,21 @@ password,
 role, 
 avatar) 
 VALUES
-  ('Tamaz','Gela','Gela','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','admin@gmail.com','man','1995-04-21','+375257096714', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
-  ('Adam','Keizer','David','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','user@gmail.com','man','1995-12-01','+375257096717', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
-  ('Alexa','Richardson','William','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lexa@gmail.com','woman','1991-08-13','+375257096718', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
-  ('Cao','Yu','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','chao@gmail.com','man','1956-03-13','+375257096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
-  ('Mila','Kunis','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','	mila@kunis.com','man','1966-03-13','+375258096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
-  ('George','Clooney','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlon@brando.com','man','1926-03-13','+375259096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
-  ('Ryan','Gossling','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','jack@nicholson','man','1936-03-13','+375251096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
-  ('Badri','Gabriel','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','humphrey@bogart.com','man','1936-03-13','+375252096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
-  ('Revaz','Imeda','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575', 'spencer@tracy','man','1946-03-13','+375253096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
-  ('Grigol','Tornike','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlo2n@brando.com','man','1966-03-13','+375254096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
-  ('Temur','Lidia','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lidia@brando.com','man','1976-03-13','+375255096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
-  ('Tedore','Merab','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Merab@gmail.com','man','1976-03-13','+375255196719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
-  ('Stepane','Daviti','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Daviti@gmail.com','man','2001-04-13','+375255296719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
-  ('Keto','Liana','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Liana@gmail.com','woman','2005-05-13','+375255396719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
-  ('Zurab','Tamar','Jr.','Chief Accountant','AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Tamar@gmail.com','man','2003-06-13','+375255496719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
+  ('Tamaz','Gela','Gela','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','admin@gmail.com','man','1995-04-21','+375257096714', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230996.png'),
+  ('Adam','Keizer','David','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','user@gmail.com','man','1995-12-01','+375257096717', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230997.png'),
+  ('Alexa','Richardson','William','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lexa@gmail.com','woman','1991-08-13','+375257096718', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','1663318230998.png'),
+  ('Cao','Yu','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','chao@gmail.com','man','1956-03-13','+375257096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','1663318230999.png'),
+  ('Mila','Kunis','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','	mila@kunis.com','man','1966-03-13','+375258096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521111.png'),
+  ('George','Clooney','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlon@brando.com','man','1926-03-13','+375259096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521112.png'),
+  ('Ryan','Gossling','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','jack@nicholson','man','1936-03-13','+375251096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521113.png'),
+  ('Badri','Gabriel','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','humphrey@bogart.com','man','1936-03-13','+375252096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521114.png'),
+  ('Revaz','Imeda','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575', 'spencer@tracy','man','1946-03-13','+375253096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521115.png'),
+  ('Grigol','Tornike','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','marlo2n@brando.com','man','1966-03-13','+375254096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521116.png'),
+  ('Temur','Lidia','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','lidia@brando.com','man','1976-03-13','+375255096719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521117.png'),
+  ('Tedore','Merab','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Merab@gmail.com','man','1976-03-13','+375255196719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521118.png'),
+  ('Stepane','Daviti','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Daviti@gmail.com','man','2001-04-13','+375255296719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521119.png'),
+  ('Keto','Liana','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Liana@gmail.com','woman','2005-05-13','+375255396719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'user','167580521121.png'),
+  ('Zurab','Tamar','Jr.','Chief Accountant',FALSE,FALSE,FALSE,FALSE,FALSE,'AFG','Kabul','USA','New York','4062836884511050','Xin Qian Jespersen','04/2027','575','Tamar@gmail.com','man','2003-06-13','+375255496719', '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS', 'admin','167580521122.png');
 
 CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL AUTO_INCREMENT,
