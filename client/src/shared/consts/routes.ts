@@ -23,6 +23,8 @@ export const ROUTES = {
 
   CHAT: '/chat',
 
+  FILE_MANAGER: '/filemanager',
+
   NOT_FOUND: '/notFound',
   HELP: '/help',
 }

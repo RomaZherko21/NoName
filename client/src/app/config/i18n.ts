@@ -10,6 +10,7 @@ const namespaces = [
   'post',
   'page',
   'sentences',
+  'file',
 ]
 const initTranslation = () => {
   return i18n
