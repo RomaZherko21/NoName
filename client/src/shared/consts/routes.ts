@@ -21,6 +21,8 @@ export const ROUTES = {
   ACCOUNT_SECURITY: '/account/security',
   ACCOUNT_VERIFICATION: '/account/verification',
 
+  CHAT: '/chat',
+
   NOT_FOUND: '/notFound',
   HELP: '/help',
 }

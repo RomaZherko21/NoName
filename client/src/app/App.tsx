@@ -1,5 +1,4 @@
 import React from 'react'
-import { ModalProvider } from 'react-modal-hook'
 import { Slide, toast } from 'react-toastify'
 import { configure } from 'mobx'
 import { observer } from 'mobx-react-lite'
@@ -35,7 +34,7 @@ function App() {
       <RootStoreProvider>
         <AppThemeProvider>
           <CssBaseline enableColorScheme />
-          <ModalProvider>{authorization.isAuthorized ? <Router /> : <SignIn />}</ModalProvider>
+          {authorization.isAuthorized ? <Router /> : <SignIn />}
         </AppThemeProvider>
       </RootStoreProvider>
     </React.StrictMode>

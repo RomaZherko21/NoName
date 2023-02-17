@@ -1,0 +1,1 @@
+export { emailTransporter } from './emailTransporter'

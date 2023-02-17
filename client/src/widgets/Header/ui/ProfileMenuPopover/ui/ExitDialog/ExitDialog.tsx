@@ -1,33 +1,37 @@
-import { Button, Stack } from '@mui/material'
 import { observer } from 'mobx-react-lite'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Button, Stack } from '@mui/material'
 
+import { Modal } from 'shared/ui'
 import { useRootStore } from 'stores'
 
 interface Props {
-  onClose: () => void
+  open: boolean
+  handleClose: () => void
 }
 
-function ExitDialog({ onClose }: Props) {
+function ConfirmDialog({ open, handleClose }: Props) {
+  const { t } = useTranslation()
   const { authorization } = useRootStore()
 
-  const { t } = useTranslation()
+  const onExit = () => {
+    authorization.unauthorize()
+    handleClose()
+  }
 
   return (
-    <Stack direction="row" spacing={2} sx={{ padding: 3 }}>
-      <Button
-        onClick={() => {
-          authorization.unauthorize()
-          onClose()
-        }}
-        variant="contained"
-        color="error"
-        fullWidth
-      >
-        {t('actions.exit')}
-      </Button>
-    </Stack>
+    <Modal open={open} handleClose={handleClose} title={t('notification:sure')}>
+      <Stack direction="row" spacing={2} sx={{ py: 3, px: 2 }}>
+        <Button size="small" onClick={onExit} variant="contained" color="error" fullWidth>
+          {t('actions.exit')}
+        </Button>
+        <Button size="small" onClick={handleClose} variant="contained" fullWidth>
+          {t('actions.cancel')}
+        </Button>
+      </Stack>
+    </Modal>
   )
 }
 
-export default observer(ExitDialog)
+export default observer(ConfirmDialog)

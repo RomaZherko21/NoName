@@ -1,11 +1,23 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 
 import sequelize from './init'
 import PostModel from './post'
 import UserModel from './user'
 
-const PostCommentModel = sequelize.define(
-  'post_comments',
+interface PostComment {
+  id: number
+  message: string | null
+  created_at: number | null
+
+  user_id: number
+  post_id: number
+}
+
+interface ModelCreation extends Optional<PostComment, 'id'> {}
+
+class PostCommentModel extends Model<PostComment, ModelCreation> {}
+
+PostCommentModel.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,18 +31,37 @@ const PostCommentModel = sequelize.define(
     created_at: {
       type: DataTypes.BIGINT,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: UserModel,
+        key: 'id',
+      },
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: PostModel,
+        key: 'id',
+      },
+    },
   },
   {
-    tableName: 'post_comments', // You can simply tell DataTypes the name of the table directly
+    sequelize,
+    tableName: 'post_comments',
   }
 )
 
 PostCommentModel.belongsTo(PostModel, {
   foreignKey: 'post_id',
+  onDelete: 'CASCADE',
 })
 
 PostCommentModel.belongsTo(UserModel, {
   foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 })
 
 export default PostCommentModel

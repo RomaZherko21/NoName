@@ -1,29 +1,46 @@
-export type User = UserBasic & UserMeta & UserPassword & CreditCard
+export type User = {
+  basic: BasicUserInfo
+  meta: MetaUserInfo
+  place: UserLocation
+  credit_card: CreditCard
+  security: UserSecurity
+} & UserCredentials
 
-export interface UserBasic {
+export interface BasicUserInfo {
   id?: number
   name: string
   surname: string
   middle_name: string
   email: string
+  tel_number?: string
   role: Roles
 }
 
-export interface UserMeta {
+export interface MetaUserInfo {
   date_of_birth?: string
-  tel_number?: string
   gender?: Gender
-  avatar?: string
   job_title?: string
-  connection_status?: ConnectionStatus | null
+  avatar?: string
+  profile_background?: string
+}
 
+export interface UserLocation {
   native_country?: string
   native_city?: string
   residence_country?: string
   residence_city?: string
 }
 
-export interface UserPassword {
+export interface UserSecurity {
+  is_email_verified: boolean
+  is_phone_verified: boolean
+
+  is_two_factor_auth_active: boolean
+  is_sms_alerts_active: boolean
+  is_email_alerts_active: boolean
+}
+
+export interface UserCredentials {
   password?: string
   confirmPassword?: string
 }

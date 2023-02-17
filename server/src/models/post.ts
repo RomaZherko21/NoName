@@ -1,10 +1,26 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 
 import GenreModel from './genre'
 import sequelize from './init'
 
-const PostModel = sequelize.define(
-  'posts',
+interface Post {
+  id: number
+  name: string
+  description: string
+  created_at: number
+  short_description: string | null
+  reading_time: number | null
+  image: string | null
+
+  user_id: number
+  genre_id: number
+}
+
+interface ModelCreation extends Optional<Post, 'id'> {}
+
+class PostModel extends Model<Post, ModelCreation> {}
+
+PostModel.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,9 +30,11 @@ const PostModel = sequelize.define(
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
+      allowNull: false,
     },
     short_description: {
       type: DataTypes.TEXT,
@@ -26,18 +44,32 @@ const PostModel = sequelize.define(
     },
     created_at: {
       type: DataTypes.BIGINT,
+      allowNull: false,
     },
     image: {
       type: DataTypes.STRING,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+    },
+    genre_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'genres',
+        key: 'id',
+      },
+    },
   },
   {
-    tableName: 'posts', // You can simply tell DataTypes the name of the table directly
+    sequelize,
+    tableName: 'posts',
   }
 )
 
-GenreModel.hasMany(PostModel, {
-  foreignKey: 'genre_id',
-})
+PostModel.belongsTo(GenreModel, { foreignKey: 'genre_id' })
 
 export default PostModel

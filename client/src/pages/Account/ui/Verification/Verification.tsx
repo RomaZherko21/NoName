@@ -1,90 +1,84 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Grid, Paper, Typography } from '@mui/material'
+import { Box, Card, Grid, Paper, Typography } from '@mui/material'
 
-import { CircleDevider } from 'shared/ui'
-import { useDialog } from 'shared/hooks'
-import VerificationCodeModal, { SEND_TYPE } from './VerificationCodeModal'
+import { useRootStore } from 'stores'
+import { OptionSetup } from 'shared/ui'
+import { useTimer } from 'shared/hooks'
+
+import VerificationCodeModal from './VerificationCodeModal'
+import { SEND_TYPE, VerificationModel } from './model'
 
 function Verification() {
   const { t } = useTranslation()
+  const { user } = useRootStore()
 
-  const [showConfirmationModal] = useDialog(
-    'notification:verification',
-    (onClose) => (
-      <VerificationCodeModal onClose={onClose} sendTo="sdff@gmail.com" sendType={SEND_TYPE.email} />
-    ),
-    true
-  )
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const { timeLeft, setTimeLeft, isTimerEnded } = useTimer()
+
+  function onStartTimer() {
+    setTimeLeft(60)
+  }
 
   return (
-    <Grid
-      component={Paper}
-      elevation={16}
-      container
-      spacing={2}
-      sx={{ p: 2, borderRadius: 2, width: 'fit-content', m: '0 auto' }}
-    >
-      <Grid item xs={12}>
+    <>
+      <Card elevation={16} sx={{ p: 4 }}>
         <Typography variant="h6">{t('user:verifStatuses')}</Typography>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <Paper variant="outlined" sx={{ p: 3, pb: 1, borderRadius: 2 }}>
-          <Typography
-            variant="body2"
-            color={true ? 'error' : 'success.main'}
-            sx={{ mb: 1, display: 'flex', alignItems: 'center' }}
-          >
-            <CircleDevider
-              sx={{
-                backgroundColor: (theme) =>
-                  true ? theme.palette.error.main : theme.palette.success.main,
-                ml: 0,
-              }}
-            />
-            {true ? t('actions.off') : t('actions.on')}
-          </Typography>
-          <Typography variant="subtitle2">{t('user:emailVerif')}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {t('user:updates.security.receiveEmailCode')}
-          </Typography>
-          <Button
-            sx={{
-              mt: 4,
-              width: 'fit-content',
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 3 }}>
+          <OptionSetup
+            title={t('user:emailVerif')}
+            subtitle={t('user:updates.security.receiveEmailCode')}
+            onClick={async () => {
+              VerificationModel.verificationType = SEND_TYPE.email
+              await VerificationModel.sendCode()
+              setIsOpenModal(true)
+              onStartTimer()
             }}
-            size="small"
-            onClick={() => showConfirmationModal()}
-          >
-            {t('actions.sendCode')}
-          </Button>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <Paper variant="outlined" sx={{ p: 3, pb: 1, borderRadius: 2 }}>
-          <Typography
-            variant="body2"
-            color="error"
-            sx={{ mb: 1, display: 'flex', alignItems: 'center' }}
-          >
-            <CircleDevider sx={{ backgroundColor: (theme) => theme.palette.error.main, ml: 0 }} />
-            {t('actions.off')}
-          </Typography>
-          <Typography variant="subtitle2">{t('user:phoneVerif')}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {t('user:updates.security.receiveSmsCode')}
-          </Typography>
-          <Button
-            sx={{
-              mt: 4,
-              width: 'fit-content',
+            buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
+            disabled={!isTimerEnded}
+            isActive={user.is_email_verified}
+          />
+
+          <OptionSetup
+            title={t('user:phoneVerif')}
+            subtitle={t('user:updates.security.receiveSmsCode')}
+            onClick={async () => {
+              VerificationModel.verificationType = SEND_TYPE.phone
+              await VerificationModel.sendCode()
+              setIsOpenModal(true)
+              onStartTimer()
             }}
-            size="small"
-          >
-            {t('actions.sendCode')}
-          </Button>
-        </Paper>
-      </Grid>
-    </Grid>
+            buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
+            disabled={!isTimerEnded}
+            isActive={user.is_phone_verified}
+          />
+        </Box>
+      </Card>
+
+      <VerificationCodeModal
+        open={isOpenModal}
+        handleClose={() => {
+          setIsOpenModal(false)
+        }}
+        title={
+          VerificationModel.verificationType === SEND_TYPE.email ? user.email : user.tel_number
+        }
+        subtitle={t(
+          `user:updates.security.${
+            VerificationModel.verificationType === SEND_TYPE.email ? 'sentEmailCode' : 'sentSmsCode'
+          }`
+        )}
+        timeLeft={timeLeft}
+        isTimerEnded={isTimerEnded}
+        onSubmit={async (code: string) => {
+          await VerificationModel.verifyCode(code)
+        }}
+        onSendCodeAgain={() => {
+          VerificationModel.sendCode()
+          onStartTimer()
+        }}
+      />
+    </>
   )
 }
 

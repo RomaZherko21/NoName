@@ -1,15 +1,24 @@
-import { makeAutoObservable } from 'mobx'
+import { debounce } from '@mui/material'
 import { toast } from 'react-toastify'
+import { makeAutoObservable } from 'mobx'
 
 import { API } from 'services'
-import { ConnectionStatus, QueryPaginationParams, QuerySortParams, User } from 'shared/types'
+import {
+  ConnectionStatus,
+  QueryPaginationParams,
+  QuerySortParams,
+  BasicUserInfo,
+  MetaUserInfo,
+} from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-import { debounce } from '@mui/material'
 
 import { UserFilters } from './filters'
 
 type SearchParams = UserFilters & QuerySortParams & QueryPaginationParams
+
+export type User = BasicUserInfo & MetaUserInfo & { connection_status?: ConnectionStatus | null }
+
 class UsersModel {
   users: User[] = []
 

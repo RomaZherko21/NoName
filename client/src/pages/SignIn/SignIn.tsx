@@ -21,7 +21,12 @@ function SignIn() {
   })
 
   return (
-    <Box className={s.backgroundImg}>
+    <Box
+      sx={{
+        background: ({ palette }) =>
+          `linear-gradient(45deg, ${palette.background.default} 30%, rgba(37, 69, 125, 1) 80%, rgba(3, 175, 213, 1) 100%)`,
+      }}
+    >
       <Container
         maxWidth="lg"
         sx={{

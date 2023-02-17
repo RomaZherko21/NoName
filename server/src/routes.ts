@@ -1,7 +1,7 @@
 import express from 'express'
 
-import { signIn } from 'auth'
-import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'user'
+import { signIn } from 'services/auth'
+import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'services/user'
 import {
   createPost,
   createPostComment,
@@ -11,10 +11,20 @@ import {
   getPosts,
   togglePostLikes,
   updatePostComment,
-} from 'posts'
-import { getGenres } from 'genres'
-import { createUser, getUser, getUsers, updateUserById } from 'users'
-import { deleteConnectionById, getConnections, updateConnectionStatusById } from 'connections'
+} from 'services/posts'
+import { getGenres } from 'services/genres'
+import { createUser, getUser, getUsers, updateUserById } from 'services/users'
+import {
+  deleteConnectionById,
+  getConnections,
+  updateConnectionStatusById,
+} from 'services/connections'
+import {
+  sendEmailVerificationCode,
+  sendPhoneVerificationCode,
+  verifyUserEmailByCode,
+  verifyUserPhoneByCode,
+} from 'services/verification'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
@@ -27,6 +37,12 @@ router.get(`${USER}`, getUserSelf)
 router.put(`${USER}`, updateUserSelf)
 router.delete(`${USER}`, removeUserSelf)
 router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+
+const VERIFICATION = '/verification'
+router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
+router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
+router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
+router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)

@@ -55,9 +55,17 @@
   "nativeLocation": "Native location",
   "residenceLocation": "Residence location",
   "jobTitle": "Job title",
+  "chats": "Chats",
+  "group": "Group",
+  "conversationHint": "Start meaningful conversations!",
+  "contactNameTip": "Tip. Enter a contact name",
+  "matchesDontFoundHint": "We couldn't find any matches for '{{value}}'. Try checking for typos or using complete words.",
   "verifStatuses": "Verification statuses",
   "emailVerif": "Email verification",
   "phoneVerif": "Phone number verification",
+  "contacts": "Contacts",
+  "me": "Me",
+  "codeSecondsLeft": "Verification code will expire in {{timeLeft}} seconds",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -86,7 +94,9 @@
     "accept": "Accept",
     "writeYourComment": "Write your comment",
     "sendRequest": "Send request",
-    "declain": "Declain"
+    "declain": "Declain",
+    "searchContacts": "Search contacts",
+    "leaveMessage": "Leave a message"
   },
   "bankCard": {
     "number": "Card number",
@@ -106,7 +116,9 @@
       "receiveSmsCode": "Use your mobile phone to receive security codes via SMS.",
       "receiveEmailCode": "Use your email account to receive security code.",
       "sentEmailCode": "We have sent a verification code. For any changes you need to confirm the email",
-      "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number"
+      "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number",
+      "phoneVerified": "Phone number successfuly verified",
+      "emailVerified": "Email successfuly verified"
     }
   }
 }

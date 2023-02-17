@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Box, Grid } from '@mui/material'
 
 import { useRootStore } from 'stores'
-import { PostCard, PostCardSceleton, UserBasicInfo } from 'entities'
+import { PostCard, PostCardSceleton, BasicInfo } from 'entities'
 import { LeaveComment } from 'shared/ui'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 import { ProfileModel } from 'pages/Profile/model'
@@ -18,7 +18,7 @@ const Posts = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={4}>
-        <UserBasicInfo user={ProfileModel} />
+        <BasicInfo user={ProfileModel} />
       </Grid>
 
       <Grid item xs={12} md={8}>

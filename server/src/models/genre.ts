@@ -1,9 +1,17 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 
 import sequelize from './init'
 
-const GenreModel = sequelize.define(
-  'genres',
+interface Genre {
+  id: number
+  name: string
+}
+
+interface ModelCreation extends Optional<Genre, 'id'> {}
+
+class GenreModel extends Model<Genre, ModelCreation> {}
+
+GenreModel.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,9 +21,11 @@ const GenreModel = sequelize.define(
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
+    sequelize,
     tableName: 'genres',
   }
 )

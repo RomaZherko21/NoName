@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
-import { User, Roles, Gender } from 'shared/types'
+import { User, Roles, Gender, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 class EditUserModel {
   id: number = 0
@@ -43,7 +43,7 @@ class EditUserModel {
     }
   }
 
-  async updateUser(user: User, id: number) {
+  async updateUser(user: BasicUserInfo & MetaUserInfo & UserCredentials, id: number) {
     try {
       this.loading.begin()
 
@@ -56,17 +56,17 @@ class EditUserModel {
   }
 
   private fromJSON(user: User) {
-    this.id = user.id || 0
-    this.name = user.name
-    this.surname = user.surname
-    this.middle_name = user.middle_name
+    this.id = user.basic.id || 0
+    this.name = user.basic.name
+    this.surname = user.basic.surname
+    this.middle_name = user.basic.middle_name
+    this.email = user.basic.email
+    this.role = user.basic.role
+    this.tel_number = user.basic.tel_number
 
-    this.email = user.email
-    this.role = user.role
-    this.date_of_birth = user.date_of_birth
-    this.tel_number = user.tel_number
-    this.gender = user.gender
-    this.avatar = user.avatar
+    this.date_of_birth = user.meta.date_of_birth
+    this.gender = user.meta.gender
+    this.avatar = user.meta.avatar
 
     this.password = user.password
     this.confirmPassword = user.confirmPassword
