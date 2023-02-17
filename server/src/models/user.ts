@@ -47,6 +47,36 @@ const UserModel = sequelize.define(
     avatar: {
       type: DataTypes.STRING,
     },
+    job_title: {
+      type: DataTypes.STRING,
+    },
+    profile_background: {
+      type: DataTypes.STRING,
+    },
+    native_country: {
+      type: DataTypes.STRING,
+    },
+    native_city: {
+      type: DataTypes.STRING,
+    },
+    residence_country: {
+      type: DataTypes.STRING,
+    },
+    residence_city: {
+      type: DataTypes.STRING,
+    },
+    card_number: {
+      type: DataTypes.STRING,
+    },
+    name_on_card: {
+      type: DataTypes.STRING,
+    },
+    valid_thru: {
+      type: DataTypes.STRING,
+    },
+    cvv: {
+      type: DataTypes.STRING,
+    },
   },
   {
     tableName: 'users', // You can simply tell DataTypes the name of the table directly

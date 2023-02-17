@@ -15,6 +15,12 @@ import {
 import { getGenres } from 'genres'
 import { createUser, getUser, getUsers, updateUserById } from 'users'
 import { deleteConnectionById, getConnections, updateConnectionStatusById } from 'connections'
+import {
+  sendEmailVerificationCode,
+  sendPhoneVerificationCode,
+  verifyUserEmailByCode,
+  verifyUserPhoneByCode,
+} from 'verification'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
@@ -27,6 +33,12 @@ router.get(`${USER}`, getUserSelf)
 router.put(`${USER}`, updateUserSelf)
 router.delete(`${USER}`, removeUserSelf)
 router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+
+const VERIFICATION = '/verification'
+router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
+router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
+router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
+router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)

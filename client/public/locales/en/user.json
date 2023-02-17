@@ -65,6 +65,7 @@
   "phoneVerif": "Phone number verification",
   "contacts": "Contacts",
   "me": "Me",
+  "codeSecondsLeft": "Verification code will expire in {{timeLeft}} seconds",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -115,7 +116,9 @@
       "receiveSmsCode": "Use your mobile phone to receive security codes via SMS.",
       "receiveEmailCode": "Use your email account to receive security code.",
       "sentEmailCode": "We have sent a verification code. For any changes you need to confirm the email",
-      "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number"
+      "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number",
+      "phoneVerified": "Phone number successfuly verified",
+      "emailVerified": "Email successfuly verified"
     }
   }
 }

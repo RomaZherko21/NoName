@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import LoadingModel from 'models/Loading'
-import { Comment, Post, User } from 'shared/types'
+import { Comment, Post, UserBasic, UserMeta } from 'shared/types'
 
 class PostModel {
   id: number = 0
@@ -118,7 +118,7 @@ class PostModel {
     }
   }
 
-  private fromJSON(post: Post & { user: User }) {
+  private fromJSON(post: Post & { user: UserBasic & UserMeta }) {
     this.id = post.id
     this.user_id = post.user_id
     this.genre_id = post.genre_id

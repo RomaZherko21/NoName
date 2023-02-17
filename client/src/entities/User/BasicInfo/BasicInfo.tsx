@@ -12,12 +12,12 @@ import {
   Divider,
 } from '@mui/material'
 
-import { UserBasic, UserMeta } from 'shared/types'
+import { UserBasic, UserMeta, UserPlace } from 'shared/types'
 
 import { getListConfig } from './getListConfig'
 
 interface Props {
-  user: UserBasic & UserMeta
+  user: UserBasic & UserMeta & UserPlace
 }
 
 function UserBasicDetails({ user }: Props) {

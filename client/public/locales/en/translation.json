@@ -59,7 +59,8 @@
     "change": "Change",
     "select": "Select",
     "sortBy": "Sort by",
-    "sendCode": "Send code"
+    "sendCode": "Send code",
+    "sendCodeAgain": "Send code again"
   },
   "fields": {
     "name": "Name",

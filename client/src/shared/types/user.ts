@@ -1,4 +1,9 @@
-export type User = UserBasic & UserMeta & UserPassword & CreditCard
+export type User = {
+  basic: UserBasic
+  meta: UserMeta
+  place: UserPlace
+  credit_card: CreditCard
+} & UserPassword
 
 export interface UserBasic {
   id?: number
@@ -6,17 +11,19 @@ export interface UserBasic {
   surname: string
   middle_name: string
   email: string
+  tel_number?: string
   role: Roles
 }
 
 export interface UserMeta {
   date_of_birth?: string
-  tel_number?: string
   gender?: Gender
-  avatar?: string
   job_title?: string
-  connection_status?: ConnectionStatus | null
+  avatar?: string
+  profile_background?: string
+}
 
+export interface UserPlace {
   native_country?: string
   native_city?: string
   residence_country?: string

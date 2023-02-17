@@ -4,14 +4,15 @@ import fs from 'fs'
 import path from 'path'
 
 import { UserModel, PostModel } from 'models'
+import { prettifyUserData } from 'shared/helpers'
 
 export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = await UserModel.findByPk(res.locals.authorization_id)
+    const data: any = await UserModel.findByPk(res.locals.authorization_id)
 
     if (!data) return next(createError(403))
 
-    return res.status(200).json(data)
+    return res.status(200).json(prettifyUserData(data))
   } catch (err: any) {
     next(createError(500, err.message))
   }
