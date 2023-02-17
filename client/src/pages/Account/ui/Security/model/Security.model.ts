@@ -6,6 +6,9 @@ import PaginationModel from 'models/Pagination'
 import { API } from 'services'
 
 class SecurityModel {
+  qrCodeUrl: string = ''
+  qrCodeSecret: string = ''
+
   entrances: any = [
     {
       login_type: 'Credential login',
@@ -33,7 +36,10 @@ class SecurityModel {
 
   async getQRCode() {
     try {
-      await API.verification.sendPhoneVerificationCode()
+      const data = await API.verification.getQrCode()
+
+      this.qrCodeUrl = data.qrCodeUrl
+      this.qrCodeSecret = data.secret
     } catch (err: any) {
       toast.error(err)
     }

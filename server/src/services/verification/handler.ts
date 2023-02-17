@@ -1,6 +1,8 @@
 import { emailTransporter } from 'config'
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
+import speakeasy from 'speakeasy'
+import qrcode from 'qrcode'
 
 import { CodeManager } from 'localDB'
 import { UserModel } from 'models'
@@ -103,6 +105,26 @@ export async function verifyUserPhoneByCode({ body }: Request, res: Response, ne
     } else {
       throw new Error('Wrong phone verification code')
     }
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+export async function getQrCode(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    const secret = speakeasy.generateSecret()
+
+    const otpAuthUrl = `otpauth://totp/someSecretText:${authorization_id}?secret=${secret.base32}&issuer=someSecretText`
+
+    qrcode.toDataURL(otpAuthUrl, (err, imageUrl) => {
+      if (err) {
+        throw new Error('Error generating QR code')
+      }
+
+      res.status(200).json({ secret: secret.base32, qrCodeUrl: imageUrl })
+    })
   } catch (err: any) {
     return next(createError(500, err.message))
   }
