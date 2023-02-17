@@ -18,8 +18,6 @@ import { HiOutlineLightBulb } from 'react-icons/hi2'
 import { User } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
-import s from './Styles.module.scss'
-
 interface Props {
   inputValue: string
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -28,8 +26,8 @@ interface Props {
 }
 
 function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts }: Props) {
-  const [tip, setTip] = useState(false)
   const { t } = useTranslation()
+  const [tip, setTip] = useState(false)
 
   function onBlur() {
     setTip(false)
@@ -99,12 +97,24 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
       {contacts.length > 0 && (
         <Stack>
           <Typography variant="subtitle2" color="text.secondary">
-            Contacts
+            {t('user:contacts')}
           </Typography>
           <Stack sx={{ gap: 0.5, overflowY: 'auto' }}>
             {contacts.map((user) => {
               return (
-                <button className={s.contactButton}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    p: 1,
+                    cursor: 'pointer',
+                    backgroundColor: (theme) => theme.palette.background.paper,
+                    '&:hover': {
+                      backgroundColor: (theme) => theme.palette.action.hover,
+                    },
+                  }}
+                >
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Avatar
                       sx={{ height: '32px', width: '32px' }}
@@ -114,16 +124,28 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
                       {`${user.name} ${user.surname}`}
                     </Typography>
                   </Box>
-                </button>
+                </Box>
               )
             })}
           </Stack>
         </Stack>
       )}
-      <button className={s.messageButton}>
-        <Box display="flex" gap={2}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          p: 2,
+          cursor: 'pointer',
+          backgroundColor: (theme) => theme.palette.background.paper,
+          '&:hover': {
+            backgroundColor: (theme) => theme.palette.action.hover,
+            borderRadius: '15px',
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <Avatar />
-          <Stack alignItems="flex-start">
+          <Stack>
             <Typography variant="subtitle2" color="text.primary">
               Miron Vitold
             </Typography>
@@ -135,7 +157,7 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
         <Typography variant="caption" color="text.secondary">
           1h
         </Typography>
-      </button>
+      </Box>
     </Paper>
   )
 }

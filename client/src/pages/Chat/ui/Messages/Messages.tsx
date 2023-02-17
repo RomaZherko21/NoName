@@ -3,11 +3,17 @@ import { Paper, Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import conversationNotFound from 'assets/images/404.png'
+import { Message as MessageE } from 'shared/types'
+import { ChatModel } from 'pages/Chat/model'
 
 import s from './Styles.module.scss'
 import { Message } from './ui'
 
-function Messages() {
+interface Props {
+  messages: MessageE[]
+}
+
+function Messages({ messages }: Props) {
   const { t } = useTranslation()
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
@@ -30,7 +36,9 @@ function Messages() {
         borderRadius: 0,
       }}
     >
-      <Message messagesEndRef={messagesEndRef} />
+      {messages.map((message) => (
+        <Message key={message.message_id} messagesEndRef={messagesEndRef} message={message} />
+      ))}
     </Paper>
     // <Paper sx={{ width: '100%', height: `calc(100vh - 130px)`, borderRadius: 0 }}>
     //   <Box

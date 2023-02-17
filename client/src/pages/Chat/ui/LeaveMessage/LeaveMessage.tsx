@@ -27,7 +27,12 @@ function LeaveMessage() {
         sx={{ height: '40px', width: '40px' }}
         src={`${API_USER_AVATAR_URL}/${user.avatar.url}`}
       />
-      <TextField size="small" fullWidth placeholder={t('Leave a message')} variant="outlined" />
+      <TextField
+        size="small"
+        fullWidth
+        placeholder={t('user:actions.leaveMessage')}
+        variant="outlined"
+      />
       <IconButton>
         <TbSend />
       </IconButton>

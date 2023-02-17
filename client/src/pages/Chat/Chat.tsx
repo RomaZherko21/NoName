@@ -44,7 +44,7 @@ function Chat() {
       />
       <Stack sx={{ width: '100%', height: '100%' }}>
         <Header />
-        <Messages />
+        <Messages messages={ChatModel.messages} />
         <LeaveMessage />
       </Stack>
     </Box>
