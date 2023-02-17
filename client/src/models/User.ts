@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { RootStore } from 'stores'
 import { API } from 'services'
-import { Gender, Roles, User, UserBasic, UserMeta, UserPassword } from 'shared/types'
+import { Gender, Roles, User, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 import FileModel from './File'
 
@@ -76,7 +76,7 @@ class UserModel {
     }
   }
 
-  async update(values: UserBasic & UserMeta & UserPassword) {
+  async update(values: BasicUserInfo & MetaUserInfo & UserCredentials) {
     try {
       this.rootStore.loading.begin()
 

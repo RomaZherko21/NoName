@@ -98,13 +98,13 @@ export async function updateConnectionStatusById(
 ) {
   try {
     const { id } = params
-    const { status } = body
+    const { status }: { status: ConnectionStatus } = body
     const authorization_id = res.locals.authorization_id
 
-    if (status === 'pending') {
+    if (status === ConnectionStatus.pending) {
       await UserConnectionModel.create({
         sender_id: authorization_id,
-        recipient_id: id,
+        recipient_id: Number(id),
         status,
       })
     } else {

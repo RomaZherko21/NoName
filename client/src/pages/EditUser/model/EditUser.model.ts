@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
-import { User, Roles, Gender, UserBasic, UserMeta, UserPassword } from 'shared/types'
+import { User, Roles, Gender, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 class EditUserModel {
   id: number = 0
@@ -43,7 +43,7 @@ class EditUserModel {
     }
   }
 
-  async updateUser(user: UserBasic & UserMeta & UserPassword, id: number) {
+  async updateUser(user: BasicUserInfo & MetaUserInfo & UserCredentials, id: number) {
     try {
       this.loading.begin()
 

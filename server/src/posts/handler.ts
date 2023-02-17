@@ -225,14 +225,14 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
 export async function deletePostById({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
-    const { image }: any = await PostModel.findByPk(id)
+    const data = await PostModel.findByPk(id)
 
-    if (image) {
+    if (data?.dataValues.image) {
       const filePath = path.join(
         path.dirname(require?.main?.path || ''),
         '/uploads',
         '/post',
-        image
+        data?.dataValues.image
       )
       if (fs.existsSync(filePath)) {
         fs.unlink(filePath, (err) => {

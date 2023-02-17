@@ -6,8 +6,8 @@ import {
   ConnectionStatus,
   QueryPaginationParams,
   QuerySortParams,
-  UserBasic,
-  UserMeta,
+  BasicUserInfo,
+  MetaUserInfo,
 } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
@@ -17,7 +17,7 @@ import { UserFilters } from './filters'
 
 type SearchParams = UserFilters & QuerySortParams & QueryPaginationParams
 
-export type User = UserBasic & UserMeta & { connection_status?: ConnectionStatus | null }
+export type User = BasicUserInfo & MetaUserInfo & { connection_status?: ConnectionStatus | null }
 
 class UsersModel {
   users: User[] = []

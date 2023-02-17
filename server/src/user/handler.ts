@@ -8,7 +8,7 @@ import { prettifyUserData } from 'shared/helpers'
 
 export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
-    const data: any = await UserModel.findByPk(res.locals.authorization_id)
+    const data = await UserModel.findByPk(res.locals.authorization_id)
 
     if (!data) return next(createError(403))
 
@@ -38,14 +38,14 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
   try {
     const authorization_id = res.locals.authorization_id
 
-    const { avatar }: any = await UserModel.findByPk(authorization_id)
+    const data = await UserModel.findByPk(authorization_id)
 
-    if (avatar) {
+    if (data?.dataValues.avatar) {
       const filePath = path.join(
         path.dirname(require?.main?.path || ''),
         '/uploads',
         '/avatar',
-        avatar
+        data?.dataValues.avatar
       )
       if (fs.existsSync(filePath)) {
         fs.unlink(filePath, (err) => {

@@ -1,5 +1,5 @@
 import { getQueryParams } from 'shared/helpers'
-import { Comment, Post, QueryParams, UserBasic, UserMeta } from 'shared/types'
+import { Comment, Post, QueryParams, BasicUserInfo, MetaUserInfo } from 'shared/types'
 
 import fetch from './fetch'
 
@@ -14,7 +14,7 @@ export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
   )
 
 export const get = (id: number) =>
-  fetch.get<Post & { user: UserBasic & UserMeta }>(`${ENDPOINT_BASE}/${id}`)
+  fetch.get<Post & { user: BasicUserInfo & MetaUserInfo }>(`${ENDPOINT_BASE}/${id}`)
 
 export const create = async (post: any) => {
   const formData = new FormData()
