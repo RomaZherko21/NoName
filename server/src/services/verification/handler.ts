@@ -110,11 +110,15 @@ export async function verifyUserPhoneByCode({ body }: Request, res: Response, ne
   }
 }
 
+let a = ''
+
 export async function getQrCode(req: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 
     const secret = speakeasy.generateSecret()
+
+    a = secret.base32
 
     const otpAuthUrl = `otpauth://totp/someSecretText:${authorization_id}?secret=${secret.base32}&issuer=someSecretText`
 
@@ -125,6 +129,37 @@ export async function getQrCode(req: Request, res: Response, next: NextFunction)
 
       res.status(200).json({ secret: secret.base32, qrCodeUrl: imageUrl })
     })
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+export async function verifyQrCode({ body }: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    console.log('hehehehe', body.token, a)
+
+    const verified = speakeasy.totp.verify({
+      secret: a,
+      encoding: 'base32',
+      token: body.token,
+    })
+
+    if (!verified) {
+      throw new Error('Invalid code')
+    }
+
+    await UserModel.update(
+      { is_two_factor_auth_active: true },
+      {
+        where: {
+          id: authorization_id,
+        },
+      }
+    )
+
+    res.status(204).send()
   } catch (err: any) {
     return next(createError(500, err.message))
   }

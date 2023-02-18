@@ -17,3 +17,5 @@ export const getQrCode = () =>
     qrCodeUrl: string
     secret: string
   }>(`${ENDPOINT_BASE}/qr`)
+
+export const verifyQrCode = (code: string) => fetch.put(`${ENDPOINT_BASE}/qr`, { token: code })

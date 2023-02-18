@@ -44,6 +44,14 @@ class SecurityModel {
       toast.error(err)
     }
   }
+
+  async verifyQrCode(code: string) {
+    try {
+      await API.verification.verifyQrCode(code)
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
 }
 
 export default new SecurityModel()

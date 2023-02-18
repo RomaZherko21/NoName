@@ -23,6 +23,7 @@ import {
   getQrCode,
   sendEmailVerificationCode,
   sendPhoneVerificationCode,
+  verifyQrCode,
   verifyUserEmailByCode,
   verifyUserPhoneByCode,
 } from 'services/verification'
@@ -45,6 +46,7 @@ router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
 router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
 router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
 router.get(`${VERIFICATION}/qr`, getQrCode)
+router.put(`${VERIFICATION}/qr`, verifyQrCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)

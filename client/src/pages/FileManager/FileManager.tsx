@@ -50,7 +50,7 @@ const FileManager = () => {
       </PageHeader>
 
       <Grid container xs={12} spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={12} lg={8}>
           <AsideFiltersBar
             inputValue={searchParams.get('name') || ''}
             onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +90,7 @@ const FileManager = () => {
           <Grid item container spacing={2} sx={{ mt: 1 }}>
             {FilesModel.files.map((file) =>
               view === ViewType.card ? (
-                <Grid item xs={4}>
+                <Grid item xs={12} md={6} lg={4}>
                   <FileItemCard
                     file={file}
                     toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
@@ -108,7 +108,7 @@ const FileManager = () => {
           </Grid>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4}>
           <Storage />
         </Grid>
       </Grid>
