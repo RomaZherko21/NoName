@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { Box, Card, Divider, Grid, Stack, Switch, Typography } from '@mui/material'
+import { useRootStore } from 'stores'
 
 function Notifications() {
   const { t } = useTranslation()
+  const { user } = useRootStore()
 
   return (
     <Card elevation={16} sx={{ p: 4 }}>
@@ -18,9 +20,11 @@ function Notifications() {
                 {t('user:updates.product.text')}
               </Typography>
             </Box>
-            <Switch defaultChecked />
+            <Switch disabled />
           </Stack>
+
           <Divider />
+
           <Stack direction="row" justifyContent="space-between" sx={{ mt: 3 }}>
             <Box>
               <Typography variant="subtitle1">{t('user:updates.security.title')}</Typography>
@@ -28,7 +32,13 @@ function Notifications() {
                 {t('user:updates.security.text')}
               </Typography>
             </Box>
-            <Switch defaultChecked />
+            <Switch
+              defaultChecked={user.is_email_alerts_active}
+              disabled={!user.is_email_verified}
+              onChange={() => {
+                user.toggleEmailAlerts()
+              }}
+            />
           </Stack>
         </Grid>
       </Grid>
@@ -37,6 +47,7 @@ function Notifications() {
         <Grid item xs={12} md={4}>
           <Typography variant="h6">{t('user:phoneNotification')}</Typography>
         </Grid>
+
         <Grid item xs={12} md={8}>
           <Stack direction="row" justifyContent="space-between">
             <Box>
@@ -45,7 +56,14 @@ function Notifications() {
                 {t('user:updates.security.text')}
               </Typography>
             </Box>
-            <Switch defaultChecked />
+
+            <Switch
+              defaultChecked={user.is_sms_alerts_active}
+              disabled={!user.is_phone_verified}
+              onChange={() => {
+                user.toggleSmsAlerts()
+              }}
+            />
           </Stack>
         </Grid>
       </Grid>

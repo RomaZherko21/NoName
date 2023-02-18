@@ -23,10 +23,12 @@ import {
   getQrCode,
   sendEmailVerificationCode,
   sendPhoneVerificationCode,
+  toggleEmailAlerts,
+  toggleSmsAlerts,
   verifyQrCode,
   verifyUserEmailByCode,
   verifyUserPhoneByCode,
-} from 'services/verification'
+} from 'services/security'
 import { FILE_FIELD_NAMES, useFile } from 'middlewares'
 
 const router = express.Router()
@@ -40,13 +42,17 @@ router.put(`${USER}`, updateUserSelf)
 router.delete(`${USER}`, removeUserSelf)
 router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
 
-const VERIFICATION = '/verification'
-router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
-router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
-router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
-router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
-router.get(`${VERIFICATION}/qr`, getQrCode)
-router.put(`${VERIFICATION}/qr`, verifyQrCode)
+const SECURITY = '/security'
+router.put(`${SECURITY}/email`, sendEmailVerificationCode)
+router.post(`${SECURITY}/email`, verifyUserEmailByCode)
+router.put(`${SECURITY}/email/alerts`, toggleEmailAlerts)
+
+router.put(`${SECURITY}/phone`, sendPhoneVerificationCode)
+router.post(`${SECURITY}/phone`, verifyUserPhoneByCode)
+router.put(`${SECURITY}/phone/alerts`, toggleSmsAlerts)
+
+router.get(`${SECURITY}/qr`, getQrCode)
+router.put(`${SECURITY}/qr`, verifyQrCode)
 
 const USERS = '/users'
 router.get(`${USERS}`, getUsers)

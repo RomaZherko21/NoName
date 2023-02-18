@@ -5,7 +5,7 @@ import speakeasy from 'speakeasy'
 import qrcode from 'qrcode'
 
 import { CodeManager } from 'localDB'
-import { UserModel } from 'models'
+import { sequelize, UserModel } from 'models'
 import { generateRandomCode } from 'shared/helpers'
 
 const { SERVER_EMAIL_LOGIN } = process.env
@@ -138,8 +138,6 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
   try {
     const authorization_id = res.locals.authorization_id
 
-    console.log('hehehehe', body.token, a)
-
     const verified = speakeasy.totp.verify({
       secret: a,
       encoding: 'base32',
@@ -152,6 +150,44 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
 
     await UserModel.update(
       { is_two_factor_auth_active: true },
+      {
+        where: {
+          id: authorization_id,
+        },
+      }
+    )
+
+    res.status(204).send()
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+export async function toggleSmsAlerts(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    await UserModel.update(
+      { is_sms_alerts_active: sequelize.literal('NOT is_sms_alerts_active') },
+      {
+        where: {
+          id: authorization_id,
+        },
+      }
+    )
+
+    res.status(204).send()
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+export async function toggleEmailAlerts(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    await UserModel.update(
+      { is_email_alerts_active: sequelize.literal('NOT is_email_alerts_active') },
       {
         where: {
           id: authorization_id,

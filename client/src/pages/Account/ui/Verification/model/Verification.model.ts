@@ -21,10 +21,10 @@ class VerificationModel {
   async sendCode() {
     try {
       if (this.verificationType === SEND_TYPE.email) {
-        await API.verification.sendEmailVerificationCode()
+        await API.security.sendEmailVerificationCode()
       }
       if (this.verificationType === SEND_TYPE.phone) {
-        await API.verification.sendPhoneVerificationCode()
+        await API.security.sendPhoneVerificationCode()
       }
     } catch (err: any) {
       toast.error(err)
@@ -34,11 +34,11 @@ class VerificationModel {
   async verifyCode(code: string) {
     try {
       if (this.verificationType === SEND_TYPE.email) {
-        await API.verification.verifyEmailVerificationCode(code)
+        await API.security.verifyEmailVerificationCode(code)
         toast.success(i18next.t('user:updates.security.emailVerified'))
       }
       if (this.verificationType === SEND_TYPE.phone) {
-        await API.verification.verifyPhoneVerificationCode(code)
+        await API.security.verifyPhoneVerificationCode(code)
         toast.success(i18next.t('user:updates.security.phoneVerified'))
       }
     } catch (err: any) {

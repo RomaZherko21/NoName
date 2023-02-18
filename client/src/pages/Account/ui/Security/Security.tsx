@@ -63,11 +63,11 @@ function Security() {
           <OptionSetup
             title={t('user:textMessage')}
             subtitle={t('user:updates.security.receiveSmsCode')}
-            onClick={async () => {
-              console.log('change in BD to true')
+            onClick={() => {
+              user.toggleSmsAlerts()
             }}
-            buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
-            disabled={!isTimerEnded}
+            buttonText={`${t('actions.sendCode')}`}
+            disabled={user.is_sms_alerts_active}
             isActive={user.is_sms_alerts_active}
           />
         </Box>

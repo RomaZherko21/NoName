@@ -69,6 +69,22 @@ class UserModel {
     }
   }
 
+  async fetch({ hidden = false }: { hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.rootStore.loading.begin()
+      }
+
+      const user = await API.user.get()
+
+      this.fromJSON(user)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.rootStore.loading.reset()
+    }
+  }
+
   async uploadPhoto(file: File) {
     try {
       this.rootStore.loading.begin()
@@ -89,7 +105,7 @@ class UserModel {
 
       await API.user.update(values)
 
-      await this.init()
+      await this.fetch({})
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -108,6 +124,26 @@ class UserModel {
       toast.error(err)
     } finally {
       this.rootStore.loading.end()
+    }
+  }
+
+  async toggleEmailAlerts() {
+    try {
+      await API.security.toggleEmailAlerts()
+
+      this.fetch({ hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async toggleSmsAlerts() {
+    try {
+      await API.security.toggleSmsAlerts()
+
+      this.fetch({ hidden: true })
+    } catch (err: any) {
+      toast.error(err)
     }
   }
 
