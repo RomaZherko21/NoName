@@ -2,9 +2,7 @@ import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, Drawer, List } from '@mui/material'
 
-import { useRootStore } from 'stores'
 import { DRAWER_WIDTH } from 'shared/consts'
-import { Operation } from 'models/Permissions'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import { NavBarItem } from './ui'
@@ -12,7 +10,6 @@ import { config } from './config'
 
 const NavBar = () => {
   const navBarConfig = useMemo(() => config, [])
-  const { user } = useRootStore()
 
   return (
     <Box component="nav" sx={{ width: DRAWER_WIDTH }}>
@@ -43,7 +40,8 @@ const NavBar = () => {
               title={item.title}
               collapsedItems={item?.collapsedItems}
               to={item?.to}
-              hasAccess={user.permissions.hasAccess(Operation.get, item.accessRoute)}
+              accessRoute={item.accessRoute}
+              accessOperation={item.accessOperation}
             />
           ))}
         </List>

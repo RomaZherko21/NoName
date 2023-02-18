@@ -4,7 +4,7 @@ import { HiOutlineNewspaper } from 'react-icons/hi2'
 import { AiOutlineFileJpg } from 'react-icons/ai'
 
 import { ROUTES } from 'shared/consts'
-import { AccessRoute } from 'models/Permissions'
+import { AccessRoute, Operation } from 'models/Permissions'
 
 export const config = [
   {
@@ -14,13 +14,16 @@ export const config = [
       {
         text: 'List',
         to: ROUTES.USERS,
+        accessOperation: Operation.get,
       },
       {
         text: 'Create',
         to: ROUTES.USERS_NEW,
+        accessOperation: Operation.create,
       },
     ],
     accessRoute: AccessRoute.users,
+    accessOperation: Operation.get,
   },
   {
     icon: <HiOutlineNewspaper />,
@@ -29,24 +32,29 @@ export const config = [
       {
         text: 'List',
         to: ROUTES.POSTS,
+        accessOperation: Operation.get,
       },
       {
         text: 'Create',
         to: ROUTES.POSTS_NEW,
+        accessOperation: Operation.create,
       },
     ],
     accessRoute: AccessRoute.posts,
+    accessOperation: Operation.get,
   },
   {
     icon: <HiOutlineChatBubbleLeftRight />,
     title: 'page:chat',
     to: ROUTES.CHAT,
     accessRoute: AccessRoute.chat,
+    accessOperation: Operation.get,
   },
   {
     icon: <AiOutlineFileJpg />,
     title: 'page:fileManager',
     to: ROUTES.FILE_MANAGER,
     accessRoute: AccessRoute.files,
+    accessOperation: Operation.get,
   },
 ]
