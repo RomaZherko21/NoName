@@ -9,7 +9,6 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  Box,
 } from '@mui/material'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 import { CircleDevider } from 'shared/ui'
@@ -19,9 +18,10 @@ interface Props {
   title: string
   to?: string
   collapsedItems?: { to: string; text: string }[]
+  hasAccess: boolean
 }
 
-const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
+const NavBarItem = ({ icon, title, to = '', collapsedItems = [], hasAccess = true }: Props) => {
   const { t } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
@@ -41,6 +41,10 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
       to ? location.pathname === to : collapsedItems.find((item) => location.pathname === item.to),
     [to, location, collapsedItems]
   )
+
+  if (!hasAccess) {
+    return null
+  }
 
   return (
     <>

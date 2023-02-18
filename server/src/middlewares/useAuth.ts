@@ -3,7 +3,7 @@ import createError from 'http-errors'
 import jwt from 'jsonwebtoken'
 
 const useAuth = (req: Request, res: Response, next: NextFunction) => {
-  if (req.originalUrl === '/api/auth/signIn') return next()
+  if (req.originalUrl === '/auth/signIn') return next()
 
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]
@@ -14,6 +14,7 @@ const useAuth = (req: Request, res: Response, next: NextFunction) => {
     if (err) return next(createError(403))
 
     res.locals.authorization_id = decoded.id
+    res.locals.authorization_role = decoded.role
 
     return next()
   })

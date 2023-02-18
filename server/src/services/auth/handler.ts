@@ -19,7 +19,7 @@ export async function signIn({ body }: Request, res: Response, next: NextFunctio
     const compare = await bcrypt.compare(password, data.password)
 
     if (compare) {
-      const token = jwt.sign({ id: data.id }, String(process.env.TOKEN_SECRET), {
+      const token = jwt.sign({ id: data.id, role: data.role }, String(process.env.TOKEN_SECRET), {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRED_TIME,
       })
 

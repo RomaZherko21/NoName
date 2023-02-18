@@ -6,9 +6,12 @@ import { API } from 'services'
 import { Gender, Roles, User, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 import FileModel from './File'
+import PermissionsModel from './Permissions'
 
 class UserModel {
   readonly rootStore: typeof RootStore
+
+  permissions: PermissionsModel
 
   id: number = 0
   name: string = ''
@@ -44,8 +47,10 @@ class UserModel {
     makeAutoObservable(this)
     this.rootStore = rootStore
 
-    this.avatar = new FileModel()
     this.init()
+
+    this.permissions = new PermissionsModel()
+    this.avatar = new FileModel()
   }
 
   isAuthorizedUser(id: number) {

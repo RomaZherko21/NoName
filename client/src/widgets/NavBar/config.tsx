@@ -4,6 +4,7 @@ import { HiOutlineNewspaper } from 'react-icons/hi2'
 import { AiOutlineFileJpg } from 'react-icons/ai'
 
 import { ROUTES } from 'shared/consts'
+import { AccessRoute } from 'models/Permissions'
 
 export const config = [
   {
@@ -19,6 +20,7 @@ export const config = [
         to: ROUTES.USERS_NEW,
       },
     ],
+    accessRoute: AccessRoute.users,
   },
   {
     icon: <HiOutlineNewspaper />,
@@ -33,15 +35,18 @@ export const config = [
         to: ROUTES.POSTS_NEW,
       },
     ],
+    accessRoute: AccessRoute.posts,
   },
   {
     icon: <HiOutlineChatBubbleLeftRight />,
     title: 'page:chat',
     to: ROUTES.CHAT,
+    accessRoute: AccessRoute.chat,
   },
   {
     icon: <AiOutlineFileJpg />,
     title: 'page:fileManager',
     to: ROUTES.FILE_MANAGER,
+    accessRoute: AccessRoute.files,
   },
 ]

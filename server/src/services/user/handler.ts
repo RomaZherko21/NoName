@@ -5,6 +5,7 @@ import path from 'path'
 
 import { UserModel, PostModel } from 'models'
 import { prettifyUserData } from 'shared/helpers'
+import { Role, permission } from 'shared/consts'
 
 export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
@@ -102,6 +103,16 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
     } else {
       next(createError(400, 'Avatar wasnt uploaded'))
     }
+  } catch (err: any) {
+    next(createError(500, err.message))
+  }
+}
+
+export async function getUserPermissions(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_role: Role = res.locals.authorization_role
+
+    return res.status(200).json(permission[authorization_role])
   } catch (err: any) {
     next(createError(500, err.message))
   }
