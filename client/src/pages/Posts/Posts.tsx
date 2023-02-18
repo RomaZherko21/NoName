@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid } from '@mui/material'
 
+import { useRootStore } from 'stores'
 import { AsideFilters, AsideFiltersBar, Pagination } from 'shared/ui'
 import { getSearchParamsObj } from 'shared/helpers'
 import { ROUTES } from 'shared/consts'
@@ -15,6 +16,7 @@ import { getFiltersConfig, PostsModel, sortConfig } from './model'
 function Posts() {
   const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { user } = useRootStore()
   const [openFilter, setOpenFilter] = useState(false)
 
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
@@ -38,17 +40,19 @@ function Posts() {
         pageName={t('page:posts')}
         breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.list' }]}
       >
-        <Grid item>
-          <Button
-            component={Link}
-            to={ROUTES.POSTS_NEW}
-            size="small"
-            variant="contained"
-            color="primary"
-          >
-            {t('post:form.create')}
-          </Button>
-        </Grid>
+        {user.permissions.createPosts ? (
+          <Grid item>
+            <Button
+              component={Link}
+              to={ROUTES.POSTS_NEW}
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              {t('post:form.create')}
+            </Button>
+          </Grid>
+        ) : null}
       </PageHeader>
 
       <Grid container spacing={3} direction="column">

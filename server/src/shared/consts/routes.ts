@@ -1,5 +1,5 @@
 export const ROUTES = {
-  AUTH: 'users',
+  AUTH: 'auth',
   USER: 'user',
   SECURITY: 'security',
   USERS: 'users',
@@ -20,15 +20,15 @@ export type Permission = { [key in Role]: { [key: string]: string[] } }
 
 export const permission: Permission = {
   admin: {
-    [ROUTES.USERS]: ['get', 'create', 'update', 'delete'],
-    [ROUTES.POSTS]: ['get', 'create', 'update', 'delete'],
-    [ROUTES.CHAT]: ['get', 'create', 'update', 'delete'],
-    [ROUTES.FILES]: ['get', 'create', 'update', 'delete'],
+    [ROUTES.USERS]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.POSTS]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.CHAT]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.FILES]: ['get', 'post', 'put', 'delete'],
   },
   user: {
     [ROUTES.USERS]: ['get'],
-    [ROUTES.POSTS]: ['get', 'create'],
-    [ROUTES.CHAT]: ['get', 'create'],
-    [ROUTES.FILES]: ['get', 'create', 'update'],
+    [ROUTES.POSTS]: ['get', 'post'],
+    [ROUTES.CHAT]: ['get', 'post'],
+    [ROUTES.FILES]: ['get', 'post', 'put'],
   },
 }

@@ -12,8 +12,8 @@ export enum AccessRoute {
 
 export enum Operation {
   get = 'get',
-  create = 'create',
-  update = 'update',
+  create = 'post',
+  update = 'put',
   delete = 'delete',
 }
 
