@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { useMemo, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -37,13 +38,10 @@ const NavBarItem = ({
   const navigate = useNavigate()
   const { user } = useRootStore()
 
-  const hasAccess = useMemo(() => {
-    if (!accessRoute || !accessOperation) {
-      return true
-    }
-
-    return user.permissions.hasAccess(accessOperation, accessRoute)
-  }, [])
+  const hasAccess =
+    !accessRoute || !accessOperation
+      ? true
+      : user.permissions.hasAccess(accessOperation, accessRoute)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -137,4 +135,4 @@ const NavBarItem = ({
   )
 }
 
-export default NavBarItem
+export default observer(NavBarItem)

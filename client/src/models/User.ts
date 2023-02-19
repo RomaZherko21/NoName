@@ -47,10 +47,10 @@ class UserModel {
     makeAutoObservable(this)
     this.rootStore = rootStore
 
-    this.init()
-
     this.permissions = new PermissionsModel()
     this.avatar = new FileModel()
+
+    this.init()
   }
 
   isAuthorizedUser(id: number) {
@@ -62,6 +62,8 @@ class UserModel {
       this.rootStore.loading.begin()
 
       const user = await API.user.get()
+
+      await this.permissions.init()
 
       this.fromJSON(user)
 

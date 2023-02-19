@@ -29,68 +29,68 @@ class PermissionsModel {
 
   async init() {
     try {
-      const permissions = await API.user.getPermissions()
+      const data = await API.user.getPermissions()
 
-      this._permissions = permissions
+      this._permissions = data
     } catch (err: any) {
       toast.error(err)
     }
   }
 
   hasAccess(operation: Operation, route: AccessRoute) {
-    return this._permissions?.[route].includes(operation)
+    return this._permissions?.[route]?.includes(operation)
   }
 
   get getUsers() {
-    return this._permissions?.[AccessRoute.users].includes(Operation.get)
+    return this._permissions?.[AccessRoute.users]?.includes(Operation.get)
   }
   get createUsers() {
-    return this._permissions?.[AccessRoute.users].includes(Operation.create)
+    return this._permissions?.[AccessRoute.users]?.includes(Operation.create)
   }
   get updateUsers() {
-    return this._permissions?.[AccessRoute.users].includes(Operation.update)
+    return this._permissions?.[AccessRoute.users]?.includes(Operation.update)
   }
   get deleteUsers() {
-    return this._permissions?.[AccessRoute.users].includes(Operation.delete)
+    return this._permissions?.[AccessRoute.users]?.includes(Operation.delete)
   }
 
   get getPosts() {
-    return this._permissions?.[AccessRoute.posts].includes(Operation.get)
+    return this._permissions?.[AccessRoute.posts]?.includes(Operation.get)
   }
   get createPosts() {
-    return this._permissions?.[AccessRoute.posts].includes(Operation.create)
+    return this._permissions?.[AccessRoute.posts]?.includes(Operation.create)
   }
   get updatePosts() {
-    return this._permissions?.[AccessRoute.posts].includes(Operation.update)
+    return this._permissions?.[AccessRoute.posts]?.includes(Operation.update)
   }
   get deletePosts() {
-    return this._permissions?.[AccessRoute.posts].includes(Operation.delete)
+    return this._permissions?.[AccessRoute.posts]?.includes(Operation.delete)
   }
 
   get getChat() {
-    return this._permissions?.[AccessRoute.chat].includes(Operation.get)
+    return this._permissions?.[AccessRoute.chat]?.includes(Operation.get)
   }
   get createChat() {
-    return this._permissions?.[AccessRoute.chat].includes(Operation.create)
+    return this._permissions?.[AccessRoute.chat]?.includes(Operation.create)
   }
   get updateChat() {
-    return this._permissions?.[AccessRoute.chat].includes(Operation.update)
+    return this._permissions?.[AccessRoute.chat]?.includes(Operation.update)
   }
   get deleteChat() {
-    return this._permissions?.[AccessRoute.chat].includes(Operation.delete)
+    return this._permissions?.[AccessRoute.chat]?.includes(Operation.delete)
   }
 
   get getFiles() {
-    return this._permissions?.[AccessRoute.files].includes(Operation.get)
+    return this._permissions?.[AccessRoute.files]?.includes(Operation.get)
   }
   get createFiles() {
-    return this._permissions?.[AccessRoute.files].includes(Operation.create)
+    return this._permissions?.[AccessRoute.files]?.includes(Operation.create)
   }
   get updateFiles() {
-    return this._permissions?.[AccessRoute.files].includes(Operation.update)
+    return this._permissions?.[AccessRoute.files]?.includes(Operation.update)
   }
   get deleteFiles() {
-    return this._permissions?.[AccessRoute.files].includes(Operation.delete)
+    return this._permissions?.[AccessRoute.files]?.includes(Operation.delete)
   }
 }
 
