@@ -66,6 +66,7 @@
   "contacts": "Contacts",
   "me": "Me",
   "codeSecondsLeft": "Verification code will expire in {{timeLeft}} seconds",
+  "qrCodeSecondsLeft": "QR code will expire in {{timeLeft}} seconds",
   "form": {
     "createNewUser": "Add user",
     "updateUser": "Update user"
@@ -118,7 +119,11 @@
       "sentEmailCode": "We have sent a verification code. For any changes you need to confirm the email",
       "sentSmsCode": "We have sent an SMS with a verification code. For any changes you need to confirm the number",
       "phoneVerified": "Phone number successfuly verified",
-      "emailVerified": "Email successfuly verified"
+      "emailVerified": "Email successfuly verified",
+      "qrCodeModalTitle": "Two-factor Authentication",
+      "qrCodeTitle": "Google Authenticator (2FA)",
+      "qrCodeSubtitle": "Secure your account using Google Authenticator mobile app",
+      "qrCodeVerification": "Enter the code from the Google Authenticatior app"
     }
   }
 }

@@ -36,10 +36,18 @@ class SecurityModel {
 
   async getQRCode() {
     try {
-      const data = await API.verification.getQrCode()
+      const data = await API.security.getQrCode()
 
       this.qrCodeUrl = data.qrCodeUrl
       this.qrCodeSecret = data.secret
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async verifyQrCode(code: string) {
+    try {
+      await API.security.verifyQrCode(code)
     } catch (err: any) {
       toast.error(err)
     }

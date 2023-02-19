@@ -6,9 +6,12 @@ import { API } from 'services'
 import { Gender, Roles, User, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 import FileModel from './File'
+import PermissionsModel from './Permissions'
 
 class UserModel {
   readonly rootStore: typeof RootStore
+
+  permissions: PermissionsModel
 
   id: number = 0
   name: string = ''
@@ -44,8 +47,10 @@ class UserModel {
     makeAutoObservable(this)
     this.rootStore = rootStore
 
-    this.avatar = new FileModel()
     this.init()
+
+    this.permissions = new PermissionsModel()
+    this.avatar = new FileModel()
   }
 
   isAuthorizedUser(id: number) {
@@ -69,6 +74,22 @@ class UserModel {
     }
   }
 
+  async fetch({ hidden = false }: { hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.rootStore.loading.begin()
+      }
+
+      const user = await API.user.get()
+
+      this.fromJSON(user)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.rootStore.loading.reset()
+    }
+  }
+
   async uploadPhoto(file: File) {
     try {
       this.rootStore.loading.begin()
@@ -89,7 +110,7 @@ class UserModel {
 
       await API.user.update(values)
 
-      await this.init()
+      await this.fetch({})
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -108,6 +129,26 @@ class UserModel {
       toast.error(err)
     } finally {
       this.rootStore.loading.end()
+    }
+  }
+
+  async toggleEmailAlerts() {
+    try {
+      await API.security.toggleEmailAlerts()
+
+      this.fetch({ hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async toggleSmsAlerts() {
+    try {
+      await API.security.toggleSmsAlerts()
+
+      this.fetch({ hidden: true })
+    } catch (err: any) {
+      toast.error(err)
     }
   }
 

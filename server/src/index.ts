@@ -21,11 +21,11 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/api/uploads', express.static(path.join('uploads')))
+app.use('/uploads', express.static(path.join('uploads')))
 
 app.use(useAuth)
 
-app.use('/api', router)
+app.use('/', router)
 
 sequelize
   .sync()

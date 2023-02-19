@@ -40,6 +40,8 @@ const NavBar = () => {
               title={item.title}
               collapsedItems={item?.collapsedItems}
               to={item?.to}
+              accessRoute={item.accessRoute}
+              accessOperation={item.accessOperation}
             />
           ))}
         </List>

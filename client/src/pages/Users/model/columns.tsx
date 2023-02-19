@@ -13,6 +13,7 @@ import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined'
 
 import { InformativeImage } from 'shared/ui'
 import { ConfirmDialog } from 'entities'
+import { useRootStore } from 'stores'
 import { TableColumn, Roles, Gender } from 'shared/types'
 import { API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 import { getFullName, getInitials, reformatDates } from 'shared/helpers'
@@ -22,6 +23,7 @@ import { ConnectionStatus } from '../ui'
 
 const ActionButtons = observer(({ user: data }: { user: User }) => {
   const { t } = useTranslation()
+  const { user } = useRootStore()
 
   const [isOpenModal, setIsOpenModal] = useState(false)
 
@@ -29,16 +31,18 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
 
   return (
     <>
-      <Tooltip title={t('actions.edit') || 'edit'} placement="top">
-        <IconButton
-          component={Link}
-          to={generatePath(ROUTES.USERS_EDIT, { id: String(data.id) })}
-          aria-label="edit"
-          size="small"
-        >
-          <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
-        </IconButton>
-      </Tooltip>
+      {user.permissions.updateUsers && (
+        <Tooltip title={t('actions.edit') || 'edit'} placement="top">
+          <IconButton
+            component={Link}
+            to={generatePath(ROUTES.USERS_EDIT, { id: String(data.id) })}
+            aria-label="edit"
+            size="small"
+          >
+            <EditOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
+          </IconButton>
+        </Tooltip>
+      )}
       <Tooltip title={t('page:userProfile') || 'User profile'} placement="top">
         <IconButton
           component={Link}
@@ -48,11 +52,13 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
           <ArrowForwardOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
         </IconButton>
       </Tooltip>
-      <Tooltip title={t('actions.delete') || 'delete'} placement="top">
-        <IconButton aria-label="delete" size="small" onClick={() => setIsOpenModal(true)}>
-          <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
-        </IconButton>
-      </Tooltip>
+      {user.permissions.deleteUsers && (
+        <Tooltip title={t('actions.delete') || 'delete'} placement="top">
+          <IconButton aria-label="delete" size="small" onClick={() => setIsOpenModal(true)}>
+            <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
+          </IconButton>
+        </Tooltip>
+      )}
 
       <ConfirmDialog
         open={isOpenModal}
@@ -110,7 +116,6 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'gender',
     title: i18next.t('user:gender'),
-    // getValue: (row: User) => i18next.t(`user:${row.gender}`),
     getValue: (row: User) => (
       <Box color="text.primary">
         {row.gender === Gender.man ? i18next.t('user:man') : i18next.t('user:woman')}

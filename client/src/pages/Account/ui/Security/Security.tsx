@@ -7,6 +7,7 @@ import { CommonTable, Input, OptionSetup, Pagination, Spinner } from 'shared/ui'
 import { useTimer } from 'shared/hooks'
 
 import { getColumns, SecurityModel } from './model'
+import QrCodeModal from './QrCodeModal'
 
 function Security() {
   const { t } = useTranslation()
@@ -16,7 +17,7 @@ function Security() {
   const { timeLeft, setTimeLeft, isTimerEnded } = useTimer()
 
   function onStartTimer() {
-    setTimeLeft(60)
+    setTimeLeft(60 * 5)
   }
 
   const columns = useMemo(() => getColumns(), [])
@@ -62,11 +63,11 @@ function Security() {
           <OptionSetup
             title={t('user:textMessage')}
             subtitle={t('user:updates.security.receiveSmsCode')}
-            onClick={async () => {
-              console.log('change in BD to true')
+            onClick={() => {
+              user.toggleSmsAlerts()
             }}
-            buttonText={`${t('actions.sendCode')} ${!isTimerEnded ? timeLeft : ''}`}
-            disabled={!isTimerEnded}
+            buttonText={`${t('actions.sendCode')}`}
+            disabled={user.is_sms_alerts_active}
             isActive={user.is_sms_alerts_active}
           />
         </Box>
@@ -90,6 +91,23 @@ function Security() {
           )}
         </Grid>
       </Paper>
+
+      <QrCodeModal
+        open={isOpenModal}
+        handleClose={() => {
+          setIsOpenModal(false)
+        }}
+        qrCodeUrl={SecurityModel.qrCodeUrl}
+        timeLeft={timeLeft}
+        isTimerEnded={isTimerEnded}
+        onSubmit={async (code: string) => {
+          await SecurityModel.verifyQrCode(code)
+        }}
+        onSendCodeAgain={() => {
+          SecurityModel.getQRCode()
+          onStartTimer()
+        }}
+      />
     </>
   )
 }

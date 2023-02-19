@@ -1,7 +1,13 @@
 import express from 'express'
 
 import { signIn } from 'services/auth'
-import { removeUserSelf, getUserSelf, updateUserSelf, uploadUserAvatar } from 'services/user'
+import {
+  removeUserSelf,
+  getUserSelf,
+  updateUserSelf,
+  uploadUserAvatar,
+  getUserPermissions,
+} from 'services/user'
 import {
   createPost,
   createPostComment,
@@ -23,54 +29,60 @@ import {
   getQrCode,
   sendEmailVerificationCode,
   sendPhoneVerificationCode,
+  toggleEmailAlerts,
+  toggleSmsAlerts,
+  verifyQrCode,
   verifyUserEmailByCode,
   verifyUserPhoneByCode,
-} from 'services/verification'
-import { FILE_FIELD_NAMES, useFile } from 'middlewares'
+} from 'services/security'
+import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
+import { ROUTES } from 'shared/consts'
 
 const router = express.Router()
 
-const AUTH = '/auth'
-router.post(`${AUTH}/signIn`, signIn)
+router.post(`/${ROUTES.AUTH}/signIn`, signIn)
 
-const USER = '/user'
-router.get(`${USER}`, getUserSelf)
-router.put(`${USER}`, updateUserSelf)
-router.delete(`${USER}`, removeUserSelf)
-router.post(`${USER}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+router.get(`/${ROUTES.USER}`, getUserSelf)
+router.put(`/${ROUTES.USER}`, updateUserSelf)
+router.delete(`/${ROUTES.USER}`, removeUserSelf)
+router.post(
+  `/${ROUTES.USER}/uploadPhoto`,
+  useFile.single(FILE_FIELD_NAMES.avatar),
+  uploadUserAvatar
+)
+router.get(`/${ROUTES.USER}/permissions`, getUserPermissions)
 
-const VERIFICATION = '/verification'
-router.put(`${VERIFICATION}/email`, sendEmailVerificationCode)
-router.post(`${VERIFICATION}/email`, verifyUserEmailByCode)
-router.put(`${VERIFICATION}/phone`, sendPhoneVerificationCode)
-router.post(`${VERIFICATION}/phone`, verifyUserPhoneByCode)
-router.get(`${VERIFICATION}/qr`, getQrCode)
+router.put(`/${ROUTES.SECURITY}/email`, sendEmailVerificationCode)
+router.post(`/${ROUTES.SECURITY}/email`, verifyUserEmailByCode)
+router.put(`/${ROUTES.SECURITY}/email/alerts`, toggleEmailAlerts)
 
-const USERS = '/users'
-router.get(`${USERS}`, getUsers)
-router.post(`${USERS}`, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
-router.get(`${USERS}/:id`, getUser)
-router.put(`${USERS}/:id`, updateUserById)
-router.delete(`${USERS}/:id`, removeUserSelf)
+router.put(`/${ROUTES.SECURITY}/phone`, sendPhoneVerificationCode)
+router.post(`/${ROUTES.SECURITY}/phone`, verifyUserPhoneByCode)
+router.put(`/${ROUTES.SECURITY}/phone/alerts`, toggleSmsAlerts)
 
-const POSTS = '/posts'
-router.get(`${POSTS}`, getPosts)
-router.get(`${POSTS}/:id`, getPost)
-router.post(`${POSTS}`, useFile.single(FILE_FIELD_NAMES.post), createPost)
-router.delete(`${POSTS}/:id`, deletePostById)
-router.put(`${POSTS}/:id/likes`, togglePostLikes)
+router.get(`/${ROUTES.SECURITY}/qr`, getQrCode)
+router.put(`/${ROUTES.SECURITY}/qr`, verifyQrCode)
 
-const GENRES = '/genres'
-router.get(`${GENRES}`, getGenres)
+router.get(`/${ROUTES.USERS}`, usePermission, getUsers)
+router.post(`/${ROUTES.USERS}`, usePermission, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
+router.get(`/${ROUTES.USERS}/:id`, usePermission, getUser)
+router.put(`/${ROUTES.USERS}/:id`, usePermission, updateUserById)
+router.delete(`/${ROUTES.USERS}/:id`, usePermission, removeUserSelf)
 
-const COMMENTS = '/comments'
-router.post(`${POSTS}/:post_id${COMMENTS}`, createPostComment)
-router.delete(`${POSTS}/:post_id${COMMENTS}/:comment_id`, deletePostComment)
-router.put(`${POSTS}/:post_id${COMMENTS}/:comment_id`, updatePostComment)
+router.get(`/${ROUTES.POSTS}`, usePermission, getPosts)
+router.get(`/${ROUTES.POSTS}/:id`, usePermission, getPost)
+router.post(`/${ROUTES.POSTS}`, usePermission, useFile.single(FILE_FIELD_NAMES.post), createPost)
+router.delete(`/${ROUTES.POSTS}/:id`, usePermission, deletePostById)
+router.put(`/${ROUTES.POSTS}/:id/likes`, usePermission, togglePostLikes)
 
-const CONNECTIONS = '/connections'
-router.get(`${CONNECTIONS}`, getConnections)
-router.delete(`${CONNECTIONS}/:id`, deleteConnectionById)
-router.put(`${CONNECTIONS}/:id`, updateConnectionStatusById)
+router.get(`/${ROUTES.GENRES}`, getGenres)
+
+router.post(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}`, createPostComment)
+router.delete(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}/:comment_id`, deletePostComment)
+router.put(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}/:comment_id`, updatePostComment)
+
+router.get(`/${ROUTES.CONNECTIONS}`, getConnections)
+router.delete(`/${ROUTES.CONNECTIONS}/:id`, deleteConnectionById)
+router.put(`/${ROUTES.CONNECTIONS}/:id`, updateConnectionStatusById)
 
 export default router

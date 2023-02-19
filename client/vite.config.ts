@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode, ssrBuild }): any => {
         open: true,
         proxy: {
           '/api': {
-            target: 'http://localhost:80/api',
+            target: 'http://localhost:80',
             changeOrigin: true,
             ws: true,
             rewrite: (path: any) => path.replace(/^\/api/, ''),

@@ -27,7 +27,7 @@ function UserInfo() {
               cvv={ProfileModel.cvv}
             />
 
-            {user.isAuthorizedUser(ProfileModel.id) && (
+            {(user.isAuthorizedUser(ProfileModel.id) || user.permissions.deleteUsers) && (
               <DeleteAccount onDelete={ProfileModel.removeById} />
             )}
           </Grid>

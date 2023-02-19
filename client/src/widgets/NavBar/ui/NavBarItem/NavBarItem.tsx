@@ -9,22 +9,41 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  Box,
 } from '@mui/material'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 import { CircleDevider } from 'shared/ui'
+import { useRootStore } from 'stores'
+import { AccessRoute, Operation } from 'models/Permissions'
 
 interface Props {
   icon: JSX.Element
   title: string
   to?: string
-  collapsedItems?: { to: string; text: string }[]
+  collapsedItems?: { to: string; text: string; accessOperation?: Operation }[]
+  accessRoute?: AccessRoute
+  accessOperation?: Operation
 }
 
-const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
+const NavBarItem = ({
+  icon,
+  title,
+  to = '',
+  collapsedItems = [],
+  accessRoute,
+  accessOperation,
+}: Props) => {
   const { t } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
+  const { user } = useRootStore()
+
+  const hasAccess = useMemo(() => {
+    if (!accessRoute || !accessOperation) {
+      return true
+    }
+
+    return user.permissions.hasAccess(accessOperation, accessRoute)
+  }, [])
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -41,6 +60,10 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
       to ? location.pathname === to : collapsedItems.find((item) => location.pathname === item.to),
     [to, location, collapsedItems]
   )
+
+  if (!hasAccess) {
+    return null
+  }
 
   return (
     <>
@@ -72,28 +95,42 @@ const NavBarItem = ({ icon, title, to = '', collapsedItems = [] }: Props) => {
 
       {!to && (
         <Collapse in={isOpen} timeout="auto" mountOnEnter unmountOnExit>
-          {collapsedItems.map((item) => (
-            <List component="div" disablePadding>
-              <ListItemButton component={Link} to={item.to} sx={{ p: 0.6, borderRadius: 1, pl: 5 }}>
-                {location.pathname === item.to && (
-                  <CircleDevider
-                    sx={{
-                      position: 'absolute',
-                      backgroundColor: 'primary.main',
-                      left: 10,
-                    }}
-                  />
-                )}
+          <List component="div" disablePadding>
+            {collapsedItems.map((item) => {
+              if (
+                item.accessOperation &&
+                accessRoute &&
+                !user.permissions.hasAccess(item.accessOperation, accessRoute)
+              ) {
+                return null
+              }
 
-                <Typography
-                  variant="body2"
-                  color={location.pathname === item.to ? 'text.primary' : 'text.secondary'}
+              return (
+                <ListItemButton
+                  component={Link}
+                  to={item.to}
+                  sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
                 >
-                  {t(item.text)}
-                </Typography>
-              </ListItemButton>
-            </List>
-          ))}
+                  {location.pathname === item.to && (
+                    <CircleDevider
+                      sx={{
+                        position: 'absolute',
+                        backgroundColor: 'primary.main',
+                        left: 10,
+                      }}
+                    />
+                  )}
+
+                  <Typography
+                    variant="body2"
+                    color={location.pathname === item.to ? 'text.primary' : 'text.secondary'}
+                  >
+                    {t(item.text)}
+                  </Typography>
+                </ListItemButton>
+              )
+            })}
+          </List>
         </Collapse>
       )}
     </>

@@ -8,7 +8,7 @@ import { ROUTES } from 'shared/consts'
 
 interface Props {
   pageName: string
-  children?: JSX.Element
+  children?: JSX.Element | null
   breadcrumbs?: { to?: string; text: string }[]
 }
 
