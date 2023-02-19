@@ -42,10 +42,11 @@ class AuthorizationModel {
       this.rootStore.loading.begin()
 
       const data = await API.auth.signIn(value.email, value.password)
-      this.rootStore.user.init()
 
       this.setAccessToken(data.accessToken)
       this.isAuthorized = true
+
+      await this.rootStore.user.init()
     } catch (err: any) {
       toast.error(err)
     } finally {
