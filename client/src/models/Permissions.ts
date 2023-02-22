@@ -8,6 +8,7 @@ export enum AccessRoute {
   posts = 'posts',
   chat = 'chat',
   files = 'files',
+  kanban = 'kanban',
 }
 
 export enum Operation {
@@ -91,6 +92,19 @@ class PermissionsModel {
   }
   get deleteFiles() {
     return this._permissions?.[AccessRoute.files]?.includes(Operation.delete)
+  }
+
+  get getKanban() {
+    return this._permissions?.[AccessRoute.kanban]?.includes(Operation.get)
+  }
+  get createKanban() {
+    return this._permissions?.[AccessRoute.kanban]?.includes(Operation.create)
+  }
+  get updateKanban() {
+    return this._permissions?.[AccessRoute.kanban]?.includes(Operation.update)
+  }
+  get deleteKanban() {
+    return this._permissions?.[AccessRoute.kanban]?.includes(Operation.delete)
   }
 }
 
