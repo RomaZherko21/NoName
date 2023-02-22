@@ -1,6 +1,11 @@
 {
   "createdAt": "Created at {{date}}",
   "fileItems": "{{count}} items",
+  "createdBy": "Created by",
+  "size": "Size",
+  "modifiedAt": "Modified At",
+  "tags": "Tags",
+  "sharedWith": "Shared with",
   "actions": {
     "upgradePlan": "Upgrade Plan"
   },

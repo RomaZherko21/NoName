@@ -13,9 +13,10 @@ import folder from 'shared/assets/images/fileFormat/folder.svg'
 interface Props {
   file: File
   toggleFavourite: (id: number) => void
+  handleOpenFileInfo: () => void
 }
 
-const FileItemRow = ({ file, toggleFavourite }: Props) => {
+const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
   const popupConfig = useMemo(() => getFilePopupConfig(file.id), [file.id])
 
@@ -29,13 +30,20 @@ const FileItemRow = ({ file, toggleFavourite }: Props) => {
         p: 2,
         background: 'none',
         borderRadius: 2,
+        '&:hover': {
+          backgroundColor: (theme) => theme.palette.background.paper,
+        },
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <img alt="Folder" src={folder} />
+        <Box sx={{ cursor: 'pointer' }}>
+          <img alt="Folder" src={folder} onClick={handleOpenFileInfo} />
+        </Box>
 
         <Box>
-          <Typography variant="body2">{file.name}</Typography>
+          <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
+            {file.name}
+          </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
