@@ -18,6 +18,7 @@ class FilesModel {
       count: 12,
       created_at: 'Feb 13, 2023',
       is_favourite: false,
+      tags: ['Business', 'Work'],
     },
     {
       id: 1,
@@ -27,6 +28,7 @@ class FilesModel {
       count: 9,
       created_at: 'Feb 13, 2023',
       is_favourite: false,
+      tags: ['Friends', 'Personal'],
     },
     {
       id: 2,
@@ -36,6 +38,7 @@ class FilesModel {
       count: 11,
       created_at: 'Feb 13, 2023',
       is_favourite: true,
+      tags: ['Homework', 'Holiday'],
     },
   ]
 
@@ -55,6 +58,14 @@ class FilesModel {
 
   toggleFavourite(id: number) {
     console.log('toggleFavourite request')
+  }
+
+  deleteFile(id: number) {
+    console.log('deleteFile request')
+  }
+
+  deleteTag(id: number) {
+    console.log('deleteTag request')
   }
 
   debounceFetch = debounce(this.fetch, 500)

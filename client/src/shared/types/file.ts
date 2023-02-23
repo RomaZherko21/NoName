@@ -6,4 +6,5 @@ export interface File {
   count?: number
   created_at: string
   is_favourite: boolean
+  tags: string[]
 }

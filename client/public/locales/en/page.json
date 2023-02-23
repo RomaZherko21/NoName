@@ -19,6 +19,7 @@
   "404": "404 | Page not found",
   "verification": "Verification",
   "fileManager": "File Manager",
+  "kanban": "Kanban",
   "sub": {
     "list": "List",
     "create": "Create",

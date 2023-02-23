@@ -12,7 +12,7 @@ import { AsideFiltersBar } from 'shared/ui'
 import { getSearchParamsObj } from 'shared/helpers'
 
 import { FilesModel, sortConfig } from './model'
-import { FileItemCard, FileItemRow, Storage } from './ui'
+import { FileItemCard, FileItemRow, Storage, AsideFileInfo } from './ui'
 
 enum ViewType {
   card = 'card',
@@ -24,6 +24,7 @@ const FileManager = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [view, setView] = useState<ViewType>(ViewType.card)
+  const [openFileInfo, setOpenFileInfo] = useState(false)
 
   const sortOptions = useMemo(() => sortConfig, [])
 
@@ -94,6 +95,9 @@ const FileManager = () => {
                   <FileItemCard
                     file={file}
                     toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
+                    handleOpenFileInfo={() => {
+                      setOpenFileInfo(true)
+                    }}
                   />
                 </Grid>
               ) : (
@@ -101,6 +105,9 @@ const FileManager = () => {
                   <FileItemRow
                     file={file}
                     toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
+                    handleOpenFileInfo={() => {
+                      setOpenFileInfo(true)
+                    }}
                   />
                 </Grid>
               )
@@ -112,6 +119,17 @@ const FileManager = () => {
           <Storage />
         </Grid>
       </Grid>
+
+      {FilesModel.files.map((file) => (
+        <AsideFileInfo
+          file={file}
+          openFileInfo={openFileInfo}
+          onCloseFileInfo={() => setOpenFileInfo(false)}
+          toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
+          deleteFile={() => FilesModel.deleteFile(file.id)}
+          deleteTag={() => FilesModel.deleteTag(file.id)}
+        />
+      ))}
     </>
   )
 }
