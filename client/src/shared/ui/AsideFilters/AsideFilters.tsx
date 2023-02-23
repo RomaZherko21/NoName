@@ -49,7 +49,7 @@ const AsideFilters = ({
       open={openFilter}
       onClose={onCloseFilter}
       PaperProps={{
-        sx: { width: 280, border: 'none', overflow: 'hidden', pt: '60px' },
+        sx: { width: 280, border: 'none', overflow: 'hidden' },
       }}
     >
       <Stack
