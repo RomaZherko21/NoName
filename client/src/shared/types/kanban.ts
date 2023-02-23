@@ -1,10 +1,10 @@
-export interface Column {
+export interface KanbanColumn {
   id: string
   title: string
-  tasks: Task[]
+  tasks: KanbanTask[]
 }
 
-export interface Task {
-  task_id: string
+export interface KanbanTask {
+  id: string
   content: string
 }

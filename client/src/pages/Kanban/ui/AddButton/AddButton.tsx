@@ -17,23 +17,19 @@ function AddButton({ text }: Props) {
       {isFormOpen ? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
             p: 1.5,
-            gap: 1.5,
-            width: '100%',
-            maxWidth: '300px',
-            borderRadius: '20px',
-            backgroundColor: '#1c2536',
-            color: (theme) => theme.palette.text.secondary,
-            cursor: 'pointer',
-            '&:active': {
-              backgroundColor: (theme) => theme.palette.action.hover,
+            borderRadius: 2,
+            minWidth: 280,
+            backgroundColor: 'background.rare',
+            '&:hover': {
+              backgroundColor: ({ palette }) =>
+                !isFormOpen ? palette.action.hover : 'background.rare',
             },
           }}
         >
           <TextField size="small" autoFocus placeholder={t(text)} fullWidth />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+
+          <Box sx={{ display: 'flex', mt: 1, gap: 1 }}>
             <Button
               onClick={() => setIsFormOpen(false)}
               size="small"
@@ -42,33 +38,34 @@ function AddButton({ text }: Props) {
             >
               {t(text)}
             </Button>
-            <Button onClick={() => setIsFormOpen(false)} size="small" variant="text">
+
+            <Button
+              onClick={() => setIsFormOpen(false)}
+              size="small"
+              sx={{ color: ({ palette }) => palette.text.secondary }}
+            >
               {t('user:actions.cancel')}
             </Button>
           </Box>
         </Box>
       ) : (
-        <Box
+        <Button
+          startIcon={<AiOutlinePlus fontSize={16} />}
           onClick={() => setIsFormOpen(true)}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            maxWidth: '300px',
-            p: 1.5,
-            gap: 1,
-            borderRadius: '20px',
-            backgroundColor: '#1c2536',
-            color: (theme) => theme.palette.text.secondary,
-            cursor: 'pointer',
-            '&:active': {
-              backgroundColor: (theme) => theme.palette.action.hover,
+            color: ({ palette }) => palette.text.secondary,
+            minWidth: 280,
+            py: 1,
+            m: 0,
+            backgroundColor: 'background.rare',
+            '&:hover': {
+              backgroundColor: ({ palette }) =>
+                !isFormOpen ? palette.action.hover : 'background.rare',
             },
           }}
         >
-          <AiOutlinePlus fontSize={24} />
-          <Typography variant="subtitle1">{t(text)}</Typography>
-        </Box>
+          {t(text)}
+        </Button>
       )}
     </>
   )

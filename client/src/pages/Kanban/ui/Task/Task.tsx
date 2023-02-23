@@ -6,7 +6,7 @@ import { BsEye } from 'react-icons/bs'
 import { AiOutlineMessage } from 'react-icons/ai'
 
 import primerImg from 'shared/assets/images/cover.jpg'
-import { Task as TypeTask } from 'shared/types'
+import { KanbanTask as TypeTask } from 'shared/types'
 
 interface Props {
   provided: DraggableProvided
@@ -24,9 +24,10 @@ function Task({ provided, snapshot, task }: Props) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        p: '24px',
+        p: 2,
         gap: 2,
-        backgroundColor: (theme) => (snapshot.isDragging ? theme.palette.action.hover : '#1c2536'),
+        backgroundColor: (theme) =>
+          snapshot.isDragging ? theme.palette.action.hover : 'background.rare',
         '&:hover': {
           backgroundColor: (theme) => theme.palette.action.hover,
         },
@@ -38,9 +39,9 @@ function Task({ provided, snapshot, task }: Props) {
         <CardMedia
           sx={{
             alignSelf: 'center',
-            height: '140px',
-            width: '300px',
-            borderRadius: '20px',
+            height: 140,
+            width: '100%',
+            borderRadius: 2,
             mb: 1,
           }}
           image={primerImg}
@@ -68,16 +69,18 @@ function Task({ provided, snapshot, task }: Props) {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 1,
+            gap: 1.5,
             color: (theme) => theme.palette.grey[600],
+            fontSize: 18,
           }}
         >
-          <BsEye size={24} />
-          <ImFilePicture size={24} />
-          <AiOutlineMessage size={24} />
+          <BsEye />
+          <ImFilePicture />
+          <AiOutlineMessage />
         </Box>
+
         <Avatar
-          sx={{ height: '40px', width: '40px' }}
+          sx={{ height: 32, width: 32 }}
           // src={`${API_USER_AVATAR_URL}/${user.avatar}`}
         />
       </Box>

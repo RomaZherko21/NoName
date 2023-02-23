@@ -74,7 +74,7 @@ function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts 
               alignItems: 'center',
               gap: 1,
               p: 1,
-              backgroundColor: '#1c2536',
+              backgroundColor: 'background.rare',
               color: (theme) => theme.palette.text.secondary,
               borderRadius: '8px',
             }}

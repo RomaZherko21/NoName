@@ -1,30 +1,30 @@
 import { useState } from 'react'
-import { Box, Paper, Chip, IconButton, InputBase } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
+import { Box, Paper, Chip, IconButton, InputBase, Container } from '@mui/material'
 import { FiMoreHorizontal } from 'react-icons/fi'
 
 import { PageHeader } from 'widgets'
-import { Column } from 'shared/types'
+import { KanbanColumn } from 'shared/types'
 
 import { AddButton, Task } from './ui'
 
-const columnsFromBackend: Column[] = [
+const columnsFromBackend: KanbanColumn[] = [
   {
     id: '1',
     title: 'Todo',
     tasks: [
-      { task_id: '1', content: 'First task' },
-      { task_id: '2', content: 'Second task' },
+      { id: '1', content: 'First task' },
+      { id: '2', content: 'Second task' },
     ],
   },
   {
     id: '2',
     title: 'In progress',
     tasks: [
-      { task_id: '3', content: 'Three task' },
-      { task_id: '4', content: 'Four task' },
+      { id: '3', content: 'Three task' },
+      { id: '4', content: 'Four task' },
     ],
   },
   {
@@ -38,148 +38,148 @@ function Kanban() {
   const { t } = useTranslation()
   const [columns, setColumns] = useState(columnsFromBackend)
 
-  function onDragEnd(result: DropResult) {
-    if (!result.destination) return
-    const { source, destination } = result
+  function onDragEnd({ source, destination }: DropResult) {
+    if (!destination) return
+
     if (source.droppableId !== destination.droppableId) {
-      const sourceColumn: Column = columns.filter((item) => source.droppableId === item.id)[0]
-      const destinationColumn: Column = columns.filter(
-        (item) => destination.droppableId === item.id
-      )[0]
-      const sourceItems = [...sourceColumn.tasks]
-      const destinationItems = [...destinationColumn.tasks]
-      const [removed] = sourceItems.splice(source.index, 1)
-      destinationItems.splice(destination.index, 0, removed)
-      setColumns(
-        columns.map((item) => {
-          if (item.id === source.droppableId) {
-            return { ...sourceColumn, tasks: sourceItems }
-          } else if (item.id === destination.droppableId) {
-            return { ...destinationColumn, tasks: destinationItems }
-          } else {
-            return item
-          }
-        })
-      )
+      const fromColumn = columns.find((item) => source.droppableId === item.id)
+      const toColumn = columns.find((item) => destination.droppableId === item.id)
+
+      if (fromColumn && toColumn) {
+        const fromTasks = [...fromColumn.tasks]
+        const toTasks = [...toColumn.tasks]
+        const [removed] = fromTasks.splice(source.index, 1)
+
+        toTasks.splice(destination.index, 0, removed)
+
+        setColumns(
+          columns.map((column) => {
+            if (column.id === source.droppableId) {
+              return { ...fromColumn, tasks: fromTasks }
+            } else if (column.id === destination.droppableId) {
+              return { ...toColumn, tasks: toTasks }
+            } else {
+              return column
+            }
+          })
+        )
+      }
     } else {
-      const column: Column = columns.filter((item) => source.droppableId === item.id)[0]
-      const copiedItems = [...column.tasks]
-      const [removed] = copiedItems.splice(source.index, 1)
-      copiedItems.splice(destination.index, 0, removed)
-      setColumns(
-        columns.map((item) => {
-          if (item.id !== source.droppableId) {
-            return item
-          } else {
-            return { ...column, tasks: copiedItems }
-          }
-        })
-      )
+      const column = columns.find((item) => source.droppableId === item.id)
+
+      if (column) {
+        const fromTasks = [...column.tasks]
+        const [removed] = fromTasks.splice(source.index, 1)
+
+        fromTasks.splice(destination.index, 0, removed)
+
+        setColumns(
+          columns.map((column) => {
+            if (column.id === source.droppableId) {
+              return { ...column, tasks: fromTasks }
+            } else {
+              return column
+            }
+          })
+        )
+      }
     }
   }
 
   return (
-    <Box
+    <Container
+      maxWidth="xl"
       sx={{
-        display: 'flex',
-        flexDirection: 'column ',
-        mt: '40px',
-        p: '24px',
-        gap: 2,
+        py: 6,
       }}
     >
       <PageHeader pageName={t('page:kanban')} breadcrumbs={[{ text: 'page:kanban' }]} />
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'row',
           alignItems: 'flex-start',
-          flexGrow: 1,
           gap: 4,
         }}
       >
-        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-          {columns.map((column) => {
-            return (
-              <Droppable droppableId={column.id} key={column.id}>
-                {(provided) => {
-                  return (
-                    <Box
+        <DragDropContext onDragEnd={onDragEnd}>
+          {columns.map((column) => (
+            <Droppable droppableId={column.id} key={column.id}>
+              {(provided) => (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minWidth: 380,
+                    gap: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 2,
+                    }}
+                  >
+                    <InputBase
+                      value={column.title}
+                      size="small"
+                      fullWidth
                       sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '380px',
-                        gap: 1,
+                        p: 0.5,
+                        pl: 2,
+                        backgroundColor: ({ palette }) => palette.background.default,
+                        color: ({ palette }) => palette.text.primary,
+                        '&:hover': {
+                          backgroundColor: ({ palette }) => palette.action.hover,
+                          borderRadius: '15px',
+                        },
+                        '&.Mui-focused': {
+                          backgroundColor: ({ palette }) => palette.action.hover,
+                          borderRadius: '15px',
+                        },
+                        '&fieldset': { border: 'none' },
                       }}
-                    >
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 2,
-                        }}
-                      >
-                        <InputBase
-                          value={column.title}
-                          size="small"
-                          fullWidth
-                          sx={{
-                            p: 0.5,
-                            pl: 2,
-                            backgroundColor: (theme) => theme.palette.background.default,
-                            color: (theme) => theme.palette.text.primary,
-                            '&:hover': {
-                              backgroundColor: (theme) => theme.palette.action.hover,
-                              borderRadius: '15px',
-                            },
-                            '&.Mui-focused': {
-                              backgroundColor: (theme) => theme.palette.action.hover,
-                              borderRadius: '15px',
-                            },
-                            '& fieldset': { border: 'none' },
-                          }}
-                        />
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Chip
-                            label={column.tasks.length}
-                            sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
-                          />
-                          <IconButton>
-                            <FiMoreHorizontal />
-                          </IconButton>
-                        </Box>
-                      </Box>
+                    />
 
-                      <Paper
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          p: '24px',
-                          gap: 2,
-                        }}
-                      >
-                        {column.tasks.map((task, id) => (
-                          <Draggable key={task.task_id} draggableId={task.task_id} index={id}>
-                            {(provided, snapshot) => (
-                              <Task provided={provided} snapshot={snapshot} task={task} />
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                        <AddButton text="user:actions.addTask" />
-                      </Paper>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Chip
+                        label={column.tasks.length}
+                        sx={{ backgroundColor: ({ palette }) => palette.grey[700] }}
+                      />
+                      <IconButton>
+                        <FiMoreHorizontal />
+                      </IconButton>
                     </Box>
-                  )
-                }}
-              </Droppable>
-            )
-          })}
+                  </Box>
+
+                  <Paper
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      p: 2,
+                      gap: 2,
+                    }}
+                  >
+                    {column.tasks.map((task, id) => (
+                      <Draggable key={task.id} draggableId={task.id} index={id}>
+                        {(provided, snapshot) => (
+                          <Task provided={provided} snapshot={snapshot} task={task} />
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                    <AddButton text="user:actions.addTask" />
+                  </Paper>
+                </Box>
+              )}
+            </Droppable>
+          ))}
           <AddButton text="user:actions.addColumn" />
         </DragDropContext>
       </Box>
-    </Box>
+    </Container>
   )
 }
 
