@@ -17,7 +17,7 @@ const Layout = () => {
       <Header />
 
       <NavBar />
-      {location.pathname === ROUTES.CHAT ? (
+      {location.pathname === ROUTES.CHAT || location.pathname === ROUTES.KANBAN ? (
         <Box sx={{ width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` } }}>
           <Toolbar />
           <Outlet />
