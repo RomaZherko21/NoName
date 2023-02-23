@@ -5,9 +5,7 @@ import { MdOutlineEdit } from 'react-icons/md'
 import { FiTrash } from 'react-icons/fi'
 
 import { File } from 'shared/types/file'
-
 import { FilesModel } from 'pages/FileManager/model'
-
 import folder from 'shared/assets/images/fileFormat/folder.svg'
 
 interface Props {
@@ -67,11 +65,10 @@ const AsideFileInfo = ({
       <Box sx={{ px: 3, py: 2 }}>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
+            textAlign: 'center',
             p: 2,
             mb: 2,
-            color: ({ palette }) => palette.grey[500],
+            borderColor: ({ palette }) => palette.grey[500],
             backgroundColor: 'background.rare',
             borderRadius: 1,
             borderStyle: 'dashed',
@@ -82,82 +79,93 @@ const AsideFileInfo = ({
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography variant="h6">{file.name}</Typography>
+          <Typography variant="h5">{file.name}</Typography>
           <IconButton size="small">
             <MdOutlineEdit />
           </IconButton>
         </Box>
 
-        <Grid container>
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('file:createdBy')}</Typography>
-          </Grid>
-          <Grid xs={8} sx={{ p: 1.5 }}>
-            <Avatar></Avatar>
-          </Grid>
-
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('file:size')}</Typography>
-          </Grid>
-          <Grid xs={8} sx={{ p: 1.5 }}>
-            <Typography variant="body2">{file.size}</Typography>
+        <Grid container sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('file:createdBy')}</Typography>
+            </Grid>
+            <Grid xs={8}>
+              <Avatar sx={{ width: 28, height: 28 }}></Avatar>
+            </Grid>
           </Grid>
 
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('fields.createdAt')}</Typography>
-          </Grid>
-          <Grid xs={8} sx={{ p: 1.5 }}>
-            <Typography variant="body2">{file.created_at}</Typography>
-          </Grid>
-
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('file:modifiedAt')}</Typography>
-          </Grid>
-          <Grid xs={8} sx={{ p: 1.5 }}>
-            <Typography variant="body2"></Typography>
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('file:size')}</Typography>
+            </Grid>
+            <Grid xs={8}>
+              <Typography variant="body2">{file.size}</Typography>
+            </Grid>
           </Grid>
 
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('file:tags')}</Typography>
-          </Grid>
-          <Grid
-            xs={8}
-            sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center', p: 1.5 }}
-          >
-            {FilesModel.files.map((file) =>
-              file.tags.map((tag, id) => (
-                <Chip
-                  label={tag}
-                  onDelete={() => deleteTag(id)}
-                  sx={{ height: 26, backgroundColor: ({ palette }) => palette.grey[700] }}
-                />
-              ))
-            )}
-            <IconButton sx={{ fontSize: 20, color: ({ palette }) => palette.grey[500] }}>
-              <AiOutlinePlus />
-            </IconButton>
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('fields.createdAt')}</Typography>
+            </Grid>
+            <Grid xs={8}>
+              <Typography variant="body2">{file.created_at}</Typography>
+            </Grid>
           </Grid>
 
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('file:sharedWith')}</Typography>
-          </Grid>
-          <Grid xs={8} sx={{ display: 'flex', p: 1.5 }}>
-            <Avatar></Avatar>
-            <IconButton sx={{ fontSize: 20, ml: 1, color: ({ palette }) => palette.grey[500] }}>
-              <AiOutlinePlus />
-            </IconButton>
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('file:modifiedAt')}</Typography>
+            </Grid>
+            <Grid xs={8}>
+              <Typography variant="body2"></Typography>
+            </Grid>
           </Grid>
 
-          <Grid xs={4} sx={{ p: 1.5 }}>
-            <Typography variant="caption">{t('translation:common.actions')}</Typography>
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('file:tags')}</Typography>
+            </Grid>
+            <Grid xs={8} sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
+              {FilesModel.files.map((file) =>
+                file.tags.map((tag, id) => (
+                  <Chip
+                    label={tag}
+                    onDelete={() => deleteTag(id)}
+                    sx={{ height: 26, backgroundColor: ({ palette }) => palette.grey[700] }}
+                  />
+                ))
+              )}
+              <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
+                <AiOutlinePlus />
+              </IconButton>
+            </Grid>
           </Grid>
-          <Grid xs={8} sx={{ p: 1.5 }}>
-            <IconButton
-              onClick={() => deleteFile(file.id)}
-              sx={{ fontSize: 18, color: ({ palette }) => palette.grey[500] }}
-            >
-              <FiTrash />
-            </IconButton>
+
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('file:sharedWith')}</Typography>
+            </Grid>
+            <Grid xs={8} sx={{ display: 'flex' }}>
+              <Avatar sx={{ width: 28, height: 28 }}></Avatar>
+              <IconButton sx={{ fontSize: 16, ml: 1, color: ({ palette }) => palette.grey[500] }}>
+                <AiOutlinePlus />
+              </IconButton>
+            </Grid>
+          </Grid>
+
+          <Grid container xs={12}>
+            <Grid xs={4}>
+              <Typography variant="caption">{t('translation:common.actions')}</Typography>
+            </Grid>
+            <Grid xs={8}>
+              <IconButton
+                onClick={() => deleteFile(file.id)}
+                sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
+              >
+                <FiTrash />
+              </IconButton>
+            </Grid>
           </Grid>
         </Grid>
       </Box>
