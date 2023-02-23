@@ -49,15 +49,14 @@ const AsideFileInfo = ({
           sx={{
             p: 1,
             fontSize: 20,
-            color: (theme) =>
-              file.is_favourite ? theme.palette.warning.main : theme.palette.grey[500],
+            color: ({ palette }) => (file.is_favourite ? palette.warning.main : palette.grey[500]),
           }}
         >
           <AiOutlineStar />
         </IconButton>
         <IconButton
           onClick={onCloseFileInfo}
-          sx={{ p: 1, fontSize: 20, color: (theme) => theme.palette.grey[500] }}
+          sx={{ p: 1, fontSize: 20, color: ({ palette }) => palette.grey[500] }}
         >
           <AiOutlineClose />
         </IconButton>
@@ -72,8 +71,8 @@ const AsideFileInfo = ({
             justifyContent: 'center',
             p: 2,
             mb: 2,
-            color: (theme) => theme.palette.grey[500],
-            backgroundColor: '#1c2536',
+            color: ({ palette }) => palette.grey[500],
+            backgroundColor: 'background.rare',
             borderRadius: 1,
             borderStyle: 'dashed',
             borderWidth: 1,
@@ -130,11 +129,11 @@ const AsideFileInfo = ({
                 <Chip
                   label={tag}
                   onDelete={() => deleteTag(id)}
-                  sx={{ height: 26, backgroundColor: (theme) => theme.palette.grey[700] }}
+                  sx={{ height: 26, backgroundColor: ({ palette }) => palette.grey[700] }}
                 />
               ))
             )}
-            <IconButton sx={{ fontSize: 20, color: (theme) => theme.palette.grey[500] }}>
+            <IconButton sx={{ fontSize: 20, color: ({ palette }) => palette.grey[500] }}>
               <AiOutlinePlus />
             </IconButton>
           </Grid>
@@ -144,7 +143,7 @@ const AsideFileInfo = ({
           </Grid>
           <Grid xs={8} sx={{ display: 'flex', p: 1.5 }}>
             <Avatar></Avatar>
-            <IconButton sx={{ fontSize: 20, ml: 1, color: (theme) => theme.palette.grey[500] }}>
+            <IconButton sx={{ fontSize: 20, ml: 1, color: ({ palette }) => palette.grey[500] }}>
               <AiOutlinePlus />
             </IconButton>
           </Grid>
@@ -155,7 +154,7 @@ const AsideFileInfo = ({
           <Grid xs={8} sx={{ p: 1.5 }}>
             <IconButton
               onClick={() => deleteFile(file.id)}
-              sx={{ fontSize: 18, color: (theme) => theme.palette.grey[500] }}
+              sx={{ fontSize: 18, color: ({ palette }) => palette.grey[500] }}
             >
               <FiTrash />
             </IconButton>
