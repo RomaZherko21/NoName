@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import GenreModel from './genre'
+import { GenreModel } from './post2'
 import sequelize from './init'
 
 interface Post {

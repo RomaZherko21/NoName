@@ -4,43 +4,33 @@ import { debounce } from '@mui/material'
 
 import { API } from 'services'
 import LoadingModel from 'models/Loading'
-import { BasicUserInfo, MetaUserInfo } from 'shared/types'
+import { BasicUserInfo, Message, MetaUserInfo } from 'shared/types'
 
 interface UserFilters {
   name?: string
 }
 
+interface Chat {
+  id: number
+  name: string
+
+  user_name: string
+  user_surname: string
+  user_avatar: string
+  last_message: string
+  updated_at: number
+}
+
 class ChatModel {
+  chat_id?: number
+
   users: (BasicUserInfo & MetaUserInfo)[] = []
 
-  loading: LoadingModel
+  chats: Chat[] = []
 
-  messages = [
-    {
-      id: 1,
-      text: 'Hey, nice projects! I really liked the one in react. Whats your quote on kinda similar project?',
-      created_at: 1231231232,
-      user_id: 2,
-      user_name: 'Miron',
-      user_surname: 'Vitold',
-    },
-    {
-      id: 2,
-      text: 'I would need to know more details, but my hourly rate stats at $35/hour. Thanks!',
-      created_at: 1231231239,
-      user_id: 1,
-      user_name: 'Ben',
-      user_surname: 'Yes',
-    },
-    {
-      id: 3,
-      text: 'Well its a really easy one, Im sure we can make it half of the price.',
-      created_at: 1231231259,
-      user_id: 2,
-      user_name: 'Miron',
-      user_surname: 'Vitold',
-    },
-  ]
+  messages: Message[] = []
+
+  loading: LoadingModel
 
   constructor() {
     makeAutoObservable(this)
@@ -52,17 +42,31 @@ class ChatModel {
     this.users = []
   }
 
-  debounceFetch = debounce(this.fetch, 500)
-
-  async fetch({ searchParams }: { searchParams: UserFilters }) {
+  async fetchChats() {
     try {
       this.loading.begin()
 
-      const data = await API.users.list({
-        searchParams,
-      })
+      const data = await API.chat.getUserChats()
 
-      this.users = data.users
+      this.fetchChatMessages(1)
+
+      this.chats = data
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
+    }
+  }
+
+  async fetchChatMessages(chatId: number) {
+    try {
+      this.loading.begin()
+
+      const messages = await API.chat.getChatMessages(chatId)
+
+      this.chat_id = chatId
+
+      this.messages = messages || []
     } catch (err: any) {
       toast.error(err)
     } finally {

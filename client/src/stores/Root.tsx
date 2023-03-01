@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react'
 
 import AuthorizationModel from 'models/Authorization'
 import LoadingModel from 'models/Loading'
+import WebSocketModel from 'models/WebSocket'
 import UserModel from 'models/User'
 
 import AppConfig from './AppConfig'
@@ -11,6 +12,8 @@ export class RootStore {
 
   readonly user: UserModel
 
+  readonly ws: WebSocketModel
+
   readonly loading: LoadingModel
 
   constructor() {
@@ -19,8 +22,8 @@ export class RootStore {
     this.init()
 
     this.authorization = new AuthorizationModel(this)
-
     this.user = new UserModel(this)
+    this.ws = new WebSocketModel(this)
   }
 
   async init() {

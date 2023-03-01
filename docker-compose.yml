@@ -13,8 +13,8 @@ x-api-variables: &api-variables
   SERVER_HOST: ${SERVER_HOST}
   SERVER_PORT_INNER: ${SERVER_PORT_INNER}
   SERVER_PORT_OUTER: ${SERVER_PORT_OUTER}
-  # SERVER_EMAIL_LOGIN: ${SERVER_EMAIL_LOGIN}
-  # SERVER_EMAIL_PASSWORD: ${SERVER_EMAIL_PASSWORD}
+  SERVER_EMAIL_LOGIN: ${SERVER_EMAIL_LOGIN}
+  SERVER_EMAIL_PASSWORD: ${SERVER_EMAIL_PASSWORD}
   ACCESS_TOKEN_EXPIRED_TIME: ${ACCESS_TOKEN_EXPIRED_TIME}
   TOKEN_SECRET: ${TOKEN_SECRET}
 
@@ -39,6 +39,7 @@ services:
 
   api:
     container_name: api
+    restart: always
     build:
       context: ./server
       target: api

@@ -11,6 +11,7 @@ const namespaces = [
   'page',
   'sentences',
   'file',
+  'chat',
 ]
 const initTranslation = () => {
   return i18n

@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `post_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` text,
   `created_at` bigint,
-   `post_id` int NOT NULL,
+  `post_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`post_id`) REFERENCES posts(`id`),
@@ -224,6 +224,67 @@ VALUES
 	(2, 3,'pending'),
 	(3, 4,'pending');
 
+  
+CREATE TABLE IF NOT EXISTS `chats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `created_at` bigint,
+  `updated_at` bigint,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `chats` (`name`, `created_at`, `updated_at`) 
+VALUES ('Chat 1', FLOOR(RAND() * 1640995200000), FLOOR(RAND() * 1640995200000)),
+       ('Chat 2', FLOOR(RAND() * 1640995200000), FLOOR(RAND() * 1640995200000)),
+       ('Chat 3', FLOOR(RAND() * 1640995200000), FLOOR(RAND() * 1640995200000)),
+       ('Chat 4', FLOOR(RAND() * 1640995200000), FLOOR(RAND() * 1640995200000)),
+       ('Chat 5', FLOOR(RAND() * 1640995200000), FLOOR(RAND() * 1640995200000));
+
+
+CREATE TABLE IF NOT EXISTS `chat_messages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `text` text,
+  `created_at` bigint,
+  `user_id` int NOT NULL,
+  `chat_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`)
+);
+
+INSERT INTO `chat_messages` (`text`, `created_at`, `user_id`, `chat_id`)
+SELECT
+    CONCAT('Message ', FLOOR(RAND() * 100)),
+    FLOOR(RAND() * 1640995200000), -- случайное время в миллисекундах от 01.01.2022 до текущего момента
+    FLOOR(RAND() * 2) + 1, -- случайный получатель из пользователей (id 1-2)
+    1
+FROM
+    information_schema.tables
+LIMIT 100;
+
+
+CREATE TABLE IF NOT EXISTS m2m_users_chats (
+  user_id INT NOT NULL,
+  chat_id INT NOT NULL,
+  PRIMARY KEY (user_id, chat_id),
+  CONSTRAINT `Constr_m2m_users_chats_user_fk`
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Constr_m2m_users_chats_chat_fk`
+    FOREIGN KEY (`chat_id`) REFERENCES chats(`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO `m2m_users_chats` (user_id, chat_id) 
+VALUES
+	(1,1),
+  (2,1),
+  (1,2),
+  (3,2),
+  (1,3),
+  (4,3),
+  (1,4),
+  (5,4);
 
 
   -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов

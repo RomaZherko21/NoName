@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -11,153 +11,108 @@ import {
   Stack,
   Avatar,
 } from '@mui/material'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 import { FiSearch } from 'react-icons/fi'
-import { HiOutlineLightBulb } from 'react-icons/hi2'
 
-import { BasicUserInfo, MetaUserInfo } from 'shared/types'
-import { API_USER_AVATAR_URL } from 'shared/consts'
+import { API_USER_AVATAR_URL, COMMON_DATE_FORMAT } from 'shared/consts'
 
-interface Props {
-  inputValue: string
-  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  contacts: (BasicUserInfo & MetaUserInfo)[] | []
-  clearContacts: () => void
-}
+import { format } from 'date-fns'
+import { fromMsToDate } from 'shared/helpers'
 
-function AsideChatSelector({ inputValue, onInputChange, contacts, clearContacts }: Props) {
+import { ChatModel } from '../../model'
+
+function AsideChatSelector() {
   const { t } = useTranslation()
-  const [showTip, setShowTip] = useState(false)
+  const [searchInputValue, setSearchInputValue] = useState('')
 
-  function onBlur() {
-    setShowTip(false)
-    clearContacts()
-  }
+  useEffect(() => {
+    ChatModel.fetchChats()
+  }, [searchInputValue])
 
   return (
     <Paper
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minWidth: 380,
+        minWidth: 320,
         p: 2,
-        gap: 2.5,
+        gap: 2,
         borderRadius: 0,
         borderRight: (theme) => `1px solid ${theme.palette.divider}`,
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Typography variant="h5">{t('user:chats')}</Typography>
-        <Button startIcon={<AiOutlinePlus />} variant="contained">
-          {t('user:group')}
+        <Button size="small" variant="contained" endIcon={<AiOutlineUsergroupAdd />}>
+          {t('chat:actions.addGroup')}
         </Button>
       </Box>
-      <Stack gap={1.5}>
+
+      <Stack gap={1}>
         <TextField
-          value={inputValue}
-          onChange={onInputChange}
-          onFocus={() => setShowTip(true)}
-          onBlur={onBlur}
+          value={searchInputValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setSearchInputValue(e.target.value)
+          }}
           fullWidth
-          placeholder={t('user:actions.searchContacts')}
+          placeholder={t('chat:actions.searchChat')}
           variant="outlined"
+          size="small"
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">{<FiSearch size="24px" />}</InputAdornment>
+              <InputAdornment position="start">{<FiSearch size="16px" />}</InputAdornment>
             ),
           }}
         />
-        {showTip && !inputValue && (
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              p: 1,
-              backgroundColor: 'background.rare',
-              color: (theme) => theme.palette.text.secondary,
-              borderRadius: '8px',
-            }}
-          >
-            <HiOutlineLightBulb size={18} />
-            <Typography variant="caption">{t('user:contactNameTip')}</Typography>
-          </Box>
-        )}
-        {inputValue && !contacts.length && (
+
+        {searchInputValue && (
           <Typography
             variant="caption"
             color="text.secondary"
-            sx={{ maxWidth: '280px', wordWrap: 'break-word' }}
+            sx={{ wordWrap: 'break-word', textAlign: 'left', ml: 0.5 }}
           >
-            {t('user:matchesDontFoundHint', { value: inputValue })}
+            {t('chat:notification.emptyChatSearch')}
           </Typography>
         )}
       </Stack>
 
-      {contacts.length > 0 && (
-        <Stack>
-          <Typography variant="subtitle2" color="text.secondary">
-            {t('user:contacts')}
+      {ChatModel.chats.map((item) => (
+        <Box
+          onClick={() => {
+            if (item.id !== ChatModel.chat_id) {
+              ChatModel.fetchChatMessages(item.id)
+            }
+          }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            p: 2,
+            cursor: 'pointer',
+            backgroundColor: item.id === ChatModel.chat_id ? 'action.hover' : 'background.paper',
+            borderRadius: 2,
+            '&:hover': {
+              backgroundColor: 'action.hover',
+            },
+          }}
+        >
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Avatar src={`${API_USER_AVATAR_URL}/${item.user_avatar}`} />
+            <Stack>
+              <Typography variant="subtitle2" color="text.primary">
+                {item.user_name} {item.user_surname}
+              </Typography>
+
+              <Typography variant="subtitle2" color="text.secondary">
+                {item.last_message}
+              </Typography>
+            </Stack>
+          </Box>
+
+          <Typography variant="caption" color="text.secondary">
+            {format(fromMsToDate(item.updated_at), COMMON_DATE_FORMAT)}
           </Typography>
-          <Stack sx={{ gap: 0.5, overflowY: 'auto' }}>
-            {contacts.map((user) => {
-              return (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    p: 1,
-                    cursor: 'pointer',
-                    backgroundColor: (theme) => theme.palette.background.paper,
-                    '&:hover': {
-                      backgroundColor: (theme) => theme.palette.action.hover,
-                    },
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Avatar
-                      sx={{ height: '32px', width: '32px' }}
-                      src={`${API_USER_AVATAR_URL}/${user.avatar}`}
-                    />
-                    <Typography variant="subtitle2" color="text.primary">
-                      {`${user.name} ${user.surname}`}
-                    </Typography>
-                  </Box>
-                </Box>
-              )
-            })}
-          </Stack>
-        </Stack>
-      )}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          p: 2,
-          cursor: 'pointer',
-          backgroundColor: (theme) => theme.palette.background.paper,
-          '&:hover': {
-            backgroundColor: (theme) => theme.palette.action.hover,
-            borderRadius: '15px',
-          },
-        }}
-      >
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <Avatar />
-          <Stack>
-            <Typography variant="subtitle2" color="text.primary">
-              Miron Vitold
-            </Typography>
-            <Typography variant="subtitle2" color="text.secondary">
-              Sent a photo
-            </Typography>
-          </Stack>
         </Box>
-        <Typography variant="caption" color="text.secondary">
-          1h
-        </Typography>
-      </Box>
+      ))}
     </Paper>
   )
 }
