@@ -20,4 +20,6 @@ class TeamModel {
   }
 }
 
-export default new TeamModel()
+const model = new TeamModel()
+
+export default model

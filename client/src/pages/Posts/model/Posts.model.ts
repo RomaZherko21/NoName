@@ -62,4 +62,6 @@ class PostsModel {
   }
 }
 
-export default new PostsModel()
+const model = new PostsModel()
+
+export default model

@@ -170,4 +170,6 @@ class KanbanModel {
   }
 }
 
-export default new KanbanModel()
+const model = new KanbanModel()
+
+export default model

@@ -1,7 +1,7 @@
 import i18next from 'i18next'
 import { Typography } from '@mui/material'
 
-import { Entrances, TableColumn, User } from 'shared/types'
+import { Entrances, TableColumn } from 'shared/types'
 
 export const getColumns = (): TableColumn[] => [
   {

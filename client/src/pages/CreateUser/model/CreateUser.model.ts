@@ -29,4 +29,6 @@ class CreateUserModel {
   }
 }
 
-export default new CreateUserModel()
+const model = new CreateUserModel()
+
+export default model

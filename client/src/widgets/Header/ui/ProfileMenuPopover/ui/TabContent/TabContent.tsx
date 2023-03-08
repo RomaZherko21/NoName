@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 

@@ -92,4 +92,6 @@ class FilesModel {
   }
 }
 
-export default new FilesModel()
+const model = new FilesModel()
+
+export default model

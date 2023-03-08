@@ -39,7 +39,7 @@ function EditUser() {
 
   useEffect(() => {
     EditUserModel.fetchUser(Number(id))
-  }, [])
+  }, [id])
 
   const validationSchema = useMemo(
     () =>

@@ -1,17 +1,7 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Paper,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Divider, Grid, IconButton, Paper, Tooltip, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Card, Grid, Paper, Typography } from '@mui/material'
+import { Box, Card, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { OptionSetup } from 'shared/ui'

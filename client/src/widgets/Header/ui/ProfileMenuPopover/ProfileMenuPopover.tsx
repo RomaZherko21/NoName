@@ -19,12 +19,9 @@ function ProfileMenuPopover() {
     setIsOpenModal(true)
   }
 
-  const profileConfig = useMemo(
-    () => getProfileConfig({ onLogout, id: user.id }),
-    [onLogout, getProfileConfig]
-  )
+  const profileConfig = useMemo(() => getProfileConfig({ onLogout, id: user.id }), [user.id])
 
-  const settingsConfig = useMemo(() => getSettingsConfig(), [getSettingsConfig])
+  const settingsConfig = useMemo(() => getSettingsConfig(), [])
 
   return (
     <>

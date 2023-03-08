@@ -16,8 +16,6 @@ import {
 
 import { getListConfig } from './getListConfig'
 
-interface Props {}
-
 function CreditCardInfo(props: any) {
   const { t } = useTranslation()
 

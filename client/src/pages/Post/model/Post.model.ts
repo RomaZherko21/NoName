@@ -143,4 +143,6 @@ class PostModel {
   }
 }
 
-export default new PostModel()
+const model = new PostModel()
+
+export default model

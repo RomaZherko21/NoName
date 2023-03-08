@@ -55,4 +55,7 @@ class CreatePostModel {
     }
   }
 }
-export default new CreatePostModel()
+
+const model = new CreatePostModel()
+
+export default model

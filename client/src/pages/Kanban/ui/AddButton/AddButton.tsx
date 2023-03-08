@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Box, Typography, Button, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 
 interface Props {

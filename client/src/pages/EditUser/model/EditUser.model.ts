@@ -73,4 +73,6 @@ class EditUserModel {
   }
 }
 
-export default new EditUserModel()
+const model = new EditUserModel()
+
+export default model

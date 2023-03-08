@@ -81,4 +81,6 @@ class UsersModel {
   }
 }
 
-export default new UsersModel()
+const model = new UsersModel()
+
+export default model

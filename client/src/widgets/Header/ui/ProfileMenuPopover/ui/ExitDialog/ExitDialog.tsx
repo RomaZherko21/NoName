@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button, Stack } from '@mui/material'
 

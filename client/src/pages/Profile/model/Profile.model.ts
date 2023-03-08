@@ -213,4 +213,6 @@ class ProfileModel {
   }
 }
 
-export default new ProfileModel()
+const model = new ProfileModel()
+
+export default model

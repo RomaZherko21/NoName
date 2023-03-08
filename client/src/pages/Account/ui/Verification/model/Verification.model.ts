@@ -47,4 +47,6 @@ class VerificationModel {
   }
 }
 
-export default new VerificationModel()
+const model = new VerificationModel()
+
+export default model

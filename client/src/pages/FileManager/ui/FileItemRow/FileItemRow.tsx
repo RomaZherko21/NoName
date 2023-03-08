@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
-import { Box, Grid, IconButton, Paper, Typography, AvatarGroup, Avatar } from '@mui/material'
+import { Box, IconButton, Paper, Typography, AvatarGroup, Avatar } from '@mui/material'
 import { AiOutlineStar } from 'react-icons/ai'
 import { FiMoreVertical } from 'react-icons/fi'
 

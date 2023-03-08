@@ -46,4 +46,6 @@ export class FetchService {
   }
 }
 
-export default new FetchService()
+const model = new FetchService()
+
+export default model

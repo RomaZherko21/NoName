@@ -37,7 +37,11 @@ function PostCover({ field }: Props) {
           className={s.uploadedPhoto}
         >
           {values[field] ? (
-            <img alt="image" className={s.postCover} src={URL.createObjectURL(values[field])} />
+            <img
+              alt="Post cover"
+              className={s.postCover}
+              src={URL.createObjectURL(values[field])}
+            />
           ) : (
             <>
               <Typography variant="h6" sx={{ color: (theme) => theme.palette.text.secondary }}>

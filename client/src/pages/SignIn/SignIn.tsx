@@ -37,7 +37,7 @@ function SignIn() {
           gap: 15,
         }}
       >
-        <img src={logo} className={s.logo} />
+        <img src={logo} className={s.logo} alt="Logo" />
 
         <Box>
           <Paper

@@ -54,4 +54,6 @@ class SecurityModel {
   }
 }
 
-export default new SecurityModel()
+const model = new SecurityModel()
+
+export default model
