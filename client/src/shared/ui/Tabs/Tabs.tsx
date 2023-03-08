@@ -36,6 +36,7 @@ const Tabs = ({
         >
           {options.map((item, id) => (
             <Tab
+              key={item.to}
               onClick={() => {
                 if (item.to) {
                   navigate(item.to)
@@ -49,6 +50,7 @@ const Tabs = ({
       </Box>
       {options.map((item, index) => (
         <TabPanel
+          key={item.to}
           value={options.findIndex((item, index) =>
             item.to ? item.to === location.pathname : currentTab === index
           )}

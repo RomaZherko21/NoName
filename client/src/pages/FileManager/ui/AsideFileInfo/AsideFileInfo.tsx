@@ -43,7 +43,9 @@ const AsideFileInfo = ({
     >
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, px: 3, py: 2 }}>
         <IconButton
-          onClick={() => toggleFavourite(file.id)}
+          onClick={() => {
+            toggleFavourite(file.id)
+          }}
           sx={{
             p: 1,
             fontSize: 20,
@@ -130,8 +132,11 @@ const AsideFileInfo = ({
               {FilesModel.files.map((file) =>
                 file.tags.map((tag, id) => (
                   <Chip
+                    key={tag}
                     label={tag}
-                    onDelete={() => deleteTag(id)}
+                    onDelete={() => {
+                      deleteTag(id)
+                    }}
                     sx={{ height: 26, backgroundColor: ({ palette }) => palette.grey[700] }}
                   />
                 ))
@@ -160,7 +165,9 @@ const AsideFileInfo = ({
             </Grid>
             <Grid xs={8}>
               <IconButton
-                onClick={() => deleteFile(file.id)}
+                onClick={() => {
+                  deleteFile(file.id)
+                }}
                 sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
               >
                 <FiTrash />

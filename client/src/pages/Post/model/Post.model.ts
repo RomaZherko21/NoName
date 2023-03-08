@@ -90,8 +90,8 @@ class PostModel {
   async editComment() {
     try {
       await API.posts.editComment({
-        post_id: this.id,
-        comment_id: this.editCommentId,
+        postId: this.id,
+        commentId: this.editCommentId,
         comment: {
           created_at: new Date().getTime(),
           message: this.commentInputValue,
@@ -108,9 +108,9 @@ class PostModel {
     }
   }
 
-  async deleteComment(comment_id: number) {
+  async deleteComment(commentId: number) {
     try {
-      await API.posts.deleteComment(this.id, comment_id)
+      await API.posts.deleteComment(this.id, commentId)
 
       this.fetch({ id: this.id, hidden: true })
     } catch (err: any) {

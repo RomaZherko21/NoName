@@ -43,8 +43,11 @@ const Posts = () => {
               ))
             : ProfileModel.posts.map((post) => (
                 <PostCard
+                  key={post.id}
                   post={post}
-                  toggleLike={() => ProfileModel.toggleLike({ post_id: post.id })}
+                  toggleLike={async () => {
+                    await ProfileModel.toggleLike({ postId: post.id })
+                  }}
                 />
               ))}
         </Box>

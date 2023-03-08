@@ -14,9 +14,9 @@ export const useTimer = (seconds: number = 0) => {
       setTimeLeft(timeLeft - 1)
     }, 1000)
 
-    return () => clearInterval(intervalId)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      clearInterval(intervalId)
+    }
   }, [timeLeft])
 
   return { timeLeft, setTimeLeft, isTimerEnded }

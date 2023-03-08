@@ -5,22 +5,22 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/connections'
 
-export const get = ({
+export const get = async ({
   status,
   isReceived = true,
   isSent = true,
-  user_id,
+  userId,
 }: {
   status: ConnectionStatus
   isReceived?: boolean
   isSent?: boolean
-  user_id: number
+  userId: number
 }) =>
-  fetch.get<Connection[]>(
-    `${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent, user_id })}`
+  await fetch.get<Connection[]>(
+    `${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent, user_id: userId })}`
   )
 
-export const update = (id: number, status: ConnectionStatus) =>
-  fetch.put(`${ENDPOINT_BASE}/${id}`, { status })
+export const update = async (id: number, status: ConnectionStatus) =>
+  await fetch.put(`${ENDPOINT_BASE}/${id}`, { status })
 
-export const remove = (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)
+export const remove = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/${id}`)

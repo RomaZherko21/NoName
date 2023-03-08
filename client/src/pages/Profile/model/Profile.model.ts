@@ -1,11 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
-import { Connection, ConnectionStatus, Gender, Roles, User } from 'shared/types'
+import { Connection, ConnectionStatus, Gender, Roles, User, Post } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
-import { Post } from 'shared/types'
 
 export enum CONNECTION_OPTIONS {
   connections = 'connections',
@@ -107,10 +106,10 @@ class ProfileModel {
       }
 
       const data = await API.connections.get({
-        status: status,
-        isReceived: isReceived,
-        isSent: isSent,
-        user_id: this.id,
+        status,
+        isReceived,
+        isSent,
+        userId: this.id,
       })
 
       this.connections = data
@@ -165,11 +164,11 @@ class ProfileModel {
     }
   }
 
-  async toggleLike({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
+  async toggleLike({ postId, filters }: { postId: number; filters?: PostsFilters }) {
     try {
-      await API.posts.like(post_id)
+      await API.posts.like(postId)
 
-      this.fetchPosts({ filters: filters, hidden: true })
+      this.fetchPosts({ filters, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -188,7 +187,7 @@ class ProfileModel {
   }
 
   private fromJSON(user: User) {
-    this.id = user.basic.id || 0
+    this.id = user.basic.id ?? 0
     this.name = user.basic.name
     this.surname = user.basic.surname
     this.middle_name = user.basic.middle_name

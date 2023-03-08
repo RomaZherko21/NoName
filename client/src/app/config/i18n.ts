@@ -14,8 +14,8 @@ const namespaces = [
   'kanban',
   'chat',
 ]
-const initTranslation = () => {
-  return i18n
+const initTranslation = async () => {
+  return await i18n
     .use(initReactI18next)
     .use(Backend)
     .init({

@@ -41,9 +41,9 @@ function CreateUser() {
       yup.object().shape({
         full_name: fullNameValidation(),
         email: emailValidation(),
-        role: commonStringValidation(t(`user:role`)),
-        tel_number: phoneNumberValidation(t(`fields.phone`)),
-        date_of_birth: required(t(`user:dateOfBirth`)),
+        role: commonStringValidation(t('user:role')),
+        tel_number: phoneNumberValidation(t('fields.phone')),
+        date_of_birth: required(t('user:dateOfBirth')),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
         avatar: fileValidation({
@@ -82,8 +82,8 @@ function CreateUser() {
               tel_number: normalizePhone(values.tel_number),
               role: values.role,
               gender: values.gender,
-              date_of_birth: values.date_of_birth || '',
-              avatar: values.avatar || '',
+              date_of_birth: values.date_of_birth ?? '',
+              avatar: values.avatar ?? '',
               password: values.password,
               confirmPassword: values.confirmPassword,
             },

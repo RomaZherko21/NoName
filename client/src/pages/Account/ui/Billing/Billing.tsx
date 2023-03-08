@@ -41,7 +41,7 @@ function Billing() {
       </Grid>
       <Grid container spacing={2} direction="row">
         {SUBSCRIPTON_TYPES.map((item) => (
-          <Grid item xs={4}>
+          <Grid key={item.name} item xs={4}>
             <CardContent
               sx={{
                 p: 4,

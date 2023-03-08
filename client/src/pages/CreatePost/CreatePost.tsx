@@ -25,19 +25,17 @@ function CreatePost() {
 
   useEffect(() => {
     CreatePostModel.fetch()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        postTitle: commonStringValidation(t(`post:postTitle`), 3),
-        shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
-        genre: commonStringValidation(t(`post:genres`)),
-        description: commonStringValidation(t(`post:description`), 30),
+        postTitle: commonStringValidation(t('post:postTitle'), 3),
+        shortDescription: commonStringValidation(t('post:shortDescription'), 5),
+        genre: commonStringValidation(t('post:genres')),
+        description: commonStringValidation(t('post:description'), 30),
         readingTime: commonNumberRangeValidation({
-          field: t(`post:form.readingTime`),
+          field: t('post:form.readingTime'),
           min: 1,
           max: 60,
         }),

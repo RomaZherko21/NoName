@@ -29,7 +29,7 @@ const DeleteAccount = ({ onDelete }: Props) => {
           >
             <Typography variant="body1">{t('sentences:deleteAccount')}</Typography>
             <Button
-              onClick={() => setIsOpenModal(true)}
+              onClick={() => { setIsOpenModal(true) }}
               sx={{ mt: 3, width: 'fit-content' }}
               color="error"
               variant="outlined"

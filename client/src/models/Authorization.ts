@@ -24,7 +24,7 @@ class AuthorizationModel {
   }
 
   getAccessToken() {
-    return localStorage.getItem(ACCESS_TOKEN) || ''
+    return localStorage.getItem(ACCESS_TOKEN) ?? ''
   }
 
   setAccessToken(value: string) {

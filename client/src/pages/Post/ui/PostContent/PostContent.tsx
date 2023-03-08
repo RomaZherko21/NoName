@@ -60,7 +60,7 @@ function PostContent() {
             placement="bottom"
           >
             <IconButton
-              onClick={() => PostModel.toggleLike()}
+              onClick={async () => { await PostModel.toggleLike() }}
               sx={{
                 color: (theme) =>
                   PostModel.is_liked ? theme.palette.error.dark : theme.palette.action.active,

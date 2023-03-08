@@ -58,7 +58,7 @@ function PostCover({ field }: Props) {
         </Box>
 
         <Button
-          onClick={() => setFieldValue(field, null)}
+          onClick={() => { setFieldValue(field, null) }}
           disabled={!values[field]}
           size="large"
           sx={{

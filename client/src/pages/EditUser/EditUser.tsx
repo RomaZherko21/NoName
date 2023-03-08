@@ -46,9 +46,9 @@ function EditUser() {
       yup.object().shape({
         full_name: fullNameValidation(),
         email: emailValidation(),
-        role: commonStringValidation(t(`user:role`)),
-        tel_number: phoneNumberValidation(t(`fields.phone`)),
-        date_of_birth: required(t(`user:dateOfBirth`)),
+        role: commonStringValidation(t('user:role')),
+        tel_number: phoneNumberValidation(t('fields.phone')),
+        date_of_birth: required(t('user:dateOfBirth')),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
       }),
@@ -89,10 +89,10 @@ function EditUser() {
                 getFullName(EditUserModel.name, EditUserModel.surname, EditUserModel.middle_name) ||
                 '',
               email: EditUserModel?.email || '',
-              tel_number: EditUserModel?.tel_number || '',
+              tel_number: EditUserModel?.tel_number ?? '',
               role: EditUserModel?.role || Roles.user,
-              gender: EditUserModel?.gender || Gender.man,
-              date_of_birth: EditUserModel?.date_of_birth || '',
+              gender: EditUserModel?.gender ?? Gender.man,
+              date_of_birth: EditUserModel?.date_of_birth ?? '',
               password: '',
               confirmPassword: '',
             }}

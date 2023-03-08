@@ -89,7 +89,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
               placement="bottom"
             >
               <IconButton
-                onClick={() => toggleLike(post.id)}
+                onClick={() => { toggleLike(post.id) }}
                 sx={{
                   color: (theme) =>
                     post.is_liked ? theme.palette.error.dark : theme.palette.action.active,

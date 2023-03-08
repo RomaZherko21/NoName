@@ -78,11 +78,12 @@ const AsideFilters = ({
                 <item.Control
                   placeholder={item.placeholder}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
+                  }
                   }
                 />
               )}
@@ -91,11 +92,12 @@ const AsideFilters = ({
                   label={item.placeholder}
                   options={item.options || {}}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
+                  }
                   }
                 />
               )}
@@ -103,11 +105,12 @@ const AsideFilters = ({
                 <item.Control
                   label={item.placeholder}
                   value={Number(searchParams.get(item.key)) || null}
-                  onChange={(e: number) =>
+                  onChange={(e: number) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, String(getTime(e)))
                       return searchParams
                     })
+                  }
                   }
                 />
               )}
@@ -115,11 +118,12 @@ const AsideFilters = ({
                 <item.Control
                   label={item.placeholder}
                   checked={searchParams.get(item.key) === 'true' || false}
-                  onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLFormElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.checked)
                       return searchParams
                     })
+                  }
                   }
                   sx={{ color: ({ palette }: Theme) => palette.text.secondary, ml: 1 }}
                 />

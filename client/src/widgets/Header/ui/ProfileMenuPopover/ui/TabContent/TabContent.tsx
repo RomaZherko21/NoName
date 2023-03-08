@@ -27,6 +27,7 @@ function TabContent({ onMenuClose, config }: Props) {
     <List sx={{ p: 0 }}>
       {config.map((item) => (
         <ListItemButton
+          key={item.to}
           onClick={(event) => {
             if (item.to) {
               onChangePage(item.to, event)

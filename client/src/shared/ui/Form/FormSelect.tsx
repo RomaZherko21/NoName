@@ -22,7 +22,7 @@ const FormSelect = ({ field, label, options }: Props) => {
         id={field}
         value={values[field]}
         label={t(label)}
-        onChange={(e) => setFieldValue(field, e.target.value)}
+        onChange={(e) => { setFieldValue(field, e.target.value) }}
       >
         {Object.entries(options).map(([key, text]) => (
           <MenuItem key={key} value={key}>

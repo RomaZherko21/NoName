@@ -44,9 +44,9 @@ const Connections = () => {
         {user.isAuthorizedUser(ProfileModel.id) && (
           <Select
             value={ProfileModel.connectionStatus}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               ProfileModel.onConnectionStatusChange(e.target.value as CONNECTION_OPTIONS)
-            }
+            }}
             label="actions.sortBy"
             options={{
               [CONNECTION_OPTIONS.connections]: 'page:connections',
@@ -65,7 +65,7 @@ const Connections = () => {
           <Spinner />
         ) : (
           ProfileModel.connections.map((item) => (
-            <Grid item xs={12} md={6}>
+            <Grid key={item.email} item xs={12} md={6}>
               <Paper
                 sx={{
                   p: 2,
@@ -94,7 +94,9 @@ const Connections = () => {
                     <Button
                       color="error"
                       size="small"
-                      onClick={() => ProfileModel.removeConnectionRequest(item.user_id)}
+                      onClick={async () => {
+                        await ProfileModel.removeConnectionRequest(item.user_id)
+                      }}
                       sx={{ mt: 1 }}
                     >
                       {t('user:actions.cancelSending')}
@@ -107,24 +109,24 @@ const Connections = () => {
                       <Button
                         color="success"
                         size="small"
-                        onClick={() =>
-                          ProfileModel.updateConnectionStatus({
+                        onClick={async () => {
+                          await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
                             status: ConnectionStatus.accept,
                           })
-                        }
+                        }}
                       >
                         {t('user:actions.accept')}
                       </Button>
                       <Button
                         color="error"
                         size="small"
-                        onClick={() =>
-                          ProfileModel.updateConnectionStatus({
+                        onClick={async () => {
+                          await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
                             status: ConnectionStatus.decline,
                           })
-                        }
+                        }}
                       >
                         {t('user:actions.declain')}
                       </Button>

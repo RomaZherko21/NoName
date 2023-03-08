@@ -26,7 +26,7 @@ function Post() {
         breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.details' }]}
       >
         <Grid item>
-          <Button variant="text" size="large" onClick={() => navigate(-1)}>
+          <Button variant="text" size="large" onClick={() => { navigate(-1) }}>
             {t('translation:actions.goBack')}
           </Button>
         </Grid>

@@ -78,6 +78,7 @@ function AsideChatSelector() {
 
       {ChatModel.chats.map((item) => (
         <Box
+          key={item.id}
           onClick={() => {
             if (item.id !== ChatModel.chat_id) {
               ChatModel.fetchChatMessages(item.id)

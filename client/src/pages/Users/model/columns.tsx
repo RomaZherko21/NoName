@@ -27,12 +27,15 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
 
   const [isOpenModal, setIsOpenModal] = useState(false)
 
-  const removeUser = useCallback(() => data.id && UsersModel.remove(data.id), [data.id])
+  const removeUser = useCallback(
+    async () => await (data.id && UsersModel.remove(data.id)),
+    [data.id]
+  )
 
   return (
     <>
       {user.permissions.updateUsers && (
-        <Tooltip title={t('actions.edit') || 'edit'} placement="top">
+        <Tooltip title={t('actions.edit') ?? 'edit'} placement="top">
           <IconButton
             component={Link}
             to={generatePath(ROUTES.USERS_EDIT, { id: String(data.id) })}
@@ -43,7 +46,7 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
           </IconButton>
         </Tooltip>
       )}
-      <Tooltip title={t('page:userProfile') || 'User profile'} placement="top">
+      <Tooltip title={t('page:userProfile') ?? 'User profile'} placement="top">
         <IconButton
           component={Link}
           to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}
@@ -53,8 +56,14 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
         </IconButton>
       </Tooltip>
       {user.permissions.deleteUsers && (
-        <Tooltip title={t('actions.delete') || 'delete'} placement="top">
-          <IconButton aria-label="delete" size="small" onClick={() => setIsOpenModal(true)}>
+        <Tooltip title={t('actions.delete') ?? 'delete'} placement="top">
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => {
+              setIsOpenModal(true)
+            }}
+          >
             <DeleteOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
           </IconButton>
         </Tooltip>
@@ -75,11 +84,11 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('user:name'),
-    getValue: ({ name, surname, middle_name, email, avatar }: User) => (
+    getValue: ({ name, surname, middle_name: middleName, email, avatar }: User) => (
       <InformativeImage
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
-        PrimaryText={getFullName(name, surname, middle_name)}
+        PrimaryText={getFullName(name, surname, middleName)}
         SecondaryText={email}
       />
     ),
@@ -106,7 +115,7 @@ export const getColumns = (): TableColumn[] => [
     key: 'date_of_birth',
     title: i18next.t('user:dateOfBirth'),
     getValue: (row: User) => (
-      <Box color="text.primary">{reformatDates(row.date_of_birth || '')}</Box>
+      <Box color="text.primary">{reformatDates(row.date_of_birth ?? '')}</Box>
     ),
   },
   {

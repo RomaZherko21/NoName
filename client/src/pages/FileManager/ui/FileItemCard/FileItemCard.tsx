@@ -35,7 +35,7 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
         <IconButton
-          onClick={() => toggleFavourite(file.id)}
+          onClick={() => { toggleFavourite(file.id) }}
           sx={{
             width: 36,
             height: 36,

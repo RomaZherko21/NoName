@@ -23,7 +23,7 @@ function Header({ user }: Props) {
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: 0,
         height: 60,
-        width: `100%`,
+        width: '100%',
       }}
     >
       <Box

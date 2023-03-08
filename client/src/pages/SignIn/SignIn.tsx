@@ -84,7 +84,8 @@ function SignIn() {
           </Paper>
 
           <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>"admin@gmail.com"</strong> and password <strong>"qwerqwer"</strong>
+            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
+            <strong>&quot;qwerqwer&quot;</strong>
           </Alert>
         </Box>
       </Container>

@@ -50,6 +50,7 @@ function VerificationCode({ length = 6, onSubmit, error = null, setError = () =>
         {inputValues.map((element) => (
           <TextField
             id={element.name}
+            key={element.name}
             type="text"
             onKeyUp={onKeyUpEvent(changeInputValue)}
             onPaste={onPasteEvent(inputValues, changeInputValue)}

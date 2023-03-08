@@ -66,7 +66,7 @@ const LeaveComment = ({
             </IconButton>
           </Stack>
 
-          <Button size="small" variant="contained" onClick={() => onSend()}>
+          <Button size="small" variant="contained" onClick={() => { onSend() }}>
             {t(buttonText)}
           </Button>
         </Box>

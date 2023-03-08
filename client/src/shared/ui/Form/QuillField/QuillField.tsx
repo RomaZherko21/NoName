@@ -18,7 +18,7 @@ function QuillField({ field }: Props) {
       <ReactQuill
         theme="snow"
         value={values.description}
-        onChange={(html: string) => setFieldValue(field, html)}
+        onChange={(html: string) => { setFieldValue(field, html) }}
         className={clsx('quill', touched[field] && Boolean(errors[field]) && 'error')}
       />
       {touched[field] && (

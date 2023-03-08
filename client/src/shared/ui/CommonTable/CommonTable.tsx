@@ -14,7 +14,7 @@ const CommonTable = ({ data, columns }: Props) => {
       <TableHead>
         <TableRow>
           {columns.map((column) => (
-            <TableCell key={column.key} align={column.align || 'left'}>
+            <TableCell key={column.key} align={column.align ?? 'left'}>
               {column.title}
             </TableCell>
           ))}
@@ -24,7 +24,7 @@ const CommonTable = ({ data, columns }: Props) => {
         {data.map((row) => (
           <TableRow key={row.id}>
             {columns.map((column) => (
-              <TableCell key={column.key} align={column.align || 'left'}>
+              <TableCell key={column.key} align={column.align ?? 'left'}>
                 {column.getValue ? column.getValue(row) : row[column.key]}
               </TableCell>
             ))}

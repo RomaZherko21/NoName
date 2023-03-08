@@ -5,16 +5,16 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/posts'
 
-export const list = ({ searchParams }: { searchParams?: QueryParams }) =>
-  fetch.get<{ posts: Post[]; count: number }>(
+export const list = async ({ searchParams }: { searchParams?: QueryParams }) =>
+  await fetch.get<{ posts: Post[]; count: number }>(
     `${ENDPOINT_BASE}${getQueryParams({
       ...searchParams,
       offset: Number(searchParams?.limit) * Number(searchParams?.page),
     })}`
   )
 
-export const get = (id: number) =>
-  fetch.get<Post & { user: BasicUserInfo & MetaUserInfo }>(`${ENDPOINT_BASE}/${id}`)
+export const get = async (id: number) =>
+  await fetch.get<Post & { user: BasicUserInfo & MetaUserInfo }>(`${ENDPOINT_BASE}/${id}`)
 
 export const create = async (post: any) => {
   const formData = new FormData()
@@ -25,25 +25,25 @@ export const create = async (post: any) => {
     }
   })
 
-  return fetch.post(`${ENDPOINT_BASE}`, formData)
+  return await fetch.post(`${ENDPOINT_BASE}`, formData)
 }
 
-export const createComment = (id: number, comment: any) =>
-  fetch.post<Comment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
+export const createComment = async (id: number, comment: any) =>
+  await fetch.post<Comment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
 
-export const editComment = ({
-  post_id,
-  comment_id,
+export const editComment = async ({
+  postId,
+  commentId,
   comment,
 }: {
-  post_id: number
-  comment_id: number
+  postId: number
+  commentId: number
   comment: { created_at: number; message: string }
-}) => fetch.put<Comment>(`${ENDPOINT_BASE}/${post_id}/comments/${comment_id}`, comment)
+}) => await fetch.put<Comment>(`${ENDPOINT_BASE}/${postId}/comments/${commentId}`, comment)
 
-export const deleteComment = (post_id: number, id: number) =>
-  fetch.delete(`${ENDPOINT_BASE}/${post_id}/comments/${id}`)
+export const deleteComment = async (postId: number, id: number) =>
+  await fetch.delete(`${ENDPOINT_BASE}/${postId}/comments/${id}`)
 
-export const remove = async (id: number) => fetch.delete(`${ENDPOINT_BASE}/${id}`)
+export const remove = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/${id}`)
 
-export const like = async (id: number) => fetch.put(`${ENDPOINT_BASE}/${id}/likes`)
+export const like = async (id: number) => await fetch.put(`${ENDPOINT_BASE}/${id}/likes`)
