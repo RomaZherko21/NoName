@@ -46,6 +46,7 @@ function ContactsPopover() {
         <List sx={{ display: 'flex', flexDirection: 'column', width: '100%', p: 2, gap: 2 }}>
           {contacts.map((item: any) => (
             <InformativeImage
+              key={item.name}
               imgUrl={`${API_USER_AVATAR_URL}/${item.avatar}`}
               PrimaryText={
                 <Box

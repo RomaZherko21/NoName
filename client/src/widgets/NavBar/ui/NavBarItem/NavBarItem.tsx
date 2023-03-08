@@ -109,6 +109,7 @@ const NavBarItem = ({
                   component={Link}
                   to={item.to}
                   sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
+                  key={item.to}
                 >
                   {location.pathname === item.to && (
                     <CircleDevider

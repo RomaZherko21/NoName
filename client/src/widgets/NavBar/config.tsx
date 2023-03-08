@@ -1,6 +1,5 @@
 import { HiOutlineUsers } from 'react-icons/hi'
-import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
-import { HiOutlineNewspaper } from 'react-icons/hi2'
+import { HiOutlineChatBubbleLeftRight, HiOutlineNewspaper } from 'react-icons/hi2'
 import { AiOutlineFileJpg } from 'react-icons/ai'
 import { BsKanban } from 'react-icons/bs'
 

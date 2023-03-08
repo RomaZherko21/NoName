@@ -43,7 +43,7 @@ const NOTIFICATIONS = [
 function NotificationsPopover() {
   const [notifications, setNotifications] = useState(NOTIFICATIONS)
 
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length
+  const totalUnRead = notifications.filter((item) => item.isUnRead).length
 
   const handleMarkAllAsRead = () => {
     setNotifications(

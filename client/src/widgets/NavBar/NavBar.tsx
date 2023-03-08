@@ -42,6 +42,7 @@ const NavBar = () => {
               to={item?.to}
               accessRoute={item.accessRoute}
               accessOperation={item.accessOperation}
+              key={item.to}
             />
           ))}
         </List>

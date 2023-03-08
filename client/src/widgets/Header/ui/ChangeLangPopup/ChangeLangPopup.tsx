@@ -15,7 +15,10 @@ function ChangeLangPopup() {
   const popupConfig = useMemo(
     () =>
       getPopupConfig((val: string) => {
-        i18next.changeLanguage(val)
+        i18next
+          .changeLanguage(val)
+          .then(() => {})
+          .catch(() => {})
       }),
     []
   )

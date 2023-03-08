@@ -70,11 +70,12 @@ const PageHeader = ({ pageName, children, breadcrumbs }: Props) => {
                   variant="body2"
                   color="text.primary"
                   to={item.to}
+                  key={item.to}
                 >
                   {t(item.text)}
                 </MuiLink>
               ) : (
-                <Typography variant="body2" color="text.secondary">
+                <Typography key={item.to} variant="body2" color="text.secondary">
                   {t(item.text)}
                 </Typography>
               )
