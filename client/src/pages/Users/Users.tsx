@@ -24,6 +24,8 @@ function Users() {
 
   useEffect(() => {
     UsersModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [UsersModel.pagination.currentPage, UsersModel.pagination.limit, searchParams])
 
   useEffect(() => {

@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "standard-with-typescript"],
+  "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended"
+  ],
   "overrides": [
     {
       "files": ["*.tsx"],

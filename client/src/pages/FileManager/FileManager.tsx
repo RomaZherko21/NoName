@@ -30,6 +30,8 @@ const FileManager = () => {
 
   useEffect(() => {
     FilesModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [FilesModel.pagination.currentPage, FilesModel.pagination.limit, searchParams])
 
   useEffect(() => {

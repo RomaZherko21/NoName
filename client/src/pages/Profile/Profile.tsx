@@ -27,6 +27,7 @@ function Profile() {
     ProfileModel.fetchUser(Number(id))
   }, [id])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const tabsConfig = useMemo(() => getTabsConfig(ProfileModel.id), [ProfileModel.id])
 
   return (

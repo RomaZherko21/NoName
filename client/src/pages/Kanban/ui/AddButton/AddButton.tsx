@@ -27,11 +27,13 @@ function AddButton({ text }: Props) {
             },
           }}
         >
-          <TextField size="small" autoFocus placeholder={t(text)} fullWidth />
+          <TextField size="small" placeholder={t(text)} fullWidth />
 
           <Box sx={{ display: 'flex', mt: 1, gap: 1 }}>
             <Button
-              onClick={() => { setIsFormOpen(false) }}
+              onClick={() => {
+                setIsFormOpen(false)
+              }}
               size="small"
               variant="contained"
               startIcon={<AiOutlinePlus />}
@@ -40,7 +42,9 @@ function AddButton({ text }: Props) {
             </Button>
 
             <Button
-              onClick={() => { setIsFormOpen(false) }}
+              onClick={() => {
+                setIsFormOpen(false)
+              }}
               size="small"
               sx={{ color: ({ palette }) => palette.text.secondary }}
             >
@@ -51,7 +55,9 @@ function AddButton({ text }: Props) {
       ) : (
         <Button
           startIcon={<AiOutlinePlus fontSize={16} />}
-          onClick={() => { setIsFormOpen(true) }}
+          onClick={() => {
+            setIsFormOpen(true)
+          }}
           sx={{
             color: ({ palette }) => palette.text.secondary,
             minWidth: 280,

@@ -35,7 +35,9 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
         <IconButton
-          onClick={() => { toggleFavourite(file.id) }}
+          onClick={() => {
+            toggleFavourite(file.id)
+          }}
           sx={{
             width: 36,
             height: 36,
@@ -56,8 +58,8 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         />
       </Box>
 
-      <Box sx={{ cursor: 'pointer' }}>
-        <img alt="Folder" src={folder} onClick={handleOpenFileInfo} />
+      <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
+        <img alt="Folder" src={folder} />
       </Box>
 
       <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
