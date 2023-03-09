@@ -1,19 +1,15 @@
 import { useRef, useEffect } from 'react'
-import { Paper, Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { observer } from 'mobx-react-lite'
+import { Avatar, Box, Typography } from '@mui/material'
 
-import conversationNotFound from 'assets/images/404.png'
-import { Message as TMessage } from 'shared/types'
+import notFound from 'shared/assets/images/404.png'
 
-import { ChatModel } from '../../model'
 import s from './Styles.module.scss'
-import { Message } from './ui'
+import Message from './Message'
+import { ChatModel } from '../../model'
 
-interface Props {
-  messages: TMessage[]
-}
-
-function Messages({ messages }: Props) {
+function Messages() {
   const { t } = useTranslation()
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
@@ -22,42 +18,43 @@ function Messages({ messages }: Props) {
   }, [])
 
   return (
-    <Paper
+    <Box
       sx={{
+        flexGrow: 1,
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
-        height: `calc(100vh - 202px)`,
-        p: 4,
+        p: 3,
         gap: 2,
         overflowY: 'auto',
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-        borderRadius: 0,
       }}
       className={s.chatBackground}
     >
-      {messages.map((message) => (
-        <Message key={message.id} messagesEndRef={messagesEndRef} message={message} />
-      ))}
-    </Paper>
-    // <Paper sx={{ width: '100%', height: `calc(100vh - 130px)`, borderRadius: 0 }}>
-    //   <Box
-    //     sx={{
-    //       display: 'flex',
-    //       alignItems: 'center',
-    //       justifyContent: 'center',
-    //       flexDirection: 'column',
-    //       gap: 1,
-    //       height: '100%',
-    //     }}
-    //   >
-    //     <img src={conversationNotFound} alt="Conversation not found" className={s.img} />
-    //     <Typography variant="subtitle1" color="text.secondary">
-    //       {t('user:conversationHint')}
-    //     </Typography>
-    //   </Box>
-    // </Paper>
+      {ChatModel.messages.length ? (
+        ChatModel.messages.map((message) => <Message key={message.id} message={message} />)
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            gap: 1,
+            height: '100%',
+          }}
+        >
+          <Avatar
+            src={notFound}
+            alt="No any messages"
+            sx={{ width: 120, height: 120, borderRadius: 0 }}
+          />
+          <Typography variant="subtitle2" color="text.secondary">
+            {t('chat:notification.emptyChat')}
+          </Typography>
+        </Box>
+      )}
+    </Box>
   )
 }
 
-export default Messages
+export default observer(Messages)

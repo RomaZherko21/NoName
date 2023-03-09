@@ -12,6 +12,7 @@ const namespaces = [
   'sentences',
   'file',
   'kanban',
+  'chat',
 ]
 const initTranslation = () => {
   return i18n

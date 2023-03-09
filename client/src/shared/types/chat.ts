@@ -3,7 +3,10 @@ export interface Message {
   text: string
   created_at: number
 
-  user_id: number
-  user_name: string
-  user_surname: string
+  user: {
+    id: number
+    name: string
+    surname: string
+    avatar: string
+  }
 }

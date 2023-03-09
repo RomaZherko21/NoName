@@ -26,6 +26,21 @@ export const config = [
     accessRoute: AccessRoute.users,
     accessOperation: Operation.get,
   },
+
+  {
+    icon: <BsKanban />,
+    title: 'page:kanban',
+    to: ROUTES.KANBAN,
+    // accessRoute: AccessRoute.kanban,
+    // accessOperation: Operation.get,
+  },
+  {
+    icon: <AiOutlineFileJpg />,
+    title: 'page:fileManager',
+    to: ROUTES.FILE_MANAGER,
+    accessRoute: AccessRoute.files,
+    accessOperation: Operation.get,
+  },
   {
     icon: <HiOutlineNewspaper />,
     title: 'page:posts',
@@ -50,19 +65,5 @@ export const config = [
     to: ROUTES.CHAT,
     accessRoute: AccessRoute.chat,
     accessOperation: Operation.get,
-  },
-  {
-    icon: <AiOutlineFileJpg />,
-    title: 'page:fileManager',
-    to: ROUTES.FILE_MANAGER,
-    accessRoute: AccessRoute.files,
-    accessOperation: Operation.get,
-  },
-  {
-    icon: <BsKanban />,
-    title: 'page:kanban',
-    to: ROUTES.KANBAN,
-    // accessRoute: AccessRoute.kanban,
-    // accessOperation: Operation.get,
   },
 ]
