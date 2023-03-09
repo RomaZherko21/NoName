@@ -9,27 +9,21 @@ import { PopupMenu } from 'shared/ui'
 
 import { getCommentPopupConfig } from './CommentPopupConfig'
 
-interface Props {
-  comment: CommentT
-  isOwner: boolean
-}
+function Comment() {
+  const isOwner = true
 
-function Comment({ comment, isOwner }: Props) {
-  const popupConfig = useMemo(
-    () => getCommentPopupConfig(comment.id, comment.message),
-    [comment.id, comment.message]
-  )
+  const popupConfig = useMemo(() => getCommentPopupConfig(1, 'Ben'), [])
 
   return (
-    <Box key={comment.id} sx={{ display: 'flex', gap: 1 }}>
+    <Box key={1} sx={{ display: 'flex', gap: 2 }}>
       <Avatar
         alt="User avatar"
         sx={{ width: 40, height: 40 }}
-        src={`${API_USER_AVATAR_URL}/${comment.user_avatar}`}
+        // src={`${API_USER_AVATAR_URL}/${comment.user_avatar}`}
       />
       <Box
         sx={{
-          p: 2,
+          p: 1.5,
           width: '100%',
           backgroundColor: (theme) =>
             isOwner ? theme.palette.grey[800] : theme.palette.background.paper,
@@ -38,13 +32,11 @@ function Comment({ comment, isOwner }: Props) {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography variant="body2">
-            {comment.user_name} {comment.user_surname}
+            {'Ben'} {'Benovich'}
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant="body2">
-              {new Date(comment.created_at).toLocaleDateString()}
-            </Typography>
+            <Typography variant="body2">{new Date(123421432324).toLocaleDateString()}</Typography>
             {isOwner && (
               <PopupMenu
                 ActionButton={(btnProps) => (
@@ -57,8 +49,8 @@ function Comment({ comment, isOwner }: Props) {
             )}
           </Box>
         </Box>
-        <Typography variant="body2" sx={{ mt: 1, wordBreak: 'break-word' }}>
-          {comment.message}
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1, wordBreak: 'break-word' }}>
+          Ben send something
         </Typography>
       </Box>
     </Box>

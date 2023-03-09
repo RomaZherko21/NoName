@@ -30,7 +30,7 @@ function LeaveMessage() {
       <TextField
         size="small"
         fullWidth
-        placeholder={t('user:actions.leaveMessage')}
+        placeholder={t('actions.leaveMessage')}
         variant="outlined"
       />
       <IconButton>

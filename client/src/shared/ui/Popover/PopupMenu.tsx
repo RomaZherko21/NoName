@@ -14,7 +14,7 @@ import Popover from './Popover'
 
 interface Props {
   config: Array<{
-    Icon: JSX.Element
+    Icon?: JSX.Element
     text: string
     linkTo?: string
     onClick?: (args?: any) => void
@@ -48,7 +48,7 @@ const PopupMenu = ({ config, ActionButton, id, selectCondition }: Props) => {
                 }}
                 sx={{ px: 1, py: 0.5 }}
               >
-                <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>
+                {item.Icon && <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>}
                 <ListItemText>
                   <Typography
                     variant="body2"

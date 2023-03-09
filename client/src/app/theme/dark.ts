@@ -111,6 +111,16 @@ const darkTheme = {
         },
       },
     },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgb(49, 51, 120)',
+          '& .MuiLinearProgress-barColorPrimary': {
+            backgroundColor: 'rgb(99, 102, 241)',
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
