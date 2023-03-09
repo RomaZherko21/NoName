@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite'
 import { useMemo, useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,8 +12,9 @@ import {
   Typography,
 } from '@mui/material'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
-import { CircleDevider } from 'shared/ui'
+
 import { useRootStore } from 'stores'
+import { CircleDevider } from 'shared/ui'
 import { AccessRoute, Operation } from 'models/Permissions'
 
 interface Props {

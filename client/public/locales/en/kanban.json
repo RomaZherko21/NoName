@@ -1,0 +1,10 @@
+{
+    "overview": "Overview",
+    "checklists": "Checklists",
+    "attachments": "Attachments",
+    "dueDate": "Due date",
+    "comments": "Comments",
+    "actions": {
+      "addItem": "Add item"
+    }
+  }

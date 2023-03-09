@@ -1,2 +1,6 @@
 export { Task } from './Task'
 export { AddButton } from './AddButton'
+export { AsideTaskInfo } from './AsideTaskInfo'
+export { Overview } from './Overview'
+export { Checklists } from './Checklists'
+export { Comments } from './Comments'

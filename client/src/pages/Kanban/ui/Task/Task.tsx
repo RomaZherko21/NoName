@@ -12,11 +12,13 @@ interface Props {
   provided: DraggableProvided
   snapshot: DraggableStateSnapshot
   task: TypeTask
+  handleOpenTaskInfo: () => void
 }
 
-function Task({ provided, snapshot, task }: Props) {
+function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
   return (
     <Paper
+      onClick={handleOpenTaskInfo}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}

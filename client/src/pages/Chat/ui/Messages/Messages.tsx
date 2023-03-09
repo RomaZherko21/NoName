@@ -14,7 +14,7 @@ function Messages() {
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView()
   }, [])
 
   return (
