@@ -2,8 +2,8 @@ import { observer } from 'mobx-react-lite'
 import { Grid } from '@mui/material'
 
 import { useRootStore } from 'stores'
-import { DeleteAccount, BasicInfo, CreditCardInfo, CreditCard, Carousel } from 'entities'
-import { Spinner } from 'shared/ui'
+import { DeleteAccount, BasicInfo, CreditCardInfo, CreditCard } from 'entities'
+import { Spinner, Carousel } from 'shared/ui'
 import { ProfileModel } from '../../model'
 import masterCard from 'shared/assets/images/cards/mastercard.png'
 import visa from 'shared/assets/images/cards/visa.png'
@@ -23,7 +23,7 @@ function UserInfo() {
             <BasicInfo user={ProfileModel} />
           </Grid>
           <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Carousel>
+            <Carousel width={550}>
               <CreditCard
                 cardNumber={ProfileModel.card_number}
                 nameOnCard={ProfileModel.name_on_card}

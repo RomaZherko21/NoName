@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material'
 
-import { getListConfig } from '../getListConfig'
+import { getListConfig } from './getListConfig'
 
 interface Props {}
 

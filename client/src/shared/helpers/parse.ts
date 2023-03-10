@@ -41,3 +41,8 @@ export const getSearchParamsObj = (searchParams: URLSearchParams) => {
 }
 
 export const normalizePhone = (phone: string) => `+${phone.replace(/[^\d]/g, '')}`
+
+export const getCardNumber = (cardNumber?: string) =>
+  `${cardNumber?.replace(/(\d{4}(?!\s))/g, '$1 ')}`
+
+export const getExpiryDate = (validThru?: string) => `${validThru?.split('/').join(' / ')}`
