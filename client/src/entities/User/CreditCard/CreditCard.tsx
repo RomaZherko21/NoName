@@ -1,8 +1,6 @@
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Typography } from '@mui/material'
 
-import { getListConfig } from '../CreditCardInfo/getListConfig'
 import contactless from 'shared/assets/images/cards/contactless.svg'
 import sim from 'shared/assets/images/cards/sim.svg'
 import { getCardNumber, getExpiryDate } from 'shared/helpers'
