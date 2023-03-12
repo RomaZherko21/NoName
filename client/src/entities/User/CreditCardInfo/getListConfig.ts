@@ -9,12 +9,12 @@ export const getListConfig = ({ cardNumber, nameOnCard, validThru, cvv }: any) =
   },
   {
     Icon: BiUser,
-    title: 'user:bankCard.holderName',
+    title: 'user:bankCard.cardHolderName',
     text: nameOnCard,
   },
   {
     Icon: BsCalendar2Event,
-    title: 'user:bankCard.expirationDate',
+    title: 'user:bankCard.expiryDate',
     text: validThru.split('/').join(' / '),
   },
 
