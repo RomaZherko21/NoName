@@ -1,0 +1,10 @@
+{
+  "notification": {
+    "emptyChatSearch": "We couldn't find any matches. Try checking for typos or using complete words.",
+    "emptyChat": "There is no any messages here..."
+  },
+  "actions": {
+    "addGroup": "Add group",
+    "searchChat": "Search chat"
+  }
+}

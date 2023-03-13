@@ -60,7 +60,8 @@
     "select": "Select",
     "sortBy": "Sort by",
     "sendCode": "Send code",
-    "sendCodeAgain": "Send code again"
+    "sendCodeAgain": "Send code again",
+    "leaveMessage": "Leave a message"
   },
   "fields": {
     "name": "Name",
@@ -76,6 +77,9 @@
     "createdAt": "Created at",
     "createdFrom": "Created from",
     "createdTo": "Created to",
+    "createdBy": "Created by",
+    "assignedTo": "Assigned to",
+    "tags": "Tags",
     "phone": "Phone number"
   }
 }

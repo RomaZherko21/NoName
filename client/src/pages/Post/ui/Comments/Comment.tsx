@@ -57,7 +57,7 @@ function Comment({ comment, isOwner }: Props) {
             )}
           </Box>
         </Box>
-        <Typography variant="body2" sx={{ mt: 1 }}>
+        <Typography variant="body2" sx={{ mt: 1, wordBreak: 'break-word' }}>
           {comment.message}
         </Typography>
       </Box>

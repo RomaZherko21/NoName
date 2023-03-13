@@ -1,4 +1,3 @@
-import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Box, Paper, Typography } from '@mui/material'
@@ -10,18 +9,17 @@ import { Message as TMessage } from 'shared/types'
 import { API_USER_AVATAR_URL, COMMON_DATE_FORMAT } from 'shared/consts'
 
 interface Props {
-  messagesEndRef: React.MutableRefObject<HTMLDivElement | null>
   message: TMessage
 }
 
-function Message({ messagesEndRef, message }: Props) {
-  const { user } = useRootStore()
+function Message({ message }: Props) {
   const { t } = useTranslation()
-  const isCurrentUser = user.id === message.user_id ? true : false
+  const { user } = useRootStore()
+
+  const isCurrentUser = user.id === message.user.id
 
   return (
     <Box
-      ref={messagesEndRef}
       sx={{
         display: 'flex',
         alignItems: 'flex-start',
@@ -29,27 +27,34 @@ function Message({ messagesEndRef, message }: Props) {
         gap: 1,
       }}
     >
-      {!isCurrentUser && <Avatar sx={{ width: '32px', height: '32px' }} />}
+      {!isCurrentUser && (
+        <Avatar
+          src={`${API_USER_AVATAR_URL}/${message.user.avatar}`}
+          sx={{ width: 40, height: 40 }}
+        />
+      )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Paper
           elevation={3}
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            p: '8px 16px',
+            py: 1,
+            px: 2,
             gap: 1,
-            maxWidth: '450px',
+            maxWidth: 400,
             wordWrap: 'break-word',
-            backgroundColor: (theme) => (isCurrentUser ? theme.palette.primary.dark : ''),
+            backgroundColor: isCurrentUser ? 'primary.dark' : 'background.paper',
           }}
         >
           <Typography variant="subtitle2">
-            {isCurrentUser ? t('user:me') : `${message.user_name} ${message.user_surname}`}
+            {isCurrentUser ? t('user:me') : `${message.user.name} ${message.user.surname}`}
           </Typography>
-          <Typography variant="body1">{message.text}</Typography>
+          <Typography variant="body2">{message.text}</Typography>
         </Paper>
+
         <Typography
-          sx={isCurrentUser ? { mr: 2, mt: 1, alignSelf: 'flex-end' } : { ml: 2, mt: 1 }}
+          sx={isCurrentUser ? { mr: 2, mt: 0.25, alignSelf: 'flex-end' } : { ml: 2, mt: 0.25 }}
           variant="caption"
           color="text.secondary"
         >
@@ -57,7 +62,7 @@ function Message({ messagesEndRef, message }: Props) {
         </Typography>
       </Box>
       {isCurrentUser && (
-        <Avatar src={`${API_USER_AVATAR_URL}/${user.avatar.url}`} sx={{ width: 32, height: 32 }} />
+        <Avatar src={`${API_USER_AVATAR_URL}/${user.avatar.url}`} sx={{ width: 40, height: 40 }} />
       )}
     </Box>
   )

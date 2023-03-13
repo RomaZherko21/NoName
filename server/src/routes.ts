@@ -35,8 +35,9 @@ import {
   verifyUserEmailByCode,
   verifyUserPhoneByCode,
 } from 'services/security'
-import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
+import { getChatMessages, getUserChats } from 'services/chat'
 import { ROUTES } from 'shared/consts'
+import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
 
 const router = express.Router()
 
@@ -84,5 +85,8 @@ router.put(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}/:comment_id`, updatePos
 router.get(`/${ROUTES.CONNECTIONS}`, getConnections)
 router.delete(`/${ROUTES.CONNECTIONS}/:id`, deleteConnectionById)
 router.put(`/${ROUTES.CONNECTIONS}/:id`, updateConnectionStatusById)
+
+router.get(`/${ROUTES.CHAT}`, getUserChats)
+router.get(`/${ROUTES.CHAT}/messages`, getChatMessages)
 
 export default router

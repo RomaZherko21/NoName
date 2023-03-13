@@ -1,8 +1,8 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import sequelize from './init'
-import PostModel from './post'
-import UserModel from './user'
+import sequelize from '../init'
+import PostModel from '../post'
+import UserModel from '../user'
 
 interface PostComment {
   id: number
@@ -54,13 +54,13 @@ PostCommentModel.init(
   }
 )
 
-PostCommentModel.belongsTo(PostModel, {
-  foreignKey: 'post_id',
+PostCommentModel.belongsTo(UserModel, {
+  foreignKey: 'user_id',
   onDelete: 'CASCADE',
 })
 
-PostCommentModel.belongsTo(UserModel, {
-  foreignKey: 'user_id',
+PostCommentModel.belongsTo(PostModel, {
+  foreignKey: 'post_id',
   onDelete: 'CASCADE',
 })
 
