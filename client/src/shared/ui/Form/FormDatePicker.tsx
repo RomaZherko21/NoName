@@ -33,9 +33,9 @@ function FormDatePicker(props: Props) {
           inputFormat={dateFormat}
           value={values[field]}
           onChange={(newValue: Date | null) => {
-            newValue &&
-              isValid(newValue) &&
+            if (newValue && isValid(newValue)) {
               setFieldValue(field, format(newValue, DEFAULT_DATE_FORMAT))
+            }
           }}
           renderInput={(params) => <TextField {...params} />}
         />

@@ -1,6 +1,4 @@
-import { TFunction } from 'react-i18next'
-
-export const getPopupConfig = (t: TFunction) => [
+export const getPopupConfig = () => [
   {
     text: 'Todo',
     onClick: () => {

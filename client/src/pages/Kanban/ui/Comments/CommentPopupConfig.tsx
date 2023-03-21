@@ -6,6 +6,7 @@ export const getCommentPopupConfig = (id: number, value: string) => [
     Icon: <CiEdit />,
     text: 'actions.edit',
     onClick: () => {
+      console.log(id, value)
       // KanbanModel.onEditComment({ id, value })
     }
   },

@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
 import { Box, Drawer, IconButton, Button, InputBase } from '@mui/material'
 import { IoIosArrowDown } from 'react-icons/io'
 import { HiOutlineArchive } from 'react-icons/hi'
@@ -17,7 +16,6 @@ interface Props {
 }
 
 const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
-  const { t } = useTranslation()
   const [isEyeActive, setIsEyeActive] = useState(true)
 
   const tabsConfig = useMemo(() => getTabsConfig(), [])
@@ -50,7 +48,7 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
                 startIcon={<IoIosArrowDown />}
               />
             )}
-            config={getPopupConfig(t)}
+            config={getPopupConfig()}
           />
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>

@@ -1,1 +1,1 @@
-export { default as ProfileModel, CONNECTION_OPTIONS } from './Profile.model'
+export { default as ProfileModel, ConnectionOptions } from './Profile.model'

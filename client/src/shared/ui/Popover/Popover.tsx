@@ -28,7 +28,9 @@ function Popover({ children, activateElement, selfClosed = false }: Props) {
         anchorEl={open}
         onClose={handleClose}
         onClick={() => {
-          selfClosed && handleClose()
+          if (selfClosed) {
+            handleClose()
+          }
         }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}

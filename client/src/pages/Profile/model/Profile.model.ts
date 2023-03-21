@@ -6,7 +6,7 @@ import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
 
-export enum CONNECTION_OPTIONS {
+export enum ConnectionOptions {
   connections = 'connections',
   sentConnections = 'sentConnections',
   receivedConnections = 'receivedConnections'
@@ -43,7 +43,7 @@ class ProfileModel {
   editCommentId: number = 0
   isEditActive: boolean = false
 
-  connectionStatus: CONNECTION_OPTIONS = CONNECTION_OPTIONS.connections
+  connectionStatus: ConnectionOptions = ConnectionOptions.connections
 
   loading: LoadingModel
 
@@ -53,9 +53,9 @@ class ProfileModel {
     this.loading = new LoadingModel()
   }
 
-  onConnectionStatusChange(status: CONNECTION_OPTIONS) {
-    if (status === CONNECTION_OPTIONS.connections) {
-      this.connectionStatus = CONNECTION_OPTIONS.connections
+  onConnectionStatusChange(status: ConnectionOptions) {
+    if (status === ConnectionOptions.connections) {
+      this.connectionStatus = ConnectionOptions.connections
       this.fetchConnections({
         isSent: true,
         isReceived: true,
@@ -63,12 +63,12 @@ class ProfileModel {
         hidden: true
       })
     }
-    if (status === CONNECTION_OPTIONS.sentConnections) {
-      this.connectionStatus = CONNECTION_OPTIONS.sentConnections
+    if (status === ConnectionOptions.sentConnections) {
+      this.connectionStatus = ConnectionOptions.sentConnections
       this.fetchConnections({ isSent: true, isReceived: false, hidden: true })
     }
-    if (status === CONNECTION_OPTIONS.receivedConnections) {
-      this.connectionStatus = CONNECTION_OPTIONS.receivedConnections
+    if (status === ConnectionOptions.receivedConnections) {
+      this.connectionStatus = ConnectionOptions.receivedConnections
       this.fetchConnections({ isSent: false, isReceived: true, hidden: true })
     }
   }

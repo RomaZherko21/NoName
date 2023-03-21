@@ -10,7 +10,7 @@ import { InformativeImage, Input, Select, Spinner } from 'shared/ui'
 import { ConnectionStatus } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
-import { ProfileModel, CONNECTION_OPTIONS } from '../../model'
+import { ProfileModel, ConnectionOptions } from '../../model'
 
 const Connections = () => {
   const { user } = useRootStore()
@@ -45,13 +45,13 @@ const Connections = () => {
           <Select
             value={ProfileModel.connectionStatus}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              ProfileModel.onConnectionStatusChange(e.target.value as CONNECTION_OPTIONS)
+              ProfileModel.onConnectionStatusChange(e.target.value as ConnectionOptions)
             }}
             label="actions.sortBy"
             options={{
-              [CONNECTION_OPTIONS.connections]: 'page:connections',
-              [CONNECTION_OPTIONS.sentConnections]: 'user:sentConnections',
-              [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections'
+              [ConnectionOptions.connections]: 'page:connections',
+              [ConnectionOptions.sentConnections]: 'user:sentConnections',
+              [ConnectionOptions.receivedConnections]: 'user:receivedConnections'
             }}
             sx={{ width: 160 }}
           />
@@ -90,7 +90,7 @@ const Connections = () => {
                   </Tooltip>
                 </Box>
                 {item.status === ConnectionStatus.pending &&
-                  ProfileModel.connectionStatus === CONNECTION_OPTIONS.sentConnections && (
+                  ProfileModel.connectionStatus === ConnectionOptions.sentConnections && (
                     <Button
                       color="error"
                       size="small"
@@ -104,7 +104,7 @@ const Connections = () => {
                   )}
 
                 {item.status === ConnectionStatus.pending &&
-                  ProfileModel.connectionStatus === CONNECTION_OPTIONS.receivedConnections && (
+                  ProfileModel.connectionStatus === ConnectionOptions.receivedConnections && (
                     <Box
                       sx={{
                         display: 'flex',

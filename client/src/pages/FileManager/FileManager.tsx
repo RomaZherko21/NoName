@@ -9,7 +9,6 @@ import { BsListUl } from 'react-icons/bs'
 
 import { PageHeader } from 'widgets'
 import { AsideFiltersBar } from 'shared/ui'
-import { getSearchParamsObj } from 'shared/helpers'
 
 import { FilesModel, sortConfig } from './model'
 import { FileItemCard, FileItemRow, Storage, AsideFileInfo } from './ui'
@@ -29,7 +28,7 @@ const FileManager = () => {
   const sortOptions = useMemo(() => sortConfig, [])
 
   useEffect(() => {
-    FilesModel.debounceFetch({ searchParams: getSearchParamsObj(searchParams) })
+    FilesModel.debounceFetch({})
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [FilesModel.pagination.currentPage, FilesModel.pagination.limit, searchParams])

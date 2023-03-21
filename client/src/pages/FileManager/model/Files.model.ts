@@ -2,11 +2,9 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 import { debounce } from '@mui/material'
 
-import { QueryPaginationParams, QuerySortParams, File } from 'shared/types'
+import { File } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
-
-type SearchParams = QuerySortParams & QueryPaginationParams
 
 class FilesModel {
   files: File[] = [
@@ -57,20 +55,20 @@ class FilesModel {
   }
 
   toggleFavourite(id: number) {
-    console.log('toggleFavourite request')
+    console.log('toggleFavourite request', id)
   }
 
   deleteFile(id: number) {
-    console.log('deleteFile request')
+    console.log('deleteFile request', id)
   }
 
   deleteTag(id: number) {
-    console.log('deleteTag request')
+    console.log('deleteTag request', id)
   }
 
   debounceFetch = debounce(this.fetch, 500)
 
-  async fetch({ searchParams, hidden = false }: { searchParams?: SearchParams; hidden?: boolean }) {
+  async fetch({ hidden = false }: { hidden?: boolean }) {
     try {
       if (!hidden) {
         this.loading.begin()
