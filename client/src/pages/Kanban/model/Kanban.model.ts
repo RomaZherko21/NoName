@@ -15,14 +15,14 @@ class KanbanModel {
         {
           id: '1',
           content: 'First task',
-          KanbanComment: [{ id: 1, created_at: 1231234521, task_id: 1, message: 'Yes' }],
+          KanbanComment: [{ id: 1, created_at: 1231234521, task_id: 1, message: 'Yes' }]
         },
         {
           id: '2',
           content: 'Second task',
-          KanbanComment: [{ id: 2, created_at: 1331234521, task_id: 1, message: 'no' }],
-        },
-      ],
+          KanbanComment: [{ id: 2, created_at: 1331234521, task_id: 1, message: 'no' }]
+        }
+      ]
     },
     {
       id: '2',
@@ -31,20 +31,20 @@ class KanbanModel {
         {
           id: '3',
           content: 'Three task',
-          KanbanComment: [{ id: 3, created_at: 1341234521, task_id: 2, message: 'nooOooOoO' }],
+          KanbanComment: [{ id: 3, created_at: 1341234521, task_id: 2, message: 'nooOooOoO' }]
         },
         {
           id: '4',
           content: 'Four task',
-          KanbanComment: [{ id: 4, created_at: 133221234521, task_id: 2, message: 'Yeeesese' }],
-        },
-      ],
+          KanbanComment: [{ id: 4, created_at: 133221234521, task_id: 2, message: 'Yeeesese' }]
+        }
+      ]
     },
     {
       id: '3',
       title: 'Done',
-      tasks: [],
-    },
+      tasks: []
+    }
   ]
 
   commentInputValue: string = ''
@@ -65,7 +65,7 @@ class KanbanModel {
         this.loading.begin()
       }
 
-      const data = await API.posts.get(id)
+      await API.posts.get(id)
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -83,12 +83,12 @@ class KanbanModel {
     try {
       await API.posts.createComment(id, {
         created_at: new Date().getTime(),
-        message: this.commentInputValue,
+        message: this.commentInputValue
       })
 
       this.commentInputValue = ''
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -97,29 +97,29 @@ class KanbanModel {
   async editComment(id: number) {
     try {
       await API.posts.editComment({
-        post_id: id,
-        comment_id: this.editCommentId,
+        postId: id,
+        commentId: this.editCommentId,
         comment: {
           created_at: new Date().getTime(),
-          message: this.commentInputValue,
-        },
+          message: this.commentInputValue
+        }
       })
 
       this.isEditActive = false
       this.commentInputValue = ''
       this.editCommentId = 0
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
   }
 
-  async deleteComment(comment_id: number, id: number) {
+  async deleteComment(commentId: number, id: number) {
     try {
-      await API.posts.deleteComment(id, comment_id)
+      await API.posts.deleteComment(id, commentId)
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -170,4 +170,6 @@ class KanbanModel {
   }
 }
 
-export default new KanbanModel()
+const model = new KanbanModel()
+
+export default model

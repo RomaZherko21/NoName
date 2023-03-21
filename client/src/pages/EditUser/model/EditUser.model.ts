@@ -56,7 +56,7 @@ class EditUserModel {
   }
 
   private fromJSON(user: User) {
-    this.id = user.basic.id || 0
+    this.id = user.basic.id ?? 0
     this.name = user.basic.name
     this.surname = user.basic.surname
     this.middle_name = user.basic.middle_name
@@ -73,4 +73,6 @@ class EditUserModel {
   }
 }
 
-export default new EditUserModel()
+const model = new EditUserModel()
+
+export default model

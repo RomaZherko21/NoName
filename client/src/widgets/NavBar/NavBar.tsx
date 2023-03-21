@@ -21,8 +21,8 @@ const NavBar = () => {
             width: DRAWER_WIDTH,
             backgroundColor: 'background.rare',
             p: 2,
-            border: 'none',
-          },
+            border: 'none'
+          }
         }}
         open
       >
@@ -30,7 +30,7 @@ const NavBar = () => {
           alt="NoName logo"
           src={logo}
           style={{
-            width: 120,
+            width: 120
           }}
         />
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 3 }}>
@@ -42,6 +42,7 @@ const NavBar = () => {
               to={item?.to}
               accessRoute={item.accessRoute}
               accessOperation={item.accessOperation}
+              key={item.to}
             />
           ))}
         </List>

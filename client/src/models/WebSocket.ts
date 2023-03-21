@@ -6,7 +6,7 @@ import { RootStore } from 'stores/Root'
 import { WsChatMessage } from './WsMessages'
 
 enum WsMessageCodes {
-  chat = 'chat',
+  chat = 'chat'
 }
 
 class WebSocketModel {

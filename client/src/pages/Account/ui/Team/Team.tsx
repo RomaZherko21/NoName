@@ -9,7 +9,7 @@ import {
   Button,
   Stack,
   TableContainer,
-  InputAdornment,
+  InputAdornment
 } from '@mui/material'
 import { AiOutlineMail } from 'react-icons/ai'
 
@@ -44,7 +44,7 @@ function Team() {
                   <InputAdornment position="start">
                     <AiOutlineMail />
                   </InputAdornment>
-                ),
+                )
               }}
             />
             <Button size="medium" variant="contained" sx={{ minWidth: '110px', ml: 3 }}>

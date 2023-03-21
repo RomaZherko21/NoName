@@ -37,7 +37,7 @@ class PostsModel {
       }
 
       const data = await API.posts.list({
-        searchParams,
+        searchParams
       })
 
       this.posts = data.posts
@@ -62,4 +62,6 @@ class PostsModel {
   }
 }
 
-export default new PostsModel()
+const model = new PostsModel()
+
+export default model

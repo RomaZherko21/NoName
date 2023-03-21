@@ -8,6 +8,16 @@ import * as security from './security'
 import * as kanban from './kanban'
 import * as chat from './chat'
 
-const API = { auth, user, users, posts, connections, genres, security, kanban, chat }
+const API = {
+  auth,
+  user,
+  users,
+  posts,
+  connections,
+  genres,
+  security,
+  kanban,
+  chat
+}
 
 export default API

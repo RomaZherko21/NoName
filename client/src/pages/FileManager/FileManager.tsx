@@ -16,7 +16,7 @@ import { FileItemCard, FileItemRow, Storage, AsideFileInfo } from './ui'
 
 enum ViewType {
   card = 'card',
-  list = 'list',
+  list = 'list'
 }
 
 const FileManager = () => {
@@ -53,7 +53,7 @@ const FileManager = () => {
       <Grid container xs={12} spacing={2}>
         <Grid item xs={12} lg={8}>
           <AsideFiltersBar
-            inputValue={searchParams.get('name') || ''}
+            inputValue={searchParams.get('name') ?? ''}
             onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setSearchParams((searchParams: URLSearchParams) => {
                 searchParams.set('name', e.target.value)
@@ -77,7 +77,9 @@ const FileManager = () => {
             <ToggleButtonGroup
               value={view}
               exclusive
-              onChange={(_, nextView: ViewType) => setView(nextView)}
+              onChange={(_, nextView: ViewType) => {
+                setView(nextView)
+              }}
             >
               <ToggleButton value={ViewType.card} sx={{ p: 1, fontSize: 18 }}>
                 <MdOutlineGridView />
@@ -91,20 +93,24 @@ const FileManager = () => {
           <Grid item container spacing={2} sx={{ mt: 1 }}>
             {FilesModel.files.map((file) =>
               view === ViewType.card ? (
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid key={file.id} item xs={12} md={6} lg={4}>
                   <FileItemCard
                     file={file}
-                    toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
+                    toggleFavourite={() => {
+                      FilesModel.toggleFavourite(file.id)
+                    }}
                     handleOpenFileInfo={() => {
                       setOpenFileInfo(true)
                     }}
                   />
                 </Grid>
               ) : (
-                <Grid item xs={12}>
+                <Grid key={file.id} item xs={12}>
                   <FileItemRow
                     file={file}
-                    toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
+                    toggleFavourite={() => {
+                      FilesModel.toggleFavourite(file.id)
+                    }}
                     handleOpenFileInfo={() => {
                       setOpenFileInfo(true)
                     }}
@@ -122,12 +128,21 @@ const FileManager = () => {
 
       {FilesModel.files.map((file) => (
         <AsideFileInfo
+          key={file.id}
           file={file}
           openFileInfo={openFileInfo}
-          onCloseFileInfo={() => setOpenFileInfo(false)}
-          toggleFavourite={() => FilesModel.toggleFavourite(file.id)}
-          deleteFile={() => FilesModel.deleteFile(file.id)}
-          deleteTag={() => FilesModel.deleteTag(file.id)}
+          onCloseFileInfo={() => {
+            setOpenFileInfo(false)
+          }}
+          toggleFavourite={() => {
+            FilesModel.toggleFavourite(file.id)
+          }}
+          deleteFile={() => {
+            FilesModel.deleteFile(file.id)
+          }}
+          deleteTag={() => {
+            FilesModel.deleteTag(file.id)
+          }}
         />
       ))}
     </>

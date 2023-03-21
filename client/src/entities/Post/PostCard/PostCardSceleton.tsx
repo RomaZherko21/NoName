@@ -9,7 +9,14 @@ const PostCardSceleton = () => {
       <Skeleton variant="rectangular" height={220} />
 
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 2
+          }}
+        >
           <>
             <Skeleton width={100} height={20} variant="rounded" />
             <Skeleton width={40} height={20} variant="rounded" />
@@ -24,7 +31,14 @@ const PostCardSceleton = () => {
           <Skeleton height={65} variant="rounded" />
         </Typography>
 
-        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box
+          sx={{
+            mt: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
           <InformativeImage imgUrl="" PrimaryText="" isLoaded={false} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>

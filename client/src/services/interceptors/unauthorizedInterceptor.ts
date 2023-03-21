@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { RootStore } from 'stores'
 
-export function unauthorizedInterceptor(error: AxiosError) {
+export async function unauthorizedInterceptor(error: AxiosError) {
   const { response } = error
 
   if (response?.status === 400 || response?.status === 401 || response?.status === 500) {
@@ -13,5 +13,5 @@ export function unauthorizedInterceptor(error: AxiosError) {
     RootStore.authorization.unauthorize()
   }
 
-  return Promise.reject(error)
+  return await Promise.reject(error)
 }

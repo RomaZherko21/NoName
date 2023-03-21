@@ -20,7 +20,10 @@ function PostContent() {
       <Box sx={{ display: 'flex', flexDirection: 'column', py: 2, gap: 2 }}>
         <Chip
           label={t(`post:genre.${PostModel.genre}`)}
-          sx={{ backgroundColor: (theme) => theme.palette.grey[700], width: 'fit-content' }}
+          sx={{
+            backgroundColor: (theme) => theme.palette.grey[700],
+            width: 'fit-content'
+          }}
         />
         <Typography variant="h4">{PostModel.name}</Typography>
         <Typography variant="body2" color="text.secondary">
@@ -35,7 +38,9 @@ function PostContent() {
               {format(PostModel.created_at, 'MMMM dd, yyyy')}
             </>
           }
-          SecondaryText={t('post:readingTime', { minute: PostModel.reading_time })}
+          SecondaryText={t('post:readingTime', {
+            minute: PostModel.reading_time
+          })}
         />
       </Box>
 
@@ -60,12 +65,14 @@ function PostContent() {
             placement="bottom"
           >
             <IconButton
-              onClick={() => PostModel.toggleLike()}
+              onClick={async () => {
+                await PostModel.toggleLike()
+              }}
               sx={{
                 color: (theme) =>
                   PostModel.is_liked ? theme.palette.error.dark : theme.palette.action.active,
                 fontSize: 22,
-                p: 0,
+                p: 0
               }}
             >
               {PostModel.is_liked ? <AiFillHeart /> : <AiOutlineHeart />}
@@ -84,7 +91,7 @@ function PostContent() {
               <IconButton
                 {...btnProps}
                 sx={{
-                  fontSize: 22,
+                  fontSize: 22
                 }}
               >
                 <AiOutlineShareAlt />{' '}

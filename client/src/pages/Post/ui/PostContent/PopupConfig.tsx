@@ -9,6 +9,6 @@ export const getPopupConfig = (t: TFunction) => [
     onClick: () => {
       navigator.clipboard.writeText(window.location.href)
       toast.success(t('translation:actions.linkCopied'))
-    },
-  },
+    }
+  }
 ]

@@ -36,7 +36,7 @@ const PageHeader = ({ pageName, children, breadcrumbs }: Props) => {
                   width: '4px',
                   height: '4px',
                   backgroundColor: 'text.secondary',
-                  borderRadius: 50,
+                  borderRadius: 50
                 }}
               />
             }
@@ -53,8 +53,8 @@ const PageHeader = ({ pageName, children, breadcrumbs }: Props) => {
                   color: ({ palette }) => palette.text.secondary,
                   fontSize: 12,
                   '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
+                    bgcolor: 'transparent'
+                  }
                 }}
               >
                 <AiOutlineHome />
@@ -70,11 +70,12 @@ const PageHeader = ({ pageName, children, breadcrumbs }: Props) => {
                   variant="body2"
                   color="text.primary"
                   to={item.to}
+                  key={item.to}
                 >
                   {t(item.text)}
                 </MuiLink>
               ) : (
-                <Typography variant="body2" color="text.secondary">
+                <Typography key={item.to} variant="body2" color="text.secondary">
                   {t(item.text)}
                 </Typography>
               )

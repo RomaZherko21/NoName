@@ -3,14 +3,14 @@ import { Checklists, Overview, Comments } from '../../ui'
 export const getTabsConfig = () => [
   {
     label: 'kanban:overview',
-    Component: Overview,
+    Component: Overview
   },
   {
     label: 'kanban:checklists',
-    Component: Checklists,
+    Component: Checklists
   },
   {
     label: 'kanban:comments',
-    Component: Comments,
-  },
+    Component: Comments
+  }
 ]

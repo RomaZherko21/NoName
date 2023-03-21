@@ -11,7 +11,7 @@ import {
   Typography,
   Divider,
   Checkbox,
-  TextField,
+  TextField
 } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { FiTrash } from 'react-icons/fi'
@@ -25,10 +25,17 @@ function Checklist() {
   const [isChangeCheckActive, setIsChangeCheckActive] = useState(false)
 
   return (
-    <Stack sx={{ border: ({ palette }) => `1px solid ${palette.divider}`, borderRadius: '20px' }}>
+    <Stack
+      sx={{
+        border: ({ palette }) => `1px solid ${palette.divider}`,
+        borderRadius: '20px'
+      }}
+    >
       <Box sx={{ display: 'flex', gap: 3, p: 1.5 }}>
         <InputBase
-          onFocus={() => setIsChangeNameActive(true)}
+          onFocus={() => {
+            setIsChangeNameActive(true)
+          }}
           value="Untitled Checklist"
           size="small"
           fullWidth
@@ -38,17 +45,21 @@ function Checklist() {
             fontSize: '14px',
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
         {isChangeNameActive ? (
-          <ActionButtons onClick={() => setIsChangeNameActive(false)} />
+          <ActionButtons
+            onClick={() => {
+              setIsChangeNameActive(false)
+            }}
+          />
         ) : (
           <IconButton sx={{ color: ({ palette }) => palette.text.secondary }} size="small">
             <FiTrash />
@@ -71,7 +82,9 @@ function Checklist() {
       <Box sx={{ display: 'flex', alignItems: 'center', p: 2, gap: 2 }}>
         <Checkbox size="medium" />
         <InputBase
-          onFocus={() => setIsChangeCheckActive(true)}
+          onFocus={() => {
+            setIsChangeCheckActive(true)
+          }}
           value="Check"
           size="small"
           fullWidth
@@ -82,18 +95,22 @@ function Checklist() {
             fontSize: '14px',
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
         <Box sx={{ display: 'flex', gap: 2 }}>
           {isChangeCheckActive ? (
-            <ActionButtons onClick={() => setIsChangeCheckActive(false)} />
+            <ActionButtons
+              onClick={() => {
+                setIsChangeCheckActive(false)
+              }}
+            />
           ) : (
             <IconButton sx={{ color: ({ palette }) => palette.text.secondary }} size="small">
               <FiTrash />
@@ -106,10 +123,19 @@ function Checklist() {
       {isAddItemActive ? (
         <Box sx={{ display: 'flex', gap: 1, p: 1.5 }}>
           <TextField size="small" fullWidth placeholder={t('kanban:actions.addItem')} />
-          <ActionButtons onClick={() => setIsAddItemActive(false)} />
+          <ActionButtons
+            onClick={() => {
+              setIsAddItemActive(false)
+            }}
+          />
         </Box>
       ) : (
-        <Box onClick={() => setIsAddItemActive(true)} sx={{ p: 1.5 }}>
+        <Box
+          onClick={() => {
+            setIsAddItemActive(true)
+          }}
+          sx={{ p: 1.5 }}
+        >
           <Button color="inherit" startIcon={<AiOutlinePlus />}>
             {t('kanban:actions.addItem')}
           </Button>

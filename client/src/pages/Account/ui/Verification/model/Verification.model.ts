@@ -5,7 +5,7 @@ import { API } from 'services'
 
 export enum SEND_TYPE {
   email = 'email',
-  phone = 'phone',
+  phone = 'phone'
 }
 
 class VerificationModel {
@@ -47,4 +47,6 @@ class VerificationModel {
   }
 }
 
-export default new VerificationModel()
+const model = new VerificationModel()
+
+export default model

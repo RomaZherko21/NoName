@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx'
 class WsChatMessage {
   chatId?: number = 0
 
-  private connection?: WebSocket
+  private readonly connection?: WebSocket
 
   constructor(connection?: WebSocket) {
     makeAutoObservable(this)
@@ -18,7 +18,7 @@ class WsChatMessage {
         text: data.text,
         created_at: data.createdAt,
         recipient_id: data.recipientId,
-        chat_id: this.chatId,
+        chat_id: this.chatId
       })
     )
   }

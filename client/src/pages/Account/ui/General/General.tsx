@@ -20,11 +20,11 @@ const General = () => {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        name: commonStringValidation(t(`user:name`), 3),
-        surname: commonStringValidation(t(`user:surname`), 3),
+        name: commonStringValidation(t('user:name'), 3),
+        surname: commonStringValidation(t('user:surname'), 3),
         email: emailValidation(),
-        role: commonStringValidation(t(`user:role`)),
-        date_of_birth: commonStringValidation(t(`user:dateOfBirth`), 10),
+        role: commonStringValidation(t('user:role')),
+        date_of_birth: commonStringValidation(t('user:dateOfBirth'), 10)
       }),
     [t]
   )
@@ -41,7 +41,7 @@ const General = () => {
           tel_number: user.tel_number,
           role: user.role,
           gender: user.gender,
-          date_of_birth: user.date_of_birth,
+          date_of_birth: user.date_of_birth
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -108,7 +108,7 @@ const General = () => {
                 <Box
                   sx={{
                     display: 'flex',
-                    flexDirection: 'column',
+                    flexDirection: 'column'
                   }}
                 >
                   <Typography color="textPrimary" variant="body1">

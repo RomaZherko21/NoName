@@ -11,7 +11,7 @@ import {
   Box,
   Chip,
   Link as MuiLink,
-  Tooltip,
+  Tooltip
 } from '@mui/material'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
@@ -46,7 +46,14 @@ const PostCard = ({ post, toggleLike }: Props) => {
       />
 
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 2
+          }}
+        >
           <Chip
             label={t(`post:genre.${post.genre}`)}
             sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
@@ -70,7 +77,14 @@ const PostCard = ({ post, toggleLike }: Props) => {
           {post.short_description}
         </Typography>
 
-        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box
+          sx={{
+            mt: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
           <InformativeImage
             imgUrl={`${API_USER_AVATAR_URL}/${post.avatar}`}
             PrimaryText={
@@ -89,12 +103,14 @@ const PostCard = ({ post, toggleLike }: Props) => {
               placement="bottom"
             >
               <IconButton
-                onClick={() => toggleLike(post.id)}
+                onClick={() => {
+                  toggleLike(post.id)
+                }}
                 sx={{
                   color: (theme) =>
                     post.is_liked ? theme.palette.error.dark : theme.palette.action.active,
                   fontSize: 22,
-                  p: 0,
+                  p: 0
                 }}
               >
                 {post.is_liked ? <AiFillHeart /> : <AiOutlineHeart />}

@@ -9,13 +9,13 @@ export const getCommentPopupConfig = (id: number, value: string) => [
     text: 'actions.edit',
     onClick: () => {
       PostModel.onEditComment({ id, value })
-    },
+    }
   },
   {
     Icon: <MdDeleteOutline />,
     text: 'actions.delete',
     onClick: () => {
       PostModel.deleteComment(id)
-    },
-  },
+    }
+  }
 ]

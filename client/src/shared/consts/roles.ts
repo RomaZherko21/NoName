@@ -1,9 +1,9 @@
 export const ROLES = {
   admin: 'admin',
-  user: 'user',
+  user: 'user'
 }
 
 export const GENDER = {
   man: 'man',
-  woman: 'woman',
+  woman: 'woman'
 }

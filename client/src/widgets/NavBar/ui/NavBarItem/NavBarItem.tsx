@@ -9,7 +9,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
+  Typography
 } from '@mui/material'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 
@@ -32,7 +32,7 @@ const NavBarItem = ({
   to = '',
   collapsedItems = [],
   accessRoute,
-  accessOperation,
+  accessOperation
 }: Props) => {
   const { t } = useTranslation()
   const location = useLocation()
@@ -70,7 +70,7 @@ const NavBarItem = ({
         <ListItemIcon
           sx={{
             color: ({ palette }) => (isActive ? palette.primary.main : palette.text.secondary),
-            fontSize: 20,
+            fontSize: 20
           }}
         >
           {icon}
@@ -109,13 +109,14 @@ const NavBarItem = ({
                   component={Link}
                   to={item.to}
                   sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
+                  key={item.to}
                 >
                   {location.pathname === item.to && (
                     <CircleDevider
                       sx={{
                         position: 'absolute',
                         backgroundColor: 'primary.main',
-                        left: 10,
+                        left: 10
                       }}
                     />
                   )}

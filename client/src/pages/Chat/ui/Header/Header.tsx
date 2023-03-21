@@ -23,13 +23,18 @@ function Header({ user }: Props) {
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: 0,
         height: 60,
-        width: `100%`,
+        width: '100%'
       }}
     >
       <Box
         component={Link}
         to={ROUTES.USERS}
-        sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none' }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+          textDecoration: 'none'
+        }}
       >
         <Avatar sx={{ height: 32, width: 32 }} src={user.avatar} />
         <Stack>
@@ -46,7 +51,7 @@ function Header({ user }: Props) {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: 1,
+          gap: 1
         }}
       >
         <IconButton sx={{ fontSize: '16px' }}>

@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from '@mui/material'
 import { HiOutlineLightningBolt } from 'react-icons/hi'
 

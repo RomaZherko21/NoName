@@ -24,7 +24,7 @@ function VerificationCodeModal({
   timeLeft,
   isTimerEnded,
   onSubmit,
-  onSendCodeAgain,
+  onSendCodeAgain
 }: Props) {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -57,7 +57,7 @@ function VerificationCodeModal({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          p: 4,
+          p: 4
         }}
       >
         <Typography variant="h5">{title}</Typography>
@@ -80,7 +80,7 @@ function VerificationCodeModal({
             sx={{
               mt: 4,
               width: 'fit-content',
-              color: ({ palette }) => palette.text.primary,
+              color: ({ palette }) => palette.text.primary
             }}
             size="small"
           >

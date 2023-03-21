@@ -32,7 +32,7 @@ function Security() {
           p: 4,
           mb: 2,
           borderRadius: 2,
-          gap: 5,
+          gap: 5
         }}
       >
         <Typography variant="h6">{t('translation:actions.changePassword')}</Typography>
@@ -46,7 +46,14 @@ function Security() {
 
       <Paper elevation={16} sx={{ p: 4, mb: 2, borderRadius: 2 }}>
         <Typography variant="h6">{t('user:multiFactorAuthentication')}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 3 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: 2,
+            mt: 3
+          }}
+        >
           <OptionSetup
             title={t('user:authenticatorApp')}
             subtitle={t('user:updates.security.generateCode')}

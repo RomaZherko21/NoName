@@ -19,7 +19,7 @@ const NotFound = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <img
@@ -29,7 +29,7 @@ const NotFound = () => {
             marginBottom: 50,
             display: 'inline-block',
             maxWidth: '100%',
-            width: 350,
+            width: 350
           }}
         />
         <Typography align="center" color="text.primary" variant="h3">

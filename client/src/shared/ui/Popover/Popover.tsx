@@ -27,14 +27,16 @@ function Popover({ children, activateElement, selfClosed = false }: Props) {
         open={Boolean(open)}
         anchorEl={open}
         onClose={handleClose}
-        onClick={() => selfClosed && handleClose()}
+        onClick={() => {
+          selfClosed && handleClose()
+        }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{
           sx: {
             mt: 1.5,
-            ml: 0.75,
-          },
+            ml: 0.75
+          }
         }}
         disableScrollLock
       >

@@ -18,7 +18,9 @@ function FormDatePicker(props: Props) {
   const { label, field, dateFormat = DEFAULT_DATE_FORMAT } = props
   const { t } = useTranslation()
 
-  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   const hasError = touched[field] && Boolean(errors[field])
 
@@ -30,11 +32,11 @@ function FormDatePicker(props: Props) {
           label={t(label)}
           inputFormat={dateFormat}
           value={values[field]}
-          onChange={(newValue: Date | null) =>
+          onChange={(newValue: Date | null) => {
             newValue &&
-            isValid(newValue) &&
-            setFieldValue(field, format(newValue, DEFAULT_DATE_FORMAT))
-          }
+              isValid(newValue) &&
+              setFieldValue(field, format(newValue, DEFAULT_DATE_FORMAT))
+          }}
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>

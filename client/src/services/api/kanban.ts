@@ -4,20 +4,20 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/kanban'
 
-export const get = (id: number) => fetch.get<KanbanColumn>(`${ENDPOINT_BASE}/${id}`)
+export const get = async (id: number) => await fetch.get<KanbanColumn>(`${ENDPOINT_BASE}/${id}`)
 
-export const createComment = (id: number, comment: any) =>
-  fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
+export const createComment = async (id: number, comment: any) =>
+  await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
 
-export const editComment = ({
-  task_id,
-  comment_id,
-  comment,
+export const editComment = async ({
+  taskId,
+  commentId,
+  comment
 }: {
-  task_id: number
-  comment_id: number
+  taskId: number
+  commentId: number
   comment: { created_at: number; message: string }
-}) => fetch.put<KanbanComment>(`${ENDPOINT_BASE}/${task_id}/comments/${comment_id}`, comment)
+}) => await fetch.put<KanbanComment>(`${ENDPOINT_BASE}/${taskId}/comments/${commentId}`, comment)
 
-export const deleteComment = (task_id: number, id: number) =>
-  fetch.delete(`${ENDPOINT_BASE}/${task_id}/comments/${id}`)
+export const deleteComment = async (taskId: number, id: number) =>
+  await fetch.delete(`${ENDPOINT_BASE}/${taskId}/comments/${id}`)

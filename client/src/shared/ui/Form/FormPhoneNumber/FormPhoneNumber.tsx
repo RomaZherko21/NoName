@@ -16,7 +16,9 @@ function FormPhoneNumber(props: Props) {
   const { label, field } = props
   const { t } = useTranslation()
 
-  const { touched, errors, setFieldValue, values } = useFormikContext<{ [key: string]: any }>()
+  const { touched, errors, setFieldValue, values } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   const hasError = touched[field] && Boolean(errors[field])
 

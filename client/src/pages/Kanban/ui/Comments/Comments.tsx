@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
-import { Box, IconButton, Typography, Avatar, Chip, Stack, Divider } from '@mui/material'
+import { Box, Stack, Divider } from '@mui/material'
 import Comment from './Comment'
 import { LeaveComment } from 'shared/ui'
 import { KanbanModel } from 'pages/Kanban/model'
@@ -24,14 +23,14 @@ function Comments() {
       sx={{
         gap: 2,
         p: '24px',
-        pt: 0,
+        pt: 0
       }}
     >
       {1 && (
         <>
           <Stack sx={{ gap: 2 }}>
-            {[1].map(() => (
-              <Comment />
+            {[1].map((item) => (
+              <Comment key={item} />
             ))}
           </Stack>
         </>

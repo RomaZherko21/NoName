@@ -16,7 +16,7 @@ function CircleDevider({ sx }: Props) {
         backgroundColor: 'text.primary',
         borderRadius: 50,
         m: 1,
-        ...sx,
+        ...sx
       }}
     />
   )

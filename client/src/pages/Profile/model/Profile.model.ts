@@ -1,16 +1,15 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
-import { Connection, ConnectionStatus, Gender, Roles, User } from 'shared/types'
+import { Connection, ConnectionStatus, Gender, Roles, User, Post } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
-import { Post } from 'shared/types'
 
 export enum CONNECTION_OPTIONS {
   connections = 'connections',
   sentConnections = 'sentConnections',
-  receivedConnections = 'receivedConnections',
+  receivedConnections = 'receivedConnections'
 }
 
 class ProfileModel {
@@ -61,7 +60,7 @@ class ProfileModel {
         isSent: true,
         isReceived: true,
         status: ConnectionStatus.accept,
-        hidden: true,
+        hidden: true
       })
     }
     if (status === CONNECTION_OPTIONS.sentConnections) {
@@ -94,7 +93,7 @@ class ProfileModel {
     isSent,
     isReceived,
     status = ConnectionStatus.pending,
-    hidden = false,
+    hidden = false
   }: {
     isSent: boolean
     isReceived: boolean
@@ -107,10 +106,10 @@ class ProfileModel {
       }
 
       const data = await API.connections.get({
-        status: status,
-        isReceived: isReceived,
-        isSent: isSent,
-        user_id: this.id,
+        status,
+        isReceived,
+        isSent,
+        userId: this.id
       })
 
       this.connections = data
@@ -123,7 +122,7 @@ class ProfileModel {
 
   async fetchPosts({
     filters: searchParams,
-    hidden = false,
+    hidden = false
   }: {
     filters?: PostsFilters
     hidden?: boolean
@@ -134,7 +133,7 @@ class ProfileModel {
       }
 
       const data = await API.posts.list({
-        searchParams: { ...searchParams, user_id: String(this.id) },
+        searchParams: { ...searchParams, user_id: String(this.id) }
       })
 
       this.posts = data.posts
@@ -165,11 +164,11 @@ class ProfileModel {
     }
   }
 
-  async toggleLike({ post_id, filters }: { post_id: number; filters?: PostsFilters }) {
+  async toggleLike({ postId, filters }: { postId: number; filters?: PostsFilters }) {
     try {
-      await API.posts.like(post_id)
+      await API.posts.like(postId)
 
-      this.fetchPosts({ filters: filters, hidden: true })
+      this.fetchPosts({ filters, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -188,7 +187,7 @@ class ProfileModel {
   }
 
   private fromJSON(user: User) {
-    this.id = user.basic.id || 0
+    this.id = user.basic.id ?? 0
     this.name = user.basic.name
     this.surname = user.basic.surname
     this.middle_name = user.basic.middle_name
@@ -213,4 +212,6 @@ class ProfileModel {
   }
 }
 
-export default new ProfileModel()
+const model = new ProfileModel()
+
+export default model

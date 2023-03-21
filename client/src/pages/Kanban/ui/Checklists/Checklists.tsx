@@ -13,7 +13,7 @@ function Checklists() {
       sx={{
         gap: 3,
         p: '24px',
-        pt: 0,
+        pt: 0
       }}
     >
       <Checklist />

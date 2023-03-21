@@ -15,7 +15,9 @@ interface Props {
 const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
   const { t } = useTranslation()
 
-  const { touched, values, errors, handleChange } = useFormikContext<{ [key: string]: any }>()
+  const { touched, values, errors, handleChange } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   return (
     <TextField
@@ -32,7 +34,7 @@ const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Pr
       rows={rows}
       InputProps={
         icon && {
-          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
+          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>
         }
       }
     />

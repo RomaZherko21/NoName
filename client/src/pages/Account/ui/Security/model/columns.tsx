@@ -1,31 +1,31 @@
 import i18next from 'i18next'
 import { Typography } from '@mui/material'
 
-import { Entrances, TableColumn, User } from 'shared/types'
+import { Entrances, TableColumn } from 'shared/types'
 
 export const getColumns = (): TableColumn[] => [
   {
     key: 'login_type',
     title: i18next.t('user:loginType'),
-    getValue: ({ login_type, date }: Entrances) => (
+    getValue: ({ login_type: loginType, date }: Entrances) => (
       <>
         <Typography variant="body2" color="text.primary">
-          {login_type}
+          {loginType}
         </Typography>
         <Typography variant="body2" color="text.primary">
           on {date}
         </Typography>
       </>
-    ),
+    )
   },
   {
     key: 'ip_address',
     title: i18next.t('user:ipAddress'),
-    getValue: ({ ip_address }: Entrances) => (
+    getValue: ({ ip_address: ipAdress }: Entrances) => (
       <Typography variant="body2" color="text.primary">
-        {ip_address}
+        {ipAdress}
       </Typography>
-    ),
+    )
   },
   {
     key: 'client',
@@ -34,6 +34,6 @@ export const getColumns = (): TableColumn[] => [
       <Typography variant="body2" color="text.primary">
         {client}
       </Typography>
-    ),
-  },
+    )
+  }
 ]

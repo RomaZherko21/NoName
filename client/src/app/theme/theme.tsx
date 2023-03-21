@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import { createContext, FC, useEffect, useMemo } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
@@ -13,7 +14,7 @@ declare module '@mui/material/styles' {
   interface ThemeOptions {}
 }
 
-const toggleThemeContext = createContext<() => void>(() => {})
+const toggleThemeContext = createContext(() => {})
 
 const AppThemeProvider: FC = ({ children }) => {
   const [isDefaultTheme, , , toggleTheme] = useBoolState(false)

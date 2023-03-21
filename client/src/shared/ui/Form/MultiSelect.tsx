@@ -10,7 +10,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
+  SelectChangeEvent
 } from '@mui/material'
 
 interface Option {
@@ -27,7 +27,9 @@ interface Props {
 const MultiSelectField = ({ field, label, options }: Props) => {
   const { t } = useTranslation()
 
-  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     setFieldValue(field, event.target.value)
@@ -47,9 +49,9 @@ const MultiSelectField = ({ field, label, options }: Props) => {
         MenuProps={{
           PaperProps: {
             style: {
-              maxHeight: 230,
-            },
-          },
+              maxHeight: 230
+            }
+          }
         }}
       >
         {options.map((value: { id: number; name: string }) => (

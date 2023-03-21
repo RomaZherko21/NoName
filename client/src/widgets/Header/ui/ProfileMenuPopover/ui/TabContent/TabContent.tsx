@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 
@@ -28,6 +27,7 @@ function TabContent({ onMenuClose, config }: Props) {
     <List sx={{ p: 0 }}>
       {config.map((item) => (
         <ListItemButton
+          key={item.to}
           onClick={(event) => {
             if (item.to) {
               onChangePage(item.to, event)
@@ -40,7 +40,7 @@ function TabContent({ onMenuClose, config }: Props) {
             sx={{
               color: ({ palette }) =>
                 location.pathname === item.to ? palette.primary.main : palette.text.secondary,
-              fontSize: 20,
+              fontSize: 20
             }}
           >
             {item.icon}

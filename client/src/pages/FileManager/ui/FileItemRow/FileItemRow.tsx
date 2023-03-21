@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
-import { Box, Grid, IconButton, Paper, Typography, AvatarGroup, Avatar } from '@mui/material'
+import { Box, IconButton, Paper, Typography, AvatarGroup, Avatar } from '@mui/material'
 import { AiOutlineStar } from 'react-icons/ai'
 import { FiMoreVertical } from 'react-icons/fi'
 
@@ -31,13 +31,13 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         background: 'none',
         borderRadius: 2,
         '&:hover': {
-          backgroundColor: ({ palette }) => palette.background.paper,
-        },
+          backgroundColor: ({ palette }) => palette.background.paper
+        }
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <Box sx={{ cursor: 'pointer' }}>
-          <img alt="Folder" src={folder} onClick={handleOpenFileInfo} />
+        <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
+          <img alt="Folder" src={folder} />
         </Box>
 
         <Box>
@@ -73,12 +73,14 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
 
       <Box sx={{ display: 'flex', gap: 4 }}>
         <IconButton
-          onClick={() => toggleFavourite(file.id)}
+          onClick={() => {
+            toggleFavourite(file.id)
+          }}
           sx={{
             width: 36,
             height: 36,
             color: ({ palette }) =>
-              file.is_favourite ? palette.warning.main : palette.action.active,
+              file.is_favourite ? palette.warning.main : palette.action.active
           }}
         >
           <AiOutlineStar />

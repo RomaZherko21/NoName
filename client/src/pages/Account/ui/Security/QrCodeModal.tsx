@@ -22,7 +22,7 @@ function QrCodeModal({
   timeLeft,
   isTimerEnded,
   onSubmit,
-  onSendCodeAgain,
+  onSendCodeAgain
 }: Props) {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -56,7 +56,7 @@ function QrCodeModal({
           flexDirection: 'column',
           alignItems: 'center',
           p: 4,
-          px: 8,
+          px: 8
         }}
       >
         <Typography variant="h6" sx={{ mt: 2 }}>
@@ -68,13 +68,20 @@ function QrCodeModal({
 
         <Divider sx={{ mt: 2, width: '100%' }} />
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', my: 3 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            my: 3
+          }}
+        >
           <Avatar
             sx={{
               height: 180,
               width: 180,
               borderRadius: 2,
-              border: ({ palette }) => `3px solid ${palette.divider}`,
+              border: ({ palette }) => `3px solid ${palette.divider}`
             }}
             src={qrCodeUrl}
           />
@@ -98,7 +105,7 @@ function QrCodeModal({
             }}
             sx={{
               width: 'fit-content',
-              color: ({ palette }) => palette.text.primary,
+              color: ({ palette }) => palette.text.primary
             }}
             size="small"
           >

@@ -9,7 +9,7 @@ import {
   ListItemText,
   CardActions,
   Button,
-  Divider,
+  Divider
 } from '@mui/material'
 
 import { BasicUserInfo, MetaUserInfo, UserLocation } from 'shared/types'

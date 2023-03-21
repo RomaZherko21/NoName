@@ -5,16 +5,16 @@ import { API_URL } from 'shared/consts'
 import {
   extractDataInterceptor,
   setAuthInterceptor,
-  unauthorizedInterceptor,
+  unauthorizedInterceptor
 } from '../interceptors'
 
-export type FetchServiceConfig = {
+export interface FetchServiceConfig {
   apiUrl: string
   photoUrl: string
 }
 
 export class FetchService {
-  private instance: AxiosInstance
+  private readonly instance: AxiosInstance
 
   constructor() {
     this.instance = axios.create()
@@ -25,25 +25,27 @@ export class FetchService {
     this.instance.defaults.baseURL = API_URL
   }
 
-  public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.post(url, data, config)
+  public async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.post(url, data, config)
   }
 
-  public put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.put(url, data, config)
+  public async put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.put(url, data, config)
   }
 
-  public patch<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.patch(url, config)
+  public async patch<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.patch(url, config)
   }
 
-  public get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.get(url, config)
+  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.get(url, config)
   }
 
-  public delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.delete(url, config)
+  public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.delete(url, config)
   }
 }
 
-export default new FetchService()
+const model = new FetchService()
+
+export default model

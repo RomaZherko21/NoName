@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Card, Grid, Paper, Typography } from '@mui/material'
+import { Box, Card, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { OptionSetup } from 'shared/ui'
@@ -24,7 +24,14 @@ function Verification() {
     <>
       <Card elevation={16} sx={{ p: 4 }}>
         <Typography variant="h6">{t('user:verifStatuses')}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 3 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: 2,
+            mt: 3
+          }}
+        >
           <OptionSetup
             title={t('user:emailVerif')}
             subtitle={t('user:updates.security.receiveEmailCode')}

@@ -7,7 +7,7 @@ import { FiSettings } from 'react-icons/fi'
 import {
   MdOutlineNotificationsNone,
   MdOutlineSecurityUpdateGood,
-  MdOutlineVerifiedUser,
+  MdOutlineVerifiedUser
 } from 'react-icons/md'
 import { AiOutlineTeam, AiOutlineDollar } from 'react-icons/ai'
 
@@ -17,55 +17,55 @@ export const getProfileConfig = ({ id, onLogout }: { id: number; onLogout: () =>
   {
     icon: <CgProfile />,
     text: 'user:socialProfile',
-    to: generatePath(ROUTES.USERS_PROFILE, { id }),
+    to: generatePath(ROUTES.USERS_PROFILE, { id })
   },
   {
     icon: <HiOutlineUsers />,
     text: 'user:connections',
-    to: generatePath(ROUTES.USERS_CONNECTIONS, { id }),
+    to: generatePath(ROUTES.USERS_CONNECTIONS, { id })
   },
   {
     icon: <IoNewspaperOutline />,
     text: 'user:userPosts',
-    to: generatePath(ROUTES.USERS_POSTS, { id }),
+    to: generatePath(ROUTES.USERS_POSTS, { id })
   },
 
   {
     icon: <ImExit />,
     text: 'actions.logout',
-    onClick: onLogout,
-  },
+    onClick: onLogout
+  }
 ]
 
 export const getSettingsConfig = () => [
   {
     icon: <FiSettings />,
     text: 'page:general',
-    to: ROUTES.ACCOUNT_GENERAL,
+    to: ROUTES.ACCOUNT_GENERAL
   },
   {
     icon: <AiOutlineDollar />,
     text: 'page:billing',
-    to: ROUTES.ACCOUNT_BILLING,
+    to: ROUTES.ACCOUNT_BILLING
   },
   {
     icon: <AiOutlineTeam />,
     text: 'page:team',
-    to: ROUTES.ACCOUNT_TEAM,
+    to: ROUTES.ACCOUNT_TEAM
   },
   {
     icon: <MdOutlineNotificationsNone />,
     text: 'page:notifications',
-    to: ROUTES.ACCOUNT_NOTIFICATIONS,
+    to: ROUTES.ACCOUNT_NOTIFICATIONS
   },
   {
     icon: <MdOutlineSecurityUpdateGood />,
     text: 'page:security',
-    to: ROUTES.ACCOUNT_SECURITY,
+    to: ROUTES.ACCOUNT_SECURITY
   },
   {
     icon: <MdOutlineVerifiedUser />,
     text: 'page:verification',
-    to: ROUTES.ACCOUNT_VERIFICATION,
-  },
+    to: ROUTES.ACCOUNT_VERIFICATION
+  }
 ]

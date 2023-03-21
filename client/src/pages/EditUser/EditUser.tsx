@@ -14,7 +14,7 @@ import {
   FormPhoneNumber,
   SelectField,
   Spinner,
-  FormDatePicker,
+  FormDatePicker
 } from 'shared/ui'
 import { getFullName, getInitials, getSplitName, normalizePhone } from 'shared/helpers'
 import { Gender, Roles } from 'shared/types'
@@ -25,7 +25,7 @@ import {
   fullNameValidation,
   phoneNumberValidation,
   passwordValidation,
-  required,
+  required
 } from 'shared/validations'
 
 import { EditUserModel } from './model'
@@ -39,18 +39,18 @@ function EditUser() {
 
   useEffect(() => {
     EditUserModel.fetchUser(Number(id))
-  }, [])
+  }, [id])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
         full_name: fullNameValidation(),
         email: emailValidation(),
-        role: commonStringValidation(t(`user:role`)),
-        tel_number: phoneNumberValidation(t(`fields.phone`)),
-        date_of_birth: required(t(`user:dateOfBirth`)),
+        role: commonStringValidation(t('user:role')),
+        tel_number: phoneNumberValidation(t('fields.phone')),
+        date_of_birth: required(t('user:dateOfBirth')),
         password: passwordValidation(),
-        confirmPassword: confirmPasswordValidation(),
+        confirmPassword: confirmPasswordValidation()
       }),
     [t]
   )
@@ -89,12 +89,12 @@ function EditUser() {
                 getFullName(EditUserModel.name, EditUserModel.surname, EditUserModel.middle_name) ||
                 '',
               email: EditUserModel?.email || '',
-              tel_number: EditUserModel?.tel_number || '',
+              tel_number: EditUserModel?.tel_number ?? '',
               role: EditUserModel?.role || Roles.user,
-              gender: EditUserModel?.gender || Gender.man,
-              date_of_birth: EditUserModel?.date_of_birth || '',
+              gender: EditUserModel?.gender ?? Gender.man,
+              date_of_birth: EditUserModel?.date_of_birth ?? '',
               password: '',
-              confirmPassword: '',
+              confirmPassword: ''
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -107,7 +107,7 @@ function EditUser() {
                   gender: values.gender,
                   date_of_birth: values.date_of_birth,
                   password: values.password,
-                  confirmPassword: values.confirmPassword,
+                  confirmPassword: values.confirmPassword
                 },
                 Number(id)
               )
@@ -156,7 +156,7 @@ function EditUser() {
                       sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}
                     >
                       <Box>
