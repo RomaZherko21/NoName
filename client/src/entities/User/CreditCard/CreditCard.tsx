@@ -28,8 +28,8 @@ function CreditCard({ cardNumber, nameOnCard, validThru, background, logo }: Pro
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <img src={contactless} />
-        <img src={logo} />
+        <img alt="contactless" src={contactless} />
+        <img alt="logo" src={logo} />
       </Box>
       <Typography variant="h5" sx={{ mt: 6, mb: 3, letterSpacing: 4 }}>
         {getCardNumber(cardNumber)}
@@ -47,7 +47,7 @@ function CreditCard({ cardNumber, nameOnCard, validThru, background, logo }: Pro
           </Typography>
           <Typography variant="body1">{getExpiryDate(validThru)}</Typography>
         </Box>
-        <img src={sim} />
+        <img alt="sim" src={sim} />
       </Box>
     </Box>
   )

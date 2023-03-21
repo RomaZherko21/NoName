@@ -65,7 +65,7 @@ class KanbanModel {
         this.loading.begin()
       }
 
-      const data = await API.posts.get(id)
+      await API.posts.get(id)
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -88,7 +88,7 @@ class KanbanModel {
 
       this.commentInputValue = ''
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
@@ -97,8 +97,8 @@ class KanbanModel {
   async editComment(id: number) {
     try {
       await API.posts.editComment({
-        post_id: id,
-        comment_id: this.editCommentId,
+        postId: id,
+        commentId: this.editCommentId,
         comment: {
           created_at: new Date().getTime(),
           message: this.commentInputValue,
@@ -109,17 +109,17 @@ class KanbanModel {
       this.commentInputValue = ''
       this.editCommentId = 0
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
   }
 
-  async deleteComment(comment_id: number, id: number) {
+  async deleteComment(commentId: number, id: number) {
     try {
-      await API.posts.deleteComment(id, comment_id)
+      await API.posts.deleteComment(id, commentId)
 
-      this.fetch({ id: id, hidden: true })
+      this.fetch({ id, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }

@@ -54,7 +54,11 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
           />
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
-          <IconButton onClick={() => setIsEyeActive(!isEyeActive)}>
+          <IconButton
+            onClick={() => {
+              setIsEyeActive(!isEyeActive)
+            }}
+          >
             {isEyeActive ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </IconButton>
           <IconButton>

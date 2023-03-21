@@ -3,8 +3,6 @@ import { observer } from 'mobx-react-lite'
 import { Box, Typography, Avatar, IconButton } from '@mui/material'
 import { FiMoreVertical } from 'react-icons/fi'
 
-import { API_USER_AVATAR_URL } from 'shared/consts'
-import { Comment as CommentT } from 'shared/types'
 import { PopupMenu } from 'shared/ui'
 
 import { getCommentPopupConfig } from './CommentPopupConfig'

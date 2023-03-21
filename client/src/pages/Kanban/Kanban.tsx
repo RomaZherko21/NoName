@@ -30,7 +30,11 @@ function Kanban() {
             gap: 4,
           }}
         >
-          <DragDropContext onDragEnd={(provided) => KanbanModel.onDragEnd(provided)}>
+          <DragDropContext
+            onDragEnd={(provided) => {
+              KanbanModel.onDragEnd(provided)
+            }}
+          >
             {KanbanModel.columnsFromBackend.map((column) => (
               <Droppable droppableId={column.id} key={column.id}>
                 {(provided) => (
@@ -114,7 +118,12 @@ function Kanban() {
         </Box>
       </Container>
 
-      <AsideTaskInfo openTaskInfo={openTaskInfo} onCloseTaskInfo={() => setOpenTaskInfo(false)} />
+      <AsideTaskInfo
+        openTaskInfo={openTaskInfo}
+        onCloseTaskInfo={() => {
+          setOpenTaskInfo(false)
+        }}
+      />
     </>
   )
 }

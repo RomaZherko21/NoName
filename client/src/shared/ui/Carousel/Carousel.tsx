@@ -22,7 +22,10 @@ function Carousel({ width, children }: Props) {
       <Box sx={{ position: 'absolute', display: 'flex', gap: 3, pl: 4, pt: 3, zIndex: 1 }}>
         {children.map((child: any, id: number) => (
           <Box
-            onClick={() => cardClick(id)}
+            onClick={() => {
+              cardClick(id)
+            }}
+            key={id}
             sx={{
               width: 10,
               height: 10,
