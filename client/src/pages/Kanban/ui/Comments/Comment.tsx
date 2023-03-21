@@ -25,10 +25,16 @@ function Comment() {
           width: '100%',
           backgroundColor: (theme) =>
             isOwner ? theme.palette.grey[800] : theme.palette.background.paper,
-          borderRadius: 1,
+          borderRadius: 1
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
           <Typography variant="body2">
             {'Ben'} {'Benovich'}
           </Typography>

@@ -8,9 +8,13 @@ import TabPanel from './TabPanel'
 
 const Tabs = ({
   options,
-  variant = 'standard',
+  variant = 'standard'
 }: {
-  options: { label: string; to?: string; Component: (arg: any) => JSX.Element }[]
+  options: {
+    label: string
+    to?: string
+    Component: (arg: any) => JSX.Element
+  }[]
   variant?: 'standard' | 'scrollable' | 'fullWidth'
 }) => {
   const { t } = useTranslation()
@@ -43,7 +47,10 @@ const Tabs = ({
                 }
               }}
               label={t(item.label)}
-              {...{ [id]: `simple-tab-${id}`, 'aria-controls': `simple-tabpanel-${id}` }}
+              {...{
+                [id]: `simple-tab-${id}`,
+                'aria-controls': `simple-tabpanel-${id}`
+              }}
             />
           ))}
         </MUiTabs>

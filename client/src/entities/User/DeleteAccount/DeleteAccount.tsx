@@ -24,12 +24,14 @@ const DeleteAccount = ({ onDelete }: Props) => {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'column'
             }}
           >
             <Typography variant="body1">{t('sentences:deleteAccount')}</Typography>
             <Button
-              onClick={() => { setIsOpenModal(true) }}
+              onClick={() => {
+                setIsOpenModal(true)
+              }}
               sx={{ mt: 3, width: 'fit-content' }}
               color="error"
               variant="outlined"

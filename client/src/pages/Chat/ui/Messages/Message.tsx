@@ -24,7 +24,7 @@ function Message({ message }: Props) {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: isCurrentUser ? 'flex-end' : 'flex-start',
-        gap: 1,
+        gap: 1
       }}
     >
       {!isCurrentUser && (
@@ -44,7 +44,7 @@ function Message({ message }: Props) {
             gap: 1,
             maxWidth: 400,
             wordWrap: 'break-word',
-            backgroundColor: isCurrentUser ? 'primary.dark' : 'background.paper',
+            backgroundColor: isCurrentUser ? 'primary.dark' : 'background.paper'
           }}
         >
           <Typography variant="subtitle2">

@@ -24,7 +24,7 @@ function CreditCard({ cardNumber, nameOnCard, validThru, background, logo }: Pro
         pt: 6,
         backgroundImage: `url(${background})`,
         backgroundPosition: 'center center',
-        borderRadius: 2,
+        borderRadius: 2
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -11,14 +11,18 @@ interface Props {
 }
 
 function QuillField({ field }: Props) {
-  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   return (
     <>
       <ReactQuill
         theme="snow"
         value={values.description}
-        onChange={(html: string) => { setFieldValue(field, html) }}
+        onChange={(html: string) => {
+          setFieldValue(field, html)
+        }}
         className={clsx('quill', touched[field] && Boolean(errors[field]) && 'error')}
       />
       {touched[field] && (

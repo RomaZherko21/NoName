@@ -27,8 +27,12 @@ function Profile() {
     ProfileModel.fetchUser(Number(id))
   }, [id])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const tabsConfig = useMemo(() => getTabsConfig(ProfileModel.id), [ProfileModel.id])
+  const tabsConfig = useMemo(
+    () => getTabsConfig(ProfileModel.id),
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [ProfileModel.id]
+  )
 
   return (
     <Grid container spacing={3}>
@@ -38,7 +42,11 @@ function Profile() {
       <Grid
         item
         xs={12}
-        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between'
+        }}
       >
         <InformativeImage
           imgUrl={`${API_USER_AVATAR_URL}/${ProfileModel.avatar}`}

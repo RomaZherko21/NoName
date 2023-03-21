@@ -15,36 +15,36 @@ export const getFiltersConfig = () => [
     key: 'id',
     Control: Input,
     placeholder: 'common.id',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'name',
     Control: Input,
     placeholder: 'user:name',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'description',
     Control: Input,
     placeholder: 'post:description',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'created_from',
     Control: DatePicker,
     placeholder: 'fields.createdFrom',
-    type: 'date',
+    type: 'date'
   },
   {
     key: 'created_to',
     Control: DatePicker,
     placeholder: 'fields.createdTo',
-    type: 'date',
+    type: 'date'
   },
   {
     key: 'is_liked',
     Control: Checkbox,
     placeholder: 'post:form.isLiked',
-    type: 'checkbox',
-  },
+    type: 'checkbox'
+  }
 ]

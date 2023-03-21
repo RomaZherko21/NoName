@@ -9,7 +9,7 @@ import { PostsFilters } from 'pages/Posts/model'
 export enum CONNECTION_OPTIONS {
   connections = 'connections',
   sentConnections = 'sentConnections',
-  receivedConnections = 'receivedConnections',
+  receivedConnections = 'receivedConnections'
 }
 
 class ProfileModel {
@@ -60,7 +60,7 @@ class ProfileModel {
         isSent: true,
         isReceived: true,
         status: ConnectionStatus.accept,
-        hidden: true,
+        hidden: true
       })
     }
     if (status === CONNECTION_OPTIONS.sentConnections) {
@@ -93,7 +93,7 @@ class ProfileModel {
     isSent,
     isReceived,
     status = ConnectionStatus.pending,
-    hidden = false,
+    hidden = false
   }: {
     isSent: boolean
     isReceived: boolean
@@ -109,7 +109,7 @@ class ProfileModel {
         status,
         isReceived,
         isSent,
-        userId: this.id,
+        userId: this.id
       })
 
       this.connections = data
@@ -122,7 +122,7 @@ class ProfileModel {
 
   async fetchPosts({
     filters: searchParams,
-    hidden = false,
+    hidden = false
   }: {
     filters?: PostsFilters
     hidden?: boolean
@@ -133,7 +133,7 @@ class ProfileModel {
       }
 
       const data = await API.posts.list({
-        searchParams: { ...searchParams, user_id: String(this.id) },
+        searchParams: { ...searchParams, user_id: String(this.id) }
       })
 
       this.posts = data.posts

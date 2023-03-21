@@ -5,8 +5,13 @@ import PaginationModel from 'models/Pagination'
 
 class TeamModel {
   users: any = [
-    { name: 'Johnny', surname: 'Donald', middle_name: 'Johnson', role: 'admin' },
-    { name: 'Bruce', surname: 'Jones', middle_name: 'Ingram', role: 'user' },
+    {
+      name: 'Johnny',
+      surname: 'Donald',
+      middle_name: 'Johnson',
+      role: 'admin'
+    },
+    { name: 'Bruce', surname: 'Jones', middle_name: 'Ingram', role: 'user' }
   ]
 
   loading: LoadingModel

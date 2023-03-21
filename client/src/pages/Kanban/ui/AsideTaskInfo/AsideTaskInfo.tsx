@@ -32,8 +32,8 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
           overflow: 'auto',
           width: 500,
           position: 'fixed',
-          border: 'none',
-        },
+          border: 'none'
+        }
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
@@ -77,13 +77,13 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
             color: ({ palette }) => palette.text.primary,
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
       </Box>

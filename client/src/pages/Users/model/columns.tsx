@@ -91,7 +91,7 @@ export const getColumns = (): TableColumn[] => [
         PrimaryText={getFullName(name, surname, middleName)}
         SecondaryText={email}
       />
-    ),
+    )
   },
   {
     key: 'role',
@@ -109,18 +109,18 @@ export const getColumns = (): TableColumn[] => [
           icon={<AccountCircleOutlinedIcon fontSize="small" />}
           color="secondary"
         />
-      ),
+      )
   },
   {
     key: 'date_of_birth',
     title: i18next.t('user:dateOfBirth'),
     getValue: (row: User) => (
       <Box color="text.primary">{reformatDates(row.date_of_birth ?? '')}</Box>
-    ),
+    )
   },
   {
     key: 'tel_number',
-    title: i18next.t('user:telephoneNumber'),
+    title: i18next.t('user:telephoneNumber')
   },
   {
     key: 'gender',
@@ -129,17 +129,17 @@ export const getColumns = (): TableColumn[] => [
       <Box color="text.primary">
         {row.gender === Gender.man ? i18next.t('user:man') : i18next.t('user:woman')}
       </Box>
-    ),
+    )
   },
   {
     key: 'friends',
     title: i18next.t('user:friends'),
-    getValue: (row: User) => <ConnectionStatus user={row} />,
+    getValue: (row: User) => <ConnectionStatus user={row} />
   },
   {
     key: 'actions',
     title: i18next.t('common.actions'),
     align: 'right',
-    getValue: (row: User) => <ActionButtons user={row} />,
-  },
+    getValue: (row: User) => <ActionButtons user={row} />
+  }
 ]

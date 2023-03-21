@@ -9,7 +9,7 @@ export const get = async ({
   status,
   isReceived = true,
   isSent = true,
-  userId,
+  userId
 }: {
   status: ConnectionStatus
   isReceived?: boolean
@@ -17,7 +17,12 @@ export const get = async ({
   userId: number
 }) =>
   await fetch.get<Connection[]>(
-    `${ENDPOINT_BASE}${getQueryParams({ status, isReceived, isSent, user_id: userId })}`
+    `${ENDPOINT_BASE}${getQueryParams({
+      status,
+      isReceived,
+      isSent,
+      user_id: userId
+    })}`
   )
 
 export const update = async (id: number, status: ConnectionStatus) =>

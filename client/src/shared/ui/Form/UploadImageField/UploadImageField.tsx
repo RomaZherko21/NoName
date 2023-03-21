@@ -18,7 +18,9 @@ interface Props {
 function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
   const { t } = useTranslation()
   const inputRef = useRef<any>()
-  const { touched, values, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   const hasError = touched[field] && errors[field]
 
@@ -35,7 +37,7 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
               `1px dashed ${hasError ? palette.error.main : palette.divider}`,
             borderWidth: 1,
             borderRadius: '50%',
-            p: 0.5,
+            p: 0.5
           }}
           onClick={handleClick}
           className={s.image}
@@ -49,7 +51,7 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
           >
             <IconButton
               sx={{
-                color: ({ palette }) => palette.text.primary,
+                color: ({ palette }) => palette.text.primary
               }}
               size="large"
             >
@@ -66,7 +68,7 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
         <Button
           onClick={handleClick}
           sx={{
-            color: ({ palette }) => (hasError ? palette.error.main : palette.text.secondary),
+            color: ({ palette }) => (hasError ? palette.error.main : palette.text.secondary)
           }}
         >
           {hasError ? errors[field] : t('actions.change')}
@@ -79,8 +81,9 @@ function UploadImageField({ field, imageUrl = '', imgSx }: Props) {
         name={field}
         type="file"
         accept="image/*"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setFieldValue(field, e.target.files?.[0]) }
-        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setFieldValue(field, e.target.files?.[0])
+        }}
         style={{ display: 'none' }}
       />
     </>

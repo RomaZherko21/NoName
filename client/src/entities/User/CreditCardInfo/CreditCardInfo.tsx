@@ -11,7 +11,7 @@ import {
   Button,
   Divider,
   ListItemIcon,
-  Typography,
+  Typography
 } from '@mui/material'
 
 import { getListConfig } from './getListConfig'

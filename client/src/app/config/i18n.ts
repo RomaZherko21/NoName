@@ -12,7 +12,7 @@ const namespaces = [
   'sentences',
   'file',
   'kanban',
-  'chat',
+  'chat'
 ]
 const initTranslation = async () => {
   return await i18n
@@ -24,8 +24,8 @@ const initTranslation = async () => {
       debug: false,
       react: {
         useSuspense: false,
-        nsMode: 'fallback',
-      },
+        nsMode: 'fallback'
+      }
     })
 }
 

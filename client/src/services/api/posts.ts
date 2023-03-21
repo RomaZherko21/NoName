@@ -9,7 +9,7 @@ export const list = async ({ searchParams }: { searchParams?: QueryParams }) =>
   await fetch.get<{ posts: Post[]; count: number }>(
     `${ENDPOINT_BASE}${getQueryParams({
       ...searchParams,
-      offset: Number(searchParams?.limit) * Number(searchParams?.page),
+      offset: Number(searchParams?.limit) * Number(searchParams?.page)
     })}`
   )
 
@@ -34,7 +34,7 @@ export const createComment = async (id: number, comment: any) =>
 export const editComment = async ({
   postId,
   commentId,
-  comment,
+  comment
 }: {
   postId: number
   commentId: number

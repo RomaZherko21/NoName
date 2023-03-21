@@ -40,7 +40,7 @@ function TabContent({ onMenuClose, config }: Props) {
             sx={{
               color: ({ palette }) =>
                 location.pathname === item.to ? palette.primary.main : palette.text.secondary,
-              fontSize: 20,
+              fontSize: 20
             }}
           >
             {item.icon}

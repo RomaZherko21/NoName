@@ -8,7 +8,7 @@ import {
   QueryPaginationParams,
   QuerySortParams,
   BasicUserInfo,
-  MetaUserInfo,
+  MetaUserInfo
 } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
@@ -45,7 +45,7 @@ class UsersModel {
       }
 
       const data = await API.users.list({
-        searchParams,
+        searchParams
       })
       this.users = data.users
       this.pagination.totalCount = data.count

@@ -23,7 +23,7 @@ const Input = (props: Props & any) => {
       size={size}
       InputProps={
         icon && {
-          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
+          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>
         }
       }
     />

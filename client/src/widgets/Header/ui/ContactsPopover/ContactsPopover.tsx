@@ -12,15 +12,15 @@ const CONTACTS = [
     avatar: '1663318230996.png',
     name: 'Marcus Finn',
     online: true,
-    last_login: '',
+    last_login: ''
   },
   {
     id: 2,
     avatar: '1663318230996.png',
     name: 'Carson Darrin',
     online: false,
-    last_login: '3 hours ago',
-  },
+    last_login: '3 hours ago'
+  }
 ]
 
 function ContactsPopover() {
@@ -43,7 +43,15 @@ function ContactsPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <List sx={{ display: 'flex', flexDirection: 'column', width: '100%', p: 2, gap: 2 }}>
+        <List
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            p: 2,
+            gap: 2
+          }}
+        >
           {contacts.map((item: any) => (
             <InformativeImage
               key={item.name}
@@ -54,7 +62,7 @@ function ContactsPopover() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    gap: 2,
+                    gap: 2
                   }}
                 >
                   {' '}
@@ -64,7 +72,7 @@ function ContactsPopover() {
                       backgroundColor: item.online ? 'secondary.main' : 'grey.400',
                       width: 8,
                       height: 8,
-                      borderRadius: '50%',
+                      borderRadius: '50%'
                     }}
                   />
                 </Box>

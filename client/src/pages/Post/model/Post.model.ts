@@ -76,7 +76,7 @@ class PostModel {
     try {
       await API.posts.createComment(this.id, {
         created_at: new Date().getTime(),
-        message: this.commentInputValue,
+        message: this.commentInputValue
       })
 
       this.commentInputValue = ''
@@ -94,8 +94,8 @@ class PostModel {
         commentId: this.editCommentId,
         comment: {
           created_at: new Date().getTime(),
-          message: this.commentInputValue,
-        },
+          message: this.commentInputValue
+        }
       })
 
       this.isEditActive = false

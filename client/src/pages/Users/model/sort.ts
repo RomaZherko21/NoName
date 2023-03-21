@@ -6,5 +6,5 @@ export const sortConfig = {
   'role ASC': 'user:sort.roleASC',
   'role DESC': 'user:sort.roleDESC',
   'date_of_birth ASC': 'user:sort.dateOfBirthASC',
-  'date_of_birth DESC': 'user:sort.dateOfBirthDESC',
+  'date_of_birth DESC': 'user:sort.dateOfBirthDESC'
 }

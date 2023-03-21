@@ -26,7 +26,7 @@ function Messages() {
         p: 3,
         gap: 2,
         overflowY: 'auto',
-        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        borderBottom: (theme) => `1px solid ${theme.palette.divider}`
       }}
       className={s.chatBackground}
     >
@@ -40,7 +40,7 @@ function Messages() {
             justifyContent: 'center',
             flexDirection: 'column',
             gap: 1,
-            height: '100%',
+            height: '100%'
           }}
         >
           <Avatar

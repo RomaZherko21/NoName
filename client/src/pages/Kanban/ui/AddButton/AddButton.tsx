@@ -23,8 +23,8 @@ function AddButton({ text }: Props) {
             backgroundColor: 'background.rare',
             '&:hover': {
               backgroundColor: ({ palette }) =>
-                !isFormOpen ? palette.action.hover : 'background.rare',
-            },
+                !isFormOpen ? palette.action.hover : 'background.rare'
+            }
           }}
         >
           <TextField size="small" placeholder={t(text)} fullWidth />
@@ -66,8 +66,8 @@ function AddButton({ text }: Props) {
             backgroundColor: 'background.rare',
             '&:hover': {
               backgroundColor: ({ palette }) =>
-                !isFormOpen ? palette.action.hover : 'background.rare',
-            },
+                !isFormOpen ? palette.action.hover : 'background.rare'
+            }
           }}
         >
           {t(text)}

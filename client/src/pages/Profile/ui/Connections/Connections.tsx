@@ -20,7 +20,7 @@ const Connections = () => {
     ProfileModel.fetchConnections({
       isSent: true,
       isReceived: true,
-      status: ConnectionStatus.accept,
+      status: ConnectionStatus.accept
     })
   }, [])
 
@@ -36,7 +36,7 @@ const Connections = () => {
           justifyContent: 'space-between',
           alignItems: 'flex-end',
           gap: 3,
-          mb: 3,
+          mb: 3
         }}
       >
         <Input icon={<SearchIcon />} placeholder={t('user:actions.searchName')} />
@@ -51,7 +51,7 @@ const Connections = () => {
             options={{
               [CONNECTION_OPTIONS.connections]: 'page:connections',
               [CONNECTION_OPTIONS.sentConnections]: 'user:sentConnections',
-              [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections',
+              [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections'
             }}
             sx={{ width: 160 }}
           />
@@ -68,13 +68,13 @@ const Connections = () => {
             <Grid key={item.email} item xs={12} md={6}>
               <Paper
                 sx={{
-                  p: 2,
+                  p: 2
                 }}
               >
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-between'
                   }}
                 >
                   <InformativeImage
@@ -105,14 +105,21 @@ const Connections = () => {
 
                 {item.status === ConnectionStatus.pending &&
                   ProfileModel.connectionStatus === CONNECTION_OPTIONS.receivedConnections && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, gap: 0.5 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        mt: 1,
+                        gap: 0.5
+                      }}
+                    >
                       <Button
                         color="success"
                         size="small"
                         onClick={async () => {
                           await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
-                            status: ConnectionStatus.accept,
+                            status: ConnectionStatus.accept
                           })
                         }}
                       >
@@ -124,7 +131,7 @@ const Connections = () => {
                         onClick={async () => {
                           await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
-                            status: ConnectionStatus.decline,
+                            status: ConnectionStatus.decline
                           })
                         }}
                       >

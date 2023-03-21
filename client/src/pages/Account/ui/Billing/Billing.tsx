@@ -11,7 +11,7 @@ import {
   Typography,
   Box,
   List,
-  ListItem,
+  ListItem
 } from '@mui/material'
 import { BsFillLayersFill } from 'react-icons/bs'
 import { MdOutlineModeEditOutline } from 'react-icons/md'
@@ -24,9 +24,21 @@ function Billing() {
   const { t } = useTranslation()
   const SUBSCRIPTON_TYPES = useMemo(
     () => [
-      { price: '$0.00', name: t('user:startup'), status: BillingStatus.startup },
-      { price: '$4.99', name: t('user:standard'), status: BillingStatus.standard },
-      { price: '$29.99', name: t('user:business'), status: BillingStatus.business },
+      {
+        price: '$0.00',
+        name: t('user:startup'),
+        status: BillingStatus.startup
+      },
+      {
+        price: '$4.99',
+        name: t('user:standard'),
+        status: BillingStatus.standard
+      },
+      {
+        price: '$29.99',
+        name: t('user:business'),
+        status: BillingStatus.business
+      }
     ],
     [t]
   )
@@ -49,7 +61,7 @@ function Billing() {
                 border:
                   BillingModel.billingStatus === item.status
                     ? '2px solid #7582eb'
-                    : '1px solid #2d3748',
+                    : '1px solid #2d3748'
               }}
               onClick={() => {
                 BillingModel.billingStatus = item.status
@@ -62,7 +74,13 @@ function Billing() {
                   /{t('user:month')}
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}
+              >
                 <Typography variant="overline" sx={{ textTransform: 'uppercase' }}>
                   {item.name}
                 </Typography>
@@ -86,7 +104,15 @@ function Billing() {
           {t('actions.edit')}
         </Button>
       </Stack>
-      <List sx={{ border: '1px solid #2d3748', borderRadius: '8px', mb: 2, pt: 0, pb: 0 }}>
+      <List
+        sx={{
+          border: '1px solid #2d3748',
+          borderRadius: '8px',
+          mb: 2,
+          pt: 0,
+          pb: 0
+        }}
+      >
         <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
           <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
             {t('user:billingName')}

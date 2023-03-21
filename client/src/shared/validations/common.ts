@@ -8,7 +8,7 @@ export const required = (field: string) =>
   Yup.string()
     .required(
       i18next.t('validation:error.isRequired', {
-        field,
+        field
       })
     )
     .nullable(true)
@@ -19,19 +19,19 @@ export const commonStringValidation = (field: string, minSymbols: number = 1) =>
       minSymbols,
       i18next.t('validation:error.minSymbols', {
         field,
-        count: minSymbols,
+        count: minSymbols
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field,
+        field
       })
     )
 
 export const commonNumberRangeValidation = ({
   field,
   min = Infinity,
-  max = Infinity,
+  max = Infinity
 }: {
   field: string
   min?: number
@@ -42,19 +42,19 @@ export const commonNumberRangeValidation = ({
       min,
       i18next.t('validation:error.minSymbols', {
         field,
-        count: min,
+        count: min
       })
     )
     .max(
       max,
       i18next.t('validation:error.maxSymbols', {
         field,
-        count: max,
+        count: max
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field,
+        field
       })
     )
 
@@ -62,12 +62,12 @@ export const emailValidation = () =>
   Yup.string()
     .email(
       i18next.t('validation:error.validField', {
-        field: i18next.t('user:email'),
+        field: i18next.t('user:email')
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field: i18next.t('user:email'),
+        field: i18next.t('user:email')
       })
     )
 
@@ -77,12 +77,12 @@ export const passwordValidation = () =>
       8,
       i18next.t('validation:error.minSymbols', {
         field: i18next.t('user:password'),
-        count: 8,
+        count: 8
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field: i18next.t('user:password'),
+        field: i18next.t('user:password')
       })
     )
 
@@ -91,26 +91,26 @@ export const confirmPasswordValidation = () =>
     .oneOf(
       [Yup.ref('password'), null],
       i18next.t('validation:error.needMatched', {
-        field: i18next.t('user:password'),
+        field: i18next.t('user:password')
       })
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field: i18next.t('user:confirmPassword'),
+        field: i18next.t('user:confirmPassword')
       })
     )
 
 export const fullNameValidation = () =>
   Yup.string().required(
     i18next.t('validation:error.isRequired', {
-      field: i18next.t('user:fullName'),
+      field: i18next.t('user:fullName')
     })
   )
 
 export const fileValidation = ({
   field,
   maxSize,
-  fileFormats,
+  fileFormats
 }: {
   field: string
   maxSize: number
@@ -120,21 +120,21 @@ export const fileValidation = ({
     .test(
       field,
       i18next.t('validation:error.isRequired', {
-        field: i18next.t('common.file'),
+        field: i18next.t('common.file')
       }),
       (value) => Boolean(value)
     )
     .test(
       field,
       i18next.t('validation:error.largeFile', {
-        max: maxSize / MB,
+        max: maxSize / MB
       }),
       (value) => value?.size <= maxSize
     )
     .test(
       field,
       i18next.t('validation:error.correctFileFormats', {
-        formats: fileFormats.join(', ').replace(/\//g, '.'),
+        formats: fileFormats.join(', ').replace(/\//g, '.')
       }),
       (value) => fileFormats.includes(value?.type)
     )
@@ -148,6 +148,6 @@ export const phoneNumberValidation = (field: string) =>
     )
     .required(
       i18next.t('validation:error.isRequired', {
-        field,
+        field
       })
     )

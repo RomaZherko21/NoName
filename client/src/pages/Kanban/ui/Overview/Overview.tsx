@@ -16,7 +16,7 @@ function Overview() {
       sx={{
         gap: 2,
         p: '24px',
-        pt: 0,
+        pt: 0
       }}
     >
       <Box sx={{ display: 'flex', height: 64 }}>

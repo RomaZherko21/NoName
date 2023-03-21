@@ -16,7 +16,7 @@ import {
   FormPhoneNumber,
   SelectField,
   Spinner,
-  UploadImageField,
+  UploadImageField
 } from 'shared/ui'
 import {
   commonStringValidation,
@@ -26,7 +26,7 @@ import {
   fullNameValidation,
   phoneNumberValidation,
   passwordValidation,
-  required,
+  required
 } from 'shared/validations'
 
 import { CreateUserModel } from './model'
@@ -49,8 +49,8 @@ function CreateUser() {
         avatar: fileValidation({
           field: 'avatar',
           maxSize: MAX_IMAGE_SIZE,
-          fileFormats: SUPPORTED_IMAGE_FORMATS,
-        }),
+          fileFormats: SUPPORTED_IMAGE_FORMATS
+        })
       }),
     [t]
   )
@@ -71,7 +71,7 @@ function CreateUser() {
           date_of_birth: null,
           password: '',
           confirmPassword: '',
-          avatar: null,
+          avatar: null
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -85,7 +85,7 @@ function CreateUser() {
               date_of_birth: values.date_of_birth ?? '',
               avatar: values.avatar ?? '',
               password: values.password,
-              confirmPassword: values.confirmPassword,
+              confirmPassword: values.confirmPassword
             },
             () => {
               navigate(ROUTES.USERS)
@@ -166,7 +166,7 @@ function CreateUser() {
                     alignItems: 'center',
                     justifyContent: 'flex-end',
                     gap: 2,
-                    p: 2,
+                    p: 2
                   }}
                   container
                 >

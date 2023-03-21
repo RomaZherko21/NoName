@@ -7,13 +7,13 @@ export const getCommentPopupConfig = (id: number, value: string) => [
     text: 'actions.edit',
     onClick: () => {
       // KanbanModel.onEditComment({ id, value })
-    },
+    }
   },
   {
     Icon: <MdDeleteOutline />,
     text: 'actions.delete',
     onClick: () => {
       // KanbanModel.deleteComment(id)
-    },
-  },
+    }
+  }
 ]

@@ -16,14 +16,14 @@ export const getColumns = (): TableColumn[] => [
       name,
       surname,
       middle_name: middleName,
-      avatar,
+      avatar
     }: BasicUserInfo & MetaUserInfo) => (
       <InformativeImage
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
         PrimaryText={getFullName(name, surname, middleName)}
       />
-    ),
+    )
   },
   {
     key: 'role',
@@ -33,6 +33,6 @@ export const getColumns = (): TableColumn[] => [
         <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
       ) : (
         <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
-      ),
-  },
+      )
+  }
 ]

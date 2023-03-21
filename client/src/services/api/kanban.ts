@@ -12,7 +12,7 @@ export const createComment = async (id: number, comment: any) =>
 export const editComment = async ({
   taskId,
   commentId,
-  comment,
+  comment
 }: {
   taskId: number
   commentId: number

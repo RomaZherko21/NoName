@@ -32,7 +32,7 @@ function AsideFiltersBar({
   sortOptions,
   isTablePart = false,
   isShowFilter = true,
-  children,
+  children
 }: Props) {
   const { t } = useTranslation()
 
@@ -46,7 +46,7 @@ function AsideFiltersBar({
         justifyContent: 'space-between',
         p: 3,
         gap: 1,
-        borderRadius: isTablePart ? '20px 20px 0 0' : 1,
+        borderRadius: isTablePart ? '20px 20px 0 0' : 1
       }}
     >
       <TextField
@@ -58,7 +58,7 @@ function AsideFiltersBar({
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">{<FiSearch size="16px" />}</InputAdornment>
-          ),
+          )
         }}
       />
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

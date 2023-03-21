@@ -29,8 +29,8 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         background: 'none',
         borderRadius: 2,
         '&:hover': {
-          backgroundColor: ({ palette }) => palette.background.paper,
-        },
+          backgroundColor: ({ palette }) => palette.background.paper
+        }
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
@@ -42,7 +42,7 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
             width: 36,
             height: 36,
             color: ({ palette }) =>
-              file.is_favourite ? palette.warning.main : palette.action.active,
+              file.is_favourite ? palette.warning.main : palette.action.active
           }}
         >
           <AiOutlineStar />
@@ -68,7 +68,13 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
 
       <Divider sx={{ my: 1 }} />
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
         <Typography
           variant="body2"
           color="text.secondary"

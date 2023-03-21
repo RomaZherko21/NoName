@@ -14,7 +14,9 @@ function PostCover({ field }: Props) {
   const { t } = useTranslation()
   const hiddenFileInput = useRef<HTMLInputElement>(null)
 
-  const { values, touched, errors, setFieldValue } = useFormikContext<{ [key: string]: any }>()
+  const { values, touched, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
 
   const hasError = touched[field] && errors[field]
 
@@ -32,7 +34,7 @@ function PostCover({ field }: Props) {
         <Box
           sx={{
             border: (theme) => (!values[field] ? `1px dashed ${theme.palette.divider}` : ''),
-            borderRadius: 1,
+            borderRadius: 1
           }}
           className={s.uploadedPhoto}
         >
@@ -58,12 +60,14 @@ function PostCover({ field }: Props) {
         </Box>
 
         <Button
-          onClick={() => { setFieldValue(field, null) }}
+          onClick={() => {
+            setFieldValue(field, null)
+          }}
           disabled={!values[field]}
           size="large"
           sx={{
             alignSelf: 'flex-start',
-            color: (theme) => theme.palette.secondary.contrastText,
+            color: (theme) => theme.palette.secondary.contrastText
           }}
         >
           {t('post:actions.removePhoto')}
@@ -77,8 +81,8 @@ function PostCover({ field }: Props) {
             borderRadius: 1,
             '&:hover': {
               backgroundColor: (theme) => theme.palette.action.hover,
-              opacity: 0.6,
-            },
+              opacity: 0.6
+            }
           }}
           className={s.uploadPhoto}
         >
@@ -99,7 +103,7 @@ function PostCover({ field }: Props) {
               height: '64px',
               backgroundColor: (theme) =>
                 hasError ? theme.palette.error.main : theme.palette.grey[300],
-              mr: 2,
+              mr: 2
             }}
           >
             <FiUpload />

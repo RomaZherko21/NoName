@@ -22,4 +22,5 @@ export const getQrCode = async () =>
     secret: string
   }>(`${ENDPOINT_BASE}/qr`)
 
-export const verifyQrCode = async (code: string) => await fetch.put(`${ENDPOINT_BASE}/qr`, { token: code })
+export const verifyQrCode = async (code: string) =>
+  await fetch.put(`${ENDPOINT_BASE}/qr`, { token: code })

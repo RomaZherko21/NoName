@@ -35,8 +35,8 @@ function Popover({ children, activateElement, selfClosed = false }: Props) {
         PaperProps={{
           sx: {
             mt: 1.5,
-            ml: 0.75,
-          },
+            ml: 0.75
+          }
         }}
         disableScrollLock
       >

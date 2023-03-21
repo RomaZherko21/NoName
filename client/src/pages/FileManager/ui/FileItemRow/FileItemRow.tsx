@@ -31,8 +31,8 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         background: 'none',
         borderRadius: 2,
         '&:hover': {
-          backgroundColor: ({ palette }) => palette.background.paper,
-        },
+          backgroundColor: ({ palette }) => palette.background.paper
+        }
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -80,7 +80,7 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
             width: 36,
             height: 36,
             color: ({ palette }) =>
-              file.is_favourite ? palette.warning.main : palette.action.active,
+              file.is_favourite ? palette.warning.main : palette.action.active
           }}
         >
           <AiOutlineStar />

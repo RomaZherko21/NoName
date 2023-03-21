@@ -9,7 +9,7 @@ import {
   TextField,
   InputAdornment,
   Stack,
-  Avatar,
+  Avatar
 } from '@mui/material'
 import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 import { FiSearch } from 'react-icons/fi'
@@ -38,10 +38,16 @@ function AsideChatSelector() {
         p: 2,
         gap: 2,
         borderRadius: 0,
-        borderRight: (theme) => `1px solid ${theme.palette.divider}`,
+        borderRight: (theme) => `1px solid ${theme.palette.divider}`
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
         <Typography variant="h5">{t('user:chats')}</Typography>
         <Button size="small" variant="contained" endIcon={<AiOutlineUsergroupAdd />}>
           {t('chat:actions.addGroup')}
@@ -61,7 +67,7 @@ function AsideChatSelector() {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">{<FiSearch size="16px" />}</InputAdornment>
-            ),
+            )
           }}
         />
 
@@ -92,8 +98,8 @@ function AsideChatSelector() {
             backgroundColor: item.id === ChatModel.chat_id ? 'action.hover' : 'background.paper',
             borderRadius: 2,
             '&:hover': {
-              backgroundColor: 'action.hover',
-            },
+              backgroundColor: 'action.hover'
+            }
           }}
         >
           <Box sx={{ display: 'flex', gap: 2 }}>

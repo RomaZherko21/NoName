@@ -16,44 +16,44 @@ export const getFiltersConfig = () => [
     key: 'id',
     Control: Input,
     placeholder: 'common.id',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'name',
     Control: Input,
     placeholder: 'user:name',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'surname',
     Control: Input,
     placeholder: 'user:surname',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'middle_name',
     Control: Input,
     placeholder: 'user:middleName',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'email',
     Control: Input,
     placeholder: 'user:email',
-    type: 'input',
+    type: 'input'
   },
   {
     key: 'gender',
     placeholder: 'user:gender',
     Control: Select,
     type: 'select',
-    options: GENDER,
+    options: GENDER
   },
   {
     key: 'role',
     placeholder: 'user:role',
     Control: Select,
     type: 'select',
-    options: ROLES,
-  },
+    options: ROLES
+  }
 ]

@@ -35,7 +35,7 @@ const Modal = ({ open, handleClose, children, closable = true, title = '', foote
           bgcolor: 'background.paper',
           boxShadow: 24,
           minWidth: 300,
-          borderRadius: 2,
+          borderRadius: 2
         }}
       >
         {title && (
@@ -49,7 +49,7 @@ const Modal = ({ open, handleClose, children, closable = true, title = '', foote
               p: 2,
               borderRadius: 2,
               borderEndEndRadius: 0,
-              borderEndStartRadius: 0,
+              borderEndStartRadius: 0
             }}
           >
             <Typography variant="body2" color="text.secondary">
@@ -61,7 +61,7 @@ const Modal = ({ open, handleClose, children, closable = true, title = '', foote
               sx={{
                 color: 'text.secondary',
                 fontSize: '16px',
-                p: 0.25,
+                p: 0.25
               }}
             >
               <IoCloseSharp />
@@ -80,7 +80,7 @@ const Modal = ({ open, handleClose, children, closable = true, title = '', foote
               borderRadius: 2,
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
-              backgroundColor: 'background.default',
+              backgroundColor: 'background.default'
             }}
           >
             {footer}

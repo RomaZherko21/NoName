@@ -21,7 +21,7 @@ function InformativeImage({
   size = 'medium',
   PrimaryVariant = 'body2',
   SecondaryVariant = 'subtitle2',
-  isLoaded = true,
+  isLoaded = true
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -31,7 +31,7 @@ function InformativeImage({
           sx={{
             cursor: 'pointer',
             width: size === 'large' ? 64 : 40,
-            height: size === 'large' ? 64 : 40,
+            height: size === 'large' ? 64 : 40
           }}
           src={imgUrl}
         >

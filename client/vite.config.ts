@@ -11,9 +11,9 @@ export default defineConfig(({ command, mode, ssrBuild }): any => {
         react(),
         viteTsconfigPaths(),
         checker({
-          typescript: true,
+          typescript: true
         }),
-        eslint(),
+        eslint()
       ],
       server: {
         host: 'localhost',
@@ -24,10 +24,10 @@ export default defineConfig(({ command, mode, ssrBuild }): any => {
           '/api': {
             target: 'http://localhost:80',
             changeOrigin: true,
-            rewrite: (path: any) => path.replace(/^\/api/, ''),
-          },
-        },
-      },
+            rewrite: (path: any) => path.replace(/^\/api/, '')
+          }
+        }
+      }
     }
   } else {
     return {
@@ -35,10 +35,10 @@ export default defineConfig(({ command, mode, ssrBuild }): any => {
         react(),
         viteTsconfigPaths(),
         checker({
-          typescript: true,
+          typescript: true
         }),
-        eslint(),
-      ],
+        eslint()
+      ]
     }
   }
 })

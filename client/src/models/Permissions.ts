@@ -8,14 +8,14 @@ export enum AccessRoute {
   posts = 'posts',
   chat = 'chat',
   files = 'files',
-  kanban = 'kanban',
+  kanban = 'kanban'
 }
 
 export enum Operation {
   get = 'get',
   create = 'post',
   update = 'put',
-  delete = 'delete',
+  delete = 'delete'
 }
 
 class PermissionsModel {

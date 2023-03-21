@@ -14,22 +14,22 @@ export const config = [
       {
         text: 'List',
         to: ROUTES.USERS,
-        accessOperation: Operation.get,
+        accessOperation: Operation.get
       },
       {
         text: 'Create',
         to: ROUTES.USERS_NEW,
-        accessOperation: Operation.create,
-      },
+        accessOperation: Operation.create
+      }
     ],
     accessRoute: AccessRoute.users,
-    accessOperation: Operation.get,
+    accessOperation: Operation.get
   },
 
   {
     icon: <BsKanban />,
     title: 'page:kanban',
-    to: ROUTES.KANBAN,
+    to: ROUTES.KANBAN
     // accessRoute: AccessRoute.kanban,
     // accessOperation: Operation.get,
   },
@@ -38,7 +38,7 @@ export const config = [
     title: 'page:fileManager',
     to: ROUTES.FILE_MANAGER,
     accessRoute: AccessRoute.files,
-    accessOperation: Operation.get,
+    accessOperation: Operation.get
   },
   {
     icon: <HiOutlineNewspaper />,
@@ -47,22 +47,22 @@ export const config = [
       {
         text: 'List',
         to: ROUTES.POSTS,
-        accessOperation: Operation.get,
+        accessOperation: Operation.get
       },
       {
         text: 'Create',
         to: ROUTES.POSTS_NEW,
-        accessOperation: Operation.create,
-      },
+        accessOperation: Operation.create
+      }
     ],
     accessRoute: AccessRoute.posts,
-    accessOperation: Operation.get,
+    accessOperation: Operation.get
   },
   {
     icon: <HiOutlineChatBubbleLeftRight />,
     title: 'page:chat',
     to: ROUTES.CHAT,
     accessRoute: AccessRoute.chat,
-    accessOperation: Operation.get,
-  },
+    accessOperation: Operation.get
+  }
 ]

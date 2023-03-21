@@ -14,7 +14,7 @@ import {
   FormPhoneNumber,
   SelectField,
   Spinner,
-  FormDatePicker,
+  FormDatePicker
 } from 'shared/ui'
 import { getFullName, getInitials, getSplitName, normalizePhone } from 'shared/helpers'
 import { Gender, Roles } from 'shared/types'
@@ -25,7 +25,7 @@ import {
   fullNameValidation,
   phoneNumberValidation,
   passwordValidation,
-  required,
+  required
 } from 'shared/validations'
 
 import { EditUserModel } from './model'
@@ -50,7 +50,7 @@ function EditUser() {
         tel_number: phoneNumberValidation(t('fields.phone')),
         date_of_birth: required(t('user:dateOfBirth')),
         password: passwordValidation(),
-        confirmPassword: confirmPasswordValidation(),
+        confirmPassword: confirmPasswordValidation()
       }),
     [t]
   )
@@ -94,7 +94,7 @@ function EditUser() {
               gender: EditUserModel?.gender ?? Gender.man,
               date_of_birth: EditUserModel?.date_of_birth ?? '',
               password: '',
-              confirmPassword: '',
+              confirmPassword: ''
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -107,7 +107,7 @@ function EditUser() {
                   gender: values.gender,
                   date_of_birth: values.date_of_birth,
                   password: values.password,
-                  confirmPassword: values.confirmPassword,
+                  confirmPassword: values.confirmPassword
                 },
                 Number(id)
               )
@@ -156,7 +156,7 @@ function EditUser() {
                       sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        alignItems: 'center',
+                        alignItems: 'center'
                       }}
                     >
                       <Box>

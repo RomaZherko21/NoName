@@ -9,24 +9,22 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "overrides": [
-    {
-      "files": ["*.tsx"],
-      "rules": {
-        "@typescript-eslint/explicit-function-return-type": "off"
-      }
-    }
-  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": ["./tsconfig.eslint.json"]
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/array-type": "off",
-    "@typescript-eslint/comma-dangle": "off",
+    // "@typescript-eslint/array-type": ["warn", "array"],
+    "@typescript-eslint/comma-dangle": ["warn", "never"],
     "@typescript-eslint/member-delimiter-style": "off",
     "multiline-ternary": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
@@ -41,9 +39,12 @@
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/indent": "off"
   },
-  "settings": {
-    "react": {
-      "version": "detect"
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
     }
-  }
+  ]
 }

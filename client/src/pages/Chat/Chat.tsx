@@ -9,7 +9,7 @@ function Chat() {
       sx={{
         display: 'flex',
         borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-        height: 'calc(100vh - 64px)',
+        height: 'calc(100vh - 64px)'
       }}
     >
       <AsideChatSelector />

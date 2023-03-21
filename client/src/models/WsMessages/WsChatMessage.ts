@@ -18,7 +18,7 @@ class WsChatMessage {
         text: data.text,
         created_at: data.createdAt,
         recipient_id: data.recipientId,
-        chat_id: this.chatId,
+        chat_id: this.chatId
       })
     )
   }

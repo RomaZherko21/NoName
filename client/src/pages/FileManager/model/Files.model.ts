@@ -18,7 +18,7 @@ class FilesModel {
       count: 12,
       created_at: 'Feb 13, 2023',
       is_favourite: false,
-      tags: ['Business', 'Work'],
+      tags: ['Business', 'Work']
     },
     {
       id: 1,
@@ -28,7 +28,7 @@ class FilesModel {
       count: 9,
       created_at: 'Feb 13, 2023',
       is_favourite: false,
-      tags: ['Friends', 'Personal'],
+      tags: ['Friends', 'Personal']
     },
     {
       id: 2,
@@ -38,8 +38,8 @@ class FilesModel {
       count: 11,
       created_at: 'Feb 13, 2023',
       is_favourite: true,
-      tags: ['Homework', 'Holiday'],
-    },
+      tags: ['Homework', 'Holiday']
+    }
   ]
 
   pagination: PaginationModel

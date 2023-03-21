@@ -28,5 +28,5 @@ export const ROUTES = {
   KANBAN: '/kanban',
 
   NOT_FOUND: '/notFound',
-  HELP: '/help',
+  HELP: '/help'
 }

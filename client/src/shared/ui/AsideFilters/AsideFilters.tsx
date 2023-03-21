@@ -10,7 +10,7 @@ import {
   Typography,
   Grid,
   Tooltip,
-  Theme,
+  Theme
 } from '@mui/material'
 import { getTime } from 'date-fns'
 import { BsFilterRight } from 'react-icons/bs'
@@ -35,7 +35,7 @@ const AsideFilters = ({
   onCloseFilter,
   config,
   setSearchParams,
-  searchParams,
+  searchParams
 }: Props) => {
   const { t } = useTranslation()
 
@@ -49,7 +49,7 @@ const AsideFilters = ({
       open={openFilter}
       onClose={onCloseFilter}
       PaperProps={{
-        sx: { width: 280, border: 'none', overflow: 'hidden' },
+        sx: { width: 280, border: 'none', overflow: 'hidden' }
       }}
     >
       <Stack
@@ -83,8 +83,7 @@ const AsideFilters = ({
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
-                  }
-                  }
+                  }}
                 />
               )}
               {item.type === 'select' && (
@@ -97,8 +96,7 @@ const AsideFilters = ({
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
-                  }
-                  }
+                  }}
                 />
               )}
               {item.type === 'date' && (
@@ -110,8 +108,7 @@ const AsideFilters = ({
                       searchParams.set(item.key, String(getTime(e)))
                       return searchParams
                     })
-                  }
-                  }
+                  }}
                 />
               )}
               {item.type === 'checkbox' && (
@@ -123,9 +120,11 @@ const AsideFilters = ({
                       searchParams.set(item.key, e.target.checked)
                       return searchParams
                     })
-                  }
-                  }
-                  sx={{ color: ({ palette }: Theme) => palette.text.secondary, ml: 1 }}
+                  }}
+                  sx={{
+                    color: ({ palette }: Theme) => palette.text.secondary,
+                    ml: 1
+                  }}
                 />
               )}
             </Grid>
@@ -139,7 +138,7 @@ const AsideFilters = ({
           flexGrow: 1,
           display: 'flex',
           alignItems: 'flex-end',
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-end'
         }}
       >
         <Button

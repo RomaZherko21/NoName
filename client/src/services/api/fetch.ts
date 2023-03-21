@@ -5,7 +5,7 @@ import { API_URL } from 'shared/consts'
 import {
   extractDataInterceptor,
   setAuthInterceptor,
-  unauthorizedInterceptor,
+  unauthorizedInterceptor
 } from '../interceptors'
 
 export interface FetchServiceConfig {

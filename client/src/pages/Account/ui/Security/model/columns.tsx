@@ -16,7 +16,7 @@ export const getColumns = (): TableColumn[] => [
           on {date}
         </Typography>
       </>
-    ),
+    )
   },
   {
     key: 'ip_address',
@@ -25,7 +25,7 @@ export const getColumns = (): TableColumn[] => [
       <Typography variant="body2" color="text.primary">
         {ipAdress}
       </Typography>
-    ),
+    )
   },
   {
     key: 'client',
@@ -34,6 +34,6 @@ export const getColumns = (): TableColumn[] => [
       <Typography variant="body2" color="text.primary">
         {client}
       </Typography>
-    ),
-  },
+    )
+  }
 ]

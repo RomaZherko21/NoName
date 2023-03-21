@@ -16,7 +16,7 @@ import { FileItemCard, FileItemRow, Storage, AsideFileInfo } from './ui'
 
 enum ViewType {
   card = 'card',
-  list = 'list',
+  list = 'list'
 }
 
 const FileManager = () => {

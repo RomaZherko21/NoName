@@ -4,5 +4,5 @@ export const sortConfig = {
   'user_email ASC': 'post:sort.emailASC',
   'user_email DESC': 'post:sort.emailDESC',
   'created_at ASC': 'post:sort.createdAtASC',
-  'created_at DESC': 'post:sort.createdAtDESC',
+  'created_at DESC': 'post:sort.createdAtDESC'
 }

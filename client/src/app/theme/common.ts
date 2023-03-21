@@ -3,7 +3,7 @@ const SECONDARY_FONT = ['Manrope', 'Arial', 'sans-serif'].join(',')
 
 const commonTheme = {
   zIndex: {
-    appBar: 1250,
+    appBar: 1250
   },
   typography: {
     htmlFontSize: 16,
@@ -12,76 +12,76 @@ const commonTheme = {
 
     subtitle1: {
       fontFamily: SECONDARY_FONT,
-      fontWeight: 500,
+      fontWeight: 500
     },
     subtitle2: {
       fontFamily: SECONDARY_FONT,
-      fontSize: '0.775rem',
+      fontSize: '0.775rem'
     },
     body1: {
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     body2: {
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     caption: {
-      fontFamily: SECONDARY_FONT,
+      fontFamily: SECONDARY_FONT
     },
     overline: {
-      fontFamily: SECONDARY_FONT,
+      fontFamily: SECONDARY_FONT
     },
     button: {
       fontWeight: 400,
       textTransform: 'none',
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h1: {
       fontWeight: 700,
       fontSize: '3.5rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h2: {
       fontWeight: 700,
       fontSize: '3rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h3: {
       fontWeight: 700,
       fontSize: '2.25rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h4: {
       fontWeight: 700,
       fontSize: '2rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h5: {
       fontWeight: 600,
       fontSize: '1.5rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
+      fontFamily: PRIMARY_FONT
     },
     h6: {
       fontWeight: 600,
       fontSize: '1.125rem',
       lineHeight: 1.375,
-      fontFamily: PRIMARY_FONT,
-    },
+      fontFamily: PRIMARY_FONT
+    }
   },
   shape: {
-    borderRadius: 10,
+    borderRadius: 10
   },
   components: {
     MuiOutlinedInput: {
       defaultProps: {
         sx: {
-          fontSize: 14,
-        },
-      },
+          fontSize: 14
+        }
+      }
     },
     MuiTableHead: {
       styleOverrides: {
@@ -93,21 +93,21 @@ const commonTheme = {
             fontWeight: 600,
             lineHeight: 1,
             letterSpacing: 0.5,
-            textTransform: 'uppercase',
-          },
-        },
-      },
+            textTransform: 'uppercase'
+          }
+        }
+      }
     },
     MuiTableBody: {
       styleOverrides: {
         root: {
           '& .MuiTableCell-root': {
-            border: 'none',
-          },
-        },
-      },
-    },
-  },
+            border: 'none'
+          }
+        }
+      }
+    }
+  }
 }
 
 export default commonTheme

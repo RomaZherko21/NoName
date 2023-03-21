@@ -19,7 +19,7 @@ function Kanban() {
       <Container
         maxWidth="xl"
         sx={{
-          py: 6,
+          py: 6
         }}
       >
         <PageHeader pageName={t('page:kanban')} breadcrumbs={[{ text: 'page:kanban' }]} />
@@ -27,7 +27,7 @@ function Kanban() {
           sx={{
             display: 'flex',
             alignItems: 'flex-start',
-            gap: 4,
+            gap: 4
           }}
         >
           <DragDropContext
@@ -41,13 +41,13 @@ function Kanban() {
                   <Stack
                     sx={{
                       minWidth: 380,
-                      gap: 1,
+                      gap: 1
                     }}
                   >
                     <Box
                       sx={{
                         display: 'flex',
-                        gap: 2,
+                        gap: 2
                       }}
                     >
                       <InputBase
@@ -61,20 +61,22 @@ function Kanban() {
                           color: ({ palette }) => palette.text.primary,
                           '&:hover': {
                             backgroundColor: ({ palette }) => palette.action.hover,
-                            borderRadius: '15px',
+                            borderRadius: '15px'
                           },
                           '&.Mui-focused': {
                             backgroundColor: ({ palette }) => palette.action.hover,
-                            borderRadius: '15px',
+                            borderRadius: '15px'
                           },
-                          '&fieldset': { border: 'none' },
+                          '&fieldset': { border: 'none' }
                         }}
                       />
 
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <Chip
                           label={column.tasks.length}
-                          sx={{ backgroundColor: ({ palette }) => palette.grey[700] }}
+                          sx={{
+                            backgroundColor: ({ palette }) => palette.grey[700]
+                          }}
                         />
                         <IconButton>
                           <FiMoreHorizontal />
@@ -89,7 +91,7 @@ function Kanban() {
                         display: 'flex',
                         flexDirection: 'column',
                         p: 2,
-                        gap: 2,
+                        gap: 2
                       }}
                     >
                       {column.tasks.map((task, id) => (

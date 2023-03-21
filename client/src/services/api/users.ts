@@ -9,7 +9,7 @@ export const list = async ({ searchParams }: { searchParams?: QueryParams }) =>
   await fetch.get<{ users: (BasicUserInfo & MetaUserInfo)[]; count: number }>(
     `${ENDPOINT_BASE}${getQueryParams({
       ...searchParams,
-      offset: Number(searchParams?.limit) * Number(searchParams?.page),
+      offset: Number(searchParams?.limit) * Number(searchParams?.page)
     })}`
   )
 

@@ -15,7 +15,7 @@ interface Props {
 const generateInputValuesArr = (num: number) =>
   new Array(num).fill(null).map((_, i) => ({
     name: `InputCell${i}`,
-    value: null,
+    value: null
   }))
 
 function VerificationCode({ length = 6, onSubmit, error = null, setError = () => {}, sx }: Props) {
@@ -59,7 +59,7 @@ function VerificationCode({ length = 6, onSubmit, error = null, setError = () =>
             onFocus={handleFocus}
             sx={{ width: 45 }}
             InputProps={{
-              sx: { fontSize: 18 },
+              sx: { fontSize: 18 }
             }}
           />
         ))}

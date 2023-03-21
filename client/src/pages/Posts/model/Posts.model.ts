@@ -37,7 +37,7 @@ class PostsModel {
       }
 
       const data = await API.posts.list({
-        searchParams,
+        searchParams
       })
 
       this.posts = data.posts

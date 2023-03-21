@@ -40,7 +40,7 @@ function ProfileMenuPopover() {
       >
         <Paper
           sx={{
-            width: 290,
+            width: 290
           }}
         >
           <CardContent>
@@ -65,12 +65,12 @@ function ProfileMenuPopover() {
             options={[
               {
                 label: 'common.profile',
-                Component: () => <TabContent config={profileConfig} onMenuClose={() => {}} />,
+                Component: () => <TabContent config={profileConfig} onMenuClose={() => {}} />
               },
               {
                 label: 'common.settings',
-                Component: () => <TabContent config={settingsConfig} onMenuClose={() => {}} />,
-              },
+                Component: () => <TabContent config={settingsConfig} onMenuClose={() => {}} />
+              }
             ]}
             variant="fullWidth"
           />

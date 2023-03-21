@@ -11,7 +11,7 @@ import {
   Typography,
   Divider,
   Checkbox,
-  TextField,
+  TextField
 } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { FiTrash } from 'react-icons/fi'
@@ -25,7 +25,12 @@ function Checklist() {
   const [isChangeCheckActive, setIsChangeCheckActive] = useState(false)
 
   return (
-    <Stack sx={{ border: ({ palette }) => `1px solid ${palette.divider}`, borderRadius: '20px' }}>
+    <Stack
+      sx={{
+        border: ({ palette }) => `1px solid ${palette.divider}`,
+        borderRadius: '20px'
+      }}
+    >
       <Box sx={{ display: 'flex', gap: 3, p: 1.5 }}>
         <InputBase
           onFocus={() => {
@@ -40,13 +45,13 @@ function Checklist() {
             fontSize: '14px',
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
         {isChangeNameActive ? (
@@ -90,13 +95,13 @@ function Checklist() {
             fontSize: '14px',
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
         <Box sx={{ display: 'flex', gap: 2 }}>

@@ -4,7 +4,7 @@ import {
   Navigate,
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider,
+  RouterProvider
 } from 'react-router-dom'
 
 import {
@@ -19,7 +19,7 @@ import {
   CreateUser,
   FileManager,
   Chat,
-  Kanban,
+  Kanban
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 

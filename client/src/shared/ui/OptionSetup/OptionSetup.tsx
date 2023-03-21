@@ -27,7 +27,7 @@ function OptionSetup({ title, subtitle, onClick, buttonText, disabled, isActive 
           sx={{
             backgroundColor: (theme) =>
               isActive ? theme.palette.success.main : theme.palette.error.main,
-            ml: 0,
+            ml: 0
           }}
         />
         {isActive ? t('actions.on') : t('actions.off')}
@@ -42,7 +42,7 @@ function OptionSetup({ title, subtitle, onClick, buttonText, disabled, isActive 
         <Button
           sx={{
             mt: 4,
-            width: 'fit-content',
+            width: 'fit-content'
           }}
           size="small"
           disabled={disabled}

@@ -23,7 +23,7 @@ function Comments() {
       sx={{
         gap: 2,
         p: '24px',
-        pt: 0,
+        pt: 0
       }}
     >
       {1 && (
