@@ -38,7 +38,7 @@ export const editComment = async ({
 }: {
   postId: number
   commentId: number
-  comment: { created_at: number; message: string }
+  comment: { message: string }
 }) => await fetch.put<Comment>(`${ENDPOINT_BASE}/${postId}/comments/${commentId}`, comment)
 
 export const deleteComment = async (postId: number, id: number) =>

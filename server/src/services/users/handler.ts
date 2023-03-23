@@ -7,6 +7,13 @@ import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
 import { prettifyUserData } from 'shared/helpers'
 
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Retrieve a list of JSONPlaceholder users
+ *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
+ */
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
     const {

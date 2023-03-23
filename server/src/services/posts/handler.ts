@@ -7,6 +7,36 @@ import path from 'path'
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
 
+/**
+ * @swagger
+ * /posts:
+ *   get:
+ *     description: Get a list of posts
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *       - name: user_id
+ *         in: query
+ *       - name: name
+ *         in: query
+ *       - name: description
+ *         in: query
+ *       - name: created_from
+ *         in: query
+ *       - name: created_to
+ *         in: query
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *       - name: offset
+ *         in: query
+ *         schema:
+ *           type: integer
+ *           default: 0
+ */
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
   try {
     const {
@@ -92,6 +122,19 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}:
+ *   get:
+ *     description: Get post
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function getPost({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
@@ -150,6 +193,37 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
   }
 }
 
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     description: Create post
+ *     tags: [Posts]
+ *     requestBody:
+ *      content:
+ *         multipart/form-data:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                example: About AI
+ *              description:
+ *                type: string
+ *                example: Some long description...
+ *              short_description:
+ *                type: string
+ *                example: Some short description...
+ *              genre_id:
+ *                type: integer
+ *                example: 1
+ *              reading_time:
+ *                type: integer
+ *                example: 15
+ *              post:
+ *                 type: string
+ *                 format: binary
+ */
 export async function createPost({ body, file }: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
@@ -158,6 +232,7 @@ export async function createPost({ body, file }: Request, res: Response, next: N
       ...body,
       image: file?.filename,
       user_id: authorization_id,
+      created_at: Date.now(),
     })
 
     res.status(204).send()
@@ -166,6 +241,19 @@ export async function createPost({ body, file }: Request, res: Response, next: N
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}/likes:
+ *   put:
+ *     description: Toggle post like
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function togglePostLikes({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
@@ -216,6 +304,19 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}:
+ *   delete:
+ *     description: Delete post
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function deletePostById({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
@@ -247,6 +348,28 @@ export async function deletePostById({ params }: Request, res: Response, next: N
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}/comments:
+ *   post:
+ *     description: Create post comment
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              message:
+ *                type: string
+ *                example: Some post comment...
+ */
 export async function createPostComment(
   { body, params }: Request,
   res: Response,
@@ -260,6 +383,7 @@ export async function createPostComment(
       ...body,
       post_id,
       user_id: authorization_id,
+      created_at: Date.now(),
     })
 
     res.status(204).send()
@@ -268,6 +392,24 @@ export async function createPostComment(
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}/comments/{comment_id}:
+ *   delete:
+ *     description: Delete post comment
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *       - name: comment_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function deletePostComment({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { post_id, comment_id } = params
@@ -287,6 +429,33 @@ export async function deletePostComment({ params }: Request, res: Response, next
   }
 }
 
+/**
+ * @swagger
+ * /posts/{post_id}/comments/{comment_id}:
+ *   put:
+ *     description: Update post comment
+ *     tags: [Posts]
+ *     parameters:
+ *       - name: post_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *       - name: comment_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              message:
+ *                type: string
+ *                example: Some post comment...
+ */
 export async function updatePostComment(
   { params, body }: Request,
   res: Response,
@@ -299,6 +468,7 @@ export async function updatePostComment(
     await PostCommentModel.update(
       {
         ...body,
+        created_at: Date.now(),
       },
       {
         where: {
