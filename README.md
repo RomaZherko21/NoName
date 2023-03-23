@@ -25,7 +25,7 @@ I also recommend you to install "Make", it is a tool which controls the generati
 
 
 
-### In the project root folder (/NoName) run `make run` or `docker-compose up --build`
+### In the project root folder (/NoName) run `make run` or `docker compose up --build`
 Start docker services in development mode.
 - Open [http://localhost:8080](http://localhost:8080) to view phpMyAdmin.
 
