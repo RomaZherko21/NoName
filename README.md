@@ -78,8 +78,14 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 2. Absolute path
 3. Relative paths
 
-### Commit message
+### Branch name
 
 - Types: feat, fix, refactor, ci, docs, style, test
 - Scope: FE-{task-number}, BE-{task-number}, ROOT-{task-number}
-- F.E. git commit -m "fix(FE-33): edit local storage hook"
+- example: git checkout -b "fix-FE-33-edit-local-storage-hook"
+
+### Commit message
+
+- Types: feat, fix, refactor, ci, docs, style, test
+- Scope: "FE({task-number})", "BE({task-number}):", "ROOT({task-number}):"
+- example: git commit -m "fix(FE-33): edit local storage hook"
