@@ -28,6 +28,7 @@ I also recommend you to install "Make", it is a tool which controls the generati
 ### In the project root folder (/NoName) run `make run` or `docker compose up --build`
 Start docker services in development mode.
 - Open [http://localhost:8080](http://localhost:8080) to view phpMyAdmin.
+- Open [http://localhost/swagger](http://localhost/swagger) to view Swagger.
 
 ### In the client folder (/NoName/client) run `yarn start`
 Start client in development mode.
@@ -37,7 +38,6 @@ Client and api server will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `make down` or `docker compose down --remove-orphans -t 0`
-
 Stops docker containers.
 
 ## Client credentials:
