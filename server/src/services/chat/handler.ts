@@ -6,6 +6,13 @@ import { QueryTypes } from 'sequelize'
 import { WebSocket, Server } from 'ws'
 import { WsMessageCodes } from 'wsHandler'
 
+/**
+ * @swagger
+ * /chat:
+ *   get:
+ *     description: Get current user chats
+ *     tags: [Chat]
+ */
 export async function getUserChats(req: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
@@ -69,13 +76,26 @@ export async function createUserChat({ body }: Request, res: Response, next: Nex
   }
 }
 
-export async function getChatMessages({ query }: Request, res: Response, next: NextFunction) {
+/**
+ * @swagger
+ * /chat/{chat_id}/messages:
+ *   get:
+ *     description: Get chat messages
+ *     tags: [Chat]
+ *     parameters:
+ *       - name: chat_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
+export async function getChatMessages({ params }: Request, res: Response, next: NextFunction) {
   try {
-    const { chatId } = query
+    const { chat_id } = params
 
     const messages = await ChatMessageModel.findAll({
       where: {
-        chat_id: Number(chatId),
+        chat_id: Number(chat_id),
       },
       order: [['created_at', 'ASC']],
       include: [

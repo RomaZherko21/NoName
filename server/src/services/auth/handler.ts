@@ -5,7 +5,28 @@ import bcrypt from 'bcrypt'
 
 import { UserModel } from 'models'
 
-// eslint-disable-next-line class-methods-use-this
+/**
+ * @swagger
+ * /auth/signIn:
+ *   post:
+ *     description: Login to the application
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: The user's name.
+ *                 example: admin@gmail.com
+ *               password:
+ *                 type: string
+ *                 description: The user's name.
+ *                 example: qwerqwer
+ */
 export async function signIn({ body }: Request, res: Response, next: NextFunction) {
   try {
     const { email, password } = body

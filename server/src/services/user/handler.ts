@@ -7,6 +7,13 @@ import { UserModel, PostModel } from 'models'
 import { prettifyUserData } from 'shared/helpers'
 import { Role, permission } from 'shared/consts'
 
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     description: Get current user data
+ *     tags: [User]
+ */
 export async function getUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
     const data = await UserModel.findByPk(res.locals.authorization_id)
@@ -19,6 +26,37 @@ export async function getUserSelf(req: Request, res: Response, next: NextFunctio
   }
 }
 
+/**
+ * @swagger
+ * /user:
+ *   put:
+ *     description: Update current user data
+ *     tags: [User]
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                example: Alex
+ *              surname:
+ *                type: string
+ *                example: Pitt
+ *              middle_name:
+ *                type: string
+ *                example: Junior
+ *              gender:
+ *                type: string
+ *                example: man
+ *              date_of_birth:
+ *                type: string
+ *                example: 1753-01-01
+ *              role:
+ *                type: string
+ *                example: admin
+ */
 export async function updateUserSelf({ body }: Request, res: Response, next: NextFunction) {
   try {
     const data = await UserModel.update(body, {
@@ -35,6 +73,13 @@ export async function updateUserSelf({ body }: Request, res: Response, next: Nex
   }
 }
 
+/**
+ * @swagger
+ * /user:
+ *   delete:
+ *     description: Delete current user
+ *     tags: [User]
+ */
 export async function removeUserSelf(req: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
@@ -73,6 +118,22 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
   }
 }
 
+/**
+ * @swagger
+ * /user/uploadPhoto:
+ *   post:
+ *     description: Upload user avatar
+ *     tags: [User]
+ *     requestBody:
+ *      content:
+ *         multipart/form-data:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              avatar:
+ *                 type: string
+ *                 format: binary
+ */
 export async function uploadUserAvatar(req: Request, res: Response, next: NextFunction) {
   try {
     const { file } = req
@@ -108,6 +169,13 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
   }
 }
 
+/**
+ * @swagger
+ * /user/permissions:
+ *   get:
+ *     description: Get current user permissions
+ *     tags: [User]
+ */
 export async function getUserPermissions(req: Request, res: Response, next: NextFunction) {
   try {
     const authorization_role: Role = res.locals.authorization_role

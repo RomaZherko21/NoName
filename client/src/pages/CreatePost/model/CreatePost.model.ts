@@ -45,9 +45,7 @@ class CreatePostModel {
     try {
       this.loading.begin()
 
-      const createdAt = Date.now()
-
-      await API.posts.create({ ...post, created_at: createdAt })
+      await API.posts.create(post)
     } catch (err: any) {
       toast.error(err)
     } finally {

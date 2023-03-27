@@ -75,7 +75,6 @@ class PostModel {
   async addNewComment() {
     try {
       await API.posts.createComment(this.id, {
-        created_at: new Date().getTime(),
         message: this.commentInputValue
       })
 
@@ -93,7 +92,6 @@ class PostModel {
         postId: this.id,
         commentId: this.editCommentId,
         comment: {
-          created_at: new Date().getTime(),
           message: this.commentInputValue
         }
       })

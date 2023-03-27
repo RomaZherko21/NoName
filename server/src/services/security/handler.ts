@@ -14,6 +14,13 @@ const emailCodes = new CodeManager()
 
 const smsCodes = new CodeManager()
 
+/**
+ * @swagger
+ * /security/email:
+ *   put:
+ *     description: Send verification code to current user email
+ *     tags: [Security]
+ */
 export async function sendEmailVerificationCode(
   { body }: Request,
   res: Response,
@@ -46,6 +53,22 @@ export async function sendEmailVerificationCode(
   }
 }
 
+/**
+ * @swagger
+ * /security/email:
+ *   post:
+ *     description: Verify current user email
+ *     tags: [Security]
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              code:
+ *                type: string
+ *                example: 111111
+ */
 export async function verifyUserEmailByCode({ body }: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
@@ -70,6 +93,39 @@ export async function verifyUserEmailByCode({ body }: Request, res: Response, ne
   }
 }
 
+/**
+ * @swagger
+ * /security/email/alerts:
+ *   put:
+ *     description: Toggle (on/off) email notifiation's
+ *     tags: [Security]
+ */
+export async function toggleEmailAlerts(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    await UserModel.update(
+      { is_email_alerts_active: sequelize.literal('NOT is_email_alerts_active') },
+      {
+        where: {
+          id: authorization_id,
+        },
+      }
+    )
+
+    res.status(204).send()
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+/**
+ * @swagger
+ * /security/phone:
+ *   put:
+ *     description: Send verification code to current user phone number
+ *     tags: [Security]
+ */
 export async function sendPhoneVerificationCode(
   { body }: Request,
   res: Response,
@@ -86,6 +142,22 @@ export async function sendPhoneVerificationCode(
   }
 }
 
+/**
+ * @swagger
+ * /security/phone:
+ *   post:
+ *     description: Verify current user phone number
+ *     tags: [Security]
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              code:
+ *                type: string
+ *                example: 111111
+ */
 export async function verifyUserPhoneByCode({ body }: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
@@ -105,6 +177,32 @@ export async function verifyUserPhoneByCode({ body }: Request, res: Response, ne
     } else {
       throw new Error('Wrong phone verification code')
     }
+  } catch (err: any) {
+    return next(createError(500, err.message))
+  }
+}
+
+/**
+ * @swagger
+ * /security/phone/alerts:
+ *   put:
+ *     description: Toggle (on/off) phone sms notifiation's
+ *     tags: [Security]
+ */
+export async function toggleSmsAlerts(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorization_id = res.locals.authorization_id
+
+    await UserModel.update(
+      { is_sms_alerts_active: sequelize.literal('NOT is_sms_alerts_active') },
+      {
+        where: {
+          id: authorization_id,
+        },
+      }
+    )
+
+    res.status(204).send()
   } catch (err: any) {
     return next(createError(500, err.message))
   }
@@ -150,44 +248,6 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
 
     await UserModel.update(
       { is_two_factor_auth_active: true },
-      {
-        where: {
-          id: authorization_id,
-        },
-      }
-    )
-
-    res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
-  }
-}
-
-export async function toggleSmsAlerts(req: Request, res: Response, next: NextFunction) {
-  try {
-    const authorization_id = res.locals.authorization_id
-
-    await UserModel.update(
-      { is_sms_alerts_active: sequelize.literal('NOT is_sms_alerts_active') },
-      {
-        where: {
-          id: authorization_id,
-        },
-      }
-    )
-
-    res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
-  }
-}
-
-export async function toggleEmailAlerts(req: Request, res: Response, next: NextFunction) {
-  try {
-    const authorization_id = res.locals.authorization_id
-
-    await UserModel.update(
-      { is_email_alerts_active: sequelize.literal('NOT is_email_alerts_active') },
       {
         where: {
           id: authorization_id,

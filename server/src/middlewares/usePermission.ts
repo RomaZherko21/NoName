@@ -1,13 +1,22 @@
 import { NextFunction, Request, Response } from 'express'
 import { permission, Role } from 'shared/consts'
 
+function getFirstPathSegment(url: string) {
+  const match = url.match(/^\/(\w+)/)
+  if (match) {
+    return match[1]
+  }
+  return null
+}
+
 const usePermission = (req: Request, res: Response, next: NextFunction) => {
   const authorization_role: Role = res.locals.authorization_role
 
-  const resource: string = req.originalUrl.split('/')[1]
+  const resource: string | null = getFirstPathSegment(req.originalUrl)
   const action: string = req.method.toLowerCase()
 
   if (
+    resource &&
     permission[authorization_role][resource] &&
     permission[authorization_role][resource].includes(action)
   ) {
