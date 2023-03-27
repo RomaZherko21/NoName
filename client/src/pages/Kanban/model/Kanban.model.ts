@@ -100,7 +100,6 @@ class KanbanModel {
         postId: id,
         commentId: this.editCommentId,
         comment: {
-          created_at: new Date().getTime(),
           message: this.commentInputValue
         }
       })
