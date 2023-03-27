@@ -4,6 +4,39 @@ import createError from 'http-errors'
 import { ConnectionStatus, sequelize, UserConnectionModel } from 'models'
 import { QueryTypes } from 'sequelize'
 
+/**
+ * @swagger
+ * /connections:
+ *   get:
+ *     description: Get a list of connections
+ *     tags: [Connections]
+ *     parameters:
+ *       - name: status
+ *         in: query
+ *         schema:
+ *           type: string
+ *           enum:
+ *             - pending
+ *             - decline
+ *             - accept
+ *           default: pending
+ *       - name: isReceived
+ *         in: query
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *       - name: isSent
+ *         in: query
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *       - name: name
+ *         in: query
+ *       - name: surname
+ *         in: query
+ *       - name: user_id
+ *         in: query
+ */
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
     const { status, isReceived, isSent, name = '', surname = '', user_id } = query
@@ -68,6 +101,19 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
   }
 }
 
+/**
+ * @swagger
+ * /connections/{connection_id}:
+ *   delete:
+ *     description: Delete connection
+ *     tags: [Connections]
+ *     parameters:
+ *       - name: connection_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function deleteConnectionById({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
@@ -90,6 +136,32 @@ export async function deleteConnectionById({ params }: Request, res: Response, n
   }
 }
 
+/**
+ * @swagger
+ * /connections/{connection_id}:
+ *   put:
+ *     description: Update connection status
+ *     tags: [Connections]
+ *     parameters:
+ *       - name: connection_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              status:
+ *                type: string
+ *                enum:
+ *                - pending
+ *                - decline
+ *                - accept
+ *                example: pending
+ */
 export async function updateConnectionStatusById(
   { params, body }: Request,
   res: Response,

@@ -87,6 +87,6 @@ router.delete(`/${ROUTES.CONNECTIONS}/:id`, deleteConnectionById)
 router.put(`/${ROUTES.CONNECTIONS}/:id`, updateConnectionStatusById)
 
 router.get(`/${ROUTES.CHAT}`, getUserChats)
-router.get(`/${ROUTES.CHAT}/messages`, getChatMessages)
+router.get(`/${ROUTES.CHAT}/:chat_id/messages`, getChatMessages)
 
 export default router
