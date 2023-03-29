@@ -98,7 +98,8 @@
     "declain": "Declain",
     "searchContacts": "Search contacts",
     "addTask": "Add Task",
-    "addColumn": "Add Column"
+    "addColumn": "Add Column",
+    "changeCover": "Change cover"
   },
   "bankCard": {
     "number": "Card number",
