@@ -156,6 +156,7 @@ UserModel.init(
 
 UserModel.hasMany(PostModel, {
   foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 })
 
 export default UserModel

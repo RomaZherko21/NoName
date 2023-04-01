@@ -12,7 +12,7 @@ function NotificationItem({ notification }: any) {
         py: 1.5,
         px: 2.5,
         mt: '1px',
-        bgcolor: notification.isUnRead && 'action.selected',
+        bgcolor: notification.isUnRead && 'action.selected'
       }}
     >
       <InformativeImage
@@ -32,12 +32,12 @@ function NotificationItem({ notification }: any) {
               mt: 0.5,
               display: 'flex',
               alignItems: 'center',
-              color: 'text.disabled',
+              color: 'text.disabled'
             }}
           >
             <AccountBoxIcon sx={{ mr: 0.5, width: 16, height: 16 }} />
             {formatDistanceToNow(new Date(notification.createdAt), {
-              addSuffix: true,
+              addSuffix: true
             })}
           </Typography>
         }

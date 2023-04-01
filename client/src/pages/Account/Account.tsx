@@ -22,16 +22,32 @@ function Account() {
       <PageHeader pageName={t('page:account')} breadcrumbs={breadcrumbs} />
       <Tabs
         options={[
-          { label: 'page:general', to: ROUTES.ACCOUNT_GENERAL, Component: General },
-          { label: 'page:billing', to: ROUTES.ACCOUNT_BILLING, Component: Billing },
+          {
+            label: 'page:general',
+            to: ROUTES.ACCOUNT_GENERAL,
+            Component: General
+          },
+          {
+            label: 'page:billing',
+            to: ROUTES.ACCOUNT_BILLING,
+            Component: Billing
+          },
           { label: 'page:team', to: ROUTES.ACCOUNT_TEAM, Component: Team },
           {
             label: 'page:notifications',
             to: ROUTES.ACCOUNT_NOTIFICATIONS,
-            Component: Notifications,
+            Component: Notifications
           },
-          { label: 'page:security', to: ROUTES.ACCOUNT_SECURITY, Component: Security },
-          { label: 'page:verification', to: ROUTES.ACCOUNT_VERIFICATION, Component: Verification },
+          {
+            label: 'page:security',
+            to: ROUTES.ACCOUNT_SECURITY,
+            Component: Security
+          },
+          {
+            label: 'page:verification',
+            to: ROUTES.ACCOUNT_VERIFICATION,
+            Component: Verification
+          }
         ]}
       />
     </>

@@ -10,7 +10,7 @@ import {
   Typography,
   Grid,
   Tooltip,
-  Theme,
+  Theme
 } from '@mui/material'
 import { getTime } from 'date-fns'
 import { BsFilterRight } from 'react-icons/bs'
@@ -35,7 +35,7 @@ const AsideFilters = ({
   onCloseFilter,
   config,
   setSearchParams,
-  searchParams,
+  searchParams
 }: Props) => {
   const { t } = useTranslation()
 
@@ -49,7 +49,7 @@ const AsideFilters = ({
       open={openFilter}
       onClose={onCloseFilter}
       PaperProps={{
-        sx: { width: 280, border: 'none', overflow: 'hidden' },
+        sx: { width: 280, border: 'none', overflow: 'hidden' }
       }}
     >
       <Stack
@@ -78,12 +78,12 @@ const AsideFilters = ({
                 <item.Control
                   placeholder={item.placeholder}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
-                  }
+                  }}
                 />
               )}
               {item.type === 'select' && (
@@ -91,37 +91,40 @@ const AsideFilters = ({
                   label={item.placeholder}
                   options={item.options || {}}
                   value={searchParams.get(item.key) || ''}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.value)
                       return searchParams
                     })
-                  }
+                  }}
                 />
               )}
               {item.type === 'date' && (
                 <item.Control
                   label={item.placeholder}
                   value={Number(searchParams.get(item.key)) || null}
-                  onChange={(e: number) =>
+                  onChange={(e: number) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, String(getTime(e)))
                       return searchParams
                     })
-                  }
+                  }}
                 />
               )}
               {item.type === 'checkbox' && (
                 <item.Control
                   label={item.placeholder}
                   checked={searchParams.get(item.key) === 'true' || false}
-                  onChange={(e: React.ChangeEvent<HTMLFormElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLFormElement>) => {
                     setSearchParams((searchParams: URLSearchParams) => {
                       searchParams.set(item.key, e.target.checked)
                       return searchParams
                     })
-                  }
-                  sx={{ color: ({ palette }: Theme) => palette.text.secondary, ml: 1 }}
+                  }}
+                  sx={{
+                    color: ({ palette }: Theme) => palette.text.secondary,
+                    ml: 1
+                  }}
                 />
               )}
             </Grid>
@@ -135,7 +138,7 @@ const AsideFilters = ({
           flexGrow: 1,
           display: 'flex',
           alignItems: 'flex-end',
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-end'
         }}
       >
         <Button

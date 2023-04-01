@@ -155,28 +155,28 @@ class UserModel {
   }
 
   private fromJSON(user: User) {
-    this.id = user.basic.id || 0
+    this.id = user.basic.id ?? 0
     this.name = user.basic.name
     this.surname = user.basic.surname
     this.middle_name = user.basic.middle_name
-    this.tel_number = user.basic.tel_number || ''
+    this.tel_number = user.basic.tel_number ?? ''
     this.email = user.basic.email
     this.role = user.basic.role
 
-    this.date_of_birth = user.meta.date_of_birth || ''
-    this.gender = user.meta.gender || Gender.man
-    this.avatar.url = user.meta.avatar || ''
+    this.date_of_birth = user.meta.date_of_birth ?? ''
+    this.gender = user.meta.gender ?? Gender.man
+    this.avatar.url = user.meta.avatar ?? ''
     this.job_title = user.meta.job_title = ''
 
-    this.native_country = user.place.native_country || ''
-    this.native_city = user.place.native_city || ''
-    this.residence_country = user.place.residence_country || ''
-    this.residence_city = user.place.residence_city || ''
+    this.native_country = user.place.native_country ?? ''
+    this.native_city = user.place.native_city ?? ''
+    this.residence_country = user.place.residence_country ?? ''
+    this.residence_city = user.place.residence_city ?? ''
 
-    this.card_number = user.credit_card.card_number || ''
-    this.name_on_card = user.credit_card.name_on_card || ''
-    this.valid_thru = user.credit_card.valid_thru || ''
-    this.cvv = user.credit_card.cvv || ''
+    this.card_number = user.credit_card.card_number ?? ''
+    this.name_on_card = user.credit_card.name_on_card ?? ''
+    this.valid_thru = user.credit_card.valid_thru ?? ''
+    this.cvv = user.credit_card.cvv ?? ''
 
     this.is_email_verified = user.security.is_email_verified
     this.is_phone_verified = user.security.is_phone_verified

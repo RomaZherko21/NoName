@@ -25,9 +25,10 @@ I also recommend you to install "Make", it is a tool which controls the generati
 
 
 
-### In the project root folder (/NoName) run `make run` or `docker-compose up --build`
+### In the project root folder (/NoName) run `make run` or `docker compose up --build`
 Start docker services in development mode.
 - Open [http://localhost:8080](http://localhost:8080) to view phpMyAdmin.
+- Open [http://localhost/swagger](http://localhost/swagger) to view Swagger.
 
 ### In the client folder (/NoName/client) run `yarn start`
 Start client in development mode.
@@ -37,7 +38,6 @@ Client and api server will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `make down` or `docker compose down --remove-orphans -t 0`
-
 Stops docker containers.
 
 ## Client credentials:
@@ -78,8 +78,14 @@ https://app.diagrams.net/#HRomaZherko21%2FNoName%2Fmaster%2Fdiagrams%2Fdocker-se
 2. Absolute path
 3. Relative paths
 
+### Branch name
+
+- Types: feat, fix, refactor, ci, docs, style, test
+- Scope: {scope}-FE-{task-number}, {scope}-BE-{task-number}, {scope}-ROOT-{task-number}
+- example: git checkout -b "fix-FE-33-edit-local-storage-hook"
+
 ### Commit message
 
 - Types: feat, fix, refactor, ci, docs, style, test
-- Scope: FE-{task-number}, BE-{task-number}, ROOT-{task-number}
-- F.E. git commit -m "fix(FE-33): edit local storage hook"
+- Scope: "{scope}(FE-{task-number})", "{scope}(BE-{task-number}):", "{scope}(ROOT-{task-number}):"
+- example: git commit -m "fix(FE-33): edit local storage hook"

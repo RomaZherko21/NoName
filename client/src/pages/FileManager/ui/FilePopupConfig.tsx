@@ -5,11 +5,13 @@ export const getFilePopupConfig = (id: number) => [
   {
     Icon: <AiOutlineLink />,
     text: 'actions.copyLink',
-    onClick: () => {},
+    onClick: () => {
+      console.log('hehe', id)
+    }
   },
   {
     Icon: <MdDeleteOutline />,
     text: 'actions.delete',
-    onClick: () => {},
-  },
+    onClick: () => {}
+  }
 ]

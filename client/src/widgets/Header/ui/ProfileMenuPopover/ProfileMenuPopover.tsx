@@ -19,12 +19,9 @@ function ProfileMenuPopover() {
     setIsOpenModal(true)
   }
 
-  const profileConfig = useMemo(
-    () => getProfileConfig({ onLogout, id: user.id }),
-    [onLogout, getProfileConfig]
-  )
+  const profileConfig = useMemo(() => getProfileConfig({ onLogout, id: user.id }), [user.id])
 
-  const settingsConfig = useMemo(() => getSettingsConfig(), [getSettingsConfig])
+  const settingsConfig = useMemo(() => getSettingsConfig(), [])
 
   return (
     <>
@@ -43,7 +40,7 @@ function ProfileMenuPopover() {
       >
         <Paper
           sx={{
-            width: 290,
+            width: 290
           }}
         >
           <CardContent>
@@ -68,12 +65,12 @@ function ProfileMenuPopover() {
             options={[
               {
                 label: 'common.profile',
-                Component: () => <TabContent config={profileConfig} onMenuClose={() => {}} />,
+                Component: () => <TabContent config={profileConfig} onMenuClose={() => {}} />
               },
               {
                 label: 'common.settings',
-                Component: () => <TabContent config={settingsConfig} onMenuClose={() => {}} />,
-              },
+                Component: () => <TabContent config={settingsConfig} onMenuClose={() => {}} />
+              }
             ]}
             variant="fullWidth"
           />

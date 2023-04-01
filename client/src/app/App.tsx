@@ -13,7 +13,7 @@ import Router from './Router'
 import AppThemeProvider from './theme'
 
 configure({
-  reactionScheduler: (f) => setTimeout(f),
+  reactionScheduler: (f) => setTimeout(f)
 })
 
 toast.configure({
@@ -23,7 +23,7 @@ toast.configure({
   closeOnClick: true,
   pauseOnHover: true,
   draggable: false,
-  transition: Slide,
+  transition: Slide
 })
 
 function App() {

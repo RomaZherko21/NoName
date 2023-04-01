@@ -12,10 +12,10 @@ const namespaces = [
   'sentences',
   'file',
   'kanban',
-  'chat',
+  'chat'
 ]
-const initTranslation = () => {
-  return i18n
+const initTranslation = async () => {
+  return await i18n
     .use(initReactI18next)
     .use(Backend)
     .init({
@@ -24,8 +24,8 @@ const initTranslation = () => {
       debug: false,
       react: {
         useSuspense: false,
-        nsMode: 'fallback',
-      },
+        nsMode: 'fallback'
+      }
     })
 }
 

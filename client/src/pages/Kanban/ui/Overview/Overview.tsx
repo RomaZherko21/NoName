@@ -16,7 +16,7 @@ function Overview() {
       sx={{
         gap: 2,
         p: '24px',
-        pt: 0,
+        pt: 0
       }}
     >
       <Box sx={{ display: 'flex', height: 64 }}>
@@ -49,7 +49,7 @@ function Overview() {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <img src={primerImg} className={s.attachmentImg} />
+          <img alt="primerImg" src={primerImg} className={s.attachmentImg} />
           <IconButton size="small">
             <AiOutlinePlus />
           </IconButton>
@@ -75,7 +75,9 @@ function Overview() {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Chip
-            onDelete={() => console.log('Delete')}
+            onDelete={() => {
+              console.log('Delete')
+            }}
             label="Business"
             sx={{ backgroundColor: (theme) => theme.palette.grey[800] }}
           />

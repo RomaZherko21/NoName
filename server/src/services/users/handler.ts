@@ -7,11 +7,47 @@ import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
 import { prettifyUserData } from 'shared/helpers'
 
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     description: Get a list of users
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *       - name: name
+ *         in: query
+ *       - name: surname
+ *         in: query
+ *       - name: middle_name
+ *         in: query
+ *       - name: email
+ *         in: query
+ *       - name: role
+ *         in: query
+ *       - name: gender
+ *         in: query
+ *       - name: connection_status
+ *         in: query
+ *       - name: order_by
+ *         in: query
+ *       - name: order_type
+ *         in: query
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *       - name: offset
+ *         in: query
+ *         schema:
+ *           type: integer
+ *           default: 0
+ */
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
     const {
-      offset = OFFSET,
-      limit = LIMIT,
       id = ID,
       name = '',
       surname = '',
@@ -20,6 +56,8 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
       role = '',
       gender = '',
       connection_status = '',
+      limit = LIMIT,
+      offset = OFFSET,
       order_by = 'email',
       order_type = ORDER_TYPE,
     } = query
@@ -56,6 +94,19 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
   }
 }
 
+/**
+ * @swagger
+ * /users/{user_id}:
+ *   get:
+ *     description: Get user
+ *     tags: [Users]
+ *     parameters:
+ *       - name: user_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ */
 export async function getUser({ params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params
@@ -74,6 +125,49 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
   }
 }
 
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     description: Create user
+ *     tags: [Users]
+ *     requestBody:
+ *      content:
+ *         multipart/form-data:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                example: Alex
+ *              surname:
+ *                type: string
+ *                example: House
+ *              middle_name:
+ *                type: string
+ *                example: Junior
+ *              gender:
+ *                type: string
+ *                example: man
+ *              date_of_birth:
+ *                type: string
+ *                example: 2000-01-01
+ *              email:
+ *                type: string
+ *                example: AlexHouse@gmail.com
+ *              tel_number:
+ *                type: string
+ *                example: +375257777777
+ *              password:
+ *                type: string
+ *                example: qwerqwer
+ *              role:
+ *                type: string
+ *                example: admin
+ *              avatar:
+ *                 type: string
+ *                 format: binary
+ */
 export async function createUser({ body, file }: Request, res: Response, next: NextFunction) {
   try {
     const hash = await bcrypt.hash(body.password, 10)
@@ -90,6 +184,55 @@ export async function createUser({ body, file }: Request, res: Response, next: N
   }
 }
 
+/**
+ * @swagger
+ * /users/{user_id}:
+ *   post:
+ *     description: Create user
+ *     tags: [Users]
+ *     parameters:
+ *       - name: user_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     requestBody:
+ *      content:
+ *         application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                example: Alex
+ *              surname:
+ *                type: string
+ *                example: House
+ *              middle_name:
+ *                type: string
+ *                example: Junior
+ *              gender:
+ *                type: string
+ *                example: man
+ *              date_of_birth:
+ *                type: string
+ *                example: 2000-01-01
+ *              email:
+ *                type: string
+ *                example: AlexHouse@gmail.com
+ *              tel_number:
+ *                type: string
+ *                example: +375257777777
+ *              password:
+ *                type: string
+ *                example: qwerqwer
+ *              role:
+ *                type: string
+ *                example: admin
+ *              avatar:
+ *                 type: string
+ *                 format: binary
+ */
 export async function updateUserById({ body, params }: Request, res: Response, next: NextFunction) {
   try {
     const { id } = params

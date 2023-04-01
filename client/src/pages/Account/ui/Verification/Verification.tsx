@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Card, Grid, Paper, Typography } from '@mui/material'
+import { Box, Card, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { OptionSetup } from 'shared/ui'
 import { useTimer } from 'shared/hooks'
 
 import VerificationCodeModal from './VerificationCodeModal'
-import { SEND_TYPE, VerificationModel } from './model'
+import { SendType, VerificationModel } from './model'
 
 function Verification() {
   const { t } = useTranslation()
@@ -24,12 +24,19 @@ function Verification() {
     <>
       <Card elevation={16} sx={{ p: 4 }}>
         <Typography variant="h6">{t('user:verifStatuses')}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 3 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: 2,
+            mt: 3
+          }}
+        >
           <OptionSetup
             title={t('user:emailVerif')}
             subtitle={t('user:updates.security.receiveEmailCode')}
             onClick={async () => {
-              VerificationModel.verificationType = SEND_TYPE.email
+              VerificationModel.verificationType = SendType.email
               await VerificationModel.sendCode()
               setIsOpenModal(true)
               onStartTimer()
@@ -43,7 +50,7 @@ function Verification() {
             title={t('user:phoneVerif')}
             subtitle={t('user:updates.security.receiveSmsCode')}
             onClick={async () => {
-              VerificationModel.verificationType = SEND_TYPE.phone
+              VerificationModel.verificationType = SendType.phone
               await VerificationModel.sendCode()
               setIsOpenModal(true)
               onStartTimer()
@@ -60,12 +67,10 @@ function Verification() {
         handleClose={() => {
           setIsOpenModal(false)
         }}
-        title={
-          VerificationModel.verificationType === SEND_TYPE.email ? user.email : user.tel_number
-        }
+        title={VerificationModel.verificationType === SendType.email ? user.email : user.tel_number}
         subtitle={t(
           `user:updates.security.${
-            VerificationModel.verificationType === SEND_TYPE.email ? 'sentEmailCode' : 'sentSmsCode'
+            VerificationModel.verificationType === SendType.email ? 'sentEmailCode' : 'sentSmsCode'
           }`
         )}
         timeLeft={timeLeft}

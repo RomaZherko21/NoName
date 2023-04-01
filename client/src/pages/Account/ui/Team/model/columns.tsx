@@ -12,13 +12,18 @@ export const getColumns = (): TableColumn[] => [
   {
     key: 'full_name',
     title: i18next.t('user:member'),
-    getValue: ({ name, surname, middle_name, avatar }: BasicUserInfo & MetaUserInfo) => (
+    getValue: ({
+      name,
+      surname,
+      middle_name: middleName,
+      avatar
+    }: BasicUserInfo & MetaUserInfo) => (
       <InformativeImage
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
-        PrimaryText={getFullName(name, surname, middle_name)}
+        PrimaryText={getFullName(name, surname, middleName)}
       />
-    ),
+    )
   },
   {
     key: 'role',
@@ -28,6 +33,6 @@ export const getColumns = (): TableColumn[] => [
         <Chip label={row.role} icon={<AdminPanelSettingsIcon />} color="primary" />
       ) : (
         <Chip label={row.role} icon={<AccountCircleIcon />} color="secondary" />
-      ),
-  },
+      )
+  }
 ]

@@ -10,7 +10,7 @@ import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 import {
   commonNumberRangeValidation,
   commonStringValidation,
-  fileValidation,
+  fileValidation
 } from 'shared/validations'
 import { InputField, QuillField, SelectField } from 'shared/ui'
 import { MAX_IMAGE_SIZE, ROUTES, SUPPORTED_IMAGE_FORMATS } from 'shared/consts'
@@ -25,27 +25,25 @@ function CreatePost() {
 
   useEffect(() => {
     CreatePostModel.fetch()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        postTitle: commonStringValidation(t(`post:postTitle`), 3),
-        shortDescription: commonStringValidation(t(`post:shortDescription`), 5),
-        genre: commonStringValidation(t(`post:genres`)),
-        description: commonStringValidation(t(`post:description`), 30),
+        postTitle: commonStringValidation(t('post:postTitle'), 3),
+        shortDescription: commonStringValidation(t('post:shortDescription'), 5),
+        genre: commonStringValidation(t('post:genres')),
+        description: commonStringValidation(t('post:description'), 30),
         readingTime: commonNumberRangeValidation({
-          field: t(`post:form.readingTime`),
+          field: t('post:form.readingTime'),
           min: 1,
-          max: 60,
+          max: 60
         }),
         cover: fileValidation({
           field: 'cover',
           maxSize: MAX_IMAGE_SIZE,
-          fileFormats: SUPPORTED_IMAGE_FORMATS,
-        }),
+          fileFormats: SUPPORTED_IMAGE_FORMATS
+        })
       }),
     [t]
   )
@@ -58,7 +56,7 @@ function CreatePost() {
         genre: '',
         description: '',
         readingTime: '',
-        cover: null,
+        cover: null
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
@@ -68,7 +66,7 @@ function CreatePost() {
           genre_id: Number(values.genre),
           description: values.description,
           post: values.cover,
-          reading_time: Number(values.readingTime),
+          reading_time: Number(values.readingTime)
         })
         navigate(ROUTES.POSTS)
         toast.success(t('notification:success.created'))
@@ -126,7 +124,7 @@ function CreatePost() {
                   alignItems: 'center',
                   justifyContent: 'flex-end',
                   p: 2.5,
-                  gap: 1,
+                  gap: 1
                 }}
               >
                 <Button size="small" component={Link} to={ROUTES.POSTS}>

@@ -16,7 +16,7 @@ import {
   FormPhoneNumber,
   SelectField,
   Spinner,
-  UploadImageField,
+  UploadImageField
 } from 'shared/ui'
 import {
   commonStringValidation,
@@ -26,7 +26,7 @@ import {
   fullNameValidation,
   phoneNumberValidation,
   passwordValidation,
-  required,
+  required
 } from 'shared/validations'
 
 import { CreateUserModel } from './model'
@@ -41,16 +41,16 @@ function CreateUser() {
       yup.object().shape({
         full_name: fullNameValidation(),
         email: emailValidation(),
-        role: commonStringValidation(t(`user:role`)),
-        tel_number: phoneNumberValidation(t(`fields.phone`)),
-        date_of_birth: required(t(`user:dateOfBirth`)),
+        role: commonStringValidation(t('user:role')),
+        tel_number: phoneNumberValidation(t('fields.phone')),
+        date_of_birth: required(t('user:dateOfBirth')),
         password: passwordValidation(),
         confirmPassword: confirmPasswordValidation(),
         avatar: fileValidation({
           field: 'avatar',
           maxSize: MAX_IMAGE_SIZE,
-          fileFormats: SUPPORTED_IMAGE_FORMATS,
-        }),
+          fileFormats: SUPPORTED_IMAGE_FORMATS
+        })
       }),
     [t]
   )
@@ -71,7 +71,7 @@ function CreateUser() {
           date_of_birth: null,
           password: '',
           confirmPassword: '',
-          avatar: null,
+          avatar: null
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -82,10 +82,10 @@ function CreateUser() {
               tel_number: normalizePhone(values.tel_number),
               role: values.role,
               gender: values.gender,
-              date_of_birth: values.date_of_birth || '',
-              avatar: values.avatar || '',
+              date_of_birth: values.date_of_birth ?? '',
+              avatar: values.avatar ?? '',
               password: values.password,
-              confirmPassword: values.confirmPassword,
+              confirmPassword: values.confirmPassword
             },
             () => {
               navigate(ROUTES.USERS)
@@ -166,7 +166,7 @@ function CreateUser() {
                     alignItems: 'center',
                     justifyContent: 'flex-end',
                     gap: 2,
-                    p: 2,
+                    p: 2
                   }}
                   container
                 >

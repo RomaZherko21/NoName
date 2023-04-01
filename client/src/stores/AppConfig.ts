@@ -8,4 +8,6 @@ class AppConfig implements AppConfigValues {
   init() {}
 }
 
-export default new AppConfig()
+const model = new AppConfig()
+
+export default model

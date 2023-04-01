@@ -58,7 +58,7 @@ function Posts() {
       <Grid container spacing={3} direction="column">
         <Grid item>
           <AsideFiltersBar
-            inputValue={searchParams.get('name') || ''}
+            inputValue={searchParams.get('name') ?? ''}
             onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setSearchParams((searchParams: URLSearchParams) => {
                 searchParams.set('name', e.target.value)
@@ -92,7 +92,12 @@ function Posts() {
               ))
             : PostsModel.posts.map((post) => (
                 <Grid key={post?.id} item xs={12} md={6} sx={{ width: '100%' }}>
-                  <PostCard post={post} toggleLike={() => PostsModel.toggleLike(post?.id)} />
+                  <PostCard
+                    post={post}
+                    toggleLike={async () => {
+                      await PostsModel.toggleLike(post?.id)
+                    }}
+                  />
                 </Grid>
               ))}
         </Grid>

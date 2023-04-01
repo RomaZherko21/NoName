@@ -1,17 +1,7 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Paper,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Divider, Grid, IconButton, Paper, Tooltip, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
@@ -20,7 +10,7 @@ import { InformativeImage, Input, Select, Spinner } from 'shared/ui'
 import { ConnectionStatus } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
 
-import { ProfileModel, CONNECTION_OPTIONS } from '../../model'
+import { ProfileModel, ConnectionOptions } from '../../model'
 
 const Connections = () => {
   const { user } = useRootStore()
@@ -30,7 +20,7 @@ const Connections = () => {
     ProfileModel.fetchConnections({
       isSent: true,
       isReceived: true,
-      status: ConnectionStatus.accept,
+      status: ConnectionStatus.accept
     })
   }, [])
 
@@ -46,7 +36,7 @@ const Connections = () => {
           justifyContent: 'space-between',
           alignItems: 'flex-end',
           gap: 3,
-          mb: 3,
+          mb: 3
         }}
       >
         <Input icon={<SearchIcon />} placeholder={t('user:actions.searchName')} />
@@ -54,14 +44,14 @@ const Connections = () => {
         {user.isAuthorizedUser(ProfileModel.id) && (
           <Select
             value={ProfileModel.connectionStatus}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              ProfileModel.onConnectionStatusChange(e.target.value as CONNECTION_OPTIONS)
-            }
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              ProfileModel.onConnectionStatusChange(e.target.value as ConnectionOptions)
+            }}
             label="actions.sortBy"
             options={{
-              [CONNECTION_OPTIONS.connections]: 'page:connections',
-              [CONNECTION_OPTIONS.sentConnections]: 'user:sentConnections',
-              [CONNECTION_OPTIONS.receivedConnections]: 'user:receivedConnections',
+              [ConnectionOptions.connections]: 'page:connections',
+              [ConnectionOptions.sentConnections]: 'user:sentConnections',
+              [ConnectionOptions.receivedConnections]: 'user:receivedConnections'
             }}
             sx={{ width: 160 }}
           />
@@ -75,16 +65,16 @@ const Connections = () => {
           <Spinner />
         ) : (
           ProfileModel.connections.map((item) => (
-            <Grid item xs={12} md={6}>
+            <Grid key={item.email} item xs={12} md={6}>
               <Paper
                 sx={{
-                  p: 2,
+                  p: 2
                 }}
               >
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-between'
                   }}
                 >
                   <InformativeImage
@@ -100,11 +90,13 @@ const Connections = () => {
                   </Tooltip>
                 </Box>
                 {item.status === ConnectionStatus.pending &&
-                  ProfileModel.connectionStatus === CONNECTION_OPTIONS.sentConnections && (
+                  ProfileModel.connectionStatus === ConnectionOptions.sentConnections && (
                     <Button
                       color="error"
                       size="small"
-                      onClick={() => ProfileModel.removeConnectionRequest(item.user_id)}
+                      onClick={async () => {
+                        await ProfileModel.removeConnectionRequest(item.user_id)
+                      }}
                       sx={{ mt: 1 }}
                     >
                       {t('user:actions.cancelSending')}
@@ -112,29 +104,36 @@ const Connections = () => {
                   )}
 
                 {item.status === ConnectionStatus.pending &&
-                  ProfileModel.connectionStatus === CONNECTION_OPTIONS.receivedConnections && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, gap: 0.5 }}>
+                  ProfileModel.connectionStatus === ConnectionOptions.receivedConnections && (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        mt: 1,
+                        gap: 0.5
+                      }}
+                    >
                       <Button
                         color="success"
                         size="small"
-                        onClick={() =>
-                          ProfileModel.updateConnectionStatus({
+                        onClick={async () => {
+                          await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
-                            status: ConnectionStatus.accept,
+                            status: ConnectionStatus.accept
                           })
-                        }
+                        }}
                       >
                         {t('user:actions.accept')}
                       </Button>
                       <Button
                         color="error"
                         size="small"
-                        onClick={() =>
-                          ProfileModel.updateConnectionStatus({
+                        onClick={async () => {
+                          await ProfileModel.updateConnectionStatus({
                             id: item.user_id,
-                            status: ConnectionStatus.decline,
+                            status: ConnectionStatus.decline
                           })
-                        }
+                        }}
                       >
                         {t('user:actions.declain')}
                       </Button>

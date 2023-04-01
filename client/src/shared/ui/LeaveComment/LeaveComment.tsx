@@ -22,7 +22,7 @@ const LeaveComment = ({
   avatarUrl,
   label,
   filledBackground = false,
-  buttonText = 'actions.post',
+  buttonText = 'actions.post'
 }: Props) => {
   const { t } = useTranslation()
 
@@ -34,7 +34,7 @@ const LeaveComment = ({
         backgroundColor: filledBackground ? 'background.secondary' : 'transparent',
         p: 2,
         gap: 2,
-        mb: 4,
+        mb: 4
       }}
       elevation={filledBackground ? 1 : 0}
     >
@@ -50,7 +50,13 @@ const LeaveComment = ({
           rows={3}
         />
 
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
           <Stack direction="row">
             <IconButton sx={{ fontSize: '20px' }} aria-label="upload picture" component="label">
               <input hidden accept="image/*" type="file" />
@@ -66,7 +72,13 @@ const LeaveComment = ({
             </IconButton>
           </Stack>
 
-          <Button size="small" variant="contained" onClick={() => onSend()}>
+          <Button
+            size="small"
+            variant="contained"
+            onClick={() => {
+              onSend()
+            }}
+          >
             {t(buttonText)}
           </Button>
         </Box>

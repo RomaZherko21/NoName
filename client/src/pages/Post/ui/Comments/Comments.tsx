@@ -33,7 +33,7 @@ function Comments({ comments = [] }: Props) {
         <>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {comments.map((comment) => (
-              <Comment comment={comment} isOwner={user.id === comment.user_id} />
+              <Comment key={comment.id} comment={comment} isOwner={user.id === comment.user_id} />
             ))}
           </Box>
           <Divider sx={{ my: 4 }} />

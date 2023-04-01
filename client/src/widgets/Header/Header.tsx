@@ -18,7 +18,7 @@ function Header() {
         ml: { sm: `${DRAWER_WIDTH}px` },
         backdropFilter: 'blur(6px)',
         boxShadow: 'none',
-        zIndex: 1,
+        zIndex: 1
       }}
       position="fixed"
     >

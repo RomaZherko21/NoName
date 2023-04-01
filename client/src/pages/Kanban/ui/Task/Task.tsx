@@ -31,10 +31,10 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
         backgroundColor: (theme) =>
           snapshot.isDragging ? theme.palette.action.hover : 'background.rare',
         '&:hover': {
-          backgroundColor: (theme) => theme.palette.action.hover,
+          backgroundColor: (theme) => theme.palette.action.hover
         },
         ...provided.draggableProps.style,
-        userSelect: 'none',
+        userSelect: 'none'
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -44,7 +44,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             height: 140,
             width: '100%',
             borderRadius: 2,
-            mb: 1,
+            mb: 1
           }}
           image={primerImg}
           title="task cover"
@@ -64,7 +64,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <Box
@@ -73,7 +73,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             alignItems: 'center',
             gap: 1.5,
             color: (theme) => theme.palette.grey[600],
-            fontSize: 18,
+            fontSize: 18
           }}
         >
           <BsEye />

@@ -57,7 +57,7 @@ function Users() {
 
       <Grid container direction="column">
         <AsideFiltersBar
-          inputValue={searchParams.get('name') || ''}
+          inputValue={searchParams.get('name') ?? ''}
           onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setSearchParams((searchParams: URLSearchParams) => {
               searchParams.set('name', e.target.value)
@@ -98,7 +98,9 @@ function Users() {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         openFilter={openFilter}
-        onCloseFilter={() => setOpenFilter(false)}
+        onCloseFilter={() => {
+          setOpenFilter(false)
+        }}
       />
     </>
   )

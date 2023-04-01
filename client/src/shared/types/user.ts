@@ -66,24 +66,24 @@ export interface Connection {
 
 export enum Roles {
   admin = 'admin',
-  user = 'user',
+  user = 'user'
 }
 
 export enum Gender {
   man = 'man',
-  woman = 'woman',
+  woman = 'woman'
 }
 
 export enum BillingStatus {
   startup = 'startup',
   standard = 'standard',
-  business = 'business',
+  business = 'business'
 }
 
 export enum ConnectionStatus {
   pending = 'pending',
   decline = 'decline',
-  accept = 'accept',
+  accept = 'accept'
 }
 
 export interface Entrances {

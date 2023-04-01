@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: 'flex'
       }}
     >
       <Header />
@@ -30,7 +30,7 @@ const Layout = () => {
             flexGrow: 1,
             py: 7,
             px: 4,
-            width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` },
+            width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` }
           }}
         >
           <Toolbar />

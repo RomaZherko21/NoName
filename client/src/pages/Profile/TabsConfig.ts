@@ -8,16 +8,16 @@ export const getTabsConfig = (id: number) => [
   {
     label: 'page:profile',
     to: generatePath(ROUTES.USERS_PROFILE, { id }),
-    Component: UserInfo,
+    Component: UserInfo
   },
   {
     label: 'page:connections',
     to: generatePath(ROUTES.USERS_CONNECTIONS, { id }),
-    Component: Connections,
+    Component: Connections
   },
   {
     label: 'page:posts',
     to: generatePath(ROUTES.USERS_POSTS, { id }),
-    Component: Posts,
-  },
+    Component: Posts
+  }
 ]

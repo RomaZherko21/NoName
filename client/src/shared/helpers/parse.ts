@@ -1,25 +1,24 @@
 import qs from 'qs'
-import { User } from 'shared/types'
 
 export const getInitials = (name = '') =>
   name
     .replace(/\s+/, ' ')
     .split(' ')
     .slice(0, 2)
-    .map((v) => v && v[0].toUpperCase())
+    .map((v) => v?.[0]?.toUpperCase())
     .join('')
 
 export const getFullName = (name = '', surname = '', middleName = '') =>
   middleName ? `${name} ${middleName} ${surname}` : `${name} ${surname}`
 
-export const getSplitName = (full_name: string, user?: User) => {
-  const [firstName, middleName, lastName] = full_name.split(' ')
+export const getSplitName = (fullName: string) => {
+  const [firstName, middleName, lastName] = fullName.split(' ')
 
   return { name: firstName, middle_name: middleName, surname: lastName }
 }
 
 export const getQueryParams = (obj: { [key: string]: any }): string => {
-  let result: { [key: string]: any } = {}
+  const result: { [key: string]: any } = {}
 
   Object.entries(obj).forEach(([key, value]) => {
     if (value || value > 0) {

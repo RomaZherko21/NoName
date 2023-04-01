@@ -4,6 +4,13 @@ import createError from 'http-errors'
 
 import { sequelize } from 'models'
 
+/**
+ * @swagger
+ * /genres:
+ *   get:
+ *     description: Get a list of genres
+ *     tags: [Genres]
+ */
 export async function getGenres(req: Request, res: Response, next: NextFunction) {
   try {
     let result = await sequelize.query(

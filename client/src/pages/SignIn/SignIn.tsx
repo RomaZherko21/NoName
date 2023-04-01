@@ -17,14 +17,14 @@ function SignIn() {
 
   const validationSchema = yup.object().shape({
     email: emailValidation(),
-    password: passwordValidation(),
+    password: passwordValidation()
   })
 
   return (
     <Box
       sx={{
         background: ({ palette }) =>
-          `linear-gradient(45deg, ${palette.background.default} 30%, rgba(37, 69, 125, 1) 80%, rgba(3, 175, 213, 1) 100%)`,
+          `linear-gradient(45deg, ${palette.background.default} 30%, rgba(37, 69, 125, 1) 80%, rgba(3, 175, 213, 1) 100%)`
       }}
     >
       <Container
@@ -34,10 +34,10 @@ function SignIn() {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'column',
-          gap: 15,
+          gap: 15
         }}
       >
-        <img src={logo} className={s.logo} />
+        <img src={logo} className={s.logo} alt="Logo" />
 
         <Box>
           <Paper
@@ -46,7 +46,7 @@ function SignIn() {
               display: 'flex',
               flexDirection: 'column',
               minWidth: 550,
-              p: 3,
+              p: 3
             }}
           >
             <Box mb={3}>
@@ -59,7 +59,7 @@ function SignIn() {
             <Formik
               initialValues={{
                 email: '',
-                password: '',
+                password: ''
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => {
@@ -84,7 +84,8 @@ function SignIn() {
           </Paper>
 
           <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>"admin@gmail.com"</strong> and password <strong>"qwerqwer"</strong>
+            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
+            <strong>&quot;qwerqwer&quot;</strong>
           </Alert>
         </Box>
       </Container>

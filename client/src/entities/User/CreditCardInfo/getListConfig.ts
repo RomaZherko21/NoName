@@ -5,22 +5,22 @@ export const getListConfig = ({ cardNumber, nameOnCard, validThru, cvv }: any) =
   {
     Icon: BsCreditCard2Back,
     title: 'user:bankCard.number',
-    text: cardNumber.replace(/(\d{4}(?!\s))/g, '$1 '),
+    text: cardNumber.replace(/(\d{4}(?!\s))/g, '$1 ')
   },
   {
     Icon: BiUser,
     title: 'user:bankCard.cardHolderName',
-    text: nameOnCard,
+    text: nameOnCard
   },
   {
     Icon: BsCalendar2Event,
     title: 'user:bankCard.expiryDate',
-    text: validThru.split('/').join(' / '),
+    text: validThru.split('/').join(' / ')
   },
 
   {
     Icon: BiLockAlt,
     title: 'user:bankCard.cvv',
-    text: cvv,
-  },
+    text: cvv
+  }
 ]

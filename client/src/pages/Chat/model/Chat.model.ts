@@ -1,14 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
-import { debounce } from '@mui/material'
 
 import { API } from 'services'
 import LoadingModel from 'models/Loading'
 import { BasicUserInfo, Message, MetaUserInfo } from 'shared/types'
-
-interface UserFilters {
-  name?: string
-}
 
 interface Chat {
   id: number
@@ -75,4 +70,6 @@ class ChatModel {
   }
 }
 
-export default new ChatModel()
+const model = new ChatModel()
+
+export default model

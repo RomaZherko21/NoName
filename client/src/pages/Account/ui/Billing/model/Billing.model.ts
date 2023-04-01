@@ -10,4 +10,6 @@ class BillingModel {
   }
 }
 
-export default new BillingModel()
+const model = new BillingModel()
+
+export default model

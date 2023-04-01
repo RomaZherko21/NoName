@@ -75,8 +75,7 @@ class PostModel {
   async addNewComment() {
     try {
       await API.posts.createComment(this.id, {
-        created_at: new Date().getTime(),
-        message: this.commentInputValue,
+        message: this.commentInputValue
       })
 
       this.commentInputValue = ''
@@ -90,12 +89,11 @@ class PostModel {
   async editComment() {
     try {
       await API.posts.editComment({
-        post_id: this.id,
-        comment_id: this.editCommentId,
+        postId: this.id,
+        commentId: this.editCommentId,
         comment: {
-          created_at: new Date().getTime(),
-          message: this.commentInputValue,
-        },
+          message: this.commentInputValue
+        }
       })
 
       this.isEditActive = false
@@ -108,9 +106,9 @@ class PostModel {
     }
   }
 
-  async deleteComment(comment_id: number) {
+  async deleteComment(commentId: number) {
     try {
-      await API.posts.deleteComment(this.id, comment_id)
+      await API.posts.deleteComment(this.id, commentId)
 
       this.fetch({ id: this.id, hidden: true })
     } catch (err: any) {
@@ -143,4 +141,6 @@ class PostModel {
   }
 }
 
-export default new PostModel()
+const model = new PostModel()
+
+export default model

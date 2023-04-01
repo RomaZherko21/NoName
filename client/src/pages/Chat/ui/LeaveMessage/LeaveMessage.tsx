@@ -23,7 +23,7 @@ function LeaveMessage() {
         p: 2,
         gap: 1,
         width: '100%',
-        borderRadius: 0,
+        borderRadius: 0
       }}
     >
       <Avatar sx={{ height: 40, width: 40 }} src={`${API_USER_AVATAR_URL}/${user.avatar.url}`} />
@@ -41,7 +41,11 @@ function LeaveMessage() {
 
       <IconButton
         onClick={() => {
-          ws.chatMessages.sendMessage({ text: value, createdAt: Date.now(), recipientId: 2 })
+          ws.chatMessages.sendMessage({
+            text: value,
+            createdAt: Date.now(),
+            recipientId: 2
+          })
         }}
       >
         <TbSend />

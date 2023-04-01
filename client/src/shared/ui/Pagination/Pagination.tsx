@@ -15,6 +15,8 @@ const Pagination = ({ paginationModel }: Props) => {
   useEffect(() => {
     paginationModel.currentPage = Number(searchParams.get('page')) || 0
     paginationModel.limit = Number(searchParams.get('limit')) || 10
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function onPageChange(event: unknown, newPage: number) {

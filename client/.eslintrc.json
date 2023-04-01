@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-typescript",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2023,
+    "sourceType": "module"
+  },
+  "plugins": [],
+  "rules": {
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "react/jsx-filename-extension": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/no-shadow": "off"
+  },
+  "ignorePatterns": ["vite.config.ts"]
+}

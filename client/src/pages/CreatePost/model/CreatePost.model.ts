@@ -45,9 +45,7 @@ class CreatePostModel {
     try {
       this.loading.begin()
 
-      const created_at = Date.now()
-
-      await API.posts.create({ ...post, created_at })
+      await API.posts.create(post)
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -55,4 +53,7 @@ class CreatePostModel {
     }
   }
 }
-export default new CreatePostModel()
+
+const model = new CreatePostModel()
+
+export default model

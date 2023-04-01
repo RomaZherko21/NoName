@@ -23,7 +23,7 @@ const AsideFileInfo = ({
   onCloseFileInfo,
   toggleFavourite,
   deleteFile,
-  deleteTag,
+  deleteTag
 }: Props) => {
   const { t } = useTranslation()
 
@@ -37,17 +37,27 @@ const AsideFileInfo = ({
           width: 350,
           position: 'fixed',
           overflow: 'hidden',
-          border: 'none',
-        },
+          border: 'none'
+        }
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, px: 3, py: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: 2,
+          px: 3,
+          py: 2
+        }}
+      >
         <IconButton
-          onClick={() => toggleFavourite(file.id)}
+          onClick={() => {
+            toggleFavourite(file.id)
+          }}
           sx={{
             p: 1,
             fontSize: 20,
-            color: ({ palette }) => (file.is_favourite ? palette.warning.main : palette.grey[500]),
+            color: ({ palette }) => (file.is_favourite ? palette.warning.main : palette.grey[500])
           }}
         >
           <AiOutlineStar />
@@ -72,13 +82,20 @@ const AsideFileInfo = ({
             backgroundColor: 'background.rare',
             borderRadius: 1,
             borderStyle: 'dashed',
-            borderWidth: 1,
+            borderWidth: 1
           }}
         >
           <img alt="Folder" src={folder} />
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 2
+          }}
+        >
           <Typography variant="h5">{file.name}</Typography>
           <IconButton size="small">
             <MdOutlineEdit />
@@ -126,13 +143,27 @@ const AsideFileInfo = ({
             <Grid xs={4}>
               <Typography variant="caption">{t('file:tags')}</Typography>
             </Grid>
-            <Grid xs={8} sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Grid
+              xs={8}
+              sx={{
+                display: 'flex',
+                gap: 1,
+                flexWrap: 'wrap',
+                alignItems: 'center'
+              }}
+            >
               {FilesModel.files.map((file) =>
                 file.tags.map((tag, id) => (
                   <Chip
+                    key={tag}
                     label={tag}
-                    onDelete={() => deleteTag(id)}
-                    sx={{ height: 26, backgroundColor: ({ palette }) => palette.grey[700] }}
+                    onDelete={() => {
+                      deleteTag(id)
+                    }}
+                    sx={{
+                      height: 26,
+                      backgroundColor: ({ palette }) => palette.grey[700]
+                    }}
                   />
                 ))
               )}
@@ -148,7 +179,13 @@ const AsideFileInfo = ({
             </Grid>
             <Grid xs={8} sx={{ display: 'flex' }}>
               <Avatar sx={{ width: 28, height: 28 }}></Avatar>
-              <IconButton sx={{ fontSize: 16, ml: 1, color: ({ palette }) => palette.grey[500] }}>
+              <IconButton
+                sx={{
+                  fontSize: 16,
+                  ml: 1,
+                  color: ({ palette }) => palette.grey[500]
+                }}
+              >
                 <AiOutlinePlus />
               </IconButton>
             </Grid>
@@ -160,7 +197,9 @@ const AsideFileInfo = ({
             </Grid>
             <Grid xs={8}>
               <IconButton
-                onClick={() => deleteFile(file.id)}
+                onClick={() => {
+                  deleteFile(file.id)
+                }}
                 sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
               >
                 <FiTrash />

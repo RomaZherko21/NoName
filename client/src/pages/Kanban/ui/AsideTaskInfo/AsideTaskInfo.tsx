@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { useTranslation } from 'react-i18next'
 import { Box, Drawer, IconButton, Button, InputBase } from '@mui/material'
 import { IoIosArrowDown } from 'react-icons/io'
 import { HiOutlineArchive } from 'react-icons/hi'
@@ -17,7 +16,6 @@ interface Props {
 }
 
 const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
-  const { t } = useTranslation()
   const [isEyeActive, setIsEyeActive] = useState(true)
 
   const tabsConfig = useMemo(() => getTabsConfig(), [])
@@ -32,8 +30,8 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
           overflow: 'auto',
           width: 500,
           position: 'fixed',
-          border: 'none',
-        },
+          border: 'none'
+        }
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
@@ -50,11 +48,15 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
                 startIcon={<IoIosArrowDown />}
               />
             )}
-            config={getPopupConfig(t)}
+            config={getPopupConfig()}
           />
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
-          <IconButton onClick={() => setIsEyeActive(!isEyeActive)}>
+          <IconButton
+            onClick={() => {
+              setIsEyeActive(!isEyeActive)
+            }}
+          >
             {isEyeActive ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </IconButton>
           <IconButton>
@@ -73,13 +75,13 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
             color: ({ palette }) => palette.text.primary,
             '&:hover': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
             '&.Mui-focused': {
               backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px',
+              borderRadius: '15px'
             },
-            '&fieldset': { border: 'none' },
+            '&fieldset': { border: 'none' }
           }}
         />
       </Box>

@@ -8,9 +8,13 @@ import TabPanel from './TabPanel'
 
 const Tabs = ({
   options,
-  variant = 'standard',
+  variant = 'standard'
 }: {
-  options: { label: string; to?: string; Component: (arg: any) => JSX.Element }[]
+  options: {
+    label: string
+    to?: string
+    Component: (arg: any) => JSX.Element
+  }[]
   variant?: 'standard' | 'scrollable' | 'fullWidth'
 }) => {
   const { t } = useTranslation()
@@ -36,19 +40,24 @@ const Tabs = ({
         >
           {options.map((item, id) => (
             <Tab
+              key={item.to}
               onClick={() => {
                 if (item.to) {
                   navigate(item.to)
                 }
               }}
               label={t(item.label)}
-              {...{ [id]: `simple-tab-${id}`, 'aria-controls': `simple-tabpanel-${id}` }}
+              {...{
+                [id]: `simple-tab-${id}`,
+                'aria-controls': `simple-tabpanel-${id}`
+              }}
             />
           ))}
         </MUiTabs>
       </Box>
       {options.map((item, index) => (
         <TabPanel
+          key={item.to}
           value={options.findIndex((item, index) =>
             item.to ? item.to === location.pathname : currentTab === index
           )}

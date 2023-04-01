@@ -6,7 +6,7 @@ import { RootStore } from 'stores/Root'
 import { WsChatMessage } from './WsMessages'
 
 enum WsMessageCodes {
-  chat = 'chat',
+  chat = 'chat'
 }
 
 class WebSocketModel {
@@ -29,11 +29,11 @@ class WebSocketModel {
     if (this.rootStore.authorization.isAuthorized) {
       this.connection = new WebSocket(API_WS_URL)
 
-      this.connection.onopen = (evt) => {
+      this.connection.onopen = () => {
         console.log('Ws onopen...')
       }
 
-      this.connection.onclose = (evt) => {
+      this.connection.onclose = () => {
         console.log('Ws closed...')
       }
 
@@ -41,7 +41,7 @@ class WebSocketModel {
         this.processMessage(JSON.parse(evt.data))
       }
 
-      this.connection.onerror = (evt) => {
+      this.connection.onerror = () => {
         console.log('Ws onerror...')
       }
     } else {

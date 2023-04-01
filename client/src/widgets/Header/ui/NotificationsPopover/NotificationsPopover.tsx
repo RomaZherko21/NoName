@@ -10,7 +10,7 @@ import {
   Divider,
   Typography,
   IconButton,
-  ListSubheader,
+  ListSubheader
 } from '@mui/material'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { MdOutlineNotificationsNone } from 'react-icons/md'
@@ -27,7 +27,7 @@ const NOTIFICATIONS = [
     avatar: null,
     type: 'order_placed',
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
-    isUnRead: true,
+    isUnRead: true
   },
   {
     id: 2,
@@ -36,20 +36,20 @@ const NOTIFICATIONS = [
     avatar: null,
     type: 'chat_message',
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false,
-  },
+    isUnRead: false
+  }
 ]
 
 function NotificationsPopover() {
   const [notifications, setNotifications] = useState(NOTIFICATIONS)
 
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length
+  const totalUnRead = notifications.filter((item) => item.isUnRead).length
 
   const handleMarkAllAsRead = () => {
     setNotifications(
       notifications.map((notification) => ({
         ...notification,
-        isUnRead: false,
+        isUnRead: false
       }))
     )
   }

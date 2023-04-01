@@ -4,18 +4,18 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/user'
 
-export const get = () => fetch.get<User>(`${ENDPOINT_BASE}`)
+export const get = async () => await fetch.get<User>(`${ENDPOINT_BASE}`)
 
-export const getPermissions = () =>
-  fetch.get<{ [key: string]: string[] }>(`${ENDPOINT_BASE}/permissions`)
+export const getPermissions = async () =>
+  await fetch.get<{ [key: string]: string[] }>(`${ENDPOINT_BASE}/permissions`)
 
-export const update = (user: BasicUserInfo & MetaUserInfo & UserCredentials) =>
-  fetch.put(`${ENDPOINT_BASE}`, user)
+export const update = async (user: BasicUserInfo & MetaUserInfo & UserCredentials) =>
+  await fetch.put(`${ENDPOINT_BASE}`, user)
 
-export const remove = () => fetch.delete(`${ENDPOINT_BASE}`)
+export const remove = async () => await fetch.delete(`${ENDPOINT_BASE}`)
 
 export const uploadPhoto = async (avatar: File) => {
   const formData = new FormData()
   formData.append('avatar', avatar)
-  return fetch.post<any>(`${ENDPOINT_BASE}/uploadPhoto`, formData)
+  return await fetch.post<any>(`${ENDPOINT_BASE}/uploadPhoto`, formData)
 }
