@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
@@ -6,13 +6,16 @@ import { Box, Paper, Chip, IconButton, InputBase, Container, Stack } from '@mui/
 import { FiMoreHorizontal } from 'react-icons/fi'
 
 import { PageHeader } from 'widgets'
+import { PopupMenu } from 'shared/ui'
 
 import { AddButton, AsideTaskInfo, Task } from './ui'
+import { getKanbanPopupConfig } from './ui/KanbanPopupConfig'
 import { KanbanModel } from './model'
 
 function Kanban() {
   const { t } = useTranslation()
   const [openTaskInfo, setOpenTaskInfo] = useState(false)
+  const popupConfig = useMemo(() => getKanbanPopupConfig(1), [])
 
   return (
     <>
@@ -78,9 +81,18 @@ function Kanban() {
                             backgroundColor: ({ palette }) => palette.grey[700]
                           }}
                         />
-                        <IconButton>
-                          <FiMoreHorizontal />
-                        </IconButton>
+                          <PopupMenu
+                            ActionButton={(btnProps) => (
+                              <IconButton
+                                {...btnProps}
+                                aria-label="settings"
+                                sx={{ p: 0.25, fontSize: 18 }}
+                              >
+                                <FiMoreHorizontal />
+                              </IconButton>
+                            )}
+                            config={popupConfig}
+                          />
                       </Box>
                     </Box>
 
