@@ -49,7 +49,7 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
       <Tooltip title={t('page:userProfile') ?? 'User profile'} placement="top">
         <IconButton
           component={Link}
-          to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}//!!!
+          to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}
           size="small"
         >
           <ArrowForwardOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
