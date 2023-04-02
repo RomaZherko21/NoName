@@ -39,7 +39,11 @@ const PostCardSceleton = () => {
             justifyContent: 'space-between'
           }}
         >
-          <InformativeImage imgUrl="" PrimaryText="" isLoaded={false} />
+          <InformativeImage
+            imgUrl=""
+            PrimaryText=""
+            isLoaded={false}
+          />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
             <Skeleton width={22} height={22} variant="circular" />
