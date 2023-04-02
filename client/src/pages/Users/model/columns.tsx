@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generatePath, Link } from 'react-router-dom'
+import { generatePath, Link, NavigateFunction } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import i18next from 'i18next'
 import { Box, Chip, IconButton, Tooltip } from '@mui/material'
@@ -49,7 +49,7 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
       <Tooltip title={t('page:userProfile') ?? 'User profile'} placement="top">
         <IconButton
           component={Link}
-          to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}
+          to={generatePath(ROUTES.USERS_PROFILE, { id: String(data.id) })}//!!!
           size="small"
         >
           <ArrowForwardOutlinedIcon sx={{ color: 'grey.500' }} fontSize="medium" />
@@ -80,12 +80,13 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
   )
 })
 
-export const getColumns = (): TableColumn[] => [
+export const getColumns = (navigate:NavigateFunction): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('user:name'),
-    getValue: ({ name, surname, middle_name: middleName, email, avatar }: User) => (
+    getValue: ({ name, surname, middle_name: middleName, email, avatar, id }: User) => (
       <InformativeImage
+        onClick={()=>navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(id)}))}
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
         PrimaryText={getFullName(name, surname, middleName)}
