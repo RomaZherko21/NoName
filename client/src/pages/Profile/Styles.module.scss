@@ -7,3 +7,18 @@
   background-size: cover;
   border-radius: 8px;
 }
+
+.hoverImg {
+  width: 100%;
+  position: relative;
+
+  .btn {
+    display: none;
+  }
+
+  &:hover {
+    .btn {
+      display: flex;
+    }
+  }
+}
