@@ -11,6 +11,7 @@ interface Props {
   PrimaryVariant?: Variant
   SecondaryVariant?: Variant
   isLoaded?: boolean
+  onClick?: () => void
 }
 
 function InformativeImage({
@@ -21,15 +22,17 @@ function InformativeImage({
   size = 'medium',
   PrimaryVariant = 'body2',
   SecondaryVariant = 'subtitle2',
-  isLoaded = true
+  isLoaded = true,
+  onClick
 }: Props) {
   return (
     <Stack direction="row" spacing={1.25} alignItems="center">
       {isLoaded ? (
         <Avatar
+          onClick={onClick}
           alt="Image"
           sx={{
-            cursor: 'pointer',
+            cursor: onClick? 'pointer' : 'default',
             width: size === 'large' ? 64 : 40,
             height: size === 'large' ? 64 : 40
           }}
@@ -45,7 +48,13 @@ function InformativeImage({
         />
       )}
       <Stack>
-        <Typography variant={PrimaryVariant}>
+        <Typography
+          onClick={onClick}
+          sx={{
+            cursor: onClick? 'pointer' : 'default'
+          }}
+          variant={PrimaryVariant}
+        >
           {isLoaded ? PrimaryText : <Skeleton width={120} />}
         </Typography>
         {SecondaryText && (
