@@ -41,52 +41,52 @@ import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
 
 const router = express.Router()
 
-router.post(`/${ROUTES.AUTH}/signIn`, signIn)
+router.post(`/${ROUTES.auth}/signIn`, signIn)
 
-router.get(`/${ROUTES.USER}`, getUserSelf)
-router.put(`/${ROUTES.USER}`, updateUserSelf)
-router.delete(`/${ROUTES.USER}`, removeUserSelf)
+router.get(`/${ROUTES.user}`, getUserSelf)
+router.put(`/${ROUTES.user}`, updateUserSelf)
+router.delete(`/${ROUTES.user}`, removeUserSelf)
 router.post(
-  `/${ROUTES.USER}/uploadPhoto`,
+  `/${ROUTES.user}/uploadPhoto`,
   useFile.single(FILE_FIELD_NAMES.avatar),
   uploadUserAvatar
 )
-router.get(`/${ROUTES.USER}/permissions`, getUserPermissions)
+router.get(`/${ROUTES.user}/permissions`, getUserPermissions)
 
-router.put(`/${ROUTES.SECURITY}/email`, sendEmailVerificationCode)
-router.post(`/${ROUTES.SECURITY}/email`, verifyUserEmailByCode)
-router.put(`/${ROUTES.SECURITY}/email/alerts`, toggleEmailAlerts)
+router.put(`/${ROUTES.security}/email`, sendEmailVerificationCode)
+router.post(`/${ROUTES.security}/email`, verifyUserEmailByCode)
+router.put(`/${ROUTES.security}/email/alerts`, toggleEmailAlerts)
 
-router.put(`/${ROUTES.SECURITY}/phone`, sendPhoneVerificationCode)
-router.post(`/${ROUTES.SECURITY}/phone`, verifyUserPhoneByCode)
-router.put(`/${ROUTES.SECURITY}/phone/alerts`, toggleSmsAlerts)
+router.put(`/${ROUTES.security}/phone`, sendPhoneVerificationCode)
+router.post(`/${ROUTES.security}/phone`, verifyUserPhoneByCode)
+router.put(`/${ROUTES.security}/phone/alerts`, toggleSmsAlerts)
 
-router.get(`/${ROUTES.SECURITY}/qr`, getQrCode)
-router.put(`/${ROUTES.SECURITY}/qr`, verifyQrCode)
+router.get(`/${ROUTES.security}/qr`, getQrCode)
+router.put(`/${ROUTES.security}/qr`, verifyQrCode)
 
-router.get(`/${ROUTES.USERS}`, usePermission, getUsers)
-router.post(`/${ROUTES.USERS}`, usePermission, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
-router.get(`/${ROUTES.USERS}/:id`, usePermission, getUser)
-router.put(`/${ROUTES.USERS}/:id`, usePermission, updateUserById)
-router.delete(`/${ROUTES.USERS}/:id`, usePermission, removeUserSelf)
+router.get(`/${ROUTES.users}`, usePermission, getUsers)
+router.post(`/${ROUTES.users}`, usePermission, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
+router.get(`/${ROUTES.users}/:id`, usePermission, getUser)
+router.put(`/${ROUTES.users}/:id`, usePermission, updateUserById)
+router.delete(`/${ROUTES.users}/:id`, usePermission, removeUserSelf)
 
-router.get(`/${ROUTES.POSTS}`, usePermission, getPosts)
-router.get(`/${ROUTES.POSTS}/:id`, usePermission, getPost)
-router.post(`/${ROUTES.POSTS}`, usePermission, useFile.single(FILE_FIELD_NAMES.post), createPost)
-router.delete(`/${ROUTES.POSTS}/:id`, usePermission, deletePostById)
-router.put(`/${ROUTES.POSTS}/:id/likes`, usePermission, togglePostLikes)
+router.get(`/${ROUTES.posts}`, usePermission, getPosts)
+router.get(`/${ROUTES.posts}/:id`, usePermission, getPost)
+router.post(`/${ROUTES.posts}`, usePermission, useFile.single(FILE_FIELD_NAMES.post), createPost)
+router.delete(`/${ROUTES.posts}/:id`, usePermission, deletePostById)
+router.put(`/${ROUTES.posts}/:id/likes`, usePermission, togglePostLikes)
 
-router.get(`/${ROUTES.GENRES}`, getGenres)
+router.get(`/${ROUTES.genres}`, getGenres)
 
-router.post(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}`, createPostComment)
-router.delete(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}/:comment_id`, deletePostComment)
-router.put(`/${ROUTES.POSTS}/:post_id/${ROUTES.COMMENTS}/:comment_id`, updatePostComment)
+router.post(`/${ROUTES.posts}/:post_id/${ROUTES.comments}`, createPostComment)
+router.delete(`/${ROUTES.posts}/:post_id/${ROUTES.comments}/:comment_id`, deletePostComment)
+router.put(`/${ROUTES.posts}/:post_id/${ROUTES.comments}/:comment_id`, updatePostComment)
 
-router.get(`/${ROUTES.CONNECTIONS}`, getConnections)
-router.delete(`/${ROUTES.CONNECTIONS}/:id`, deleteConnectionById)
-router.put(`/${ROUTES.CONNECTIONS}/:id`, updateConnectionStatusById)
+router.get(`/${ROUTES.connections}`, getConnections)
+router.delete(`/${ROUTES.connections}/:id`, deleteConnectionById)
+router.put(`/${ROUTES.connections}/:id`, updateConnectionStatusById)
 
-router.get(`/${ROUTES.CHAT}`, getUserChats)
-router.get(`/${ROUTES.CHAT}/:chat_id/messages`, getChatMessages)
+router.get(`/${ROUTES.chat}`, getUserChats)
+router.get(`/${ROUTES.chat}/:chat_id/messages`, getChatMessages)
 
 export default router

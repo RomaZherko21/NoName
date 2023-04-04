@@ -41,6 +41,8 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-unicorn": "^46.0.0",
     "nodemon": "^2.0.18",
     "prettier": "^2.8.6",
     "ts-node": "^10.8.1",

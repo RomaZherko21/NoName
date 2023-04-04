@@ -22,7 +22,7 @@ export async function getGenres(req: Request, res: Response, next: NextFunction)
     )
 
     res.status(200).json(result)
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }

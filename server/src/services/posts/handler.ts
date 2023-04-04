@@ -1,8 +1,8 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { NextFunction, Request, Response } from 'express'
 import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
-import fs from 'fs'
-import path from 'path'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
@@ -117,8 +117,8 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
     const count = await PostModel.count()
 
     res.status(200).json({ posts: result, count })
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -188,8 +188,8 @@ export async function getPost({ params }: Request, res: Response, next: NextFunc
     })
 
     res.status(200).json({ ...post, user })
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -236,8 +236,8 @@ export async function createPost({ body, file }: Request, res: Response, next: N
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -299,8 +299,8 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
     }
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -330,8 +330,8 @@ export async function deletePostById({ params }: Request, res: Response, next: N
         data?.dataValues.image
       )
       if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, (err) => {
-          if (err) throw err
+        fs.unlink(filePath, (error) => {
+          if (error) throw error
         })
       }
     }
@@ -343,8 +343,8 @@ export async function deletePostById({ params }: Request, res: Response, next: N
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -387,8 +387,8 @@ export async function createPostComment(
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -424,8 +424,8 @@ export async function deletePostComment({ params }: Request, res: Response, next
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -480,7 +480,7 @@ export async function updatePostComment(
     )
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }

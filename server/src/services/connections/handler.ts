@@ -96,8 +96,8 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
     }
 
     return res.status(200).json(connections)
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -131,8 +131,8 @@ export async function deleteConnectionById({ params }: Request, res: Response, n
     )
 
     return res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -193,7 +193,7 @@ export async function updateConnectionStatusById(
     }
 
     return res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
