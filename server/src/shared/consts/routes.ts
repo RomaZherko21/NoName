@@ -1,14 +1,14 @@
 export const ROUTES = {
-  AUTH: 'auth',
-  USER: 'user',
-  SECURITY: 'security',
-  USERS: 'users',
-  POSTS: 'posts',
-  GENRES: 'genres',
-  COMMENTS: 'comments',
-  CONNECTIONS: 'connections',
-  CHAT: 'chat',
-  FILES: 'files',
+  auth: 'auth',
+  user: 'user',
+  security: 'security',
+  users: 'users',
+  posts: 'posts',
+  genres: 'genres',
+  comments: 'comments',
+  connections: 'connections',
+  chat: 'chat',
+  files: 'files',
 }
 
 export enum Role {
@@ -20,15 +20,15 @@ export type Permission = { [key in Role]: { [key: string]: string[] } }
 
 export const permission: Permission = {
   admin: {
-    [ROUTES.USERS]: ['get', 'post', 'put', 'delete'],
-    [ROUTES.POSTS]: ['get', 'post', 'put', 'delete'],
-    [ROUTES.CHAT]: ['get', 'post', 'put', 'delete'],
-    [ROUTES.FILES]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.users]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.posts]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.chat]: ['get', 'post', 'put', 'delete'],
+    [ROUTES.files]: ['get', 'post', 'put', 'delete'],
   },
   user: {
-    [ROUTES.USERS]: ['get'],
-    [ROUTES.POSTS]: ['get', 'post'],
-    [ROUTES.CHAT]: ['get', 'post'],
-    [ROUTES.FILES]: ['get', 'post', 'put'],
+    [ROUTES.users]: ['get'],
+    [ROUTES.posts]: ['get', 'post'],
+    [ROUTES.chat]: ['get', 'post'],
+    [ROUTES.files]: ['get', 'post', 'put'],
   },
 }

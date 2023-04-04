@@ -1,1 +1,1 @@
-export { default as CodeManager } from './CodeManager'
+export { default as CodeManager } from './codeManager'

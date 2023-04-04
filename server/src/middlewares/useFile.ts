@@ -1,10 +1,11 @@
+/* eslint-disable unicorn/no-null */
 import { Request } from 'express'
 import multer, { FileFilterCallback } from 'multer'
 // import createError from 'http-errors'
 
 type FileNameCallback = (error: Error | null, filename: string) => void
 
-const validFileExtensions = ['image/png', 'image/jpg', 'image/jpeg']
+const validFileExtensions = new Set(['image/png', 'image/jpg', 'image/jpeg'])
 export const FILE_FIELD_NAMES = {
   avatar: 'avatar',
   post: 'post',
@@ -31,7 +32,7 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
-  if (validFileExtensions.includes(file.mimetype)) {
+  if (validFileExtensions.has(file.mimetype)) {
     cb(null, true)
   } else {
     // cb(createError(400, 'Not valid file format'), false)

@@ -89,8 +89,8 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
     const count = await UserModel.count()
 
     res.status(200).json({ users, count })
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -120,8 +120,8 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
     )
 
     res.status(200).json(prettifyUserData(result[0]))
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -179,8 +179,8 @@ export async function createUser({ body, file }: Request, res: Response, next: N
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -252,7 +252,7 @@ export async function updateUserById({ body, params }: Request, res: Response, n
     )
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }

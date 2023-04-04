@@ -3,13 +3,13 @@ import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../init'
 
 enum Gender {
-  MAN = 'man',
-  WOMAN = 'woman',
+  man = 'man',
+  woman = 'woman',
 }
 
 enum Role {
-  ADMIN = 'admin',
-  USER = 'user',
+  admin = 'admin',
+  user = 'user',
 }
 
 interface User {
@@ -71,7 +71,7 @@ UserModel.init(
       type: DataTypes.STRING,
     },
     gender: {
-      type: DataTypes.ENUM(Gender.MAN, Gender.WOMAN),
+      type: DataTypes.ENUM(Gender.man, Gender.woman),
     },
     date_of_birth: {
       type: DataTypes.DATE,
@@ -90,7 +90,7 @@ UserModel.init(
       allowNull: false,
     },
     role: {
-      type: DataTypes.ENUM(Role.ADMIN, Role.USER),
+      type: DataTypes.ENUM(Role.admin, Role.user),
       allowNull: false,
     },
     avatar: {
