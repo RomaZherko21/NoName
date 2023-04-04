@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import sequelize from './init'
-import UserModel from './user'
+import sequelize from '../init'
 
 export enum ConnectionStatus {
   pending = 'pending',
@@ -37,7 +36,7 @@ UserConnectionModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
     },
@@ -45,7 +44,7 @@ UserConnectionModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
     },
@@ -55,13 +54,5 @@ UserConnectionModel.init(
     tableName: 'user_connections',
   }
 )
-
-UserConnectionModel.belongsTo(UserModel, {
-  foreignKey: 'sender_id',
-})
-
-UserConnectionModel.belongsTo(UserModel, {
-  foreignKey: 'recipient_id',
-})
 
 export default UserConnectionModel

@@ -1,7 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
 
-import { ChatModel } from '.'
-import UserModel from '../user'
 import sequelize from '../init'
 
 interface UserConnection {
@@ -17,7 +15,7 @@ UsersChatsModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -27,7 +25,7 @@ UsersChatsModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: ChatModel,
+        model: 'chats',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -40,8 +38,5 @@ UsersChatsModel.init(
     timestamps: false,
   }
 )
-
-UserModel.belongsToMany(ChatModel, { through: UsersChatsModel, foreignKey: 'user_id', as: 'chats' })
-ChatModel.belongsToMany(UserModel, { through: UsersChatsModel, foreignKey: 'chat_id', as: 'users' })
 
 export default UsersChatsModel

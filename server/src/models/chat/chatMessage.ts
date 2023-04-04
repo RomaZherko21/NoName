@@ -1,8 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
-import UserModel from '../user'
-import ChatModel from './chat'
 
 interface ChatMessage {
   id: number
@@ -37,7 +35,7 @@ ChatMessageModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
     },
@@ -45,7 +43,7 @@ ChatMessageModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: ChatModel,
+        model: 'chats',
         key: 'id',
       },
     },
@@ -55,14 +53,5 @@ ChatMessageModel.init(
     tableName: 'chat_messages',
   }
 )
-
-ChatMessageModel.belongsTo(UserModel, {
-  foreignKey: 'user_id',
-  as: 'user',
-})
-
-ChatMessageModel.belongsTo(ChatModel, {
-  foreignKey: 'chat_id',
-})
 
 export default ChatMessageModel

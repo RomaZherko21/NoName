@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import sequelize from './init'
-import PostModel from './post'
+import sequelize from '../init'
 
 enum Gender {
   MAN = 'man',
@@ -153,10 +152,5 @@ UserModel.init(
     tableName: 'users',
   }
 )
-
-UserModel.hasMany(PostModel, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-})
 
 export default UserModel
