@@ -21,11 +21,7 @@ const smsCodes = new CodeManager()
  *     description: Send verification code to current user email
  *     tags: [Security]
  */
-export async function sendEmailVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function sendEmailVerificationCode(_: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 
@@ -126,11 +122,7 @@ export async function toggleEmailAlerts(req: Request, res: Response, next: NextF
  *     description: Send verification code to current user phone number
  *     tags: [Security]
  */
-export async function sendPhoneVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function sendPhoneVerificationCode(_: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 

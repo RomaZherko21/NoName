@@ -17,6 +17,6 @@
     "baseUrl": "src"
   },
   "lib": ["es2015"],
-  "include": ["src/**/*"],
+  "include": ["src/**/*", ".eslintrc.json"],
   "exclude": ["./node_modules", "src/**/*.test.ts"]
 }
