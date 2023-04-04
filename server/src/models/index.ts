@@ -1,8 +1,7 @@
 export { default as sequelize } from './init'
 
-export { GenreModel, PostCommentModel, PostModel } from './post2'
-export { default as UserModel } from './user'
-export { default as UserConnectionModel, ConnectionStatus } from './userConnection'
+export { GenreModel, PostCommentModel, PostModel, UsersPostsLikesModel } from './post'
+export { UserModel, UserConnectionModel, ConnectionStatus } from './user'
 export { ChatMessageModel, ChatModel, UsersChatsModel } from './chat'
 
 import './join'

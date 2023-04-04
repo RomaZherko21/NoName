@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import sequelize from './init'
+import sequelize from '../init'
 
 export enum ConnectionStatus {
   pending = 'pending',

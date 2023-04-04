@@ -1,52 +1,41 @@
 import { ChatMessageModel, ChatModel, UsersChatsModel } from './chat'
-import { GenreModel, PostCommentModel, UsersPostsLikesModel, PostModel } from './post2'
-import UserModel from './user'
-import UserConnectionModel from './userConnection'
-
-PostModel.belongsTo(GenreModel, { foreignKey: 'genre_id' })
+import { GenreModel, PostCommentModel, UsersPostsLikesModel, PostModel } from './post'
+import { UserConnectionModel, UserModel } from './user'
 
 UserModel.hasMany(PostModel, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE',
 })
 
+GenreModel.hasMany(PostModel, { foreignKey: 'genre_id' })
+
 UserConnectionModel.belongsTo(UserModel, {
   foreignKey: 'sender_id',
 })
-
 UserConnectionModel.belongsTo(UserModel, {
   foreignKey: 'recipient_id',
 })
 
-PostCommentModel.belongsTo(UserModel, {
+UserModel.belongsToMany(PostModel, {
+  through: PostCommentModel,
   foreignKey: 'user_id',
-  onDelete: 'CASCADE',
 })
-
-PostCommentModel.belongsTo(PostModel, {
+PostModel.belongsToMany(UserModel, {
+  through: PostCommentModel,
   foreignKey: 'post_id',
-  onDelete: 'CASCADE',
 })
 
 UserModel.belongsToMany(PostModel, {
   through: UsersPostsLikesModel,
   foreignKey: 'user_id',
-  as: 'posts',
 })
 PostModel.belongsToMany(UserModel, {
   through: UsersPostsLikesModel,
   foreignKey: 'post_id',
-  as: 'users',
 })
 
-ChatMessageModel.belongsTo(UserModel, {
-  foreignKey: 'user_id',
-  as: 'user',
-})
+UserModel.belongsToMany(ChatModel, { through: ChatMessageModel, foreignKey: 'user_id' })
+ChatModel.belongsToMany(UserModel, { through: ChatMessageModel, foreignKey: 'chat_id' })
 
-ChatMessageModel.belongsTo(ChatModel, {
-  foreignKey: 'chat_id',
-})
-
-UserModel.belongsToMany(ChatModel, { through: UsersChatsModel, foreignKey: 'user_id', as: 'chats' })
-ChatModel.belongsToMany(UserModel, { through: UsersChatsModel, foreignKey: 'chat_id', as: 'users' })
+UserModel.belongsToMany(ChatModel, { through: UsersChatsModel, foreignKey: 'user_id' })
+ChatModel.belongsToMany(UserModel, { through: UsersChatsModel, foreignKey: 'chat_id' })
