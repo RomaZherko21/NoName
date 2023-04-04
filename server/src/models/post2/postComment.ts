@@ -1,8 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
-import PostModel from '../post'
-import UserModel from '../user'
 
 interface PostComment {
   id: number
@@ -35,7 +33,7 @@ PostCommentModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
     },
@@ -43,7 +41,7 @@ PostCommentModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: PostModel,
+        model: 'posts',
         key: 'id',
       },
     },
@@ -53,15 +51,5 @@ PostCommentModel.init(
     tableName: 'post_comments',
   }
 )
-
-PostCommentModel.belongsTo(UserModel, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-})
-
-PostCommentModel.belongsTo(PostModel, {
-  foreignKey: 'post_id',
-  onDelete: 'CASCADE',
-})
 
 export default PostCommentModel
