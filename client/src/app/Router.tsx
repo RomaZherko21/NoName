@@ -19,7 +19,8 @@ import {
   CreateUser,
   FileManager,
   Chat,
-  Kanban
+  Kanban,
+  Home
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -53,8 +54,10 @@ const router = createBrowserRouter(
 
       <Route path={ROUTES.KANBAN} element={<Kanban />} />
 
+      <Route path={ROUTES.HOME} element={<Home />} />
+
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-      <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} />
+      {/* <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} /> */}
       <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
     </Route>
   )

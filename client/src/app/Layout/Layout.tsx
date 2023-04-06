@@ -14,9 +14,9 @@ const Layout = () => {
         display: 'flex'
       }}
     >
-      <Header />
+      {/* <Header />
 
-      <NavBar />
+      <NavBar /> */}
       {location.pathname === ROUTES.CHAT || location.pathname === ROUTES.KANBAN ? (
         <Box sx={{ width: { xs: `calc(100% - ${DRAWER_WIDTH}px)` } }}>
           <Toolbar />
