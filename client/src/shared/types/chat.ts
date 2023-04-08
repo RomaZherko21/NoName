@@ -10,3 +10,7 @@ export interface Message {
     avatar: string
   }
 }
+
+export enum WsMessageCodes {
+  chat = 'chat'
+}

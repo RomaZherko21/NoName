@@ -34,8 +34,13 @@ PostModel.belongsToMany(UserModel, {
   foreignKey: 'post_id',
 })
 
-UserModel.belongsToMany(ChatModel, { through: ChatMessageModel, foreignKey: 'user_id' })
-ChatModel.belongsToMany(UserModel, { through: ChatMessageModel, foreignKey: 'chat_id' })
+ChatMessageModel.belongsTo(UserModel, {
+  foreignKey: 'user_id',
+  as: 'user',
+})
+ChatMessageModel.belongsTo(ChatModel, {
+  foreignKey: 'chat_id',
+})
 
 UserModel.belongsToMany(ChatModel, { through: UsersChatsModel, foreignKey: 'user_id' })
 ChatModel.belongsToMany(UserModel, { through: UsersChatsModel, foreignKey: 'chat_id' })

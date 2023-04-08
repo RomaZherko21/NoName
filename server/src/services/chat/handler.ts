@@ -115,17 +115,28 @@ export async function getChatMessages({ params }: Request, res: Response, next: 
 }
 
 export async function processMessage(msg: any, wss: Server<WebSocket>) {
-  console.log('HEHEH', msg)
   try {
-    ChatMessageModel.create({
+    await ChatMessageModel.create({
       text: msg.text,
       created_at: Date.now(),
       chat_id: msg.chat_id,
       user_id: msg.user_id,
     })
 
-    wss.clients.forEach((client) => {
-      client.send(JSON.stringify({ code: WsMessageCodes.chat, ...msg }))
+    const chats = await UsersChatsModel.findAll({
+      where: {
+        chat_id: Number(msg.chat_id),
+      },
+    })
+
+    const clientsToSend = chats.map((item) => item.dataValues.user_id)
+
+    console.log(clientsToSend)
+    wss.clients.forEach((client: any) => {
+      console.log(client.id)
+      client.send(JSON.stringify({ code: WsMessageCodes.chat, ...msg }), (error: any) => {
+        client.send(error)
+      })
     })
   } catch (error: any) {
     console.log(error)

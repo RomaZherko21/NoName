@@ -43,8 +43,7 @@ function LeaveMessage() {
         onClick={() => {
           ws.chatMessages.sendMessage({
             text: value,
-            createdAt: Date.now(),
-            recipientId: 2
+            userId: 2
           })
         }}
       >

@@ -112,7 +112,7 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
     const { id } = params
 
     const result: any = await sequelize.query(
-      `SELECT *  FROM users 
+      `SELECT * FROM users 
         WHERE users.id=${id}`,
       {
         type: QueryTypes.SELECT,

@@ -1,17 +1,18 @@
-/*eslint-disable no-console*/
-import chalk from 'chalk'
-
+/*eslint-disable no-console, unicorn/no-hex-escape, unicorn/escape-case*/
 class Log {
   positive(msg: string) {
-    console.log(chalk.greenBright.bold(msg))
+    const blue = '\x1b[34m%s\x1b[0m'
+    console.log(blue, msg)
   }
 
   negative(msg: string) {
-    console.log(chalk.red.bold(msg))
+    const red = '\x1b[31m%s\x1b[0m'
+    console.log(red, msg)
   }
 
   neutral(msg: string) {
-    console.log(chalk.blueBright.bold(msg))
+    const yellow = '\x1b[33m%s\x1b[0m'
+    console.log(yellow, msg)
   }
 }
 
