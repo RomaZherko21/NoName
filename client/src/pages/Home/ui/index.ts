@@ -1,1 +1,1 @@
-export { Questins } from './Questions'
+export { Questions } from './Questions'

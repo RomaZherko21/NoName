@@ -1,11 +1,11 @@
-import { Box } from '@mui/system'
-import { Questins } from './ui/Questions'
+import { Container } from '@mui/material'
+import { Questions } from './ui/Questions'
 
 function Home() {
   return (
-    <>
-      <Questins />
-    </>
+    <Container component="main" maxWidth="lg">
+      <Questions />
+    </Container>
   )
 }
 

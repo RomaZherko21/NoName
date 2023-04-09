@@ -106,6 +106,20 @@ const commonTheme = {
           }
         }
       }
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          '&.MuiAccordion-root': {
+            '&:before': {
+              display: 'none'
+            },
+            '&:after': {
+              display: 'none'
+            }
+          }
+        }
+      }
     }
   }
 }
