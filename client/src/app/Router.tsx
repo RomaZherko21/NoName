@@ -20,7 +20,8 @@ import {
   FileManager,
   Chat,
   Kanban,
-  Home
+  Home,
+  Contact
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -30,6 +31,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path={ROUTES.HOME} element={<Home />} />
+
+      <Route path={ROUTES.CONTACT} element={<Contact />} />
+
       <Route path={ROUTES.DEFAULT} element={<Layout />}>
         <Route path={ROUTES.USERS} element={<Users />} />
         <Route path={ROUTES.USERS_NEW} element={<CreateUser />} />
