@@ -1,0 +1,17 @@
+{
+  "fillTheForm": "Fill the form below",
+  "fullName": "Full Name",
+  "companyName": "Company Name",
+  "workEmail": "Work Email",
+  "phoneNumber": "Phone Number",
+  "companySize": "Company Size",
+  "actions": {
+    "team": "Team",
+    "engineering": "Engineering",
+    "design": "Design"
+  },
+  "projectBudget": "Project Budget",
+  "message": "Message",
+  "send": "Let's Talk",
+  "privacyPolicy": "By submitting this, you agree to the Privacy Policy and Cookie Policy."
+}

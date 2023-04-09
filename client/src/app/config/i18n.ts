@@ -13,7 +13,8 @@ const namespaces = [
   'file',
   'kanban',
   'chat',
-  'home'
+  'home',
+  'contact'
 ]
 const initTranslation = async () => {
   return await i18n
