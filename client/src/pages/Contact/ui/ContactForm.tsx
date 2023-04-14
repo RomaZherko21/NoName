@@ -1,24 +1,47 @@
+import * as yup from 'yup'
 import { Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 
 import { InputField } from 'shared/ui'
 import { FormSelect } from 'shared/ui/Form'
+import {
+  commonStringValidation,
+  emailValidation,
+  fullNameValidation,
+  phoneNumberValidation
+} from 'shared/validations'
 
 function ContactForm() {
   const { t } = useTranslation()
 
+  const validationSchemaContact = yup.object().shape({
+    fullName: fullNameValidation(),
+    companyName: commonStringValidation('Company name'),
+    email: emailValidation(),
+    phoneNumber: phoneNumberValidation('contact:phoneNumber'),
+    companySize: yup.mixed().required('Required'),
+    team: yup.mixed().required('Required'),
+    projectBudget: yup.mixed().required('Required'),
+    message: commonStringValidation('Message')
+  })
+
   return (
     <Formik
       initialValues={{
-        postTitle: '',
-        shortDescription: '',
-        genre: '',
-        description: '',
-        readingTime: '',
-        cover: null
+        fullName: '',
+        companyName: '',
+        email: '',
+        phoneNumber: '',
+        companySize: '',
+        team: '',
+        projectBudget: '',
+        message: ''
       }}
-      onSubmit={() => {}}
+      validationSchema={validationSchemaContact}
+      onSubmit={(values) => {
+        console.log('onSubmit', values)
+      }}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
@@ -39,7 +62,7 @@ function ContactForm() {
               </Grid>
 
               <Grid item md={12} sx={{ display: 'flex', gap: 4 }}>
-                <InputField field="workEmail " label="contact:workEmail" />
+                <InputField field="email" label="contact:workEmail" />
                 <InputField field="phoneNumber" label="contact:phoneNumber" />
               </Grid>
 
