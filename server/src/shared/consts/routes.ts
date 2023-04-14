@@ -9,6 +9,15 @@ export const ROUTES = {
   connections: 'connections',
   chat: 'chat',
   files: 'files',
+  kanban: {
+    kanban: 'kanban',
+    boards: 'boards',
+    columns: 'columns',
+    tasks: 'tasks',
+    subtasks: 'subtasks',
+    tags: 'tags',
+    attachments: 'attachments',
+  },
 }
 
 export enum Role {
