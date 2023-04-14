@@ -1,4 +1,9 @@
 {
   "title": "Everything you need to know",
-  "subtitle": "Frequently asked questions"
+  "subtitle": "Frequently asked questions",
+  "menu": "MENU",
+  "legal": "LEGAL",
+  "social": "SOCIAL",
+  "rights": "All Rights Reserved.",
+  "development": "© 2023 NoName"
 }
