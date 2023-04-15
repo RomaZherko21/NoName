@@ -134,12 +134,10 @@ CREATE TABLE IF NOT EXISTS `kanban_tasks` (
   `updated_at` TIMESTAMP,
   `column_id` int NOT NULL,
   `created_by` int NOT NULL,
-  `assigned_to` int NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`created_by`) REFERENCES users(`id`),
-  FOREIGN KEY (`assigned_to`) REFERENCES users(`id`)
+  FOREIGN KEY (`created_by`) REFERENCES users(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_subtasks` (

@@ -96,9 +96,6 @@ export async function getKanbanTask({ params }: Request, res: Response, next: Ne
  *              due_date:
  *                type: string
  *                example: 2025-04-04 12:04:01
- *              assigned_to:
- *                type: integer
- *                example: 2
  */
 export async function createKanbanTask(
   { body, params }: Request,
@@ -165,9 +162,6 @@ export async function createKanbanTask(
  *              due_date:
  *                type: string
  *                example: 2025-04-04 12:04:01
- *              assigned_to:
- *                type: integer
- *                example: 2
  */
 export async function updateKanbanTask(
   { params, body }: Request,

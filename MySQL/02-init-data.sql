@@ -732,8 +732,7 @@ INSERT INTO
         created_at,
         updated_at,
         column_id,
-        created_by,
-        assigned_to
+        created_by
     )
 VALUES
     (
@@ -745,7 +744,6 @@ VALUES
         '2025-04-04 12:04:01',
         1,
         1,
-        2
     ),
     (
         'FE-2',
@@ -756,7 +754,6 @@ VALUES
         '2025-04-04 12:04:01',
         1,
         1,
-        2
     ),
     (
         'FE-3',
@@ -767,7 +764,6 @@ VALUES
         '2025-04-04 12:04:01',
         2,
         2,
-        3
     );
 
 INSERT INTO

@@ -23,7 +23,6 @@ interface Task {
 
   column_id: number
   created_by: number
-  assigned_to: number
 }
 
 interface ModelCreation extends Optional<Task, 'id'> {}
@@ -75,13 +74,6 @@ KanbanTaskModel.init(
       },
     },
     created_by: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: TABLE.users,
-        key: 'id',
-      },
-    },
-    assigned_to: {
       type: DataTypes.INTEGER,
       references: {
         model: TABLE.users,
