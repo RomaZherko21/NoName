@@ -2,37 +2,35 @@ import { NextFunction, Request, Response } from 'express'
 import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
-import { KanbanSubtaskModel, sequelize } from 'models'
+import { KanbanTagModel, sequelize } from 'models'
 import { TABLE } from 'shared/consts'
 
 /**
  * @swagger
- * /kanban/tasks/{task_id}/subtasks:
+ * /kanban/boards/{board_id}/tags:
  *   get:
- *     description: Get all subtasks of one kanban task
+ *     description: Get all board tags
  *     tags: [Kanban]
  *     parameters:
- *       - name: task_id
+ *       - name: board_id
  *         in: path
  *         schema:
  *           type: integer
  *           default: 1
  */
-export async function getKanbanSubtasks({ params }: Request, res: Response, next: NextFunction) {
+export async function getKanbanBoardTags({ params }: Request, res: Response, next: NextFunction) {
   try {
-    const { task_id } = params
+    const { board_id } = params
 
     let result = await sequelize.query(
       `SELECT 
-      ${TABLE.kanban_subtasks}.id, ${TABLE.kanban_subtasks}.name, ${TABLE.kanban_subtasks}.is_completed 
-      FROM ${TABLE.kanban_subtasks}
-        WHERE ${TABLE.kanban_subtasks}.task_id = ${task_id}`,
+        ${TABLE.kanban_task_tags}.id, ${TABLE.kanban_task_tags}.name 
+      FROM ${TABLE.kanban_task_tags}
+        WHERE ${TABLE.kanban_task_tags}.board_id = ${board_id}`,
       {
         type: QueryTypes.SELECT,
       }
     )
-
-    result = result.map((item: any) => ({ ...item, is_completed: Boolean(item.is_completed) }))
 
     res.status(200).json(result)
   } catch (error: any) {
@@ -42,12 +40,12 @@ export async function getKanbanSubtasks({ params }: Request, res: Response, next
 
 /**
  * @swagger
- * /kanban/tasks/{task_id}/subtasks:
+ * /kanban/boards/{board_id}/tags:
  *   post:
- *     description: Create kanban subtask
+ *     description: Create kanban tag
  *     tags: [Kanban]
  *     parameters:
- *       - name: task_id
+ *       - name: board_id
  *         in: path
  *         schema:
  *           type: integer
@@ -61,21 +59,18 @@ export async function getKanbanSubtasks({ params }: Request, res: Response, next
  *              name:
  *                type: string
  *                example: Some task
- *              is_completed:
- *                type: boolean
- *                example: false
  */
-export async function createKanbanSubtask(
+export async function createKanbanBoardTag(
   { body, params }: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const { task_id } = params
+    const { board_id } = params
 
-    await KanbanSubtaskModel.create({
+    await KanbanTagModel.create({
       ...body,
-      task_id,
+      board_id,
     })
 
     res.status(204).send()
@@ -86,17 +81,17 @@ export async function createKanbanSubtask(
 
 /**
  * @swagger
- * /kanban/tasks/{task_id}/subtasks/{subtask_id}:
+ * /kanban/boards/{board_id}/tags/{tag_id}:
  *   put:
- *     description: Update kanban subtask
+ *     description: Update kanban tag
  *     tags: [Kanban]
  *     parameters:
- *       - name: task_id
+ *       - name: board_id
  *         in: path
  *         schema:
  *           type: integer
  *           default: 1
- *       - name: subtask_id
+ *       - name: tag_id
  *         in: path
  *         schema:
  *           type: integer
@@ -109,27 +104,24 @@ export async function createKanbanSubtask(
  *            properties:
  *              name:
  *                type: string
- *                example: New subtask name
- *              is_completed:
- *                type: boolean
- *                example: true
+ *                example: New tag name
  */
-export async function updateKanbanSubtask(
+export async function updateKanbanBoardTag(
   { params, body }: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const { task_id, subtask_id } = params
+    const { board_id, tag_id } = params
 
-    await KanbanSubtaskModel.update(
+    await KanbanTagModel.update(
       {
         ...body,
       },
       {
         where: {
-          id: subtask_id,
-          task_id,
+          id: tag_id,
+          board_id,
         },
       }
     )
@@ -142,24 +134,24 @@ export async function updateKanbanSubtask(
 
 /**
  * @swagger
- * /kanban/subtasks/{subtask_id}:
+ * /kanban/tags/{tag_id}:
  *   delete:
- *     description: Delete kanban subtask
+ *     description: Delete kanban tag
  *     tags: [Kanban]
  *     parameters:
- *       - name: subtask_id
+ *       - name: tag_id
  *         in: path
  *         schema:
  *           type: integer
  *           default: 1
  */
-export async function removeKanbanSubtask({ params }: Request, res: Response, next: NextFunction) {
+export async function removeKanbanBoardTag({ params }: Request, res: Response, next: NextFunction) {
   try {
-    const { subtask_id } = params
+    const { tag_id } = params
 
-    await KanbanSubtaskModel.destroy({
+    await KanbanTagModel.destroy({
       where: {
-        id: subtask_id,
+        id: tag_id,
       },
     })
 

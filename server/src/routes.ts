@@ -38,16 +38,20 @@ import {
 import { getChatMessages, getUserChats } from 'services/chat'
 import {
   createKanbanBoard,
+  createKanbanBoardTag,
   createKanbanColumn,
   createKanbanSubtask,
   getBoards,
   getKanbanBoard,
+  getKanbanBoardTags,
   getKanbanColumns,
   getKanbanSubtasks,
   removeKanbanBoard,
+  removeKanbanBoardTag,
   removeKanbanColumn,
   removeKanbanSubtask,
   updateKanbanBoard,
+  updateKanbanBoardTag,
   updateKanbanColumn,
   updateKanbanSubtask,
 } from 'services/kanban'
@@ -66,7 +70,7 @@ const {
   comments,
   connections,
   chat,
-  kanban: { kanban, boards, columns, tasks, subtasks },
+  kanban: { kanban, boards, columns, tasks, subtasks, tags },
 } = ROUTES
 
 router.post(`/${auth}/signIn`, signIn)
@@ -129,5 +133,10 @@ router.get(`/${kanban}/${tasks}/:task_id/${subtasks}`, getKanbanSubtasks)
 router.post(`/${kanban}/${tasks}/:task_id/${subtasks}`, createKanbanSubtask)
 router.put(`/${kanban}/${tasks}/:task_id/${subtasks}/:subtask_id`, updateKanbanSubtask)
 router.delete(`/${kanban}/${subtasks}/:subtask_id`, removeKanbanSubtask)
+
+router.get(`/${kanban}/${boards}/:board_id/${tags}`, getKanbanBoardTags)
+router.post(`/${kanban}/${boards}/:board_id/${tags}`, createKanbanBoardTag)
+router.put(`/${kanban}/${boards}/:board_id/${tags}/:tag_id`, updateKanbanBoardTag)
+router.delete(`/${kanban}/${tags}/:tag_id`, removeKanbanBoardTag)
 
 export default router
