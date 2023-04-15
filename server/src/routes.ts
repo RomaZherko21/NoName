@@ -41,19 +41,24 @@ import {
   createKanbanBoardTag,
   createKanbanColumn,
   createKanbanSubtask,
+  createKanbanTask,
   getBoards,
   getKanbanBoard,
   getKanbanBoardTags,
   getKanbanColumns,
   getKanbanSubtasks,
+  getKanbanTask,
+  getKanbanTasks,
   removeKanbanBoard,
   removeKanbanBoardTag,
   removeKanbanColumn,
   removeKanbanSubtask,
+  removeKanbanTask,
   updateKanbanBoard,
   updateKanbanBoardTag,
   updateKanbanColumn,
   updateKanbanSubtask,
+  updateKanbanTask,
 } from 'services/kanban'
 import { ROUTES } from 'shared/consts'
 import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
@@ -128,6 +133,12 @@ router.get(`/${kanban}/${boards}/:board_id/${columns}`, getKanbanColumns)
 router.post(`/${kanban}/${boards}/:board_id/${columns}`, createKanbanColumn)
 router.put(`/${kanban}/${boards}/:board_id/${columns}/:column_id`, updateKanbanColumn)
 router.delete(`/${kanban}/${columns}/:column_id`, removeKanbanColumn)
+
+router.get(`/${kanban}/${tasks}`, getKanbanTasks)
+router.get(`/${kanban}/${tasks}/:task_id`, getKanbanTask)
+router.post(`/${kanban}/${columns}/:column_id/${tasks}`, createKanbanTask)
+router.put(`/${kanban}/${columns}/:column_id/${tasks}/:task_id`, updateKanbanTask)
+router.delete(`/${kanban}/${tasks}/:task_id`, removeKanbanTask)
 
 router.get(`/${kanban}/${tasks}/:task_id/${subtasks}`, getKanbanSubtasks)
 router.post(`/${kanban}/${tasks}/:task_id/${subtasks}`, createKanbanSubtask)
