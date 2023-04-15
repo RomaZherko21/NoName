@@ -122,6 +122,7 @@ function Kanban() {
                       ))}
                       {provided.placeholder}
                       <AddButton text="user:actions.addTask" />
+                      
                     </Paper>
                   </Stack>
                 )}
