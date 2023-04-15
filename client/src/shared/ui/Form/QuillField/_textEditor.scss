@@ -2,20 +2,20 @@
   .ql-toolbar {
     border: 1px solid rgb(45, 55, 72);
     border-radius: 10px 10px 0 0;
-    color: white;
+    color: 'text.primary';
 
     .ql-stroke {
       fill: none;
-      stroke: #fff;
+      stroke: 'text.primary';
     }
 
     .ql-fill {
-      fill: #fff;
+      fill: 'text.primary';
       stroke: none;
     }
 
     .ql-picker {
-      color: #fff;
+      color: 'text.primary';
     }
   }
 

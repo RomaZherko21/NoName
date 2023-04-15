@@ -106,6 +106,13 @@ const commonTheme = {
           }
         }
       }
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: 32
+        }
+      }
     }
   }
 }

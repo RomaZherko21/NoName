@@ -29,7 +29,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
         p: 2,
         gap: 2,
         backgroundColor: (theme) =>
-          snapshot.isDragging ? theme.palette.action.hover : 'background.rare',
+          snapshot.isDragging ? theme.palette.action.hover : 'background.kanban',
         '&:hover': {
           backgroundColor: (theme) => theme.palette.action.hover
         },

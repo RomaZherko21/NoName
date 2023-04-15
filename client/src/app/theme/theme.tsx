@@ -28,7 +28,7 @@ const AppThemeProvider: FC = ({ children }) => {
     if (typeof prevTheme === 'string' && prevTheme !== String(isDefaultTheme)) {
       toggleTheme()
     }
-  }, [isDefaultTheme, toggleTheme])
+  }, [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme.palette.background.default

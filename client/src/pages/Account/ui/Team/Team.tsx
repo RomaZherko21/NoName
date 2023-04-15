@@ -57,7 +57,7 @@ function Team() {
         {TeamModel.loading.has ? (
           <Spinner />
         ) : (
-          <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+          <TableContainer component={Paper} sx={{ borderRadius: '0 0 10px 10px' }}>
             <CommonTable data={TeamModel.users} columns={columns} />
             <Pagination paginationModel={TeamModel.pagination} />
           </TableContainer>

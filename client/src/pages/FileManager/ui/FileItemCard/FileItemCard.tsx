@@ -28,8 +28,10 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         p: 2,
         background: 'none',
         borderRadius: 2,
+        transition: 'ease 0.3s',
         '&:hover': {
-          backgroundColor: ({ palette }) => palette.background.paper
+          backgroundColor: ({ palette }) => palette.background.paper,
+          boxShadow: '0 14px 28px rgba(0,0,0,0.15)'
         }
       }}
     >

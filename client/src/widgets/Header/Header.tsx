@@ -5,7 +5,13 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 
 import { DRAWER_WIDTH } from 'shared/consts'
 
-import { ProfileMenuPopover, ChangeLangPopup, NotificationsPopover, ContactsPopover } from './ui'
+import {
+  ProfileMenuPopover,
+  ChangeLangPopup,
+  NotificationsPopover,
+  ContactsPopover,
+  ChangeTheme
+} from './ui'
 
 function Header() {
   const { t } = useTranslation()
@@ -32,6 +38,7 @@ function Header() {
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1.5 }}>
+          <ChangeTheme />
           <ChangeLangPopup />
           <NotificationsPopover />
           <ContactsPopover />
