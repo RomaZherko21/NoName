@@ -38,10 +38,18 @@ import {
 import { getChatMessages, getUserChats } from 'services/chat'
 import {
   createKanbanBoard,
+  createKanbanColumn,
+  createKanbanSubtask,
   getBoards,
   getKanbanBoard,
+  getKanbanColumns,
+  getKanbanSubtasks,
   removeKanbanBoard,
+  removeKanbanColumn,
+  removeKanbanSubtask,
   updateKanbanBoard,
+  updateKanbanColumn,
+  updateKanbanSubtask,
 } from 'services/kanban'
 import { ROUTES } from 'shared/consts'
 import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
@@ -58,7 +66,7 @@ const {
   comments,
   connections,
   chat,
-  kanban: { kanban, boards },
+  kanban: { kanban, boards, columns, tasks, subtasks },
 } = ROUTES
 
 router.post(`/${auth}/signIn`, signIn)
@@ -110,5 +118,16 @@ router.get(`/${kanban}/${boards}/:board_id`, getKanbanBoard)
 router.post(`/${kanban}/${boards}`, createKanbanBoard)
 router.put(`/${kanban}/${boards}/:board_id`, updateKanbanBoard)
 router.delete(`/${kanban}/${boards}/:board_id`, removeKanbanBoard)
+
+// todo
+router.get(`/${kanban}/${boards}/:board_id/${columns}`, getKanbanColumns)
+router.post(`/${kanban}/${boards}/:board_id/${columns}`, createKanbanColumn)
+router.put(`/${kanban}/${boards}/:board_id/${columns}/:column_id`, updateKanbanColumn)
+router.delete(`/${kanban}/${columns}/:column_id`, removeKanbanColumn)
+
+router.get(`/${kanban}/${tasks}/:task_id/${subtasks}`, getKanbanSubtasks)
+router.post(`/${kanban}/${tasks}/:task_id/${subtasks}`, createKanbanSubtask)
+router.put(`/${kanban}/${tasks}/:task_id/${subtasks}/:subtask_id`, updateKanbanSubtask)
+router.delete(`/${kanban}/${subtasks}/:subtask_id`, removeKanbanSubtask)
 
 export default router
