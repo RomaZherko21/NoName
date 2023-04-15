@@ -38,7 +38,7 @@ function Carousel({ width, children }: Props) {
             sx={{
               width: 10,
               height: 10,
-              backgroundColor: 'text.primary',
+              backgroundColor: 'info.contrastText',
               borderRadius: 50,
               cursor: 'pointer'
             }}
