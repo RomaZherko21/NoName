@@ -15,15 +15,15 @@ import {
 function ContactForm() {
   const { t } = useTranslation()
 
-  const validationSchemaContact = yup.object().shape({
+  const validationSchema = yup.object().shape({
     fullName: fullNameValidation(),
-    companyName: commonStringValidation('Company name'),
+    companyName: commonStringValidation(t("contact:companyName"), 3),
     email: emailValidation(),
-    phoneNumber: phoneNumberValidation('contact:phoneNumber'),
-    companySize: yup.mixed().required('Required'),
-    team: yup.mixed().required('Required'),
-    projectBudget: yup.mixed().required('Required'),
-    message: commonStringValidation('Message')
+    phoneNumber: phoneNumberValidation(t("contact:phoneNumber")),
+    companySize: yup.mixed().required(t('common.required')),
+    team: yup.mixed().required(t('common.required')),
+    projectBudget: yup.mixed().required(t('common.required')),
+    message: commonStringValidation(t("contact:message"))
   })
 
   return (
@@ -38,7 +38,7 @@ function ContactForm() {
         projectBudget: '',
         message: ''
       }}
-      validationSchema={validationSchemaContact}
+      validationSchema={validationSchema}
       onSubmit={(values) => {
         console.log('onSubmit', values)
       }}

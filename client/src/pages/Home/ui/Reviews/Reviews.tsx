@@ -52,7 +52,7 @@ function Reviews() {
         alignItems: 'center'
       }}
     >
-      <Typography variant="h3">{t('home:titleReview')}</Typography>
+      <Typography variant="h3">{t('home:reviewTitle')}</Typography>
 
       <Typography
         variant="body1"
@@ -61,7 +61,7 @@ function Reviews() {
           mt: 2
         }}
       >
-        {t('home:subtitleReview')}
+        {t('home:reviewSubtitle')}
       </Typography>
 
       <Container
