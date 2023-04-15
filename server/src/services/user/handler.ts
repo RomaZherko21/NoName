@@ -1,7 +1,7 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
-import fs from 'fs'
-import path from 'path'
 
 import { UserModel, PostModel } from 'models'
 import { prettifyUserData } from 'shared/helpers'
@@ -21,8 +21,8 @@ export async function getUserSelf(req: Request, res: Response, next: NextFunctio
     if (!data) return next(createError(403))
 
     return res.status(200).json(prettifyUserData(data))
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -68,8 +68,8 @@ export async function updateUserSelf({ body }: Request, res: Response, next: Nex
     if (!data) return next(createError(400, "User wasn't updated"))
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -94,8 +94,8 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
         data?.dataValues.avatar
       )
       if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, (err) => {
-          if (err) throw err
+        fs.unlink(filePath, (error) => {
+          if (error) throw error
         })
       }
     }
@@ -113,8 +113,8 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -149,8 +149,8 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
           data.avatar
         )
         if (fs.existsSync(filePath)) {
-          fs.unlink(filePath, (err) => {
-            if (err) throw err
+          fs.unlink(filePath, (error) => {
+            if (error) throw error
           })
         }
       }
@@ -164,8 +164,8 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
     } else {
       next(createError(400, 'Avatar wasnt uploaded'))
     }
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }
 
@@ -181,7 +181,7 @@ export async function getUserPermissions(req: Request, res: Response, next: Next
     const authorization_role: Role = res.locals.authorization_role
 
     return res.status(200).json(permission[authorization_role])
-  } catch (err: any) {
-    next(createError(500, err.message))
+  } catch (error: any) {
+    next(createError(500, error.message))
   }
 }

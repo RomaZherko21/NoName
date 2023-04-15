@@ -107,10 +107,28 @@ const commonTheme = {
         }
       }
     },
+
     MuiListItemIcon: {
       styleOverrides: {
         root: {
           minWidth: 32
+          }
+          }
+          }
+
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          '&.MuiAccordion-root': {
+            '&:before': {
+              display: 'none'
+            },
+            '&:after': {
+              display: 'none'
+            }
+          }
+}
+}
         }
       }
     }

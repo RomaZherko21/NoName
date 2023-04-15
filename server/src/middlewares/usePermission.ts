@@ -6,13 +6,12 @@ function getFirstPathSegment(url: string) {
   if (match) {
     return match[1]
   }
-  return null
 }
 
 const usePermission = (req: Request, res: Response, next: NextFunction) => {
   const authorization_role: Role = res.locals.authorization_role
 
-  const resource: string | null = getFirstPathSegment(req.originalUrl)
+  const resource = getFirstPathSegment(req.originalUrl)
   const action: string = req.method.toLowerCase()
 
   if (

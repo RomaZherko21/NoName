@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { WsMessageCodes } from 'shared/types'
 
 class WsChatMessage {
   chatId?: number = 0
@@ -11,14 +12,14 @@ class WsChatMessage {
     this.connection = connection
   }
 
-  sendMessage(data: { text: string; createdAt: number; recipientId: number }) {
+  sendMessage(data: { text: string; userId: number }) {
     console.log('sdfsdf', data, this.connection)
     this.connection?.send(
       JSON.stringify({
         text: data.text,
-        created_at: data.createdAt,
-        recipient_id: data.recipientId,
-        chat_id: this.chatId
+        user_id: data.userId,
+        chat_id: 1,
+        code: WsMessageCodes.chat
       })
     )
   }

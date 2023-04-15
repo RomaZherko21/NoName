@@ -43,8 +43,8 @@ export async function getUserChats(req: Request, res: Response, next: NextFuncti
     )
 
     return res.status(200).json(chats)
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -71,8 +71,8 @@ export async function createUserChat({ body }: Request, res: Response, next: Nex
     })
 
     return res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -109,23 +109,36 @@ export async function getChatMessages({ params }: Request, res: Response, next: 
     })
 
     return res.status(200).json(messages)
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
 export async function processMessage(msg: any, wss: Server<WebSocket>) {
-  console.log('HEHEH', msg)
   try {
-    ChatMessageModel.create({
+    await ChatMessageModel.create({
       text: msg.text,
       created_at: Date.now(),
       chat_id: msg.chat_id,
       user_id: msg.user_id,
     })
 
-    wss.clients.forEach((client) => {
-      client.send(JSON.stringify({ code: WsMessageCodes.chat, ...msg }))
+    const chats = await UsersChatsModel.findAll({
+      where: {
+        chat_id: Number(msg.chat_id),
+      },
     })
-  } catch (err: any) {}
+
+    const clientsToSend = chats.map((item) => item.dataValues.user_id)
+
+    console.log(clientsToSend)
+    wss.clients.forEach((client: any) => {
+      console.log(client.id)
+      client.send(JSON.stringify({ code: WsMessageCodes.chat, ...msg }), (error: any) => {
+        client.send(error)
+      })
+    })
+  } catch (error: any) {
+    console.log(error)
+  }
 }

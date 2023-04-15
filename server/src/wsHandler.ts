@@ -1,5 +1,7 @@
 import { Server, WebSocket } from 'ws'
 
+import { log } from 'shared/helpers'
+
 import { processMessage as processChatMessage } from './services/chat'
 
 export enum WsMessageCodes {
@@ -8,7 +10,7 @@ export enum WsMessageCodes {
 
 const wsHandler = (wss: Server<WebSocket>) => {
   wss.on('connection', (ws) => {
-    console.log('A user connected.')
+    log.positive('A user connected.')
 
     ws.on('message', async (data: string) => {
       try {
@@ -30,6 +32,20 @@ const wsHandler = (wss: Server<WebSocket>) => {
       console.log('A user disconnected.')
     })
   })
+
+  // // Check for died connections at regular intervals.
+  // setInterval(function () {
+  //   wss.clients.forEach(function (connection: any) {
+  //     if (connection.isAlive === false) {
+  //       console.log('Connection died', connection.id)
+  //       return connection.terminate()
+  //     }
+
+  //     // Request the client to respond with pong. Client does this automatically.
+  //     connection.isAlive = false
+  //     connection.ping(function () {})
+  //   })
+  // }, 30_000)
 }
 
 export default wsHandler

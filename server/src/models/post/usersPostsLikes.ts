@@ -1,8 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 
-import UserModel from '../user'
 import sequelize from '../init'
-import PostModel from 'models/post'
 
 interface UsersPostsLikes {
   user_id: number
@@ -17,7 +15,7 @@ UsersPostsLikesModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: UserModel,
+        model: 'users',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -27,7 +25,7 @@ UsersPostsLikesModel.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: PostModel,
+        model: 'posts',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -40,16 +38,5 @@ UsersPostsLikesModel.init(
     timestamps: false,
   }
 )
-
-UserModel.belongsToMany(PostModel, {
-  through: UsersPostsLikesModel,
-  foreignKey: 'user_id',
-  as: 'posts',
-})
-PostModel.belongsToMany(UserModel, {
-  through: UsersPostsLikesModel,
-  foreignKey: 'post_id',
-  as: 'users',
-})
 
 export default UsersPostsLikesModel

@@ -46,7 +46,7 @@ const PageHeader = ({ pageName, children, breadcrumbs }: Props) => {
               underline="hover"
               variant="body2"
               color="text.primary"
-              to={ROUTES.HOME}
+              to={ROUTES.DEFAULT}
             >
               <IconButton
                 sx={{
