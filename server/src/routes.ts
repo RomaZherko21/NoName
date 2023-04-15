@@ -134,6 +134,7 @@ router.post(`/${kanban}/${boards}/:board_id/${columns}`, createKanbanColumn)
 router.put(`/${kanban}/${boards}/:board_id/${columns}/:column_id`, updateKanbanColumn)
 router.delete(`/${kanban}/${columns}/:column_id`, removeKanbanColumn)
 
+// todo
 router.get(`/${kanban}/${tasks}`, getKanbanTasks)
 router.get(`/${kanban}/${tasks}/:task_id`, getKanbanTask)
 router.post(`/${kanban}/${columns}/:column_id/${tasks}`, createKanbanTask)

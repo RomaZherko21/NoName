@@ -802,3 +802,13 @@ VALUES
     (1, 1),
     (1, 2),
     (1, 3);
+
+INSERT INTO
+    `m2m_kanban_users_tasks` (user_id, task_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 2),
+    (3, 2),
+    (3, 3);

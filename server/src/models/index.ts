@@ -9,6 +9,7 @@ export {
   KanbanSubtaskModel,
   KanbanTagModel,
   KanbanTaskModel,
+  KanbanAttachmentsModel,
 } from './kanban'
 
 import './join'

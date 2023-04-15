@@ -5,4 +5,5 @@ export const TABLE = {
   kanban_tasks: 'kanban_tasks',
   kanban_subtasks: 'kanban_subtasks',
   kanban_task_tags: 'kanban_task_tags',
+  kanban_attachments: 'kanban_attachments',
 }
