@@ -21,11 +21,7 @@ const smsCodes = new CodeManager()
  *     description: Send verification code to current user email
  *     tags: [Security]
  */
-export async function sendEmailVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function sendEmailVerificationCode(_: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 
@@ -48,8 +44,8 @@ export async function sendEmailVerificationCode(
     })
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -88,8 +84,8 @@ export async function verifyUserEmailByCode({ body }: Request, res: Response, ne
     } else {
       throw new Error('Wrong email verification code')
     }
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -114,8 +110,8 @@ export async function toggleEmailAlerts(req: Request, res: Response, next: NextF
     )
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -126,19 +122,15 @@ export async function toggleEmailAlerts(req: Request, res: Response, next: NextF
  *     description: Send verification code to current user phone number
  *     tags: [Security]
  */
-export async function sendPhoneVerificationCode(
-  { body }: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function sendPhoneVerificationCode(_: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 
     smsCodes.addCode(authorization_id, '111111')
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -177,8 +169,8 @@ export async function verifyUserPhoneByCode({ body }: Request, res: Response, ne
     } else {
       throw new Error('Wrong phone verification code')
     }
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -203,8 +195,8 @@ export async function toggleSmsAlerts(req: Request, res: Response, next: NextFun
     )
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -220,15 +212,15 @@ export async function getQrCode(req: Request, res: Response, next: NextFunction)
 
     const otpAuthUrl = `otpauth://totp/someSecretText:${authorization_id}?secret=${secret.base32}&issuer=someSecretText`
 
-    qrcode.toDataURL(otpAuthUrl, (err, imageUrl) => {
-      if (err) {
+    qrcode.toDataURL(otpAuthUrl, (error, imageUrl) => {
+      if (error) {
         throw new Error('Error generating QR code')
       }
 
       res.status(200).json({ secret: secret.base32, qrCodeUrl: imageUrl })
     })
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }
 
@@ -236,13 +228,13 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
   try {
     const authorization_id = res.locals.authorization_id
 
-    const verified = speakeasy.totp.verify({
+    const isVerified = speakeasy.totp.verify({
       secret: a,
       encoding: 'base32',
       token: body.token,
     })
 
-    if (!verified) {
+    if (!isVerified) {
       throw new Error('Invalid code')
     }
 
@@ -256,7 +248,7 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
     )
 
     res.status(204).send()
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }

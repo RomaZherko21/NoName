@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Box, Button, Grid, Paper, TableContainer } from '@mui/material'
 import UploadIcon from '@mui/icons-material/Upload'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
@@ -17,8 +17,9 @@ function Users() {
   const { t } = useTranslation()
   const [openFilter, setOpenFilter] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
-  const columns = useMemo(() => getColumns(), [])
+  const columns = useMemo(() => getColumns(navigate), [navigate])
   const filtersConfig = useMemo(() => getFiltersConfig(), [])
   const sortOptions = useMemo(() => sortConfig, [])
 

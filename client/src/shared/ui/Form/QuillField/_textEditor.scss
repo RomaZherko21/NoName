@@ -2,21 +2,21 @@
   .ql-toolbar {
     border: 1px solid rgb(45, 55, 72);
     border-radius: 10px 10px 0 0;
-    color: white;
+    // color: 'primary.main';
 
     .ql-stroke {
       fill: none;
-      stroke: #fff;
+      // stroke: 'primary.main';
     }
 
     .ql-fill {
-      fill: #fff;
+      // fill: 'primary.main';
       stroke: none;
     }
 
-    .ql-picker {
-      color: #fff;
-    }
+    // .ql-picker {
+    //    color: 'primary.main';
+    // }
   }
 
   .ql-container {

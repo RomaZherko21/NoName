@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Box, Drawer, List } from '@mui/material'
+import { Box, Drawer, List, Link as MuiLink } from '@mui/material'
 
-import { DRAWER_WIDTH } from 'shared/consts'
+import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import { NavBarItem } from './ui'
 import { config } from './config'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   const navBarConfig = useMemo(() => config, [])
@@ -19,20 +20,22 @@ const NavBar = () => {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: DRAWER_WIDTH,
-            backgroundColor: 'background.rare',
+            backgroundColor: '#1C2536',
             p: 2,
             border: 'none'
           }
         }}
         open
       >
-        <img
-          alt="NoName logo"
-          src={logo}
-          style={{
-            width: 120
-          }}
-        />
+        <MuiLink component={Link} to={ROUTES.HOME} sx={{ width: 'fit-content' }}>
+          <img
+            alt="NoName logo"
+            src={logo}
+            style={{
+              width: 120
+            }}
+          />
+        </MuiLink>
         <List sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 3 }}>
           {navBarConfig.map((item) => (
             <NavBarItem

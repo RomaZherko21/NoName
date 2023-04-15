@@ -79,7 +79,6 @@ const AsideFileInfo = ({
             p: 2,
             mb: 2,
             borderColor: ({ palette }) => palette.grey[500],
-            backgroundColor: 'background.rare',
             borderRadius: 1,
             borderStyle: 'dashed',
             borderWidth: 1

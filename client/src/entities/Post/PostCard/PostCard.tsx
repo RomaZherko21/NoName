@@ -16,12 +16,12 @@ import {
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 import { fromMsToDate } from 'shared/helpers'
-import { COMMON_DATE_FORMAT, API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
-
-import s from './Styles.module.scss'
 import { Post } from 'shared/types'
 import { InformativeImage } from 'shared/ui'
 import { CircleDevider } from 'shared/ui/CircleDevider'
+import { COMMON_DATE_FORMAT, API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+
+import s from './Styles.module.scss'
 
 interface Props {
   post: Post
@@ -86,6 +86,7 @@ const PostCard = ({ post, toggleLike }: Props) => {
           }}
         >
           <InformativeImage
+            onClick={()=>navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(post.user_id)}))} 
             imgUrl={`${API_USER_AVATAR_URL}/${post.avatar}`}
             PrimaryText={
               <>

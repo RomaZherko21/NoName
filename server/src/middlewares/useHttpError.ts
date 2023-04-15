@@ -6,7 +6,7 @@ export interface HttpException {
   message: string
 }
 
-const useHttpError = (error: HttpException, req: Request, res: Response, next: NextFunction) => {
+const useHttpError = (error: HttpException, req: Request, res: Response, _: NextFunction) => {
   log.negative(`${error.status}: ${error.message}`)
   res.status(error.status || 500).json({
     status: error.status,

@@ -37,9 +37,9 @@ export async function signIn({ body }: Request, res: Response, next: NextFunctio
     })
     if (!data) return next(createError(401, 'Wrong email'))
 
-    const compare = await bcrypt.compare(password, data.password)
+    const isPasswordCorrect = await bcrypt.compare(password, data.password)
 
-    if (compare) {
+    if (isPasswordCorrect) {
       const token = jwt.sign({ id: data.id, role: data.role }, String(process.env.TOKEN_SECRET), {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRED_TIME,
       })
@@ -48,7 +48,7 @@ export async function signIn({ body }: Request, res: Response, next: NextFunctio
     }
 
     return next(createError(401, 'Wrong password'))
-  } catch (err: any) {
-    return next(createError(500, err.message))
+  } catch (error: any) {
+    return next(createError(500, error.message))
   }
 }

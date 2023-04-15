@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 
-import { GenreModel } from './post2'
-import sequelize from './init'
+import sequelize from '../init'
 
 interface Post {
   id: number
@@ -69,7 +68,5 @@ PostModel.init(
     tableName: 'posts',
   }
 )
-
-PostModel.belongsTo(GenreModel, { foreignKey: 'genre_id' })
 
 export default PostModel

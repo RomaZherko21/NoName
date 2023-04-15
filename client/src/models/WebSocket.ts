@@ -1,13 +1,10 @@
 import { makeAutoObservable } from 'mobx'
-import { API_WS_URL } from 'shared/consts'
 
+import { API_WS_URL } from 'shared/consts'
+import { WsMessageCodes } from 'shared/types'
 import { RootStore } from 'stores/Root'
 
 import { WsChatMessage } from './WsMessages'
-
-enum WsMessageCodes {
-  chat = 'chat'
-}
 
 class WebSocketModel {
   private readonly rootStore: RootStore

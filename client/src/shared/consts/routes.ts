@@ -1,5 +1,7 @@
 export const ROUTES = {
-  HOME: '/',
+  HOME: '/home',
+
+  DEFAULT: '/',
 
   USERS: '/users',
   USERS_NEW: '/users/new',
@@ -28,5 +30,7 @@ export const ROUTES = {
   KANBAN: '/kanban',
 
   NOT_FOUND: '/notFound',
-  HELP: '/help'
+  HELP: '/help',
+
+  CONTACT: '/contact'
 }
