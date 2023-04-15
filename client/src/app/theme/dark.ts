@@ -14,8 +14,7 @@ const darkTheme = {
       default: 'rgba(14, 19, 32)',
       paper: '#111927',
       rare: '#1C2536',
-      header: 'rgba(14, 19, 32, 0.8)',
-      kanban: '#1C2536'
+      header: 'rgba(14, 19, 32, 0.8)'
     },
     primary: {
       main: '#7582EB',

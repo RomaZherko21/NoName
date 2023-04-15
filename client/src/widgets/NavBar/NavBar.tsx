@@ -19,7 +19,7 @@ const NavBar = () => {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: DRAWER_WIDTH,
-            backgroundColor: 'background.rare',
+            backgroundColor: '#1C2536',
             p: 2,
             border: 'none'
           }

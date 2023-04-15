@@ -20,10 +20,10 @@ function AddButton({ text }: Props) {
             p: 1.5,
             borderRadius: 2,
             minWidth: 280,
-            backgroundColor: 'background.kanban',
+            backgroundColor: 'background.rare',
             '&:hover': {
               backgroundColor: ({ palette }) =>
-                !isFormOpen ? palette.action.hover : 'background.kanban'
+                !isFormOpen ? palette.action.hover : 'background.rare'
             }
           }}
         >
@@ -63,10 +63,10 @@ function AddButton({ text }: Props) {
             minWidth: 280,
             py: 1,
             m: 0,
-            backgroundColor: 'background.kanban',
+            backgroundColor: 'background.rare',
             '&:hover': {
               backgroundColor: ({ palette }) =>
-                !isFormOpen ? palette.action.hover : 'background.kanban'
+                !isFormOpen ? palette.action.hover : 'background.rare'
             }
           }}
         >

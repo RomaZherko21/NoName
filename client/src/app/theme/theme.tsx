@@ -14,7 +14,7 @@ declare module '@mui/material/styles' {
   interface ThemeOptions {}
 }
 
-const toggleThemeContext = createContext(() => {})
+const toggleThemeContext = createContext<any>(() => {})
 
 const AppThemeProvider: FC = ({ children }) => {
   const [isDefaultTheme, , , toggleTheme] = useBoolState(false)
@@ -28,6 +28,8 @@ const AppThemeProvider: FC = ({ children }) => {
     if (typeof prevTheme === 'string' && prevTheme !== String(isDefaultTheme)) {
       toggleTheme()
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const AppThemeProvider: FC = ({ children }) => {
   }, [isDefaultTheme, theme.palette.background.default])
 
   return (
-    <toggleThemeContext.Provider value={toggleTheme}>
+    <toggleThemeContext.Provider value={{ toggleTheme, isDefaultTheme }}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </toggleThemeContext.Provider>
   )

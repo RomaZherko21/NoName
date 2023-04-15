@@ -11,9 +11,8 @@ const lightTheme = {
     background: {
       default: '#fff',
       paper: 'rgb(255, 255, 255)',
-      rare: '#1C2536',
-      header: 'rgba(255, 255, 255, 0.8)',
-      kanban: '#fff'
+      rare: '#fff',
+      header: 'rgba(255, 255, 255, 0.8)'
     },
     primary: {
       main: '#6366F1',
