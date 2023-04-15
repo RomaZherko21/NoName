@@ -743,7 +743,7 @@ VALUES
         '2022-04-04 12:04:01',
         '2025-04-04 12:04:01',
         1,
-        1,
+        1
     ),
     (
         'FE-2',
@@ -753,7 +753,7 @@ VALUES
         '2022-03-03 12:04:01',
         '2025-04-04 12:04:01',
         1,
-        1,
+        1
     ),
     (
         'FE-3',
@@ -763,7 +763,7 @@ VALUES
         '2021-04-04 12:04:01',
         '2025-04-04 12:04:01',
         2,
-        2,
+        2
     );
 
 INSERT INTO
@@ -780,8 +780,8 @@ INSERT INTO
     `kanban_task_attachments` (task_id, url)
 VALUES
     (1, 'example1.jpg'),
-    (1, 'example1.jpg'),
-    (2, 'example2.png');
+    (1, 'example2.jpg'),
+    (2, 'example3.png');
 
 INSERT INTO
     `kanban_task_tags` (board_id, name)
@@ -808,3 +808,49 @@ VALUES
     (2, 2),
     (3, 2),
     (3, 3);
+
+SELECT
+    kt.id,
+    kt.name,
+    kta.url as attachments,
+    ktt.name as tags
+from
+    kanban_tasks as kt
+    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
+    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
+    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
+WHERE
+    kt.column_id = 1;
+
+SELECT
+    kt.id,
+    kt.name,
+    JSON_ARRAYAGG(kta.url) as attachments,
+    JSON_ARRAYAGG(ktt.name) as tags
+from
+    kanban_tasks as kt
+    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
+    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
+    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
+WHERE
+    kt.column_id = 1
+GROUP BY
+    kt.name,
+    kt.id;
+
+SELECT
+    kt.id,
+    kt.name,
+    JSON_ARRAYAGG(kta.url) as attachments,
+    JSON_ARRAYAGG(ktt.name) as tags
+from
+    kanban_tasks as kt
+    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
+    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
+    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
+WHERE
+    kt.column_id = 1
+GROUP BY
+    kt.name,
+    kt.id,
+    kta.url;

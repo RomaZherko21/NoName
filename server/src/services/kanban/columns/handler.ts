@@ -12,18 +12,47 @@ import { TABLE } from 'shared/consts'
  *     description: Get a list of kanban columns
  *     tags: [Kanban]
  */
-export async function getKanbanColumns(req: Request, res: Response, next: NextFunction) {
+export async function getKanbanColumns({ params }: Request, res: Response, next: NextFunction) {
   // TODO
   try {
-    let result = await sequelize.query(
-      `SELECT 
-        ${TABLE.kanban_columns}.* FROM ${TABLE.kanban_columns}
-        
+    const { board_id } = params
+
+    const result: any = []
+
+    let columns: { id: number; name: string; position: number; board_id: number }[] =
+      await sequelize.query(
+        `SELECT
+        ${TABLE.kanban_columns}.*,
+        kt.name as task_name
+    from
+        kanban_columns as kc
+        JOIN kanban_tasks as kt on kc.id = kt.column_id
+    WHERE
+        kc.board_id = ${board_id};
         `,
-      {
-        type: QueryTypes.SELECT,
-      }
-    )
+        {
+          type: QueryTypes.SELECT,
+        }
+      )
+
+    columns.forEach(async (item) => {
+      await sequelize.query(
+        `SELECT
+        ${TABLE.kanban_columns}.*,
+        kt.name as task_name
+    from
+        kanban_columns as kc
+        JOIN kanban_tasks as kt on kc.id = kt.column_id
+    WHERE
+        kc.board_id = ${board_id};
+        `,
+        {
+          type: QueryTypes.SELECT,
+        }
+      )
+
+      result.push({ column: { position: item.position, name: item.name }, tasks: [] })
+    })
 
     res.status(200).json(result)
   } catch (error: any) {
