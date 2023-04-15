@@ -112,9 +112,9 @@ const commonTheme = {
       styleOverrides: {
         root: {
           minWidth: 32
-          }
-          }
-          }
+        }
+      }
+    },
 
     MuiAccordion: {
       styleOverrides: {
@@ -127,8 +127,6 @@ const commonTheme = {
               display: 'none'
             }
           }
-}
-}
         }
       }
     }
