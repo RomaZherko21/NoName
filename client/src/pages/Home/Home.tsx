@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 
-import { Reviews, Questions, HomeHeader } from './ui'
+import { Reviews, Questions, HomeHeader, Footer } from './ui'
 
 function Home() {
   return (
@@ -8,6 +8,7 @@ function Home() {
       <HomeHeader />
       <Reviews />
       <Questions />
+      <Footer/>
     </Container>
   )
 }
