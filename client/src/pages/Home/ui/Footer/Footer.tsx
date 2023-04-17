@@ -3,7 +3,7 @@ import { Grid, Typography, Divider, Link as MuiLink, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { ROUTES } from 'shared/consts'
-import { FooterLink } from './ui'
+import FooterLink from './FooterLink'
 
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
