@@ -812,26 +812,30 @@ VALUES
 SELECT
     kt.id,
     kt.name,
-    kta.url as attachments,
-    ktt.name as tags
+    kta.attachments,
+    JSON_ARRAYAGG(ktt.tag_name)
 from
     kanban_tasks as kt
-    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
-    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
-    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
-WHERE
-    kt.column_id = 1;
-
-SELECT
-    kt.id,
-    kt.name,
-    JSON_ARRAYAGG(kta.url) as attachments,
-    JSON_ARRAYAGG(ktt.name) as tags
-from
-    kanban_tasks as kt
-    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
-    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
-    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
+    LEFT JOIN (
+        SELECT
+            kanban_task_attachments.task_id as task_id,
+            JSON_ARRAYAGG(kanban_task_attachments.url) as attachments
+        from
+            kanban_task_attachments
+        GROUP BY
+            task_id
+    ) as kta on kt.id = kta.task_id
+    LEFT JOIN (
+        SELECT
+            kanban_task_tags.name as tag_name,
+            m2m_kanban_tasks_tags.task_id as task_id
+        from
+            kanban_task_tags
+            LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.tag_id = tag_id
+        GROUP BY
+            tag_name,
+            task_id
+    ) as ktt on kt.id = ktt.task_id
 WHERE
     kt.column_id = 1
 GROUP BY
@@ -841,16 +845,34 @@ GROUP BY
 SELECT
     kt.id,
     kt.name,
-    JSON_ARRAYAGG(kta.url) as attachments,
-    JSON_ARRAYAGG(ktt.name) as tags
+    kta.attachments,
+    JSON_ARRAYAGG(ktt.tag_name),
+    users.name as created_by_name
 from
     kanban_tasks as kt
-    JOIN kanban_task_attachments as kta on kt.id = kta.task_id
-    LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.task_id = kt.id
-    LEFT JOIN kanban_task_tags as ktt on m2m_kanban_tasks_tags.tag_id = ktt.id
+    LEFT JOIN (
+        SELECT
+            kanban_task_attachments.task_id as task_id,
+            JSON_ARRAYAGG(kanban_task_attachments.url) as attachments
+        from
+            kanban_task_attachments
+        GROUP BY
+            task_id
+    ) as kta on kt.id = kta.task_id
+    LEFT JOIN (
+        SELECT
+            kanban_task_tags.name as tag_name,
+            m2m_kanban_tasks_tags.task_id as task_id
+        from
+            kanban_task_tags
+            LEFT JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.tag_id = tag_id
+        GROUP BY
+            tag_name,
+            task_id
+    ) as ktt on kt.id = ktt.task_id
+    JOIN users on users.id = kt.created_by
 WHERE
     kt.column_id = 1
 GROUP BY
     kt.name,
-    kt.id,
-    kta.url;
+    kt.id;
