@@ -35,7 +35,7 @@ export async function getUserChats(req: Request, res: Response, next: NextFuncti
             join chat_messages as cm1 on cm.chat_id=cm1.chat_id and cm1.user_id=${authorization_id}
               group by cm.chat_id) 
               as lattest_msg_id on cm.id=lattest_msg_id.id
-          order by cm.created_at ;
+          order by cm.created_at;
       `,
       {
         type: QueryTypes.SELECT,

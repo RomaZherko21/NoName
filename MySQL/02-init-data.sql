@@ -780,8 +780,8 @@ INSERT INTO
     `kanban_task_attachments` (task_id, url)
 VALUES
     (1, 'example1.jpg'),
-    (1, 'example1.jpg'),
-    (2, 'example2.png');
+    (1, 'example2.jpg'),
+    (2, 'example3.png');
 
 INSERT INTO
     `kanban_task_tags` (board_id, name)
