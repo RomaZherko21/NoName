@@ -1,14 +1,15 @@
 import { Container } from '@mui/material'
 
-import { Reviews, Questions, HomeHeader, Footer } from './ui'
+import { Reviews, Questions, HomeHeader, MainSection, Footer } from './ui'
 
 function Home() {
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" sx={{ p: 15 }}>
       <HomeHeader />
+      <MainSection />
       <Reviews />
       <Questions />
-      <Footer/>
+      <Footer />
     </Container>
   )
 }
