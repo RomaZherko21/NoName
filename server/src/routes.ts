@@ -60,6 +60,18 @@ import {
   updateKanbanSubtask,
   updateKanbanTask,
 } from 'services/kanban'
+import {
+  createFolder,
+  getFile,
+  getFiles,
+  getFolder,
+  getFolders,
+  removeFile,
+  removeFolder,
+  updateFile,
+  updateFolder,
+  uploadFile,
+} from 'services/fileManager'
 import { ROUTES } from 'shared/consts'
 import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
 
@@ -75,6 +87,7 @@ const {
   comments,
   connections,
   chat,
+  fileManager: { files, folders },
   kanban: { kanban, boards, columns, tasks, subtasks, tags },
 } = ROUTES
 
@@ -128,13 +141,11 @@ router.post(`/${kanban}/${boards}`, createKanbanBoard)
 router.put(`/${kanban}/${boards}/:board_id`, updateKanbanBoard)
 router.delete(`/${kanban}/${boards}/:board_id`, removeKanbanBoard)
 
-// todo
 router.get(`/${kanban}/${boards}/:board_id/${columns}`, getKanbanColumns)
 router.post(`/${kanban}/${boards}/:board_id/${columns}`, createKanbanColumn)
 router.put(`/${kanban}/${boards}/:board_id/${columns}/:column_id`, updateKanbanColumn)
 router.delete(`/${kanban}/${columns}/:column_id`, removeKanbanColumn)
 
-// todo
 router.get(`/${kanban}/${tasks}`, getKanbanTasks)
 router.get(`/${kanban}/${tasks}/:task_id`, getKanbanTask)
 router.post(`/${kanban}/${columns}/:column_id/${tasks}`, createKanbanTask)
@@ -150,5 +161,17 @@ router.get(`/${kanban}/${boards}/:board_id/${tags}`, getKanbanBoardTags)
 router.post(`/${kanban}/${boards}/:board_id/${tags}`, createKanbanBoardTag)
 router.put(`/${kanban}/${boards}/:board_id/${tags}/:tag_id`, updateKanbanBoardTag)
 router.delete(`/${kanban}/${tags}/:tag_id`, removeKanbanBoardTag)
+
+router.get(`/${files}`, getFiles)
+router.get(`/${files}/:file_id`, getFile)
+router.post(`/${files}`, useFile.single(FILE_FIELD_NAMES.fileManager), uploadFile)
+router.post(`/${files}/:file_id`, useFile.single(FILE_FIELD_NAMES.fileManager), updateFile)
+router.delete(`/${files}/:file_id`, removeFile)
+
+router.get(`/${folders}`, getFolders)
+router.get(`/${folders}/:folder_id`, getFolder)
+router.post(`/${folders}`, createFolder)
+router.post(`/${folders}/:folder_id`, updateFolder)
+router.delete(`/${folders}/:folder_id`, removeFolder)
 
 export default router

@@ -9,6 +9,7 @@ const validFileExtensions = new Set(['image/png', 'image/jpg', 'image/jpeg'])
 export const FILE_FIELD_NAMES = {
   avatar: 'avatar',
   post: 'post',
+  fileManager: 'fileManager',
 }
 
 // only multipart/form-data
@@ -20,12 +21,18 @@ const storage = multer.diskStorage({
     if (file.fieldname === FILE_FIELD_NAMES.post) {
       cb(null, `uploads/${FILE_FIELD_NAMES.post}`)
     }
+    if (file.fieldname === FILE_FIELD_NAMES.fileManager) {
+      cb(null, `uploads/${FILE_FIELD_NAMES.fileManager}`)
+    }
   },
   filename: (req: Request, file: Express.Multer.File, cb: FileNameCallback) => {
     if (file.fieldname === FILE_FIELD_NAMES.avatar) {
       cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
     }
     if (file.fieldname === FILE_FIELD_NAMES.post) {
+      cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
+    }
+    if (file.fieldname === FILE_FIELD_NAMES.fileManager) {
       cb(null, `${Date.now()}.${file.mimetype.split('/')[1]}`)
     }
   },
