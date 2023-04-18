@@ -1,4 +1,5 @@
 export { Questions } from './Questions'
 export { Reviews } from './Reviews'
 export { HomeHeader } from './HomeHeader'
+export { MainSection } from './MainSection'
 export { Footer } from './Footer'
