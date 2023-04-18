@@ -165,13 +165,13 @@ router.delete(`/${kanban}/${tags}/:tag_id`, removeKanbanBoardTag)
 router.get(`/${files}`, getFiles)
 router.get(`/${files}/:file_id`, getFile)
 router.post(`/${files}`, useFile.single(FILE_FIELD_NAMES.fileManager), uploadFile)
-router.post(`/${files}/:file_id`, useFile.single(FILE_FIELD_NAMES.fileManager), updateFile)
+router.put(`/${files}/:file_id`, useFile.single(FILE_FIELD_NAMES.fileManager), updateFile)
 router.delete(`/${files}/:file_id`, removeFile)
 
 router.get(`/${folders}`, getFolders)
 router.get(`/${folders}/:folder_id`, getFolder)
 router.post(`/${folders}`, createFolder)
-router.post(`/${folders}/:folder_id`, updateFolder)
+router.put(`/${folders}/:folder_id`, updateFolder)
 router.delete(`/${folders}/:folder_id`, removeFolder)
 
 export default router
