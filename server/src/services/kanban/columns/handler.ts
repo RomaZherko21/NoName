@@ -18,7 +18,6 @@ import { KanbanColumnModel, sequelize } from 'models'
  *           default: 1
  */
 export async function getKanbanColumns({ params }: Request, res: Response, next: NextFunction) {
-  // TODO
   try {
     const { board_id } = params
 
@@ -42,8 +41,6 @@ kc.id;
           type: QueryTypes.SELECT,
         }
       )
-
-    console.log('START 222', columns)
 
     await Promise.all(
       columns.map(async (column) => {
