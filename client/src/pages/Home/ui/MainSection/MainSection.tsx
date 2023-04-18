@@ -8,10 +8,10 @@ function MainSection() {
   const { t } = useTranslation()
   return (
     <Box sx={{ maxWidth: '600px' }}>
-      <Typography variant="h1">{t('home:mainTitle')}</Typography>
+      <Typography variant="h1">{t('home:mainTitle.title')}</Typography>
       <Typography sx={{ display: 'flex' }}>
         <Typography variant="h1" sx={{ mr: 1.5 }}>
-          {t('home:the')}
+          {t('home:mainTitle.the')}
         </Typography>
         <Typography
           variant="h1"
@@ -19,12 +19,12 @@ function MainSection() {
             color: ({ palette }) => palette.primary.dark
           }}
         >
-          {t('home:userExperience')}
+          {t('home:mainTitle.userExperience')}
         </Typography>
-        <Typography variant="h1">{t('home:comma')}</Typography>
+        <Typography variant="h1">,</Typography>
       </Typography>
       <Typography variant="h1" sx={{ mb: 2 }}>
-        {t('home:focus')}
+        {t('home:mainTitle.focus')}
       </Typography>
       <Typography
         variant="h6"

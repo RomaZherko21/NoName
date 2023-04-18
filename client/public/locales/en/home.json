@@ -12,11 +12,12 @@
   "pages": "Pages",
   "docs": "Docs",
   "purchaseNow": "Purchase Now",
-  "mainTitle": "Let us worry about",
-  "the": "the ",
-  "userExperience": " User Experience",
-  "comma": ",",
-  "focus": "you focus on Developing.",
+  "mainTitle": {
+    "title": "Let us worry about",
+    "the": "the ",
+    "userExperience": " User Experience",
+    "focus": "you focus on Developing."
+  },
   "mainSubtitle": "A professional kit that comes with ready-to-use MUI components developed with one common goal in mind, help you build faster & beautiful applications.",
   "liveDemo": "Live Demo",
   "basedOn": "based on ({{count}}+ reviews)"
