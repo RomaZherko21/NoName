@@ -137,30 +137,16 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
 export async function uploadUserAvatar(req: Request, res: Response, next: NextFunction) {
   try {
     const { file } = req
+    const authorization_id = res.locals.authorization_id
 
-    if (file) {
-      const data: any = await UserModel.findByPk(res.locals.authorization_id)
+    const newFileName = `${authorization_id}.jpg`
 
-      if (data.avatar) {
-        const filePath = path.join(
-          path.dirname(require?.main?.path || ''),
-          '/uploads',
-          '/avatar',
-          data.avatar
-        )
-        if (fs.existsSync(filePath)) {
-          fs.unlink(filePath, (error) => {
-            if (error) throw error
-          })
-        }
-      }
+    if (file && file?.filename) {
+      fs.renameSync(`./uploads/avatar/${file?.filename}`, `./uploads/avatar/${newFileName}`)
 
-      await UserModel.update(
-        { avatar: file.filename },
-        { where: { id: res.locals.authorization_id } }
-      )
+      await UserModel.update({ avatar: newFileName }, { where: { id: authorization_id } })
 
-      res.status(200).json({ url: file.filename })
+      res.status(200).json({ url: newFileName })
     } else {
       next(createError(400, 'Avatar wasnt uploaded'))
     }

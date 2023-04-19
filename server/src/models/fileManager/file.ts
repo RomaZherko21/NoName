@@ -22,7 +22,7 @@ interface File {
   id: number
   name: string
   url: string
-  format: FileFormat
+  format: any
   size: number
 
   created_at: string
@@ -53,7 +53,8 @@ FileModel.init(
       allowNull: false,
     },
     format: {
-      type: DataTypes.ENUM(...Object.values(FileFormat)),
+      // type: DataTypes.ENUM(...Object.values(FileFormat)),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     size: {

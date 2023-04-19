@@ -62,38 +62,49 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
 
 /**
  * @swagger
- * /files:
+ * /folders/{folder_id}/files:
  *   post:
  *     description: Upload new file
  *     tags: [Files]
+ *     parameters:
+ *       - name: folder_id
+ *         in: path
+ *         schema:
+ *           type: integer
+ *           default: 1
  *     requestBody:
  *      content:
  *         multipart/form-data:
  *           schema:
  *            type: object
  *            properties:
- *              name:
- *                type: string
- *                example: example
- *              format:
- *                type: string
- *                example: jpg
- *              size:
- *                type: integer
- *                example: 120000
  *              file:
  *                 type: string
  *                 format: binary
  */
-export async function uploadFile({ body }: Request, res: Response, next: NextFunction) {
+export async function uploadFile({ file, params }: Request, res: Response, next: NextFunction) {
   try {
-    await FileModel.create({
-      ...body,
-      created_at: getTimestamp(),
-      updated_at: getTimestamp(),
-    })
+    const { folder_id } = params
+    const authorization_id = res.locals.authorization_id
 
-    res.status(204).send()
+    const format = file?.originalname.split('.')[1]
+
+    if (file?.filename && file?.destination && file?.size && format) {
+      await FileModel.create({
+        name: file.filename,
+        url: `${file.destination}/${file.filename}`,
+        format,
+        size: file.size,
+        created_at: getTimestamp(),
+        updated_at: getTimestamp(),
+        folder_id: Number(folder_id),
+        user_id: authorization_id,
+      })
+
+      res.status(204).send()
+    } else {
+      throw new Error('Invalid file data')
+    }
   } catch (error: any) {
     next(createError(500, error.message))
   }

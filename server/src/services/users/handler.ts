@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import fs from 'node:fs'
 import createError from 'http-errors'
 import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
@@ -171,11 +172,16 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
 export async function createUser({ body, file }: Request, res: Response, next: NextFunction) {
   try {
     const hash = await bcrypt.hash(body.password, 10)
+    const authorization_id = res.locals.authorization_id
+
+    const newFileName = `${authorization_id}.jpg`
+
+    fs.renameSync(`./uploads/avatar/${file?.filename}`, `./uploads/avatar/${newFileName}`)
 
     await UserModel.create({
       ...body,
       password: hash,
-      avatar: file?.filename,
+      avatar: newFileName,
     })
 
     res.status(204).send()

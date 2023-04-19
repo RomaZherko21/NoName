@@ -1,4 +1,5 @@
 import express from 'express'
+import multer from 'multer'
 
 import { signIn } from 'services/auth'
 import {
@@ -72,10 +73,12 @@ import {
   updateFolder,
   uploadFile,
 } from 'services/fileManager'
-import { ROUTES } from 'shared/consts'
-import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
+import { FILE_FIELD_NAMES, ROUTES } from 'shared/consts'
+import { usePermission } from 'middlewares'
 
 const router = express.Router()
+
+import { createNonExistFolder } from 'shared/helpers'
 
 const {
   auth,
@@ -96,7 +99,11 @@ router.post(`/${auth}/signIn`, signIn)
 router.get(`/${user}`, getUserSelf)
 router.put(`/${user}`, updateUserSelf)
 router.delete(`/${user}`, removeUserSelf)
-router.post(`/${user}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+router.post(
+  `/${user}/uploadPhoto`,
+  multer({ dest: './uploads/avatar' }).single(FILE_FIELD_NAMES.avatar),
+  uploadUserAvatar
+)
 router.get(`/${user}/permissions`, getUserPermissions)
 
 router.put(`/${security}/email`, sendEmailVerificationCode)
@@ -111,16 +118,26 @@ router.get(`/${security}/qr`, getQrCode)
 router.put(`/${security}/qr`, verifyQrCode)
 
 router.get(`/${users}`, usePermission, getUsers)
-router.post(`/${users}`, usePermission, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
+router.post(
+  `/${users}`,
+  usePermission,
+  multer({ dest: './uploads/avatar' }).single(FILE_FIELD_NAMES.avatar),
+  createUser
+)
 router.get(`/${users}/:id`, usePermission, getUser)
 router.put(`/${users}/:id`, usePermission, updateUserById)
 router.delete(`/${users}/:id`, usePermission, removeUserSelf)
 
 router.get(`/${posts}`, usePermission, getPosts)
 router.get(`/${posts}/:id`, usePermission, getPost)
-router.post(`/${posts}`, usePermission, useFile.single(FILE_FIELD_NAMES.post), createPost)
+router.post(
+  `/${posts}`,
+  usePermission,
+  multer({ dest: './uploads/post' }).single(FILE_FIELD_NAMES.post),
+  createPost
+)
 router.delete(`/${posts}/:id`, usePermission, deletePostById)
-router.put(`/${posts}/:id/likes`, usePermission, togglePostLikes)
+router.put(`/${posts}/:post_id/likes`, usePermission, togglePostLikes)
 
 router.get(`/${genres}`, getGenres)
 
@@ -164,8 +181,33 @@ router.delete(`/${kanban}/${tags}/:tag_id`, removeKanbanBoardTag)
 
 router.get(`/${files}`, getFiles)
 router.get(`/${files}/:file_id`, getFile)
-router.post(`/${files}`, useFile.single(FILE_FIELD_NAMES.fileManager), uploadFile)
-router.put(`/${files}/:file_id`, useFile.single(FILE_FIELD_NAMES.fileManager), updateFile)
+router.post(
+  `/${folders}/:folder_id/${files}`,
+  multer({
+    storage: multer.diskStorage({
+      destination: function (req, file, callback) {
+        const [, format] = file.originalname.split('.')
+
+        createNonExistFolder(`./uploads/fileManager/${format}`)
+
+        // eslint-disable-next-line unicorn/no-null
+        callback(null, `./uploads/fileManager/${format}`)
+      },
+      filename: function (req, file, callback) {
+        const [name, format] = file.originalname.split('.')
+
+        // eslint-disable-next-line unicorn/no-null
+        callback(null, `${name}-${Date.now()}.${format}`)
+      },
+    }),
+  }).single(FILE_FIELD_NAMES.file),
+  uploadFile
+)
+router.put(
+  `/${files}/:file_id`,
+  multer({ dest: './uploads/fileManager' }).single(FILE_FIELD_NAMES.file),
+  updateFile
+)
 router.delete(`/${files}/:file_id`, removeFile)
 
 router.get(`/${folders}`, getFolders)
