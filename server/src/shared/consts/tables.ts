@@ -8,4 +8,7 @@ export const TABLE = {
   kanban_attachments: 'kanban_attachments',
   folders: 'folders',
   files: 'files',
+  folder_tags: 'folder_tags',
+  m2m_users_folders: 'm2m_users_folders',
+  m2m_folders_tags: 'm2m_folders_tags',
 }
