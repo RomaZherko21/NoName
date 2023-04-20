@@ -3,6 +3,7 @@ import createError from 'http-errors'
 
 import { ChatMessageModel, ChatModel, sequelize, UserModel, UsersChatsModel } from 'models'
 import { QueryTypes } from 'sequelize'
+import { getTimestamp } from 'shared/helpers'
 import { WebSocket, Server } from 'ws'
 import { WsMessageCodes } from 'wsHandler'
 
@@ -56,8 +57,8 @@ export async function createUserChat({ body }: Request, res: Response, next: Nex
 
     const { dataValues } = await ChatModel.create({
       name: chat_name || '',
-      created_at: Date.now(),
-      updated_at: Date.now(),
+      created_at: getTimestamp(),
+      updated_at: getTimestamp(),
     })
 
     UsersChatsModel.create({
@@ -118,7 +119,7 @@ export async function processMessage(msg: any, wss: Server<WebSocket>) {
   try {
     await ChatMessageModel.create({
       text: msg.text,
-      created_at: Date.now(),
+      created_at: getTimestamp(),
       chat_id: msg.chat_id,
       user_id: msg.user_id,
     })

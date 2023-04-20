@@ -5,6 +5,7 @@ import createError from 'http-errors'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
 import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
+import { getTimestamp } from 'shared/helpers'
 
 /**
  * @swagger
@@ -235,7 +236,7 @@ export async function createPost({ body, file }: Request, res: Response, next: N
       ...body,
       image: newFileName,
       user_id: authorization_id,
-      created_at: Date.now(),
+      created_at: getTimestamp(),
     })
 
     res.status(204).send()
@@ -381,7 +382,7 @@ export async function createPostComment(
       ...body,
       post_id,
       user_id: authorization_id,
-      created_at: Date.now(),
+      created_at: getTimestamp(),
     })
 
     res.status(204).send()
@@ -466,7 +467,7 @@ export async function updatePostComment(
     await PostCommentModel.update(
       {
         ...body,
-        created_at: Date.now(),
+        created_at: getTimestamp(),
       },
       {
         where: {

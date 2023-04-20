@@ -1,7 +1,7 @@
 export interface Message {
   id: number
   text: string
-  created_at: number
+  created_at: string
 
   user: {
     id: number

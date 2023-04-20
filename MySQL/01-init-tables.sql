@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `description` text,
   `short_description` text,
   `reading_time` int,
-  `created_at` bigint,
+  `created_at` TIMESTAMP,
   `image` varchar(255),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`),
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `m2m_users_posts_likes` (
 CREATE TABLE IF NOT EXISTS `post_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` text,
-  `created_at` bigint,
+  `created_at` TIMESTAMP,
   `post_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -81,15 +81,15 @@ CREATE TABLE IF NOT EXISTS `user_connections` (
 CREATE TABLE IF NOT EXISTS `chats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `created_at` bigint,
-  `updated_at` bigint,
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `chat_messages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `text` text,
-  `created_at` bigint,
+  `created_at` TIMESTAMP,
   `user_id` int NOT NULL,
   `chat_id` int NOT NULL,
   PRIMARY KEY (`id`),

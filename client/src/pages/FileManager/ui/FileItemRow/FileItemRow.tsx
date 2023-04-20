@@ -6,9 +6,10 @@ import { FiMoreVertical } from 'react-icons/fi'
 
 import { File } from 'shared/types/file'
 import { CircleDevider, PopupMenu } from 'shared/ui'
+import { fromTimestampToDate } from 'shared/helpers'
+import folder from 'shared/assets/images/fileFormat/folder.svg'
 
 import { getFilePopupConfig } from '../FilePopupConfig'
-import folder from 'shared/assets/images/fileFormat/folder.svg'
 
 interface Props {
   file: File
@@ -64,7 +65,7 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         </Typography>
 
         <Typography variant="body2" color="text.secondary">
-          {file.created_at}
+          {fromTimestampToDate(file.created_at)}
         </Typography>
       </Box>
 

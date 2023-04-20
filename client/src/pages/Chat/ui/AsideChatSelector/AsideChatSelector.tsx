@@ -14,10 +14,8 @@ import {
 import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 import { FiSearch } from 'react-icons/fi'
 
-import { API_USER_AVATAR_URL, COMMON_DATE_FORMAT } from 'shared/consts'
-
-import { format } from 'date-fns'
-import { fromMsToDate } from 'shared/helpers'
+import { API_USER_AVATAR_URL } from 'shared/consts'
+import { fromTimestampToDate } from 'shared/helpers'
 
 import { ChatModel } from '../../model'
 
@@ -116,7 +114,7 @@ function AsideChatSelector() {
           </Box>
 
           <Typography variant="caption" color="text.secondary">
-            {format(fromMsToDate(item.updated_at), COMMON_DATE_FORMAT)}
+            {fromTimestampToDate(item.updated_at)}
           </Typography>
         </Box>
       ))}

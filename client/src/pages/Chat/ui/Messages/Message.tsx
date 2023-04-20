@@ -1,12 +1,11 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Box, Paper, Typography } from '@mui/material'
-import { format } from 'date-fns'
 
 import { useRootStore } from 'stores'
-import { fromMsToDate } from 'shared/helpers'
+import { fromTimestampToDate } from 'shared/helpers'
 import { Message as TMessage } from 'shared/types'
-import { API_USER_AVATAR_URL, COMMON_DATE_FORMAT } from 'shared/consts'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 interface Props {
   message: TMessage
@@ -58,7 +57,7 @@ function Message({ message }: Props) {
           variant="caption"
           color="text.secondary"
         >
-          {format(fromMsToDate(message.created_at), COMMON_DATE_FORMAT)}
+          {fromTimestampToDate(message.created_at)}
         </Typography>
       </Box>
       {isCurrentUser && (
