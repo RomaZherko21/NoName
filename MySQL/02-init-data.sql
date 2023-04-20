@@ -808,3 +808,97 @@ VALUES
     (2, 2),
     (3, 2),
     (3, 3);
+
+INSERT INTO
+    `folders` (name, created_at, updated_at)
+VALUES
+    (
+        'Backoffice',
+        '2016-04-05 10:40:01',
+        '2017-01-01 10:40:01'
+    ),
+    (
+        'Pictures',
+        '2017-04-05 10:40:01',
+        '2020-01-01 10:40:01'
+    ),
+    (
+        'Something',
+        '2018-01-01 10:40:01',
+        '2021-04-05 10:40:01'
+    ),
+    (
+        'English',
+        '2019-01-01 10:40:01',
+        '2022-04-05 10:40:01'
+    );
+
+INSERT INTO
+    `files` (
+        name,
+        url,
+        format,
+        size,
+        folder_id,
+        user_id,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        'example1',
+        'example1.jpg',
+        'jpg',
+        20000,
+        1,
+        1,
+        '2016-04-05 10:40:01',
+        '2017-01-01 10:40:01'
+    ),
+    (
+        'example2',
+        'example2.jpg',
+        'jpg',
+        25000,
+        2,
+        1,
+        '2017-04-05 10:40:01',
+        '2020-01-01 10:40:01'
+    ),
+    (
+        'example3',
+        'example3.jpg',
+        'jpg',
+        300000,
+        2,
+        2,
+        '2018-01-01 10:40:01',
+        '2021-04-05 10:40:01'
+    );
+
+INSERT INTO
+    `folder_tags` (name)
+VALUES
+    ('FE'),
+    ('BE'),
+    ('DevOps');
+
+INSERT INTO
+    `m2m_folders_tags` (folder_id, tag_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 2),
+    (3, 2),
+    (3, 3);
+
+INSERT INTO
+    `m2m_users_folders` (folder_id, user_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 1),
+    (3, 1),
+    (3, 2);

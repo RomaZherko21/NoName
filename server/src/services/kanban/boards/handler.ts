@@ -11,7 +11,7 @@ import { getTimestamp } from 'shared/helpers'
  * /kanban/boards:
  *   get:
  *     description: Get a list of kanban boards
- *     tags: [Kanban]
+ *     tags: [Kanban-boards]
  */
 export async function getBoards(req: Request, res: Response, next: NextFunction) {
   try {
@@ -34,7 +34,7 @@ export async function getBoards(req: Request, res: Response, next: NextFunction)
  * /kanban/boards/{board_id}:
  *   get:
  *     description: Get kanban board
- *     tags: [Kanban]
+ *     tags: [Kanban-boards]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -65,7 +65,7 @@ export async function getKanbanBoard({ params }: Request, res: Response, next: N
  * /kanban/boards:
  *   post:
  *     description: Create kanban board
- *     tags: [Kanban]
+ *     tags: [Kanban-boards]
  *     requestBody:
  *      content:
  *         application/json:
@@ -98,7 +98,7 @@ export async function createKanbanBoard({ body }: Request, res: Response, next: 
  * /kanban/boards/{board_id}:
  *   put:
  *     description: Update kanban board
- *     tags: [Kanban]
+ *     tags: [Kanban-boards]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -149,7 +149,7 @@ export async function updateKanbanBoard(
  * /kanban/boards/{board_id}:
  *   delete:
  *     description: Delete kanban board
- *     tags: [Kanban]
+ *     tags: [Kanban-boards]
  *     parameters:
  *       - name: board_id
  *         in: path

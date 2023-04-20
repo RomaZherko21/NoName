@@ -9,7 +9,7 @@ import { KanbanColumnModel, sequelize } from 'models'
  * /kanban/boards/{board_id}/columns:
  *   get:
  *     description: Get a list of kanban columns
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -18,7 +18,6 @@ import { KanbanColumnModel, sequelize } from 'models'
  *           default: 1
  */
 export async function getKanbanColumns({ params }: Request, res: Response, next: NextFunction) {
-  // TODO
   try {
     const { board_id } = params
 
@@ -42,8 +41,6 @@ kc.id;
           type: QueryTypes.SELECT,
         }
       )
-
-    console.log('START 222', columns)
 
     await Promise.all(
       columns.map(async (column) => {
@@ -116,7 +113,7 @@ kt.id;
  * /kanban/boards/{board_id}/columns:
  *   post:
  *     description: Create kanban column in board
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -160,7 +157,7 @@ export async function createKanbanColumn(
  * /kanban/boards/{board_id}/columns/{column_id}:
  *   put:
  *     description: Update kanban column in board
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -216,7 +213,7 @@ export async function updateKanbanColumn(
  * /kanban/columns/{column_id}:
  *   delete:
  *     description: Delete kanban column
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: column_id
  *         in: path

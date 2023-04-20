@@ -1,4 +1,5 @@
 import express from 'express'
+import multer from 'multer'
 
 import { signIn } from 'services/auth'
 import {
@@ -60,8 +61,22 @@ import {
   updateKanbanSubtask,
   updateKanbanTask,
 } from 'services/kanban'
-import { ROUTES } from 'shared/consts'
-import { FILE_FIELD_NAMES, useFile, usePermission } from 'middlewares'
+import {
+  createFolder,
+  getFile,
+  getFiles,
+  getFolder,
+  getFolders,
+  removeFile,
+  removeFolder,
+  updateFile,
+  updateFolder,
+  uploadFile,
+} from 'services/fileManager'
+import { FILE_MANAGER_FOLDER, POST_FOLDER, ROUTES, USER_AVATAR_FOLDER } from 'shared/consts'
+import { usePermission } from 'middlewares'
+import { fileFilter, fileLimits, imgLimits } from 'shared/helpers'
+import { fileManagerStorage } from 'entities/fileManager'
 
 const router = express.Router()
 
@@ -75,6 +90,7 @@ const {
   comments,
   connections,
   chat,
+  fileManager: { files, folders },
   kanban: { kanban, boards, columns, tasks, subtasks, tags },
 } = ROUTES
 
@@ -83,7 +99,11 @@ router.post(`/${auth}/signIn`, signIn)
 router.get(`/${user}`, getUserSelf)
 router.put(`/${user}`, updateUserSelf)
 router.delete(`/${user}`, removeUserSelf)
-router.post(`/${user}/uploadPhoto`, useFile.single(FILE_FIELD_NAMES.avatar), uploadUserAvatar)
+router.post(
+  `/${user}/uploadPhoto`,
+  multer({ dest: USER_AVATAR_FOLDER, fileFilter, limits: imgLimits }).single('avatar'),
+  uploadUserAvatar
+)
 router.get(`/${user}/permissions`, getUserPermissions)
 
 router.put(`/${security}/email`, sendEmailVerificationCode)
@@ -98,16 +118,26 @@ router.get(`/${security}/qr`, getQrCode)
 router.put(`/${security}/qr`, verifyQrCode)
 
 router.get(`/${users}`, usePermission, getUsers)
-router.post(`/${users}`, usePermission, useFile.single(FILE_FIELD_NAMES.avatar), createUser)
+router.post(
+  `/${users}`,
+  usePermission,
+  multer({ dest: USER_AVATAR_FOLDER, fileFilter, limits: imgLimits }).single('avatar'),
+  createUser
+)
 router.get(`/${users}/:id`, usePermission, getUser)
 router.put(`/${users}/:id`, usePermission, updateUserById)
 router.delete(`/${users}/:id`, usePermission, removeUserSelf)
 
 router.get(`/${posts}`, usePermission, getPosts)
 router.get(`/${posts}/:id`, usePermission, getPost)
-router.post(`/${posts}`, usePermission, useFile.single(FILE_FIELD_NAMES.post), createPost)
+router.post(
+  `/${posts}`,
+  usePermission,
+  multer({ dest: POST_FOLDER, fileFilter, limits: imgLimits }).single('post'),
+  createPost
+)
 router.delete(`/${posts}/:id`, usePermission, deletePostById)
-router.put(`/${posts}/:id/likes`, usePermission, togglePostLikes)
+router.put(`/${posts}/:post_id/likes`, usePermission, togglePostLikes)
 
 router.get(`/${genres}`, getGenres)
 
@@ -128,13 +158,11 @@ router.post(`/${kanban}/${boards}`, createKanbanBoard)
 router.put(`/${kanban}/${boards}/:board_id`, updateKanbanBoard)
 router.delete(`/${kanban}/${boards}/:board_id`, removeKanbanBoard)
 
-// todo
 router.get(`/${kanban}/${boards}/:board_id/${columns}`, getKanbanColumns)
 router.post(`/${kanban}/${boards}/:board_id/${columns}`, createKanbanColumn)
 router.put(`/${kanban}/${boards}/:board_id/${columns}/:column_id`, updateKanbanColumn)
 router.delete(`/${kanban}/${columns}/:column_id`, removeKanbanColumn)
 
-// todo
 router.get(`/${kanban}/${tasks}`, getKanbanTasks)
 router.get(`/${kanban}/${tasks}/:task_id`, getKanbanTask)
 router.post(`/${kanban}/${columns}/:column_id/${tasks}`, createKanbanTask)
@@ -150,5 +178,29 @@ router.get(`/${kanban}/${boards}/:board_id/${tags}`, getKanbanBoardTags)
 router.post(`/${kanban}/${boards}/:board_id/${tags}`, createKanbanBoardTag)
 router.put(`/${kanban}/${boards}/:board_id/${tags}/:tag_id`, updateKanbanBoardTag)
 router.delete(`/${kanban}/${tags}/:tag_id`, removeKanbanBoardTag)
+
+router.get(`/${files}`, getFiles)
+router.get(`/${files}/:file_id`, getFile)
+router.post(
+  `/${folders}/:folder_id/${files}`,
+  multer({
+    storage: fileManagerStorage,
+    fileFilter,
+    limits: fileLimits,
+  }).single('file'),
+  uploadFile
+)
+router.put(
+  `/${files}/:file_id`,
+  multer({ dest: FILE_MANAGER_FOLDER, fileFilter, limits: fileLimits }).single('file'),
+  updateFile
+)
+router.delete(`/${files}/:file_id`, removeFile)
+
+router.get(`/${folders}`, getFolders)
+router.get(`/${folders}/:folder_id`, getFolder)
+router.post(`/${folders}`, createFolder)
+router.put(`/${folders}/:folder_id`, updateFolder)
+router.delete(`/${folders}/:folder_id`, removeFolder)
 
 export default router

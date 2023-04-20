@@ -11,7 +11,7 @@ import { getTimestamp } from 'shared/helpers'
  * /kanban/tasks:
  *   get:
  *     description: Get a list of kanban tasks
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  */
 export async function getKanbanTasks(req: Request, res: Response, next: NextFunction) {
   try {
@@ -34,7 +34,7 @@ export async function getKanbanTasks(req: Request, res: Response, next: NextFunc
  * /kanban/tasks/{task_id}:
  *   get:
  *     description: Get kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: task_id
  *         in: path
@@ -117,7 +117,7 @@ kt.id;
  * /kanban/columns/{column_id}/tasks:
  *   post:
  *     description: Create kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: column_id
  *         in: path
@@ -178,7 +178,7 @@ export async function createKanbanTask(
  * /kanban/columns/{column_id}/tasks/{task_id}:
  *   put:
  *     description: Update kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: column_id
  *         in: path
@@ -250,7 +250,7 @@ export async function updateKanbanTask(
  * /kanban/tasks/{task_id}:
  *   delete:
  *     description: Delete kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: task_id
  *         in: path

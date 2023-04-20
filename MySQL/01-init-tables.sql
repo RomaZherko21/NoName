@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
 );
 
 CREATE TABLE IF NOT EXISTS m2m_users_chats (
-  user_id INT NOT NULL,
-  chat_id INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `chat_id` INT NOT NULL,
   PRIMARY KEY (user_id, chat_id),
   CONSTRAINT `Constr_m2m_users_chats_user_fk` FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Constr_m2m_users_chats_chat_fk` FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -166,19 +166,77 @@ CREATE TABLE IF NOT EXISTS `kanban_task_tags` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS m2m_kanban_tasks_tags (
-  task_id INT NOT NULL,
-  tag_id INT NOT NULL,
+  `task_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
   PRIMARY KEY (task_id, tag_id),
   FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`tag_id`) REFERENCES kanban_task_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS m2m_kanban_users_tasks (
-  user_id INT NOT NULL,
-  task_id INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `task_id` INT NOT NULL,
   PRIMARY KEY (user_id, task_id),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- FILE MANAGER
+CREATE TABLE IF NOT EXISTS `folders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+  `url` varchar(255),
+  `format` ENUM(
+    'jpg',
+    'gif',
+    'png',
+    'svg',
+    'tif',
+    'pdf',
+    'docx',
+    'html',
+    'xlsx',
+    'txt',
+    'pptx'
+  ),
+  `size` bigint,
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
+  `folder_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `folder_tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS m2m_folders_tags (
+  `folder_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
+  PRIMARY KEY (folder_id, tag_id),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`tag_id`) REFERENCES folder_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS m2m_users_folders (
+  `folder_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (folder_id, user_id),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов
