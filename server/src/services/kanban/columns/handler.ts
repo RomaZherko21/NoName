@@ -9,7 +9,7 @@ import { KanbanColumnModel, sequelize } from 'models'
  * /kanban/boards/{board_id}/columns:
  *   get:
  *     description: Get a list of kanban columns
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -113,7 +113,7 @@ kt.id;
  * /kanban/boards/{board_id}/columns:
  *   post:
  *     description: Create kanban column in board
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -157,7 +157,7 @@ export async function createKanbanColumn(
  * /kanban/boards/{board_id}/columns/{column_id}:
  *   put:
  *     description: Update kanban column in board
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -213,7 +213,7 @@ export async function updateKanbanColumn(
  * /kanban/columns/{column_id}:
  *   delete:
  *     description: Delete kanban column
- *     tags: [Kanban]
+ *     tags: [Kanban-columns]
  *     parameters:
  *       - name: column_id
  *         in: path

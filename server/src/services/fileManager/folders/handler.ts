@@ -11,7 +11,7 @@ import { getTimestamp } from 'shared/helpers'
  * /folders:
  *   get:
  *     description: Get a list of folders
- *     tags: [Folders]
+ *     tags: [FileManager-folders]
  */
 export async function getFolders(req: Request, res: Response, next: NextFunction) {
   try {
@@ -53,7 +53,7 @@ export async function getFolders(req: Request, res: Response, next: NextFunction
  * /folders/{folder_id}:
  *   get:
  *     description: Get folder
- *     tags: [Folders]
+ *     tags: [FileManager-folders]
  *     parameters:
  *       - name: folder_id
  *         in: path
@@ -118,7 +118,7 @@ export async function getFolder({ params }: Request, res: Response, next: NextFu
  * /folders:
  *   post:
  *     description: Create folder
- *     tags: [Folders]
+ *     tags: [FileManager-folders]
  *     requestBody:
  *      content:
  *         application/json:
@@ -148,7 +148,7 @@ export async function createFolder({ body }: Request, res: Response, next: NextF
  * /folders/{folder_id}:
  *   put:
  *     description: Update kanban board
- *     tags: [Folders]
+ *     tags: [FileManager-folders]
  *     parameters:
  *       - name: folder_id
  *         in: path
@@ -192,7 +192,7 @@ export async function updateFolder({ params, body }: Request, res: Response, nex
  * /folders/{folder_id}:
  *   delete:
  *     description: Delete folder
- *     tags: [Folders]
+ *     tags: [FileManager-folders]
  *     parameters:
  *       - name: folder_id
  *         in: path

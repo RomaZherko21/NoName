@@ -1,11 +1,10 @@
 import fs from 'node:fs'
-import path from 'node:path'
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
 import { UserModel, PostModel } from 'models'
 import { prettifyUserData } from 'shared/helpers'
-import { Role, permission } from 'shared/consts'
+import { Role, permission, USER_AVATAR_FOLDER } from 'shared/consts'
 
 /**
  * @swagger
@@ -84,20 +83,13 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
   try {
     const authorization_id = res.locals.authorization_id
 
-    const data = await UserModel.findByPk(authorization_id)
+    const fileName = `${authorization_id}.jpg`
 
-    if (data?.dataValues.avatar) {
-      const filePath = path.join(
-        path.dirname(require?.main?.path || ''),
-        '/uploads',
-        '/avatar',
-        data?.dataValues.avatar
-      )
-      if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, (error) => {
-          if (error) throw error
-        })
-      }
+    const filePath = `${USER_AVATAR_FOLDER}/${fileName}`
+    if (fs.existsSync(filePath)) {
+      fs.unlink(filePath, (error) => {
+        if (error) throw error
+      })
     }
 
     await PostModel.destroy({
@@ -142,13 +134,16 @@ export async function uploadUserAvatar(req: Request, res: Response, next: NextFu
     const newFileName = `${authorization_id}.jpg`
 
     if (file && file?.filename) {
-      fs.renameSync(`./uploads/avatar/${file?.filename}`, `./uploads/avatar/${newFileName}`)
+      fs.renameSync(
+        `${USER_AVATAR_FOLDER}/${file?.filename}`,
+        `${USER_AVATAR_FOLDER}/${newFileName}`
+      )
 
       await UserModel.update({ avatar: newFileName }, { where: { id: authorization_id } })
 
       res.status(200).json({ url: newFileName })
     } else {
-      next(createError(400, 'Avatar wasnt uploaded'))
+      next(createError(400, "Avatar wasn't uploaded"))
     }
   } catch (error: any) {
     next(createError(500, error.message))

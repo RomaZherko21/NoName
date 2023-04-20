@@ -1,11 +1,10 @@
 import fs from 'node:fs'
-import path from 'node:path'
 import { NextFunction, Request, Response } from 'express'
 import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
-import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
+import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
 
 /**
  * @swagger
@@ -230,7 +229,7 @@ export async function createPost({ body, file }: Request, res: Response, next: N
 
     const newFileName = `${Date.now()}.jpg`
 
-    fs.renameSync(`./uploads/post/${file?.filename}`, `./uploads/post/${newFileName}`)
+    fs.renameSync(`${POST_FOLDER}/${file?.filename}`, `${POST_FOLDER}/${newFileName}`)
 
     await PostModel.create({
       ...body,
@@ -327,12 +326,7 @@ export async function deletePostById({ params }: Request, res: Response, next: N
     const data = await PostModel.findByPk(id)
 
     if (data?.dataValues.image) {
-      const filePath = path.join(
-        path.dirname(require?.main?.path || ''),
-        '/uploads',
-        '/post',
-        data?.dataValues.image
-      )
+      const filePath = `${POST_FOLDER}/${data?.dataValues.image}`
       if (fs.existsSync(filePath)) {
         fs.unlink(filePath, (error) => {
           if (error) throw error

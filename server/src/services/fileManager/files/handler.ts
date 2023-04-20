@@ -10,7 +10,7 @@ import { getTimestamp } from 'shared/helpers'
  * /files:
  *   get:
  *     description: Get a list all files
- *     tags: [Files]
+ *     tags: [FileManager-files]
  */
 export async function getFiles(req: Request, res: Response, next: NextFunction) {
   try {
@@ -33,7 +33,7 @@ export async function getFiles(req: Request, res: Response, next: NextFunction) 
  * /files/{file_id}:
  *   get:
  *     description: Get file info
- *     tags: [Files]
+ *     tags: [FileManager-files]
  *     parameters:
  *       - name: file_id
  *         in: path
@@ -65,7 +65,7 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
  * /folders/{folder_id}/files:
  *   post:
  *     description: Upload new file
- *     tags: [Files]
+ *     tags: [FileManager-files]
  *     parameters:
  *       - name: folder_id
  *         in: path
@@ -115,7 +115,7 @@ export async function uploadFile({ file, params }: Request, res: Response, next:
  * /files/{file_id}:
  *   put:
  *     description: Update file by id
- *     tags: [Files]
+ *     tags: [FileManager-files]
  *     parameters:
  *       - name: file_id
  *         in: path
@@ -168,7 +168,7 @@ export async function updateFile({ params, body }: Request, res: Response, next:
  * /files/{file_id}:
  *   delete:
  *     description: Delete file
- *     tags: [Files]
+ *     tags: [FileManager-files]
  *     parameters:
  *       - name: file_id
  *         in: path

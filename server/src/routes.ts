@@ -73,12 +73,12 @@ import {
   updateFolder,
   uploadFile,
 } from 'services/fileManager'
-import { FILE_FIELD_NAMES, ROUTES } from 'shared/consts'
+import { FILE_MANAGER_FOLDER, POST_FOLDER, ROUTES, USER_AVATAR_FOLDER } from 'shared/consts'
 import { usePermission } from 'middlewares'
+import { fileFilter, fileLimits, imgLimits } from 'shared/helpers'
+import { fileManagerStorage } from 'entities/fileManager'
 
 const router = express.Router()
-
-import { createNonExistFolder } from 'shared/helpers'
 
 const {
   auth,
@@ -101,7 +101,7 @@ router.put(`/${user}`, updateUserSelf)
 router.delete(`/${user}`, removeUserSelf)
 router.post(
   `/${user}/uploadPhoto`,
-  multer({ dest: './uploads/avatar' }).single(FILE_FIELD_NAMES.avatar),
+  multer({ dest: USER_AVATAR_FOLDER, fileFilter, limits: imgLimits }).single('avatar'),
   uploadUserAvatar
 )
 router.get(`/${user}/permissions`, getUserPermissions)
@@ -121,7 +121,7 @@ router.get(`/${users}`, usePermission, getUsers)
 router.post(
   `/${users}`,
   usePermission,
-  multer({ dest: './uploads/avatar' }).single(FILE_FIELD_NAMES.avatar),
+  multer({ dest: USER_AVATAR_FOLDER, fileFilter, limits: imgLimits }).single('avatar'),
   createUser
 )
 router.get(`/${users}/:id`, usePermission, getUser)
@@ -133,7 +133,7 @@ router.get(`/${posts}/:id`, usePermission, getPost)
 router.post(
   `/${posts}`,
   usePermission,
-  multer({ dest: './uploads/post' }).single(FILE_FIELD_NAMES.post),
+  multer({ dest: POST_FOLDER, fileFilter, limits: imgLimits }).single('post'),
   createPost
 )
 router.delete(`/${posts}/:id`, usePermission, deletePostById)
@@ -184,28 +184,15 @@ router.get(`/${files}/:file_id`, getFile)
 router.post(
   `/${folders}/:folder_id/${files}`,
   multer({
-    storage: multer.diskStorage({
-      destination: function (req, file, callback) {
-        const [, format] = file.originalname.split('.')
-
-        createNonExistFolder(`./uploads/fileManager/${format}`)
-
-        // eslint-disable-next-line unicorn/no-null
-        callback(null, `./uploads/fileManager/${format}`)
-      },
-      filename: function (req, file, callback) {
-        const [name, format] = file.originalname.split('.')
-
-        // eslint-disable-next-line unicorn/no-null
-        callback(null, `${name}-${Date.now()}.${format}`)
-      },
-    }),
-  }).single(FILE_FIELD_NAMES.file),
+    storage: fileManagerStorage,
+    fileFilter,
+    limits: fileLimits,
+  }).single('file'),
   uploadFile
 )
 router.put(
   `/${files}/:file_id`,
-  multer({ dest: './uploads/fileManager' }).single(FILE_FIELD_NAMES.file),
+  multer({ dest: FILE_MANAGER_FOLDER, fileFilter, limits: fileLimits }).single('file'),
   updateFile
 )
 router.delete(`/${files}/:file_id`, removeFile)
