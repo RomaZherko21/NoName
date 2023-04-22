@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from 'sequelize'
+import { DataTypes, literal, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
 
@@ -6,7 +6,7 @@ interface Post {
   id: number
   name: string
   description: string
-  created_at: number
+  created_at: string
   short_description: string | null
   reading_time: number | null
   image: string | null
@@ -42,8 +42,9 @@ PostModel.init(
       type: DataTypes.INTEGER,
     },
     created_at: {
-      type: DataTypes.BIGINT,
+      type: 'TIMESTAMP',
       allowNull: false,
+      defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     image: {
       type: DataTypes.STRING,

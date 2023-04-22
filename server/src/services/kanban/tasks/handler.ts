@@ -11,7 +11,7 @@ import { getTimestamp } from 'shared/helpers'
  * /kanban/tasks:
  *   get:
  *     description: Get a list of kanban tasks
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  */
 export async function getKanbanTasks(req: Request, res: Response, next: NextFunction) {
   try {
@@ -34,7 +34,7 @@ export async function getKanbanTasks(req: Request, res: Response, next: NextFunc
  * /kanban/tasks/{task_id}:
  *   get:
  *     description: Get kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: task_id
  *         in: path
@@ -46,9 +46,61 @@ export async function getKanbanTask({ params }: Request, res: Response, next: Ne
   try {
     const { task_id } = params
 
-    const result: any = await sequelize.query(
-      `SELECT * FROM ${TABLE.kanban_tasks} 
-        WHERE ${TABLE.kanban_tasks}.id=${task_id}`,
+    const result = await sequelize.query(
+      `SELECT
+kt.id,
+kt.name,
+kt.description,
+kt.priority,
+kt.due_date,
+kt.created_at,
+kt.updated_at,
+kta.attachments,
+JSON_ARRAYAGG(ktt.tag_name) as tags,
+users.name as user_name,
+users.surname as user_surname,
+users.middle_name as user_middle_name,
+users.email as user_email,
+users.tel_number as user_tel_number,
+users.role as user_role,
+JSON_ARRAYAGG(u.assigne_to) as assigne_to
+from
+kanban_tasks as kt
+LEFT JOIN (
+SELECT
+    kanban_task_attachments.task_id as task_id,
+    JSON_ARRAYAGG(kanban_task_attachments.url) as attachments
+from
+    kanban_task_attachments
+GROUP BY
+    task_id
+) as kta on kt.id = kta.task_id
+LEFT JOIN (
+SELECT
+    kanban_task_tags.name as tag_name,
+    m2m_kanban_tasks_tags.task_id as task_id
+from
+    kanban_task_tags
+    JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.tag_id = kanban_task_tags.id
+GROUP BY
+    tag_name,
+    task_id
+) as ktt on kt.id = ktt.task_id
+LEFT JOIN (
+SELECT
+    users.avatar as assigne_to,
+    m2m_kanban_users_tasks.task_id as task_id
+from
+    users
+    JOIN m2m_kanban_users_tasks on m2m_kanban_users_tasks.user_id = users.id
+) as u on kt.id = u.task_id
+JOIN users on users.id = kt.created_by
+WHERE
+kt.id = ${task_id}
+GROUP BY
+kt.name,
+kt.id;
+    `,
       {
         type: QueryTypes.SELECT,
       }
@@ -65,7 +117,7 @@ export async function getKanbanTask({ params }: Request, res: Response, next: Ne
  * /kanban/columns/{column_id}/tasks:
  *   post:
  *     description: Create kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: column_id
  *         in: path
@@ -126,7 +178,7 @@ export async function createKanbanTask(
  * /kanban/columns/{column_id}/tasks/{task_id}:
  *   put:
  *     description: Update kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: column_id
  *         in: path
@@ -198,7 +250,7 @@ export async function updateKanbanTask(
  * /kanban/tasks/{task_id}:
  *   delete:
  *     description: Delete kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-tasks]
  *     parameters:
  *       - name: task_id
  *         in: path

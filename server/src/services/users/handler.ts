@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express'
+import fs from 'node:fs'
 import createError from 'http-errors'
 import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
-import { ID, LIMIT, OFFSET, ORDER_TYPE } from 'shared/consts'
+import { ID, LIMIT, OFFSET, ORDER_TYPE, USER_AVATAR_FOLDER } from 'shared/consts'
 import { prettifyUserData } from 'shared/helpers'
 
 /**
@@ -172,11 +173,15 @@ export async function createUser({ body, file }: Request, res: Response, next: N
   try {
     const hash = await bcrypt.hash(body.password, 10)
 
-    await UserModel.create({
+    const user = await UserModel.create({
       ...body,
       password: hash,
-      avatar: file?.filename,
     })
+
+    const newFileName = `${user.dataValues.id}.jpg`
+    fs.renameSync(`${USER_AVATAR_FOLDER}/${file?.filename}`, `${USER_AVATAR_FOLDER}/${newFileName}`)
+
+    await UserModel.update({ avatar: newFileName }, { where: { id: user.dataValues.id } })
 
     res.status(204).send()
   } catch (error: any) {

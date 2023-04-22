@@ -10,7 +10,7 @@ import { TABLE } from 'shared/consts'
  * /kanban/tasks/{task_id}/subtasks:
  *   get:
  *     description: Get all subtasks of one kanban task
- *     tags: [Kanban]
+ *     tags: [Kanban-subtasks]
  *     parameters:
  *       - name: task_id
  *         in: path
@@ -45,7 +45,7 @@ export async function getKanbanSubtasks({ params }: Request, res: Response, next
  * /kanban/tasks/{task_id}/subtasks:
  *   post:
  *     description: Create kanban subtask
- *     tags: [Kanban]
+ *     tags: [Kanban-subtasks]
  *     parameters:
  *       - name: task_id
  *         in: path
@@ -89,7 +89,7 @@ export async function createKanbanSubtask(
  * /kanban/tasks/{task_id}/subtasks/{subtask_id}:
  *   put:
  *     description: Update kanban subtask
- *     tags: [Kanban]
+ *     tags: [Kanban-subtasks]
  *     parameters:
  *       - name: task_id
  *         in: path
@@ -145,7 +145,7 @@ export async function updateKanbanSubtask(
  * /kanban/subtasks/{subtask_id}:
  *   delete:
  *     description: Delete kanban subtask
- *     tags: [Kanban]
+ *     tags: [Kanban-subtasks]
  *     parameters:
  *       - name: subtask_id
  *         in: path

@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from 'sequelize'
+import { DataTypes, literal, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
 
@@ -6,8 +6,8 @@ interface Chat {
   id: number
   name: string
 
-  created_at: number
-  updated_at: number
+  created_at: string
+  updated_at: string
 }
 
 interface ModelCreation extends Optional<Chat, 'id'> {}
@@ -26,12 +26,14 @@ ChatModel.init(
       type: DataTypes.STRING,
     },
     created_at: {
-      type: DataTypes.BIGINT,
+      type: 'TIMESTAMP',
       allowNull: false,
+      defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     updated_at: {
-      type: DataTypes.BIGINT,
+      type: 'TIMESTAMP',
       allowNull: false,
+      defaultValue: literal('CURRENT_TIMESTAMP'),
     },
   },
   {

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Container, Grid, Typography } from '@mui/material'
 
 import Review from './Review'
@@ -41,6 +42,8 @@ const DataReviews = [
 ]
 
 function Reviews() {
+  const { t } = useTranslation()
+
   return (
     <Container
       sx={{
@@ -49,7 +52,7 @@ function Reviews() {
         alignItems: 'center'
       }}
     >
-      <Typography variant="h3">Loved by businesses worldwide.</Typography>
+      <Typography variant="h3">{t('home:reviewTitle')}</Typography>
 
       <Typography
         variant="body1"
@@ -58,8 +61,7 @@ function Reviews() {
           mt: 2
         }}
       >
-        Our template is so simple that people can’t help but fall in love with it. Simplicity is
-        easy when you just skip tons of mission-critical features.
+        {t('home:reviewSubtitle')}
       </Typography>
 
       <Container

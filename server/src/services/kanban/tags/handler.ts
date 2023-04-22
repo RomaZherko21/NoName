@@ -10,7 +10,7 @@ import { TABLE } from 'shared/consts'
  * /kanban/boards/{board_id}/tags:
  *   get:
  *     description: Get all board tags
- *     tags: [Kanban]
+ *     tags: [Kanban-tags]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -43,7 +43,7 @@ export async function getKanbanBoardTags({ params }: Request, res: Response, nex
  * /kanban/boards/{board_id}/tags:
  *   post:
  *     description: Create kanban tag
- *     tags: [Kanban]
+ *     tags: [Kanban-tags]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -84,7 +84,7 @@ export async function createKanbanBoardTag(
  * /kanban/boards/{board_id}/tags/{tag_id}:
  *   put:
  *     description: Update kanban tag
- *     tags: [Kanban]
+ *     tags: [Kanban-tags]
  *     parameters:
  *       - name: board_id
  *         in: path
@@ -137,7 +137,7 @@ export async function updateKanbanBoardTag(
  * /kanban/tags/{tag_id}:
  *   delete:
  *     description: Delete kanban tag
- *     tags: [Kanban]
+ *     tags: [Kanban-tags]
  *     parameters:
  *       - name: tag_id
  *         in: path

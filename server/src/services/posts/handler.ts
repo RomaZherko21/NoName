@@ -1,11 +1,11 @@
 import fs from 'node:fs'
-import path from 'node:path'
 import { NextFunction, Request, Response } from 'express'
 import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
-import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET } from 'shared/consts'
+import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
+import { getTimestamp } from 'shared/helpers'
 
 /**
  * @swagger
@@ -228,11 +228,15 @@ export async function createPost({ body, file }: Request, res: Response, next: N
   try {
     const authorization_id = res.locals.authorization_id
 
+    const newFileName = `${Date.now()}.jpg`
+
+    fs.renameSync(`${POST_FOLDER}/${file?.filename}`, `${POST_FOLDER}/${newFileName}`)
+
     await PostModel.create({
       ...body,
-      image: file?.filename,
+      image: newFileName,
       user_id: authorization_id,
-      created_at: Date.now(),
+      created_at: getTimestamp(),
     })
 
     res.status(204).send()
@@ -256,7 +260,7 @@ export async function createPost({ body, file }: Request, res: Response, next: N
  */
 export async function togglePostLikes({ params }: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = params
+    const { post_id } = params
     const authorization_id = res.locals.authorization_id
 
     const [result]: { post_id: number; user_id: number }[] = await sequelize.query(
@@ -265,7 +269,7 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
         user_id  
       FROM m2m_users_posts_likes
 
-        WHERE m2m_users_posts_likes.post_id=${id} 
+        WHERE m2m_users_posts_likes.post_id=${post_id} 
         AND m2m_users_posts_likes.user_id=${authorization_id} 
         `,
       {
@@ -279,7 +283,7 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
         `DELETE 
         FROM m2m_users_posts_likes
   
-          WHERE m2m_users_posts_likes.post_id=${id} 
+          WHERE m2m_users_posts_likes.post_id=${post_id} 
           AND m2m_users_posts_likes.user_id=${authorization_id} 
           `,
         {
@@ -290,7 +294,7 @@ export async function togglePostLikes({ params }: Request, res: Response, next: 
       await sequelize.query(
         `INSERT 
         INTO  m2m_users_posts_likes(post_id, user_id)
-        VALUES (${id}, ${authorization_id})
+        VALUES (${post_id}, ${authorization_id})
           `,
         {
           type: QueryTypes.INSERT,
@@ -323,12 +327,7 @@ export async function deletePostById({ params }: Request, res: Response, next: N
     const data = await PostModel.findByPk(id)
 
     if (data?.dataValues.image) {
-      const filePath = path.join(
-        path.dirname(require?.main?.path || ''),
-        '/uploads',
-        '/post',
-        data?.dataValues.image
-      )
+      const filePath = `${POST_FOLDER}/${data?.dataValues.image}`
       if (fs.existsSync(filePath)) {
         fs.unlink(filePath, (error) => {
           if (error) throw error
@@ -383,7 +382,7 @@ export async function createPostComment(
       ...body,
       post_id,
       user_id: authorization_id,
-      created_at: Date.now(),
+      created_at: getTimestamp(),
     })
 
     res.status(204).send()
@@ -468,7 +467,7 @@ export async function updatePostComment(
     await PostCommentModel.update(
       {
         ...body,
-        created_at: Date.now(),
+        created_at: getTimestamp(),
       },
       {
         where: {

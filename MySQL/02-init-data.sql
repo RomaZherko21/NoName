@@ -456,7 +456,7 @@ VALUES
         10,
         'Articles are words that define a noun and else',
         'Articles are words that define a noun as specific or unspecific. Consider the following examples:',
-        1664011922672,
+        '2018-01-01 10:40:01',
         '1663318230996.jpg'
     ),
     (
@@ -466,7 +466,7 @@ VALUES
         8,
         'Clothing (also known as clothes, apparel, and attire) are items and else',
         'Clothing (also known as clothes, apparel, and attire) are items worn on the body. Typically, clothing is made of fabrics or textiles, but over time it has included garments made from animal skin and other thin sheets of materials and natural products found in the environment, put together. The wearing of clothing is mostly restricted to human beings and is a feature of all human societies. The amount and type of clothing worn depends on gender, body type, social factors, and geographic considerations. Garments cover the body, footwear covers the feet, gloves cover the hands, while hats and headgear cover the head. Eyewear and jewelry are not generally considered items of clothing, but play an important role in fashion and clothing as costume.',
-        1662011922672,
+        '2018-01-01 10:40:01',
         '1663318230997.jpg'
     ),
     (
@@ -476,7 +476,7 @@ VALUES
         40,
         'The MacBook is a brand of Macintosh notebook and else',
         'The MacBook is a brand of Macintosh notebook computers designed and marketed by Apple Inc. that use Apples macOS operating system since 2006. It replaced the PowerBook and iBook brands during the Mac transition to Intel processors, announced in 2005. The current lineup consists of the MacBook Air (2008–present) and the MacBook Pro (2006–present). Two different lines simply named "MacBook" existed from 2006 to 2012 and 2015 to 2019.',
-        1664611922672,
+        '2018-01-01 10:40:01',
         '1663318230998.jpg'
     ),
     (
@@ -486,7 +486,7 @@ VALUES
         30,
         'A book is a medium for recording information and else',
         'A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.[1] The technical term for this physical arrangement is codex (plural, codices). In the history of hand-held physical supports for extended written compositions or records, the codex replaces its predecessor, the scroll. A single sheet in a codex is a leaf and each side of a leaf is a page.',
-        1664491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -496,7 +496,7 @@ VALUES
         30,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1665491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -506,7 +506,7 @@ VALUES
         40,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1666491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -516,7 +516,7 @@ VALUES
         30,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1667491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -526,7 +526,7 @@ VALUES
         40,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1668491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -536,7 +536,7 @@ VALUES
         45,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1669491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -546,7 +546,7 @@ VALUES
         30,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1671491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -556,7 +556,7 @@ VALUES
         50,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1672491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -566,7 +566,7 @@ VALUES
         10,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1667391922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     ),
     (
@@ -576,7 +576,7 @@ VALUES
         20,
         'A book is a medium for recording information and else',
         ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        1667491922672,
+        '2018-01-01 10:40:01',
         '1663318230999.jpg'
     );
 
@@ -596,16 +596,16 @@ VALUES
 INSERT INTO
     `post_comments` (user_id, post_id, message, created_at)
 VALUES
-    (1, 1, 'So deep...1', 1664011922672),
-    (1, 2, 'So deep...2', 1664022922672),
-    (1, 3, 'So deep...3', 1664019922672),
-    (2, 1, 'So deep...4', 1664088922672),
-    (2, 2, 'So deep...5', 1664014922672),
-    (2, 2, 'So deep...6', 1664014922672),
-    (3, 1, 'So deep...7', 1664011922672),
-    (3, 2, 'So deep...8', 1664017722672),
-    (4, 4, 'So deep...8', 1664017722672),
-    (4, 4, 'So deep...8', 1664017722672);
+    (1, 1, 'So deep...1', '2018-01-01 10:40:01'),
+    (1, 2, 'So deep...2', '2018-01-01 10:40:01'),
+    (1, 3, 'So deep...3', '2018-01-01 10:40:01'),
+    (2, 1, 'So deep...4', '2018-01-01 10:40:01'),
+    (2, 2, 'So deep...5', '2018-01-01 10:40:01'),
+    (2, 2, 'So deep...6', '2018-01-01 10:40:01'),
+    (3, 1, 'So deep...7', '2018-01-01 10:40:01'),
+    (3, 2, 'So deep...8', '2018-01-01 10:40:01'),
+    (4, 4, 'So deep...8', '2018-01-01 10:40:01'),
+    (4, 4, 'So deep...8', '2018-01-01 10:40:01');
 
 INSERT INTO
     `user_connections` (sender_id, recipient_id, status)
@@ -640,36 +640,35 @@ INSERT INTO
 VALUES
     (
         'Chat 1',
-        FLOOR(RAND() * 1640995200000),
-        FLOOR(RAND() * 1640995200000)
+        '2018-01-01 10:40:01',
+        '2018-01-01 10:40:01'
     ),
     (
         'Chat 2',
-        FLOOR(RAND() * 1640995200000),
-        FLOOR(RAND() * 1640995200000)
+        '2018-01-01 10:40:01',
+        '2018-01-01 10:40:01'
     ),
     (
         'Chat 3',
-        FLOOR(RAND() * 1640995200000),
-        FLOOR(RAND() * 1640995200000)
+        '2018-01-01 10:40:01',
+        '2018-01-01 10:40:01'
     ),
     (
         'Chat 4',
-        FLOOR(RAND() * 1640995200000),
-        FLOOR(RAND() * 1640995200000)
+        '2018-01-01 10:40:01',
+        '2018-01-01 10:40:01'
     ),
     (
         'Chat 5',
-        FLOOR(RAND() * 1640995200000),
-        FLOOR(RAND() * 1640995200000)
+        '2018-01-01 10:40:01',
+        '2018-01-01 10:40:01'
     );
 
 INSERT INTO
     `chat_messages` (`text`, `created_at`, `user_id`, `chat_id`)
 SELECT
     CONCAT('Message ', FLOOR(RAND() * 100)),
-    FLOOR(RAND() * 1640995200000),
-    -- случайное время в миллисекундах от 01.01.2022 до текущего момента
+    '2018-01-01 10:40:01',
     FLOOR(RAND() * 2) + 1,
     -- случайный получатель из пользователей (id 1-2)
     1
@@ -780,8 +779,8 @@ INSERT INTO
     `kanban_task_attachments` (task_id, url)
 VALUES
     (1, 'example1.jpg'),
-    (1, 'example1.jpg'),
-    (2, 'example2.png');
+    (1, 'example2.jpg'),
+    (2, 'example3.png');
 
 INSERT INTO
     `kanban_task_tags` (board_id, name)
@@ -808,3 +807,97 @@ VALUES
     (2, 2),
     (3, 2),
     (3, 3);
+
+INSERT INTO
+    `folders` (name, created_at, updated_at)
+VALUES
+    (
+        'Backoffice',
+        '2016-04-05 10:40:01',
+        '2017-01-01 10:40:01'
+    ),
+    (
+        'Pictures',
+        '2017-04-05 10:40:01',
+        '2020-01-01 10:40:01'
+    ),
+    (
+        'Something',
+        '2018-01-01 10:40:01',
+        '2021-04-05 10:40:01'
+    ),
+    (
+        'English',
+        '2019-01-01 10:40:01',
+        '2022-04-05 10:40:01'
+    );
+
+INSERT INTO
+    `files` (
+        name,
+        url,
+        format,
+        size,
+        folder_id,
+        user_id,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        'example1',
+        'example1.jpg',
+        'jpg',
+        20000,
+        1,
+        1,
+        '2016-04-05 10:40:01',
+        '2017-01-01 10:40:01'
+    ),
+    (
+        'example2',
+        'example2.jpg',
+        'jpg',
+        25000,
+        2,
+        1,
+        '2017-04-05 10:40:01',
+        '2020-01-01 10:40:01'
+    ),
+    (
+        'example3',
+        'example3.jpg',
+        'jpg',
+        300000,
+        2,
+        2,
+        '2018-01-01 10:40:01',
+        '2021-04-05 10:40:01'
+    );
+
+INSERT INTO
+    `folder_tags` (name)
+VALUES
+    ('FE'),
+    ('BE'),
+    ('DevOps');
+
+INSERT INTO
+    `m2m_folders_tags` (folder_id, tag_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 2),
+    (3, 2),
+    (3, 3);
+
+INSERT INTO
+    `m2m_users_folders` (folder_id, user_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 1),
+    (3, 1),
+    (3, 2);

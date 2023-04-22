@@ -15,13 +15,13 @@ export interface Post extends Creator {
   first_liked_users: number[]
   comments: Comment[]
 
-  created_at: number
+  created_at: string
 }
 
 export interface Comment extends Creator {
   id: number
   post_id: number
-  created_at: number
+  created_at: string
   message: string
 }
 

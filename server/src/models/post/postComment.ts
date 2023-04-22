@@ -1,11 +1,11 @@
-import { DataTypes, Model, Optional } from 'sequelize'
+import { DataTypes, literal, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
 
 interface PostComment {
   id: number
   message: string | null
-  created_at: number | null
+  created_at: string | null
 
   user_id: number
   post_id: number
@@ -27,7 +27,9 @@ PostCommentModel.init(
       type: DataTypes.TEXT,
     },
     created_at: {
-      type: DataTypes.BIGINT,
+      type: 'TIMESTAMP',
+      allowNull: false,
+      defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     user_id: {
       type: DataTypes.INTEGER,

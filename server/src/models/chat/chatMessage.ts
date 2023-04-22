@@ -1,11 +1,11 @@
-import { DataTypes, Model, Optional } from 'sequelize'
+import { DataTypes, literal, Model, Optional } from 'sequelize'
 
 import sequelize from '../init'
 
 interface ChatMessage {
   id: number
   text: string
-  created_at: number
+  created_at: string
 
   user_id: number
   chat_id: number
@@ -28,8 +28,9 @@ ChatMessageModel.init(
       allowNull: false,
     },
     created_at: {
-      type: DataTypes.BIGINT,
+      type: 'TIMESTAMP',
       allowNull: false,
+      defaultValue: literal('CURRENT_TIMESTAMP'),
     },
     user_id: {
       type: DataTypes.INTEGER,
