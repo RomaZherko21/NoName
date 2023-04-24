@@ -65,9 +65,17 @@ const lightTheme = {
       700: 'rgba(17, 25, 39, 0.12)',
       800: '#D1D5DB',
       900: '#111827'
-    }
+    },
+    divider: 'rgb(45, 55, 72)'
   },
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: '#2d3748'
+        }
+      }
+    },
     MuiTableHead: {
       styleOverrides: {
         root: {
@@ -82,6 +90,53 @@ const lightTheme = {
       styleOverrides: {
         root: {
           borderBottom: '1px solid rgb(242, 244, 247)'
+        }
+      }
+    },
+    MuiAlert: {
+      styleOverrides: {
+        standardError: {
+          backgroundColor: 'rgb(254, 252, 252)',
+          color: 'rgb(101, 91, 90)',
+          fontSize: 16
+        }
+      }
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgb(195, 196, 249)',
+          '& .MuiLinearProgress-barColorPrimary': {
+            backgroundColor: 'rgb(99, 102, 241)'
+          }
+        }
+      }
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          scrollbarColor: 'rgba(55, 65, 81, 0.04) #FFF',
+          '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
+            backgroundColor: '#FFF'
+          },
+          '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
+            borderRadius: 8,
+            backgroundColor: 'rgba(55, 65, 81, 0.04)',
+            minHeight: 24,
+            border: '3px solid rgba(55, 65, 81, 0.04)'
+          },
+          '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
+            backgroundColor: 'rgba(17, 25, 39, 0.12)'
+          },
+          '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
+            backgroundColor: 'rgba(17, 25, 39, 0.12)'
+          },
+          '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: 'rgba(17, 25, 39, 0.12)'
+          },
+          '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
+            backgroundColor: 'rgba(17, 25, 39, 0.12)'
+          }
         }
       }
     }
