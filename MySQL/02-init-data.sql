@@ -50,7 +50,7 @@ VALUES
         '+375257096714',
         '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
         'admin',
-        '1663318230996.png'
+        '1.png'
     ),
     (
         'Adam',
@@ -76,346 +76,198 @@ VALUES
         '+375257096717',
         '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
         'user',
-        '1663318230997.png'
-    ),
-    (
-        'Alexa',
-        'Richardson',
-        'William',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'lexa@gmail.com',
-        'woman',
-        '1991-08-13',
-        '+375257096718',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'admin',
-        '1663318230998.png'
-    ),
-    (
-        'Cao',
-        'Yu',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'chao@gmail.com',
-        'man',
-        '1956-03-13',
-        '+375257096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '1663318230999.png'
-    ),
-    (
-        'Mila',
-        'Kunis',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        '	mila@kunis.com',
-        'man',
-        '1966-03-13',
-        '+375258096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521111.png'
-    ),
-    (
-        'George',
-        'Clooney',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'marlon@brando.com',
-        'man',
-        '1926-03-13',
-        '+375259096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521112.png'
-    ),
-    (
-        'Ryan',
-        'Gossling',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'jack@nicholson',
-        'man',
-        '1936-03-13',
-        '+375251096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521113.png'
-    ),
-    (
-        'Badri',
-        'Gabriel',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'humphrey@bogart.com',
-        'man',
-        '1936-03-13',
-        '+375252096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521114.png'
-    ),
-    (
-        'Revaz',
-        'Imeda',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'spencer@tracy',
-        'man',
-        '1946-03-13',
-        '+375253096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521115.png'
-    ),
-    (
-        'Grigol',
-        'Tornike',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'marlo2n@brando.com',
-        'man',
-        '1966-03-13',
-        '+375254096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521116.png'
-    ),
-    (
-        'Temur',
-        'Lidia',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'lidia@brando.com',
-        'man',
-        '1976-03-13',
-        '+375255096719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'admin',
-        '167580521117.png'
-    ),
-    (
-        'Tedore',
-        'Merab',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'Merab@gmail.com',
-        'man',
-        '1976-03-13',
-        '+375255196719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521118.png'
-    ),
-    (
-        'Stepane',
-        'Daviti',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'Daviti@gmail.com',
-        'man',
-        '2001-04-13',
-        '+375255296719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521119.png'
-    ),
-    (
-        'Keto',
-        'Liana',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'Liana@gmail.com',
-        'woman',
-        '2005-05-13',
-        '+375255396719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'user',
-        '167580521121.png'
-    ),
-    (
-        'Zurab',
-        'Tamar',
-        'Jr.',
-        'Chief Accountant',
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        'AFG',
-        'Kabul',
-        'USA',
-        'New York',
-        '4062836884511050',
-        'Xin Qian Jespersen',
-        '04/2027',
-        '575',
-        'Tamar@gmail.com',
-        'man',
-        '2003-06-13',
-        '+375255496719',
-        '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS',
-        'admin',
-        '167580521122.png'
+        '2.png'
     );
+
+INSERT INTO
+    users (
+        name,
+        surname,
+        middle_name,
+        email,
+        tel_number,
+        job_title,
+        gender,
+        date_of_birth,
+        role,
+        avatar,
+        profile_background,
+        native_country,
+        native_city,
+        residence_country,
+        residence_city,
+        card_number,
+        name_on_card,
+        valid_thru,
+        cvv,
+        is_email_verified,
+        is_phone_verified,
+        is_two_factor_auth_active,
+        is_sms_alerts_active,
+        is_email_alerts_active,
+        password
+    )
+SELECT
+    CONCAT('Name', i) AS name,
+    CONCAT('Surname', i) AS surname,
+    CONCAT('MiddleName', i) AS middle_name,
+    CONCAT('email', i + 10000, '@example.com') AS email,
+    CONCAT('+37525', i + 1000000) AS tel_number,
+    CONCAT('Job Title', i) AS job_title,
+    IF(i % 2 = 0, 'woman', 'man') AS gender,
+    DATE_ADD(
+        '1970-01-01',
+        INTERVAL FLOOR(RAND() * 365 * 50) DAY
+    ) AS date_of_birth,
+    IF(RAND() < 0.5, 'admin', 'user') AS role,
+    '3.png' AS avatar,
+    '3.png' AS profile_background,
+    CONCAT('NativeCountry', i) AS native_country,
+    CONCAT('NativeCity', i) AS native_city,
+    CONCAT('ResidenceCountry', i) AS residence_country,
+    CONCAT('ResidenceCity', i) AS residence_city,
+    10 AS card_number,
+    CONCAT('Name on Card', i) AS name_on_card,
+    CONCAT('12/2', i % 10, '/2025') AS valid_thru,
+    CONCAT(FLOOR(RAND() * 100)) AS cvv,
+    IF(RAND() < 0.5, 1, 0) AS is_email_verified,
+    IF(RAND() < 0.5, 1, 0) AS is_phone_verified,
+    IF(RAND() < 0.5, 1, 0) AS is_two_factor_auth_active,
+    IF(RAND() < 0.5, 1, 0) AS is_sms_alerts_active,
+    IF(RAND() < 0.5, 1, 0) AS is_email_alerts_active,
+    '$2b$10$qrN6JkJjKG8fa2tEUvyhb.2Hfgpx8w4l7/Mb3y4/rZXdMMRGWHEkS' AS password
+FROM
+    (
+        SELECT
+            n + m * 10 + o * 100 + p * 1000 + 1 AS i
+        FROM
+            (
+                SELECT
+                    0 AS n
+                UNION
+                SELECT
+                    1
+                UNION
+                SELECT
+                    2
+                UNION
+                SELECT
+                    3
+                UNION
+                SELECT
+                    4
+                UNION
+                SELECT
+                    5
+                UNION
+                SELECT
+                    6
+                UNION
+                SELECT
+                    7
+                UNION
+                SELECT
+                    8
+                UNION
+                SELECT
+                    9
+            ) a,
+            (
+                SELECT
+                    0 AS m
+                UNION
+                SELECT
+                    1
+                UNION
+                SELECT
+                    2
+                UNION
+                SELECT
+                    3
+                UNION
+                SELECT
+                    4
+                UNION
+                SELECT
+                    5
+                UNION
+                SELECT
+                    6
+                UNION
+                SELECT
+                    7
+                UNION
+                SELECT
+                    8
+                UNION
+                SELECT
+                    9
+            ) b,
+            (
+                SELECT
+                    0 AS o
+                UNION
+                SELECT
+                    1
+                UNION
+                SELECT
+                    2
+                UNION
+                SELECT
+                    3
+                UNION
+                SELECT
+                    4
+                UNION
+                SELECT
+                    5
+                UNION
+                SELECT
+                    6
+                UNION
+                SELECT
+                    7
+                UNION
+                SELECT
+                    8
+                UNION
+                SELECT
+                    9
+            ) c,
+            (
+                SELECT
+                    0 AS p
+                UNION
+                SELECT
+                    1
+                UNION
+                SELECT
+                    2
+                UNION
+                SELECT
+                    3
+                UNION
+                SELECT
+                    4
+                UNION
+                SELECT
+                    5
+                UNION
+                SELECT
+                    6
+                UNION
+                SELECT
+                    7
+                UNION
+                SELECT
+                    8
+                UNION
+                SELECT
+                    9
+            ) d
+    ) numbers
+WHERE
+    i <= 1000;
 
 INSERT INTO
     `genres` (name)
@@ -438,279 +290,164 @@ VALUES
     ('Fiction');
 
 INSERT INTO
-    `posts` (
-        user_id,
-        genre_id,
+    posts (
         name,
-        reading_time,
         short_description,
         description,
+        reading_time,
         created_at,
-        image
+        image,
+        user_id,
+        genre_id
     )
-VALUES
-    (
-        1,
-        1,
-        'What are articles?',
-        10,
-        'Articles are words that define a noun and else',
-        'Articles are words that define a noun as specific or unspecific. Consider the following examples:',
-        '2018-01-01 10:40:01',
-        '1663318230996.jpg'
-    ),
-    (
-        1,
-        2,
-        'Clothing',
-        8,
-        'Clothing (also known as clothes, apparel, and attire) are items and else',
-        'Clothing (also known as clothes, apparel, and attire) are items worn on the body. Typically, clothing is made of fabrics or textiles, but over time it has included garments made from animal skin and other thin sheets of materials and natural products found in the environment, put together. The wearing of clothing is mostly restricted to human beings and is a feature of all human societies. The amount and type of clothing worn depends on gender, body type, social factors, and geographic considerations. Garments cover the body, footwear covers the feet, gloves cover the hands, while hats and headgear cover the head. Eyewear and jewelry are not generally considered items of clothing, but play an important role in fashion and clothing as costume.',
-        '2018-01-01 10:40:01',
-        '1663318230997.jpg'
-    ),
-    (
-        2,
-        3,
-        'MacBook',
-        40,
-        'The MacBook is a brand of Macintosh notebook and else',
-        'The MacBook is a brand of Macintosh notebook computers designed and marketed by Apple Inc. that use Apples macOS operating system since 2006. It replaced the PowerBook and iBook brands during the Mac transition to Intel processors, announced in 2005. The current lineup consists of the MacBook Air (2008–present) and the MacBook Pro (2006–present). Two different lines simply named "MacBook" existed from 2006 to 2012 and 2015 to 2019.',
-        '2018-01-01 10:40:01',
-        '1663318230998.jpg'
-    ),
-    (
-        3,
-        4,
-        'Book',
-        30,
-        'A book is a medium for recording information and else',
-        'A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.[1] The technical term for this physical arrangement is codex (plural, codices). In the history of hand-held physical supports for extended written compositions or records, the codex replaces its predecessor, the scroll. A single sheet in a codex is a leaf and each side of a leaf is a page.',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        2,
-        4,
-        'Book',
-        30,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        1,
-        4,
-        'Book',
-        40,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        2,
-        5,
-        'Book',
-        30,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        3,
-        6,
-        'Book',
-        40,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        4,
-        7,
-        'Book',
-        45,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        5,
-        8,
-        'Book',
-        30,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        6,
-        9,
-        'Book',
-        50,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        7,
-        10,
-        'Book',
-        10,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    ),
-    (
-        8,
-        11,
-        'Book',
-        20,
-        'A book is a medium for recording information and else',
-        ' <head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>',
-        '2018-01-01 10:40:01',
-        '1663318230999.jpg'
-    );
-
-INSERT INTO
-    `m2m_users_posts_likes` (user_id, post_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 1),
-    (2, 2),
-    (2, 3),
-    (2, 4),
-    (3, 2),
-    (4, 4);
-
-INSERT INTO
-    `post_comments` (user_id, post_id, message, created_at)
-VALUES
-    (1, 1, 'So deep...1', '2018-01-01 10:40:01'),
-    (1, 2, 'So deep...2', '2018-01-01 10:40:01'),
-    (1, 3, 'So deep...3', '2018-01-01 10:40:01'),
-    (2, 1, 'So deep...4', '2018-01-01 10:40:01'),
-    (2, 2, 'So deep...5', '2018-01-01 10:40:01'),
-    (2, 2, 'So deep...6', '2018-01-01 10:40:01'),
-    (3, 1, 'So deep...7', '2018-01-01 10:40:01'),
-    (3, 2, 'So deep...8', '2018-01-01 10:40:01'),
-    (4, 4, 'So deep...8', '2018-01-01 10:40:01'),
-    (4, 4, 'So deep...8', '2018-01-01 10:40:01');
-
-INSERT INTO
-    `user_connections` (sender_id, recipient_id, status)
-VALUES
-    (1, 2, 'accept'),
-    (1, 3, 'decline'),
-    (1, 4, 'pending'),
-    (8, 1, 'pending'),
-    (9, 1, 'decline'),
-    (10, 1, 'decline'),
-    (11, 1, 'accept'),
-    (12, 1, 'accept'),
-    (1, 13, 'decline'),
-    (1, 14, 'accept'),
-    (1, 15, 'pending'),
-    (2, 3, 'decline'),
-    (2, 4, 'pending'),
-    (8, 2, 'pending'),
-    (9, 2, 'decline'),
-    (10, 2, 'decline'),
-    (11, 2, 'accept'),
-    (12, 2, 'accept'),
-    (2, 13, 'decline'),
-    (2, 14, 'accept'),
-    (2, 15, 'pending'),
-    (2, 4, 'accept'),
-    (2, 3, 'pending'),
-    (3, 4, 'pending');
-
-INSERT INTO
-    `chats` (`name`, `created_at`, `updated_at`)
-VALUES
-    (
-        'Chat 1',
-        '2018-01-01 10:40:01',
-        '2018-01-01 10:40:01'
-    ),
-    (
-        'Chat 2',
-        '2018-01-01 10:40:01',
-        '2018-01-01 10:40:01'
-    ),
-    (
-        'Chat 3',
-        '2018-01-01 10:40:01',
-        '2018-01-01 10:40:01'
-    ),
-    (
-        'Chat 4',
-        '2018-01-01 10:40:01',
-        '2018-01-01 10:40:01'
-    ),
-    (
-        'Chat 5',
-        '2018-01-01 10:40:01',
-        '2018-01-01 10:40:01'
-    );
-
-INSERT INTO
-    `chat_messages` (`text`, `created_at`, `user_id`, `chat_id`)
 SELECT
-    CONCAT('Message ', FLOOR(RAND() * 100)),
-    '2018-01-01 10:40:01',
-    FLOOR(RAND() * 2) + 1,
-    -- случайный получатель из пользователей (id 1-2)
-    1
+    CONCAT('Name', i) AS name,
+    CONCAT('ShortDescription', i) AS short_description,
+    '<head> <title>Div Align Attribbute</title> </head> <body> <div align="left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="right"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> <div align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div> </body>' AS description,
+    FLOOR(RAND() * 100) AS reading_time,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    '1663318230996.jpg' AS image,
+    FLOOR((RAND() * 10) + 1) AS user_id,
+    FLOOR((RAND() * 10) + 1) AS genre_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            200
+    ) AS t;
+
+INSERT INTO
+    m2m_users_posts_likes (user_id, post_id)
+SELECT
+    i AS user_id,
+    FLOOR((RAND() * 200) + 1) AS post_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            1000
+    ) AS t;
+
+INSERT INTO
+    post_comments (user_id, post_id, message, created_at)
+SELECT
+    FLOOR((RAND() * 10) + 1) AS user_id,
+    FLOOR((RAND() * 200) + 1) AS post_id,
+    CONCAT('Message...', i) AS message,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            1000
+    ) AS t;
+
+INSERT INTO
+    user_connections (sender_id, recipient_id, status)
+SELECT
+    FLOOR((RAND() * 5) + 1) AS sender_id,
+    i + 1 + 10 AS recipient_id,
+    IF(RAND() < 0.5, 'pending', 'accept') AS status
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            500
+    ) AS t;
+
+INSERT INTO
+    chats (name, created_at, updated_at)
+SELECT
+    CONCAT('Chat...', i) AS name,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS updated_at
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            20
+    ) AS t;
+
+INSERT INTO
+    chat_messages (text, created_at, user_id, chat_id)
+SELECT
+    CONCAT('Message ', FLOOR(RAND() * 1000)) as text,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    FLOOR(RAND() * 5) + 1 as user_id,
+    FLOOR(RAND() * 10) + 1 as chat_id
 FROM
     information_schema.tables
 LIMIT
-    100;
+    3000;
 
 INSERT INTO
-    `m2m_users_chats` (user_id, chat_id)
-VALUES
-    (1, 1),
-    (2, 1),
-    (1, 2),
-    (3, 2),
-    (1, 3),
-    (4, 3),
-    (1, 4),
-    (5, 4);
+    m2m_users_chats (user_id, chat_id)
+SELECT
+    1 as user_id,
+    i as chat_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            10
+    ) AS t;
 
 -- KANBAN
 INSERT INTO
-    `kanban_boards` (name, description, created_at, updated_at)
-VALUES
+    kanban_boards (name, description, created_at, updated_at)
+SELECT
+    CONCAT('Name ', i) as name,
+    CONCAT('Description ', i) as description,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS updated_at
+FROM
     (
-        'Frontend',
-        'Some description...',
-        '2016-01-01 10:40:01',
-        '2022-04-04 12:04:01'
-    ),
-    (
-        'Backend',
-        'Some description...',
-        '2017-03-08 10:40:01',
-        '2022-03-03 12:04:01'
-    ),
-    (
-        'DevOps',
-        'Some description...',
-        '2018-04-11 10:40:01',
-        '2021-04-04 12:04:01'
-    );
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            10
+    ) AS t;
 
 INSERT INTO
     `kanban_columns` (name, position, board_id)
@@ -723,7 +460,7 @@ VALUES
     ('Todo', 0, 3);
 
 INSERT INTO
-    `kanban_tasks` (
+    kanban_tasks (
         name,
         description,
         priority,
@@ -733,107 +470,108 @@ INSERT INTO
         column_id,
         created_by
     )
-VALUES
+SELECT
+    CONCAT('FE-', i) as name,
+    CONCAT('Some description... ', i) as description,
+    FLOOR(RAND() * 4 + 1) as priority,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS due_date,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS updated_at,
+    FLOOR(RAND() * 3 + 1) as column_id,
+    FLOOR(RAND() * 3 + 1) as created_by
+FROM
     (
-        'FE-1',
-        'Some description...',
-        '1',
-        '2016-01-01 10:40:01',
-        '2022-04-04 12:04:01',
-        '2025-04-04 12:04:01',
-        1,
-        1
-    ),
-    (
-        'FE-2',
-        'Some description...',
-        '2',
-        '2017-03-08 10:40:01',
-        '2022-03-03 12:04:01',
-        '2025-04-04 12:04:01',
-        1,
-        1
-    ),
-    (
-        'FE-3',
-        'Some description...',
-        '3',
-        '2018-04-11 10:40:01',
-        '2021-04-04 12:04:01',
-        '2025-04-04 12:04:01',
-        2,
-        2
-    );
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            100
+    ) AS t;
 
 INSERT INTO
-    `kanban_subtasks` (name, is_completed, task_id)
-VALUES
-    ('1.1', FALSE, 1),
-    ('1.2', FALSE, 1),
-    ('1.3', TRUE, 1),
-    ('2.2', TRUE, 2),
-    ('2.3', FALSE, 2),
-    ('2.3', TRUE, 3);
+    kanban_subtasks (name, is_completed, task_id)
+SELECT
+    CONCAT('Name ', FLOOR(RAND() * 1000)) as name,
+    IF(RAND() < 0.5, 1, 0) AS is_completed,
+    FLOOR(RAND() * 10 + 1) as task_id
+FROM
+    information_schema.tables
+LIMIT
+    500;
 
 INSERT INTO
-    `kanban_task_attachments` (task_id, url)
-VALUES
-    (1, 'example1.jpg'),
-    (1, 'example2.jpg'),
-    (2, 'example3.png');
+    kanban_task_attachments (url, task_id)
+SELECT
+    CONCAT('example', FLOOR(RAND() * 2 + 1), '.jpg') as url,
+    FLOOR(RAND() * 10 + 1) as task_id
+FROM
+    information_schema.tables
+LIMIT
+    500;
 
 INSERT INTO
-    `kanban_task_tags` (board_id, name)
-VALUES
-    (1, 'FE'),
-    (1, 'BE'),
-    (1, 'DevOps'),
-    (2, 'FE'),
-    (2, 'DevOps');
+    kanban_task_tags (name, board_id)
+SELECT
+    CONCAT('FE-', FLOOR(RAND() * 1000)) as name,
+    FLOOR(RAND() * 5 + 1) as board_id
+FROM
+    information_schema.tables
+LIMIT
+    50;
 
 INSERT INTO
-    `m2m_kanban_tasks_tags` (task_id, tag_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3);
-
-INSERT INTO
-    `m2m_kanban_users_tasks` (user_id, task_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 2),
-    (3, 2),
-    (3, 3);
-
-INSERT INTO
-    `folders` (name, created_at, updated_at)
-VALUES
+    m2m_kanban_tasks_tags (task_id, tag_id)
+SELECT
+    i as task_id,
+    FLOOR(RAND() * 50 + 1) as created_by
+FROM
     (
-        'Backoffice',
-        '2016-04-05 10:40:01',
-        '2017-01-01 10:40:01'
-    ),
-    (
-        'Pictures',
-        '2017-04-05 10:40:01',
-        '2020-01-01 10:40:01'
-    ),
-    (
-        'Something',
-        '2018-01-01 10:40:01',
-        '2021-04-05 10:40:01'
-    ),
-    (
-        'English',
-        '2019-01-01 10:40:01',
-        '2022-04-05 10:40:01'
-    );
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            50
+    ) AS t;
 
 INSERT INTO
-    `files` (
+    m2m_kanban_users_tasks (user_id, task_id)
+SELECT
+    i as user_id,
+    FLOOR(RAND() * 10 + 1) as task_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            500
+    ) AS t;
+
+INSERT INTO
+    folders (name, created_at, updated_at)
+SELECT
+    CONCAT('FE-', FLOOR(RAND() * 100)) as name,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS updated_at
+FROM
+    information_schema.tables
+LIMIT
+    20;
+
+INSERT INTO
+    files (
         name,
         url,
         format,
@@ -843,61 +581,61 @@ INSERT INTO
         created_at,
         updated_at
     )
-VALUES
-    (
-        'example1',
-        'example1.jpg',
-        'jpg',
-        20000,
-        1,
-        1,
-        '2016-04-05 10:40:01',
-        '2017-01-01 10:40:01'
-    ),
-    (
-        'example2',
-        'example2.jpg',
-        'jpg',
-        25000,
-        2,
-        1,
-        '2017-04-05 10:40:01',
-        '2020-01-01 10:40:01'
-    ),
-    (
-        'example3',
-        'example3.jpg',
-        'jpg',
-        300000,
-        2,
-        2,
-        '2018-01-01 10:40:01',
-        '2021-04-05 10:40:01'
-    );
+SELECT
+    CONCAT('File', FLOOR(RAND() * 100)) as name,
+    'example1.jpg' AS url,
+    'jpg' AS format,
+    FLOOR(RAND() * 100000) AS size,
+    FLOOR(RAND() * 10 + 1) AS folder_id,
+    FLOOR(RAND() * 10 + 1) AS user_id,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS created_at,
+    DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY) AS updated_at
+FROM
+    information_schema.tables
+LIMIT
+    20;
 
 INSERT INTO
-    `folder_tags` (name)
-VALUES
-    ('FE'),
-    ('BE'),
-    ('DevOps');
+    folder_tags (name)
+SELECT
+    CONCAT('Tag', FLOOR(RAND() * 1000)) as name
+FROM
+    information_schema.tables
+LIMIT
+    50;
 
 INSERT INTO
-    `m2m_folders_tags` (folder_id, tag_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 2),
-    (3, 2),
-    (3, 3);
+    m2m_folders_tags (folder_id, tag_id)
+SELECT
+    FLOOR(RAND() * 10 + 1) as folder_id,
+    i as tag_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            40
+    ) AS t;
 
 INSERT INTO
-    `m2m_users_folders` (folder_id, user_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 1),
-    (3, 1),
-    (3, 2);
+    m2m_users_folders (folder_id, user_id)
+SELECT
+    FLOOR(RAND() * 10 + 1) as folder_id,
+    i as user_id
+FROM
+    (
+        SELECT
+            ROW_NUMBER() OVER (
+                ORDER BY
+                    RAND()
+            ) AS i
+        FROM
+            information_schema.columns
+        LIMIT
+            500
+    ) AS t;

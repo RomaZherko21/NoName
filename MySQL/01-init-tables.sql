@@ -47,18 +47,22 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `user_id` INT NOT NULL,
   `genre_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
   FOREIGN KEY (`genre_id`) REFERENCES genres(`id`) ON DELETE
   SET
-    NULL ON UPDATE CASCADE
+    NULL ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `m2m_users_posts_likes` (
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
   PRIMARY KEY (`user_id`, `post_id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `post_comments` (
@@ -68,8 +72,10 @@ CREATE TABLE IF NOT EXISTS `post_comments` (
   `post_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `user_connections` (
@@ -78,8 +84,10 @@ CREATE TABLE IF NOT EXISTS `user_connections` (
   `sender_id` INT NOT NULL,
   `recipient_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`sender_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`recipient_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`sender_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`recipient_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `chats` (
@@ -97,16 +105,20 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
   `user_id` INT NOT NULL,
   `chat_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS m2m_users_chats (
   `user_id` INT NOT NULL,
   `chat_id` INT NOT NULL,
   PRIMARY KEY (user_id, chat_id),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 -- KANBAN
@@ -125,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `kanban_columns` (
   `position` TINYINT,
   `board_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_tasks` (
@@ -139,8 +152,10 @@ CREATE TABLE IF NOT EXISTS `kanban_tasks` (
   `column_id` INT NOT NULL,
   `created_by` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`created_by`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`created_by`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_subtasks` (
@@ -149,7 +164,8 @@ CREATE TABLE IF NOT EXISTS `kanban_subtasks` (
   `is_completed` BOOLEAN,
   `task_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_task_attachments` (
@@ -157,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `kanban_task_attachments` (
   `url` VARCHAR(255),
   `task_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_task_tags` (
@@ -165,23 +182,28 @@ CREATE TABLE IF NOT EXISTS `kanban_task_tags` (
   `name` VARCHAR(50),
   `board_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS m2m_kanban_tasks_tags (
   `task_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
   PRIMARY KEY (task_id, tag_id),
-  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`tag_id`) REFERENCES kanban_task_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`tag_id`) REFERENCES kanban_task_tags(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS m2m_kanban_users_tasks (
   `user_id` INT NOT NULL,
   `task_id` INT NOT NULL,
   PRIMARY KEY (user_id, task_id),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 -- FILE MANAGER
@@ -216,8 +238,10 @@ CREATE TABLE IF NOT EXISTS `files` (
   `folder_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `folder_tags` (
@@ -230,16 +254,20 @@ CREATE TABLE IF NOT EXISTS m2m_folders_tags (
   `folder_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
   PRIMARY KEY (folder_id, tag_id),
-  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`tag_id`) REFERENCES folder_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`tag_id`) REFERENCES folder_tags(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS m2m_users_folders (
   `folder_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (folder_id, user_id),
-  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON
+  UPDATE CASCADE
 );
 
 -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов
@@ -295,3 +323,19 @@ CREATE TABLE IF NOT EXISTS m2m_users_folders (
 -- DELETE удаление
 -- UPDATE Обновление
 -- REPLACE Обновление (если есть строка с таким же первичным ключом) или создание новой строки с новым первичным ключом
+-- INSERT INTO
+--     genres (name)
+-- SELECT
+--     CONCAT('Genre ', num)
+-- FROM
+--     (
+--         SELECT
+--             ROW_NUMBER() OVER (
+--                 ORDER BY
+--                     RAND()
+--             ) AS num
+--         FROM
+--             information_schema.columns
+--         LIMIT
+--             1000
+--     ) AS t;

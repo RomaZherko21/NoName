@@ -34,7 +34,7 @@ UsersPostsLikesModel.init(
   },
   {
     sequelize,
-    tableName: 'm2m_users_chats',
+    tableName: 'm2m_users_posts_likes',
     timestamps: false,
   }
 )
