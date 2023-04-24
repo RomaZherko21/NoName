@@ -23,3 +23,17 @@ export interface KanbanComment {
 
 //   user_avatar: string
 // }
+export interface KanbanBoard {
+  created_at: number
+  description: string
+  id: number
+  name: string
+  updated_at: string
+}
+
+export interface KanbanBoardColumn {
+  board_id: number
+  id: number
+  name: string
+  position: number
+}
