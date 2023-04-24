@@ -14,7 +14,5 @@ export const  editBoard = async (id: number, board: KanbanColumn ) => await fetc
 
 export const  deleteBoard = async (id: number) => await fetch.delete<KanbanColumn>(`${ENDPOINT_BASE}/${id}`)
 
-
-export const  getByIdColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/${id}/columns`) 
-
+// export const  getByIdColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/${id}/columns`) 
 
