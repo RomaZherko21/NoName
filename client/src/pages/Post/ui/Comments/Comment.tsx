@@ -5,6 +5,7 @@ import { FiMoreVertical } from 'react-icons/fi'
 
 import { API_USER_AVATAR_URL } from 'shared/consts'
 import { Comment as CommentT } from 'shared/types'
+import { fromTimestampToDate } from 'shared/helpers'
 import { PopupMenu } from 'shared/ui'
 
 import { getCommentPopupConfig } from './CommentPopupConfig'
@@ -48,9 +49,7 @@ function Comment({ comment, isOwner }: Props) {
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant="body2">
-              {new Date(comment.created_at).toLocaleDateString()}
-            </Typography>
+            <Typography variant="body2">{fromTimestampToDate(comment.created_at)}</Typography>
             {isOwner && (
               <PopupMenu
                 ActionButton={(btnProps) => (

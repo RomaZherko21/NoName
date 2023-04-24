@@ -9,6 +9,7 @@ export const ROUTES = {
   connections: 'connections',
   chat: 'chat',
   files: 'files',
+  fileManager: { files: 'files', folders: 'folders' },
   kanban: {
     kanban: 'kanban',
     boards: 'boards',

@@ -1,6 +1,13 @@
 {
   "title": "Everything you need to know",
   "subtitle": "Frequently asked questions",
+  "menu": "MENU",
+  "legal": "LEGAL",
+  "social": "SOCIAL",
+  "rights": "All Rights Reserved.",
+  "development": "© 2023 NoName",
+  "reviewTitle": "Loved by businesses worldwide.",
+  "reviewSubtitle": "Our template is so simple that people can’t help but fall in love with it. Simplicity is easy when you just skip tons of mission-critical features.",
   "components": "Components",
   "pages": "Pages",
   "docs": "Docs",
@@ -8,9 +15,18 @@
     "title": "Start saving time today!",
     "subtitle": "Not just a set of tools, the package includes ready-to-deploy conceptual applications written in JavaScript & TypeScript."
   },
-  "purchaseNow": "Purchase Now",
   "toolsItems": {
     "title": "Everything you need to run your project.",
     "subtitle": "Not just a set of tools, the package includes ready-to-deploy conceptual application."
-  }
+  },
+  "purchaseNow": "Purchase Now",
+  "mainTitle": {
+    "title": "Let us worry about",
+    "the": "the ",
+    "userExperience": " User Experience",
+    "focus": "you focus on Developing."
+  },
+  "mainSubtitle": "A professional kit that comes with ready-to-use MUI components developed with one common goal in mind, help you build faster & beautiful applications.",
+  "liveDemo": "Live Demo",
+  "basedOn": "based on ({{count}}+ reviews)"
 }

@@ -9,6 +9,9 @@ export {
   KanbanSubtaskModel,
   KanbanTagModel,
   KanbanTaskModel,
+  KanbanAttachmentsModel,
 } from './kanban'
+
+export { FileModel, FolderModel } from './fileManager'
 
 import './join'

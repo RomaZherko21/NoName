@@ -14,7 +14,7 @@ class FilesModel {
       type: 'folder',
       size: '503.9 MB',
       count: 12,
-      created_at: 'Feb 13, 2023',
+      created_at: '2018-01-01 10:40:01',
       is_favourite: false,
       tags: ['Business', 'Work']
     },
@@ -24,7 +24,7 @@ class FilesModel {
       type: 'folder',
       size: '403.9 MB',
       count: 9,
-      created_at: 'Feb 13, 2023',
+      created_at: '2018-01-01 10:40:01',
       is_favourite: false,
       tags: ['Friends', 'Personal']
     },
@@ -34,7 +34,7 @@ class FilesModel {
       type: 'folder',
       size: '303.9 MB',
       count: 11,
-      created_at: 'Feb 13, 2023',
+      created_at: '2018-01-01 10:40:01',
       is_favourite: true,
       tags: ['Homework', 'Holiday']
     }

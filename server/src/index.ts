@@ -10,10 +10,11 @@ import cors from 'cors'
 import { useHttpError, useAuth } from 'middlewares'
 import { sequelize } from 'models'
 import { log } from 'shared/helpers'
-import { specs } from 'config'
+import { initEmptyFolders, specs } from 'config'
 import wsHandler from 'wsHandler'
 
 import router from './routes'
+import { ROOT_UPLOADS_FOLDER } from 'shared/consts'
 
 const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT_INNER } = process.env
 
@@ -26,11 +27,13 @@ const corsOptions = {
   origin: `${CLIENT_PROTOCOL}://${CLIENT_HOST}:${CLIENT_PORT}`,
 }
 
+initEmptyFolders()
+
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs))
-app.use('/uploads', express.static(path.join('uploads')))
+app.use('/uploads', express.static(path.join(ROOT_UPLOADS_FOLDER)))
 
 app.use(useAuth)
 

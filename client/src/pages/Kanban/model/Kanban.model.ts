@@ -15,12 +15,12 @@ class KanbanModel {
         {
           id: '1',
           content: 'First task',
-          KanbanComment: [{ id: 1, created_at: 1231234521, task_id: 1, message: 'Yes' }]
+          KanbanComment: [{ id: 1, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'Yes' }]
         },
         {
           id: '2',
           content: 'Second task',
-          KanbanComment: [{ id: 2, created_at: 1331234521, task_id: 1, message: 'no' }]
+          KanbanComment: [{ id: 2, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'no' }]
         }
       ]
     },
@@ -31,12 +31,16 @@ class KanbanModel {
         {
           id: '3',
           content: 'Three task',
-          KanbanComment: [{ id: 3, created_at: 1341234521, task_id: 2, message: 'nooOooOoO' }]
+          KanbanComment: [
+            { id: 3, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'nooOooOoO' }
+          ]
         },
         {
           id: '4',
           content: 'Four task',
-          KanbanComment: [{ id: 4, created_at: 133221234521, task_id: 2, message: 'Yeeesese' }]
+          KanbanComment: [
+            { id: 4, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'Yeeesese' }
+          ]
         }
       ]
     },

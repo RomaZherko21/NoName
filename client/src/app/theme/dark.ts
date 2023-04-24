@@ -105,13 +105,6 @@ const darkTheme = {
         }
       }
     },
-    MuiListItemIcon: {
-      styleOverrides: {
-        root: {
-          minWidth: 32
-        }
-      }
-    },
     MuiLinearProgress: {
       styleOverrides: {
         root: {

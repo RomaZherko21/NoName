@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import parse from 'html-react-parser'
@@ -8,6 +7,7 @@ import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from 'react-icons/ai'
 
 import { CircleDevider, InformativeImage, PopupMenu } from 'shared/ui'
 import { API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { fromTimestampToDate } from 'shared/helpers'
 
 import { getPopupConfig } from './PopupConfig'
 import { PostModel } from '../../model'
@@ -33,12 +33,14 @@ function PostContent() {
         </Typography>
 
         <InformativeImage
-          onClick={() => navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(PostModel.user_id) }))} 
+          onClick={() =>
+            navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(PostModel.user_id) }))
+          }
           imgUrl={`${API_USER_AVATAR_URL}/${PostModel.user_avatar}`}
           PrimaryText={
             <>
               {PostModel.user_name} {PostModel.user_surname} <CircleDevider />
-              {format(PostModel.created_at, 'MMMM dd, yyyy')}
+              {fromTimestampToDate(PostModel.created_at)}
             </>
           }
           SecondaryText={t('post:readingTime', {

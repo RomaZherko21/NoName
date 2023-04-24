@@ -20,7 +20,8 @@
     "basicDetails": "Basic details",
     "content": "Content",
     "meta": "Meta",
-    "file": "File"
+    "file": "File",
+    "required": "Required"
   },
   "actions": {
     "add": "Add",

@@ -16,7 +16,7 @@ export const editComment = async ({
 }: {
   taskId: number
   commentId: number
-  comment: { created_at: number; message: string }
+  comment: { message: string }
 }) => await fetch.put<KanbanComment>(`${ENDPOINT_BASE}/${taskId}/comments/${commentId}`, comment)
 
 export const deleteComment = async (taskId: number, id: number) =>

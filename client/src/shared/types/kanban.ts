@@ -12,7 +12,7 @@ export interface KanbanTask {
 export interface KanbanComment {
   id: number
   task_id: number
-  created_at: number
+  created_at: string
   message: string
 }
 

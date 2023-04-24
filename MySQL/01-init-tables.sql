@@ -1,178 +1,245 @@
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `surname` varchar(255),
-  `middle_name` varchar(255),
-  `email` varchar(255) NOT NULL UNIQUE,
-  `tel_number` varchar(255) UNIQUE,
-  `job_title` varchar(255),
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `surname` VARCHAR(50),
+  `middle_name` VARCHAR(50),
+  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `tel_number` VARCHAR(20) UNIQUE,
+  `job_title` VARCHAR(50),
   `gender` ENUM('man', 'woman'),
   `date_of_birth` DATE,
   `role` ENUM('admin', 'user') NOT NULL,
-  `avatar` varchar(255),
-  `profile_background` varchar(255),
-  `native_country` varchar(255),
-  `native_city` varchar(255),
-  `residence_country` varchar(255),
-  `residence_city` varchar(255),
-  `card_number` varchar(255),
-  `name_on_card` varchar(255),
-  `valid_thru` varchar(255),
-  `cvv` varchar(255),
+  `avatar` VARCHAR(255),
+  `profile_background` VARCHAR(255),
+  `native_country` VARCHAR(50),
+  `native_city` VARCHAR(50),
+  `residence_country` VARCHAR(50),
+  `residence_city` VARCHAR(50),
+  `card_number` VARCHAR(20),
+  `name_on_card` VARCHAR(50),
+  `valid_thru` VARCHAR(10),
+  `cvv` VARCHAR(4),
   `is_email_verified` BOOLEAN,
   `is_phone_verified` BOOLEAN,
   `is_two_factor_auth_active` BOOLEAN,
   `is_sms_alerts_active` BOOLEAN,
   `is_email_alerts_active` BOOLEAN,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_email` (`email`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `genres` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  PRIMARY KEY (`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`),
+  INDEX `idx_name` (`name`)
 );
 
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `genre_id` int,
-  `name` varchar(255),
-  `description` text,
-  `short_description` text,
-  `reading_time` int,
-  `created_at` bigint,
-  `image` varchar(255),
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255),
+  `description` TEXT,
+  `short_description` TEXT,
+  `reading_time` INT,
+  `created_at` TIMESTAMP,
+  `image` VARCHAR(255),
+  `user_id` INT NOT NULL,
+  `genre_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`),
-  FOREIGN KEY (`genre_id`) REFERENCES genres(`id`)
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`genre_id`) REFERENCES genres(`id`) ON DELETE
+  SET
+    NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `m2m_users_posts_likes` (
-  `user_id` int NOT NULL,
-  `post_id` int NOT NULL,
+  `user_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
   PRIMARY KEY (`user_id`, `post_id`),
-  CONSTRAINT `Constr_m2m_users_posts_likes_user_fk` FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Constr_m2m_users_posts_likes_post_fk` FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `post_comments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `message` text,
-  `created_at` bigint,
-  `post_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `message` TEXT,
+  `created_at` TIMESTAMP,
+  `post_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`post_id`) REFERENCES posts(`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+  FOREIGN KEY (`post_id`) REFERENCES posts(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `user_connections` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `status` ENUM('pending', 'decline', 'accept'),
-  `sender_id` int NOT NULL,
-  `recipient_id` int NOT NULL,
+  `sender_id` INT NOT NULL,
+  `recipient_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`sender_id`) REFERENCES users(`id`),
-  FOREIGN KEY (`recipient_id`) REFERENCES users(`id`)
+  FOREIGN KEY (`sender_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`recipient_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `chats` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `created_at` bigint,
-  `updated_at` bigint,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `chat_messages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `text` text,
-  `created_at` bigint,
-  `user_id` int NOT NULL,
-  `chat_id` int NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `TEXT` TEXT,
+  `created_at` TIMESTAMP,
+  `user_id` INT NOT NULL,
+  `chat_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`),
-  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`)
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS m2m_users_chats (
-  user_id INT NOT NULL,
-  chat_id INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `chat_id` INT NOT NULL,
   PRIMARY KEY (user_id, chat_id),
-  CONSTRAINT `Constr_m2m_users_chats_user_fk` FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Constr_m2m_users_chats_chat_fk` FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`chat_id`) REFERENCES chats(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- KANBAN
 CREATE TABLE IF NOT EXISTS `kanban_boards` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `description` text,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `description` TEXT,
   `created_at` TIMESTAMP,
   `updated_at` TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_columns` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `position` int,
-  `board_id` int NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `position` TINYINT,
+  `board_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_tasks` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `description` text,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `description` TEXT,
   `priority` ENUM('1', '2', '3', '4', '5'),
   `due_date` TIMESTAMP,
   `created_at` TIMESTAMP,
   `updated_at` TIMESTAMP,
-  `column_id` int NOT NULL,
-  `created_by` int NOT NULL,
-  `assigned_to` int NOT NULL,
+  `column_id` INT NOT NULL,
+  `created_by` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`column_id`) REFERENCES kanban_columns(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`created_by`) REFERENCES users(`id`),
-  FOREIGN KEY (`assigned_to`) REFERENCES users(`id`)
+  FOREIGN KEY (`created_by`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_subtasks` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
   `is_completed` BOOLEAN,
-  `task_id` int NOT NULL,
+  `task_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_task_attachments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `url` varchar(255),
-  `task_id` int NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(255),
+  `task_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `kanban_task_tags` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `board_id` int NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `board_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`board_id`) REFERENCES kanban_boards(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS m2m_kanban_tasks_tags (
-  task_id INT NOT NULL,
-  tag_id INT NOT NULL,
+  `task_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
   PRIMARY KEY (task_id, tag_id),
   FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`tag_id`) REFERENCES kanban_task_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS m2m_kanban_users_tasks (
+  `user_id` INT NOT NULL,
+  `task_id` INT NOT NULL,
+  PRIMARY KEY (user_id, task_id),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`task_id`) REFERENCES kanban_tasks(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- FILE MANAGER
+CREATE TABLE IF NOT EXISTS `folders` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `url` VARCHAR(255),
+  `format` ENUM(
+    'jpg',
+    'gif',
+    'png',
+    'svg',
+    'tif',
+    'pdf',
+    'docx',
+    'html',
+    'xlsx',
+    'txt',
+    'pptx'
+  ),
+  `size` BIGINT,
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
+  `folder_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `folder_tags` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS m2m_folders_tags (
+  `folder_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
+  PRIMARY KEY (folder_id, tag_id),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`tag_id`) REFERENCES folder_tags(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS m2m_users_folders (
+  `folder_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (folder_id, user_id),
+  FOREIGN KEY (`folder_id`) REFERENCES folders(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- SELECT COUNT(DISTINCT m2m_books_genres.book_id) AS total FROM m2m_books_genres   7 посчитать всех по book_id без повторов

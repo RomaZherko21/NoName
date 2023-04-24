@@ -7,6 +7,7 @@ import { FiTrash } from 'react-icons/fi'
 import { File } from 'shared/types/file'
 import { FilesModel } from 'pages/FileManager/model'
 import folder from 'shared/assets/images/fileFormat/folder.svg'
+import { fromTimestampToDate } from 'shared/helpers'
 
 interface Props {
   file: File
@@ -79,7 +80,6 @@ const AsideFileInfo = ({
             p: 2,
             mb: 2,
             borderColor: ({ palette }) => palette.grey[500],
-            backgroundColor: 'background.rare',
             borderRadius: 1,
             borderStyle: 'dashed',
             borderWidth: 1
@@ -126,7 +126,7 @@ const AsideFileInfo = ({
               <Typography variant="caption">{t('fields.createdAt')}</Typography>
             </Grid>
             <Grid xs={8}>
-              <Typography variant="body2">{file.created_at}</Typography>
+              <Typography variant="body2">{fromTimestampToDate(file.created_at)}</Typography>
             </Grid>
           </Grid>
 

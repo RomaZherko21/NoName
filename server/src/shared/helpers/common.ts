@@ -1,3 +1,5 @@
+import * as fs from 'node:fs'
+
 export const generateRandomCode = (n: number = 6) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let code = ''
@@ -5,4 +7,10 @@ export const generateRandomCode = (n: number = 6) => {
     code += characters.charAt(Math.floor(Math.random() * characters.length))
   }
   return code
+}
+
+export const createNonExistFolder = (url: string) => {
+  if (!fs.existsSync(url)) {
+    fs.mkdirSync(url, { recursive: true })
+  }
 }

@@ -13,7 +13,7 @@ interface Chat {
   user_surname: string
   user_avatar: string
   last_message: string
-  updated_at: number
+  updated_at: string
 }
 
 class ChatModel {

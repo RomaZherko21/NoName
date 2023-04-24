@@ -79,7 +79,9 @@ const NavBarItem = ({
         <ListItemText>
           <Typography
             variant="body2"
-            color={({ palette }) => (isActive ? palette.text.primary : palette.text.secondary)}
+            color={({ palette }) =>
+              isActive ? palette.primary.contrastText : palette.text.secondary
+            }
           >
             {t(title)}
           </Typography>
@@ -123,7 +125,9 @@ const NavBarItem = ({
 
                   <Typography
                     variant="body2"
-                    color={location.pathname === item.to ? 'text.primary' : 'text.secondary'}
+                    color={
+                      location.pathname === item.to ? 'primary.contrastText' : 'text.secondary'
+                    }
                   >
                     {t(item.text)}
                   </Typography>

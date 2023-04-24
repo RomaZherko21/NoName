@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { generatePath, Link, useNavigate } from 'react-router-dom'
@@ -15,11 +14,11 @@ import {
 } from '@mui/material'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
-import { fromMsToDate } from 'shared/helpers'
+import { fromTimestampToDate } from 'shared/helpers'
 import { Post } from 'shared/types'
 import { InformativeImage } from 'shared/ui'
 import { CircleDevider } from 'shared/ui/CircleDevider'
-import { COMMON_DATE_FORMAT, API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
+import { API_POST_IMAGES_URL, API_USER_AVATAR_URL, ROUTES } from 'shared/consts'
 
 import s from './Styles.module.scss'
 
@@ -86,13 +85,15 @@ const PostCard = ({ post, toggleLike }: Props) => {
           }}
         >
           <InformativeImage
-            onClick={()=>navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(post.user_id)}))} 
+            onClick={() =>
+              navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(post.user_id) }))
+            }
             imgUrl={`${API_USER_AVATAR_URL}/${post.avatar}`}
             PrimaryText={
               <>
                 By {post.user_name} {post.user_surname}
                 <CircleDevider />
-                {format(fromMsToDate(post.created_at), COMMON_DATE_FORMAT)}
+                {fromTimestampToDate(post.created_at)}
               </>
             }
             SecondaryText={post.user_email}

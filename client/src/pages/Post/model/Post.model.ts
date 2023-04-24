@@ -26,7 +26,7 @@ class PostModel {
   user_surname: string = ''
   user_avatar: string | undefined = ''
 
-  created_at: number = 0
+  created_at: string = ''
 
   commentInputValue: string = ''
   isEditActive: boolean = false
