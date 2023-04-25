@@ -81,18 +81,18 @@ function Kanban() {
                             backgroundColor: ({ palette }) => palette.grey[700]
                           }}
                         />
-                          <PopupMenu
-                            ActionButton={(btnProps) => (
-                              <IconButton
-                                {...btnProps}
-                                aria-label="settings"
-                                sx={{ p: 0.25, fontSize: 18 }}
-                              >
-                                <FiMoreHorizontal />
-                              </IconButton>
-                            )}
-                            config={popupConfig}
-                          />
+                        <PopupMenu
+                          ActionButton={(btnProps) => (
+                            <IconButton
+                              {...btnProps}
+                              aria-label="settings"
+                              sx={{ p: 0.25, fontSize: 18 }}
+                            >
+                              <FiMoreHorizontal />
+                            </IconButton>
+                          )}
+                          config={popupConfig}
+                        />
                       </Box>
                     </Box>
 

@@ -38,7 +38,7 @@ const ContactInfo = () => {
         {t('sentences:Contact')}
       </Typography>
 
-      <Box display="flex" alignItems="center" sx={{ mt: 2, gap: 2 }}>
+      <Box sx={{ mt: 2, gap: 2 }}>
         <Box
           sx={{
             backgroundColor: ({ palette }) => palette.primary.main,
