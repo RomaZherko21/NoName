@@ -5,9 +5,9 @@ class Log {
     console.log(blue, msg)
   }
 
-  negative(msg: string) {
+  negative(msg: string, ...rest: any) {
     const red = '\x1b[31m%s\x1b[0m'
-    console.log(red, msg)
+    console.log(red, msg, ...rest)
   }
 
   neutral(msg: string) {
