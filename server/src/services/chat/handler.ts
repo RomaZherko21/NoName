@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
-import { ChatMessageModel, ChatModel, sequelize, UserModel, UsersChatsModel } from 'models'
-import { QueryTypes } from 'sequelize'
-import { getTimestamp } from 'shared/helpers'
+import { ChatMessageModel, ChatModel, UserModel, UsersChatsModel } from 'models'
 import { WebSocket, Server } from 'ws'
 import { WsMessageCodes } from 'wsHandler'
+import { getTimestamp } from 'shared/helpers'
+
+import repo from './repo'
 
 /**
  * @swagger
@@ -18,30 +19,7 @@ export async function getUserChats(req: Request, res: Response, next: NextFuncti
   try {
     const authorization_id = res.locals.authorization_id
 
-    let chats: any = await sequelize.query(
-      `
-    SELECT
-      u.name,
-      u.name as user_name,
-      u.surname as user_surname,
-      u.avatar as user_avatar,
-      cm.created_at as updated_at,
-      cm.text as last_message,
-      c.name,
-      c.id
-        FROM users as u JOIN chat_messages as cm on u.id=cm.user_id 
-        JOIN chats as c on c.id=cm.chat_id
-        JOIN(
-          SELECT max(cm.id) as id FROM chat_messages as cm
-            join chat_messages as cm1 on cm.chat_id=cm1.chat_id and cm1.user_id=${authorization_id}
-              group by cm.chat_id) 
-              as lattest_msg_id on cm.id=lattest_msg_id.id
-          order by cm.created_at;
-      `,
-      {
-        type: QueryTypes.SELECT,
-      }
-    )
+    const chats: any = await repo.getUserChats({ userId: Number(authorization_id) })
 
     return res.status(200).json(chats)
   } catch (error: any) {
@@ -61,15 +39,16 @@ export async function createUserChat({ body }: Request, res: Response, next: Nex
       updated_at: getTimestamp(),
     })
 
-    UsersChatsModel.create({
-      chat_id: dataValues.id,
-      user_id: authorization_id,
-    })
-
-    UsersChatsModel.create({
-      chat_id: dataValues.id,
-      user_id: recipient_id,
-    })
+    await UsersChatsModel.bulkCreate([
+      {
+        chat_id: dataValues.id,
+        user_id: authorization_id,
+      },
+      {
+        chat_id: dataValues.id,
+        user_id: recipient_id,
+      },
+    ])
 
     return res.status(204).send()
   } catch (error: any) {

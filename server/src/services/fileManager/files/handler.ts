@@ -4,6 +4,7 @@ import createError from 'http-errors'
 
 import { FileModel, sequelize } from 'models'
 import { getTimestamp } from 'shared/helpers'
+import { TABLE } from 'shared/consts'
 
 /**
  * @swagger
@@ -16,7 +17,7 @@ export async function getFiles(req: Request, res: Response, next: NextFunction) 
   try {
     let result = await sequelize.query(
       `SELECT f.id, f.name, f.url, f.format, f.size, f.created_at, f.updated_at 
-        FROM files as f`,
+        FROM ${TABLE.files} as f`,
       {
         type: QueryTypes.SELECT,
       }
@@ -47,7 +48,7 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
 
     const result: any = await sequelize.query(
       `SELECT f.id, f.name, f.url, f.format, f.size, f.created_at, f.updated_at 
-      FROM files as f 
+          FROM ${TABLE.files} as f 
       WHERE f.id=${file_id};`,
       {
         type: QueryTypes.SELECT,
@@ -84,8 +85,9 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
  */
 export async function uploadFile({ file, params }: Request, res: Response, next: NextFunction) {
   try {
-    const { folder_id } = params
     const authorization_id = res.locals.authorization_id
+
+    const { folder_id } = params
 
     const format = file?.originalname.split('.')[1]
 
@@ -103,7 +105,7 @@ export async function uploadFile({ file, params }: Request, res: Response, next:
 
       res.status(204).send()
     } else {
-      throw new Error('Invalid file data')
+      return next(createError(400, 'Invalid file data'))
     }
   } catch (error: any) {
     next(createError(500, error.message))

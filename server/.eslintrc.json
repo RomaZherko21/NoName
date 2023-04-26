@@ -39,7 +39,7 @@
 
       {
         "selector": "parameter",
-        "format": ["camelCase"],
+        "format": ["camelCase", "snake_case"],
         "leadingUnderscore": "allowSingleOrDouble"
       },
       {

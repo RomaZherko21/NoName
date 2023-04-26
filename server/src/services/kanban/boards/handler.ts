@@ -17,7 +17,7 @@ export async function getBoards(req: Request, res: Response, next: NextFunction)
   try {
     let result = await sequelize.query(
       `SELECT 
-        ${TABLE.kanban_boards}.* FROM ${TABLE.kanban_boards}`,
+        kb.* FROM ${TABLE.kanban_boards} as kb`,
       {
         type: QueryTypes.SELECT,
       }
@@ -47,8 +47,8 @@ export async function getKanbanBoard({ params }: Request, res: Response, next: N
     const { board_id } = params
 
     const result: any = await sequelize.query(
-      `SELECT * FROM ${TABLE.kanban_boards} 
-        WHERE ${TABLE.kanban_boards}.id=${board_id}`,
+      `SELECT * FROM ${TABLE.kanban_boards}  as kb
+        WHERE kb.id=${board_id}`,
       {
         type: QueryTypes.SELECT,
       }

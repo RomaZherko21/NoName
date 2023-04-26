@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
-import { ConnectionStatus, sequelize, UserConnectionModel } from 'models'
-import { QueryTypes } from 'sequelize'
+import { ConnectionStatus, UserConnectionModel } from 'models'
+
+import repo from './repo'
 
 /**
  * @swagger
@@ -39,58 +40,31 @@ import { QueryTypes } from 'sequelize'
  */
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const { status, isReceived, isSent, name = '', surname = '', user_id } = query
+    const { user_id = '', status = '', name = '', surname = '', isReceived, isSent } = query
+
+    const repoParams = {
+      name: String(name),
+      surname: String(surname),
+      status: String(status),
+      userId: String(user_id),
+    }
 
     let connections: any = []
 
     if (isReceived) {
-      const result = await sequelize.query(
-        `SELECT user_connections.status,
-            users.id as user_id, 
-            users.name, 
-            users.surname, 
-            users.middle_name, 
-            users.avatar, 
-            users.email, 
-            users.tel_number
-        FROM user_connections 
-        JOIN users ON (user_connections.sender_id = users.id)
-
-        WHERE user_connections.recipient_id=${user_id} 
-        AND user_connections.status='${status}' 
-        AND users.name LIKE '%${name}%'
-        AND users.surname LIKE '%${surname}%'
-          `,
-        {
-          type: QueryTypes.SELECT,
-        }
-      )
+      const result = await repo.getUserConnections({
+        ...repoParams,
+        isReceivedStatus: true,
+      })
 
       connections = [...connections, ...result]
     }
 
     if (isSent) {
-      const result = await sequelize.query(
-        `SELECT user_connections.status,
-            users.id as user_id,
-            users.name, 
-            users.surname, 
-            users.middle_name, 
-            users.avatar, 
-            users.email, 
-            users.tel_number  
-          FROM user_connections 
-          JOIN users ON (user_connections.recipient_id = users.id)
-
-          WHERE user_connections.sender_id=${user_id} 
-          AND user_connections.status='${status}'
-          AND users.name LIKE '%${name}%'
-          AND users.surname LIKE '%${surname}%'
-          `,
-        {
-          type: QueryTypes.SELECT,
-        }
-      )
+      const result = await repo.getUserConnections({
+        ...repoParams,
+        isReceivedStatus: false,
+      })
 
       connections = [...connections, ...result]
     }
@@ -116,19 +90,11 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
  */
 export async function deleteConnectionById({ params }: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = params
     const authorization_id = res.locals.authorization_id
 
-    await sequelize.query(
-      `DELETE FROM user_connections
-      
-        WHERE user_connections.sender_id=${authorization_id} AND user_connections.recipient_id=${id}
-        OR user_connections.sender_id=${id} AND user_connections.recipient_id=${authorization_id}
-        `,
-      {
-        type: QueryTypes.DELETE,
-      }
-    )
+    const { id } = params
+
+    await repo.deleteUserConnection({ userId: authorization_id, id: Number(id) })
 
     return res.status(204).send()
   } catch (error: any) {
@@ -168,9 +134,10 @@ export async function updateConnectionStatusById(
   next: NextFunction
 ) {
   try {
+    const authorization_id = res.locals.authorization_id
+
     const { id } = params
     const { status }: { status: ConnectionStatus } = body
-    const authorization_id = res.locals.authorization_id
 
     if (status === ConnectionStatus.pending) {
       await UserConnectionModel.create({
@@ -179,17 +146,7 @@ export async function updateConnectionStatusById(
         status,
       })
     } else {
-      await sequelize.query(
-        `UPDATE user_connections
-          SET user_connections.status = '${status}'
-        
-          WHERE user_connections.sender_id=${authorization_id} AND user_connections.recipient_id=${id}
-          OR user_connections.sender_id=${id} AND user_connections.recipient_id=${authorization_id}
-          `,
-        {
-          type: QueryTypes.DELETE,
-        }
-      )
+      await repo.updateConnectionStatus({ userId: authorization_id, id: Number(id), status })
     }
 
     return res.status(204).send()
