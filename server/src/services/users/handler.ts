@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
 
 import { sequelize, UserModel } from 'models'
-import { ID, LIMIT, OFFSET, ORDER_TYPE, USER_AVATAR_FOLDER } from 'shared/consts'
+import { TABLE, USER_AVATAR_FOLDER } from 'shared/consts'
 import { prettifyUserData } from 'shared/helpers'
 import repo from './repo'
 
@@ -51,7 +51,7 @@ export async function getUsers({ query }: Request, res: Response, next: NextFunc
   try {
     const authorization_id = res.locals.authorization_id
 
-    const users: any = await repo.getUsers({ ...query, id: authorization_id })
+    const users: any = await repo.getUsers({ ...query, authorization_id })
 
     const count = await UserModel.count()
 
@@ -79,8 +79,8 @@ export async function getUser({ params }: Request, res: Response, next: NextFunc
     const { id } = params
 
     const result: any = await sequelize.query(
-      `SELECT * FROM users 
-        WHERE users.id=${id}`,
+      `SELECT * FROM ${TABLE.users} as u
+        WHERE u.id=${id}`,
       {
         type: QueryTypes.SELECT,
       }

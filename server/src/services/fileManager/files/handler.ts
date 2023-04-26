@@ -85,8 +85,9 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
  */
 export async function uploadFile({ file, params }: Request, res: Response, next: NextFunction) {
   try {
-    const { folder_id } = params
     const authorization_id = res.locals.authorization_id
+
+    const { folder_id } = params
 
     const format = file?.originalname.split('.')[1]
 
@@ -104,7 +105,7 @@ export async function uploadFile({ file, params }: Request, res: Response, next:
 
       res.status(204).send()
     } else {
-      throw new Error('Invalid file data')
+      return next(createError(400, 'Invalid file data'))
     }
   } catch (error: any) {
     next(createError(500, error.message))

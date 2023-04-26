@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
-import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
-import { KanbanColumnModel, sequelize } from 'models'
+import { KanbanColumnModel } from 'models'
+import repo from './repo'
 
 /**
  * @swagger
@@ -23,76 +23,11 @@ export async function getKanbanColumns({ params }: Request, res: Response, next:
 
     const result: any = []
 
-    let columns: { id: number; name: string; position: number; board_id: number }[] =
-      await sequelize.query(
-        `SELECT
-        kc.id,
-        kc.name,
-        kc.position
-    from
-        kanban_columns as kc
-        JOIN kanban_tasks as kt on kc.id = kt.column_id
-    WHERE
-        kc.board_id = ${board_id}
-GROUP BY
-kc.id;
-        `,
-        {
-          type: QueryTypes.SELECT,
-        }
-      )
+    let columns: any = await repo.getKanbanColumns({ board_id })
 
     await Promise.all(
-      columns.map(async (column) => {
-        const tasks = await sequelize.query(
-          `SELECT
-kt.id,
-kt.name,
-kta.attachments,
-JSON_ARRAYAGG(ktt.tag_name) as tags,
-users.name as created_by,
-JSON_ARRAYAGG(u.assigne_to) as assigne_to
-from
-kanban_tasks as kt
-LEFT JOIN (
-    SELECT
-        kanban_task_attachments.task_id as task_id,
-        JSON_ARRAYAGG(kanban_task_attachments.url) as attachments
-    from
-        kanban_task_attachments
-    GROUP BY
-        task_id
-) as kta on kt.id = kta.task_id
-LEFT JOIN (
-    SELECT
-        kanban_task_tags.name as tag_name,
-        m2m_kanban_tasks_tags.task_id as task_id
-    from
-        kanban_task_tags
-        JOIN m2m_kanban_tasks_tags on m2m_kanban_tasks_tags.tag_id = kanban_task_tags.id
-    GROUP BY
-        tag_name,
-        task_id
-) as ktt on kt.id = ktt.task_id
-LEFT JOIN (
-    SELECT
-        users.avatar as assigne_to,
-        m2m_kanban_users_tasks.task_id as task_id
-    from
-        users
-        JOIN m2m_kanban_users_tasks on m2m_kanban_users_tasks.user_id = users.id
-) as u on kt.id = u.task_id
-JOIN users on users.id = kt.created_by
-WHERE
-kt.column_id = ${column.id}
-GROUP BY
-kt.name,
-kt.id;
-        `,
-          {
-            type: QueryTypes.SELECT,
-          }
-        )
+      columns.map(async (column: any) => {
+        const tasks = await repo.getKanbanTasksByColumnId({ column_id: column.id })
 
         result.push({ column: { position: column.position, name: column.name }, tasks: tasks })
       })

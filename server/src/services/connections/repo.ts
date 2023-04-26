@@ -10,7 +10,7 @@ const getUserConnections = ({
   surname = '',
   isReceivedStatus,
 }: {
-  userId: ID
+  userId: string
   name?: string
   surname?: string
   status: string
@@ -31,10 +31,10 @@ FROM
     ${TABLE.user_connections} as uc
     JOIN ${TABLE.users} as u ON (uc.${isReceivedStatus ? 'sender_id' : 'recipient_id'} = u.id)
 WHERE
-    uc.${isReceivedStatus ? 'recipient_id' : 'sender_id'} = ${userId}
+    uc.${isReceivedStatus ? 'recipient_id' : 'sender_id'} = ${userId || 0}
     AND uc.status = '${status}'
     AND u.name LIKE '%${name}%'
-    AND u.surname LIKE '%${surname}%'
+    AND u.surname LIKE '%${surname}%';
 `,
     {
       type: QueryTypes.SELECT,

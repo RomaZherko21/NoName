@@ -3,6 +3,7 @@ import createError from 'http-errors'
 
 import { FolderModel } from 'models'
 import { getTimestamp } from 'shared/helpers'
+
 import repo from './repo'
 
 /**
@@ -14,7 +15,7 @@ import repo from './repo'
  */
 export async function getFolders(req: Request, res: Response, next: NextFunction) {
   try {
-    let result = repo.getFolders()
+    let result = await repo.getFolders()
 
     res.status(200).json(result)
   } catch (error: any) {

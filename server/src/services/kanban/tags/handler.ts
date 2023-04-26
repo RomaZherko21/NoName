@@ -24,9 +24,9 @@ export async function getKanbanBoardTags({ params }: Request, res: Response, nex
 
     let result = await sequelize.query(
       `SELECT 
-        ${TABLE.kanban_task_tags}.id, ${TABLE.kanban_task_tags}.name 
-      FROM ${TABLE.kanban_task_tags}
-        WHERE ${TABLE.kanban_task_tags}.board_id = ${board_id}`,
+        ktt.id, ktt.name 
+      FROM ${TABLE.kanban_task_tags} as ktt
+        WHERE ktt.board_id = ${board_id}`,
       {
         type: QueryTypes.SELECT,
       }

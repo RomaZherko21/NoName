@@ -1,18 +1,17 @@
 import { sequelize } from 'models'
 import { QueryTypes } from 'sequelize'
-import { TABLE } from 'shared/consts'
-import { ID, Pagination, Sorting } from 'shared/types'
+import { ID, LIMIT, OFFSET, ORDER_TYPE, TABLE } from 'shared/consts'
 
 const getPosts = ({
-  postId,
-  userId,
-  name,
-  description,
-  orderBy,
-  orderType,
-  limit,
-  offset,
-}: { postId: ID; userId: ID; name: string; description: string } & Pagination & Sorting) =>
+  id = ID,
+  user_id = ID,
+  name = '',
+  description = '',
+  limit = LIMIT,
+  offset = OFFSET,
+  order_by = 'name',
+  order_type = ORDER_TYPE,
+}: any) =>
   sequelize.query(
     `
 SELECT
@@ -27,20 +26,18 @@ SELECT
     JSON_ARRAYAGG(upl.user_id) as liked_users
 FROM
     ${TABLE.posts} as p
-    JOIN ${TABLE.users} ON p.user_id = u.id
+    JOIN ${TABLE.users} as u ON p.user_id = u.id
     LEFT JOIN ${TABLE.m2m_users_posts_likes} as upl ON p.id = upl.post_id
     JOIN ${TABLE.genres} as g ON p.genre_id = g.id
 WHERE
-    p.id LIKE '%${postId}%'
-    AND p.user_id LIKE '%${userId}%'
+    p.id LIKE '%${id}%'
+    AND p.user_id LIKE '%${user_id}%'
     AND p.name LIKE '%${name}%'
     AND p.description LIKE '%${description}%'
 GROUP BY
     p.id
-ORDER BY
-    ${orderBy} ${orderType}
-LIMIT
-    ${limit} OFFSET ${offset};
+ORDER BY ${order_by} ${order_type}
+LIMIT ${limit} OFFSET ${offset};
 `,
     {
       type: QueryTypes.SELECT,

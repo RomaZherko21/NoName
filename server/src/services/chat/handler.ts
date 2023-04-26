@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
 import { ChatMessageModel, ChatModel, UserModel, UsersChatsModel } from 'models'
-import { getTimestamp } from 'shared/helpers'
 import { WebSocket, Server } from 'ws'
 import { WsMessageCodes } from 'wsHandler'
+import { getTimestamp } from 'shared/helpers'
 
 import repo from './repo'
 
@@ -19,7 +19,7 @@ export async function getUserChats(req: Request, res: Response, next: NextFuncti
   try {
     const authorization_id = res.locals.authorization_id
 
-    let chats: any = await repo.getUserChats({ userId: Number(authorization_id) })
+    const chats: any = await repo.getUserChats({ userId: Number(authorization_id) })
 
     return res.status(200).json(chats)
   } catch (error: any) {
@@ -39,15 +39,16 @@ export async function createUserChat({ body }: Request, res: Response, next: Nex
       updated_at: getTimestamp(),
     })
 
-    UsersChatsModel.create({
-      chat_id: dataValues.id,
-      user_id: authorization_id,
-    })
-
-    UsersChatsModel.create({
-      chat_id: dataValues.id,
-      user_id: recipient_id,
-    })
+    await UsersChatsModel.bulkCreate([
+      {
+        chat_id: dataValues.id,
+        user_id: authorization_id,
+      },
+      {
+        chat_id: dataValues.id,
+        user_id: recipient_id,
+      },
+    ])
 
     return res.status(204).send()
   } catch (error: any) {

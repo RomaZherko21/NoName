@@ -28,7 +28,7 @@ FROM
             and cm_inner.user_id = ${userId}
         group by
             cm.chat_id
-    ) as lattest_msg_id on cm.id = lattest_msg_id.id
+    ) as outter_msg_id on cm.id = outter_msg_id.id
 order by
     cm.created_at;
 `,

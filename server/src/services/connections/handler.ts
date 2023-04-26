@@ -40,15 +40,13 @@ import repo from './repo'
  */
 export async function getConnections({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const authorization_id = res.locals.authorization_id
-
-    const { user_id, status, name, surname, isReceived, isSent } = query
+    const { user_id = '', status = '', name = '', surname = '', isReceived, isSent } = query
 
     const repoParams = {
       name: String(name),
       surname: String(surname),
       status: String(status),
-      userId: Number(user_id) || Number(authorization_id),
+      userId: String(user_id),
     }
 
     let connections: any = []
@@ -93,6 +91,7 @@ export async function getConnections({ query }: Request, res: Response, next: Ne
 export async function deleteConnectionById({ params }: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
+
     const { id } = params
 
     await repo.deleteUserConnection({ userId: authorization_id, id: Number(id) })
@@ -136,6 +135,7 @@ export async function updateConnectionStatusById(
 ) {
   try {
     const authorization_id = res.locals.authorization_id
+
     const { id } = params
     const { status }: { status: ConnectionStatus } = body
 

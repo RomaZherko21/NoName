@@ -24,9 +24,9 @@ export async function getKanbanSubtasks({ params }: Request, res: Response, next
 
     let result = await sequelize.query(
       `SELECT 
-      ${TABLE.kanban_subtasks}.id, ${TABLE.kanban_subtasks}.name, ${TABLE.kanban_subtasks}.is_completed 
-      FROM ${TABLE.kanban_subtasks}
-        WHERE ${TABLE.kanban_subtasks}.task_id = ${task_id}`,
+        ks.id, ks.name, ks.is_completed 
+      FROM ${TABLE.kanban_subtasks} as ks
+        WHERE ks.task_id = ${task_id}`,
       {
         type: QueryTypes.SELECT,
       }

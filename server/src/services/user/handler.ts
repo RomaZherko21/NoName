@@ -128,8 +128,9 @@ export async function removeUserSelf(req: Request, res: Response, next: NextFunc
  */
 export async function uploadUserAvatar(req: Request, res: Response, next: NextFunction) {
   try {
-    const { file } = req
     const authorization_id = res.locals.authorization_id
+
+    const { file } = req
 
     const newFileName = `${authorization_id}.jpg`
 

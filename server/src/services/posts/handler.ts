@@ -40,27 +40,9 @@ import repo from './repo'
  */
 export async function getPosts({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const {
-      id = ID,
-      user_id = ID,
-      name = '',
-      description = '',
-      limit = LIMIT,
-      offset = OFFSET,
-      order_by = 'created_at',
-      order_type = ORDER_TYPE,
-    } = query
+    let result: any = await repo.getPosts(query)
 
-    let result: any = await repo.getPosts({
-      postId: Number(id),
-      userId: Number(user_id),
-      name: String(name),
-      description: String(description),
-      orderBy: String(order_by),
-      orderType: String(order_type) as 'ASC' | 'DESC',
-      limit: Number(limit),
-      offset: Number(offset),
-    })
+    console.log(result)
 
     result = await Promise.all(
       result.map(async (item: any) => {

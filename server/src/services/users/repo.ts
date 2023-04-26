@@ -1,21 +1,21 @@
 import { sequelize } from 'models'
 import { QueryTypes } from 'sequelize'
-import { TABLE } from 'shared/consts'
+import { ID, LIMIT, OFFSET, ORDER_TYPE, TABLE } from 'shared/consts'
 
 const getUsers = ({
-  id,
-  userId,
-  name,
-  surname,
-  middle_name,
-  email,
-  role,
-  gender,
-  connection_status,
-  order_by,
-  order_type,
-  limit,
-  offset,
+  id = ID,
+  name = '',
+  surname = '',
+  middle_name = '',
+  email = '',
+  role = '',
+  gender = '',
+  connection_status = '',
+  limit = LIMIT,
+  offset = OFFSET,
+  order_by = 'email',
+  order_type = ORDER_TYPE,
+  authorization_id,
 }: any) =>
   sequelize.query(
     `
@@ -25,13 +25,13 @@ SELECT
 FROM
     ${TABLE.users} as u
     LEFT JOIN ${TABLE.user_connections} as uc ON (
-        ${id} = uc.sender_id
+        ${authorization_id} = uc.sender_id
         AND u.id = uc.recipient_id
-        OR ${id} = uc.recipient_id
+        OR ${authorization_id} = uc.recipient_id
         AND u.id = uc.sender_id
     )
 WHERE
-    u.id LIKE '%${userId}%'
+    u.id LIKE '%${id}%'
     AND u.name LIKE '%${name}%'
     AND u.surname LIKE '%${surname}%'
     AND u.middle_name LIKE '%${middle_name}%'
