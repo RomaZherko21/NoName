@@ -24,16 +24,16 @@ export interface KanbanComment {
 //   user_avatar: string
 // }
 export interface KanbanBoard {
-  created_at: number
-  description: string
   id: number
   name: string
+  description: string
+  created_at: number
   updated_at: string
 }
 
-export interface KanbanBoardColumn {
-  board_id: number
+export interface KanbanColumnItem {
   id: number
   name: string
   position: number
+  board_id: number
 }
