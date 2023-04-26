@@ -4,8 +4,9 @@ import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
-import { MIN_LIMIT, MAX_LIMIT, ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
+import { ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
 import { getTimestamp } from 'shared/helpers'
+import repo from './repo'
 
 /**
  * @swagger
@@ -44,44 +45,22 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
       user_id = ID,
       name = '',
       description = '',
-      created_from = MIN_LIMIT,
-      created_to = MAX_LIMIT,
       limit = LIMIT,
       offset = OFFSET,
       order_by = 'created_at',
       order_type = ORDER_TYPE,
     } = query
 
-    let result: any = await sequelize.query(
-      `SELECT 
-        posts.*,
-        genres.name as genre,
-        users.name as user_name, 
-        users.surname  as user_surname, 
-        users.middle_name  as user_middle_name,
-        users.email  as user_email,
-        users.avatar,
-        COUNT(m2m_users_posts_likes.post_id) as likes_count,
-        JSON_ARRAYAGG(m2m_users_posts_likes.user_id) as liked_users
-      FROM posts 
-        JOIN users ON posts.user_id = users.id 
-        LEFT JOIN m2m_users_posts_likes ON posts.id = m2m_users_posts_likes.post_id 
-        JOIN genres ON posts.genre_id = genres.id 
-          
-        WHERE posts.id LIKE '%${id}%'
-        AND posts.user_id LIKE '%${user_id}%'
-        AND posts.name LIKE '%${name}%'
-        AND posts.description LIKE '%${description}%'
-        AND posts.created_at >= ${created_from}
-        AND posts.created_at <= ${created_to}
-          
-        GROUP BY posts.id
-        ORDER BY ${order_by} ${order_type}
-        LIMIT ${limit} OFFSET ${offset};`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    )
+    let result: any = await repo.getPosts({
+      postId: Number(id),
+      userId: Number(user_id),
+      name: String(name),
+      description: String(description),
+      orderBy: String(order_by),
+      orderType: String(order_type) as 'ASC' | 'DESC',
+      limit: Number(limit),
+      offset: Number(offset),
+    })
 
     result = await Promise.all(
       result.map(async (item: any) => {

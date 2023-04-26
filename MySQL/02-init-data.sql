@@ -901,3 +901,33 @@ VALUES
     (2, 1),
     (3, 1),
     (3, 2);
+
+SELECT
+    users.*,
+    user_connections.status as connection_status
+FROM
+    users
+    LEFT JOIN user_connections ON (
+        $ { authorization_id } = user_connections.sender_id
+        AND users.id = user_connections.recipient_id
+        OR $ { authorization_id } = user_connections.recipient_id
+        AND users.id = user_connections.sender_id
+    )
+WHERE
+    users.id LIKE '%${id}%'
+    AND users.name LIKE '%${name}%'
+    AND users.surname LIKE '%${surname}%'
+    AND users.middle_name LIKE '%${middle_name}%'
+    AND users.email LIKE '%${email}%'
+    AND users.role LIKE '%${role}%'
+    AND users.gender LIKE '%${gender}%'
+    AND (
+        user_connections.status LIKE '%${connection_status}%'
+        OR user_connections.status IS NULL
+    )
+ORDER BY
+    $ { order_by } $ { order_type }
+LIMIT
+    $ {
+limit
+    } OFFSET $ { offset };

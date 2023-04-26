@@ -11,4 +11,10 @@ export const TABLE = {
   folder_tags: 'folder_tags',
   m2m_users_folders: 'm2m_users_folders',
   m2m_folders_tags: 'm2m_folders_tags',
+  user_connections: 'user_connections',
+  chat_messages: 'chat_messages',
+  chats: 'chats',
+  genres: 'genres',
+  posts: 'posts',
+  m2m_users_posts_likes: 'm2m_users_posts_likes',
 }

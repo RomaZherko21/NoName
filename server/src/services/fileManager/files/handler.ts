@@ -4,6 +4,7 @@ import createError from 'http-errors'
 
 import { FileModel, sequelize } from 'models'
 import { getTimestamp } from 'shared/helpers'
+import { TABLE } from 'shared/consts'
 
 /**
  * @swagger
@@ -16,7 +17,7 @@ export async function getFiles(req: Request, res: Response, next: NextFunction) 
   try {
     let result = await sequelize.query(
       `SELECT f.id, f.name, f.url, f.format, f.size, f.created_at, f.updated_at 
-        FROM files as f`,
+        FROM ${TABLE.files} as f`,
       {
         type: QueryTypes.SELECT,
       }
@@ -47,7 +48,7 @@ export async function getFile({ params }: Request, res: Response, next: NextFunc
 
     const result: any = await sequelize.query(
       `SELECT f.id, f.name, f.url, f.format, f.size, f.created_at, f.updated_at 
-      FROM files as f 
+          FROM ${TABLE.files} as f 
       WHERE f.id=${file_id};`,
       {
         type: QueryTypes.SELECT,

@@ -7,6 +7,7 @@ import { QueryTypes } from 'sequelize'
 import { sequelize, UserModel } from 'models'
 import { ID, LIMIT, OFFSET, ORDER_TYPE, USER_AVATAR_FOLDER } from 'shared/consts'
 import { prettifyUserData } from 'shared/helpers'
+import repo from './repo'
 
 /**
  * @swagger
@@ -48,44 +49,9 @@ import { prettifyUserData } from 'shared/helpers'
  */
 export async function getUsers({ query }: Request, res: Response, next: NextFunction) {
   try {
-    const {
-      id = ID,
-      name = '',
-      surname = '',
-      middle_name = '',
-      email = '',
-      role = '',
-      gender = '',
-      connection_status = '',
-      limit = LIMIT,
-      offset = OFFSET,
-      order_by = 'email',
-      order_type = ORDER_TYPE,
-    } = query
     const authorization_id = res.locals.authorization_id
 
-    const users: any = await sequelize.query(
-      `SELECT users.*,
-        user_connections.status as connection_status
-      FROM users 
-      LEFT JOIN user_connections ON (${authorization_id} = user_connections.sender_id AND users.id= user_connections.recipient_id
-        OR ${authorization_id} = user_connections.recipient_id AND users.id = user_connections.sender_id)
-
-        WHERE users.id LIKE '%${id}%'
-        AND users.name LIKE '%${name}%'
-        AND users.surname LIKE '%${surname}%'
-        AND users.middle_name LIKE '%${middle_name}%'
-        AND users.email LIKE '%${email}%'
-        AND users.role LIKE '%${role}%'
-        AND users.gender LIKE '%${gender}%'
-        AND (user_connections.status LIKE '%${connection_status}%' OR user_connections.status IS NULL)
-
-        ORDER BY ${order_by} ${order_type}
-        LIMIT ${limit} OFFSET ${offset};`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    )
+    const users: any = await repo.getUsers({ ...query, id: authorization_id })
 
     const count = await UserModel.count()
 
