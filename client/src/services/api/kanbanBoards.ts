@@ -17,10 +17,10 @@ export const  deleteKanbanBoard = async (id: number) => await fetch.delete(`${EN
 
 export const  getKanbanColumns = async (id: number) => await fetch.get<KanbanColumnItem[]>(`${ENDPOINT_BASE}/${id}`)
 
-export const  createKanbanColumns = async (columns: any, id: number ) => await fetch.get(`${ENDPOINT_BASE}/${id}`, columns)// ответ от Back с ошибкой 500
+export const  createKanbanColumn = async (column: KanbanColumnItem, id: number ) => await fetch.post(`${ENDPOINT_BASE}/${id}`, column)// ответ от Back с ошибкой 500
 
-export const  editKanbanColumns = async (column: any, id: number ) => await fetch.put(`${ENDPOINT_BASE}/${id}/columns/${id}`, column)
+export const  editKanbanColumn = async (column: KanbanColumnItem, id: number ) => await fetch.put(`${ENDPOINT_BASE}/${id}/columns/${id}`, column)
 
-export const  deleteKanbanColumns = async (id: number) => await fetch.delete(`${ENDPOINT_BASE_COLUMNS}/${id}`)
+export const  deleteKanbanColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE_COLUMNS}/${id}`)
 
  
