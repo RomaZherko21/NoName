@@ -8,6 +8,9 @@ x-my-sql-variables: &my-sql-variables
   MYSQL_HOST: ${MYSQL_HOST}
   MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
+x-redis-variables: &redis-variables
+  REDIS_PASSWORD: ${REDIS_PASSWORD}
+  REDIS_PORT_OUTER: ${REDIS_PORT_OUTER}
 x-api-variables: &api-variables
   SERVER_PROTOCOL: ${SERVER_PROTOCOL}
   SERVER_HOST: ${SERVER_HOST}
@@ -36,6 +39,15 @@ services:
       - SYS_NICE
     environment:
       <<: *my-sql-variables
+  redis:
+    container_name: redis
+    image: redis:7.0.11
+    # restart: always
+    ports:
+      - ${REDIS_PORT_OUTER}:${REDIS_PORT_INNER}
+    command: redis-server --loglevel warning --requirepass ${REDIS_PASSWORD}
+    volumes: 
+      - redis-volume:/data
 
   api:
     container_name: api
@@ -48,10 +60,11 @@ services:
       - ./server:/app
     depends_on:
       - mysql_db
+      - redis
     ports:
       - ${SERVER_PORT_OUTER}:${SERVER_PORT_INNER}
     environment:
-      <<: [*my-sql-variables, *api-variables, *client-variables]
+      <<: [*my-sql-variables, *api-variables, *client-variables, *redis-variables]
       MYSQL_HOST_IP: mysql_db
 
   phpmyadmin:
@@ -67,4 +80,5 @@ services:
 
 volumes:
   mySQL_db_volume:
+  redis-volume:
   api_volume:
