@@ -1,18 +1,14 @@
-import { emailTransporter } from 'config'
+import { emailTransporter, redis } from 'config'
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 import speakeasy from 'speakeasy'
 import qrcode from 'qrcode'
 
-import { CodeManager } from 'localDB'
 import { sequelize, UserModel } from 'models'
 import { generateRandomCode } from 'shared/helpers'
+import { DICTIONARIES } from 'config/redis'
 
 const { SERVER_EMAIL_LOGIN } = process.env
-
-const emailCodes = new CodeManager()
-
-const smsCodes = new CodeManager()
 
 /**
  * @swagger
@@ -32,15 +28,15 @@ export async function sendEmailVerificationCode(_: Request, res: Response, next:
       attributes: ['email'],
     })
 
-    emailCodes.addCode(authorization_id, '111111')
+    const code = generateRandomCode()
 
-    emailCodes.addCode(authorization_id, generateRandomCode())
+    await redis.set(`${DICTIONARIES.emailCode}:${authorization_id}`, code, 'EX', 720)
 
     emailTransporter.sendMail({
       from: SERVER_EMAIL_LOGIN,
       to: user?.dataValues.email,
       subject: 'Email Verification Code',
-      text: `Your email verification code is ${emailCodes.getCode(authorization_id)}`,
+      text: `Your email verification code is ${code}`,
     })
 
     res.status(204).send()
@@ -70,7 +66,9 @@ export async function verifyUserEmailByCode({ body }: Request, res: Response, ne
     const authorization_id = res.locals.authorization_id
     const { code } = body
 
-    if (code === emailCodes.getCode(authorization_id)) {
+    const storedCode = await redis.get(`${DICTIONARIES.emailCode}:${authorization_id}`)
+
+    if (code === storedCode) {
       await UserModel.update(
         { is_email_verified: true },
         {
@@ -126,7 +124,7 @@ export async function sendPhoneVerificationCode(_: Request, res: Response, next:
   try {
     const authorization_id = res.locals.authorization_id
 
-    smsCodes.addCode(authorization_id, '111111')
+    await redis.set(`${DICTIONARIES.phoneCode}:${authorization_id}`, '111111', 'EX', 60)
 
     res.status(204).send()
   } catch (error: any) {
@@ -155,7 +153,9 @@ export async function verifyUserPhoneByCode({ body }: Request, res: Response, ne
     const authorization_id = res.locals.authorization_id
     const { code } = body
 
-    if (code === smsCodes.getCode(authorization_id)) {
+    const storedCode = await redis.get(`${DICTIONARIES.phoneCode}:${authorization_id}`)
+
+    if (code === storedCode) {
       await UserModel.update(
         { is_phone_verified: true },
         {
@@ -200,24 +200,24 @@ export async function toggleSmsAlerts(req: Request, res: Response, next: NextFun
   }
 }
 
-let a = ''
-
 export async function getQrCode(req: Request, res: Response, next: NextFunction) {
   try {
     const authorization_id = res.locals.authorization_id
 
     const secret = speakeasy.generateSecret()
 
-    a = secret.base32
+    const base32 = secret.base32
 
-    const otpAuthUrl = `otpauth://totp/someSecretText:${authorization_id}?secret=${secret.base32}&issuer=someSecretText`
+    await redis.set(`${DICTIONARIES.qrSecret}:${authorization_id}`, base32)
+
+    const otpAuthUrl = `otpauth://totp/someSecretText:${authorization_id}?secret=${base32}&issuer=someSecretText`
 
     qrcode.toDataURL(otpAuthUrl, (error, imageUrl) => {
       if (error) {
         throw new Error('Error generating QR code')
       }
 
-      res.status(200).json({ secret: secret.base32, qrCodeUrl: imageUrl })
+      res.status(200).json({ secret: base32, qrCodeUrl: imageUrl })
     })
   } catch (error: any) {
     return next(createError(500, error.message))
@@ -228,14 +228,20 @@ export async function verifyQrCode({ body }: Request, res: Response, next: NextF
   try {
     const authorization_id = res.locals.authorization_id
 
+    const base32 = await redis.get(`${DICTIONARIES.qrSecret}:${authorization_id}`)
+
+    if (!base32) {
+      return next(createError(401, 'QR code has been expired'))
+    }
+
     const isVerified = speakeasy.totp.verify({
-      secret: a,
+      secret: base32,
       encoding: 'base32',
       token: body.token,
     })
 
     if (!isVerified) {
-      throw new Error('Invalid code')
+      return next(createError(401, 'Invalid QR code'))
     }
 
     await UserModel.update(

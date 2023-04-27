@@ -9,8 +9,8 @@ x-my-sql-variables: &my-sql-variables
   MYSQL_PORT_OUTER: ${MYSQL_PORT_OUTER}
 
 x-redis-variables: &redis-variables
-  REDIS_URL: ${REDIS_URL}
   REDIS_PASSWORD: ${REDIS_PASSWORD}
+  REDIS_PORT_OUTER: ${REDIS_PORT_OUTER}
 x-api-variables: &api-variables
   SERVER_PROTOCOL: ${SERVER_PROTOCOL}
   SERVER_HOST: ${SERVER_HOST}
@@ -40,14 +40,14 @@ services:
     environment:
       <<: *my-sql-variables
   redis:
+    container_name: redis
     image: redis:7.0.11
     # restart: always
-    # ports:
-    #   - '6379:6379'
-    # command: redis-server --loglevel warning
-    # command: redis-server --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    # volumes: 
-    #   - redis-volume:/data
+    ports:
+      - ${REDIS_PORT_OUTER}:${REDIS_PORT_INNER}
+    command: redis-server --loglevel warning --requirepass ${REDIS_PASSWORD}
+    volumes: 
+      - redis-volume:/data
 
   api:
     container_name: api

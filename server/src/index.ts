@@ -10,23 +10,13 @@ import cors from 'cors'
 import { useHttpError, useAuth } from 'middlewares'
 import { sequelize } from 'models'
 import { log } from 'shared/helpers'
-import { initEmptyFolders, specs, redis } from 'config'
+import { initEmptyFolders, specs } from 'config'
 import wsHandler from 'wsHandler'
 
 import router from './routes'
 import { ROOT_UPLOADS_FOLDER } from 'shared/consts'
 
-const {
-  CLIENT_PROTOCOL,
-  CLIENT_HOST,
-  CLIENT_PORT,
-  SERVER_HOST,
-  SERVER_PORT_INNER,
-  REDIS_URL,
-  REDIS_PASSWORD,
-} = process.env
-
-console.log('EHHEHE', REDIS_URL, REDIS_PASSWORD)
+const { CLIENT_PROTOCOL, CLIENT_HOST, CLIENT_PORT, SERVER_HOST, SERVER_PORT_INNER } = process.env
 
 const app = express()
 const httpServer = createServer(app)

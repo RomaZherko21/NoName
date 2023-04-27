@@ -1,18 +1,17 @@
 import Redis from 'ioredis'
 
+const { REDIS_PASSWORD, REDIS_PORT_OUTER } = process.env
+
 const redis = new Redis({
   host: 'redis',
+  password: REDIS_PASSWORD,
+  port: Number(REDIS_PORT_OUTER),
 })
 
-redis.set('mykey', 'myvalue')
+const DICTIONARIES = {
+  emailCode: 'emailCode',
+  phoneCode: 'phoneCode',
+  qrSecret: 'QrSecret',
+}
 
-redis
-  .get('mykey')
-  .then((result) => {
-    return console.log(result)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-
-export { redis }
+export { redis, DICTIONARIES }
