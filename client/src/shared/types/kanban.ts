@@ -37,3 +37,10 @@ export interface KanbanColumnItem {
   position: number
   board_id: number
 }
+
+export interface KanbanSubtask {
+  id: number
+  name: string
+  is_completed: boolean
+  task_id: number
+}
