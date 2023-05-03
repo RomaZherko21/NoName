@@ -1,46 +1,18 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
-import { debounce } from '@mui/material'
 
-import { File } from 'shared/types'
+import { File, Folder } from 'shared/types'
 import PaginationModel from 'models/Pagination'
 import LoadingModel from 'models/Loading'
+import { API } from 'services'
 
 class FilesModel {
-  files: File[] = [
-    {
-      id: 0,
-      name: 'AWS Credentials',
-      type: 'folder',
-      size: '503.9 MB',
-      count: 12,
-      created_at: '2018-01-01 10:40:01',
-      is_favourite: false,
-      tags: ['Business', 'Work']
-    },
-    {
-      id: 1,
-      name: ' Credentials 22',
-      type: 'folder',
-      size: '403.9 MB',
-      count: 9,
-      created_at: '2018-01-01 10:40:01',
-      is_favourite: false,
-      tags: ['Friends', 'Personal']
-    },
-    {
-      id: 2,
-      name: 'AWS',
-      type: 'folder',
-      size: '303.9 MB',
-      count: 11,
-      created_at: '2018-01-01 10:40:01',
-      is_favourite: true,
-      tags: ['Homework', 'Holiday']
-    }
-  ]
+  files: File[] = []
+
+  folders: Folder[] = []
 
   pagination: PaginationModel
+
   loading: LoadingModel
 
   constructor() {
@@ -51,11 +23,11 @@ class FilesModel {
   }
 
   cleanModel() {
-    // this.files = []
+    this.files = []
   }
 
-  toggleFavourite(id: number) {
-    console.log('toggleFavourite request', id)
+  toggleFavourite(name: string) {
+    console.log('toggleFavourite request', name)
   }
 
   deleteFile(id: number) {
@@ -66,19 +38,17 @@ class FilesModel {
     console.log('deleteTag request', id)
   }
 
-  debounceFetch = debounce(this.fetch, 500)
-
   async fetch({ hidden = false }: { hidden?: boolean }) {
     try {
       if (!hidden) {
         this.loading.begin()
       }
 
-      // const data = await API.posts.list({
-      //   searchParams,
-      // })
+      const data = await API.fileManager.getFileManagerFolders()
 
-      // this.files = data.posts
+      console.log(data)
+
+      this.folders = data
       // this.pagination.totalCount = data.count
 
       this.loading.reset()

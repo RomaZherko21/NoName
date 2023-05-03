@@ -28,7 +28,7 @@ const FileManager = () => {
   const sortOptions = useMemo(() => sortConfig, [])
 
   useEffect(() => {
-    FilesModel.debounceFetch({})
+    FilesModel.fetch({})
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [FilesModel.pagination.currentPage, FilesModel.pagination.limit, searchParams])
@@ -90,13 +90,13 @@ const FileManager = () => {
           </AsideFiltersBar>
 
           <Grid item container spacing={2} sx={{ mt: 1 }}>
-            {FilesModel.files.map((file) =>
+            {FilesModel.folders.map((folder) =>
               view === ViewType.card ? (
-                <Grid key={file.id} item xs={12} md={6} lg={4}>
+                <Grid key={folder.name} item xs={12} md={6} lg={4}>
                   <FileItemCard
-                    file={file}
+                    folder={folder}
                     toggleFavourite={() => {
-                      FilesModel.toggleFavourite(file.id)
+                      FilesModel.toggleFavourite(folder.name)
                     }}
                     handleOpenFileInfo={() => {
                       setOpenFileInfo(true)
@@ -104,11 +104,11 @@ const FileManager = () => {
                   />
                 </Grid>
               ) : (
-                <Grid key={file.id} item xs={12}>
+                <Grid key={folder.name} item xs={12}>
                   <FileItemRow
-                    file={file}
+                    folder={folder}
                     toggleFavourite={() => {
-                      FilesModel.toggleFavourite(file.id)
+                      FilesModel.toggleFavourite(folder.name)
                     }}
                     handleOpenFileInfo={() => {
                       setOpenFileInfo(true)
@@ -134,7 +134,7 @@ const FileManager = () => {
             setOpenFileInfo(false)
           }}
           toggleFavourite={() => {
-            FilesModel.toggleFavourite(file.id)
+            // FilesModel.toggleFavourite(file.id)
           }}
           deleteFile={() => {
             FilesModel.deleteFile(file.id)

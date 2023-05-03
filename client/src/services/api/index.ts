@@ -7,6 +7,7 @@ import * as genres from './genres'
 import * as security from './security'
 import * as kanban from './kanban'
 import * as chat from './chat'
+import * as fileManager from './fileManager'
 
 const API = {
   auth,
@@ -17,7 +18,8 @@ const API = {
   genres,
   security,
   kanban,
-  chat
+  chat,
+  fileManager
 }
 
 export default API
