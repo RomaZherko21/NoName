@@ -46,8 +46,6 @@ class FilesModel {
 
       const data = await API.fileManager.getFileManagerFolders()
 
-      console.log(data)
-
       this.folders = data
       // this.pagination.totalCount = data.count
 
