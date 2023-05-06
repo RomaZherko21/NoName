@@ -7,6 +7,14 @@ import { ValidationErrorItem } from 'sequelize'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
+import { createConnection } from 'mysql2'
+
+const connection = createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: 'test',
+})
+
 import { useHttpError, useAuth } from 'middlewares'
 import { sequelize } from 'models'
 import { log } from 'shared/helpers'
