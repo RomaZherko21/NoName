@@ -1,31 +1,19 @@
 import { useTranslation } from 'react-i18next'
-import { Box, Drawer, Divider, IconButton, Typography, Grid, Avatar, Chip } from '@mui/material'
+import { Box, Drawer, Divider, IconButton, Typography, Grid, Avatar } from '@mui/material'
 import { AiOutlineClose, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineEdit } from 'react-icons/md'
 import { FiTrash } from 'react-icons/fi'
 
-import { File } from 'shared/types/file'
-import { FilesModel } from 'pages/FileManager/model'
+// import { FilesModel } from 'pages/FileManager/model'
 import folder from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
 
 interface Props {
-  file: File
   openFileInfo: boolean
   onCloseFileInfo: () => void
-  toggleFavourite: (id: number) => void
-  deleteFile: (id: number) => void
-  deleteTag: (id: number) => void
 }
 
-const AsideFileInfo = ({
-  file,
-  openFileInfo,
-  onCloseFileInfo,
-  toggleFavourite,
-  deleteFile,
-  deleteTag
-}: Props) => {
+const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -52,13 +40,10 @@ const AsideFileInfo = ({
         }}
       >
         <IconButton
-          onClick={() => {
-            toggleFavourite(file.id)
-          }}
           sx={{
             p: 1,
-            fontSize: 20,
-            color: ({ palette }) => (file.is_favourite ? palette.warning.main : palette.grey[500])
+            fontSize: 20
+            // color: ({ palette }) => (file.is_favourite ? palette.warning.main : palette.grey[500])
           }}
         >
           <AiOutlineStar />
@@ -96,7 +81,7 @@ const AsideFileInfo = ({
             mb: 2
           }}
         >
-          <Typography variant="h5">{file.name}</Typography>
+          <Typography variant="h5">'file.name'</Typography>
           <IconButton size="small">
             <MdOutlineEdit />
           </IconButton>
@@ -117,7 +102,7 @@ const AsideFileInfo = ({
               <Typography variant="caption">{t('file:size')}</Typography>
             </Grid>
             <Grid xs={8}>
-              <Typography variant="body2">{file.size}</Typography>
+              <Typography variant="body2">2000</Typography>
             </Grid>
           </Grid>
 
@@ -126,7 +111,7 @@ const AsideFileInfo = ({
               <Typography variant="caption">{t('fields.createdAt')}</Typography>
             </Grid>
             <Grid xs={8}>
-              <Typography variant="body2">{fromTimestampToDate(file.created_at)}</Typography>
+              <Typography variant="body2">{fromTimestampToDate('2017-01-01 10:40:01')}</Typography>
             </Grid>
           </Grid>
 
@@ -152,7 +137,7 @@ const AsideFileInfo = ({
                 alignItems: 'center'
               }}
             >
-              {FilesModel.files.map((file) =>
+              {/* {FilesModel.files.map((file) =>
                 file.tags.map((tag, id) => (
                   <Chip
                     key={tag}
@@ -166,7 +151,7 @@ const AsideFileInfo = ({
                     }}
                   />
                 ))
-              )}
+              )} */}
               <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
                 <AiOutlinePlus />
               </IconButton>
@@ -198,7 +183,7 @@ const AsideFileInfo = ({
             <Grid xs={8}>
               <IconButton
                 onClick={() => {
-                  deleteFile(file.id)
+                  // deleteFile(file.id)
                 }}
                 sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
               >

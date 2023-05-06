@@ -125,25 +125,12 @@ const FileManager = () => {
         </Grid>
       </Grid>
 
-      {FilesModel.files.map((file) => (
-        <AsideFileInfo
-          key={file.id}
-          file={file}
-          openFileInfo={openFileInfo}
-          onCloseFileInfo={() => {
-            setOpenFileInfo(false)
-          }}
-          toggleFavourite={() => {
-            // FilesModel.toggleFavourite(file.id)
-          }}
-          deleteFile={() => {
-            FilesModel.deleteFile(file.id)
-          }}
-          deleteTag={() => {
-            FilesModel.deleteTag(file.id)
-          }}
-        />
-      ))}
+      <AsideFileInfo
+        openFileInfo={openFileInfo}
+        onCloseFileInfo={() => {
+          setOpenFileInfo(false)
+        }}
+      />
     </>
   )
 }
