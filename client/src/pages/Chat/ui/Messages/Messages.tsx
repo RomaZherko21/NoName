@@ -1,8 +1,10 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Avatar, Box, Typography } from '@mui/material'
 
+// import { ChangeTheme } from 'widgets/Header/ui'
+import { toggleThemeContext } from 'app/theme'
 import notFound from 'shared/assets/images/404.png'
 
 import s from './Styles.module.scss'
@@ -12,6 +14,7 @@ import { ChatModel } from '../../model'
 function Messages() {
   const { t } = useTranslation()
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
+  const { isDefaultTheme } = useContext(toggleThemeContext)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView()
@@ -28,7 +31,7 @@ function Messages() {
         overflowY: 'auto',
         borderBottom: (theme) => `1px solid ${theme.palette.divider}`
       }}
-      className={s.chatBackground}
+      className={isDefaultTheme ? s.chatBackgroundLight : s.chatBackground}
     >
       {ChatModel.messages.length ? (
         ChatModel.messages.map((message) => <Message key={message.id} message={message} />)
