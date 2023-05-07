@@ -66,11 +66,12 @@ class KanbanModel {
 
   async fetch({ id, hidden = false }: {id: number, hidden?: boolean}) {
     try {
-      this.loading.begin()
-
-      console.log(await API.kanban.get(id)) 
-
-    } catch (err: any) {
+      if(!hidden){
+        this.loading.begin()
+      }
+      this.columns = await API.kanban.get(id) 
+    } 
+    catch (err: any) {
       toast.error(err)
     } finally {
       this.loading.reset()
@@ -132,8 +133,8 @@ class KanbanModel {
     if (!destination) return
 
     if (source.droppableId !== destination.droppableId) {
-      const fromColumn = this.columns.find((item) => source.droppableId === item.id)
-      const toColumn = this.columns.find((item) => destination.droppableId === item.id)
+      const fromColumn = this.columns.find((item) => String(source.droppableId) === String(item.column.position))
+      const toColumn = this.columns.find((item) => destination.droppableId === String(item.column.position))
 
       if (fromColumn && toColumn) {
         const fromTasks = [...fromColumn.tasks]
@@ -143,9 +144,9 @@ class KanbanModel {
         toTasks.splice(destination.index, 0, removed)
 
         this.columns = this.columns.map((column) => {
-          if (column.id === source.droppableId) {
+          if (String(column.column.position) === source.droppableId) {
             return { ...fromColumn, tasks: fromTasks }
-          } else if (column.id === destination.droppableId) {
+          } else if (String(column.column.position) === destination.droppableId) {
             return { ...toColumn, tasks: toTasks }
           } else {
             return column
@@ -153,7 +154,7 @@ class KanbanModel {
         })
       }
     } else {
-      const column = this.columns.find((item) => source.droppableId === item.id)
+      const column = this.columns.find((item) => source.droppableId === String(item.column.position))
 
       if (column) {
         const fromTasks = [...column.tasks]
@@ -162,7 +163,7 @@ class KanbanModel {
         fromTasks.splice(destination.index, 0, removed)
 
         this.columns = this.columns.map((column) => {
-          if (column.id === source.droppableId) {
+          if (String(column.column.position) === source.droppableId) {
             return { ...column, tasks: fromTasks }
           } else {
             return column

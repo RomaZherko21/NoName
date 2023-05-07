@@ -1,7 +1,17 @@
+export interface KanbanBoard {
+  id: number
+  name: string
+  description: string
+  created_at: number
+  updated_at: string
+}
 export interface KanbanColumn {
-  id: string
-  title: string
+  column: KanbanColumnItem
   tasks: KanbanTask[]
+}
+export interface KanbanColumnItem {
+  name: string
+  position: number
 }
 export interface KanbanTask {
   id: string
@@ -23,20 +33,7 @@ export interface KanbanComment {
 
 //   user_avatar: string
 // }
-export interface KanbanBoard {
-  id: number
-  name: string
-  description: string
-  created_at: number
-  updated_at: string
-}
 
-export interface KanbanColumnItem {
-  id: number
-  name: string
-  position: number
-  board_id: number
-}
 
 export interface KanbanSubtask {
   id: number

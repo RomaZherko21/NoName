@@ -46,7 +46,10 @@ function Kanban() {
               <Spinner />
             ) : (
               KanbanModel.columns.map((column) => (
-                <Droppable droppableId={column.id} key={column.id}>
+                <Droppable
+                  droppableId={String(column.column.position)}
+                  key={column.column.position}
+                >
                   {(provided) => (
                     <Stack
                       sx={{
@@ -61,7 +64,7 @@ function Kanban() {
                         }}
                       >
                         <InputBase
-                          value={column.title}
+                          value={column.column.name}
                           size="small"
                           fullWidth
                           sx={{
