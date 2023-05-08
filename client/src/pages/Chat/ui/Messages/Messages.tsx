@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Avatar, Box, Typography } from '@mui/material'
 
-// import { ChangeTheme } from 'widgets/Header/ui'
 import { toggleThemeContext } from 'app/theme'
 import notFound from 'shared/assets/images/404.png'
+import background from 'shared/assets/images/chat-background.jpg'
+import backgroundLight from 'shared/assets/images/chat-background-light.jpg'
 
-import s from './Styles.module.scss'
 import Message from './Message'
 import { ChatModel } from '../../model'
 
@@ -29,9 +29,11 @@ function Messages() {
         p: 3,
         gap: 2,
         overflowY: 'auto',
-        borderBottom: (theme) => `1px solid ${theme.palette.divider}`
+        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        backgroundImage: isDefaultTheme ? `url(${backgroundLight})` : `url(${background})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       }}
-      className={isDefaultTheme ? s.chatBackgroundLight : s.chatBackground}
     >
       {ChatModel.messages.length ? (
         ChatModel.messages.map((message) => <Message key={message.id} message={message} />)
