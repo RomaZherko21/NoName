@@ -14,7 +14,7 @@ export interface KanbanColumnItem {
   position: number
 }
 export interface KanbanTask {
-  id: string
+  id: number
   content: string
   KanbanComment: KanbanComment[]
 }

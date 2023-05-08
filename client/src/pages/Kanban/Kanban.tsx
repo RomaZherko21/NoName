@@ -117,7 +117,7 @@ function Kanban() {
                         }}
                       >
                         {column.tasks.map((task, id) => (
-                          <Draggable key={task.id} draggableId={task.id} index={id}>
+                          <Draggable key={task.id} draggableId={String(task.id)} index={id}>
                             {(provided, snapshot) => (
                               <Task
                                 provided={provided}
