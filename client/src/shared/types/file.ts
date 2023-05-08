@@ -8,3 +8,11 @@ export interface File {
   is_favourite: boolean
   tags: string[]
 }
+
+export interface Folder {
+  name: string
+  created_at: string
+  files_count: number
+  memory_used: string
+  assignee_to: string[]
+}
