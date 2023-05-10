@@ -1,13 +1,13 @@
-import { Box, Paper, Chip, CardMedia, Typography, Avatar } from '@mui/material'
+import { Box, Paper, Chip, CardMedia, Typography, Avatar, dividerClasses } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { ImFilePicture } from 'react-icons/im'
 import { BsEye } from 'react-icons/bs'
 import { AiOutlineMessage } from 'react-icons/ai'
 
-import primerImg from 'shared/assets/images/cover.jpg'
+// import primerImg from 'shared/assets/images/cover.jpg'
 import { KanbanTask as TypeTask } from 'shared/types'
-
+import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
 interface Props {
   provided: DraggableProvided
   snapshot: DraggableStateSnapshot
@@ -46,18 +46,25 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             borderRadius: 2,
             mb: 1
           }}
-          image={primerImg}
+          image={task.attachments && `${API_KANBAN_IMAGES_URL}/${task.attachments[0]}`} // тут ссылка нужна на картинку с сервера
           title="task cover"
         />
-        <Typography variant="subtitle1">{task.content}</Typography>
+        <Typography variant="subtitle1">{task.name}</Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Chip
-          size="small"
-          label="Business"
-          sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
-        />
+        {task.tags.map((tag, id) => (
+          <>
+            {tag && (
+              <Chip
+                key={id}
+                size="small"
+                label={tag} //тут тэги
+                sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
+              />
+            )}
+          </>
+        ))}
       </Box>
 
       <Box
@@ -81,10 +88,13 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
           <AiOutlineMessage />
         </Box>
 
-        <Avatar
-          sx={{ height: 32, width: 32 }}
-          // src={`${API_USER_AVATAR_URL}/${user.avatar}`}
-        />
+        {task.assigne_to.map((user_img, id) => (
+          <Avatar
+            key={id}
+            sx={{ height: 32, width: 32 }}
+            src={`${API_USER_AVATAR_URL}/${user_img}`} //как отобразить несколько
+          />
+        ))}
       </Box>
     </Paper>
   )

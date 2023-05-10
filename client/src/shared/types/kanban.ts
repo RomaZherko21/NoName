@@ -15,11 +15,13 @@ export interface KanbanColumnItem {
 }
 export interface KanbanTask {
   id: number
-  content: string
-  KanbanComment: KanbanComment[]
+  name: string
+  assigne_to: string[]
+  attachments: string[]
+  created_by: string
+  tags: string[]
 }
-
-export interface KanbanComment {
+export interface KanbanComment { // это было
   id: number
   task_id: number
   created_at: string
