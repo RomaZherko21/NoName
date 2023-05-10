@@ -69,7 +69,7 @@ class KanbanModel {
       if(!hidden){
         this.loading.begin()
       }
-      this.columns = await API.kanban.get(id) 
+      this.columns = await API.kanban.getColumns(id) 
     } 
     catch (err: any) {
       toast.error(err)

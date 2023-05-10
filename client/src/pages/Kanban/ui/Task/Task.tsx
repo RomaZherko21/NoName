@@ -87,14 +87,20 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
           <ImFilePicture />
           <AiOutlineMessage />
         </Box>
-
-        {task.assigne_to.map((user_img, id) => (
-          <Avatar
-            key={id}
-            sx={{ height: 32, width: 32 }}
-            src={`${API_USER_AVATAR_URL}/${user_img}`} //как отобразить несколько
-          />
-        ))}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
+          {task.assigne_to.map((user_img, id) => (
+            <Avatar
+              key={id}
+              sx={{ height: 32, width: 32 }}
+              src={`${API_USER_AVATAR_URL}/${user_img}`} //как отобразить несколько
+            />
+          ))}
+        </Box>
       </Box>
     </Paper>
   )
