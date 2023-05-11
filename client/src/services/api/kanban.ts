@@ -5,6 +5,7 @@ import fetch from './fetch'
 const ENDPOINT_BASE = '/kanban'
 
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
+export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
 
 export const createComment = async (id: number, comment: any) =>
   await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)

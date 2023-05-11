@@ -78,6 +78,16 @@ class KanbanModel {
     }
   }
 
+  async deleteColumn(id: number) {// это я
+    try {
+      await API.kanban.deleteColumn(id)
+
+      this.fetch({ id, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
   onEditComment({ value, id }: { value: string; id: number }) {
     this.isEditActive = true
     this.commentInputValue = value

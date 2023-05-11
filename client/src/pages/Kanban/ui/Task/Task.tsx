@@ -1,4 +1,13 @@
-import { Box, Paper, Chip, CardMedia, Typography, Avatar, dividerClasses } from '@mui/material'
+import {
+  Box,
+  Paper,
+  Chip,
+  CardMedia,
+  Typography,
+  Avatar,
+  // dividerClasses,
+  AvatarGroup
+} from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { ImFilePicture } from 'react-icons/im'
@@ -93,13 +102,15 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             alignItems: 'center'
           }}
         >
-          {task.assigne_to.map((user_img, id) => (
-            <Avatar
-              key={id}
-              sx={{ height: 32, width: 32 }}
-              src={`${API_USER_AVATAR_URL}/${user_img}`} //как отобразить несколько
-            />
-          ))}
+          <AvatarGroup>
+            {task.assigne_to?.slice(0, 3)?.map((user_img, id) => (
+              <Avatar
+                key={id}
+                sx={{ width: 32, height: 32 }}
+                src={`${API_USER_AVATAR_URL}/${user_img}`}
+              ></Avatar>
+            ))}
+          </AvatarGroup>
         </Box>
       </Box>
     </Paper>
