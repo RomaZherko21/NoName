@@ -78,9 +78,18 @@ class KanbanModel {
     }
   }
 
-  async deleteColumn(id: number) {// это я
+  async deleteColumn({id}: {id: number}) {// это я
     try {
       await API.kanban.deleteColumn(id)
+
+      this.fetch({ id, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+  async postColumn({id}: {id: number}) {// это я
+    try {
+      await API.kanban.postColumn(id)
 
       this.fetch({ id, hidden: true })
     } catch (err: any) {

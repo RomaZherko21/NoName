@@ -15,7 +15,7 @@ import { KanbanModel } from './model'
 function Kanban() {
   const { t } = useTranslation()
   const [openTaskInfo, setOpenTaskInfo] = useState(false)
-  const popupConfig = useMemo(() => getKanbanPopupConfig(1), [])
+  const popupConfig = useMemo(() => getKanbanPopupConfig(1), []) // тут hard code на 1
 
   useEffect(() => {
     KanbanModel.fetch({ id: 1 })

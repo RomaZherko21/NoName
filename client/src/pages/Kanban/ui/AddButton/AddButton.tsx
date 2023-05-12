@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { KanbanModel } from 'pages/Kanban/model'
+import { number } from 'yup'
 
 interface Props {
   text: string
@@ -33,6 +35,8 @@ function AddButton({ text }: Props) {
             <Button
               onClick={() => {
                 setIsFormOpen(false)
+                // KanbanModel.postColumn({ id })
+                console.log('post') // сюда лепим пост
               }}
               size="small"
               variant="contained"
