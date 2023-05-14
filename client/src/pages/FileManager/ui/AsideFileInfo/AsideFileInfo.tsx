@@ -5,16 +5,22 @@ import { MdOutlineEdit } from 'react-icons/md'
 import { FiTrash } from 'react-icons/fi'
 
 // import { FilesModel } from 'pages/FileManager/model'
-import folder from 'shared/assets/images/fileFormat/folder.svg'
+import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
+import { Folder } from 'shared/types/file'
 
 interface Props {
+  folder: Folder
   openFileInfo: boolean
   onCloseFileInfo: () => void
 }
 
-const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
+const AsideFileInfo = ({ folder, openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
+
+  // function deleteTag(id: number) {
+  //   throw new Error('Function not implemented.')
+  // }
 
   return (
     <Drawer
@@ -70,7 +76,7 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
             borderWidth: 1
           }}
         >
-          <img alt="Folder" src={folder} />
+          <img alt="Folder" src={folderImg} />
         </Box>
 
         <Box
@@ -81,7 +87,7 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
             mb: 2
           }}
         >
-          <Typography variant="h5">'file.name'</Typography>
+          <Typography variant="h5">{folder.name}</Typography>
           <IconButton size="small">
             <MdOutlineEdit />
           </IconButton>

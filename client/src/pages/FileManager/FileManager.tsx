@@ -34,6 +34,10 @@ const FileManager = () => {
   }, [FilesModel.pagination.currentPage, FilesModel.pagination.limit, searchParams])
 
   useEffect(() => {
+    FilesModel.fetchFolderInfo({ id: 1 })
+  }, [])
+
+  useEffect(() => {
     return () => {
       FilesModel.cleanModel()
     }
@@ -130,6 +134,8 @@ const FileManager = () => {
         onCloseFileInfo={() => {
           setOpenFileInfo(false)
         }}
+        // file={file}
+        folder={FilesModel.folder}
       />
     </>
   )
