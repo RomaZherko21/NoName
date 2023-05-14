@@ -39,7 +39,7 @@ const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
         }
       }}
     >
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', width: '200px' }}>
         <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
           <img alt="Folder" src={folderImg} />
         </Box>
@@ -60,7 +60,7 @@ const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
         </Box>
       </Box>
 
-      <Box>
+      <Box sx={{ width: '150px' }}>
         <Typography variant="body2" color="text.primary">
           {t('fields.createdAt')}
         </Typography>
@@ -70,13 +70,13 @@ const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
         </Typography>
       </Box>
 
-      <AvatarGroup>
+      <AvatarGroup sx={{ width: '150px', justifyContent: 'center' }}>
         {folder.assignee_to?.slice(0, 3)?.map((item) => (
           <Avatar sx={{ width: 32, height: 32 }} src={`${API_USER_AVATAR_URL}/${item}`}></Avatar>
         ))}
       </AvatarGroup>
 
-      <Box sx={{ display: 'flex', gap: 4 }}>
+      <Box sx={{ display: 'flex', gap: 4, width: '100px', alignItems: 'center' }}>
         <IconButton
           onClick={() => {
             // toggleFavourite(file.id)
