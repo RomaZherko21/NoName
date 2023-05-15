@@ -70,6 +70,7 @@ class KanbanModel {
         this.loading.begin()
       }
       this.columns = await API.kanban.getColumns(id) 
+      console.log(API.kanban.getColumns(1))
     } 
     catch (err: any) {
       toast.error(err)
@@ -82,7 +83,7 @@ class KanbanModel {
     try {
       await API.kanban.deleteColumn(id)
 
-      this.fetch({ id, hidden: true })
+      this.fetch({ id: 1, hidden: true })
     } catch (err: any) {
       toast.error(err)
     }
