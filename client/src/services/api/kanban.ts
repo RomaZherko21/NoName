@@ -1,12 +1,13 @@
 import { KanbanColumn, KanbanComment } from 'shared/types'
 
 import fetch from './fetch'
+import id from 'date-fns/locale/id'
 
 const ENDPOINT_BASE = '/kanban'
 
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
 export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
-export const postColumn = async (id: number) => await fetch.post(`${ENDPOINT_BASE}/boards/${id}/columns`)
+// export const postColumn = async (id: number, KanbanColumn: KanbanColumn) => await fetch.post(`${ENDPOINT_BASE}/boards/${id}/columns`, KanbanColumn)
 
 export const createComment = async (id: number, comment: any) =>
   await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
@@ -23,3 +24,8 @@ export const editComment = async ({
 
 export const deleteComment = async (taskId: number, id: number) =>
   await fetch.delete(`${ENDPOINT_BASE}/${taskId}/comments/${id}`)
+
+
+
+// на PHP MyAdmin находится 3 колонки, но я получаю только 2 по итогу
+// нужно добавить ID для каждого KanbanColumn, не могу сделать delete (хотя на PHP MyAdmin есть ID)

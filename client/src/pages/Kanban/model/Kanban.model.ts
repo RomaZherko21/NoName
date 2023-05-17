@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import LoadingModel from 'models/Loading'
 import { KanbanColumn } from 'shared/types'
 import { API } from 'services'
+import { number } from 'yup'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
@@ -70,7 +71,7 @@ class KanbanModel {
         this.loading.begin()
       }
       this.columns = await API.kanban.getColumns(id) 
-      console.log(API.kanban.getColumns(1))
+     console.log(await API.kanban.getColumns(1))// мне приходит 2 колонки вместо 3 (PHP MyAdmin)
     } 
     catch (err: any) {
       toast.error(err)
@@ -88,15 +89,15 @@ class KanbanModel {
       toast.error(err)
     }
   }
-  async postColumn({id}: {id: number}) {// это я
-    try {
-      await API.kanban.postColumn(id)
+  // async postColumn({id}: {id: number}) {// это я
+  //   try {
+  //     await API.kanban.postColumn({id: number, KanbanColumn: KanbanColumn})
 
-      this.fetch({ id, hidden: true })
-    } catch (err: any) {
-      toast.error(err)
-    }
-  }
+  //     this.fetch({ id: 1, hidden: true })
+  //   } catch (err: any) {
+  //     toast.error(err)
+  //   }
+  // }
 
   onEditComment({ value, id }: { value: string; id: number }) {
     this.isEditActive = true
