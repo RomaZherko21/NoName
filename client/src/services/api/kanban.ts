@@ -1,4 +1,4 @@
-import { KanbanColumn, KanbanComment } from 'shared/types'
+import { KanbanColumn, KanbanColumnItem, KanbanComment } from 'shared/types'
 
 import fetch from './fetch'
 import id from 'date-fns/locale/id'
@@ -7,7 +7,7 @@ const ENDPOINT_BASE = '/kanban'
 
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
 export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
-// export const postColumn = async (id: number, KanbanColumn: KanbanColumn) => await fetch.post(`${ENDPOINT_BASE}/boards/${id}/columns`, KanbanColumn)
+export const postColumn = async (KanbanColumnItem: KanbanColumnItem) => await fetch.post(`${ENDPOINT_BASE}/boards/1/columns`, KanbanColumnItem)
 
 export const createComment = async (id: number, comment: any) =>
   await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)

@@ -5,6 +5,7 @@ import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { KanbanModel } from 'pages/Kanban/model'
 import { number } from 'yup'
+import { editKanbanColumn } from 'services/api/kanbanBoards'
 
 interface Props {
   text: string
@@ -35,7 +36,7 @@ function AddButton({ text }: Props) {
             <Button
               onClick={() => {
                 setIsFormOpen(false)
-                // KanbanModel.postColumn({ id: 1 })
+                // KanbanModel.postColumn(KanbanColumn)
                 console.log('post') // сюда лепим пост
               }}
               size="small"

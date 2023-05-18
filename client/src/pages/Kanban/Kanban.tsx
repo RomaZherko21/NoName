@@ -139,7 +139,7 @@ function Kanban() {
                 </Droppable>
               ))
             )}
-            `` <AddButton text="user:actions.addColumn" />
+            <AddButton text="user:actions.addColumn" />
           </DragDropContext>
         </Box>
       </Container>

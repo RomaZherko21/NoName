@@ -89,9 +89,10 @@ class KanbanModel {
       toast.error(err)
     }
   }
-  // async postColumn({id}: {id: number}) {// это я
+
+  // async postColumn(KanbanColumnItem: KanbanColumnItem) {// это я
   //   try {
-  //     await API.kanban.postColumn({id: number, KanbanColumn: KanbanColumn})
+  //     await API.kanban.postColumn(KanbanColumnItem)
 
   //     this.fetch({ id: 1, hidden: true })
   //   } catch (err: any) {
