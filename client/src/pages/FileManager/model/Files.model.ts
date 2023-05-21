@@ -11,7 +11,7 @@ class FilesModel {
 
   folders: Folder[] = []
 
-  folder!: Folder
+  folder: Folder | undefined
 
   pagination: PaginationModel
 
@@ -46,13 +46,10 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const data = await API.fileManager.getFileManagerFolders()
+      const data = await API.fileManager.get()
 
       this.folders = data
       // this.pagination.totalCount = data.count
-      // const dataId = await API.fileManager.getFileManagerFolder()
-
-      // this.folder = dataId
 
       this.loading.reset()
     } catch (err: any) {
@@ -68,7 +65,7 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const dataId = await API.fileManager.getFileManagerFolder(id)
+      const dataId = await API.fileManager.getById(id)
 
       this.folder = dataId
 

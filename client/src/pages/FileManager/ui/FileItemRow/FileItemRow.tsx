@@ -11,6 +11,7 @@ import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 
 import { getFilePopupConfig } from '../FilePopupConfig'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
+import { FilesModel } from 'pages/FileManager/model'
 
 interface Props {
   folder: Folder
@@ -21,6 +22,11 @@ interface Props {
 const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
   const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
+
+  function onClick() {
+    handleOpenFileInfo()
+    FilesModel.fetchFolderInfo({ id: folder.id })
+  }
 
   return (
     <Paper
@@ -40,12 +46,12 @@ const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-        <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
+        <Box sx={{ cursor: 'pointer' }} onClick={onClick}>
           <img alt="Folder" src={folderImg} />
         </Box>
 
         <Box>
-          <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
+          <Typography variant="body2" onClick={onClick} sx={{ cursor: 'pointer' }}>
             {folder.name}
           </Typography>
           <Typography
