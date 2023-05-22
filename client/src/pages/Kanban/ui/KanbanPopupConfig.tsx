@@ -16,7 +16,7 @@ export const getKanbanPopupConfig = () => [
     text: 'actions.delete',
     onClick: (id: number) => {
       KanbanModel.deleteColumn({ id })
-      console.log(id)
+      // console.log(id)
       console.log('delete')
       // сюда запрос на удаление
     }

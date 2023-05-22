@@ -90,15 +90,15 @@ class KanbanModel {
     }
   }
 
-  // async postColumn(KanbanColumnItem: KanbanColumnItem) {// это я
-  //   try {
-  //     await API.kanban.postColumn(KanbanColumnItem)
+  async postColumn(position: 0, KanbanColumnItem: any) {// это я
+    try {
+      await API.kanban.postColumn(position, KanbanColumnItem)
 
-  //     this.fetch({ id: 1, hidden: true })
-  //   } catch (err: any) {
-  //     toast.error(err)
-  //   }
-  // }
+      this.fetch({ id: 1, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
 
   onEditComment({ value, id }: { value: string; id: number }) {
     this.isEditActive = true

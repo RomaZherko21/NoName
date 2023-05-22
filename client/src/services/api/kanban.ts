@@ -7,7 +7,7 @@ const ENDPOINT_BASE = '/kanban'
 
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
 export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
-// export const postColumn = async () => await fetch.post(`${ENDPOINT_BASE}/boards/1/columns`, KanbanColumnItem)// может передавать name и position?
+export const postColumn = async (position: number, KanbanColumnItem: any) => await fetch.post<KanbanColumnItem> (`${ENDPOINT_BASE}/boards/1/columns`, KanbanColumnItem)// может передавать name и position?
 
 export const createComment = async (id: number, comment: any) =>
   await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)
