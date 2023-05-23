@@ -4,40 +4,16 @@ const path = require('path')
 
 module.exports = {
   entry: './src/index.ts',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
   mode: 'production',
+  target: 'node',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'index.js',
+  },
   resolve: {
     extensions: ['.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
-
-    // fallback: {
-    //   fs: false,
-    //   tls: false,
-    //   net: false,
-    //   path: false,
-    //   zlib: false,
-    //   http: false,
-    //   https: false,
-    //   stream: false,
-    //   crypto: false,
-    //   util: false,
-    //   url: false,
-    //   assert: false,
-    //   buffer: false,
-    //   os: false,
-    //   dns: false,
-    //   child_process: false,
-    //   querystring: false,
-    //   'pg-hstore': false,
-    //   'aws-sdk': false,
-    //   'utf-8-validate': false,
-    // },
   },
-  target: 'node',
-  // externalsPresets: { node: true },
   externals: [nodeExternals()],
   module: {
     rules: [
@@ -45,10 +21,6 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         use: 'ts-loader',
-      },
-      {
-        test: /\.html$/,
-        use: 'html-loader',
       },
     ],
   },

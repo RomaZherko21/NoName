@@ -4,7 +4,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./build",
     /* Strict Type-Checking Options */
     "strict": true,
     "noImplicitAny": true,
