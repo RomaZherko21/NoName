@@ -14,6 +14,7 @@ interface Props {
 function AddButton({ text }: Props) {
   const { t } = useTranslation()
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [columnName, setColumnName] = useState('')
 
   return (
     <>
@@ -30,14 +31,21 @@ function AddButton({ text }: Props) {
             }
           }}
         >
-          <TextField size="small" placeholder={t(text)} fullWidth />
+          <TextField
+            size="small"
+            placeholder={t(text)}
+            fullWidth
+            value={columnName}
+            onChange={(e) => setColumnName(e.target.value)}
+          />
           {/* нужно както вытянуть введенное значение из инпута и отправить на бэк как имя колонки */}
 
           <Box sx={{ display: 'flex', mt: 1, gap: 1 }}>
             <Button
               onClick={() => {
                 setIsFormOpen(false)
-                // KanbanModel.postColumn()
+                KanbanModel.postColumn({ position: 3, name: columnName })
+                setColumnName('')
                 console.log('post') // сюда лепим пост
               }}
               size="small"

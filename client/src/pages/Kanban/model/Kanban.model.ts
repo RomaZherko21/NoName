@@ -3,7 +3,7 @@ import { DropResult } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
-import { KanbanColumn } from 'shared/types'
+import { KanbanColumn, KanbanColumnItem } from 'shared/types'
 import { API } from 'services'
 import { number } from 'yup'
 
@@ -90,11 +90,11 @@ class KanbanModel {
     }
   }
 
-  async postColumn(position: 0, KanbanColumnItem: any) {// это я
+  async postColumn(KanbanColumnItem: KanbanColumnItem) {// это я
     try {
-      await API.kanban.postColumn(position, KanbanColumnItem)
+      await API.kanban.postColumn( KanbanColumnItem )
 
-      this.fetch({ id: 1, hidden: true })
+      this.fetch({ id: 1})
     } catch (err: any) {
       toast.error(err)
     }

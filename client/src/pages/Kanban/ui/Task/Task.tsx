@@ -69,7 +69,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
               <Chip
                 key={id}
                 size="small"
-                label={tag} //тут тэги
+                label={tag}
                 sx={{ backgroundColor: (theme) => theme.palette.grey[700] }}
               />
             )}
