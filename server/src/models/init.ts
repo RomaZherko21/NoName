@@ -5,6 +5,7 @@ const { MYSQL_DATABASE, MYSQL_USERNAME, MYSQL_PASSWORD } = process.env
 const sequelize = new Sequelize(String(MYSQL_DATABASE), MYSQL_USERNAME || '', MYSQL_PASSWORD, {
   dialect: 'mysql',
   host: 'mysql_db',
+  dialectModule: require('mysql2'),
   logging: false, // all operations in console
   define: {
     timestamps: false,

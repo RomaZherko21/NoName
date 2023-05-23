@@ -68,6 +68,7 @@
     "unicorn/prefer-top-level-await": "off",
     "unicorn/prefer-ternary": "off",
     "unicorn/prefer-module": "off",
-    "unicorn/no-array-for-each": "off"
+    "unicorn/no-array-for-each": "off",
+    "unicorn/prefer-node-protocol": "off"
   }
 }

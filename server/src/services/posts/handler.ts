@@ -1,10 +1,10 @@
-import fs from 'node:fs'
+import fs from 'fs'
 import { NextFunction, Request, Response } from 'express'
 import { QueryTypes } from 'sequelize'
 import createError from 'http-errors'
 
 import { sequelize, PostModel, UserModel, PostCommentModel } from 'models'
-import { ORDER_TYPE, ID, LIMIT, OFFSET, POST_FOLDER } from 'shared/consts'
+import { POST_FOLDER } from 'shared/consts'
 import { getTimestamp } from 'shared/helpers'
 import repo from './repo'
 

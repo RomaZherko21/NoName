@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import fs from 'node:fs'
+import fs from 'fs'
 import createError from 'http-errors'
 import bcrypt from 'bcrypt'
 import { QueryTypes } from 'sequelize'
