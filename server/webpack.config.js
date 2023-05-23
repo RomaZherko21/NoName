@@ -1,40 +1,44 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
+const path = require('path')
 
 module.exports = {
   entry: './src/index.ts',
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
   },
   mode: 'production',
   resolve: {
     extensions: ['.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
 
-    fallback: {
-      fs: false,
-      tls: false,
-      net: false,
-      path: false,
-      zlib: false,
-      http: false,
-      https: false,
-      stream: false,
-      crypto: false,
-      util: false,
-      url: false,
-      assert: false,
-      buffer: false,
-      os: false,
-      dns: false,
-      child_process: false,
-      querystring: false,
-      'pg-hstore': false,
-      'aws-sdk': false,
-      'utf-8-validate': false,
-    },
+    // fallback: {
+    //   fs: false,
+    //   tls: false,
+    //   net: false,
+    //   path: false,
+    //   zlib: false,
+    //   http: false,
+    //   https: false,
+    //   stream: false,
+    //   crypto: false,
+    //   util: false,
+    //   url: false,
+    //   assert: false,
+    //   buffer: false,
+    //   os: false,
+    //   dns: false,
+    //   child_process: false,
+    //   querystring: false,
+    //   'pg-hstore': false,
+    //   'aws-sdk': false,
+    //   'utf-8-validate': false,
+    // },
   },
   target: 'node',
+  // externalsPresets: { node: true },
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
