@@ -214,9 +214,7 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                 </Grid>
                 <Grid xs={8}>
                   <IconButton
-                    onClick={() => {
-                      // deleteFile(file.id)
-                    }}
+                    onClick={() => {}}
                     sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
                   >
                     <FiTrash />
