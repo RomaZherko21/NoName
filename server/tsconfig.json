@@ -11,6 +11,7 @@
     /* Module Resolution Options */
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,5 +19,5 @@
   },
   "lib": ["es2015"],
   "include": ["src/**/*", ".eslintrc.json"],
-  "exclude": ["./node_modules", "src/**/*.test.ts"]
+  "exclude": ["./node_modules", "src/**/*.test.ts", ".eslintrc.json"]
 }

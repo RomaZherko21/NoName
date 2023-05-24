@@ -32,5 +32,5 @@
     "@typescript-eslint/return-await": "off",
     "@typescript-eslint/no-shadow": "off"
   },
-  "ignorePatterns": ["vite.config.ts"]
+  "ignorePatterns": ["vite.config.ts", "env.d.ts"]
 }
