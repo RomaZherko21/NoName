@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import LoadingModel from 'models/Loading'
 import { KanbanColumn, KanbanColumnItem } from 'shared/types'
 import { API } from 'services'
-import { number } from 'yup'
+// import { number } from 'yup'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
@@ -65,14 +65,14 @@ class KanbanModel {
     this.loading = new LoadingModel()
   }
 
-  async fetch({ id, hidden = false }: {id: number, hidden?: boolean}) {
+  async fetch({ id, hidden = false }: { id: number, hidden?: boolean }) {
     try {
-      if(!hidden){
+      if (!hidden) {
         this.loading.begin()
       }
-      this.columns = await API.kanban.getColumns(id) 
-     console.log(await API.kanban.getColumns(1))// мне приходит 2 колонки вместо 3 (PHP MyAdmin)
-    } 
+      this.columns = await API.kanban.getColumns(id)
+      console.log(await API.kanban.getColumns(1))// мне приходит 2 колонки вместо 3 (PHP MyAdmin)
+    }
     catch (err: any) {
       toast.error(err)
     } finally {
@@ -80,7 +80,7 @@ class KanbanModel {
     }
   }
 
-  async deleteColumn({id}: {id: number}) {// это я
+  async deleteColumn({ id }: { id: number }) {// это я
     try {
       await API.kanban.deleteColumn(id)
 
@@ -92,9 +92,9 @@ class KanbanModel {
 
   async postColumn(KanbanColumnItem: KanbanColumnItem) {// это я
     try {
-      await API.kanban.postColumn( KanbanColumnItem )
+      await API.kanban.postColumn(KanbanColumnItem)
 
-      this.fetch({ id: 1})
+      this.fetch({ id: 1 })
     } catch (err: any) {
       toast.error(err)
     }

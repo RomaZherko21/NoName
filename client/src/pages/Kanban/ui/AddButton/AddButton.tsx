@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { KanbanModel } from 'pages/Kanban/model'
-import { number } from 'yup'
-import { editKanbanColumn } from 'services/api/kanbanBoards'
+// import { number } from 'yup'
+// import { editKanbanColumn } from 'services/api/kanbanBoards'
 
 interface Props {
   text: string
@@ -38,7 +38,6 @@ function AddButton({ text }: Props) {
             value={columnName}
             onChange={(e) => setColumnName(e.target.value)}
           />
-          {/* нужно както вытянуть введенное значение из инпута и отправить на бэк как имя колонки */}
 
           <Box sx={{ display: 'flex', mt: 1, gap: 1 }}>
             <Button
@@ -46,7 +45,6 @@ function AddButton({ text }: Props) {
                 setIsFormOpen(false)
                 KanbanModel.postColumn({ position: 3, name: columnName })
                 setColumnName('')
-                console.log('post') // сюда лепим пост
               }}
               size="small"
               variant="contained"
