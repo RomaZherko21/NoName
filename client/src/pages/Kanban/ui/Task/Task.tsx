@@ -55,7 +55,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             borderRadius: 2,
             mb: 1
           }}
-          image={task.attachments && `${API_KANBAN_IMAGES_URL}/${task.attachments[0]}`} // тут ссылка нужна на картинку с сервера
+          image={task.attachments && `${API_KANBAN_IMAGES_URL}/${task.attachments[0]}`}
           title="task cover"
         />
         {console.log(task.attachments)}

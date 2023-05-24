@@ -43,7 +43,9 @@ function AddButton({ text }: Props) {
             <Button
               onClick={() => {
                 setIsFormOpen(false)
-                KanbanModel.postColumn({ position: 3, name: columnName })
+                KanbanModel.postColumn({ position: 0, name: columnName })
+                // на бэк колонка приходит, на в верстке не отображается
+                // вопрос. Под каким position должна уходить новая колонка
                 setColumnName('')
               }}
               size="small"

@@ -3,7 +3,6 @@ import { BsBrushFill } from 'react-icons/bs'
 import { KanbanModel } from '../model'
 
 export const getKanbanPopupConfig = () => [
-  //сюда приходит только одно id = 1
   {
     Icon: <BsBrushFill />,
     text: 'actions.clear',
@@ -15,9 +14,8 @@ export const getKanbanPopupConfig = () => [
     Icon: <FaTrashAlt />,
     text: 'actions.delete',
     onClick: (id: number) => {
-      // KanbanModel.deleteColumn({ id })
+      // KanbanModel.deleteColumn({ id })// ждём ID колонки от бэка
       console.log('delete', id)
-      // сюда запрос на удаление
     }
   }
 ]

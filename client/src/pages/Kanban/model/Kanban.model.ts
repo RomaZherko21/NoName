@@ -9,49 +9,6 @@ import { API } from 'services'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
-  // columnsFromBackend: KanbanColumn[] = [
-  //   {
-  //     id: '1',
-  //     title: 'Todo',
-  //     tasks: [
-  //       {
-  //         id: '1',
-  //         content: 'First task',
-  //         KanbanComment: [{ id: 1, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'Yes' }]
-  //       },
-  //       {
-  //         id: '2',
-  //         content: 'Second task',
-  //         KanbanComment: [{ id: 2, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'no' }]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     id: '2',
-  //     title: 'In progress',
-  //     tasks: [
-  //       {
-  //         id: '3',
-  //         content: 'Three task',
-  //         KanbanComment: [
-  //           { id: 3, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'nooOooOoO' }
-  //         ]
-  //       },
-  //       {
-  //         id: '4',
-  //         content: 'Four task',
-  //         KanbanComment: [
-  //           { id: 4, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'Yeeesese' }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     id: '3',
-  //     title: 'Done',
-  //     tasks: []
-  //   }
-  // ]
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -80,7 +37,7 @@ class KanbanModel {
     }
   }
 
-  async deleteColumn({ id }: { id: number }) {// это я
+  async deleteColumn({ id }: { id: number }) {
     try {
       await API.kanban.deleteColumn(id)
 
@@ -90,7 +47,7 @@ class KanbanModel {
     }
   }
 
-  async postColumn(KanbanColumnItem: KanbanColumnItem) {// это я
+  async postColumn(KanbanColumnItem: KanbanColumnItem) {
     try {
       await API.kanban.postColumn(KanbanColumnItem)
 

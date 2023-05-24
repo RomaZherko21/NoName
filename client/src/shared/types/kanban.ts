@@ -22,7 +22,7 @@ export interface KanbanTask {
   created_by: string
   tags: string[]
 }
-export interface KanbanComment { // это было
+export interface KanbanComment { 
   id: number
   task_id: number
   created_at: string

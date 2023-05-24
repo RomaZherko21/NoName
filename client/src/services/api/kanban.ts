@@ -27,6 +27,3 @@ export const deleteComment = async (taskId: number, id: number) =>
 
 
 
-// на PHP MyAdmin находится 3 колонки, но я получаю только 2 по итогу
-// нужно добавить ID для каждого KanbanColumn, не могу сделать delete (хотя на PHP MyAdmin есть ID)
-// чтоб перейти на master нужно сделать commit, но мне нечего коммитить, я тупо шарился по проекту
