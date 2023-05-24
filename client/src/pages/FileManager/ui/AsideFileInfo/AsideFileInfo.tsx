@@ -21,8 +21,6 @@ import { fromTimestampToDate } from 'shared/helpers'
 import { Spinner } from 'shared/ui'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
 
-// import { Folder } from 'shared/types/file'
-
 interface Props {
   openFileInfo: boolean
   onCloseFileInfo: () => void
@@ -179,21 +177,6 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                       }}
                     />
                   ))}
-                  {/* {FilesModel.files.map((file) =>
-                file.tags.map((tag, id) => (
-                  <Chip
-                    key={tag}
-                    label={tag}
-                    onDelete={() => {
-                      deleteTag(id)
-                    }}
-                    sx={{
-                      height: 26,
-                      backgroundColor: ({ palette }) => palette.grey[700]
-                    }}
-                  />
-                ))
-              )} */}
                   <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
                     <AiOutlinePlus />
                   </IconButton>
@@ -213,7 +196,6 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                       ></Avatar>
                     ))}
                   </AvatarGroup>
-                  {/* <Avatar sx={{ width: 28, height: 28 }}></Avatar> */}
                   <IconButton
                     sx={{
                       fontSize: 16,

@@ -23,9 +23,9 @@ const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
   const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
 
-  function onClick() {
+  function onAsideOpenHandler() {
     handleOpenFileInfo()
-    FilesModel.fetchFolderInfo({ id: folder.id })
+    FilesModel.fetchFolder({ id: folder.id })
   }
 
   return (
@@ -67,11 +67,11 @@ const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
         />
       </Box>
 
-      <Box sx={{ cursor: 'pointer' }} onClick={onClick}>
+      <Box sx={{ cursor: 'pointer' }} onClick={onAsideOpenHandler}>
         <img alt="Folder" src={folderImg} />
       </Box>
 
-      <Typography variant="body2" onClick={onClick} sx={{ cursor: 'pointer' }}>
+      <Typography variant="body2" onClick={onAsideOpenHandler} sx={{ cursor: 'pointer' }}>
         {folder.name}
       </Typography>
 
