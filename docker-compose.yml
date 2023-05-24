@@ -33,7 +33,7 @@ services:
       context: ./MySQL
       target: MySQL_DB
     ports:
-      - ${MYSQL_PORT_OUTER}:${MYSQL_PORT_OUTER}
+      - ${MYSQL_PORT_OUTER}:3306
     volumes:
       - 'mySQL_db_volume:/var/lib/mysql'
     restart: always

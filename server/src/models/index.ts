@@ -14,4 +14,4 @@ export {
 
 export { FileModel, FolderModel } from './fileManager'
 
-// import './join'
+import './join'

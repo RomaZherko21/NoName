@@ -42,8 +42,6 @@ export async function getPosts({ query }: Request, res: Response, next: NextFunc
   try {
     let result: any = await repo.getPosts(query)
 
-    console.log(result)
-
     result = await Promise.all(
       result.map(async (item: any) => {
         const comments: any = await sequelize.query(

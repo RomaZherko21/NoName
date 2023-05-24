@@ -15,6 +15,7 @@
     "ecmaVersion": 2023,
     "sourceType": "module"
   },
+  "ignorePatterns": ["*.js"],
   "plugins": ["promise", "eslint-plugin-import"],
   "rules": {
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
