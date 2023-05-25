@@ -56,6 +56,7 @@ services:
     restart: always
     build:
       context: ./server
+      dockerfile: Dockerfile.production
       target: api
     volumes:
       - api_volume:/app/node_modules
