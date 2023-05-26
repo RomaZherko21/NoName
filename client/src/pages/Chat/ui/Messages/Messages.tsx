@@ -1,17 +1,20 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import { Avatar, Box, Typography } from '@mui/material'
 
+import { toggleThemeContext } from 'app/theme'
 import notFound from 'shared/assets/images/404.png'
+import background from 'shared/assets/images/chat-background.jpg'
+import backgroundLight from 'shared/assets/images/chat-background-light.jpg'
 
-import s from './Styles.module.scss'
 import Message from './Message'
 import { ChatModel } from '../../model'
 
 function Messages() {
   const { t } = useTranslation()
   const messagesEndRef = useRef<null | HTMLDivElement>(null)
+  const { isDefaultTheme } = useContext(toggleThemeContext)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView()
@@ -26,9 +29,11 @@ function Messages() {
         p: 3,
         gap: 2,
         overflowY: 'auto',
-        borderBottom: (theme) => `1px solid ${theme.palette.divider}`
+        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        backgroundImage: isDefaultTheme ? `url(${backgroundLight})` : `url(${background})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       }}
-      className={s.chatBackground}
     >
       {ChatModel.messages.length ? (
         ChatModel.messages.map((message) => <Message key={message.id} message={message} />)

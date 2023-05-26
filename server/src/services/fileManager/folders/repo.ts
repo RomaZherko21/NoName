@@ -7,6 +7,7 @@ const getFolderById = ({ folderId }: { folderId: ID }) =>
   sequelize.query(
     `
 SELECT
+    fo.id,
     fo.name,
     fo.created_at,
     fo.updated_at,
@@ -51,6 +52,7 @@ const getFolders = () =>
   sequelize.query(
     `
 SELECT
+    fo.id,
     fo.name,
     fo.created_at,
     COUNT(fi.id) as files_count,

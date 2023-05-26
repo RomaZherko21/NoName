@@ -1,8 +1,10 @@
+import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Box, Paper, Typography } from '@mui/material'
 
 import { useRootStore } from 'stores'
+import { toggleThemeContext } from 'app/theme'
 import { fromTimestampToDate } from 'shared/helpers'
 import { Message as TMessage } from 'shared/types'
 import { API_USER_AVATAR_URL } from 'shared/consts'
@@ -14,6 +16,7 @@ interface Props {
 function Message({ message }: Props) {
   const { t } = useTranslation()
   const { user } = useRootStore()
+  const { isDefaultTheme } = useContext(toggleThemeContext)
 
   const isCurrentUser = user.id === message.user.id
 
@@ -43,7 +46,13 @@ function Message({ message }: Props) {
             gap: 1,
             maxWidth: 400,
             wordWrap: 'break-word',
-            backgroundColor: isCurrentUser ? 'primary.dark' : 'background.paper'
+            backgroundColor: isDefaultTheme
+              ? isCurrentUser
+                ? 'primary.light'
+                : 'background.paper'
+              : isCurrentUser
+              ? 'primary.dark'
+              : 'background.paper'
           }}
         >
           <Typography variant="subtitle2">
@@ -55,7 +64,7 @@ function Message({ message }: Props) {
         <Typography
           sx={isCurrentUser ? { mr: 2, mt: 0.25, alignSelf: 'flex-end' } : { ml: 2, mt: 0.25 }}
           variant="caption"
-          color="text.secondary"
+          color={isDefaultTheme ? 'grey.600' : 'text.secondary'}
         >
           {fromTimestampToDate(message.created_at)}
         </Typography>
