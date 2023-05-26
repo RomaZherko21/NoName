@@ -14,7 +14,6 @@ export const getKanbanPopupConfig = () => [
     Icon: <FaTrashAlt />,
     text: 'actions.delete',
     onClick: (id: number) => {
-      // KanbanModel.deleteColumn({ id })// ждём ID колонки от бэка
       console.log('delete', id)
     }
   }

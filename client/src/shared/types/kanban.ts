@@ -6,7 +6,6 @@ export interface KanbanBoard {
   updated_at: string
 }
 export interface KanbanColumn {
-  // id: number // для delete
   column: KanbanColumnItem
   tasks: KanbanTask[]
 }

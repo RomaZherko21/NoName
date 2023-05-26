@@ -1,20 +1,10 @@
-import {
-  Box,
-  Paper,
-  Chip,
-  CardMedia,
-  Typography,
-  Avatar,
-  // dividerClasses,
-  AvatarGroup
-} from '@mui/material'
+import { Box, Paper, Chip, CardMedia, Typography, Avatar, AvatarGroup } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { ImFilePicture } from 'react-icons/im'
 import { BsEye } from 'react-icons/bs'
 import { AiOutlineMessage } from 'react-icons/ai'
 
-// import primerImg from 'shared/assets/images/cover.jpg'
 import { KanbanTask as TypeTask } from 'shared/types'
 import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
 interface Props {

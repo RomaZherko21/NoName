@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { KanbanModel } from 'pages/Kanban/model'
-// import { number } from 'yup'
-// import { editKanbanColumn } from 'services/api/kanbanBoards'
-
 interface Props {
   text: string
 }
@@ -44,8 +41,6 @@ function AddButton({ text }: Props) {
               onClick={() => {
                 setIsFormOpen(false)
                 KanbanModel.postColumn({ position: 0, name: columnName })
-                // на бэк колонка приходит, на в верстке не отображается
-                // вопрос. Под каким position должна уходить новая колонка
                 setColumnName('')
               }}
               size="small"
