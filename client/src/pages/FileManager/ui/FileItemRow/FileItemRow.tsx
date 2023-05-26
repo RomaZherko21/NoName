@@ -4,22 +4,23 @@ import { Box, IconButton, Paper, Typography, AvatarGroup, Avatar } from '@mui/ma
 import { AiOutlineStar } from 'react-icons/ai'
 import { FiMoreVertical } from 'react-icons/fi'
 
-import { File } from 'shared/types/file'
+import { Folder } from 'shared/types/file'
 import { CircleDevider, PopupMenu } from 'shared/ui'
 import { fromTimestampToDate } from 'shared/helpers'
-import folder from 'shared/assets/images/fileFormat/folder.svg'
+import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 
 import { getFilePopupConfig } from '../FilePopupConfig'
+import { API_USER_AVATAR_URL, MB } from 'shared/consts'
 
 interface Props {
-  file: File
+  folder: Folder
   toggleFavourite: (id: number) => void
   handleOpenFileInfo: () => void
 }
 
-const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
+const FileItemRow = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
-  const popupConfig = useMemo(() => getFilePopupConfig(file.id), [file.id])
+  const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
 
   return (
     <Paper
@@ -40,21 +41,21 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
     >
       <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
         <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
-          <img alt="Folder" src={folder} />
+          <img alt="Folder" src={folderImg} />
         </Box>
 
         <Box>
           <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
-            {file.name}
+            {folder.name}
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
             sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
           >
-            {file.size}
+            {Number(folder.memory_used) / MB} MB
             <CircleDevider sx={{ backgroundColor: 'text.secondary', m: 0 }} />{' '}
-            {t('file:fileItems', { count: file.count })}
+            {t('file:fileItems', { count: folder.files_count })}
           </Typography>
         </Box>
       </Box>
@@ -65,25 +66,26 @@ const FileItemRow = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
         </Typography>
 
         <Typography variant="body2" color="text.secondary">
-          {fromTimestampToDate(file.created_at)}
+          {fromTimestampToDate(folder.created_at)}
         </Typography>
       </Box>
 
       <AvatarGroup>
-        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
-        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+        {folder.assignee_to?.slice(0, 3)?.map((item) => (
+          <Avatar sx={{ width: 32, height: 32 }} src={`${API_USER_AVATAR_URL}/${item}`}></Avatar>
+        ))}
       </AvatarGroup>
 
       <Box sx={{ display: 'flex', gap: 4 }}>
         <IconButton
           onClick={() => {
-            toggleFavourite(file.id)
+            // toggleFavourite(file.id)
           }}
           sx={{
             width: 36,
-            height: 36,
-            color: ({ palette }) =>
-              file.is_favourite ? palette.warning.main : palette.action.active
+            height: 36
+            // color: ({ palette }) =>
+            //   file.is_favourite ? palette.warning.main : palette.action.active
           }}
         >
           <AiOutlineStar />

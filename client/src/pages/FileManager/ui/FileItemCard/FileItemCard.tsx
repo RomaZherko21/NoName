@@ -4,23 +4,24 @@ import { Box, IconButton, Paper, Typography, Divider, AvatarGroup, Avatar } from
 import { AiOutlineStar } from 'react-icons/ai'
 import { FiMoreVertical } from 'react-icons/fi'
 
-import { File } from 'shared/types/file'
+import { Folder } from 'shared/types/file'
 import { CircleDevider, PopupMenu } from 'shared/ui'
-import folder from 'shared/assets/images/fileFormat/folder.svg'
+import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
 
 import { getFilePopupConfig } from '../FilePopupConfig'
+import { API_USER_AVATAR_URL, MB } from 'shared/consts'
 
 interface Props {
-  file: File
+  folder: Folder
   toggleFavourite: (id: number) => void
   handleOpenFileInfo: () => void
 }
 
-const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
+const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
 
-  const popupConfig = useMemo(() => getFilePopupConfig(file.id), [file.id])
+  const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
 
   return (
     <Paper
@@ -39,13 +40,13 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
         <IconButton
           onClick={() => {
-            toggleFavourite(file.id)
+            // toggleFavourite(file.id)
           }}
           sx={{
             width: 36,
-            height: 36,
-            color: ({ palette }) =>
-              file.is_favourite ? palette.warning.main : palette.action.active
+            height: 36
+            // color: ({ palette }) =>
+            //   folder.is_favourite ? palette.warning.main : palette.action.active
           }}
         >
           <AiOutlineStar />
@@ -62,11 +63,11 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
       </Box>
 
       <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
-        <img alt="Folder" src={folder} />
+        <img alt="Folder" src={folderImg} />
       </Box>
 
       <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
-        {file.name}
+        {folder.name}
       </Typography>
 
       <Divider sx={{ my: 1 }} />
@@ -83,18 +84,19 @@ const FileItem = ({ file, toggleFavourite, handleOpenFileInfo }: Props) => {
           color="text.secondary"
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
-          {file.size}
+          {Number(folder.memory_used) / MB} MB
           <CircleDevider sx={{ backgroundColor: 'text.secondary', m: 0 }} />{' '}
-          {t('file:fileItems', { count: file.count })}
+          {t('file:fileItems', { count: folder.files_count })}
         </Typography>
         <AvatarGroup>
-          <Avatar sx={{ width: 32, height: 32 }}></Avatar>
-          <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+          {folder.assignee_to?.slice(0, 3)?.map((item) => (
+            <Avatar sx={{ width: 32, height: 32 }} src={`${API_USER_AVATAR_URL}/${item}`}></Avatar>
+          ))}
         </AvatarGroup>
       </Box>
 
       <Typography variant="caption" color="text.secondary">
-        {t('file:createdAt', { date: fromTimestampToDate(file.created_at) })}
+        {t('file:createdAt', { date: fromTimestampToDate(folder.created_at) })}
       </Typography>
     </Paper>
   )

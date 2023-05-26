@@ -1,5 +1,4 @@
 {
-  "main": "index.js",
   "dependencies": {
     "bcrypt": "4.0.1",
     "body-parser": "^1.19.0",
@@ -13,7 +12,7 @@
     "mysql2": "^2.3.3",
     "nodemailer": "^6.9.1",
     "qrcode": "^1.5.1",
-    "sequelize": "^6.28.0",
+    "sequelize": "^6.31.1",
     "speakeasy": "^2.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
@@ -27,7 +26,7 @@
     "@types/http-errors": "^1.8.2",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/multer": "^1.4.7",
-    "@types/node": "^17.0.14",
+    "@types/node": "^20.2.3",
     "@types/nodemailer": "^6.4.7",
     "@types/qrcode": "^1.5.0",
     "@types/speakeasy": "^2.0.7",
@@ -37,6 +36,7 @@
     "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.37.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
@@ -45,14 +45,19 @@
     "eslint-plugin-unicorn": "^46.0.0",
     "nodemon": "^2.0.18",
     "prettier": "^2.8.6",
+    "ts-loader": "^9.4.2",
     "ts-node": "^10.8.1",
-    "typescript": "^4.7.4"
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
     "dev": "nodemon -L src/index.ts",
     "start": "nodemon ./src/index.ts",
-    "prestart": "npm run build",
-    "build": "tsc --project ./"
+    "build": "webpack",
+    "build:start": "cross-env REDIS_PORT_OUTER=6379 REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 CLIENT_PROTOCOL=http CLIENT_HOST=localhost  CLIENT_PORT=3000 MYSQL_DATABASE=NoName MYSQL_USERNAME=root MYSQL_PASSWORD=qwer MYSQL_HOST=127.0.0.1 MYSQL_PORT_OUTER=3306 SERVER_PROTOCOL=http SERVER_HOST=0.0.0.0 SERVER_PORT_INNER=80 SERVER_PORT_OUTER=80 SERVER_EMAIL_LOGIN=yourEmail@example.com SERVER_EMAIL_PASSWORD=yourEmailPassword TOKEN_SECRET=09f26e402586e2faa8da4c98a35f1b20d6b033c60 ACCESS_TOKEN_EXPIRED_TIME=7200s  node build/index.js"
   },
   "nodemonConfig": {
     "ignore": [

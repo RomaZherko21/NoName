@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'fs'
 import { NextFunction, Request, Response } from 'express'
 import createError from 'http-errors'
 
