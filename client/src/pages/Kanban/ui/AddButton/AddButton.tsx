@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, TextField } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
-
+import { KanbanModel } from 'pages/Kanban/model'
 interface Props {
   text: string
 }
@@ -11,6 +11,7 @@ interface Props {
 function AddButton({ text }: Props) {
   const { t } = useTranslation()
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [columnName, setColumnName] = useState('')
 
   return (
     <>
@@ -27,12 +28,20 @@ function AddButton({ text }: Props) {
             }
           }}
         >
-          <TextField size="small" placeholder={t(text)} fullWidth />
+          <TextField
+            size="small"
+            placeholder={t(text)}
+            fullWidth
+            value={columnName}
+            onChange={(e) => setColumnName(e.target.value)}
+          />
 
           <Box sx={{ display: 'flex', mt: 1, gap: 1 }}>
             <Button
               onClick={() => {
                 setIsFormOpen(false)
+                KanbanModel.postColumn({ position: 0, name: columnName })
+                setColumnName('')
               }}
               size="small"
               variant="contained"

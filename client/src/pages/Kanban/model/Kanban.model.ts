@@ -3,53 +3,11 @@ import { DropResult } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
-import { KanbanColumn } from 'shared/types'
+import { KanbanColumn, KanbanColumnItem } from 'shared/types'
 import { API } from 'services'
 
 class KanbanModel {
-  columnsFromBackend: KanbanColumn[] = [
-    {
-      id: '1',
-      title: 'Todo',
-      tasks: [
-        {
-          id: '1',
-          content: 'First task',
-          KanbanComment: [{ id: 1, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'Yes' }]
-        },
-        {
-          id: '2',
-          content: 'Second task',
-          KanbanComment: [{ id: 2, created_at: '2018-01-01 10:40:01', task_id: 1, message: 'no' }]
-        }
-      ]
-    },
-    {
-      id: '2',
-      title: 'In progress',
-      tasks: [
-        {
-          id: '3',
-          content: 'Three task',
-          KanbanComment: [
-            { id: 3, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'nooOooOoO' }
-          ]
-        },
-        {
-          id: '4',
-          content: 'Four task',
-          KanbanComment: [
-            { id: 4, created_at: '2018-01-01 10:40:01', task_id: 2, message: 'Yeeesese' }
-          ]
-        }
-      ]
-    },
-    {
-      id: '3',
-      title: 'Done',
-      tasks: []
-    }
-  ]
+  columns: KanbanColumn[] = []
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -63,17 +21,38 @@ class KanbanModel {
     this.loading = new LoadingModel()
   }
 
-  async fetch({ id, hidden = false }: { id: number; hidden?: boolean }) {
+  async fetch({ id, hidden = false }: { id: number, hidden?: boolean }) {
     try {
       if (!hidden) {
         this.loading.begin()
       }
-
-      await API.posts.get(id)
-    } catch (err: any) {
+      this.columns = await API.kanban.getColumns(id)
+      console.log(await API.kanban.getColumns(1))
+    }
+    catch (err: any) {
       toast.error(err)
     } finally {
       this.loading.reset()
+    }
+  }
+
+  async deleteColumn({ id }: { id: number }) {
+    try {
+      await API.kanban.deleteColumn(id)
+
+      this.fetch({ id: 1, hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async postColumn(KanbanColumnItem: KanbanColumnItem) {
+    try {
+      await API.kanban.postColumn(KanbanColumnItem)
+
+      this.fetch({ id: 1 })
+    } catch (err: any) {
+      toast.error(err)
     }
   }
 
@@ -132,8 +111,8 @@ class KanbanModel {
     if (!destination) return
 
     if (source.droppableId !== destination.droppableId) {
-      const fromColumn = this.columnsFromBackend.find((item) => source.droppableId === item.id)
-      const toColumn = this.columnsFromBackend.find((item) => destination.droppableId === item.id)
+      const fromColumn = this.columns.find((item) => String(source.droppableId) === String(item.column.position))
+      const toColumn = this.columns.find((item) => destination.droppableId === String(item.column.position))
 
       if (fromColumn && toColumn) {
         const fromTasks = [...fromColumn.tasks]
@@ -142,10 +121,10 @@ class KanbanModel {
 
         toTasks.splice(destination.index, 0, removed)
 
-        this.columnsFromBackend = this.columnsFromBackend.map((column) => {
-          if (column.id === source.droppableId) {
+        this.columns = this.columns.map((column) => {
+          if (String(column.column.position) === source.droppableId) {
             return { ...fromColumn, tasks: fromTasks }
-          } else if (column.id === destination.droppableId) {
+          } else if (String(column.column.position) === destination.droppableId) {
             return { ...toColumn, tasks: toTasks }
           } else {
             return column
@@ -153,7 +132,7 @@ class KanbanModel {
         })
       }
     } else {
-      const column = this.columnsFromBackend.find((item) => source.droppableId === item.id)
+      const column = this.columns.find((item) => source.droppableId === String(item.column.position))
 
       if (column) {
         const fromTasks = [...column.tasks]
@@ -161,8 +140,8 @@ class KanbanModel {
 
         fromTasks.splice(destination.index, 0, removed)
 
-        this.columnsFromBackend = this.columnsFromBackend.map((column) => {
-          if (column.id === source.droppableId) {
+        this.columns = this.columns.map((column) => {
+          if (String(column.column.position) === source.droppableId) {
             return { ...column, tasks: fromTasks }
           } else {
             return column

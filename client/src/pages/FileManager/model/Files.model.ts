@@ -8,7 +8,6 @@ import { API } from 'services'
 
 class FilesModel {
   files: File[] = []
-
   folders: Folder[] = []
 
   pagination: PaginationModel
