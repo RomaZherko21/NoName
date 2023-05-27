@@ -29,7 +29,10 @@ export async function getKanbanColumns({ params }: Request, res: Response, next:
       columns.map(async (column: any) => {
         const tasks = await repo.getKanbanTasksByColumnId({ column_id: column.id })
 
-        result.push({ column: { position: column.position, name: column.name }, tasks: tasks })
+        result.push({
+          column,
+          tasks: tasks,
+        })
       })
     )
 
