@@ -51,7 +51,7 @@ const General = () => {
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+            <Grid component={Paper} elevation={2} sx={{ p: 4, width: '100%', mb: 2 }} container>
               <Grid xs={12} md={4}>
                 <Typography variant="h6">{t('user:basicDetails')}</Typography>
               </Grid>
@@ -79,7 +79,7 @@ const General = () => {
               </Grid>
             </Grid>
 
-            <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+            <Grid component={Paper} elevation={2} sx={{ p: 4, width: '100%', mb: 2 }} container>
               <Grid xs={12} md={4}>
                 <Typography variant="h6">{t('user:meta')}</Typography>
               </Grid>
@@ -97,7 +97,7 @@ const General = () => {
               </Grid>
             </Grid>
 
-            <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+            <Grid component={Paper} elevation={2} sx={{ p: 4, width: '100%', mb: 2 }} container>
               <Grid item lg={4} md={6} xs={12}>
                 <Typography color="textPrimary" variant="h6">
                   {t('common.confirm')}

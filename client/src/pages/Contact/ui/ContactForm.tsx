@@ -17,13 +17,13 @@ function ContactForm() {
 
   const validationSchema = yup.object().shape({
     fullName: fullNameValidation(),
-    companyName: commonStringValidation(t("contact:companyName"), 3),
+    companyName: commonStringValidation(t('contact:companyName'), 3),
     email: emailValidation(),
-    phoneNumber: phoneNumberValidation(t("contact:phoneNumber")),
+    phoneNumber: phoneNumberValidation(t('contact:phoneNumber')),
     companySize: yup.mixed().required(t('common.required')),
     team: yup.mixed().required(t('common.required')),
     projectBudget: yup.mixed().required(t('common.required')),
-    message: commonStringValidation(t("contact:message"))
+    message: commonStringValidation(t('contact:message'))
   })
 
   return (
@@ -49,7 +49,7 @@ function ContactForm() {
             <Grid
               component={Paper}
               container
-              elevation={1}
+              elevation={4}
               sx={{ display: 'flex', flexDirection: 'column', p: 4, gap: 5 }}
             >
               <Grid item md={4}>

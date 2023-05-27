@@ -25,7 +25,7 @@ const Connections = () => {
   }, [])
 
   return (
-    <Paper elevation={3} sx={{ p: 3 }}>
+    <Paper elevation={4} sx={{ p: 3 }}>
       <Typography variant="h5" sx={{ mb: 3 }}>
         {t('page:connections')}
       </Typography>

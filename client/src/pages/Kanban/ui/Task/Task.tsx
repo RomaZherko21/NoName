@@ -22,7 +22,7 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
-      elevation={1}
+      elevation={4}
       sx={{
         display: 'flex',
         flexDirection: 'column',

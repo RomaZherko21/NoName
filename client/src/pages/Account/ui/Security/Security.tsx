@@ -24,7 +24,7 @@ function Security() {
   return (
     <>
       <Paper
-        elevation={16}
+        elevation={4}
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -44,7 +44,7 @@ function Security() {
         </Stack>
       </Paper>
 
-      <Paper elevation={16} sx={{ p: 4, mb: 2, borderRadius: 2 }}>
+      <Paper elevation={4} sx={{ p: 4, mb: 2, borderRadius: 2 }}>
         <Typography variant="h6">{t('user:multiFactorAuthentication')}</Typography>
         <Box
           sx={{
@@ -80,7 +80,7 @@ function Security() {
         </Box>
       </Paper>
 
-      <Paper elevation={16} sx={{ borderRadius: '20px' }}>
+      <Paper elevation={4} sx={{ borderRadius: '20px' }}>
         <Grid item xs={12} md={4} spacing={2} sx={{ p: 3 }}>
           <Typography variant="h6">{t('user:loginHistory')}</Typography>
           <Typography variant="body2" color="text.secondary">

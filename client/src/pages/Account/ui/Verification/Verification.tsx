@@ -22,7 +22,7 @@ function Verification() {
 
   return (
     <>
-      <Card elevation={16} sx={{ p: 4 }}>
+      <Card elevation={4} sx={{ p: 4 }}>
         <Typography variant="h6">{t('user:verifStatuses')}</Typography>
         <Box
           sx={{

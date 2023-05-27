@@ -17,7 +17,7 @@ const lightTheme = {
     primary: {
       main: '#6366F1',
       light: '#828DF8',
-      dark: '#3832A0',
+      dark: '#464dc8',
       contrastText: '#FFFFFF'
     },
     secondary: {
@@ -66,13 +66,13 @@ const lightTheme = {
       800: '#D1D5DB',
       900: '#111827'
     },
-    divider: 'rgb(45, 55, 72)'
+    divider: '#D1D5DB'
   },
   components: {
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#2d3748'
+          borderColor: '#D1D5DB'
         }
       }
     },
@@ -89,7 +89,7 @@ const lightTheme = {
     MuiTableRow: {
       styleOverrides: {
         root: {
-          borderBottom: '1px solid rgb(242, 244, 247)'
+          borderBottom: '1px solid #dfe4eb'
         }
       }
     },

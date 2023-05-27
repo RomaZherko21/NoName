@@ -56,7 +56,7 @@ function Users() {
         </Grid>
       </PageHeader>
 
-      <Grid container direction="column">
+      <Grid elevation={4} component={Paper} container direction="column">
         <AsideFiltersBar
           inputValue={searchParams.get('name') ?? ''}
           onInputChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ function Users() {
           {UsersModel.loading.has ? (
             <Spinner />
           ) : (
-            <TableContainer component={Paper} sx={{ borderRadius: '0 0 20px 20px' }}>
+            <TableContainer component={Paper}>
               <CommonTable data={UsersModel.users} columns={columns} />
               <Pagination paginationModel={UsersModel.pagination} />
             </TableContainer>

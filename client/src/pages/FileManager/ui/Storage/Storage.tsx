@@ -22,7 +22,7 @@ const Storage = () => {
   const { t } = useTranslation()
 
   return (
-    <Paper elevation={16} sx={{ borderRadius: 2, p: 3 }}>
+    <Paper elevation={4} sx={{ borderRadius: 2, p: 3 }}>
       <Box>
         <Typography variant="h6" color="text.primary">
           {t('file:storage.title')}
