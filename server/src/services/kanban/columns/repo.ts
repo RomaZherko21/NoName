@@ -11,7 +11,7 @@ SELECT
     kc.position
 FROM
     ${TABLE.kanban_columns} as kc
-    JOIN ${TABLE.kanban_tasks} as kt on kc.id = kt.column_id
+    LEFT JOIN ${TABLE.kanban_tasks} as kt on kc.id = kt.column_id
 WHERE
     kc.board_id = ${board_id}
 GROUP BY
