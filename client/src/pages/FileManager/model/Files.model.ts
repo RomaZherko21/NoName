@@ -76,6 +76,19 @@ class FilesModel {
       this.loading.reset()
     }
   }
+
+  async fetchDeleteFolder({ id }: { id: number }) {
+    try {
+      // if (!hidden) {
+      //   this.loading.begin()
+      // }
+      await API.fileManager.deleteFolder(id)
+      this.fetch({ hidden: true })
+    } catch (err: any) {
+      toast.error(err)
+    }
+    // finally {}
+  }
 }
 
 const model = new FilesModel()

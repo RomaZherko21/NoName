@@ -9,7 +9,8 @@ import {
   Grid,
   Avatar,
   AvatarGroup,
-  Chip
+  Chip,
+  InputBase
 } from '@mui/material'
 import { AiOutlineClose, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineEdit } from 'react-icons/md'
@@ -20,6 +21,7 @@ import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
 import { Spinner } from 'shared/ui'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
+import { useState } from 'react'
 
 interface Props {
   openFileInfo: boolean
@@ -28,6 +30,9 @@ interface Props {
 
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
+
+  const [isActive, setIsActive] = useState(true)
+  const [nameInputValue, setNameInputValue] = useState(FilesModel.folder?.name)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function deleteTag(id: number) {
@@ -102,9 +107,41 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                 mb: 2
               }}
             >
-              <Typography variant="h5">{FilesModel.folder?.name}</Typography>
+              {isActive && (
+                <Typography
+                  variant="h5"
+                  sx={{
+                    pt: '5px',
+                    pl: '12px',
+                    mb: '10.5px'
+                  }}
+                >
+                  {/* {nameInputValue} */}
+                  {FilesModel.folder?.name}
+                </Typography>
+              )}
+              {!isActive && (
+                <InputBase
+                  value={FilesModel.folder?.name}
+                  // value={nameInputValue}
+                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  //   setNameInputValue(e.target.value)
+                  // }}
+                  size="small"
+                  fullWidth
+                  sx={{
+                    fontSize: 24,
+                    fontWeight: 'bold',
+                    p: 0.5,
+                    pl: 1.5,
+                    color: ({ palette }) => palette.text.primary,
+                    backgroundColor: ({ palette }) => palette.action.hover,
+                    borderRadius: '15px'
+                  }}
+                />
+              )}
               <IconButton size="small">
-                <MdOutlineEdit />
+                <MdOutlineEdit onClick={() => setIsActive(!isActive)} />
               </IconButton>
             </Box>
 

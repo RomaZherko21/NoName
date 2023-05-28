@@ -21,7 +21,7 @@ interface Props {
 
 const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
-  const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
+  const popupConfig = useMemo(() => getFilePopupConfig(folder.id), [folder.id])
 
   function onAsideOpenHandler() {
     handleOpenFileInfo()
