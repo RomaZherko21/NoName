@@ -26,7 +26,7 @@ function UserBasicDetails({ user }: Props) {
   const listConfig = useMemo(() => getListConfig(user), [user])
 
   return (
-    <Paper elevation={1} sx={{ height: 'fit-content' }}>
+    <Paper elevation={4} sx={{ height: 'fit-content' }}>
       <CardHeader
         titleTypographyProps={{ variant: 'h6' }}
         title={t('user:basicDetails')}

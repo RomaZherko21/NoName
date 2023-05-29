@@ -25,7 +25,7 @@ function PostCover({ field }: Props) {
   }
 
   return (
-    <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+    <Grid component={Paper} container elevation={4} sx={{ p: 4 }}>
       <Grid item md={4}>
         <Typography variant="h6">{t('post:postCover')}</Typography>
       </Grid>

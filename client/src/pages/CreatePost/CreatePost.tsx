@@ -80,7 +80,7 @@ function CreatePost() {
               breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.create' }]}
             />
 
-            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+            <Grid component={Paper} container elevation={4} sx={{ p: 4 }}>
               <Grid item md={4}>
                 <Typography variant="h6">{t('common.basicDetails')}</Typography>
               </Grid>
@@ -97,7 +97,7 @@ function CreatePost() {
 
             <PostCover field="cover" />
 
-            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+            <Grid component={Paper} container elevation={4} sx={{ p: 4 }}>
               <Grid item md={4}>
                 <Typography variant="h6">{t('common.content')}</Typography>
               </Grid>
@@ -106,7 +106,7 @@ function CreatePost() {
               </Grid>
             </Grid>
 
-            <Grid component={Paper} container elevation={1} sx={{ p: 4 }}>
+            <Grid component={Paper} container elevation={4} sx={{ p: 4 }}>
               <Grid item md={4}>
                 <Typography variant="h6">{t('common.meta')}</Typography>
               </Grid>
@@ -117,7 +117,7 @@ function CreatePost() {
               </Grid>
             </Grid>
 
-            <Paper elevation={1}>
+            <Paper elevation={4}>
               <Box
                 sx={{
                   display: 'flex',

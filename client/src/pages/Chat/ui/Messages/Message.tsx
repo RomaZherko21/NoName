@@ -37,7 +37,7 @@ function Message({ message }: Props) {
       )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Paper
-          elevation={3}
+          elevation={4}
           sx={{
             display: 'flex',
             flexDirection: 'column',

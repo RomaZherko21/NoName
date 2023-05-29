@@ -22,7 +22,7 @@ function CreditCardInfo(props: any) {
   const listConfig = useMemo(() => getListConfig(props), [props])
 
   return (
-    <Paper elevation={1} sx={{ width: '100%', p: 0 }}>
+    <Paper elevation={4} sx={{ width: '100%', p: 0 }}>
       <CardHeader
         titleTypographyProps={{ variant: 'h6' }}
         title={t('user:payment')}

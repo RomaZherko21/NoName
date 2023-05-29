@@ -16,7 +16,7 @@ const DeleteAccount = ({ onDelete }: Props) => {
 
   return (
     <>
-      <Grid component={Paper} sx={{ p: 3, width: '100%' }} container>
+      <Grid component={Paper} elevation={2} sx={{ p: 3, width: '100%' }} container>
         <Grid item lg={4} md={6} xs={12}>
           <Typography variant="h6">{t('user:actions.deleteAccount')}</Typography>
         </Grid>

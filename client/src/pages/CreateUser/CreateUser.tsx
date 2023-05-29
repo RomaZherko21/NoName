@@ -100,7 +100,7 @@ function CreateUser() {
               <Spinner />
             ) : (
               <>
-                <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+                <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} elevation={4} container>
                   <Grid xs={12} md={4}>
                     <Typography variant="h6">{t('user:basicDetails')}</Typography>
                   </Grid>
@@ -122,7 +122,7 @@ function CreateUser() {
                   </Grid>
                 </Grid>
 
-                <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+                <Grid component={Paper} elevation={4} sx={{ p: 4, width: '100%', mb: 2 }} container>
                   <Grid xs={12} md={4}>
                     <Typography variant="h6">{t('user:meta')}</Typography>
                   </Grid>
@@ -140,7 +140,7 @@ function CreateUser() {
                   </Grid>
                 </Grid>
 
-                <Grid component={Paper} sx={{ p: 4, width: '100%', mb: 2 }} container>
+                <Grid component={Paper} elevation={4} sx={{ p: 4, width: '100%', mb: 2 }} container>
                   <Grid xs={12} md={4}>
                     <Typography variant="h6">{t('user:security')}</Typography>
                   </Grid>
@@ -161,6 +161,7 @@ function CreateUser() {
 
                 <Grid
                   component={Paper}
+                  elevation={4}
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
