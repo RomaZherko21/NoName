@@ -1,4 +1,4 @@
-import { KanbanColumn, KanbanColumnItem, KanbanComment } from 'shared/types'
+import { KanbanColumn, KanbanColumnItem, KanbanComment, KanbanTask } from 'shared/types'
 
 import fetch from './fetch'
 // import id from 'date-fns/locale/id'
@@ -8,6 +8,8 @@ const ENDPOINT_BASE = '/kanban'
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
 export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
 export const postColumn = async (KanbanColumnItem: KanbanColumnItem) => await fetch.post<KanbanColumnItem>(`${ENDPOINT_BASE}/boards/1/columns`, KanbanColumnItem)// может передавать name и position?
+
+export const getTaskById = async (id: number) => await fetch.get<KanbanTask>(`${ENDPOINT_BASE}/tasks/${id}`)
 
 export const createComment = async (id: number, comment: any) =>
   await fetch.post<KanbanComment>(`${ENDPOINT_BASE}/${id}/comments`, comment)

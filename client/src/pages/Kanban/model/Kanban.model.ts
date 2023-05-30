@@ -3,11 +3,12 @@ import { DropResult } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
-import { KanbanColumn, KanbanColumnItem } from 'shared/types'
+import { KanbanColumn, KanbanColumnItem, KanbanTask } from 'shared/types'
 import { API } from 'services'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
+  task?: KanbanTask // Я
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -27,7 +28,6 @@ class KanbanModel {
         this.loading.begin()
       }
       this.columns = await API.kanban.getColumns(id)
-      console.log(await API.kanban.getColumns(1))
     }
     catch (err: any) {
       toast.error(err)
@@ -53,6 +53,21 @@ class KanbanModel {
       this.fetch({ id: 1 })
     } catch (err: any) {
       toast.error(err)
+    }
+  }
+  
+  async getTaskById({ id, hidden = false }: { id: number, hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.loading.begin()
+      }
+      this.task = await API.kanban.getTaskById(id)
+      console.log('eeeeeeeeeeeeeee')
+    }
+    catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
     }
   }
 
