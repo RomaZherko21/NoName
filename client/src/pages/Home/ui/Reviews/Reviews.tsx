@@ -49,7 +49,8 @@ function Reviews() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        pt: 10
       }}
     >
       <Typography variant="h3">{t('home:reviewTitle')}</Typography>
