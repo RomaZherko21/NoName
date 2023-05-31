@@ -4,11 +4,10 @@ import { Box, IconButton, Typography, Avatar, Chip, Stack, AvatarGroup } from '@
 import { AiOutlinePlus } from 'react-icons/ai'
 
 import { Input } from 'shared/ui'
-// import primerImg from 'shared/assets/images/cover.jpg'
 import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
+import { KanbanModel } from 'pages/Kanban/model'
 
 import s from './Styles.module.scss'
-import { KanbanModel } from 'pages/Kanban/model'
 
 function Overview() {
   const { t } = useTranslation()

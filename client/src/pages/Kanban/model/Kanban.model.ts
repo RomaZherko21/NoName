@@ -5,11 +5,10 @@ import { toast } from 'react-toastify'
 import LoadingModel from 'models/Loading'
 import { KanbanColumn, KanbanColumnItem, KanbanTask } from 'shared/types'
 import { API } from 'services'
-import { Task } from '../ui'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
-  task?: KanbanTask // Я
+  task?: KanbanTask 
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -62,9 +61,7 @@ class KanbanModel {
       if (!hidden) {
         this.loading.begin()
       }
-      this.task = await API.kanban.getTaskById(id)
-      console.log(await API.kanban.getTaskById(id))// всё приходит
-     
+      this.task = await API.kanban.getColumnTaskById(id)
     }
     catch (err: any) {
       toast.error(err)
