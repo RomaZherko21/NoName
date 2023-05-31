@@ -1,14 +1,16 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Box, IconButton, Typography, Avatar, Chip, Stack } from '@mui/material'
+import { Box, IconButton, Typography, Avatar, Chip, Stack, AvatarGroup } from '@mui/material'
 import { AiOutlinePlus } from 'react-icons/ai'
 
 import { Input } from 'shared/ui'
 import primerImg from 'shared/assets/images/cover.jpg'
+import { API_USER_AVATAR_URL } from 'shared/consts'
 
 import s from './Styles.module.scss'
+import { KanbanModel } from 'pages/Kanban/model'
 
-function Overview() {
+function Overview({ task }) {
   const { t } = useTranslation()
 
   return (
@@ -35,7 +37,16 @@ function Overview() {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Avatar sx={{ width: 40, height: 40 }} />
+          <AvatarGroup>
+            {task?.assigne_to?.slice(0, 3)?.map((user_img, id) => (
+              <Avatar
+                key={id}
+                sx={{ width: 32, height: 32 }}
+                src={`${API_USER_AVATAR_URL}/${user_img}`}
+              ></Avatar>
+            ))}
+          </AvatarGroup>
+          {/* <Avatar sx={{ width: 40, height: 40 }} /> */}
           <IconButton size="small">
             <AiOutlinePlus />
           </IconButton>
@@ -63,7 +74,10 @@ function Overview() {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Chip sx={{ backgroundColor: (theme) => theme.palette.grey[800] }} label="Mar 09, 2023" />
+          <Chip
+            sx={{ backgroundColor: (theme) => theme.palette.grey[800] }}
+            label={KanbanModel.task?.due_date}
+          />
         </Box>
       </Box>
 

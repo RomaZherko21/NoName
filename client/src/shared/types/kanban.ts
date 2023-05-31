@@ -18,6 +18,7 @@ export interface KanbanTask {
   id: number
   name: string
   assigne_to: string[]
+  due_date: string
   attachments: string[]
   created_by: string
   tags: string[]
