@@ -4,13 +4,13 @@ import { Box, IconButton, Typography, Avatar, Chip, Stack, AvatarGroup } from '@
 import { AiOutlinePlus } from 'react-icons/ai'
 
 import { Input } from 'shared/ui'
-import primerImg from 'shared/assets/images/cover.jpg'
-import { API_USER_AVATAR_URL } from 'shared/consts'
+// import primerImg from 'shared/assets/images/cover.jpg'
+import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
 
 import s from './Styles.module.scss'
 import { KanbanModel } from 'pages/Kanban/model'
 
-function Overview({ task }) {
+function Overview() {
   const { t } = useTranslation()
 
   return (
@@ -38,7 +38,7 @@ function Overview({ task }) {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <AvatarGroup>
-            {task?.assigne_to?.slice(0, 3)?.map((user_img, id) => (
+            {KanbanModel.task?.assigne_to?.slice(0, 3)?.map((user_img, id) => (
               <Avatar
                 key={id}
                 sx={{ width: 32, height: 32 }}
@@ -46,7 +46,6 @@ function Overview({ task }) {
               ></Avatar>
             ))}
           </AvatarGroup>
-          {/* <Avatar sx={{ width: 40, height: 40 }} /> */}
           <IconButton size="small">
             <AiOutlinePlus />
           </IconButton>
@@ -59,12 +58,23 @@ function Overview({ task }) {
             {t('kanban:attachments')}
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <img alt="primerImg" src={primerImg} className={s.attachmentImg} />
+        {KanbanModel.task?.attachments && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <img
+              alt="primerImg"
+              src={`${API_KANBAN_IMAGES_URL}/${KanbanModel.task?.attachments[0]}`}
+              className={s.attachmentImg}
+            />
+            <IconButton size="small">
+              <AiOutlinePlus />
+            </IconButton>
+          </Box>
+        )}
+        {!KanbanModel.task?.attachments && (
           <IconButton size="small">
             <AiOutlinePlus />
           </IconButton>
-        </Box>
+        )}
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'flex-start', height: 64 }}>
@@ -88,13 +98,21 @@ function Overview({ task }) {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Chip
-            onDelete={() => {
-              console.log('Delete')
-            }}
-            label="Business"
-            sx={{ backgroundColor: (theme) => theme.palette.grey[800] }}
-          />
+          {KanbanModel.task?.tags.map((tag, id) => (
+            <>
+              {tag && (
+                <Chip
+                  key={id}
+                  onDelete={() => {
+                    console.log('Delete')
+                  }}
+                  label={tag}
+                  sx={{ backgroundColor: (theme) => theme.palette.grey[800] }}
+                />
+              )}
+            </>
+          ))}
+
           <IconButton size="small">
             <AiOutlinePlus />
           </IconButton>
@@ -108,7 +126,13 @@ function Overview({ task }) {
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Input placeholder={t('actions.leaveMessage')} multiline rows={6} sx={{ width: 300 }} />
+          <Input
+            placeholder={t('actions.leaveMessage')}
+            multiline
+            rows={6}
+            sx={{ width: 300 }}
+            value={KanbanModel.task?.description}
+          />
         </Box>
       </Box>
     </Stack>
