@@ -10,7 +10,7 @@ export interface KanbanColumn {
   tasks: KanbanTask[]
 }
 export interface KanbanColumnItem {
-  id: number
+  id?: number
   name: string
   position: number
 }

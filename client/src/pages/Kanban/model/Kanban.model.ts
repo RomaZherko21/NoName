@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import LoadingModel from 'models/Loading'
 import { KanbanColumn, KanbanColumnItem, KanbanTask } from 'shared/types'
 import { API } from 'services'
-import { number } from 'yup'
+// import { number } from 'yup'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
@@ -52,7 +52,7 @@ class KanbanModel {
 
   async postColumn(KanbanColumnItem: KanbanColumnItem) {
     try {
-      await API.kanban.postColumn(KanbanColumnItem)
+      await API.kanban.postColumn(KanbanColumnItem, 1)
 
       this.fetch({ id: 1 })
     } catch (err: any) {
