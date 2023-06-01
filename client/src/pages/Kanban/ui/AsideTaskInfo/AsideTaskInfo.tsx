@@ -9,6 +9,7 @@ import { PopupMenu, Tabs } from 'shared/ui'
 
 import { getPopupConfig } from './PopupConfig'
 import { getTabsConfig } from './TabsConfig'
+import { KanbanModel } from 'pages/Kanban/model'
 
 interface Props {
   openTaskInfo: boolean
@@ -66,7 +67,7 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
       </Box>
       <Box sx={{ p: '8px 16px' }}>
         <InputBase
-          value={'Todo'}
+          value={KanbanModel.task?.name}
           size="small"
           fullWidth
           sx={{

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import LoadingModel from 'models/Loading'
 import { KanbanColumn, KanbanColumnItem, KanbanTask } from 'shared/types'
 import { API } from 'services'
+import { number } from 'yup'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
@@ -16,10 +17,13 @@ class KanbanModel {
 
   loading: LoadingModel
 
+  loadingAside: LoadingModel
+
   constructor() {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
+    this.loadingAside = new LoadingModel()
   }
 
   async fetch({ id, hidden = false }: { id: number, hidden?: boolean }) {
@@ -59,14 +63,14 @@ class KanbanModel {
   async fetchTask({ id, hidden = false }: { id: number, hidden?: boolean }) {
     try {
       if (!hidden) {
-        this.loading.begin()
+        this.loadingAside.begin()
       }
       this.task = await API.kanban.getColumnTaskById(id)
     }
     catch (err: any) {
       toast.error(err)
     } finally {
-      this.loading.reset()
+      this.loadingAside.reset()
     }
   }
 
