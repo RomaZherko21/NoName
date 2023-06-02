@@ -4,15 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material'
 
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
-import { PopupMenu } from 'shared/ui'
-import { FiMoreVertical } from 'react-icons/fi'
+
 import { getPagesPopUpConfig } from './PagesPopUpConfig'
-import { useMemo } from 'react'
+import PopupMenuHeader from './PopupMenuHeader'
 
 function HomeHeader() {
   const { t } = useTranslation()
 
-  // const popupConfig = useMemo(() => getPagesPopUpConfig(name:string)),
+  const popupConfig = getPagesPopUpConfig()
   return (
     <AppBar
       sx={{
@@ -43,17 +42,17 @@ function HomeHeader() {
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           <Button color="inherit"> {t('home:components')}</Button>
-          <Button color="inherit" endIcon={<MdKeyboardArrowDown />}>
+          <Button color="inherit">
             {t('home:pages')}
+            <PopupMenuHeader
+              ActionButton={(btnProps) => (
+                <IconButton {...btnProps}>
+                  <MdKeyboardArrowDown />
+                </IconButton>
+              )}
+              config={popupConfig}
+            />
           </Button>
-          {/* <PopupMenu
-            ActionButton={(btnProps) => (
-              <IconButton {...btnProps} aria-label="settings" sx={{ width: 36, height: 36 }}>
-                <FiMoreVertical />
-              </IconButton>
-            )}
-            config={popupConfig}
-          /> */}
           <Button color="inherit">{t('home:docs')}</Button>
         </Box>
 

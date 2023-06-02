@@ -28,5 +28,18 @@
   },
   "mainSubtitle": "A professional kit that comes with ready-to-use MUI components developed with one common goal in mind, help you build faster & beautiful applications.",
   "liveDemo": "Live Demo",
-  "basedOn": "based on ({{count}}+ reviews)"
+  "basedOn": "based on ({{count}}+ reviews)",
+  "pagesBtn": {
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "customers": "Customers",
+    "logistics": "Logistics",
+    "fileManager": "File Manager",
+    "academy": "Academy",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "checkout": "Checkout",
+    "error": "Error"
+  }
 }
