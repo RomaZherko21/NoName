@@ -44,7 +44,13 @@ const PopupMenuHeader = ({ config, ActionButton }: Props) => {
                     navigate(item.linkTo)
                   }
                 }}
-                sx={{ px: 1, py: 0.5 }}
+                sx={{
+                  px: 1,
+                  py: 0.5,
+                  '&:hover': {
+                    borderRadius: 0.7
+                  }
+                }}
               >
                 {item.Icon && <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>}
                 <ListItemText>
