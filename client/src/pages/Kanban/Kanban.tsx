@@ -19,9 +19,6 @@ function Kanban() {
 
   useEffect(() => {
     KanbanModel.fetch({ id: 1 })
-    if (KanbanModel.columns) {
-      console.log(KanbanModel.columns.length)
-    }
   }, [])
 
   return (
