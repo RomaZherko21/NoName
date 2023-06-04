@@ -1,12 +1,16 @@
 import { Box, Typography, InputBase, IconButton } from '@mui/material'
-import { FilesModel } from 'pages/FileManager/model'
 import { useState } from 'react'
 import { MdOutlineEdit } from 'react-icons/md'
 import CheckIcon from '@mui/icons-material/Check'
 
-const TitleInput = (value: any, onSave: void) => {
-  const [isActive, setIsActive] = useState(true)
-  const [nameInputValue, setNameInputValue] = useState(FilesModel.folder?.name)
+interface Props {
+  value: string
+  onSave: (value: string) => void
+}
+
+const EditableInput = ({ value, onSave }: Props) => {
+  const [isEdit, setIsEdit] = useState(false)
+  const [inputValue, setInputValue] = useState(value)
 
   return (
     <>
@@ -18,23 +22,11 @@ const TitleInput = (value: any, onSave: void) => {
           mb: 2
         }}
       >
-        {isActive && (
-          <Typography
-            variant="h5"
-            sx={{
-              pt: '5px',
-              pl: '12px',
-              mb: '10.5px'
-            }}
-          >
-            {nameInputValue}
-          </Typography>
-        )}
-        {!isActive && (
+        {isEdit ? (
           <InputBase
-            value={nameInputValue}
+            value={inputValue}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNameInputValue(e.target.value)
+              setInputValue(e.target.value)
             }}
             size="small"
             fullWidth
@@ -42,22 +34,32 @@ const TitleInput = (value: any, onSave: void) => {
               fontSize: 24,
               fontWeight: 'bold',
               p: 0.5,
-              pl: 1.5,
               color: ({ palette }) => palette.text.primary,
               backgroundColor: ({ palette }) => palette.action.hover,
               borderRadius: '15px'
             }}
           />
+        ) : (
+          <Typography
+            variant="h5"
+            sx={{
+              p: 0.5
+            }}
+          >
+            {inputValue}
+          </Typography>
         )}
+
         <IconButton size="small">
-          {isActive && <MdOutlineEdit onClick={() => setIsActive(!isActive)} />}
-          {!isActive && (
+          {isEdit ? (
             <CheckIcon
               onClick={() => {
-                setIsActive(!isActive)
-                // onSave(nameInputValue, FilesModel.folder?.id)
+                setIsEdit((pre) => !pre)
+                onSave(inputValue)
               }}
             />
+          ) : (
+            <MdOutlineEdit onClick={() => setIsEdit((pre) => !pre)} />
           )}
         </IconButton>
       </Box>
@@ -65,4 +67,4 @@ const TitleInput = (value: any, onSave: void) => {
   )
 }
 
-export default TitleInput
+export default EditableInput

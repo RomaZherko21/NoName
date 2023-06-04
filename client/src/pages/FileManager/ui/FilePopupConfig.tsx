@@ -16,7 +16,6 @@ export const getFilePopupConfig = (id: number) => {
       Icon: <MdDeleteOutline />,
       text: 'actions.delete',
       onClick: () => {
-        console.log('delete', id)
         FilesModel.deleteFolder({ id: id })
       }
     }

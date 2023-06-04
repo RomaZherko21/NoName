@@ -18,11 +18,8 @@ import { FiTrash } from 'react-icons/fi'
 import { FilesModel } from 'pages/FileManager/model'
 import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
-import { Spinner } from 'shared/ui'
+import { EditableInput, Spinner } from 'shared/ui'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
-
-import TitleInput from './TitleInput'
-import { Folder } from 'shared/types'
 
 interface Props {
   openFileInfo: boolean
@@ -97,12 +94,13 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
           <Spinner />
         ) : (
           <>
-            <TitleInput
-              value={FilesModel.folder?.name}
-              onSave={(value: Folder, id: number) => {
-                FilesModel.editFolderName(value, id)
+            <EditableInput
+              value={FilesModel.folder?.name || ''}
+              onSave={(value: string) => {
+                FilesModel.editFolderName(value)
               }}
             />
+
             <Box>{FilesModel.folder?.name}</Box>
 
             <Grid container sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

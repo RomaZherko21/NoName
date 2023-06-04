@@ -49,7 +49,6 @@ class FilesModel {
       const data = await API.fileManager.getFolders()
 
       this.folders = data
-      // this.pagination.totalCount = data.count
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -82,11 +81,16 @@ class FilesModel {
     }
   }
 
-  async editFolderName(folder: Folder, id: number) {
+  async editFolderName(name: string) {
     try {
       this.loading.begin()
 
-      await API.fileManager.editFolder(id, folder)
+      if (this.folder?.id) {
+        await API.fileManager.editFolder(this.folder.id, { name })
+
+        this.fetch({})
+        this.fetchFolder({ id: this.folder.id })
+      }
     } catch (err: any) {
       toast.error(err)
     } finally {
