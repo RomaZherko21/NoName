@@ -7,6 +7,7 @@ import { AiOutlineMessage } from 'react-icons/ai'
 
 import { KanbanTask as TypeTask } from 'shared/types'
 import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
+import { KanbanModel } from 'pages/Kanban/model'
 interface Props {
   provided: DraggableProvided
   snapshot: DraggableStateSnapshot
@@ -15,9 +16,13 @@ interface Props {
 }
 
 function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
+  function onAsideOpenHandler() {
+    handleOpenTaskInfo()
+    KanbanModel.fetchTask({ id: task.id })
+  }
+
   return (
     <Paper
-      onClick={handleOpenTaskInfo}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -45,11 +50,13 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
             borderRadius: 2,
             mb: 1
           }}
+          onClick={onAsideOpenHandler}
           image={task.attachments && `${API_KANBAN_IMAGES_URL}/${task.attachments[0]}`}
           title="task cover"
         />
-        {console.log(task.attachments)}
-        <Typography variant="subtitle1">{task.name}</Typography>
+        <Typography onClick={onAsideOpenHandler} variant="subtitle1">
+          {task.name}
+        </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

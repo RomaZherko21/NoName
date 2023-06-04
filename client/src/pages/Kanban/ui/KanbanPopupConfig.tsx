@@ -1,5 +1,6 @@
 import { FaTrashAlt } from 'react-icons/fa'
 import { BsBrushFill } from 'react-icons/bs'
+
 import { KanbanModel } from '../model'
 
 export const getKanbanPopupConfig = () => [
@@ -14,7 +15,7 @@ export const getKanbanPopupConfig = () => [
     Icon: <FaTrashAlt />,
     text: 'actions.delete',
     onClick: (id: number) => {
-      console.log('delete', id)
+      KanbanModel.deleteColumn({ id })
     }
   }
 ]
