@@ -50,11 +50,11 @@ class KanbanModel {
     }
   }
 
-  async postColumn(KanbanColumnItem: KanbanColumnItem) {
+  async postColumn(KanbanColumnItem: {name: string, position: number}) {
     try {
       await API.kanban.postColumn(KanbanColumnItem, 1)
-       // а не нужно здесь условие ставить, типа если ок то перерисовать
-      this.fetch({ id: 1 })
+      
+        this.fetch({ id: 1 })
     } catch (err: any) {
       toast.error(err)
     }

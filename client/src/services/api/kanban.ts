@@ -7,7 +7,7 @@ const ENDPOINT_BASE = '/kanban'
 
 export const getColumns = async (id: number) => await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
 export const deleteColumn = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/columns/${id}`)
-export const postColumn = async (KanbanColumnItem: KanbanColumnItem, id: number) => await fetch.post<KanbanColumnItem>(`${ENDPOINT_BASE}/boards/${id}/columns`, KanbanColumnItem)
+export const postColumn = async (KanbanColumnItem: {name: string, position: number}, id: number) => await fetch.post(`${ENDPOINT_BASE}/boards/${id}/columns`, KanbanColumnItem)
 
 export const getColumnTaskById = async (id: number) => await fetch.get<KanbanTask>(`${ENDPOINT_BASE}/tasks/${id}`)
 
