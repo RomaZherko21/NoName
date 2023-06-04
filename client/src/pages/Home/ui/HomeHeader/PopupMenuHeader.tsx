@@ -15,7 +15,7 @@ interface Props {
   config: Array<{
     Icon?: JSX.Element
     text: string
-    linkTo?: string
+    to?: string
     onClick?: (args?: any) => void
     key?: string
   }>
@@ -40,8 +40,8 @@ const PopupMenuHeader = ({ config, ActionButton }: Props) => {
             <ListItem disablePadding key={item.text}>
               <ListItemButton
                 onClick={() => {
-                  if (item.linkTo) {
-                    navigate(item.linkTo)
+                  if (item.to) {
+                    navigate(item.to)
                   }
                 }}
                 sx={{
@@ -53,6 +53,7 @@ const PopupMenuHeader = ({ config, ActionButton }: Props) => {
                 }}
               >
                 {item.Icon && <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>}
+
                 <ListItemText>
                   <Typography variant="body2">{t(item.text)}</Typography>
                 </ListItemText>

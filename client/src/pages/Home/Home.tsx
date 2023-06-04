@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { Reviews, Questions, HomeHeader, MainSection, Footer, Purchase, ToolsItems } from './ui'
 

@@ -13,56 +13,30 @@ export const getPagesPopUpConfig = () => [
   {
     Icon: <RxDashboard />,
     text: 'home:pagesBtn.dashboard'
-    // to: generatePath()
   },
   {
-    // Icon: <BsLayoutTextSidebar />,
-    text: 'home:pagesBtn.overview'
-    // to: generatePath()
-  },
-  {
-    // Icon: <BsLayoutTextSidebar />,
-    text: 'home:pagesBtn.customers'
-    // to: generatePath()
-  },
-  {
-    // Icon: <BsLayoutTextSidebar />,
-    text: 'home:pagesBtn.logistics'
-    // to: generatePath()
-  },
-  {
-    // Icon: <BsLayoutTextSidebar />,
+    Icon: <BsLayoutTextSidebar />,
     text: 'home:pagesBtn.fileManager',
     to: generatePath(ROUTES.FILE_MANAGER)
   },
   {
-    // Icon: <BsLayoutTextSidebar />,
-    text: 'home:pagesBtn.academy'
-    // to: generatePath()
-  },
-  {
     Icon: <BsLayoutTextSidebar />,
     text: 'home:pagesBtn.blog'
-    // to: generatePath()
   },
   {
     Icon: <BsFileText />,
     text: 'home:pagesBtn.pricing'
-    // to: generatePath()
   },
   {
     Icon: <BsEnvelopeOpen />,
     text: 'home:pagesBtn.contact'
-    // to: generatePath()
   },
   {
     Icon: <FiLogOut />,
     text: 'home:pagesBtn.checkout'
-    // to: generatePath()
   },
   {
     Icon: <VscError />,
     text: 'home:pagesBtn.error'
-    // to: generatePath()
   }
 ]
