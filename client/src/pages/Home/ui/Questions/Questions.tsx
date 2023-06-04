@@ -15,7 +15,7 @@ function Questions() {
   const { t } = useTranslation()
 
   return (
-    <Grid container spacing={6} justifyContent="center" sx={{ py: 12 }}>
+    <Grid container spacing={6} sx={{ py: 12, pr: 12, pl: 12 }}>
       <Grid item xs={6}>
         <Typography variant="h3">{t('home:title')}</Typography>
         <Typography variant="body2" color="text.secondary">

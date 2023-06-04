@@ -11,7 +11,7 @@ function Footer() {
   const { t } = useTranslation()
 
   return (
-    <Box sx={{ backgroundColor: 'background.rare', pt: 12, pb: 6 }}>
+    <Box sx={{ backgroundColor: 'background.rare', pt: 12, pb: 6, pr: 12, pl: 12 }}>
       <Grid container spacing={6} sx={{ display: 'flex' }}>
         <Grid item xs={3} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <MuiLink component={Link} to={ROUTES.HOME} sx={{ width: 'fit-content' }}>

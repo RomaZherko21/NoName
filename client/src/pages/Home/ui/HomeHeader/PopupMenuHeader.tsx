@@ -9,14 +9,13 @@ import {
   ListItemText,
   Typography
 } from '@mui/material'
-
-import Popover from './Popover'
+import { Popover } from 'shared/ui'
 
 interface Props {
   config: Array<{
     Icon?: JSX.Element
     text: string
-    linkTo?: string
+    to?: string
     onClick?: (args?: any) => void
     key?: string
   }>
@@ -26,13 +25,7 @@ interface Props {
   sx?: any
 }
 
-const PopupMenu = ({
-  config,
-  ActionButton,
-  id,
-  selectCondition,
-  sx = { minWidth: 200, p: 0 }
-}: Props) => {
+const PopupMenuHeader = ({ config, ActionButton }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -42,27 +35,27 @@ const PopupMenu = ({
         activateElement={(_, handleOpen) => ActionButton({ onClick: handleOpen })}
         selfClosed
       >
-        <List sx={{ minWidth: 200, p: 0 }}>
+        <List sx={{ minWidth: 400, p: 4 }}>
           {config.map((item) => (
             <ListItem disablePadding key={item.text}>
               <ListItemButton
                 onClick={() => {
-                  if (item.linkTo) {
-                    navigate(item.linkTo)
-                  } else {
-                    item.onClick?.(id)
+                  if (item.to) {
+                    navigate(item.to)
                   }
                 }}
-                sx={{ px: 1, py: 0.5 }}
+                sx={{
+                  px: 1,
+                  py: 0.5,
+                  '&:hover': {
+                    borderRadius: 0.7
+                  }
+                }}
               >
                 {item.Icon && <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>}
+
                 <ListItemText>
-                  <Typography
-                    variant="body2"
-                    color={selectCondition === item.key ? 'text.primary' : 'text.secondary'}
-                  >
-                    {t(item.text)}
-                  </Typography>
+                  <Typography variant="body2">{t(item.text)}</Typography>
                 </ListItemText>
               </ListItemButton>
             </ListItem>
@@ -73,4 +66,4 @@ const PopupMenu = ({
   )
 }
 
-export default observer(PopupMenu)
+export default observer(PopupMenuHeader)
