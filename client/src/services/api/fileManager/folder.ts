@@ -7,7 +7,7 @@ export const getFolders = async () => await fetch.get<Folder[]>(`${ENDPOINT_BASE
 
 export const getFolderById = async (id: number) => await fetch.get<Folder>(`${ENDPOINT_BASE}/${id}`)
 
-export const editFolder = async ({ id, folder }: { id: number; folder: Folder }) =>
-  await fetch.put<Folder>(`${ENDPOINT_BASE}/${id}`, folder)
+export const editFolder = async (id: number, folder: Folder) =>
+  await fetch.put(`${ENDPOINT_BASE}/${id}`, folder)
 
 export const deleteFolder = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/${id}`)

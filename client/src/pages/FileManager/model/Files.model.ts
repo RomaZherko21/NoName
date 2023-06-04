@@ -50,8 +50,6 @@ class FilesModel {
 
       this.folders = data
       // this.pagination.totalCount = data.count
-
-      this.loading.reset()
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -68,8 +66,6 @@ class FilesModel {
       const data = await API.fileManager.getFolderById(id)
 
       this.folder = data
-
-      this.loading.reset()
     } catch (err: any) {
       toast.error(err)
     } finally {
@@ -77,17 +73,25 @@ class FilesModel {
     }
   }
 
-  async fetchDeleteFolder({ id }: { id: number }) {
+  async deleteFolder({ id }: { id: number }) {
     try {
-      // if (!hidden) {
-      //   this.loading.begin()
-      // }
       await API.fileManager.deleteFolder(id)
-      this.fetch({ hidden: true })
+      this.fetch({})
     } catch (err: any) {
       toast.error(err)
     }
-    // finally {}
+  }
+
+  async editFolderName(folder: Folder, id: number) {
+    try {
+      this.loading.begin()
+
+      await API.fileManager.editFolder(id, folder)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
   }
 }
 

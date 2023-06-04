@@ -130,7 +130,6 @@ const FileManager = () => {
         onCloseFileInfo={() => {
           setOpenFileInfo(false)
         }}
-        // file={file}
       />
     </>
   )
