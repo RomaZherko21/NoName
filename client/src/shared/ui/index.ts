@@ -11,7 +11,7 @@ export {
   FormPhoneNumber
 } from './Form'
 export { AsideFilters, AsideFiltersBar } from './AsideFilters'
-export { Input, Select, DatePicker, Checkbox, VerificationCode } from './NoForm'
+export { Input, Select, DatePicker, Checkbox, VerificationCode, EditableInput } from './NoForm'
 export { Tabs } from './Tabs'
 export { LeaveComment } from './LeaveComment'
 export { InformativeImage } from './InformativeImage'

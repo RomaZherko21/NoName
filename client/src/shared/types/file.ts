@@ -10,9 +10,12 @@ export interface File {
 }
 
 export interface Folder {
+  id: number
   name: string
   created_at: string
+  updated_at: string
   files_count: number
   memory_used: string
   assignee_to: string[]
+  tags: string[]
 }
