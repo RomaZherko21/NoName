@@ -19,12 +19,12 @@ export interface KanbanTask {
   name: string
   assigne_to: string[]
   due_date: string
-  attachments: string[] 
+  attachments: string[]
   created_by: string
   tags: string[]
   description: string
 }
-export interface KanbanComment { 
+export interface KanbanComment {
   id: number
   task_id: number
   created_at: string
@@ -38,7 +38,6 @@ export interface KanbanComment {
 
 //   user_avatar: string
 // }
-
 
 export interface KanbanSubtask {
   id: number

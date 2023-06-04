@@ -3,13 +3,12 @@ import { DropResult } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
-import { KanbanColumn, KanbanColumnItem, KanbanTask } from 'shared/types'
+import { KanbanColumn, KanbanTask } from 'shared/types'
 import { API } from 'services'
-// import { number } from 'yup'
 
 class KanbanModel {
   columns: KanbanColumn[] = []
-  task?: KanbanTask 
+  task?: KanbanTask
 
   commentInputValue: string = ''
   isEditActive: boolean = false
@@ -26,14 +25,13 @@ class KanbanModel {
     this.loadingAside = new LoadingModel()
   }
 
-  async fetch({ id, hidden = false }: { id: number, hidden?: boolean }) {
+  async fetch({ id, hidden = false }: { id: number; hidden?: boolean }) {
     try {
       if (!hidden) {
         this.loading.begin()
       }
       this.columns = await API.kanban.getColumns(id)
-    }
-    catch (err: any) {
+    } catch (err: any) {
       toast.error(err)
     } finally {
       this.loading.reset()
@@ -50,24 +48,24 @@ class KanbanModel {
     }
   }
 
-  async postColumn(KanbanColumnItem: {name: string, position: number}) {
+  async createKanbanColumn(column: { name: string; position: number }) {
     try {
-      await API.kanban.postColumn(KanbanColumnItem, 1)
-      
-        this.fetch({ id: 1 })
+      await API.kanban.createKanbanColumn(column, 1)
+
+      this.fetch({ id: 1 })
     } catch (err: any) {
       toast.error(err)
     }
   }
-  
-  async fetchTask({ id, hidden = false }: { id: number, hidden?: boolean }) {
+
+  async fetchTask({ id, hidden = false }: { id: number; hidden?: boolean }) {
     try {
       if (!hidden) {
         this.loadingAside.begin()
       }
+
       this.task = await API.kanban.getColumnTaskById(id)
-    }
-    catch (err: any) {
+    } catch (err: any) {
       toast.error(err)
     } finally {
       this.loadingAside.reset()
@@ -129,8 +127,12 @@ class KanbanModel {
     if (!destination) return
 
     if (source.droppableId !== destination.droppableId) {
-      const fromColumn = this.columns.find((item) => String(source.droppableId) === String(item.column.position))
-      const toColumn = this.columns.find((item) => destination.droppableId === String(item.column.position))
+      const fromColumn = this.columns.find(
+        (item) => String(source.droppableId) === String(item.column.position)
+      )
+      const toColumn = this.columns.find(
+        (item) => destination.droppableId === String(item.column.position)
+      )
 
       if (fromColumn && toColumn) {
         const fromTasks = [...fromColumn.tasks]
@@ -150,7 +152,9 @@ class KanbanModel {
         })
       }
     } else {
-      const column = this.columns.find((item) => source.droppableId === String(item.column.position))
+      const column = this.columns.find(
+        (item) => source.droppableId === String(item.column.position)
+      )
 
       if (column) {
         const fromTasks = [...column.tasks]

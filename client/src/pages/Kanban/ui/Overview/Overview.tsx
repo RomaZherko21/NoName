@@ -6,6 +6,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { Input, Spinner } from 'shared/ui'
 import { API_KANBAN_IMAGES_URL, API_USER_AVATAR_URL } from 'shared/consts'
 import { KanbanModel } from 'pages/Kanban/model'
+import { fromTimestampToDate } from 'shared/helpers'
 
 import s from './Styles.module.scss'
 
@@ -16,7 +17,7 @@ function Overview() {
     <Stack
       sx={{
         gap: 2,
-        p: '24px',
+        p: 4,
         pt: 0
       }}
     >
@@ -39,9 +40,10 @@ function Overview() {
                 {t('fields.assignedTo')}
               </Typography>
             </Box>
+
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <AvatarGroup>
-                {KanbanModel.task?.assigne_to?.slice(0, 3)?.map((user_img, id) => (
+                {KanbanModel.task?.assigne_to.slice(0, 3).map((user_img, id) => (
                   <Avatar
                     key={id}
                     sx={{ width: 32, height: 32 }}
@@ -61,6 +63,7 @@ function Overview() {
                 {t('kanban:attachments')}
               </Typography>
             </Box>
+
             {KanbanModel.task?.attachments && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <img
@@ -73,6 +76,7 @@ function Overview() {
                 </IconButton>
               </Box>
             )}
+
             {!KanbanModel.task?.attachments && (
               <IconButton size="small">
                 <AiOutlinePlus />
@@ -86,10 +90,11 @@ function Overview() {
                 {t('kanban:dueDate')}
               </Typography>
             </Box>
+
             <Box sx={{ display: 'flex' }}>
               <Chip
                 sx={{ backgroundColor: (theme) => theme.palette.grey[800] }}
-                label={KanbanModel.task?.due_date}
+                label={fromTimestampToDate(KanbanModel.task?.due_date)}
               />
             </Box>
           </Box>
@@ -100,6 +105,7 @@ function Overview() {
                 {t('fields.tags')}
               </Typography>
             </Box>
+
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {KanbanModel.task?.tags.map((tag, id) => (
                 <>
@@ -128,6 +134,7 @@ function Overview() {
                 {t('fields.description')}
               </Typography>
             </Box>
+
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Input
                 placeholder={t('actions.leaveMessage')}

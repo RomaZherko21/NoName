@@ -19,12 +19,10 @@ function Task({ provided, snapshot, task, handleOpenTaskInfo }: Props) {
   function onAsideOpenHandler() {
     handleOpenTaskInfo()
     KanbanModel.fetchTask({ id: task.id })
-    console.log('вызов')
   }
 
   return (
     <Paper
-      onClick={handleOpenTaskInfo}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}

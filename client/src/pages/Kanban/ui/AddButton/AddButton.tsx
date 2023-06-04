@@ -41,7 +41,7 @@ function AddButton({ text }: Props) {
             <Button
               onClick={() => {
                 setIsFormOpen(false)
-                KanbanModel.postColumn({
+                KanbanModel.createKanbanColumn({
                   name: columnName,
                   position: KanbanModel.columns.length
                 })
