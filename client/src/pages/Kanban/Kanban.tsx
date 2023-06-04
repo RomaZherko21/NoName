@@ -101,7 +101,7 @@ function Kanban() {
                                 <FiMoreHorizontal />
                               </IconButton>
                             )}
-                            id={column.column.position}
+                            id={column.column.id}
                             config={popupConfig}
                           />
                         </Box>

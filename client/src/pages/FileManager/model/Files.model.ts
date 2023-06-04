@@ -10,6 +10,8 @@ class FilesModel {
   files: File[] = []
   folders: Folder[] = []
 
+  folder?: Folder
+
   pagination: PaginationModel
 
   loading: LoadingModel
@@ -43,16 +45,55 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const data = await API.fileManager.getFileManagerFolders()
+      const data = await API.fileManager.getFolders()
 
       this.folders = data
-      // this.pagination.totalCount = data.count
-
-      this.loading.reset()
     } catch (err: any) {
       toast.error(err)
     } finally {
       this.loading.reset()
+    }
+  }
+
+  async fetchFolder({ id, hidden = false }: { id: number; hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.loading.begin()
+      }
+
+      const data = await API.fileManager.getFolderById(id)
+
+      this.folder = data
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
+    }
+  }
+
+  async deleteFolder({ id }: { id: number }) {
+    try {
+      await API.fileManager.deleteFolder(id)
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async editFolderName(name: string) {
+    try {
+      this.loading.begin()
+
+      if (this.folder?.id) {
+        await API.fileManager.editFolder(this.folder.id, { name })
+
+        this.fetch({})
+        this.fetchFolder({ id: this.folder.id })
+      }
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
     }
   }
 }

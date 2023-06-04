@@ -11,6 +11,7 @@ import { fromTimestampToDate } from 'shared/helpers'
 
 import { getFilePopupConfig } from '../FilePopupConfig'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
+import { FilesModel } from 'pages/FileManager/model'
 
 interface Props {
   folder: Folder
@@ -20,8 +21,12 @@ interface Props {
 
 const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
   const { t } = useTranslation()
+  const popupConfig = useMemo(() => getFilePopupConfig(folder.id), [folder.id])
 
-  const popupConfig = useMemo(() => getFilePopupConfig(folder.name), [folder.name])
+  function onAsideOpenHandler() {
+    handleOpenFileInfo()
+    FilesModel.fetchFolder({ id: folder.id })
+  }
 
   return (
     <Paper
@@ -62,11 +67,11 @@ const FileItem = ({ folder, handleOpenFileInfo }: Props) => {
         />
       </Box>
 
-      <Box sx={{ cursor: 'pointer' }} onClick={handleOpenFileInfo}>
+      <Box sx={{ cursor: 'pointer' }} onClick={onAsideOpenHandler}>
         <img alt="Folder" src={folderImg} />
       </Box>
 
-      <Typography variant="body2" onClick={handleOpenFileInfo} sx={{ cursor: 'pointer' }}>
+      <Typography variant="body2" onClick={onAsideOpenHandler} sx={{ cursor: 'pointer' }}>
         {folder.name}
       </Typography>
 
