@@ -5,6 +5,7 @@ import { BsKanban } from 'react-icons/bs'
 
 import { ROUTES } from 'shared/consts'
 import { AccessRoute, Operation } from 'models/Permissions'
+// import { KanbanModel } from 'pages/Kanban/model'
 
 export const config = [
   {
@@ -27,9 +28,21 @@ export const config = [
   },
 
   {
+    //думаю сюда лепить map
+
     icon: <BsKanban />,
     title: 'page:kanban',
-    to: ROUTES.KANBAN
+    // to: KanbanModel.fetchBoards(), // сюда запрос на получение всех boards
+    collapsedItems: [
+      {
+        text: 'Board#1',
+        to: ROUTES.KANBAN,
+        accessOperation: Operation.get
+      }
+    ],
+    accessRoute: AccessRoute.users,
+    accessOperation: Operation.get
+
     // accessRoute: AccessRoute.kanban,
     // accessOperation: Operation.get,
   },
