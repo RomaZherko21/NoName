@@ -180,7 +180,7 @@ class KanbanModel {
       if (this.task?.id) {
         await API.kanban.editTask(this.task.id, { name })
 
-        this.fetch({ id: this.task.id })
+        this.fetch({ id: 1 })
         this.fetchTask({ id: this.task.id })
       }
     } catch (err: any) {

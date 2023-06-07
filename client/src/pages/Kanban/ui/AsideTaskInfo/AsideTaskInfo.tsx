@@ -72,25 +72,6 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
             KanbanModel.editTaskName(value)
           }}
         />
-        {/* <InputBase
-          value={KanbanModel.task?.name}
-          size="small"
-          fullWidth
-          sx={{
-            p: 0.5,
-            pl: 1.5,
-            color: ({ palette }) => palette.text.primary,
-            '&:hover': {
-              backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px'
-            },
-            '&.Mui-focused': {
-              backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px'
-            },
-            '&fieldset': { border: 'none' }
-          }}
-        /> */}
       </Box>
 
       <Tabs options={tabsConfig} />
