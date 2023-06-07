@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Box, Drawer, IconButton, Button, InputBase } from '@mui/material'
+import { Box, Drawer, IconButton, Button } from '@mui/material'
 import { IoIosArrowDown } from 'react-icons/io'
 import { HiOutlineArchive } from 'react-icons/hi'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
