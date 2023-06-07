@@ -1,5 +1,5 @@
 import { Box, Typography, InputBase, IconButton } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdOutlineEdit } from 'react-icons/md'
 import CheckIcon from '@mui/icons-material/Check'
 
@@ -11,6 +11,10 @@ interface Props {
 const EditableInput = ({ value, onSave }: Props) => {
   const [isEdit, setIsEdit] = useState(false)
   const [inputValue, setInputValue] = useState(value)
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [value])
 
   return (
     <>

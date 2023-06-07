@@ -5,7 +5,7 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { HiOutlineArchive } from 'react-icons/hi'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
-import { PopupMenu, Tabs } from 'shared/ui'
+import { EditableInput, PopupMenu, Tabs } from 'shared/ui'
 
 import { getPopupConfig } from './PopupConfig'
 import { getTabsConfig } from './TabsConfig'
@@ -66,7 +66,13 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
         </Box>
       </Box>
       <Box sx={{ p: '8px 16px' }}>
-        <InputBase
+        <EditableInput
+          value={KanbanModel.task?.name || ''}
+          onSave={(value: string) => {
+            KanbanModel.editTaskName(value)
+          }}
+        />
+        {/* <InputBase
           value={KanbanModel.task?.name}
           size="small"
           fullWidth
@@ -84,7 +90,7 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
             },
             '&fieldset': { border: 'none' }
           }}
-        />
+        /> */}
       </Box>
 
       <Tabs options={tabsConfig} />
