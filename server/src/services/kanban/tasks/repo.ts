@@ -20,8 +20,9 @@ SELECT
     u.middle_name as user_middle_name,
     u.email as user_email,
     u.tel_number as user_tel_number,
-    u.role as user_role,
-    JSON_ARRAYAGG(u.assigne_to) as assigne_to
+    u.role as user_role,    
+    JSON_ARRAYAGG(u.assigne_to) as assigne_to,
+    kc.board_id as board_id
 from
     ${TABLE.kanban_tasks} as kt
     LEFT JOIN (
@@ -53,6 +54,7 @@ from
             JOIN ${TABLE.m2m_kanban_users_tasks} as m2m_kut_inner on m2m_kut_inner.user_id = u_inner.id
     ) as u on kt.id = u.task_id
     JOIN ${TABLE.users} as u on u.id = kt.created_by
+    JOIN ${TABLE.kanban_columns} as kc on kt.column_id = kc.id
 WHERE
     kt.id = ${task_id}
 GROUP BY
