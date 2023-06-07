@@ -33,4 +33,4 @@ export const deleteComment = async (taskId: number, id: number) =>
   await fetch.delete(`${ENDPOINT_BASE}/${taskId}/comments/${id}`)
 
 export const editTask = async (columnId: number, taskId: number, task: { name?: string }) =>
-  await fetch.put(`${ENDPOINT_BASE}/column/${columnId}/tasks/${taskId}`, task)
+  await fetch.put(`${ENDPOINT_BASE}/columns/${columnId}/tasks/${taskId}`, task)
