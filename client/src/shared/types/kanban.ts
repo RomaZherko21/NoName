@@ -23,6 +23,7 @@ export interface KanbanTask {
   created_by: string
   tags: string[]
   description: string
+  column_id: number
 }
 export interface KanbanComment {
   id: number

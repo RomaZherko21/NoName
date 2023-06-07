@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Box, Drawer, IconButton, Button, InputBase } from '@mui/material'
+import { Box, Drawer, IconButton, Button } from '@mui/material'
 import { IoIosArrowDown } from 'react-icons/io'
 import { HiOutlineArchive } from 'react-icons/hi'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
-import { PopupMenu, Tabs } from 'shared/ui'
+import { EditableInput, PopupMenu, Tabs } from 'shared/ui'
 
 import { getPopupConfig } from './PopupConfig'
 import { getTabsConfig } from './TabsConfig'
@@ -66,23 +66,10 @@ const AsideTaskInfo = ({ openTaskInfo, onCloseTaskInfo }: Props) => {
         </Box>
       </Box>
       <Box sx={{ p: '8px 16px' }}>
-        <InputBase
-          value={KanbanModel.task?.name}
-          size="small"
-          fullWidth
-          sx={{
-            p: 0.5,
-            pl: 1.5,
-            color: ({ palette }) => palette.text.primary,
-            '&:hover': {
-              backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px'
-            },
-            '&.Mui-focused': {
-              backgroundColor: ({ palette }) => palette.action.hover,
-              borderRadius: '15px'
-            },
-            '&fieldset': { border: 'none' }
+        <EditableInput
+          value={KanbanModel.task?.name || ''}
+          onSave={(value: string) => {
+            KanbanModel.editTaskName(value)
           }}
         />
       </Box>

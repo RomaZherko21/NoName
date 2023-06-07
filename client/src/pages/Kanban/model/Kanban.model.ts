@@ -172,6 +172,23 @@ class KanbanModel {
       }
     }
   }
+
+  async editTaskName(name: string) {
+    try {
+      this.loading.begin()
+
+      if (this.task?.id) {
+        await API.kanban.editTask(this.task.id, this.task.column_id, { name })
+
+        this.fetch({ id: this.task.column_id })
+        this.fetchTask({ id: this.task.id })
+      }
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
 }
 
 const model = new KanbanModel()
