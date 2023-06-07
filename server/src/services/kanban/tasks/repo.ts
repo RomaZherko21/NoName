@@ -22,7 +22,7 @@ SELECT
     u.tel_number as user_tel_number,
     u.role as user_role,    
     JSON_ARRAYAGG(u.assigne_to) as assigne_to,
-    kc.board_id as board_id
+    kc.id as column_id
 from
     ${TABLE.kanban_tasks} as kt
     LEFT JOIN (
