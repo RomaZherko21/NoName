@@ -17,10 +17,13 @@ import { useRootStore } from 'stores'
 import { CircleDevider } from 'shared/ui'
 import { AccessRoute, Operation } from 'models/Permissions'
 
+import { NavBarModel } from '../../model'
+
 interface Props {
   icon: JSX.Element
   title: string
   to?: string
+  get?: string
   collapsedItems?: { to: string; text: string; accessOperation?: Operation }[]
   accessRoute?: AccessRoute
   accessOperation?: Operation
@@ -30,6 +33,7 @@ const NavBarItem = ({
   icon,
   title,
   to = '',
+  get,
   collapsedItems = [],
   accessRoute,
   accessOperation

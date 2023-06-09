@@ -33,6 +33,7 @@ export const config = [
     icon: <BsKanban />,
     title: 'page:kanban',
     // to: KanbanModel.fetchBoards(), // сюда запрос на получение всех boards
+    get: 'boards',
     collapsedItems: [
       {
         text: 'Board#1',

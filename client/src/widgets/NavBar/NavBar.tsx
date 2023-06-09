@@ -43,6 +43,7 @@ const NavBar = () => {
               title={item.title}
               collapsedItems={item?.collapsedItems}
               to={item?.to}
+              get={item.get}
               accessRoute={item.accessRoute}
               accessOperation={item.accessOperation}
               key={item.to}
