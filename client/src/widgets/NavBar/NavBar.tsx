@@ -43,7 +43,7 @@ const NavBar = () => {
               title={item.title}
               collapsedItems={item?.collapsedItems}
               to={item?.to}
-              get={item.get}
+              get={item.get} // может необязательный параметр
               accessRoute={item.accessRoute}
               accessOperation={item.accessOperation}
               key={item.to}

@@ -27,7 +27,7 @@ export const ROUTES = {
 
   FILE_MANAGER: '/filemanager',
 
-  KANBAN: '/kanban',
+  KANBAN: '/kanban/:id',
 
   NOT_FOUND: '/notFound',
   HELP: '/help',

@@ -28,8 +28,6 @@ export const config = [
   },
 
   {
-    //думаю сюда лепить map
-
     icon: <BsKanban />,
     title: 'page:kanban',
     // to: KanbanModel.fetchBoards(), // сюда запрос на получение всех boards
