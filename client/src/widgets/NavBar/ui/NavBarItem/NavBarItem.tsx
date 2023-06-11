@@ -122,13 +122,15 @@ const NavBarItem = ({
                     sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
                     key={item.id}
                   >
-                    <CircleDevider
-                      sx={{
-                        position: 'absolute',
-                        backgroundColor: 'primary.main',
-                        left: 10
-                      }}
-                    />
+                    {location.pathname === item.to && (
+                      <CircleDevider
+                        sx={{
+                          position: 'absolute',
+                          backgroundColor: 'primary.main',
+                          left: 10
+                        }}
+                      />
+                    )}
 
                     <Typography
                       variant="body2"
