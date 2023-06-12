@@ -2,6 +2,7 @@ import { HiOutlineUsers } from 'react-icons/hi'
 import { HiOutlineChatBubbleLeftRight, HiOutlineNewspaper } from 'react-icons/hi2'
 import { AiOutlineFileJpg } from 'react-icons/ai'
 import { BsKanban } from 'react-icons/bs'
+import { FiCalendar } from 'react-icons/fi'
 
 import { ROUTES } from 'shared/consts'
 import { AccessRoute, Operation } from 'models/Permissions'
@@ -69,6 +70,13 @@ export const config = (meta: MetaModel) => [
     title: 'page:chat',
     to: ROUTES.CHAT,
     accessRoute: AccessRoute.chat,
+    accessOperation: Operation.get
+  },
+  {
+    icon: <FiCalendar />,
+    title: 'page:calendar',
+    to: ROUTES.CALENDAR,
+    // accessRoute: AccessRoute.calendar,
     accessOperation: Operation.get
   }
 ]

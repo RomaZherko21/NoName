@@ -15,7 +15,8 @@ const namespaces = [
   'chat',
   'home',
   'contact',
-  'auth'
+  'auth',
+  'calendar'
 ]
 const initTranslation = async () => {
   return await i18n

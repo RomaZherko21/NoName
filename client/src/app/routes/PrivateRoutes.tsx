@@ -21,7 +21,8 @@ import {
   Chat,
   Kanban,
   Contact,
-  Home
+  Home,
+  Calendar
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
@@ -58,6 +59,8 @@ const router = createBrowserRouter(
         <Route path={ROUTES.FILE_MANAGER} element={<FileManager />} />
 
         <Route path={ROUTES.KANBAN} element={<Kanban />} />
+
+        <Route path={ROUTES.CALENDAR} element={<Calendar />} />
 
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
 
