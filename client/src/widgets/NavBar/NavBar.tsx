@@ -1,16 +1,21 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, Drawer, List, Link as MuiLink } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import { NavBarItem } from './ui'
 import { config } from './config'
-import { Link } from 'react-router-dom'
+import { NavBarModel } from './model/index.'
 
 const NavBar = () => {
-  const navBarConfig = useMemo(() => config, [])
+  const navBarConfig = useMemo(() => config(), [NavBarModel.boards])
+
+  useEffect(() => {
+    NavBarModel.fetchBoards()
+  }, [])
 
   return (
     <Box component="nav" sx={{ width: DRAWER_WIDTH }}>
@@ -43,7 +48,6 @@ const NavBar = () => {
               title={item.title}
               collapsedItems={item?.collapsedItems}
               to={item?.to}
-              get={item.get} // может необязательный параметр
               accessRoute={item.accessRoute}
               accessOperation={item.accessOperation}
               key={item.to}

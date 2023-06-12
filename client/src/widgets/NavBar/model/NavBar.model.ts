@@ -3,10 +3,9 @@ import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
-import { KanbanBoard } from 'shared/types'
 
 class NavBarModel {
-  boards: KanbanBoard[] = []
+  boards: any[] = []
  
   loading: LoadingModel
 
@@ -21,7 +20,8 @@ class NavBarModel {
     try {
        this.loading.begin()
       
-      this.boards = await API.kanban.getBoards()
+      const data = await API.kanban.getBoards()
+      this.boards = data.map((item)=>({ text: item.name , to: `/kanban/${item.id}`,}))
       console.log(this.boards)
     } catch (err: any) {
       toast.error(err)

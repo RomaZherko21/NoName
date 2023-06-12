@@ -4,7 +4,6 @@ export interface KanbanBoard {
   description: string
   created_at: number
   updated_at: string
-  to?: string
 }
 export interface KanbanColumn {
   column: KanbanColumnItem

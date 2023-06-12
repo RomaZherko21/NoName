@@ -5,9 +5,9 @@ import { BsKanban } from 'react-icons/bs'
 
 import { ROUTES } from 'shared/consts'
 import { AccessRoute, Operation } from 'models/Permissions'
-// import { KanbanModel } from 'pages/Kanban/model'
+import NavBarModel from './model/NavBar.model'
 
-export const config = [
+export const config = () => [
   {
     icon: <HiOutlineUsers />,
     title: 'page:users',
@@ -30,21 +30,12 @@ export const config = [
   {
     icon: <BsKanban />,
     title: 'page:kanban',
-    // to: KanbanModel.fetchBoards(), // сюда запрос на получение всех boards
-    get: 'boards',
-    collapsedItems: [
-      {
-        text: 'Board#1',
-        to: ROUTES.KANBAN,
-        accessOperation: Operation.get
-      }
-    ],
+
+    collapsedItems: NavBarModel.boards,
     accessRoute: AccessRoute.users,
     accessOperation: Operation.get
-
-    // accessRoute: AccessRoute.kanban,
-    // accessOperation: Operation.get,
   },
+
   {
     icon: <AiOutlineFileJpg />,
     title: 'page:fileManager',

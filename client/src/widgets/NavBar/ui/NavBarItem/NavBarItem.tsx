@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Link, generatePath, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   Collapse,
@@ -14,17 +14,13 @@ import {
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 
 import { useRootStore } from 'stores'
-import { CircleDevider, Spinner } from 'shared/ui'
+import { CircleDevider } from 'shared/ui'
 import { AccessRoute, Operation } from 'models/Permissions'
-
-import { NavBarModel } from '../../model/index.'
-import { ROUTES } from 'shared/consts'
 
 interface Props {
   icon: JSX.Element
   title: string
   to?: string
-  get?: string
   collapsedItems?: { to: string; text: string; accessOperation?: Operation }[]
   accessRoute?: AccessRoute
   accessOperation?: Operation
@@ -34,7 +30,6 @@ const NavBarItem = ({
   icon,
   title,
   to = '',
-  get,
   collapsedItems = [],
   accessRoute,
   accessOperation
@@ -43,14 +38,6 @@ const NavBarItem = ({
   const location = useLocation()
   const navigate = useNavigate()
   const { user } = useRootStore()
-
-  useEffect(() => {
-    if (get) {
-      if (get === 'boards') {
-        NavBarModel.fetchBoards()
-      }
-    }
-  }, [get])
 
   const hasAccess =
     !accessRoute || !accessOperation
@@ -110,81 +97,43 @@ const NavBarItem = ({
       {!to && (
         <Collapse in={isOpen} timeout="auto" mountOnEnter unmountOnExit>
           <List component="div" disablePadding>
-            {get ? (
-              NavBarModel.loading.has ? (
-                <Spinner />
-              ) : (
-                get === 'boards' &&
-                NavBarModel.boards.map((item) => (
-                  <ListItemButton
-                    component={Link}
-                    to={generatePath(ROUTES.KANBAN, { id: String(item.id) })}
-                    sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
-                    key={item.id}
+            {collapsedItems.map((item) => {
+              if (
+                item.accessOperation &&
+                accessRoute &&
+                !user.permissions.hasAccess(item.accessOperation, accessRoute)
+              ) {
+                return null
+              }
+
+              return (
+                <ListItemButton
+                  component={Link}
+                  to={item.to}
+                  sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
+                  key={item.to}
+                >
+                  {location.pathname === item.to && (
+                    <CircleDevider
+                      sx={{
+                        position: 'absolute',
+                        backgroundColor: 'primary.main',
+                        left: 10
+                      }}
+                    />
+                  )}
+
+                  <Typography
+                    variant="body2"
+                    color={
+                      location.pathname === item.to ? 'primary.contrastText' : 'text.secondary'
+                    }
                   >
-                    {location.pathname === item.to && (
-                      <CircleDevider
-                        sx={{
-                          position: 'absolute',
-                          backgroundColor: 'primary.main',
-                          left: 10
-                        }}
-                      />
-                    )}
-
-                    <Typography
-                      variant="body2"
-                      color={
-                        location.pathname === item.to ? 'primary.contrastText' : 'text.secondary'
-                      }
-                    >
-                      {t(item.name)}
-                    </Typography>
-                  </ListItemButton>
-                ))
+                    {t(item.text)}
+                  </Typography>
+                </ListItemButton>
               )
-            ) : (
-              <>
-                {/* {' '} */}
-                {collapsedItems.map((item) => {
-                  if (
-                    item.accessOperation &&
-                    accessRoute &&
-                    !user.permissions.hasAccess(item.accessOperation, accessRoute)
-                  ) {
-                    return null
-                  }
-
-                  return (
-                    <ListItemButton
-                      component={Link}
-                      to={item.to}
-                      sx={{ p: 0.6, borderRadius: 1, pl: 5 }}
-                      key={item.to}
-                    >
-                      {location.pathname === item.to && (
-                        <CircleDevider
-                          sx={{
-                            position: 'absolute',
-                            backgroundColor: 'primary.main',
-                            left: 10
-                          }}
-                        />
-                      )}
-
-                      <Typography
-                        variant="body2"
-                        color={
-                          location.pathname === item.to ? 'primary.contrastText' : 'text.secondary'
-                        }
-                      >
-                        {t(item.text)}
-                      </Typography>
-                    </ListItemButton>
-                  )
-                })}
-              </>
-            )}
+            })}
           </List>
         </Collapse>
       )}
