@@ -21,8 +21,8 @@ class NavBarModel {
        this.loading.begin()
       
       const data = await API.kanban.getBoards()
-      this.boards = data.map((item)=>({ text: item.name , to: `/kanban/${item.id}`,}))
-      console.log(this.boards)
+      this.boards = data.map((item) => ({ text: item.name, to: `/kanban/${item.id}`, }))
+      
     } catch (err: any) {
       toast.error(err)
     } finally {
