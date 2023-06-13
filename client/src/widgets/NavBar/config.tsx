@@ -5,8 +5,9 @@ import { BsKanban } from 'react-icons/bs'
 
 import { ROUTES } from 'shared/consts'
 import { AccessRoute, Operation } from 'models/Permissions'
+import NavBarModel from './model/NavBar.model'
 
-export const config = [
+export const config = () => [
   {
     icon: <HiOutlineUsers />,
     title: 'page:users',
@@ -29,10 +30,12 @@ export const config = [
   {
     icon: <BsKanban />,
     title: 'page:kanban',
-    to: ROUTES.KANBAN
-    // accessRoute: AccessRoute.kanban,
-    // accessOperation: Operation.get,
+
+    collapsedItems: NavBarModel.boards,
+    accessRoute: AccessRoute.users,
+    accessOperation: Operation.get
   },
+
   {
     icon: <AiOutlineFileJpg />,
     title: 'page:fileManager',

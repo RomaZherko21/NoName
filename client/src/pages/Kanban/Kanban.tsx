@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { Box, Paper, Chip, IconButton, InputBase, Container, Stack } from '@mui/material'
 import { FiMoreHorizontal } from 'react-icons/fi'
+import { useParams } from 'react-router-dom'
 
 import { PageHeader } from 'widgets'
 import { PopupMenu, Spinner } from 'shared/ui'
@@ -16,10 +17,11 @@ function Kanban() {
   const { t } = useTranslation()
   const [openTaskInfo, setOpenTaskInfo] = useState(false)
   const popupConfig = useMemo(() => getKanbanPopupConfig(), [])
+  const { id } = useParams()
 
   useEffect(() => {
-    KanbanModel.fetch({ id: 1 })
-  }, [])
+    KanbanModel.fetch({ id: Number(id) })
+  }, [id])
 
   return (
     <>

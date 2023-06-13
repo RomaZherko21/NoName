@@ -3,10 +3,11 @@ import { DropResult } from 'react-beautiful-dnd'
 import { toast } from 'react-toastify'
 
 import LoadingModel from 'models/Loading'
-import { KanbanColumn, KanbanTask } from 'shared/types'
+import { KanbanBoard, KanbanColumn, KanbanTask } from 'shared/types'
 import { API } from 'services'
 
 class KanbanModel {
+  boards: KanbanBoard[] = []
   columns: KanbanColumn[] = []
   task?: KanbanTask
 
@@ -24,6 +25,24 @@ class KanbanModel {
     this.loading = new LoadingModel()
     this.loadingAside = new LoadingModel()
   }
+
+  async fetchBoards({ hidden = false }: { hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.loading.begin()
+      }
+      this.boards = await API.kanban.getBoards()
+      console.log(this.boards)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
+    }
+  }
+
+
+
+
 
   async fetch({ id, hidden = false }: { id: number; hidden?: boolean }) {
     try {
