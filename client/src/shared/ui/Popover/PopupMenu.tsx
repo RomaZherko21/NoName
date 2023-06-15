@@ -31,7 +31,6 @@ const PopupMenu = ({
   ActionButton,
   id,
   selectCondition,
-  sx = { minWidth: 200, p: 0 }
 }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()

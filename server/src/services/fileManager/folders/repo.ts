@@ -3,6 +3,8 @@ import { QueryTypes } from 'sequelize'
 import { TABLE } from 'shared/consts'
 import { ID } from 'shared/types'
 
+console.log()
+
 const getFolderById = ({ folderId }: { folderId: ID }) =>
   sequelize.query(
     `
@@ -14,10 +16,12 @@ SELECT
     COUNT(fi.id) as files_count,
     SUM(fi.size) as memory_used,
     ft.tags,
-    u.assignee_to
+    u.assignee_to,
+    users.avatar as created_by
 FROM
     ${TABLE.folders} as fo
     LEFT JOIN ${TABLE.files} as fi on fi.folder_id = fo.id
+    JOIN ${TABLE.users} as users on fo.created_by = users.id
     LEFT JOIN (
         SELECT
             JSON_ARRAYAGG(users.avatar) as assignee_to,

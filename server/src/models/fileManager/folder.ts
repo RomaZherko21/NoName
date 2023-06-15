@@ -10,6 +10,8 @@ interface Folder {
 
   created_at: string
   updated_at: string
+
+  created_by: number
 }
 
 interface ModelCreation extends Optional<Folder, 'id'> {}
@@ -37,6 +39,13 @@ FolderModel.init(
       type: 'TIMESTAMP',
       allowNull: false,
       defaultValue: literal('CURRENT_TIMESTAMP'),
+    },
+    created_by: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: TABLE.users,
+        key: 'id',
+      },
     },
   },
   {

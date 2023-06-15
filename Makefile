@@ -12,8 +12,8 @@ down: ## Stops containers, networks, volumes, and images created by up
 
 .PHONY: prune
 prune: ## Remove ALL stopped container and ALL unused volumes
-	docker container prune -f 
-	docker volume prune -f
+	docker container prune -f
+	docker volume prune -f -a
 
 .PHONY: sysPrune
 sysPrune: ## Remove all unused containers, networks, images, and optionally, volumes.

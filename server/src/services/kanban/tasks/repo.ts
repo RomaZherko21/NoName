@@ -21,6 +21,7 @@ SELECT
     u.email as user_email,
     u.tel_number as user_tel_number,
     u.role as user_role,    
+    u.avatar as created_by,    
     JSON_ARRAYAGG(u.assigne_to) as assigne_to,
     kc.id as column_id
 from

@@ -190,7 +190,9 @@ CREATE TABLE IF NOT EXISTS `folders` (
   `name` VARCHAR(50),
   `created_at` TIMESTAMP,
   `updated_at` TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `created_by` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`created_by`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `files` (
