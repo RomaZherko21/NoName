@@ -1,5 +1,6 @@
 export const ROUTES = {
   auth: 'auth',
+  meta: 'meta',
   user: 'user',
   security: 'security',
   users: 'users',

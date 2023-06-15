@@ -77,11 +77,13 @@ import { FILE_MANAGER_FOLDER, POST_FOLDER, ROUTES, USER_AVATAR_FOLDER } from 'sh
 import { usePermission } from 'middlewares'
 import { fileFilter, fileLimits, imgLimits } from 'shared/helpers'
 import { fileManagerStorage } from 'entities/fileManager'
+import { getMetaData } from 'services/meta'
 
 const router = express.Router()
 
 const {
   auth,
+  meta,
   user,
   security,
   users,
@@ -95,6 +97,8 @@ const {
 } = ROUTES
 
 router.post(`/${auth}/signIn`, signIn)
+
+router.get(`/${meta}`, getMetaData)
 
 router.get(`/${user}`, getUserSelf)
 router.put(`/${user}`, updateUserSelf)
