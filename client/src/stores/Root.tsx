@@ -4,6 +4,7 @@ import AuthorizationModel from 'models/Authorization'
 import LoadingModel from 'models/Loading'
 import WebSocketModel from 'models/WebSocket'
 import UserModel from 'models/User'
+import MetaModel from 'models/Meta'
 
 import AppConfig from './AppConfig'
 
@@ -16,6 +17,8 @@ export class RootStore {
 
   readonly loading: LoadingModel
 
+  readonly meta: MetaModel
+
   constructor() {
     this.loading = new LoadingModel()
 
@@ -24,6 +27,7 @@ export class RootStore {
     this.authorization = new AuthorizationModel(this)
     this.user = new UserModel(this)
     this.ws = new WebSocketModel(this)
+    this.meta = new MetaModel(this)
   }
 
   async init() {

@@ -5,20 +5,18 @@ import { Link } from 'react-router-dom'
 
 import { DRAWER_WIDTH, ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
+import { useRootStore } from 'stores'
 
 import { NavBarItem } from './ui'
 import { config } from './config'
-import { NavBarModel } from './model/index.'
 
 const NavBar = () => {
-  const navBarConfig = useMemo(() => config(), [NavBarModel.boards])
-
-  useEffect(() => {
-    NavBarModel.fetchBoards()
-  }, [])
+  const { meta } = useRootStore()
+  const navBarConfig = useMemo(() => config(meta.boards), [meta.boards])
 
   return (
     <Box component="nav" sx={{ width: DRAWER_WIDTH }}>
+      {console.log(meta.boards)}
       <Drawer
         variant="permanent"
         sx={{

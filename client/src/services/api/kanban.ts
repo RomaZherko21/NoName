@@ -1,8 +1,11 @@
-import { KanbanBoard, KanbanColumn, KanbanComment, KanbanTask } from 'shared/types'
+import { KanbanBoard, KanbanColumn, KanbanComment, KanbanTask, MetaKanbanBoards } from 'shared/types'
 
 import fetch from './fetch'
 
 const ENDPOINT_BASE = '/kanban'
+
+export const getMetaBoards = async () =>
+  await fetch.get<MetaKanbanBoards[]>(`/meta`)
 
 export const getBoards = async () =>
   await fetch.get<KanbanBoard[]>(`${ENDPOINT_BASE}/boards`)
