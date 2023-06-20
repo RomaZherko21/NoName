@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Box, Drawer, List, Link as MuiLink } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -12,11 +12,10 @@ import { config } from './config'
 
 const NavBar = () => {
   const { meta } = useRootStore()
-  const navBarConfig = useMemo(() => config(meta.boards), [meta.boards])
+  const navBarConfig = useMemo(() => config(meta), [meta])
 
   return (
     <Box component="nav" sx={{ width: DRAWER_WIDTH }}>
-      {console.log(meta.boards)}
       <Drawer
         variant="permanent"
         sx={{

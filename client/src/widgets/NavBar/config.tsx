@@ -7,7 +7,7 @@ import { ROUTES } from 'shared/consts'
 import { AccessRoute, Operation } from 'models/Permissions'
 import MetaModel from 'models/Meta'
 
-export const config = (boards: any) => [
+export const config = (meta: MetaModel) => [
   {
     icon: <HiOutlineUsers />,
     title: 'page:users',
@@ -31,7 +31,10 @@ export const config = (boards: any) => [
     icon: <BsKanban />,
     title: 'page:kanban',
 
-    collapsedItems: boards,
+    collapsedItems: meta.kanbanBoards.map((item: any) => ({
+      text: item.name,
+      to: `/kanban/${item.id}`
+    })),
     accessRoute: AccessRoute.users,
     accessOperation: Operation.get
   },

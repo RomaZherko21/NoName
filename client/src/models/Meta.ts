@@ -3,13 +3,10 @@ import { toast } from 'react-toastify'
 
 import { API } from 'services'
 import { RootStore } from 'stores'
-// import { MetaKanbanBoards } from 'shared/types'
-
-import LoadingModel from './Loading'
-
 class MetaModel {
   readonly rootStore: typeof RootStore
-  boards: { text: string; to: string }[] = []
+
+  kanbanBoards: { id: number; name: string }[] = []
 
   constructor(rootStore: typeof RootStore) {
     makeAutoObservable(this)
@@ -22,13 +19,9 @@ class MetaModel {
     try {
       this.rootStore.loading.begin()
 
-      const data = await API.kanban.getMetaBoards()
-      console.log(data)
-      this.boards = data.map((item) => ({
-        text: item.name,
-        to: `/kanban/${item.id}`
-      }))
-      console.log(this.boards)
+      const data = await API.meta.getMeta()
+
+      this.kanbanBoards = data.kanban_boards
     } catch (err: any) {
       toast.error(err)
     } finally {

@@ -8,6 +8,7 @@ import * as security from './security'
 import * as kanban from './kanban'
 import * as chat from './chat'
 import * as fileManager from './fileManager/folder'
+import * as meta from './meta'
 
 const API = {
   auth,
@@ -19,7 +20,8 @@ const API = {
   security,
   kanban,
   chat,
-  fileManager
+  fileManager,
+  meta
 }
 
 export default API
