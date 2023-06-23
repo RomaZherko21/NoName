@@ -5,11 +5,6 @@ export interface KanbanBoard {
   created_at: number
   updated_at: string
 }
-
-export interface MetaKanbanBoards {
-  id: number
-  name: string
-}
 export interface KanbanColumn {
   column: KanbanColumnItem
   tasks: KanbanTask[]
