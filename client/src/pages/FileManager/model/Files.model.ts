@@ -35,9 +35,9 @@ class FilesModel {
     console.log('deleteFile request', id)
   }
 
-  deleteTag(id: number) {
-    console.log('deleteTag request', id)
-  }
+  // deleteTag(id: number) {
+  //   console.log('deleteTag request', id)
+  // }
 
   async fetch({ hidden = false }: { hidden?: boolean }) {
     try {
@@ -74,6 +74,15 @@ class FilesModel {
   async deleteFolder({ id }: { id: number }) {
     try {
       await API.fileManager.deleteFolder(id)
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async deleteTag( id: number ) {
+    try {
+      await API.fileManager.deleteTag(id)
       this.fetch({})
     } catch (err: any) {
       toast.error(err)

@@ -29,9 +29,8 @@ interface Props {
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function deleteTag(id: number) {
-    throw new Error('Function not implemented.')
+    FilesModel.deleteTag(id)
   }
 
   return (
