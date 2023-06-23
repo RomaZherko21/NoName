@@ -4,8 +4,7 @@ import fetch from './fetch'
 
 const ENDPOINT_BASE = '/kanban'
 
-export const getBoards = async () =>
-  await fetch.get<KanbanBoard[]>(`${ENDPOINT_BASE}/boards`)
+export const getBoards = async () => await fetch.get<KanbanBoard[]>(`${ENDPOINT_BASE}/boards`)
 
 export const getColumns = async (id: number) =>
   await fetch.get<KanbanColumn[]>(`${ENDPOINT_BASE}/boards/${id}/columns`)
