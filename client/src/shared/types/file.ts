@@ -18,4 +18,5 @@ export interface Folder {
   memory_used: string
   assignee_to: string[]
   tags: string[]
+  tag: string
 }

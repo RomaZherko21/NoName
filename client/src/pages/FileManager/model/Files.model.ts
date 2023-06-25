@@ -80,7 +80,7 @@ class FilesModel {
     }
   }
 
-  async deleteTag( id: number ) {
+  async deleteTag(id: number) {
     try {
       await API.fileManager.deleteTag(id)
       this.fetch({})
@@ -103,6 +103,16 @@ class FilesModel {
       toast.error(err)
     } finally {
       this.loading.end()
+    }
+  }
+
+  async createTag(tag: string) {
+    try {
+      await API.fileManager.createTag('bbb')
+
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
     }
   }
 }
