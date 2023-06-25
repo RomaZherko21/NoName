@@ -106,6 +106,7 @@ class FilesModel {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async createTag(tag: string) {
     try {
       await API.fileManager.createTag('bbb')
