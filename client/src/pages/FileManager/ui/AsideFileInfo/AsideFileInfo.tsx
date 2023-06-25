@@ -108,7 +108,7 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                   <Typography variant="caption">{t('file:createdBy')}</Typography>
                 </Grid>
                 <Grid xs={8}>
-                  <Avatar sx={{ width: 28, height: 28 }}></Avatar>
+                  <Avatar sx={{ width: 28, height: 28 }}> </Avatar>
                 </Grid>
               </Grid>
 
@@ -172,7 +172,11 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                     />
                   ))}
                   <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
-                    <AiOutlinePlus />
+                    <AiOutlinePlus
+                      onClick={() => {
+                        FilesModel.createTag('tag: string')
+                      }}
+                    />
                   </IconButton>
                 </Grid>
               </Grid>
