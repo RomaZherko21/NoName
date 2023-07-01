@@ -29,10 +29,6 @@ interface Props {
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
 
-  function deleteTag(id: number) {
-    FilesModel.deleteTag(id)
-  }
-
   return (
     <Drawer
       anchor="right"
@@ -108,7 +104,10 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                   <Typography variant="caption">{t('file:createdBy')}</Typography>
                 </Grid>
                 <Grid xs={8}>
-                  <Avatar sx={{ width: 28, height: 28 }}> </Avatar>
+                  <Avatar
+                    sx={{ width: 28, height: 28 }}
+                    src={`${API_USER_AVATAR_URL}/${FilesModel.folder?.created_by}`}
+                  ></Avatar>
                 </Grid>
               </Grid>
 
@@ -158,12 +157,12 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                     alignItems: 'center'
                   }}
                 >
-                  {FilesModel.folder?.tags?.map((tag, id) => (
+                  {FilesModel.folder?.tags?.map((tag, tagId) => (
                     <Chip
                       key={tag}
                       label={tag}
                       onDelete={() => {
-                        deleteTag(id)
+                        if (FilesModel.folder?.id) FilesModel.deleteTag(FilesModel.folder.id, tagId)
                       }}
                       sx={{
                         height: 26,
@@ -212,7 +211,9 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                 </Grid>
                 <Grid xs={8}>
                   <IconButton
-                    onClick={() => {}}
+                    onClick={() => {
+                      // FilesModel.deleteFolder(id)
+                    }}
                     sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
                   >
                     <FiTrash />
