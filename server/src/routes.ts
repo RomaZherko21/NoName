@@ -62,16 +62,20 @@ import {
   updateKanbanTask,
 } from 'services/kanban'
 import {
+  addTagToFolder,
   createFolder,
   getFile,
   getFiles,
   getFolder,
   getFolders,
+  getFileManagerTags,
   removeFile,
   removeFolder,
+  removeFolderTag,
   updateFile,
   updateFolder,
   uploadFile,
+  createFileManagerTag,
 } from 'services/fileManager'
 import { FILE_MANAGER_FOLDER, POST_FOLDER, ROUTES, USER_AVATAR_FOLDER } from 'shared/consts'
 import { usePermission } from 'middlewares'
@@ -206,5 +210,10 @@ router.get(`/${folders}/:folder_id`, getFolder)
 router.post(`/${folders}`, createFolder)
 router.put(`/${folders}/:folder_id`, updateFolder)
 router.delete(`/${folders}/:folder_id`, removeFolder)
+
+router.get(`/file-manager/tags`, getFileManagerTags)
+router.post(`/file-manager/tags`, createFileManagerTag)
+router.delete(`/${folders}/:folder_id/tags/:tag_id`, removeFolderTag)
+router.post(`/${folders}/:folder_id/tags/:tag_id`, addTagToFolder)
 
 export default router

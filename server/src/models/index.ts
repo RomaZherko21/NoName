@@ -12,6 +12,6 @@ export {
   KanbanAttachmentsModel,
 } from './kanban'
 
-export { FileModel, FolderModel } from './fileManager'
+export { FileModel, FolderModel, FolderTagModel } from './fileManager'
 
 import './join'
