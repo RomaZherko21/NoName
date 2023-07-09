@@ -44,6 +44,26 @@ export async function getFolder({ params }: Request, res: Response, next: NextFu
 
     const result: any = await repo.getFolderById({ folderId: Number(folder_id) })
 
+    const tags: any = await sequelize.query(
+      `
+      SELECT
+  ft.id as id,
+      ft.name as name
+  from
+      folder_tags as ft
+      JOIN m2m_folders_tags as m2m_fo_t on m2m_fo_t.folder_id = ${folder_id} AND m2m_fo_t.tag_id = ft.id;
+  `,
+      {
+        type: QueryTypes.SELECT,
+      }
+    )
+
+    console.log(tags)
+
+    result[0].tags = tags
+
+    console.log(result[0])
+    
     res.status(200).json(result[0])
   } catch (error: any) {
     next(createError(500, error.message))
