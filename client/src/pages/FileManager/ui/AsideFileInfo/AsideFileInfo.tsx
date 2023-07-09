@@ -159,13 +159,11 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                 >
                   {FilesModel.folder?.tags?.map((tag, tagId) => (
                     <Chip
-                      key={tagId}
-                      label={tag}
+                      key={tag}
+                      label={tag.name}
                       onDelete={() => {
                         if (FilesModel.folder?.id)
                           FilesModel.deleteTag(FilesModel.folder.id, tagId + 1)
-                        // if (FilesModel.folder?.id)
-                        //   FilesModel.fetchFolder({ id: FilesModel.folder.id })
                       }}
                       sx={{
                         height: 26,
