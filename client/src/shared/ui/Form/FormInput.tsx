@@ -10,9 +10,10 @@ interface Props {
   multiline?: boolean
   rows?: number
   icon?: JSX.Element
+  sx?: {}
 }
 
-const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
+const FormInput = ({ field, label, type, multiline = false, icon, rows = 0, sx }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<{
@@ -32,6 +33,7 @@ const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Pr
       helperText={touched[field] && errors[field]}
       multiline={multiline}
       rows={rows}
+      sx={sx}
       InputProps={
         icon && {
           startAdornment: <InputAdornment position="start">{icon}</InputAdornment>
