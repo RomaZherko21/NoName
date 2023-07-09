@@ -13,8 +13,11 @@ export const editFolder = async (id: number, folder: { name?: string }) =>
 
 export const deleteFolder = async (id: number) => await fetch.delete(`${ENDPOINT_BASE}/${id}`)
 
-export const deleteTag = async (foderId: number, id: number) =>
-  await fetch.delete(`${ENDPOINT_BASE}/${foderId}/tags/${id}`)
+export const getTagById = async (foderId: number, id: number) =>
+  await fetch.get<[]>(`${ENDPOINT_BASE}/${foderId}/tags/${id}`)
+
+export const deleteTag = async (foderId: number, tagId: number) =>
+  await fetch.delete(`${ENDPOINT_BASE}/${foderId}/tags/${tagId}`)
 
 export const createTag = async (foderId: number, id: number, tag: string) =>
   await fetch.post(`${ENDPOINT_BASE}/${foderId}/tags/${id}`, tag)

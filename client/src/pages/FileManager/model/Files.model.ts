@@ -80,9 +80,11 @@ class FilesModel {
     }
   }
 
-  async deleteTag(foderId: number, id: number) {
+  async deleteTag(folderId: number, tagId: number) {
     try {
-      await API.fileManager.deleteTag(foderId, id)
+      await API.fileManager.deleteTag(folderId, tagId)
+
+      this.fetchFolder({ id: folderId })
       this.fetch({})
     } catch (err: any) {
       toast.error(err)
