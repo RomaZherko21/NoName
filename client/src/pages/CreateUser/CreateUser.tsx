@@ -116,14 +116,7 @@ function CreateUser() {
                         <FormPhoneNumber label="fields.phone" field="tel_number" />
                       </Grid>
                       <Grid item xs={12}>
-                        {/* !!!!!!!!!!!!!!                   */}
-                        <InputField
-                          type="email"
-                          field="email"
-                          label="user:email"
-                          // sx={{ background: (theme: any) => theme.palette.secondary.dark }}
-                          // sx={{ background: (theme: any) => theme.palette.secondary.dark }}
-                        />
+                        <InputField type="email" field="email" label="user:email" />
                       </Grid>
                     </Grid>
                   </Grid>

@@ -12,6 +12,7 @@ interface Props {
   label: string
   field: string
   dateFormat?: string
+  sx?: {}
 }
 
 function FormDatePicker(props: Props) {

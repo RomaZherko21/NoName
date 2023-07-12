@@ -71,6 +71,12 @@ const lightTheme = {
   components: {
     MuiOutlinedInput: {
       styleOverrides: {
+        input: {
+          '-webkit-text-fill-color': '#111827',
+          '-webkit-box-shadow': '0 0 0px 1000px linear-gradient(65.7deg, -67.89%, 125.28%) inset',
+          transition: 'background-color 5000s ease-in-out 0s'
+        },
+
         notchedOutline: {
           borderColor: '#D1D5DB'
         }
