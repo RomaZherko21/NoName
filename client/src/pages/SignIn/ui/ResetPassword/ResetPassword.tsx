@@ -8,9 +8,8 @@ import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
-import { ForgotPassword } from './ui'
 
-import s from './Styles.module.scss'
+import s from '../../Styles.module.scss'
 
 function SignIn() {
   const { t } = useTranslation()
@@ -102,7 +101,6 @@ function SignIn() {
           </Alert>
         </Box>
       </Container>
-      <ForgotPassword />
     </Box>
   )
 }

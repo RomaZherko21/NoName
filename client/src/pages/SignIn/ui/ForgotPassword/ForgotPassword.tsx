@@ -2,23 +2,27 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box, Alert } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
-import { emailValidation, passwordValidation } from 'shared/validations'
+import { emailValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
-import { ForgotPassword } from './ui'
 
-import s from './Styles.module.scss'
+import s from '../../Styles.module.scss'
+import { useState } from 'react'
 
-function SignIn() {
+// interface Props {
+//   setOpenForgotPassword: () => void
+// }
+
+function ForgotPassword() {
+  const [openForgotPassword, setOpenForgotPassword] = useState(false)
   const { t } = useTranslation()
   const { authorization } = useRootStore()
 
   const validationSchema = yup.object().shape({
-    email: emailValidation(),
-    password: passwordValidation()
+    email: emailValidation()
   })
 
   return (
@@ -51,11 +55,11 @@ function SignIn() {
             }}
           >
             <Box mb={3}>
-              <Typography variant="h5">{t('actions.signIn')}</Typography>
-              <Typography color="text.secondary" variant="body2">
+              <Typography variant="h5">{t('actions.forgotPassword')}</Typography>
+              {/* <Typography color="text.secondary" variant="body2">
                 {t('user:dontHaveAccount')}
                 <Button color="primary">{t('actions.register')}</Button>
-              </Typography>
+              </Typography> */}
             </Box>
             <Formik
               initialValues={{
@@ -71,40 +75,19 @@ function SignIn() {
                 <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                   <Stack justifyContent="center" spacing={2}>
                     <InputField field="email" label="user:email" />
-                    <InputField field="password" label="user:password" type="password" />
+                    {/* <InputField field="password" label="user:password" type="password" /> */}
                     <Button color="primary" variant="contained" type="submit">
-                      {t('actions.signIn')}
+                      {t('actions.sendResetLink')}
                     </Button>
                   </Stack>
                 </form>
               )}
             </Formik>
-            <Paper
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                p: 0
-              }}
-            >
-              <Button color="primary" sx={{ mt: 1, mr: 1 }}>
-                {t('actions.forgotPassword')}
-              </Button>
-              <Button color="primary" sx={{ mt: 1 }}>
-                {t('actions.resetPassword')}
-              </Button>
-            </Paper>
           </Paper>
-
-          <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
-            <strong>&quot;qwerqwer&quot;</strong>
-          </Alert>
         </Box>
       </Container>
-      <ForgotPassword />
     </Box>
   )
 }
 
-export default observer(SignIn)
+export default observer(ForgotPassword)
