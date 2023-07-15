@@ -9,6 +9,7 @@ import { API } from 'services'
 class FilesModel {
   files: File[] = []
   folders: Folder[] = []
+  tags: { id: number; name: string }[] = []
 
   folder?: Folder
 
@@ -108,14 +109,29 @@ class FilesModel {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async createTag(tag: string) {
+  async createTag(folderId: number, tagId: number, tag: any) {
     try {
-      await API.fileManager.createTag(1, 1, 'bbb')
+      await API.fileManager.createTag(folderId, tagId, tag)
 
       this.fetch({})
     } catch (err: any) {
       toast.error(err)
+    }
+  }
+
+  async fetchTags({ hidden = false }: { id: number; hidden?: boolean }) {
+    try {
+      if (!hidden) {
+        this.loading.begin()
+      }
+
+      const data = await API.fileManager.getTags()
+
+      this.tags = data
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
     }
   }
 }

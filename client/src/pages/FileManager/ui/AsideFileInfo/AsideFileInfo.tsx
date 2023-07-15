@@ -18,8 +18,10 @@ import { FiTrash } from 'react-icons/fi'
 import { FilesModel } from 'pages/FileManager/model'
 import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
-import { EditableInput, Spinner } from 'shared/ui'
+import { EditableInput, PopupMenu, Spinner } from 'shared/ui'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
+import { useMemo } from 'react'
+import { getTagsPopupConfig } from '../TagsPopupConfig'
 
 interface Props {
   openFileInfo: boolean
@@ -28,6 +30,8 @@ interface Props {
 
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
+
+  const popupConfig = useMemo(() => getTagsPopupConfig(), [])
 
   return (
     <Drawer
@@ -157,13 +161,13 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                     alignItems: 'center'
                   }}
                 >
-                  {FilesModel.folder?.tags?.map((tag, tagId) => (
+                  {FilesModel.folder?.tags?.map((tag) => (
                     <Chip
-                      key={tag}
+                      key={tag.name}
                       label={tag.name}
                       onDelete={() => {
                         if (FilesModel.folder?.id)
-                          FilesModel.deleteTag(FilesModel.folder.id, tagId + 1)
+                          FilesModel.deleteTag(FilesModel.folder.id, tag.id)
                       }}
                       sx={{
                         height: 26,
@@ -171,13 +175,21 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                       }}
                     />
                   ))}
-                  <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
-                    <AiOutlinePlus
-                      onClick={() => {
-                        FilesModel.createTag('tag: string')
-                      }}
-                    />
-                  </IconButton>
+                  <PopupMenu
+                    ActionButton={(btnProps) => (
+                      <IconButton
+                        {...btnProps}
+                        sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
+                      >
+                        <AiOutlinePlus
+                        // onClick={() => {
+                        //   FilesModel.createTag('tag: string')
+                        // }}
+                        />
+                      </IconButton>
+                    )}
+                    config={popupConfig}
+                  />
                 </Grid>
               </Grid>
 

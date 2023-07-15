@@ -19,5 +19,7 @@ export const getTagById = async (foderId: number, id: number) =>
 export const deleteTag = async (foderId: number, tagId: number) =>
   await fetch.delete(`${ENDPOINT_BASE}/${foderId}/tags/${tagId}`)
 
-export const createTag = async (foderId: number, id: number, tag: string) =>
-  await fetch.post(`${ENDPOINT_BASE}/${foderId}/tags/${id}`, tag)
+export const createTag = async (foderId: number, tagId: number, tag: string) =>
+  await fetch.post(`${ENDPOINT_BASE}/${foderId}/tags/${tagId}`, tag)
+
+export const getTags = async () => await fetch.get<[]>(`/file-manager/tags`)

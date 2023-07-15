@@ -18,6 +18,6 @@ export interface Folder {
   files_count: number
   memory_used: string
   assignee_to: string[]
-  tags: any[]
-  // tag: {}
+  tags: { id: number; name: string }[]
+  tag: {}
 }
