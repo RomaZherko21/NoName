@@ -3,18 +3,21 @@ import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Button, Container, Paper, Stack, Typography, Box, Alert } from '@mui/material'
+import { useState } from 'react'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
-import { ForgotPassword } from './ui'
+import { ForgotPassword, ResetPassword } from './ui'
 
 import s from './Styles.module.scss'
 
 function SignIn() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
+  const [openForgotPassword, setOpenForgotPassword] = useState(false)
+  const [openResetPassword, setOpenResetPassword] = useState(false)
 
   const validationSchema = yup.object().shape({
     email: emailValidation(),
@@ -87,10 +90,14 @@ function SignIn() {
                 p: 0
               }}
             >
-              <Button color="primary" sx={{ mt: 1, mr: 1 }}>
+              <Button
+                onClick={() => setOpenForgotPassword(true)}
+                color="primary"
+                sx={{ mt: 1, mr: 1 }}
+              >
                 {t('actions.forgotPassword')}
               </Button>
-              <Button color="primary" sx={{ mt: 1 }}>
+              <Button onClick={() => setOpenResetPassword(true)} color="primary" sx={{ mt: 1 }}>
                 {t('actions.resetPassword')}
               </Button>
             </Paper>
@@ -102,7 +109,20 @@ function SignIn() {
           </Alert>
         </Box>
       </Container>
-      <ForgotPassword />
+      <ForgotPassword
+        openForgotPassword={openForgotPassword}
+        setOpenForgotPassword={() => {
+          setOpenForgotPassword(false)
+        }}
+        // setActiveForgotPassword={setOpenForgotPassword}
+      />
+
+      <ResetPassword
+        openResetPassword={openResetPassword}
+        setOpenResetPassword={() => {
+          setOpenResetPassword(false)
+        }}
+      />
     </Box>
   )
 }
