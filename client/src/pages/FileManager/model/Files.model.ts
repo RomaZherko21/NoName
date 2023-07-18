@@ -109,24 +109,18 @@ class FilesModel {
     }
   }
 
-  async createTag(folderId: number, tagId: number, tag: any) {
+  async createTag(folderId: number, tagId: number) {
     try {
-      await API.fileManager.createTag(folderId, tagId, tag)
-
-      this.fetch({})
+      await API.fileManager.createTag(folderId, tagId)
+      if (this.folder) await this.fetchFolder({ id: this.folder.id })
     } catch (err: any) {
       toast.error(err)
     }
   }
 
-  async fetchTags({ hidden = false }: { id: number; hidden?: boolean }) {
+  async fetchTags() {
     try {
-      if (!hidden) {
-        this.loading.begin()
-      }
-
       const data = await API.fileManager.getTags()
-
       this.tags = data
     } catch (err: any) {
       toast.error(err)
