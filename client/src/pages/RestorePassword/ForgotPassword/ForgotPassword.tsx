@@ -2,29 +2,30 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-// import { Link } from 'react-router-dom'
-import { Button, Container, Paper, Stack, Typography, Box, Alert, Link } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
-import { emailValidation, passwordValidation } from 'shared/validations'
+import { emailValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import s from './Styles.module.scss'
-import { ROUTES } from 'shared/consts'
 
-function SignIn() {
+// interface Props {
+//   openForgotPassword: boolean
+//   setOpenForgotPassword: () => void
+// }
+
+function ForgotPassword() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
-  // const [openForgotPassword, setOpenForgotPassword] = useState(false)
-  // const [openResetPassword, setOpenResetPassword] = useState(false)
 
   const validationSchema = yup.object().shape({
-    email: emailValidation(),
-    password: passwordValidation()
+    email: emailValidation()
   })
 
   return (
+    // <Drawer anchor="top" open={openForgotPassword} onClose={setOpenForgotPassword}>
     <Box
       sx={{
         background: ({ palette }) =>
@@ -42,7 +43,6 @@ function SignIn() {
         }}
       >
         <img src={logo} className={s.logo} alt="Logo" />
-
         <Box>
           <Paper
             elevation={16}
@@ -54,11 +54,11 @@ function SignIn() {
             }}
           >
             <Box mb={3}>
-              <Typography variant="h5">{t('actions.signIn')}</Typography>
-              <Typography color="text.secondary" variant="body2">
+              <Typography variant="h5">{t('actions.forgotPassword')}</Typography>
+              {/* <Typography color="text.secondary" variant="body2">
                 {t('user:dontHaveAccount')}
                 <Button color="primary">{t('actions.register')}</Button>
-              </Typography>
+              </Typography> */}
             </Box>
             <Formik
               initialValues={{
@@ -74,61 +74,20 @@ function SignIn() {
                 <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                   <Stack justifyContent="center" spacing={2}>
                     <InputField field="email" label="user:email" />
-                    <InputField field="password" label="user:password" type="password" />
+                    {/* <InputField field="password" label="user:password" type="password" /> */}
                     <Button color="primary" variant="contained" type="submit">
-                      {t('actions.signIn')}
+                      {t('actions.sendResetLink')}
                     </Button>
                   </Stack>
                 </form>
               )}
             </Formik>
-            {/* <Paper
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                p: 1
-              }}
-            > */}
-
-            {/* <Typography
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                pt: 2
-              }}
-              color="text.secondary"
-              variant="body2"
-            > */}
-            {/* <MuiLink
-              component={Link}
-              to={ROUTES.FORGOTPASSWORD}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                pt: 2
-              }}
-              color="text.secondary"
-              variant="body2"
-            >
-              {t('actions.forgotPassword')}
-            </MuiLink> */}
-            <Link href={ROUTES.FORGOTPASSWORD} underline="hover">
-              {t('actions.forgotPassword')}
-            </Link>
-            {/* </Typography> */}
           </Paper>
-
-          <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
-            <strong>&quot;qwerqwer&quot;</strong>
-          </Alert>
         </Box>
       </Container>
     </Box>
+    // </Drawer>
   )
 }
 
-export default observer(SignIn)
+export default observer(ForgotPassword)

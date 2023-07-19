@@ -21,15 +21,20 @@ import {
   Chat,
   Kanban,
   Home,
-  Contact
+  Contact,
+  ForgotPassword
+  // RestorePassword
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 import { Layout } from './Layout'
+import { ResetPassword } from 'pages/RestorePassword'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+      <Route path={ROUTES.RESETPASSWORD} element={<ResetPassword />} />
       <Route path={ROUTES.HOME} element={<Home />} />
 
       <Route path={ROUTES.CONTACT} element={<Contact />} />
@@ -61,6 +66,7 @@ const router = createBrowserRouter(
         <Route path={ROUTES.KANBAN} element={<Kanban />} />
 
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+
         {/* <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} /> */}
         <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
       </Route>
