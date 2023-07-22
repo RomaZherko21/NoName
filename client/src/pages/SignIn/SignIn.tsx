@@ -2,22 +2,19 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-// import { Link } from 'react-router-dom'
 import { Button, Container, Paper, Stack, Typography, Box, Alert, Link } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
+import { ROUTES } from 'shared/consts'
 
 import s from './Styles.module.scss'
-import { ROUTES } from 'shared/consts'
 
 function SignIn() {
   const { t } = useTranslation()
   const { authorization } = useRootStore()
-  // const [openForgotPassword, setOpenForgotPassword] = useState(false)
-  // const [openResetPassword, setOpenResetPassword] = useState(false)
 
   const validationSchema = yup.object().shape({
     email: emailValidation(),
@@ -82,28 +79,7 @@ function SignIn() {
                 </form>
               )}
             </Formik>
-            {/* <Paper
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                p: 1
-              }}
-            > */}
-
-            {/* <Typography
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                minWidth: 550,
-                pt: 2
-              }}
-              color="text.secondary"
-              variant="body2"
-            > */}
-            {/* <MuiLink
-              component={Link}
-              to={ROUTES.FORGOTPASSWORD}
+            <Typography
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -113,12 +89,10 @@ function SignIn() {
               color="text.secondary"
               variant="body2"
             >
-              {t('actions.forgotPassword')}
-            </MuiLink> */}
-            <Link href={ROUTES.FORGOTPASSWORD} underline="hover">
-              {t('actions.forgotPassword')}
-            </Link>
-            {/* </Typography> */}
+              <Link href={ROUTES.FORGOT_PASSWORD} underline="hover">
+                {t('actions.forgotPassword')}
+              </Link>
+            </Typography>
           </Paper>
 
           <Alert severity="error" sx={{ mt: 2.5 }}>

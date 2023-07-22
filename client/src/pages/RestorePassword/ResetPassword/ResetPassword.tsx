@@ -2,19 +2,16 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box, Link } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { confirmPasswordValidation, emailValidation, passwordValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
+import { ROUTES } from 'shared/consts'
 
 import s from './Styles.module.scss'
-
-// interface Props {
-//   openResetPassword: boolean
-//   setOpenResetPassword: () => void
-// }
 
 function ResetPassword() {
   const { t } = useTranslation()
@@ -27,7 +24,6 @@ function ResetPassword() {
   })
 
   return (
-    // <Drawer anchor="top" open={openResetPassword} onClose={setOpenResetPassword}>
     <Box
       sx={{
         background: ({ palette }) =>
@@ -47,6 +43,15 @@ function ResetPassword() {
         <img src={logo} className={s.logo} alt="Logo" />
 
         <Box>
+          <Button
+            variant="text"
+            sx={{ mb: 2, color: ({ palette }) => `${palette.grey[100]}` }}
+            startIcon={<ArrowBackIcon />}
+          >
+            <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+              {t('actions.goBack')}
+            </Link>
+          </Button>
           <Paper
             elevation={16}
             sx={{
@@ -90,7 +95,6 @@ function ResetPassword() {
         </Box>
       </Container>
     </Box>
-    // </Drawer>
   )
 }
 

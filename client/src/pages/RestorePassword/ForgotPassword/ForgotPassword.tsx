@@ -2,19 +2,16 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box, Link } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
+import { ROUTES } from 'shared/consts'
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import s from './Styles.module.scss'
-
-// interface Props {
-//   openForgotPassword: boolean
-//   setOpenForgotPassword: () => void
-// }
 
 function ForgotPassword() {
   const { t } = useTranslation()
@@ -25,7 +22,6 @@ function ForgotPassword() {
   })
 
   return (
-    // <Drawer anchor="top" open={openForgotPassword} onClose={setOpenForgotPassword}>
     <Box
       sx={{
         background: ({ palette }) =>
@@ -44,6 +40,18 @@ function ForgotPassword() {
       >
         <img src={logo} className={s.logo} alt="Logo" />
         <Box>
+          <Button
+            variant="text"
+            sx={{
+              mb: 2,
+              color: ({ palette }) => `${palette.grey[100]}`
+            }}
+            startIcon={<ArrowBackIcon />}
+          >
+            <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+              {t('actions.goBack')}
+            </Link>
+          </Button>
           <Paper
             elevation={16}
             sx={{
@@ -55,10 +63,6 @@ function ForgotPassword() {
           >
             <Box mb={3}>
               <Typography variant="h5">{t('actions.forgotPassword')}</Typography>
-              {/* <Typography color="text.secondary" variant="body2">
-                {t('user:dontHaveAccount')}
-                <Button color="primary">{t('actions.register')}</Button>
-              </Typography> */}
             </Box>
             <Formik
               initialValues={{
@@ -74,9 +78,10 @@ function ForgotPassword() {
                 <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                   <Stack justifyContent="center" spacing={2}>
                     <InputField field="email" label="user:email" />
-                    {/* <InputField field="password" label="user:password" type="password" /> */}
                     <Button color="primary" variant="contained" type="submit">
-                      {t('actions.sendResetLink')}
+                      <Link href={ROUTES.RESET_PASSWORD} color="inherit" underline="none">
+                        {t('actions.sendResetLink')}
+                      </Link>
                     </Button>
                   </Stack>
                 </form>
@@ -86,7 +91,6 @@ function ForgotPassword() {
         </Box>
       </Container>
     </Box>
-    // </Drawer>
   )
 }
 

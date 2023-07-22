@@ -33,6 +33,7 @@ export const ROUTES = {
   HELP: '/help',
 
   CONTACT: '/contact',
-  FORGOT_PASSWORD: '/ForgotPassword',
-  RESETPASSWORD: '/RestorePassword/ResetPassword'
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+  SIGN_IN: '/sign-in'
 }

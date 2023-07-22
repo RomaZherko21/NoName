@@ -6,10 +6,9 @@ import { CssBaseline } from '@mui/material'
 
 import 'react-toastify/dist/ReactToastify.css'
 
-import { SignIn } from 'pages'
 import { useRootStore, RootStoreProvider } from 'stores'
 
-import Router from './Router'
+import { Router, SignInRouter } from './routes'
 import AppThemeProvider from './theme'
 
 configure({
@@ -34,7 +33,7 @@ function App() {
       <RootStoreProvider>
         <AppThemeProvider>
           <CssBaseline enableColorScheme />
-          {authorization.isAuthorized ? <Router /> : <SignIn />}
+          {authorization.isAuthorized ? <Router /> : <SignInRouter />}
         </AppThemeProvider>
       </RootStoreProvider>
     </React.StrictMode>
