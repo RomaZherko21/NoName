@@ -56,6 +56,7 @@ class FilesModel {
   }
 
   async fetchFolder({ id, hidden = false }: { id: number; hidden?: boolean }) {
+    console.log('sdsdsd')
     try {
       if (!hidden) {
         this.loading.begin()
@@ -79,6 +80,7 @@ class FilesModel {
       toast.error(err)
     }
   }
+
 
   async editFolderName(name: string) {
     try {
