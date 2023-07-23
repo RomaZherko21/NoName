@@ -2,8 +2,9 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box, Link } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Link } from 'react-router-dom'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
@@ -48,9 +49,12 @@ function ResetPassword() {
             sx={{ mb: 2, color: ({ palette }) => `${palette.grey[100]}` }}
             startIcon={<ArrowBackIcon />}
           >
-            <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+            <MuiLink component={Link} to={ROUTES.SIGN_IN}>
               {t('actions.goBack')}
-            </Link>
+            </MuiLink>
+            {/* <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+              {t('actions.goBack')}
+            </Link> */}
           </Button>
           <Paper
             elevation={16}

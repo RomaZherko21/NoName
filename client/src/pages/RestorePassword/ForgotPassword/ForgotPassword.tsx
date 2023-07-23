@@ -2,7 +2,7 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box, Link } from '@mui/material'
+import { Button, Container, Paper, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { ROUTES } from 'shared/consts'
@@ -12,6 +12,7 @@ import { emailValidation } from 'shared/validations'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import s from './Styles.module.scss'
+import { Link } from 'react-router-dom'
 
 function ForgotPassword() {
   const { t } = useTranslation()
@@ -48,9 +49,12 @@ function ForgotPassword() {
             }}
             startIcon={<ArrowBackIcon />}
           >
-            <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+            <MuiLink component={Link} to={ROUTES.SIGN_IN}>
               {t('actions.goBack')}
-            </Link>
+            </MuiLink>
+            {/* <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
+              {t('actions.goBack')}
+            </Link> */}
           </Button>
           <Paper
             elevation={16}
@@ -79,9 +83,18 @@ function ForgotPassword() {
                   <Stack justifyContent="center" spacing={2}>
                     <InputField field="email" label="user:email" />
                     <Button color="primary" variant="contained" type="submit">
-                      <Link href={ROUTES.RESET_PASSWORD} color="inherit" underline="none">
+                      <MuiLink
+                        component={Link}
+                        to={ROUTES.RESET_PASSWORD}
+                        underline="none"
+                        color="inherit"
+                      >
                         {t('actions.sendResetLink')}
-                      </Link>
+                      </MuiLink>
+
+                      {/* <Link href={ROUTES.RESET_PASSWORD} color="inherit" underline="none">
+                        {t('actions.sendResetLink')}
+                      </Link> */}
                     </Button>
                   </Stack>
                 </form>

@@ -2,7 +2,17 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box, Alert, Link } from '@mui/material'
+import { Link } from 'react-router-dom'
+import {
+  Button,
+  Container,
+  Paper,
+  Stack,
+  Typography,
+  Box,
+  Alert,
+  Link as MuiLink
+} from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
@@ -89,9 +99,12 @@ function SignIn() {
               color="text.secondary"
               variant="body2"
             >
-              <Link href={ROUTES.FORGOT_PASSWORD} underline="hover">
+              <MuiLink component={Link} to={ROUTES.FORGOT_PASSWORD}>
                 {t('actions.forgotPassword')}
-              </Link>
+              </MuiLink>
+              {/* <Link href={ROUTES.FORGOT_PASSWORD} underline="hover">
+                {t('actions.forgotPassword')}
+              </Link> */}
             </Typography>
           </Paper>
 
