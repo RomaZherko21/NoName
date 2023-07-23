@@ -31,7 +31,8 @@ interface Props {
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
 
-  const popupConfig = useMemo(() => getTagsPopupConfig(), [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const popupConfig = useMemo(() => getTagsPopupConfig(), [FilesModel.folder?.tags])
 
   return (
     <Drawer
