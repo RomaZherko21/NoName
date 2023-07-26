@@ -4,11 +4,13 @@ import { useSearchParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Button, Grid, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { HiOutlineUpload } from 'react-icons/hi'
+import { HiPlus } from 'react-icons/hi'
 import { MdOutlineGridView } from 'react-icons/md'
 import { BsListUl } from 'react-icons/bs'
 
 import { PageHeader } from 'widgets'
 import { AsideFiltersBar } from 'shared/ui'
+import { AddTag } from './ui/AddTag'
 
 import { FilesModel, sortConfig } from './model'
 import { FileItemCard, FileItemRow, Storage, AsideFileInfo } from './ui'
@@ -24,6 +26,7 @@ const FileManager = () => {
 
   const [view, setView] = useState<ViewType>(ViewType.card)
   const [openFileInfo, setOpenFileInfo] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const sortOptions = useMemo(() => sortConfig, [])
 
@@ -39,11 +42,23 @@ const FileManager = () => {
     }
   }, [])
 
+  function onAddTag() {
+    setIsOpenModal(true)
+  }
+
+
+
   return (
     <>
+    <AddTag open={isOpenModal} handleClose={() => {
+          setIsOpenModal(false)
+        }} />
       <PageHeader pageName={t('page:fileManager')} breadcrumbs={[{ text: 'page:fileManager' }]}>
         <Grid item>
-          <Button variant="contained" startIcon={<HiOutlineUpload />} sx={{ ml: 4 }} size="small">
+          <Button variant="contained" startIcon={<HiPlus />} sx={{ ml: 4 }} size="small" onClick={onAddTag}>
+            {t('actions.addTag')}
+          </Button>
+          <Button variant="contained" startIcon={<HiOutlineUpload />} sx={{ ml: 2}} size="small">
             {t('actions.upload')}
           </Button>
         </Grid>
