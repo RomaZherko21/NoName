@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
-import { useNavigate } from 'react-router-dom'
-import { Trans, useTranslation } from 'react-i18next'
-import { Button, Stack, Grid, TextField  } from '@mui/material'
+import { useState, useEffect } from "react"
+import { useTranslation } from 'react-i18next'
+import { Button, Stack, TextField  } from '@mui/material'
 
 import { Modal } from 'shared/ui'
 
@@ -11,20 +11,26 @@ interface Props {
   }
 
 function AddTag({ open, handleClose }: Props){
-
     const { t } = useTranslation()
 
-    return (
+    const [tagName, setTagName] = useState('')
 
-    <Modal
-      open={open}
-      handleClose={handleClose}
-    >
-      <Stack direction="row" spacing={3} sx={{ py: 3, px:3 }} >
-      <TextField label='Tag name' fullWidth id="fullWidth"/>
-        <Button size="small" onClick={()=>console.log()} variant="contained" color="primary">{t('actions.add')}</Button>
-      </Stack>
-    </Modal>
+    const logger = ()=>{
+        console.log(tagName)
+        setTagName('')
+    }
+
+    return (
+        <Modal
+        open={open}
+        handleClose={handleClose}
+        >
+            <Stack direction="row" spacing={3} sx={{ py: 3, px:3 }} >
+                <TextField value={tagName} label='Tag name' fullWidth onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setTagName(e.target.value); console.log('set');
+  }}/>
+                    <Button size="small" onClick={()=>tagName? logger() : null} variant="contained" color="primary">{t('actions.add')}</Button>
+            </Stack>
+        </Modal>
       )
 
 }
