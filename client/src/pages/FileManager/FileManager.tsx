@@ -29,9 +29,8 @@ const FileManager = () => {
 
   useEffect(() => {
     FilesModel.fetch({})
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [FilesModel.pagination.currentPage, FilesModel.pagination.limit, searchParams])
+    FilesModel.fetchTags()
+  }, [searchParams])
 
   useEffect(() => {
     return () => {

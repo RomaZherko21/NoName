@@ -19,6 +19,7 @@ interface Props {
     linkTo?: string
     onClick?: (args?: any) => void
     key?: string
+    disabled?: boolean
   }>
   ActionButton: (args: any) => JSX.Element
   id?: number
@@ -26,12 +27,7 @@ interface Props {
   sx?: any
 }
 
-const PopupMenu = ({
-  config,
-  ActionButton,
-  id,
-  selectCondition,
-}: Props) => {
+const PopupMenu = ({ config, ActionButton, id, selectCondition }: Props) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -41,6 +37,7 @@ const PopupMenu = ({
         activateElement={(_, handleOpen) => ActionButton({ onClick: handleOpen })}
         selfClosed
       >
+        {/* <ActionButton onClick={handleOpen}/>  */}
         <List sx={{ minWidth: 200, p: 0 }}>
           {config.map((item) => (
             <ListItem disablePadding key={item.text}>
@@ -52,6 +49,7 @@ const PopupMenu = ({
                     item.onClick?.(id)
                   }
                 }}
+                disabled={item.disabled}
                 sx={{ px: 1, py: 0.5 }}
               >
                 {item.Icon && <ListItemIcon sx={{ fontSize: 20 }}>{item.Icon}</ListItemIcon>}
