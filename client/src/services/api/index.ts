@@ -7,7 +7,8 @@ import * as genres from './genres'
 import * as security from './security'
 import * as kanban from './kanban'
 import * as chat from './chat'
-import * as fileManager from './fileManager/folder'
+import * as fileManagerFolder from './fileManager/folder'
+import * as fileManagerTags from './fileManager/tags'
 import * as meta from './meta'
 
 const API = {
@@ -20,7 +21,8 @@ const API = {
   security,
   kanban,
   chat,
-  fileManager,
+  fileManagerFolder,
+  fileManagerTags,
   meta
 }
 

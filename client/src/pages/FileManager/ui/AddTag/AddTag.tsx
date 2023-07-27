@@ -1,7 +1,9 @@
 import { observer } from "mobx-react-lite"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useTranslation } from 'react-i18next'
 import { Button, Stack, TextField  } from '@mui/material'
+import { FilesModel } from "../../model"
+
 
 import { Modal } from 'shared/ui'
 
@@ -14,9 +16,10 @@ function AddTag({ open, handleClose }: Props){
     const { t } = useTranslation()
 
     const [tagName, setTagName] = useState('')
+    const [error, setError] = useState(false)
 
-    const logger = ()=>{
-        console.log(tagName)
+    const createTag = ()=>{
+        FilesModel.addFolderTag(tagName, setError, handleClose)
         setTagName('')
     }
 
@@ -26,9 +29,16 @@ function AddTag({ open, handleClose }: Props){
         handleClose={handleClose}
         >
             <Stack direction="row" spacing={3} sx={{ py: 3, px:3 }} >
-                <TextField value={tagName} label='Tag name' fullWidth onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setTagName(e.target.value); console.log('set');
+                <TextField 
+                    value={error? 'Tag already exists' : tagName} 
+                    label='Tag name' 
+                    fullWidth 
+                    error={error}
+                    onFocus={()=>setError(false)}
+                    // helperText={error? 'Tag already exists' : null}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setTagName(e.target.value)
   }}/>
-                    <Button size="small" onClick={()=>tagName? logger() : null} variant="contained" color="primary">{t('actions.add')}</Button>
+                    <Button size="small" onClick={()=>tagName? createTag() : null} variant="contained" color="primary">{t('actions.add')}</Button>
             </Stack>
         </Modal>
       )

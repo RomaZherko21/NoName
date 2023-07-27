@@ -19,3 +19,8 @@ export interface Folder {
   assignee_to: string[]
   tags: string[]
 }
+
+export interface Tag {
+  id: number
+  name: string
+}

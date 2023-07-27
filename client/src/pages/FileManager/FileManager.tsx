@@ -50,7 +50,7 @@ const FileManager = () => {
 
   return (
     <>
-    <AddTag open={isOpenModal} handleClose={() => {
+      <AddTag open={isOpenModal} handleClose={() => {
           setIsOpenModal(false)
         }} />
       <PageHeader pageName={t('page:fileManager')} breadcrumbs={[{ text: 'page:fileManager' }]}>
