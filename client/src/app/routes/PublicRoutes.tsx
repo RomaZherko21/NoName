@@ -6,12 +6,13 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import { ForgotPassword, ResetPassword, SignIn } from 'pages'
+import { ForgotPassword, Home, ResetPassword, SignIn } from 'pages'
 import { ROUTES } from 'shared/consts'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path={ROUTES.HOME} element={<Home />} />
       <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={ROUTES.RESET_PASSWORD} element={<ResetPassword />} />
       <Route path="/" element={<SignIn />} />

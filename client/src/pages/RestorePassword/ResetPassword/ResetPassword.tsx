@@ -2,7 +2,16 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Container, Paper, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
+import {
+  Button,
+  Container,
+  Paper,
+  Stack,
+  Typography,
+  Box,
+  Link as MuiLink,
+  Alert
+} from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link } from 'react-router-dom'
 
@@ -52,9 +61,6 @@ function ResetPassword() {
             <MuiLink component={Link} to={ROUTES.SIGN_IN}>
               {t('actions.goBack')}
             </MuiLink>
-            {/* <Link href={ROUTES.SIGN_IN} color="inherit" underline="hover">
-              {t('actions.goBack')}
-            </Link> */}
           </Button>
           <Paper
             elevation={16}
@@ -96,6 +102,10 @@ function ResetPassword() {
               )}
             </Formik>
           </Paper>
+          <Alert severity="error" sx={{ mt: 2.5 }}>
+            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
+            <strong>&quot;qwerqwer&quot;</strong>
+          </Alert>
         </Box>
       </Container>
     </Box>

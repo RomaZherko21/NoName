@@ -1,2 +1,2 @@
-export { default as Router } from './Router'
-export { default as SignInRouter } from './SignInRouter'
+export { default as Router } from './PrivateRoutes'
+export { default as SignInRouter } from './PublicRoutes'

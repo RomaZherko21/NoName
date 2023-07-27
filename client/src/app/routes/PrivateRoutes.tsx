@@ -20,7 +20,6 @@ import {
   FileManager,
   Chat,
   Kanban,
-  Home,
   Contact,
   SignIn
 } from 'pages'
@@ -31,8 +30,6 @@ import { Layout } from '../Layout'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={ROUTES.HOME} element={<Home />} />
-
       <Route path={ROUTES.CONTACT} element={<Contact />} />
 
       <Route path={ROUTES.DEFAULT} element={<Layout />}>

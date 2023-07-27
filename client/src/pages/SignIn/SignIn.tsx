@@ -60,7 +60,7 @@ function SignIn() {
               p: 3
             }}
           >
-            <Box mb={3}>
+            {/* <Box mb={3}>
               <Typography variant="h5">{t('actions.signIn')}</Typography>
               <Typography color="text.secondary" variant="body2">
                 {t('user:dontHaveAccount')}
@@ -102,10 +102,7 @@ function SignIn() {
               <MuiLink component={Link} to={ROUTES.FORGOT_PASSWORD}>
                 {t('actions.forgotPassword')}
               </MuiLink>
-              {/* <Link href={ROUTES.FORGOT_PASSWORD} underline="hover">
-                {t('actions.forgotPassword')}
-              </Link> */}
-            </Typography>
+            </Typography> */}
           </Paper>
 
           <Alert severity="error" sx={{ mt: 2.5 }}>
