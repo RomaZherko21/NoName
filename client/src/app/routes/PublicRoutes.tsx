@@ -21,8 +21,8 @@ const router = createBrowserRouter(
   )
 )
 
-function SignInRouter() {
+function PublicRoutes() {
   return <RouterProvider router={router} />
 }
 
-export default observer(SignInRouter)
+export default observer(PublicRoutes)

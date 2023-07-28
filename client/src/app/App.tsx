@@ -10,6 +10,7 @@ import { useRootStore, RootStoreProvider } from 'stores'
 
 import { Router, SignInRouter } from './routes'
 import AppThemeProvider from './theme'
+import PublicRoutes from './routes/PublicRoutes'
 
 configure({
   reactionScheduler: (f) => setTimeout(f)
@@ -33,7 +34,7 @@ function App() {
       <RootStoreProvider>
         <AppThemeProvider>
           <CssBaseline enableColorScheme />
-          {authorization.isAuthorized ? <Router /> : <SignInRouter />}
+          {authorization.isAuthorized ? <Router /> : <PublicRoutes />}
         </AppThemeProvider>
       </RootStoreProvider>
     </React.StrictMode>
