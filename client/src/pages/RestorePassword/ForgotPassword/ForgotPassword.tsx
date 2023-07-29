@@ -2,15 +2,13 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Paper, Stack, Typography, Box, Link as MuiLink, Container } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Button, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import { ROUTES } from 'shared/consts'
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation } from 'shared/validations'
-
-import { Link } from 'react-router-dom'
 import { AuthWrapper } from 'pages/SignIn'
 
 function ForgotPassword() {
@@ -29,20 +27,7 @@ function ForgotPassword() {
         minWidth: 550
       }}
     >
-      <Button>www</Button>
       <AuthWrapper>
-        {/* <Button
-          variant="text"
-          sx={{
-            mb: 2,
-            color: ({ palette }) => `${palette.grey[100]}`
-          }}
-          startIcon={<ArrowBackIcon />}
-        >
-          <MuiLink component={Link} to={ROUTES.SIGN_IN}>
-            {t('actions.goBack')}
-          </MuiLink>
-        </Button> */}
         <Box>
           <Box mb={3}>
             <Typography variant="h5">{t('actions.forgotPassword')}</Typography>
@@ -61,7 +46,7 @@ function ForgotPassword() {
               <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                 <Stack justifyContent="center" spacing={2}>
                   <InputField field="email" label="user:email" />
-                  <Button color="primary" variant="contained" type="submit">
+                  <Button color="primary" variant="contained">
                     <MuiLink
                       component={Link}
                       to={ROUTES.RESET_PASSWORD}

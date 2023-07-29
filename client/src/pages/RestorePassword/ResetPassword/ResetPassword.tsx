@@ -2,15 +2,11 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Paper, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { Link } from 'react-router-dom'
+import { Button, Stack, Typography, Box } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { confirmPasswordValidation, emailValidation, passwordValidation } from 'shared/validations'
-import { ROUTES } from 'shared/consts'
-
 import { AuthWrapper } from 'pages/SignIn'
 
 function ResetPassword() {
@@ -25,16 +21,6 @@ function ResetPassword() {
 
   return (
     <AuthWrapper>
-      {/* <Button
-        variant="text"
-        sx={{ mb: 2, color: ({ palette }) => `${palette.grey[100]}` }}
-        startIcon={<ArrowBackIcon />}
-      >
-        <MuiLink component={Link} to={ROUTES.SIGN_IN}>
-          {t('actions.goBack')}
-        </MuiLink>
-      </Button> */}
-
       <Box mb={3}>
         <Typography variant="h5">{t('actions.resetPassword')}</Typography>
       </Box>

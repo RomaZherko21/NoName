@@ -3,25 +3,14 @@ import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  // Container,
-  // Paper,
-  Stack,
-  Typography,
-  Box,
-  // Alert,
-  Link as MuiLink
-} from '@mui/material'
+import { Button, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
 
 import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
-// import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 import { ROUTES } from 'shared/consts'
 
-// import s from './Styles.module.scss'
-import AuthWrapper from './AuthWrapper'
+import AuthWrapper from './ui/AuthWrapper'
 
 function SignIn() {
   const { t } = useTranslation()

@@ -3,7 +3,8 @@ import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider
+  RouterProvider,
+  Navigate
 } from 'react-router-dom'
 
 import { ForgotPassword, Home, ResetPassword, SignIn } from 'pages'
@@ -15,8 +16,8 @@ const router = createBrowserRouter(
       <Route path={ROUTES.HOME} element={<Home />} />
       <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={ROUTES.RESET_PASSWORD} element={<ResetPassword />} />
-      <Route path="/" element={<SignIn />} />
-      <Route path="*" element={<SignIn />} />
+      <Route path={ROUTES.SIGN_IN} element={<SignIn />} />
+      <Route path="*" element={<Navigate to={ROUTES.SIGN_IN} replace />} />
     </>
   )
 )

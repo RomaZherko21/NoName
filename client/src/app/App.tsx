@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { useRootStore, RootStoreProvider } from 'stores'
 
-import { Router, SignInRouter } from './routes'
+import { Router } from './routes'
 import AppThemeProvider from './theme'
 import PublicRoutes from './routes/PublicRoutes'
 
