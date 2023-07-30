@@ -12,12 +12,14 @@ export interface File {
 export interface Folder {
   id: number
   name: string
+  created_by: string
   created_at: string
   updated_at: string
   files_count: number
   memory_used: string
   assignee_to: string[]
-  tags: string[]
+  tags: { id: number; name: string }[]
+  tag: {}
 }
 
 export interface Tag {

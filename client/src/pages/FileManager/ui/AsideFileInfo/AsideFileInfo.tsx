@@ -18,8 +18,10 @@ import { FiTrash } from 'react-icons/fi'
 import { FilesModel } from 'pages/FileManager/model'
 import folderImg from 'shared/assets/images/fileFormat/folder.svg'
 import { fromTimestampToDate } from 'shared/helpers'
-import { EditableInput, Spinner } from 'shared/ui'
+import { EditableInput, PopupMenu, Spinner } from 'shared/ui'
 import { API_USER_AVATAR_URL, MB } from 'shared/consts'
+import { useMemo } from 'react'
+import { getTagsPopupConfig } from '../TagsPopupConfig'
 
 interface Props {
   openFileInfo: boolean
@@ -29,10 +31,8 @@ interface Props {
 const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
   const { t } = useTranslation()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function deleteTag(id: number) {
-    throw new Error('Function not implemented.')
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const popupConfig = useMemo(() => getTagsPopupConfig(), [FilesModel.folder?.tags])
 
   return (
     <Drawer
@@ -109,7 +109,10 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                   <Typography variant="caption">{t('file:createdBy')}</Typography>
                 </Grid>
                 <Grid xs={8}>
-                  <Avatar sx={{ width: 28, height: 28 }}></Avatar>
+                  <Avatar
+                    sx={{ width: 28, height: 28 }}
+                    src={`${API_USER_AVATAR_URL}/${FilesModel.folder?.created_by}`}
+                  ></Avatar>
                 </Grid>
               </Grid>
 
@@ -159,12 +162,13 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                     alignItems: 'center'
                   }}
                 >
-                  {FilesModel.folder?.tags?.map((tag, id) => (
+                  {FilesModel.folder?.tags?.map((tag) => (
                     <Chip
-                      key={tag}
-                      label={tag}
+                      key={tag.name}
+                      label={tag.name}
                       onDelete={() => {
-                        deleteTag(id)
+                        if (FilesModel.folder?.id)
+                          FilesModel.deleteTag(FilesModel.folder.id, tag.id)
                       }}
                       sx={{
                         height: 26,
@@ -172,9 +176,21 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                       }}
                     />
                   ))}
-                  <IconButton sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}>
-                    <AiOutlinePlus />
-                  </IconButton>
+                  <PopupMenu
+                    ActionButton={(btnProps) => (
+                      <IconButton
+                        {...btnProps}
+                        sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
+                      >
+                        <AiOutlinePlus
+                        // onClick={() => {
+                        //   FilesModel.createTag('tag: string')
+                        // }}
+                        />
+                      </IconButton>
+                    )}
+                    config={popupConfig}
+                  />
                 </Grid>
               </Grid>
 
@@ -209,7 +225,9 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                 </Grid>
                 <Grid xs={8}>
                   <IconButton
-                    onClick={() => {}}
+                    onClick={() => {
+                      // FilesModel.deleteFolder(id)
+                    }}
                     sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
                   >
                     <FiTrash />

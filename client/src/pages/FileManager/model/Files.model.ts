@@ -9,6 +9,7 @@ import { API } from 'services'
 class FilesModel {
   files: File[] = []
   folders: Folder[] = []
+  tags: { id: number; name: string }[] = []
 
   folder?: Folder
 
@@ -35,9 +36,9 @@ class FilesModel {
     console.log('deleteFile request', id)
   }
 
-  deleteTag(id: number) {
-    console.log('deleteTag request', id)
-  }
+  // deleteTag(id: number) {
+  //   console.log('deleteTag request', id)
+  // }
 
   async fetch({ hidden = false }: { hidden?: boolean }) {
     try {
@@ -80,6 +81,16 @@ class FilesModel {
     }
   }
 
+  async deleteTag(folderId: number, tagId: number) {
+    try {
+      await API.fileManager.deleteTag(folderId, tagId)
+
+      this.fetchFolder({ id: folderId })
+      this.fetch({})
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
 
   async editFolderName(name: string) {
     try {
@@ -114,6 +125,25 @@ class FilesModel {
         }
     } catch (err: any) {
       toast.error(err)
+    }
+  }
+  async createTag(folderId: number, tagId: number) {
+    try {
+      await API.fileManager.createTag(folderId, tagId)
+      if (this.folder) await this.fetchFolder({ id: this.folder.id })
+    } catch (err: any) {
+      toast.error(err)
+    }
+  }
+
+  async fetchTags() {
+    try {
+      const data = await API.fileManager.getTags()
+      this.tags = data
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.reset()
     }
   }
 }
