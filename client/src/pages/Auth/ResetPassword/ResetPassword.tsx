@@ -4,17 +4,14 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Button, Stack, Typography, Box } from '@mui/material'
 
-import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
-import { confirmPasswordValidation, emailValidation, passwordValidation } from 'shared/validations'
-import { AuthWrapper } from 'pages/SignIn'
+import { confirmPasswordValidation, passwordValidation } from 'shared/validations'
+import { AuthWrapper } from '../../../entities/AuthWrapper/index'
 
 function ResetPassword() {
   const { t } = useTranslation()
-  const { authorization } = useRootStore()
 
   const validationSchema = yup.object().shape({
-    email: emailValidation(),
     password: passwordValidation(),
     confirmPassword: confirmPasswordValidation()
   })
@@ -26,13 +23,13 @@ function ResetPassword() {
       </Box>
       <Formik
         initialValues={{
-          email: '',
+          // email: '',
           password: '',
           confirmPassword: ''
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          authorization.signIn(values)
+          console.log(values)
         }}
       >
         {({ handleSubmit }) => (

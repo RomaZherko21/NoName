@@ -1,16 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Container, Paper, Box, Alert, Button, Link as MuiLink } from '@mui/material'
+import { Container, Paper, Box, Alert, Button, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
-import s from './../Styles.module.scss'
+import s from './Styles.module.scss'
 
 function AuthWrapper({ children }: any) {
   let location = useLocation()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   return (
@@ -35,6 +36,9 @@ function AuthWrapper({ children }: any) {
         <Box>
           {location.pathname === ROUTES.FORGOT_PASSWORD && (
             <Button
+              onClick={() => {
+                navigate(ROUTES.SIGN_IN)
+              }}
               variant="text"
               sx={{
                 mb: 2,
@@ -42,13 +46,22 @@ function AuthWrapper({ children }: any) {
               }}
               startIcon={<ArrowBackIcon />}
             >
-              <MuiLink component={Link} to={ROUTES.SIGN_IN}>
+              <Typography
+                sx={{
+                  '&:hover': {
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 {t('actions.goBack')}
-              </MuiLink>
+              </Typography>
             </Button>
           )}
           {location.pathname === ROUTES.RESET_PASSWORD && (
             <Button
+              onClick={() => {
+                navigate(ROUTES.SIGN_IN)
+              }}
               variant="text"
               sx={{
                 mb: 2,
@@ -56,9 +69,15 @@ function AuthWrapper({ children }: any) {
               }}
               startIcon={<ArrowBackIcon />}
             >
-              <MuiLink component={Link} to={ROUTES.SIGN_IN}>
+              <Typography
+                sx={{
+                  '&:hover': {
+                    textDecoration: 'underline'
+                  }
+                }}
+              >
                 {t('actions.goBack')}
-              </MuiLink>
+              </Typography>
             </Button>
           )}
 

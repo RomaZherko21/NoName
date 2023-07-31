@@ -2,18 +2,17 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Button, Stack, Typography, Box, Link as MuiLink } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Button, Stack, Typography, Box } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from 'shared/consts'
-import { useRootStore } from 'stores'
 import { InputField } from 'shared/ui'
 import { emailValidation } from 'shared/validations'
-import { AuthWrapper } from 'pages/SignIn'
+import { AuthWrapper } from '../../../entities/AuthWrapper/index'
 
 function ForgotPassword() {
   const { t } = useTranslation()
-  const { authorization } = useRootStore()
+  const navigate = useNavigate()
 
   const validationSchema = yup.object().shape({
     email: emailValidation()
@@ -38,23 +37,16 @@ function ForgotPassword() {
               password: ''
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-              authorization.signIn(values)
+            onSubmit={() => {
+              navigate(ROUTES.RESET_PASSWORD)
             }}
           >
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                 <Stack justifyContent="center" spacing={2}>
-                  <InputField field="email" label="user:email" />
-                  <Button color="primary" variant="contained">
-                    <MuiLink
-                      component={Link}
-                      to={ROUTES.RESET_PASSWORD}
-                      underline="none"
-                      color="inherit"
-                    >
-                      {t('actions.sendResetLink')}
-                    </MuiLink>
+                  <InputField type="email" field="email" label="user:email" />
+                  <Button type="submit" color="primary" variant="contained">
+                    <Typography>{t('actions.sendResetLink')}</Typography>
                   </Button>
                 </Stack>
               </form>
