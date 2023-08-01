@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
+import { Formik } from 'formik'
 import {
   Button,
   CardContent,
@@ -17,11 +18,13 @@ import { BsFillLayersFill } from 'react-icons/bs'
 import { MdOutlineModeEditOutline } from 'react-icons/md'
 
 import { BillingStatus } from 'shared/types'
+import { InputField } from 'shared/ui'
 
 import { BillingModel } from './model'
 
 function Billing() {
   const { t } = useTranslation()
+  const [isEditActive, setIsEditActive] = useState(false)
   const SUBSCRIPTON_TYPES = useMemo(
     () => [
       {
@@ -100,52 +103,88 @@ function Billing() {
       <Divider variant="fullWidth" sx={{ mt: 3, mb: 3 }} />
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
         <Typography variant="h6">{t('user:billingDetails')}</Typography>
-        <Button startIcon={<MdOutlineModeEditOutline />} color="inherit">
-          {t('actions.edit')}
+        <Button startIcon={<MdOutlineModeEditOutline />} color="inherit" onClick={()=>setIsEditActive(!isEditActive)}>
+          {isEditActive ? t('actions.save'): t('actions.edit')}
         </Button>
       </Stack>
-      <List
-        sx={{
-          border: '1px solid #2d3748',
-          borderRadius: '8px',
-          mb: 2,
-          pt: 0,
-          pb: 0
-        }}
-      >
-        <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-          <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-            {t('user:billingName')}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            John Doe
-          </Typography>
-        </ListItem>
-        <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-          <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-            {t('user:cardNumber')}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            **** 1111
-          </Typography>
-        </ListItem>
-        <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-          <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-            {t('user:country')}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Germany
-          </Typography>
-        </ListItem>
-        <ListItem sx={{ gap: 5 }}>
-          <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-            {t('user:zipAndPostalCode')}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            667123
-          </Typography>
-        </ListItem>
-      </List>
+
+      <Formik initialValues={{
+        cardHolderName: 'name',
+        number: '**** 1111',
+        expiryDate: "04/2027",
+        cvv: 575
+
+      }}
+      onSubmit={(values)=>console.log(values)} >
+
+      {({handleSubmit})=>(
+        <form onSubmit={handleSubmit}>
+          <List
+            sx={{
+              border: '1px solid #2d3748',
+              borderRadius: '8px',
+              mb: 2,
+              pt: 0,
+              pb: 0
+            }}>
+              {isEditActive && (
+                <>
+                  <ListItem sx={{gap: 5} }>
+                    <InputField label='Card holder name' field='' size='small'/>
+                  </ListItem>
+                  <ListItem sx={{gap: 5 }}>
+                    <InputField label='Card number' field='' size='small'/>
+                  </ListItem>
+                  <ListItem sx={{gap: 5 }}>
+                    <InputField label='Expiry date' field='' size='small'/>
+                  </ListItem>
+                  <ListItem sx={{gap: 5 }}>
+                    <InputField label='CVV' field='' size='small'/>
+                  </ListItem>
+                </>
+              )}
+              {!isEditActive && (
+                <>
+                  <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
+                <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+                  {t('user:bankCard.cardHolderName')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  John Doe
+                </Typography>
+              </ListItem>
+              <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
+                <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+                  {t('user:bankCard.number')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  **** 1111
+                </Typography>
+              </ListItem>
+              <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
+                <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+                  {t('user:bankCard.expiryDate')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Germany
+                </Typography>
+              </ListItem>
+              <ListItem sx={{ gap: 5 }}>
+                <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
+                  {t('user:bankCard.cvv')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  667123
+                </Typography>
+              </ListItem>
+                </>
+              )}
+          </List>
+        </form>
+      )}
+
+      </Formik>
+
       <Stack direction="row" alignItems="center" sx={{ mb: 3 }}>
         <Typography variant="body2" color="text.secondary">
           We cannot refund once you purchased a subscription, but you can always
