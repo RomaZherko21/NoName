@@ -24,10 +24,10 @@ import { InputField } from 'shared/ui'
 import { BillingModel } from './model'
 import { getBillingConfig } from './getBillingConfig'
 
-function Billing(props: any) {
+function Billing() {
   const { t } = useTranslation()
   const [isEditActive, setIsEditActive] = useState(false)
-  useEffect(() => { BillingModel.getBilling() }, [])
+  useEffect(() => { BillingModel.getBilling() }, [isEditActive])
   // const billingConfig = useMemo(() => getBillingConfig(props), [props])
   const SUBSCRIPTON_TYPES = useMemo(
     () => [
@@ -50,9 +50,7 @@ function Billing(props: any) {
     [t]
   )
 
-  const logger = () => {
-    console.log(BillingModel.card_number)
-  }
+
 
   return (
     <Grid component={Paper} elevation={4} spacing={5} sx={{ p: 3 }}>
@@ -124,7 +122,7 @@ function Billing(props: any) {
 
       }}
         onSubmit={(values) => {
-
+          BillingModel.putBilling(values)
           console.log(values)
           toast.success(t('notification:success.updated'))
         }} >

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-import { BillingStatus } from 'shared/types'
+import { BillingStatus, CreditCard } from 'shared/types'
 import { API } from 'services'
 import { toast } from 'react-toastify'
 class BillingModel {
@@ -29,9 +29,9 @@ class BillingModel {
 
 
   }
-  async putBilling() {
+  async putBilling(user: CreditCard) {
     try {
-
+      await API.user.updateCardInfo(user)
     } catch (error) {
 
     }
