@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Formik } from 'formik'
+import { toast } from 'react-toastify'
 import {
   Button,
   CardContent,
@@ -50,7 +51,6 @@ function Billing(props: any) {
   )
 
   const logger = () => {
-    BillingModel.getBilling()
     console.log(BillingModel.card_number)
   }
 
@@ -117,13 +117,17 @@ function Billing(props: any) {
       </Stack>
 
       <Formik initialValues={{
-        cardHolderName: 'name',
-        number: '**** 1111',
-        expiryDate: "04/2027",
-        cvv: 575
+        card_number: BillingModel.card_number,
+        name_on_card: BillingModel.name_on_card,
+        valid_thru: BillingModel.valid_thru,
+        cvv: BillingModel.cvv
 
       }}
-        onSubmit={(values) => console.log(values)} >
+        onSubmit={(values) => {
+
+          console.log(values)
+          toast.success(t('notification:success.updated'))
+        }} >
 
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
@@ -138,16 +142,16 @@ function Billing(props: any) {
               {isEditActive && (
                 <>
                   <ListItem sx={{ gap: 5 }}>
-                    <InputField label='Card holder name' field='' size='small' />
+                    <InputField label='user:bankCard.cardHolderName' field='name_on_card' size='small' />
                   </ListItem>
                   <ListItem sx={{ gap: 5 }}>
-                    <InputField label='Card number' field='' size='small' />
+                    <InputField label='user:bankCard.number' field='card_number' size='small' />
                   </ListItem>
                   <ListItem sx={{ gap: 5 }}>
-                    <InputField label='Expiry date' field='' size='small' />
+                    <InputField label='user:bankCard.expiryDate' field='valid_thru' size='small' />
                   </ListItem>
                   <ListItem sx={{ gap: 5 }}>
-                    <InputField label='CVV' field='' size='small' />
+                    <InputField label='user:bankCard.cvv' field='cvv' size='small' />
                   </ListItem>
                 </>
               )}
@@ -185,6 +189,7 @@ function Billing(props: any) {
                   </Typography>
                 </ListItem>
               </>)}
+              <Button type='submit'>TUC</Button>
             </List>
           </form>
         )}
@@ -198,7 +203,7 @@ function Billing(props: any) {
         <Button>{t('user:actions.cancel')}</Button>
       </Stack>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button onClick={() => logger()} variant="contained">{t('user:actions.upgradePlan')}</Button>
+        <Button variant="contained">{t('user:actions.upgradePlan')}</Button>
       </Box>
     </Grid>
   )

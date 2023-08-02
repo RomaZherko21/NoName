@@ -3,7 +3,6 @@ import { makeAutoObservable } from 'mobx'
 import { BillingStatus } from 'shared/types'
 import { API } from 'services'
 import { toast } from 'react-toastify'
-
 class BillingModel {
   billingStatus = BillingStatus.startup
 
@@ -30,6 +29,14 @@ class BillingModel {
 
 
   }
+  async putBilling() {
+    try {
+
+    } catch (error) {
+
+    }
+  }
+
 }
 
 const model = new BillingModel()
