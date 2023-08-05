@@ -80,7 +80,7 @@ function CreatePost() {
               breadcrumbs={[{ text: 'page:posts' }, { text: 'page:sub.create' }]}
             />
 
-            <Grid component={Paper} container elevation={4} sx={{ p: 4 }}>
+            <Grid component={Paper} container elevation={4} sx={{ p: 1 }}>
               <Grid item md={4}>
                 <Typography variant="h6">{t('common.basicDetails')}</Typography>
               </Grid>

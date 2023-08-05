@@ -44,7 +44,7 @@ function UserBasicDetails({ user }: Props) {
       </List>
       <CardActions>
         <Button size="small" sx={{ color: ({ palette }) => palette.text.primary }}>
-          {t('actions.edit')}
+          {t('actions.edit')}qwe
         </Button>
       </CardActions>
     </Paper>

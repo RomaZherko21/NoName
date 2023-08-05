@@ -10,9 +10,10 @@ interface Props {
   multiline?: boolean
   rows?: number
   icon?: JSX.Element
+  size?: 'small' | 'medium'
 }
 
-const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Props) => {
+const FormInput = ({ field, label, type, multiline = false, icon, rows = 0, size }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<{
@@ -22,6 +23,7 @@ const FormInput = ({ field, label, type, multiline = false, icon, rows = 0 }: Pr
   return (
     <TextField
       fullWidth
+      size={size}
       id={field}
       name={field}
       label={t(label)}
