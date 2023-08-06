@@ -10,7 +10,7 @@ import { InputField } from 'shared/ui'
 import { emailValidation, passwordValidation } from 'shared/validations'
 import { ROUTES } from 'shared/consts'
 
-import AuthWrapper from '../../../entities/AuthWrapper/AuthWrapper'
+import AuthWrapper from '../ui/AuthWrapper/AuthWrapper'
 
 function SignIn() {
   const { t } = useTranslation()
