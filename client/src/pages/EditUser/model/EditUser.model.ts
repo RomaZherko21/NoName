@@ -12,7 +12,7 @@ class EditUserModel {
   middle_name: string = ''
 
   email: string = ''
-  role: Roles = Roles.user
+  role?: Roles = Roles.user
   date_of_birth?: string = ''
   tel_number?: string = ''
   gender?: Gender = Gender.man

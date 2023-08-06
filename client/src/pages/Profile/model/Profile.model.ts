@@ -1,7 +1,17 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
-import { Connection, ConnectionStatus, Gender, Roles, User, Post } from 'shared/types'
+import {
+  Connection,
+  ConnectionStatus,
+  Gender,
+  Roles,
+  User,
+  Post,
+  BasicUserInfo,
+  MetaUserInfo,
+  UserCredentials
+} from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
@@ -19,9 +29,9 @@ class ProfileModel {
   middle_name: string = ''
 
   email: string = ''
-  role: Roles = Roles.user
+  role?: Roles = Roles.user
   date_of_birth?: string = ''
-  tel_number?: string = ''
+  tel_number: string = ''
   gender?: Gender = Gender.man
   avatar?: string = ''
   job_title?: string = ''
@@ -179,6 +189,19 @@ class ProfileModel {
       this.loading.begin()
 
       await API.users.remove(this.id)
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
+
+  async editUserInfo(user: BasicUserInfo & MetaUserInfo & UserCredentials) {
+    try {
+      this.loading.begin()
+
+      await API.user.update(user)
+      // await this.fetch({})
     } catch (err: any) {
       toast.error(err)
     } finally {
