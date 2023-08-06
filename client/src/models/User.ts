@@ -23,7 +23,7 @@ class UserModel {
   date_of_birth: string = ''
   email: string = ''
   avatar: FileModel
-  role: Roles = Roles.user
+  role?: Roles = Roles.user
   job_title: string = ''
 
   native_country: string = ''

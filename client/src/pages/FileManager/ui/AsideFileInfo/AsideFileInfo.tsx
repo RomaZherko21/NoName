@@ -182,11 +182,7 @@ const AsideFileInfo = ({ openFileInfo, onCloseFileInfo }: Props) => {
                         {...btnProps}
                         sx={{ fontSize: 16, color: ({ palette }) => palette.grey[500] }}
                       >
-                        <AiOutlinePlus
-                        // onClick={() => {
-                        //   FilesModel.createTag('tag: string')
-                        // }}
-                        />
+                        <AiOutlinePlus />
                       </IconButton>
                     )}
                     config={popupConfig}

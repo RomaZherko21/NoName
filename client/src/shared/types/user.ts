@@ -12,8 +12,8 @@ export interface BasicUserInfo {
   surname: string
   middle_name: string
   email: string
-  tel_number?: string
-  role: Roles
+  tel_number: string
+  role?: Roles
 }
 
 export interface MetaUserInfo {
