@@ -109,21 +109,12 @@ class FilesModel {
     }
   }
 
-  async addFolderTag(name: string, setError: Function, handleClose: Function){
+  async addFolderTag(name: string) {
     try {
-
-      const allTags = await API.fileManagerTags.getTags()
-
-      const sameTag = Boolean(allTags.find((tag)=>tag.name === name))
-
-      if (sameTag) {
-          setError(true)
-        } else {
-      await API.fileManagerTags.addTag({name: name})
+      await API.fileManagerTags.addTag({ name: name })
       this.fetch({})
-         handleClose()
-        }
-    } catch (err: any) {
+    }
+    catch (err: any) {
       toast.error(err)
     }
   }
