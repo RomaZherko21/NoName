@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { Formik } from 'formik'
+import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import {
   Button,
@@ -13,13 +14,15 @@ import {
   Typography,
   Box,
   List,
-  ListItem
+  ListItem,
+  ListItemText
 } from '@mui/material'
 import { BsFillLayersFill } from 'react-icons/bs'
 import { MdOutlineModeEditOutline } from 'react-icons/md'
 
 import { BillingStatus } from 'shared/types'
 import { InputField } from 'shared/ui'
+import { commonStringValidation } from 'shared/validations'
 
 import { BillingModel } from './model'
 import { getBillingConfig } from './getBillingConfig'
@@ -27,8 +30,18 @@ import { getBillingConfig } from './getBillingConfig'
 function Billing() {
   const { t } = useTranslation()
   const [isEditActive, setIsEditActive] = useState(false)
-  useEffect(() => { BillingModel.getBilling() }, [isEditActive])
-  // const billingConfig = useMemo(() => getBillingConfig(props), [props])
+  useEffect(() => { BillingModel.fetch() }, [])
+  const billingConfig = getBillingConfig({ creditCardInfo: BillingModel.creditCardInfo })
+  const validationSchema = useMemo(
+    () =>
+      yup.object().shape({
+        name_on_card: commonStringValidation(t('user:bankCard.cardHolderName'), 3),
+        card_number: commonStringValidation(t('user:bankCard.number'), 16),
+        valid_thru: commonStringValidation(t('user:bankCard.expiryDate'), 4),
+        cvv: commonStringValidation(t('user:bankCard.cvv'), 3)
+      }),
+    [t]
+  )
   const SUBSCRIPTON_TYPES = useMemo(
     () => [
       {
@@ -49,8 +62,6 @@ function Billing() {
     ],
     [t]
   )
-
-
 
   return (
     <Grid component={Paper} elevation={4} spacing={5} sx={{ p: 3 }}>
@@ -107,28 +118,32 @@ function Billing() {
         ))}
       </Grid>
       <Divider variant="fullWidth" sx={{ mt: 3, mb: 3 }} />
-      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-        <Typography variant="h6">{t('user:billingDetails')}</Typography>
-        <Button startIcon={<MdOutlineModeEditOutline />} color="inherit" onClick={() => setIsEditActive(!isEditActive)}>
-          {isEditActive ? t('actions.save') : t('actions.edit')}
-        </Button>
-      </Stack>
+
 
       <Formik initialValues={{
-        card_number: BillingModel.card_number,
-        name_on_card: BillingModel.name_on_card,
-        valid_thru: BillingModel.valid_thru,
-        cvv: BillingModel.cvv
-
+        name_on_card: BillingModel.creditCardInfo.name_on_card,
+        card_number: BillingModel.creditCardInfo.card_number,
+        valid_thru: BillingModel.creditCardInfo.valid_thru,
+        cvv: BillingModel.creditCardInfo.cvv
       }}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
-          BillingModel.putBilling(values)
-          console.log(values)
-          toast.success(t('notification:success.updated'))
+          // setIsEditActive(!isEditActive)
+          console.log('submit')
+          if (!isEditActive) {
+            BillingModel.putBilling(values)
+            toast.success(t('notification:success.updated'))
+          }
         }} >
 
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
+              <Typography variant="h6">{t('user:billingDetails')}</Typography>
+              <Button type='submit' startIcon={<MdOutlineModeEditOutline />} color="inherit" onClick={() => { setIsEditActive(!isEditActive) }} >
+                {isEditActive ? t('actions.save') : t('actions.edit')}
+              </Button>
+            </Stack>
             <List
               sx={{
                 border: '1px solid #2d3748',
@@ -139,55 +154,74 @@ function Billing() {
               }}>
               {isEditActive && (
                 <>
-                  <ListItem sx={{ gap: 5 }}>
-                    <InputField label='user:bankCard.cardHolderName' field='name_on_card' size='small' />
+                  <ListItem sx={{ m: 0, pt: 0, pb: 0 }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2" sx={{ width: 180 }}>
+                          {t('user:bankCard.cardHolderName')}
+                        </Typography>
+                      }
+                      secondary={<InputField field="name_on_card" label="" size="small" />}
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    />
                   </ListItem>
-                  <ListItem sx={{ gap: 5 }}>
-                    <InputField label='user:bankCard.number' field='card_number' size='small' />
+                  <Divider />
+                  <ListItem sx={{ m: 0, pt: 0, pb: 0 }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2" sx={{ width: 180 }}>
+                          {t('user:bankCard.number')}
+                        </Typography>
+                      }
+                      secondary={<InputField field="card_number" label="" size="small" />}
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    />
                   </ListItem>
-                  <ListItem sx={{ gap: 5 }}>
-                    <InputField label='user:bankCard.expiryDate' field='valid_thru' size='small' />
+                  <Divider />
+                  <ListItem sx={{ m: 0, pt: 0, pb: 0 }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2" sx={{ width: 180 }}>
+                          {t('user:bankCard.expiryDate')}
+                        </Typography>
+                      }
+                      secondary={<InputField field="valid_thru" label="" size="small" />}
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    />
                   </ListItem>
-                  <ListItem sx={{ gap: 5 }}>
-                    <InputField label='user:bankCard.cvv' field='cvv' size='small' />
+                  <Divider />
+                  <ListItem sx={{ m: 0, pt: 0, pb: 0 }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2" sx={{ width: 180 }}>
+                          {t('user:bankCard.cvv')}
+                        </Typography>
+                      }
+                      secondary={<InputField field="cvv" label="" size="small" />}
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    />
                   </ListItem>
                 </>
               )}
-              {!isEditActive && (<>
-                <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-                  <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-                    {t('user:bankCard.cardHolderName')}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {BillingModel.name_on_card}
-                  </Typography>
-                </ListItem>
-                <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-                  <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-                    {t('user:bankCard.number')}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {BillingModel.card_number}
-                  </Typography>
-                </ListItem>
-                <ListItem sx={{ borderBottom: '1px solid #2d3748', gap: 5 }}>
-                  <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-                    {t('user:bankCard.expiryDate')}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {BillingModel.valid_thru}
-                  </Typography>
-                </ListItem>
-                <ListItem sx={{ gap: 5 }}>
-                  <Typography variant="subtitle2" sx={{ minWidth: '150px' }}>
-                    {t('user:bankCard.cvv')}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {BillingModel.cvv}
-                  </Typography>
-                </ListItem>
-              </>)}
-              <Button type='submit'>TUC</Button>
+              {!isEditActive && billingConfig.map((cardInfo) => (
+                <>
+                  <ListItem key={cardInfo.text} sx={{ m: 0 }}>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2" sx={{ width: 190 }}>
+                          {t(cardInfo.title)}
+                        </Typography>
+                      }
+                      secondary={
+                        <Typography variant="body2" color="text.secondary">
+                          {cardInfo.text}
+                        </Typography>
+                      }
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    />
+                  </ListItem>
+                  <Divider />
+                </>))}
             </List>
           </form>
         )}

@@ -1,20 +1,21 @@
+import { CreditCard } from "shared/types";
 
-export const getBillingConfig = ({ cardNumber, nameOnCard, validThru, cvv }: any) => [
-    {
-        title: 'user:bankCard.number',
-        text: cardNumber.replace(/(\d{4}(?!\s))/g, '$1 ')
-    },
+export const getBillingConfig = ({ creditCardInfo }: { creditCardInfo: CreditCard }) => [
     {
         title: 'user:bankCard.cardHolderName',
-        text: nameOnCard
+        text: creditCardInfo.name_on_card
+    },
+    {
+        title: 'user:bankCard.number',
+        text: creditCardInfo.card_number?.replace(/(\d{4}(?!\s))/g, '$1 ')
     },
     {
         title: 'user:bankCard.expiryDate',
-        text: validThru.split('/').join(' / ')
+        text: creditCardInfo.valid_thru?.split('/').join(' / ')
     },
 
     {
         title: 'user:bankCard.cvv',
-        text: cvv
+        text: creditCardInfo.cvv
     }
 ]
