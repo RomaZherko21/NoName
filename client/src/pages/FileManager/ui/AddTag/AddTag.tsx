@@ -42,13 +42,16 @@ function AddTag({ open, handleClose }: Props) {
                         }
                     }} />
             </Stack>
-            <Button disabled={isButtonDisable} size="small" onClick={() => {
-                if (tagName) {
-                    createTag();
-                } else {
+            <Button disabled={isButtonDisable}
+                size="small"
+                onClick={() => {
                     setIsButtonDisable(true);
-                }
-            }} startIcon={<HiPlus />} variant="contained" color="primary" sx={{ padding: 0.5, px: 3, ml: 13, mb: 2, mt: 0 }} >{t('actions.add')}</Button>
+                    createTag()
+                }}
+                startIcon={<HiPlus />}
+                variant="contained"
+                color="primary"
+                sx={{ padding: 0.5, px: 3, ml: 13, mb: 2, mt: 0 }} >{t('actions.add')}</Button>
         </Modal>
     )
 
