@@ -22,9 +22,6 @@ class BillingModel {
       this.loading.begin()
       const data = await API.user.get()
       this.creditCardInfo = data.credit_card
-      console.log(this.creditCardInfo.card_number)
-
-
     } catch (err: any) {
       toast.error(err)
     }

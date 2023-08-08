@@ -130,8 +130,7 @@ function Billing() {
           validationSchema={validationSchema}
           onSubmit={(values) => {
             setIsEditActive(!isEditActive)
-            console.log('submit')
-            if (!isEditActive) {
+            if (isEditActive) {
               BillingModel.putBilling(values)
               toast.success(t('notification:success.updated'))
             }
