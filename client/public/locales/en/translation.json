@@ -66,6 +66,7 @@
     "leaveMessage": "Leave a message"
   },
   "fields": {
+    "tagName": "Tag name",
     "name": "Name",
     "surname": "Surname",
     "middleName": "Middle name",
