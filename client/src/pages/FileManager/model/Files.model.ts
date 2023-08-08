@@ -46,7 +46,7 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const data = await API.fileManager.getFolders()
+      const data = await API.fileManagerFolder.getFolders()
 
       this.folders = data
     } catch (err: any) {
@@ -62,7 +62,7 @@ class FilesModel {
         this.loading.begin()
       }
 
-      const data = await API.fileManager.getFolderById(id)
+      const data = await API.fileManagerFolder.getFolderById(id)
 
       this.folder = data
     } catch (err: any) {
@@ -74,7 +74,7 @@ class FilesModel {
 
   async deleteFolder({ id }: { id: number }) {
     try {
-      await API.fileManager.deleteFolder(id)
+      await API.fileManagerFolder.deleteFolder(id)
       this.fetch({})
     } catch (err: any) {
       toast.error(err)
@@ -83,7 +83,7 @@ class FilesModel {
 
   async deleteTag(folderId: number, tagId: number) {
     try {
-      await API.fileManager.deleteTag(folderId, tagId)
+      await API.fileManagerFolder.deleteTag(folderId, tagId)
 
       this.fetchFolder({ id: folderId })
       this.fetch({})
@@ -97,7 +97,7 @@ class FilesModel {
       this.loading.begin()
 
       if (this.folder?.id) {
-        await API.fileManager.editFolder(this.folder.id, { name })
+        await API.fileManagerFolder.editFolder(this.folder.id, { name })
 
         this.fetch({})
         this.fetchFolder({ id: this.folder.id })
@@ -111,7 +111,7 @@ class FilesModel {
 
   async createTag(folderId: number, tagId: number) {
     try {
-      await API.fileManager.createTag(folderId, tagId)
+      await API.fileManagerFolder.createTag(folderId, tagId)
       if (this.folder) await this.fetchFolder({ id: this.folder.id })
     } catch (err: any) {
       toast.error(err)
@@ -120,12 +120,22 @@ class FilesModel {
 
   async fetchTags() {
     try {
-      const data = await API.fileManager.getTags()
+      const data = await API.fileManagerFolder.getTags()
       this.tags = data
     } catch (err: any) {
       toast.error(err)
     } finally {
       this.loading.reset()
+    }
+  }
+
+  async addFolderTag(name: string) {
+    try {
+      await API.fileManagerTags.addTag({ name: name })
+      this.fetch({})
+    }
+    catch (err: any) {
+      toast.error(err)
     }
   }
 }

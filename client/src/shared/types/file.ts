@@ -21,3 +21,8 @@ export interface Folder {
   tags: { id: number; name: string }[]
   tag: {}
 }
+
+export interface Tag {
+  id: number
+  name: string
+}
