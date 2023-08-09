@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useLocation } from 'react-router-dom'
 import { Container, Paper, Box, Alert } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import { ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
@@ -10,6 +11,7 @@ import { BackButton } from '../BackButton'
 
 function AuthWrapper({ children }: any) {
   let location = useLocation()
+  const { t } = useTranslation()
 
   return (
     <Box
@@ -45,8 +47,9 @@ function AuthWrapper({ children }: any) {
             {children}
           </Paper>
           <Alert severity="error" sx={{ mt: 2.5 }}>
-            You can use <strong>&quot;admin@gmail.com&quot;</strong> and password{' '}
-            <strong>&quot;qwerqwer&quot;</strong>
+            {t('auth:youCanUse')} <strong>&quot;{t('auth:login')}&quot;</strong> {t('auth:and')}{' '}
+            {t('auth:password')}
+            <strong>&quot;{t('auth:passwordValue')}&quot;</strong>
           </Alert>
         </Box>
       </Container>

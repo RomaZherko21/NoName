@@ -66,8 +66,8 @@ const router = createBrowserRouter(
   )
 )
 
-function Router() {
+function PrivateRoutes() {
   return <RouterProvider router={router} />
 }
 
-export default observer(Router)
+export default observer(PrivateRoutes)

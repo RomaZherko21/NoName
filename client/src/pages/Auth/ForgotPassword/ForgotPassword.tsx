@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from 'shared/consts'
 import { InputField } from 'shared/ui'
 import { emailValidation } from 'shared/validations'
+
 import { AuthWrapper } from '../ui/AuthWrapper/index'
 
 function ForgotPassword() {

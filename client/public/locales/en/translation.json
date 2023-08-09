@@ -21,7 +21,8 @@
     "content": "Content",
     "meta": "Meta",
     "file": "File",
-    "required": "Required"
+    "required": "Required",
+    "login": "admin@gmail.com"
   },
   "actions": {
     "add": "Add",

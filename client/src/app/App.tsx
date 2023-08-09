@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { useRootStore, RootStoreProvider } from 'stores'
 
-import { Router } from './routes'
+import { PrivateRoutes } from './routes'
 import AppThemeProvider from './theme'
 import PublicRoutes from './routes/PublicRoutes'
 
@@ -34,7 +34,7 @@ function App() {
       <RootStoreProvider>
         <AppThemeProvider>
           <CssBaseline enableColorScheme />
-          {authorization.isAuthorized ? <Router /> : <PublicRoutes />}
+          {authorization.isAuthorized ? <PrivateRoutes /> : <PublicRoutes />}
         </AppThemeProvider>
       </RootStoreProvider>
     </React.StrictMode>

@@ -23,7 +23,6 @@ function ResetPassword() {
       </Box>
       <Formik
         initialValues={{
-          // email: '',
           password: '',
           confirmPassword: ''
         }}
