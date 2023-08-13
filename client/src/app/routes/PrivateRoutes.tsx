@@ -20,19 +20,18 @@ import {
   FileManager,
   Chat,
   Kanban,
-  Home,
-  Contact
+  Contact,
+  Home
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
-import { Layout } from './Layout'
+import { Layout } from '../Layout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={ROUTES.HOME} element={<Home />} />
-
       <Route path={ROUTES.CONTACT} element={<Contact />} />
+      <Route path={ROUTES.HOME} element={<Home />} />
 
       <Route path={ROUTES.DEFAULT} element={<Layout />}>
         <Route path={ROUTES.USERS} element={<Users />} />
@@ -61,6 +60,7 @@ const router = createBrowserRouter(
         <Route path={ROUTES.KANBAN} element={<Kanban />} />
 
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+
         {/* <Route path="/" element={<Navigate to={ROUTES.USERS} replace />} /> */}
         <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
       </Route>
@@ -68,8 +68,8 @@ const router = createBrowserRouter(
   )
 )
 
-function Router() {
+function PrivateRoutes() {
   return <RouterProvider router={router} />
 }
 
-export default observer(Router)
+export default observer(PrivateRoutes)

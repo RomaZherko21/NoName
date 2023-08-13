@@ -32,5 +32,9 @@ export const ROUTES = {
   NOT_FOUND: '/notFound',
   HELP: '/help',
 
-  CONTACT: '/contact'
+  CONTACT: '/contact',
+
+  SIGN_IN: '/sign-in',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password'
 }

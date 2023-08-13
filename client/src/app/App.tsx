@@ -6,11 +6,11 @@ import { CssBaseline } from '@mui/material'
 
 import 'react-toastify/dist/ReactToastify.css'
 
-import { SignIn } from 'pages'
 import { useRootStore, RootStoreProvider } from 'stores'
 
-import Router from './Router'
+import { PrivateRoutes } from './routes'
 import AppThemeProvider from './theme'
+import PublicRoutes from './routes/PublicRoutes'
 
 configure({
   reactionScheduler: (f) => setTimeout(f)
@@ -34,7 +34,7 @@ function App() {
       <RootStoreProvider>
         <AppThemeProvider>
           <CssBaseline enableColorScheme />
-          {authorization.isAuthorized ? <Router /> : <SignIn />}
+          {authorization.isAuthorized ? <PrivateRoutes /> : <PublicRoutes />}
         </AppThemeProvider>
       </RootStoreProvider>
     </React.StrictMode>
