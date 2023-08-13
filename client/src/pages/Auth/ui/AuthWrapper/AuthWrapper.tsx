@@ -1,16 +1,19 @@
 import { observer } from 'mobx-react-lite'
-import { useLocation } from 'react-router-dom'
 import { Container, Paper, Box, Alert } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { ROUTES } from 'shared/consts'
 import logo from 'shared/assets/images/logo/white-transparent-logo.svg'
 
 import s from './Styles.module.scss'
 import { BackButton } from '../BackButton'
 
-function AuthWrapper({ children }: any) {
-  let location = useLocation()
+function AuthWrapper({
+  children,
+  showBackButton
+}: {
+  children: React.ReactNode
+  showBackButton?: boolean
+}) {
   const { t } = useTranslation()
 
   return (
@@ -33,8 +36,7 @@ function AuthWrapper({ children }: any) {
         <img src={logo} className={s.logo} alt="Logo" />
 
         <Box>
-          {location.pathname === ROUTES.FORGOT_PASSWORD && <BackButton />}
-          {location.pathname === ROUTES.RESET_PASSWORD && <BackButton />}
+          {showBackButton && <BackButton />}
           <Paper
             elevation={16}
             sx={{

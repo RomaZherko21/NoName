@@ -6,6 +6,7 @@ import { Button, Stack, Typography, Box } from '@mui/material'
 
 import { InputField } from 'shared/ui'
 import { confirmPasswordValidation, passwordValidation } from 'shared/validations'
+
 import { AuthWrapper } from '../ui/AuthWrapper/index'
 
 function ResetPassword() {
@@ -17,7 +18,7 @@ function ResetPassword() {
   })
 
   return (
-    <AuthWrapper>
+    <AuthWrapper showBackButton>
       <Box mb={3}>
         <Typography variant="h5">{t('actions.resetPassword')}</Typography>
       </Box>

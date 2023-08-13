@@ -27,7 +27,7 @@ function ForgotPassword() {
         minWidth: 550
       }}
     >
-      <AuthWrapper>
+      <AuthWrapper showBackButton>
         <Box>
           <Box mb={3}>
             <Typography variant="h5">{t('actions.forgotPassword')}</Typography>
