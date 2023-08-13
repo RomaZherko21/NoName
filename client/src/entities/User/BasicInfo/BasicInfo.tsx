@@ -72,7 +72,7 @@ function UserBasicDetails({ user }: Props) {
           residenceLocation: `${user.residence_country}, ${user.residence_city}`,
           jobTitle: user.job_title
         }}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={(values) => {
           // UserModel.update(values
           //   {
@@ -82,6 +82,7 @@ function UserBasicDetails({ user }: Props) {
           // }
           // )
           console.log(values)
+
           toast.success(t('notification:success.updated'))
         }}
       >
@@ -132,11 +133,11 @@ function UserBasicDetails({ user }: Props) {
 
             <CardActions>
               <Button
-                onClick={() => setIsEditActive(!isEditActive)}
                 // onSubmit={() => {}}
                 type="submit"
                 size="small"
                 sx={{ color: ({ palette }) => palette.text.primary }}
+                onClick={() => setIsEditActive(!isEditActive)}
               >
                 {isEditActive ? t('actions.save') : t('actions.edit')}
               </Button>
