@@ -28,6 +28,7 @@ import {
 } from 'shared/validations'
 import UserModel from 'models/User'
 import { toast } from 'react-toastify'
+import { useRootStore } from 'stores'
 
 // import { ProfileModel } from 'pages/Profile/model'
 
@@ -37,8 +38,11 @@ interface Props {
 
 function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
+  const { user: USER } = useRootStore()
   const [isEditActive, setIsEditActive] = useState(false)
-  // useEffect(() => {UserModel.fetch()}, [])
+  useEffect(() => {
+    USER.fetch({})
+  }, [])
 
   const listConfig = useMemo(() => getListConfig(user), [user])
 
@@ -74,13 +78,13 @@ function UserBasicDetails({ user }: Props) {
         }}
         // validationSchema={validationSchema}
         onSubmit={(values) => {
-          // UserModel.update(values
-          //   {
-          //   ...getSplitName(values.fullName),
-          //   email: values.email,
-          //   tel_number: normalizePhone(values.tel_number)
-          // }
-          // )
+          setIsEditActive(!isEditActive)
+          if (!isEditActive)
+            USER.update({
+              ...getSplitName(values.fullName),
+              email: values.email,
+              tel_number: normalizePhone(values.tel_number)
+            })
           console.log(values)
 
           toast.success(t('notification:success.updated'))
@@ -137,7 +141,7 @@ function UserBasicDetails({ user }: Props) {
                 type="submit"
                 size="small"
                 sx={{ color: ({ palette }) => palette.text.primary }}
-                onClick={() => setIsEditActive(!isEditActive)}
+                // onClick={() => setIsEditActive(!isEditActive)}
               >
                 {isEditActive ? t('actions.save') : t('actions.edit')}
               </Button>
