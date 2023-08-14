@@ -131,7 +131,7 @@ function Billing() {
           onSubmit={(values) => {
             setIsEditActive(!isEditActive)
             if (isEditActive) {
-              BillingModel.putBilling(values)
+              BillingModel.putBilling({ ...values, name_on_card: values.name_on_card?.trim() })
               toast.success(t('notification:success.updated'))
             }
           }} >
@@ -204,7 +204,7 @@ function Billing() {
                       </ListItem>
                     </>
                   )}
-                  {!isEditActive && billingConfig.map((cardInfo) => (
+                  {!isEditActive && billingConfig.map((cardInfo, index) => (
                     <>
                       <ListItem key={cardInfo.text} sx={{ m: 0 }}>
                         <ListItemText
@@ -221,7 +221,7 @@ function Billing() {
                           sx={{ display: 'flex', alignItems: 'center' }}
                         />
                       </ListItem>
-                      <Divider />
+                      {billingConfig.length !== index + 1 && <Divider />}
                     </>))}
                 </List>
               </form>
