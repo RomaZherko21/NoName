@@ -3,10 +3,12 @@
     "isRequired": "{{field}} field is required",
     "minSymbols": "{{field}} should be of minimum {{count}} characters length",
     "maxSymbols": "{{field}} should be of maximum  {{count}} characters length",
+    "symbol": "{{field}} must contain {{count}} characters length", 
     "validField": "Enter a valid {{field}} field",
     "needMatched": "{{field}} must matched",
     "largeFile": "The file is too large, max {{max}} MB",
     "correctFileFormats": "File format may consists of {{formats}}",
-    "phoneLength": "Invalid phone number, must be 10 or more digits"
+    "phoneLength": "Invalid phone number, must be 10 or more digits",
+    "shouldOnlyBeNumbers": "{{field}} should only be numbers"
   }
 }

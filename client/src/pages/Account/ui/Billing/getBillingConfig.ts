@@ -11,7 +11,7 @@ export const getBillingConfig = ({ creditCardInfo }: { creditCardInfo: CreditCar
     },
     {
         title: 'user:bankCard.expiryDate',
-        text: creditCardInfo.valid_thru?.split('/').join(' / ')
+        text: creditCardInfo.valid_thru?.replace(/(\d{2}(?!\s))(?!$)/g, '$1/')
     },
 
     {

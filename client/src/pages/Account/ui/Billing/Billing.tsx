@@ -23,6 +23,7 @@ import { MdOutlineModeEditOutline } from 'react-icons/md'
 import { BillingStatus } from 'shared/types'
 import { InputField, Spinner } from 'shared/ui'
 import { commonStringValidation } from 'shared/validations'
+import { creditCardValidation } from 'shared/validations'
 
 import { BillingModel } from './model'
 import { getBillingConfig } from './getBillingConfig'
@@ -35,9 +36,9 @@ function Billing() {
     () =>
       yup.object().shape({
         name_on_card: commonStringValidation(t('user:bankCard.cardHolderName'), 3),
-        card_number: commonStringValidation(t('user:bankCard.number'), 16),
-        valid_thru: commonStringValidation(t('user:bankCard.expiryDate'), 4),
-        cvv: commonStringValidation(t('user:bankCard.cvv'), 3)
+        card_number: creditCardValidation(t('user:bankCard.number'), 16),
+        valid_thru: creditCardValidation(t('user:bankCard.expiryDate'), 4),
+        cvv: creditCardValidation(t('user:bankCard.cvv'), 3)
       }),
     [t]
   )
