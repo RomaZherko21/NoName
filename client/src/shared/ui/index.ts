@@ -8,7 +8,8 @@ export {
   QuillField,
   UploadImageField,
   MultiSelect,
-  FormPhoneNumber
+  FormPhoneNumber,
+  FormTimePicker
 } from './Form'
 export { AsideFilters, AsideFiltersBar } from './AsideFilters'
 export { Input, Select, DatePicker, Checkbox, VerificationCode, EditableInput } from './NoForm'

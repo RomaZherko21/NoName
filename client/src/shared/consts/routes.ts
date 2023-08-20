@@ -36,5 +36,7 @@ export const ROUTES = {
 
   SIGN_IN: '/sign-in',
   FORGOT_PASSWORD: '/forgot-password',
-  RESET_PASSWORD: '/reset-password'
+  RESET_PASSWORD: '/reset-password',
+
+  CALENDAR: '/calendar'
 }
