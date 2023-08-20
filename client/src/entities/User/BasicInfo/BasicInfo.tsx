@@ -40,17 +40,18 @@ function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
   const { user: USER } = useRootStore()
   const [isEditActive, setIsEditActive] = useState(false)
-  useEffect(() => {
-    USER.fetch({})
-  }, [])
 
   const listConfig = useMemo(() => getListConfig(user), [user])
+
+  // useEffect(() => {
+  //   USER.fetch({})
+  // }, [])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        full_name: fullNameValidation(),
-        email: emailValidation(),
+        // full_name: fullNameValidation(),
+        // email: emailValidation(),
         tel_number: phoneNumberValidation(t('fields.phone'))
         // nativeLocation: commonStringValidation(t('user:nativeLocation')),
         // residenceLocation: commonStringValidation(t('user:residenceLocation')),
@@ -76,18 +77,25 @@ function UserBasicDetails({ user }: Props) {
           residenceLocation: `${user.residence_country}, ${user.residence_city}`,
           jobTitle: user.job_title
         }}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           setIsEditActive(!isEditActive)
-          if (!isEditActive)
+          if (isEditActive) {
             USER.update({
               ...getSplitName(values.fullName),
               email: values.email,
-              tel_number: normalizePhone(values.tel_number)
-            })
-          console.log(values)
+              tel_number: normalizePhone(values.tel_number),
 
-          toast.success(t('notification:success.updated'))
+              // nativeLocation: values.nativeLocation,
+              // residenceLocation: values.residenceLocation,
+              // nativeLocation: `${values.native_country}, ${values.native_city}`,
+              // residenceLocation: `${user.residence_country}, ${user.residence_city}`,
+              job_title: values.jobTitle
+            })
+            console.log(values)
+            // USER.fetch({})
+            toast.success(t('notification:success.updated'))
+          }
         }}
       >
         {({ handleSubmit }) => (
@@ -109,8 +117,9 @@ function UserBasicDetails({ user }: Props) {
                     <InputField field={'tel_number'} label={t('user:telephoneNumber')}></InputField>
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    <InputField field={'nativeLocation'} label={t('user:nativeLocation')} />
+                  <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '4px' }}>
+                    <InputField field={'nativeCountry'} label={t('user:nativeCountry')} />
+                    <InputField field={'nativeCity'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
