@@ -1,6 +1,7 @@
 export { default as FormInput } from './FormInput'
 export { default as FormSelect } from './FormSelect'
 export { default as MultiSelect } from './MultiSelect'
+export { default as FormCountrySelect } from './FormContrySelect/FormCountrySelect'
 export { default as FormDatePicker } from './FormDatePicker'
 export { QuillField } from './QuillField'
 export { FormPhoneNumber } from './FormPhoneNumber'
