@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 
-import { Connection, ConnectionStatus, Gender, Roles, User, Post } from 'shared/types'
+import { Connection, ConnectionStatus, Gender, Roles, User, Post, CreditCard } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
 import { PostsFilters } from 'pages/Posts/model'
@@ -47,10 +47,33 @@ class ProfileModel {
 
   loading: LoadingModel
 
+  creditCardInfo: CreditCard = {} //!
+
   constructor() {
     makeAutoObservable(this)
 
     this.loading = new LoadingModel()
+  }
+
+  async fetch() {
+    try {
+      this.loading.begin()
+      const data = await API.user.get()
+      this.creditCardInfo = data.credit_card
+    } catch (err: any) {
+      toast.error(err)
+    } finally {
+      this.loading.end()
+    }
+  }
+
+  async putCreditCard(user: CreditCard) {
+    try {
+      await API.user.updateCardInfo(user)
+      this.fetch()
+    } catch (err: any) {
+      toast.error(err)
+    }
   }
 
   onConnectionStatusChange(status: ConnectionOptions) {

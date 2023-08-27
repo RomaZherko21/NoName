@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   ListItemIcon,
-  Typography
+  Typography,
+  TextField
 } from '@mui/material'
 
 import { getListConfig } from './getListConfig'
@@ -22,6 +23,7 @@ import { Formik } from 'formik'
 import { ProfileModel } from 'pages/Profile/model'
 import { getFullName } from 'shared/helpers'
 import { useRootStore } from 'stores'
+import { toast } from 'react-toastify'
 
 function CreditCardInfo(props: any) {
   const { t } = useTranslation()
@@ -29,6 +31,10 @@ function CreditCardInfo(props: any) {
   const { user } = useRootStore()
 
   const listConfig = useMemo(() => getListConfig(props), [props])
+
+  // useEffect(() => {
+  //   ProfileModel.fetch()
+  // }, [])
 
   return (
     <Paper elevation={4} sx={{ width: '100%', p: 0 }}>
@@ -41,7 +47,7 @@ function CreditCardInfo(props: any) {
         <List>
           {listConfig.map(({ Icon, text, title }) => (
             <>
-              <ListItem key={text} sx={{ m: 0.86 }}>
+              <ListItem key={text} sx={{ m: 0.89 }}>
                 <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
                   <Icon />
                 </ListItemIcon>
@@ -53,15 +59,37 @@ function CreditCardInfo(props: any) {
                   }
                   secondary={
                     <Typography variant="body2" color="text.secondary">
-                      {text}
+                      {' '}
+                      {text}{' '}
                     </Typography>
                   }
                   sx={{ display: 'flex', alignItems: 'center' }}
+
+                  // {<TextField disabled id="outlined-disabled" label="" defaultValue={text} />}
+                  // sx={{ display: 'flex', alignItems: 'center' }}
+
+                  // secondary={
+                  //   <TextField
+                  //     disabled
+                  //     id="outlined-disabled"
+                  //     label=""
+                  //     defaultValue={text}
+                  //   />
+                  // }
                 />
               </ListItem>
               <Divider />
             </>
           ))}
+          <CardActions>
+            <Button
+              size="small"
+              sx={{ color: ({ palette }) => palette.text.primary }}
+              onClick={() => setIsEditActive(!isEditActive)}
+            >
+              {isEditActive ? t('actions.save') : t('actions.edit')}
+            </Button>
+          </CardActions>
         </List>
       )}
 
@@ -75,6 +103,12 @@ function CreditCardInfo(props: any) {
           }}
           // validationSchema={validationSchema}
           onSubmit={(values) => {
+            setIsEditActive(!isEditActive)
+            if (isEditActive) {
+              ProfileModel.putCreditCard(values) // передать новые значения
+              toast.success(t('notification:success.updated'))
+              alert(values)
+            }
             // user.update(values)
             // toast.success(t('notification:success.updated'))
           }}
@@ -144,20 +178,19 @@ function CreditCardInfo(props: any) {
                 />
               </ListItem>
               <Divider />
+              <CardActions>
+                <Button
+                  type="submit"
+                  size="small"
+                  sx={{ color: ({ palette }) => palette.text.primary }}
+                >
+                  {isEditActive ? t('actions.save') : t('actions.edit')}
+                </Button>
+              </CardActions>
             </form>
           )}
         </Formik>
       )}
-
-      <CardActions>
-        <Button
-          size="small"
-          sx={{ color: ({ palette }) => palette.text.primary }}
-          onClick={() => setIsEditActive(!isEditActive)}
-        >
-          {isEditActive ? t('actions.save') : t('actions.edit')}
-        </Button>
-      </CardActions>
     </Paper>
   )
 }
