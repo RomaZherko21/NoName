@@ -58,7 +58,9 @@ class ProfileModel {
   async fetch() {
     try {
       this.loading.begin()
+
       const data = await API.user.get()
+
       this.creditCardInfo = data.credit_card
     } catch (err: any) {
       toast.error(err)
@@ -70,7 +72,9 @@ class ProfileModel {
   async putCreditCard(user: CreditCard) {
     try {
       await API.user.updateCardInfo(user)
-      this.fetch()
+      console.log(user)
+
+      await this.fetchUser(this.id)
     } catch (err: any) {
       toast.error(err)
     }
@@ -101,10 +105,12 @@ class ProfileModel {
       this.loading.begin()
 
       const data = await API.users.getById(id)
+      console.log(data)
 
       this.id = id
 
       this.fromJSON(data)
+      console.log(data)
     } catch (err: any) {
       toast.error(err)
     } finally {

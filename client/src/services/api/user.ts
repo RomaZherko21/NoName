@@ -12,7 +12,7 @@ export const getPermissions = async () =>
 export const update = async (user: BasicUserInfo & MetaUserInfo & UserCredentials) =>
   await fetch.put(`${ENDPOINT_BASE}`, user)
 
-export const updateCardInfo = async (user: CreditCard) => await fetch.put(`${ENDPOINT_BASE}`, user)
+export const updateCardInfo = async (user: CreditCard) => await fetch.put(`${ENDPOINT_BASE}`, user) //!
 
 export const remove = async () => await fetch.delete(`${ENDPOINT_BASE}`)
 

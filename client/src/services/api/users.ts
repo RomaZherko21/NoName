@@ -1,5 +1,12 @@
 import { getQueryParams } from 'shared/helpers'
-import { QueryParams, User, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
+import {
+  QueryParams,
+  User,
+  BasicUserInfo,
+  MetaUserInfo,
+  UserCredentials,
+  CreditCard
+} from 'shared/types'
 
 import fetch from './fetch'
 

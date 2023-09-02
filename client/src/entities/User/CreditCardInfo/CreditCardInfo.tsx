@@ -11,8 +11,8 @@ import {
   Button,
   Divider,
   ListItemIcon,
-  Typography,
-  TextField
+  Typography
+  // TextField
 } from '@mui/material'
 
 import { getListConfig } from './getListConfig'
@@ -21,7 +21,7 @@ import { BiLockAlt, BiUser } from 'react-icons/bi'
 import { InputField } from 'shared/ui'
 import { Formik } from 'formik'
 import { ProfileModel } from 'pages/Profile/model'
-import { getFullName } from 'shared/helpers'
+// import { getFullName } from 'shared/helpers'
 import { useRootStore } from 'stores'
 import { toast } from 'react-toastify'
 
@@ -31,10 +31,6 @@ function CreditCardInfo(props: any) {
   const { user } = useRootStore()
 
   const listConfig = useMemo(() => getListConfig(props), [props])
-
-  // useEffect(() => {
-  //   ProfileModel.fetch()
-  // }, [])
 
   return (
     <Paper elevation={4} sx={{ width: '100%', p: 0 }}>
@@ -64,18 +60,6 @@ function CreditCardInfo(props: any) {
                     </Typography>
                   }
                   sx={{ display: 'flex', alignItems: 'center' }}
-
-                  // {<TextField disabled id="outlined-disabled" label="" defaultValue={text} />}
-                  // sx={{ display: 'flex', alignItems: 'center' }}
-
-                  // secondary={
-                  //   <TextField
-                  //     disabled
-                  //     id="outlined-disabled"
-                  //     label=""
-                  //     defaultValue={text}
-                  //   />
-                  // }
                 />
               </ListItem>
               <Divider />
@@ -83,6 +67,7 @@ function CreditCardInfo(props: any) {
           ))}
           <CardActions>
             <Button
+              type="button"
               size="small"
               sx={{ color: ({ palette }) => palette.text.primary }}
               onClick={() => setIsEditActive(!isEditActive)}
@@ -96,21 +81,19 @@ function CreditCardInfo(props: any) {
       {isEditActive && (
         <Formik
           initialValues={{
-            cardNumber: ProfileModel.card_number,
-            full_name: getFullName(user.name, user.surname, user.middle_name),
-            valid_thru: ProfileModel.valid_thru,
-            cvv: ProfileModel.cvv
+            card_number: props.cardNumber,
+            name_on_card: props.nameOnCard,
+            valid_thru: props.validThru,
+            cvv: props.cvv
           }}
           // validationSchema={validationSchema}
           onSubmit={(values) => {
             setIsEditActive(!isEditActive)
             if (isEditActive) {
-              ProfileModel.putCreditCard(values) // передать новые значения
-              toast.success(t('notification:success.updated'))
-              alert(values)
+              ProfileModel.putCreditCard(values)
+              // toast.success(t('notification:success.updated'))
+              console.log(values)
             }
-            // user.update(values)
-            // toast.success(t('notification:success.updated'))
           }}
         >
           {({ handleSubmit }) => (
@@ -125,7 +108,7 @@ function CreditCardInfo(props: any) {
                       {t('user:cardNumber')}
                     </Typography>
                   }
-                  secondary={<InputField field="cardNumber" label="" size="small" />}
+                  secondary={<InputField field="card_number" label="" size="small" />}
                   sx={{ display: 'flex', alignItems: 'center' }}
                 />
               </ListItem>
@@ -141,7 +124,7 @@ function CreditCardInfo(props: any) {
                       {t('user:bankCard.cardHolderName')}
                     </Typography>
                   }
-                  secondary={<InputField field="full_name" label="" size="small" />}
+                  secondary={<InputField field="name_on_card" label="" size="small" />}
                   sx={{ display: 'flex', alignItems: 'center' }}
                 />
               </ListItem>
