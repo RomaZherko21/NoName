@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Formik } from 'formik'
+import { Formik, useFormikContext } from 'formik'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import {
@@ -129,12 +129,24 @@ function Billing() {
           cvv: BillingModel.creditCardInfo.cvv
         }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={(values, { setSubmitting }) => {
             setIsEditActive(!isEditActive)
+
             if (isEditActive) {
-              BillingModel.putBilling({ ...values, name_on_card: values.name_on_card?.trim() })
-              toast.success(t('notification:success.updated'))
+              const isFormChanged =
+                values.name_on_card !== BillingModel.creditCardInfo.name_on_card ||
+                values.card_number !== BillingModel.creditCardInfo.card_number ||
+                values.valid_thru !== BillingModel.creditCardInfo.valid_thru ||
+                values.cvv !== BillingModel.creditCardInfo.cvv;
+
+              if (isFormChanged) {
+                BillingModel.putBilling({ ...values, name_on_card: values.name_on_card?.trim() });
+                toast.success(t('notification:success.updated'));
+              }
             }
+
+
+            setSubmitting(false);
           }} >
 
           {({ handleSubmit }) => (
