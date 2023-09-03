@@ -5,8 +5,7 @@ interface Country {
   name: { common: string }
 }
 
-
-function CountrysSelect() {
+function CountriesSelect() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState('')
   const [hiddenInputValue, setHiddenInputValue] = useState('')
@@ -77,4 +76,4 @@ function CountrysSelect() {
     </div>
   )
 }
-export default CountrysSelect
+export default CountriesSelect

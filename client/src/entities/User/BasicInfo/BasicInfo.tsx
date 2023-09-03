@@ -28,7 +28,7 @@ import {
 import { toast } from 'react-toastify'
 import CountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
 import { ProfileModel } from 'pages/Profile/model'
-import { CountrysSelect, FormSelect } from 'shared/ui/Form'
+import { CountriesSelect, FormSelect } from 'shared/ui/Form'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
