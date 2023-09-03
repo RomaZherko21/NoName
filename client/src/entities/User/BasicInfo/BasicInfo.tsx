@@ -18,7 +18,7 @@ import { getListConfig } from './getListConfig'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { getFullName, normalizePhone, getSplitName } from 'shared/helpers'
-import { FormPhoneNumber, InputField } from 'shared/ui'
+import { FormPhoneNumber, InputField, Select } from 'shared/ui'
 import {
   // fullNameValidation,
   emailValidation,
@@ -26,8 +26,9 @@ import {
   commonStringValidation
 } from 'shared/validations'
 import { toast } from 'react-toastify'
-import { useRootStore } from 'stores'
 import CountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
+import { ProfileModel } from 'pages/Profile/model'
+import { CountrysSelect, FormSelect } from 'shared/ui/Form'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -35,14 +36,10 @@ interface Props {
 
 function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
-  const { user: userFromModel } = useRootStore()
+
   const [isEditActive, setIsEditActive] = useState(false)
 
   const listConfig = useMemo(() => getListConfig(user), [user])
-
-  // useEffect(() => {
-  //   userFromModel.fetch({})
-  // }, [userFromModel, user])
 
   const validationSchema = useMemo(
     () =>
@@ -83,7 +80,7 @@ function UserBasicDetails({ user }: Props) {
         onSubmit={(values) => {
           setIsEditActive(!isEditActive)
           if (isEditActive) {
-            userFromModel.update({
+            ProfileModel.editUserInfo({
               ...getSplitName(values.fullName),
               email: values.email,
               tel_number: normalizePhone(values.tel_number),
@@ -91,13 +88,14 @@ function UserBasicDetails({ user }: Props) {
               // nativeLocation: values.nativeLocation,
               // nativeLocation: `${values.native_country}, ${values.native_city}`,
 
-              // residence_country: values.residence_country,
-              // residence_city: values.residence_city,
+              residence_country: values.residence_country,
+              residence_city: values.residence_city,
               // residenceLocation: `${values.residence_country}, ${values.residence_city}`,
 
               // residenceLocation: values.residenceLocation,
               job_title: values.jobTitle
             })
+            console.log(user.residence_country)
 
             toast.success(t('notification:success.updated'))
           }
@@ -129,7 +127,21 @@ function UserBasicDetails({ user }: Props) {
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    <CountrySelect />
+                    {/* <CountrySelect /> */}
+                    {/* <CountrysSelect /> */}
+                    {/* <Select
+                      value={'residence_country'}
+                      label={t('user:residenceCountry')}
+                      options={{}}
+                      onChange={function (e: any): void {
+                        throw new Error('Function not implemented.')
+                      }}
+                    /> */}
+                    <FormSelect
+                      field={'residence_country'}
+                      label={t('user:residenceCountry')}
+                      options={{}}
+                    />
                     {/* <InputField field={'residence_country'} label={t('user:residenceCountry')} /> */}
                     <InputField field={'residence_city'} label={t('user:residenceCity')} />
                   </ListItem>

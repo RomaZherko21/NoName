@@ -32,6 +32,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "6.8.0",
     "react-toastify": "^8.2.0",
+    "svg-country-flags": "^1.2.10",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },
