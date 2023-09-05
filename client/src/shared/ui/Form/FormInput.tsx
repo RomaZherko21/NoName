@@ -11,9 +11,11 @@ interface Props {
   multiline?: boolean
   rows?: number
   icon?: JSX.Element
+  isEditable?: boolean,
+  isEditActive?: boolean
 }
 
-const FormInput = ({ field, label, size = 'medium', type, multiline = false, icon, rows = 0 }: Props) => {
+const FormInput = ({ field, label, size = 'medium', type, multiline = false, icon, rows = 0, isEditActive = true }: Props) => {
   const { t } = useTranslation()
 
   const { touched, values, errors, handleChange } = useFormikContext<{
@@ -22,6 +24,7 @@ const FormInput = ({ field, label, size = 'medium', type, multiline = false, ico
 
   return (
     <TextField
+      disabled={!isEditActive}
       fullWidth
       id={field}
       size={size}

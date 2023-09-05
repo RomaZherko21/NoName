@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { Formik, useFormikContext } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
 import {
@@ -18,7 +18,7 @@ import {
   ListItemText
 } from '@mui/material'
 import { BsFillLayersFill } from 'react-icons/bs'
-import { MdOutlineModeEditOutline } from 'react-icons/md'
+import { MdOutlineModeEditOutline, MdDoneOutline } from 'react-icons/md'
 
 import { BillingStatus } from 'shared/types'
 import { InputField, Spinner } from 'shared/ui'
@@ -31,7 +31,7 @@ import { getBillingConfig } from './getBillingConfig'
 function Billing() {
   const { t } = useTranslation()
   const [isEditActive, setIsEditActive] = useState(false)
-  const billingConfig = getBillingConfig({ creditCardInfo: BillingModel.creditCardInfo })
+  const billingConfig = getBillingConfig()
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
@@ -124,29 +124,28 @@ function Billing() {
 
         <Formik initialValues={{
           name_on_card: BillingModel.creditCardInfo.name_on_card,
-          card_number: BillingModel.creditCardInfo.card_number,
-          valid_thru: BillingModel.creditCardInfo.valid_thru,
+          // card_number: BillingModel.creditCardInfo.card_number,
+          card_number: BillingModel.creditCardInfo.card_number?.replace(/(\d{4}(?!\s))/g, '$1 '),
+          valid_thru: BillingModel.creditCardInfo.valid_thru?.replace(/(\d{2}(?!\s))(?!$)/g, '$1/'),
+          // valid_thru: BillingModel.creditCardInfo.valid_thru,
           cvv: BillingModel.creditCardInfo.cvv
         }}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setIsEditActive(!isEditActive)
+          onSubmit={(values) => {
 
-            if (isEditActive) {
-              const isFormChanged =
-                values.name_on_card !== BillingModel.creditCardInfo.name_on_card ||
-                values.card_number !== BillingModel.creditCardInfo.card_number ||
-                values.valid_thru !== BillingModel.creditCardInfo.valid_thru ||
-                values.cvv !== BillingModel.creditCardInfo.cvv;
+            const isFormChanged =
+              values.name_on_card !== BillingModel.creditCardInfo.name_on_card ||
+              values.card_number !== BillingModel.creditCardInfo.card_number ||
+              values.valid_thru !== BillingModel.creditCardInfo.valid_thru ||
+              values.cvv !== BillingModel.creditCardInfo.cvv;
 
-              if (isFormChanged) {
-                BillingModel.putBilling({ ...values, name_on_card: values.name_on_card?.trim() });
-                toast.success(t('notification:success.updated'));
-              }
+            if (isFormChanged) {
+              BillingModel.putBilling({ ...values, name_on_card: values.name_on_card?.trim() });
+              toast.success(t('notification:success.updated'));
             }
 
+            setIsEditActive(!isEditActive)
 
-            setSubmitting(false);
           }} >
 
           {({ handleSubmit }) => (
@@ -154,9 +153,45 @@ function Billing() {
               <form onSubmit={handleSubmit}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
                   <Typography variant="h6">{t('user:billingDetails')}</Typography>
-                  <Button type='submit' startIcon={<MdOutlineModeEditOutline />} color="inherit" >
-                    {isEditActive ? t('actions.save') : t('actions.edit')}
-                  </Button>
+                  {isEditActive ? (
+                    <Button
+                      type='submit'
+                      startIcon={<MdDoneOutline />}
+                      color="inherit"
+                    >
+                      {t('actions.save')}
+                    </Button>
+
+                  ) : (
+
+                    <Button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setIsEditActive(!isEditActive)
+                      }}
+                      startIcon={<MdOutlineModeEditOutline />}
+                      color="inherit"
+                    >
+                      {t('actions.edit')}
+                    </Button>
+                  )}
+
+                  {/* {isEditActive && <Button
+                    type='submit'
+                    startIcon={<MdDoneOutline />}
+                    color="inherit"
+                  >
+                    {t('actions.save')}
+                  </Button>}
+                  {!isEditActive && <Button
+                    onClick={() => {
+                      setIsEditActive(!isEditActive)
+                    }}
+                    startIcon={<MdOutlineModeEditOutline />}
+                    color="inherit"
+                  >
+                    {t('actions.edit')}
+                  </Button>} */}
                 </Stack>
                 <List
                   sx={{
@@ -166,7 +201,7 @@ function Billing() {
                     pt: 0,
                     pb: 0
                   }}>
-                  {isEditActive && (
+                  {/* {isEditActive && (
                     <>
                       <ListItem sx={{ m: 0, pt: 0, pb: 0 }}>
                         <ListItemText
@@ -216,20 +251,28 @@ function Billing() {
                         />
                       </ListItem>
                     </>
-                  )}
-                  {!isEditActive && billingConfig.map((cardInfo, index) => (
+                  )} */}
+                  {billingConfig.map((cardInfo, index) => (
                     <>
-                      <ListItem key={cardInfo.text} sx={{ m: 0 }}>
+                      <ListItem
+                        key={cardInfo.field}
+                        sx={{ m: 0 }}
+                      >
                         <ListItemText
                           primary={
-                            <Typography variant="body2" sx={{ width: 190 }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ width: 190 }}
+                            >
                               {t(cardInfo.title)}
                             </Typography>
                           }
                           secondary={
-                            <Typography variant="body2" color="text.secondary">
-                              {cardInfo.text}
-                            </Typography>
+                            <InputField
+                              field={cardInfo.field}
+                              label=''
+                              size="small"
+                              isEditActive={isEditActive} />
                           }
                           sx={{ display: 'flex', alignItems: 'center' }}
                         />
