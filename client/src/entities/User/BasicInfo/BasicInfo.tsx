@@ -29,6 +29,8 @@ import { toast } from 'react-toastify'
 import CountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
 import { ProfileModel } from 'pages/Profile/model'
 import { CountriesSelect, FormSelect } from 'shared/ui/Form'
+import { getCountryConfig } from './getCountryConfig'
+import { hasFlag } from 'country-flag-icons'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -85,13 +87,14 @@ function UserBasicDetails({ user }: Props) {
               email: values.email,
               tel_number: normalizePhone(values.tel_number),
 
+              native_country: values.native_country,
+              native_city: values.native_city,
               // nativeLocation: values.nativeLocation,
               // nativeLocation: `${values.native_country}, ${values.native_city}`,
 
               residence_country: values.residence_country,
               residence_city: values.residence_city,
               // residenceLocation: `${values.residence_country}, ${values.residence_city}`,
-
               // residenceLocation: values.residenceLocation,
               job_title: values.jobTitle
             })
@@ -122,13 +125,12 @@ function UserBasicDetails({ user }: Props) {
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
                     <CountrySelect />
-                    {/* <InputField field={'native_country'} label={t('user:nativeCountry')} /> */}
+                    <InputField field={'native_country'} label={t('user:nativeCountry')} />
                     <InputField field={'native_city'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    {/* <CountrySelect /> */}
-                    {/* <CountrysSelect /> */}
+                    {/* <CountriesSelect /> */}
                     {/* <Select
                       value={'residence_country'}
                       label={t('user:residenceCountry')}
@@ -137,10 +139,11 @@ function UserBasicDetails({ user }: Props) {
                         throw new Error('Function not implemented.')
                       }}
                     /> */}
+
                     <FormSelect
                       field={'residence_country'}
                       label={t('user:residenceCountry')}
-                      options={{}}
+                      options={getCountryConfig}
                     />
                     {/* <InputField field={'residence_country'} label={t('user:residenceCountry')} /> */}
                     <InputField field={'residence_city'} label={t('user:residenceCity')} />

@@ -6,7 +6,7 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/
 interface Props {
   field: string
   label: string
-  options: { [key: string]: string }
+  options: { [key: string]: any }
 }
 
 const FormSelect = ({ field, label, options }: Props) => {
