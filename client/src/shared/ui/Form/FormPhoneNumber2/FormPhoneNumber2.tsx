@@ -11,6 +11,9 @@ function FormPhoneNumber2() {
       sx={{ width: 400 }}
       options={countries}
       autoHighlight
+      onChange={(event, values) => {
+        console.log(event, values)
+      }}
       getOptionLabel={(option) => `+${option.phone}`}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
