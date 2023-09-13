@@ -12,7 +12,7 @@ interface Props {
   rows?: number
   icon?: JSX.Element
   isEditable?: boolean,
-  isEditActive?: boolean
+  isEditActive?: boolean,
 }
 
 const FormInput = ({ field, label, size = 'medium', type, multiline = false, icon, rows = 0, isEditActive = true }: Props) => {
@@ -25,6 +25,12 @@ const FormInput = ({ field, label, size = 'medium', type, multiline = false, ico
   return (
     <TextField
       disabled={!isEditActive}
+      sx={!isEditActive ? {
+        "& .MuiInputBase-input.Mui-disabled": {
+          WebkitTextFillColor: "white"
+        },
+        "& fieldset": { border: 'none' },
+      } : {}}
       fullWidth
       id={field}
       size={size}
@@ -39,7 +45,7 @@ const FormInput = ({ field, label, size = 'medium', type, multiline = false, ico
       rows={rows}
       InputProps={
         icon && {
-          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>
+          startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
         }
       }
     />

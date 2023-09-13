@@ -1,4 +1,4 @@
-import { CreditCard } from "shared/types";
+// import { CreditCard } from "shared/types";
 
 export const getBillingConfig = () => [
     {

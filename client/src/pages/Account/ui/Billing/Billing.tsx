@@ -124,10 +124,10 @@ function Billing() {
 
         <Formik initialValues={{
           name_on_card: BillingModel.creditCardInfo.name_on_card,
-          // card_number: BillingModel.creditCardInfo.card_number,
-          card_number: BillingModel.creditCardInfo.card_number?.replace(/(\d{4}(?!\s))/g, '$1 '),
-          valid_thru: BillingModel.creditCardInfo.valid_thru?.replace(/(\d{2}(?!\s))(?!$)/g, '$1/'),
-          // valid_thru: BillingModel.creditCardInfo.valid_thru,
+          card_number: BillingModel.creditCardInfo.card_number,
+          // card_number: BillingModel.creditCardInfo.card_number?.replace(/(\d{4}(?!\s))/g, '$1 '),
+          // valid_thru: BillingModel.creditCardInfo.valid_thru?.replace(/(\d{2}(?!\s))(?!$)/g, '$1/'),
+          valid_thru: BillingModel.creditCardInfo.valid_thru,
           cvv: BillingModel.creditCardInfo.cvv
         }}
           validationSchema={validationSchema}
