@@ -30,6 +30,19 @@ function Calendar() {
     setSelectedMonth(format(firstDayNextMonth, 'MMM-yyyy'))
   }
 
+  function border(i:number){
+    let border={border:'1px solid gray'}
+    if (i<=6)
+     border = {...border,...{ borderTop:'none'}}
+    if (i>=28 )
+    border = {...border,...{ borderBottom:'none'}}
+    if ((i+1)%7===0)
+    border = {...border,...{ borderRight:'none'}}
+    if ((i)%7===0)
+    border = {...border,...{ borderLeft:'none'}}
+    return border
+  }
+
   return (
     <>
       <Box sx={{ display: 'flex', mb: 3, pr: 3, pl: 3, justifyContent: 'space-between' }}>
@@ -72,7 +85,7 @@ function Calendar() {
 
           <Box sx={{ flexGrow: 1 }}>
             <Grid container flex-wrap="wrap">
-              {tableDays.map((day) => (
+              {tableDays.map((day, i) => (
                 <CalendarItem
                   day={day}
                   currentMonth={selectedMonth}
@@ -80,7 +93,7 @@ function Calendar() {
                     setDayId(day)
                     setIsAddEventModalOpen(true)
                   }}
-                />
+                  border={border(i)}/>
               ))}
             </Grid>
           </Box>
