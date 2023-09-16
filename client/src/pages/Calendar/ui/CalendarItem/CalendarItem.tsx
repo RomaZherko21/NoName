@@ -4,10 +4,11 @@ import { format } from 'date-fns'
 interface Props {
   day: Date
   currentMonth: string
+  border: any
   onOpenModal: () => void
 }
 
-function CalendarItem({ day, currentMonth, onOpenModal }: Props) {
+function CalendarItem({ border, day, currentMonth, onOpenModal }: Props) {
   const isToday = new Date().toDateString() === day.toDateString()
 
   const isCurrentMonth = format(day, 'MMM-yyyy') === currentMonth
@@ -15,7 +16,8 @@ function CalendarItem({ day, currentMonth, onOpenModal }: Props) {
   return (
     <Box
       sx={{
-        border: '1px solid grey',
+        ...border,
+        borderCollapse:'collapse',
         cursor: 'pointer',
         height: 150,
         width: '14.28%',
