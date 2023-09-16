@@ -26,11 +26,10 @@ import {
   commonStringValidation
 } from 'shared/validations'
 import { toast } from 'react-toastify'
-import CountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
+import FormCountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
 import { ProfileModel } from 'pages/Profile/model'
-import { CountriesSelect, FormSelect } from 'shared/ui/Form'
-import { getCountryConfig } from './getCountryConfig'
-import { hasFlag } from 'country-flag-icons'
+import { FormSelect } from 'shared/ui/Form'
+import { FormPhoneNumber2 } from 'shared/ui/Form/FormPhoneNumber2'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -124,8 +123,8 @@ function UserBasicDetails({ user }: Props) {
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    <CountrySelect />
-                    <InputField field={'native_country'} label={t('user:nativeCountry')} />
+                    <FormCountrySelect />
+                    {/* <InputField field={'native_country'} label={t('user:nativeCountry')} /> */}
                     <InputField field={'native_city'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
@@ -176,6 +175,8 @@ function UserBasicDetails({ user }: Props) {
                 {isEditActive ? t('actions.save') : t('actions.edit')}
               </Button>
             </CardActions>
+
+            <FormPhoneNumber2 />
           </form>
         )}
       </Formik>
