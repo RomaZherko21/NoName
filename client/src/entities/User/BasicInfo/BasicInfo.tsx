@@ -129,7 +129,11 @@ function UserBasicDetails({ user }: Props) {
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    {/* <CountriesSelect /> */}
+                    <FormPhoneNumber2
+                      field={'residence_country'}
+                      label={t('user:residenceCountry')}
+                    />
+
                     {/* <Select
                       value={'residence_country'}
                       label={t('user:residenceCountry')}
@@ -139,11 +143,11 @@ function UserBasicDetails({ user }: Props) {
                       }}
                     /> */}
 
-                    <FormSelect
+                    {/* <FormSelect
                       field={'residence_country'}
                       label={t('user:residenceCountry')}
-                      options={getCountryConfig}
-                    />
+                      options={{}}
+                    /> */}
                     {/* <InputField field={'residence_country'} label={t('user:residenceCountry')} /> */}
                     <InputField field={'residence_city'} label={t('user:residenceCity')} />
                   </ListItem>
@@ -176,7 +180,7 @@ function UserBasicDetails({ user }: Props) {
               </Button>
             </CardActions>
 
-            <FormPhoneNumber2 />
+            <FormPhoneNumber2 field={'residence_country'} label={t('user:residenceCountry')} />
           </form>
         )}
       </Formik>

@@ -1,9 +1,27 @@
 import { Autocomplete, Box, TextField } from '@mui/material'
 import { useState } from 'react'
 import { countries } from '../contryConfig'
+import { useTranslation } from 'react-i18next'
 
-function FormPhoneNumber2() {
+import { useFormikContext } from 'formik'
+
+interface Props {
+  label: string
+  field: string
+}
+
+function FormPhoneNumber2(props: Props) {
   const [value, setValue] = useState<any>('')
+  const { label, field } = props
+  const { t } = useTranslation()
+  const { touched, values, errors, setFieldValue } = useFormikContext<{
+    [key: string]: any
+  }>()
+
+  const handleCountryChange = (event: React.ChangeEvent<{}>, value: any) => {
+    setValue(value)
+    setFieldValue(field, value)
+  }
 
   return (
     <Autocomplete
@@ -11,9 +29,7 @@ function FormPhoneNumber2() {
       sx={{ width: 400 }}
       options={countries}
       autoHighlight
-      onChange={(event, values) => {
-        console.log(event, values)
-      }}
+      onChange={handleCountryChange}
       getOptionLabel={(option) => `+${option.phone}`}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -24,16 +40,16 @@ function FormPhoneNumber2() {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a country"
+          label={t(label)}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password' // disable autocomplete and autofill
           }}
-          onChange={(e) => {
-            console.log('sadasdsa', e.target.value)
-            setValue(e.target.value)
-          }}
           value={value}
+          onChange={(event) => {
+            console.log('sadasdsa', event.target.value)
+            setValue(event.target.value)
+          }}
         />
       )}
     />
