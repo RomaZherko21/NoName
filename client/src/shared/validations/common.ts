@@ -151,16 +151,3 @@ export const phoneNumberValidation = (field: string) =>
         field
       })
     )
-
-export const creditCardValidation = (field: string, count: number) =>
-  Yup.string()
-    .matches(/^\d+$/, i18next.t('validation:error.shouldOnlyBeNumbers', { field }))
-    .test('length', i18next.t('validation:error.symbol', {
-      field,
-      count: count
-    }), (value) => typeof value === 'string' && value.length === count)
-    .required(
-      i18next.t('validation:error.isRequired', {
-        field
-      })
-    )
