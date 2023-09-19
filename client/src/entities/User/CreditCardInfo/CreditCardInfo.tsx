@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import * as yup from 'yup'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -24,6 +25,7 @@ import { ProfileModel } from 'pages/Profile/model'
 // import { getFullName } from 'shared/helpers'
 import { useRootStore } from 'stores'
 import { toast } from 'react-toastify'
+import { FormInput } from 'shared/ui/Form'
 
 function CreditCardInfo(props: any) {
   const { t } = useTranslation()
@@ -32,6 +34,10 @@ function CreditCardInfo(props: any) {
 
   const listConfig = useMemo(() => getListConfig(props), [props])
 
+  const validationSchema = {
+    card_number: yup.string().max(16)
+  }
+
   return (
     <Paper elevation={4} sx={{ width: '100%', p: 0 }}>
       <CardHeader
@@ -39,7 +45,7 @@ function CreditCardInfo(props: any) {
         title={t('user:payment')}
         sx={{ pb: 0 }}
       />
-      {!isEditActive && (
+      {/* {!isEditActive && (
         <List>
           {listConfig.map(({ Icon, text, title }) => (
             <>
@@ -76,104 +82,123 @@ function CreditCardInfo(props: any) {
             </Button>
           </CardActions>
         </List>
-      )}
+      )} */}
 
-      {isEditActive && (
-        <Formik
-          initialValues={{
-            card_number: props.cardNumber,
-            name_on_card: props.nameOnCard,
-            valid_thru: props.validThru,
-            cvv: props.cvv
-          }}
-          // validationSchema={validationSchema}
-          onSubmit={(values) => {
-            setIsEditActive(!isEditActive)
-            if (isEditActive) {
-              ProfileModel.putCreditCard(values)
-              // toast.success(t('notification:success.updated'))
-              console.log(values)
-            }
-          }}
-        >
-          {({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <ListItem>
-                <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
-                  <BsCreditCard2Back />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2" sx={{ width: 180 }}>
-                      {t('user:cardNumber')}
-                    </Typography>
-                  }
-                  secondary={<InputField field="card_number" label="" size="small" />}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                />
-              </ListItem>
-              <Divider />
+      {/* {isEditActive && ( */}
+      <Formik
+        initialValues={{
+          card_number: props.cardNumber,
+          name_on_card: props.nameOnCard,
+          valid_thru: props.validThru,
+          cvv: props.cvv
+        }}
+        // validationSchema={validationSchema}
+        onSubmit={(values) => {
+          setIsEditActive(!isEditActive)
+          console.log(isEditActive)
+          if (isEditActive) {
+            ProfileModel.updateCreditCardInfo(values)
+            // toast.success(t('notification:success.updated'))
+            console.log(values)
+          }
+        }}
+      >
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <ListItem>
+              <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
+                <BsCreditCard2Back />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2" sx={{ width: 180 }}>
+                    {t('user:cardNumber')}
+                  </Typography>
+                }
+                secondary={
+                  <FormInput
+                    field="card_number"
+                    label=""
+                    size="small"
+                    isEditActive={isEditActive}
+                  />
+                }
+                sx={{ display: 'flex', alignItems: 'center' }}
+              />
+            </ListItem>
+            <Divider />
 
-              <ListItem>
-                <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
-                  <BiUser />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2" sx={{ width: 180 }}>
-                      {t('user:bankCard.cardHolderName')}
-                    </Typography>
-                  }
-                  secondary={<InputField field="name_on_card" label="" size="small" />}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                />
-              </ListItem>
-              <Divider />
+            <ListItem>
+              <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
+                <BiUser />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2" sx={{ width: 180 }}>
+                    {t('user:bankCard.cardHolderName')}
+                  </Typography>
+                }
+                secondary={
+                  <FormInput
+                    field="name_on_card"
+                    label=""
+                    size="small"
+                    isEditActive={isEditActive}
+                  />
+                }
+                sx={{ display: 'flex', alignItems: 'center' }}
+              />
+            </ListItem>
+            <Divider />
 
-              <ListItem>
-                <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
-                  <BsCalendar2Event />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2" sx={{ width: 180 }}>
-                      {t('user:bankCard.expiryDate')}
-                    </Typography>
-                  }
-                  secondary={<InputField field="valid_thru" label="" size="small" />}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                />
-              </ListItem>
-              <Divider />
+            <ListItem>
+              <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
+                <BsCalendar2Event />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2" sx={{ width: 180 }}>
+                    {t('user:bankCard.expiryDate')}
+                  </Typography>
+                }
+                secondary={
+                  <FormInput field="valid_thru" label="" size="small" isEditActive={isEditActive} />
+                }
+                sx={{ display: 'flex', alignItems: 'center' }}
+              />
+            </ListItem>
+            <Divider />
 
-              <ListItem>
-                <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
-                  <BiLockAlt />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2" sx={{ width: 180 }}>
-                      {t('user:bankCard.cvv')}
-                    </Typography>
-                  }
-                  secondary={<InputField field="cvv" label="" size="small" />}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                />
-              </ListItem>
-              <Divider />
-              <CardActions>
-                <Button
-                  type="submit"
-                  size="small"
-                  sx={{ color: ({ palette }) => palette.text.primary }}
-                >
-                  {isEditActive ? t('actions.save') : t('actions.edit')}
-                </Button>
-              </CardActions>
-            </form>
-          )}
-        </Formik>
-      )}
+            <ListItem>
+              <ListItemIcon sx={{ p: 0, m: 0, fontSize: 16 }}>
+                <BiLockAlt />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2" sx={{ width: 180 }}>
+                    {t('user:bankCard.cvv')}
+                  </Typography>
+                }
+                secondary={
+                  <FormInput field="cvv" label="" size="small" isEditActive={isEditActive} />
+                }
+                sx={{ display: 'flex', alignItems: 'center' }}
+              />
+            </ListItem>
+            <Divider />
+            <CardActions>
+              <Button
+                type="submit"
+                size="small"
+                sx={{ color: ({ palette }) => palette.text.primary }}
+              >
+                {isEditActive ? t('actions.save') : t('actions.edit')}
+              </Button>
+            </CardActions>
+          </form>
+        )}
+      </Formik>
+      {/* )} */}
     </Paper>
   )
 }

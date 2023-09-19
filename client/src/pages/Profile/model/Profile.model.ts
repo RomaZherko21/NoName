@@ -69,10 +69,10 @@ class ProfileModel {
     }
   }
 
-  async putCreditCard(user: CreditCard) {
+  async updateCreditCardInfo(cardInfo: CreditCard) {
     try {
-      await API.user.updateCardInfo(user)
-      console.log(user)
+      await API.user.updateCardInfo(cardInfo)
+      console.log(cardInfo)
 
       await this.fetchUser(this.id)
     } catch (err: any) {

@@ -3,15 +3,7 @@ import { toast } from 'react-toastify'
 
 import { RootStore } from 'stores'
 import { API } from 'services'
-import {
-  Gender,
-  Roles,
-  User,
-  BasicUserInfo,
-  MetaUserInfo,
-  UserCredentials,
-  CreditCard
-} from 'shared/types'
+import { Gender, Roles, User, BasicUserInfo, MetaUserInfo, UserCredentials } from 'shared/types'
 
 import FileModel from './File'
 import PermissionsModel from './Permissions'
