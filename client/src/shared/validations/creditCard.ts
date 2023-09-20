@@ -18,9 +18,17 @@ export const creditCardValidation = (field: string, count: number) =>
       })
     )
 
-export const expirationDate = () =>
+export const expirationDate = (field: string) =>
   Yup.string()
-    .typeError('Not a valid expiration date. Example: MM/YY')
-    .max(5, 'Not a valid expiration date. Example: MM/YY')
-    .matches(/([0-9]{2})\/([0-9]{2})/, 'Not a valid expiration date. Example: MM/YY')
-    .required('Expiration date is required')
+    .typeError(i18next.t('validation:error.validExpiryDate', {
+      field
+    }))
+    .max(5, i18next.t('validation:error.validExpiryDate', {
+      field
+    }))
+    .matches(/([0-9]{2})\/([0-9]{2})/, i18next.t('validation:error.validExpiryDate', {
+      field
+    }))
+    .required(i18next.t('validation:error.isRequired', {
+      field
+    }))
