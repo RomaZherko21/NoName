@@ -18,7 +18,7 @@ import { getListConfig } from './getListConfig'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { getFullName, normalizePhone, getSplitName } from 'shared/helpers'
-import { FormPhoneNumber, InputField, Select } from 'shared/ui'
+import { FormPhoneNumber, InputField } from 'shared/ui'
 import {
   // fullNameValidation,
   emailValidation,
@@ -28,8 +28,6 @@ import {
 import { toast } from 'react-toastify'
 import FormCountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
 import { ProfileModel } from 'pages/Profile/model'
-import { FormSelect } from 'shared/ui/Form'
-import { FormPhoneNumber2 } from 'shared/ui/Form/FormPhoneNumber2'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -123,32 +121,17 @@ function UserBasicDetails({ user }: Props) {
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    <FormCountrySelect />
+                    <FormCountrySelect label={t('user:nativeCountry')} field={'native_country'} />
                     {/* <InputField field={'native_country'} label={t('user:nativeCountry')} /> */}
                     <InputField field={'native_city'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
-                    <FormPhoneNumber2
+                    <FormCountrySelect
                       field={'residence_country'}
                       label={t('user:residenceCountry')}
                     />
 
-                    {/* <Select
-                      value={'residence_country'}
-                      label={t('user:residenceCountry')}
-                      options={{}}
-                      onChange={function (e: any): void {
-                        throw new Error('Function not implemented.')
-                      }}
-                    /> */}
-
-                    {/* <FormSelect
-                      field={'residence_country'}
-                      label={t('user:residenceCountry')}
-                      options={{}}
-                    /> */}
-                    {/* <InputField field={'residence_country'} label={t('user:residenceCountry')} /> */}
                     <InputField field={'residence_city'} label={t('user:residenceCity')} />
                   </ListItem>
                   <Divider />
@@ -179,8 +162,6 @@ function UserBasicDetails({ user }: Props) {
                 {isEditActive ? t('actions.save') : t('actions.edit')}
               </Button>
             </CardActions>
-
-            <FormPhoneNumber2 field={'residence_country'} label={t('user:residenceCountry')} />
           </form>
         )}
       </Formik>
