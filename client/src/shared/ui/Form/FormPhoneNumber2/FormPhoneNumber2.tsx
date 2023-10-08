@@ -14,7 +14,7 @@ function FormPhoneNumber2(props: Props) {
   const [value, setValue] = useState<any>('')
   const { label, field } = props
   const { t } = useTranslation()
-  const { touched, values, errors, setFieldValue } = useFormikContext<{
+  const { setFieldValue } = useFormikContext<{
     [key: string]: any
   }>()
 
