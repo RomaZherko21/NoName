@@ -28,6 +28,7 @@ import {
 import { toast } from 'react-toastify'
 import FormCountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
 import { ProfileModel } from 'pages/Profile/model'
+import { FormPhoneNumber2 } from 'shared/ui/Form/FormPhoneNumber2'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -45,7 +46,8 @@ function UserBasicDetails({ user }: Props) {
       yup.object().shape({
         // full_name: fullNameValidation(),
         email: emailValidation(),
-        tel_number: phoneNumberValidation(t('fields.phone')),
+        // tel_number: phoneNumberValidation(t('fields.phone')),
+
         // nativeLocation: commonStringValidation(t('user:nativeLocation')),
         // residenceLocation: commonStringValidation(t('user:residenceLocation')),
         jobTitle: commonStringValidation(t('user:jobTitle'))
@@ -65,7 +67,9 @@ function UserBasicDetails({ user }: Props) {
         initialValues={{
           fullName: getFullName(user.name, user.surname, user.middle_name),
           email: user.email,
-          tel_number: normalizePhone(user.tel_number),
+          // tel_number: normalizePhone(user.tel_number),
+          tel_number: user.tel_number,
+
           nativeLocation: `${user.native_country}, ${user.native_city}`,
           native_country: user.native_country,
           native_city: user.native_city,
@@ -82,7 +86,8 @@ function UserBasicDetails({ user }: Props) {
             ProfileModel.editUserInfo({
               ...getSplitName(values.fullName),
               email: values.email,
-              tel_number: normalizePhone(values.tel_number),
+              // tel_number: normalizePhone(values.tel_number),
+              tel_number: values.tel_number,
 
               native_country: values.native_country,
               native_city: values.native_city,
@@ -116,7 +121,7 @@ function UserBasicDetails({ user }: Props) {
                   </ListItem>
                   <Divider />
                   <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
-                    <FormPhoneNumber label={t('fields:phone')} field="tel_number" />
+                    <FormPhoneNumber2 label={t('fields:phone')} field="tel_number" />
                     {/* <InputField field={'tel_number'} label={t('user:telephoneNumber')}></InputField> */}
                   </ListItem>
                   <Divider />

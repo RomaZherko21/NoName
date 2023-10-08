@@ -1,9 +1,8 @@
-import { Autocomplete, Box, TextField } from '@mui/material'
-import { useState } from 'react'
-import { countries } from '../contryConfig'
 import { useTranslation } from 'react-i18next'
-
 import { useFormikContext } from 'formik'
+import { Autocomplete, Box, InputAdornment, TextField } from '@mui/material'
+
+import { countries } from '../contryConfig'
 
 interface Props {
   label: string
@@ -11,44 +10,51 @@ interface Props {
 }
 
 function FormPhoneNumber2(props: Props) {
-  const [value, setValue] = useState<any>('')
   const { label, field } = props
   const { t } = useTranslation()
-  const { setFieldValue } = useFormikContext<{
+  const { setFieldValue, values } = useFormikContext<{
     [key: string]: any
   }>()
-
-  const handleCountryChange = (event: React.ChangeEvent<{}>, value: any) => {
-    setValue(value)
-    setFieldValue(field, value)
-  }
 
   return (
     <Autocomplete
       id="country-select-demo"
-      sx={{ width: 400 }}
       options={countries}
       autoHighlight
-      onChange={handleCountryChange}
+      fullWidth
+      onChange={(_, value) => {
+        setFieldValue(field, value)
+      }}
       getOptionLabel={(option) => `+${option.phone}`}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img loading="lazy" width="20" src={`/flags/${option.code.toLowerCase()}.svg`} alt="" />
-          {option.label} (+{option.phone})
+          <img loading="lazy" width="20" src={`/flags/${option.code.toLowerCase()}.svg`} alt="" />+
+          {option.phone}
         </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
           label={t(label)}
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password' // disable autocomplete and autofill
+          variant="outlined"
+          fullWidth
+          value={values[field]}
+          onChange={(value) => {
+            setFieldValue(field, value)
           }}
-          value={value}
-          onChange={(event) => {
-            console.log('sadasdsa', event.target.value)
-            setValue(event.target.value)
+          InputProps={{
+            ...params.InputProps,
+            autoComplete: 'new-password', // disable autocomplete and autofill
+            startAdornment: (
+              <InputAdornment position="start">
+                <img
+                  loading="lazy"
+                  width="24"
+                  src={`/flags/${values[field]?.code?.toLowerCase()}.svg`}
+                  alt=""
+                />
+              </InputAdornment>
+            )
           }}
         />
       )}
