@@ -148,7 +148,7 @@ function Billing() {
               toast.success(t('notification:success.updated'))
             }}
           >
-            {({ handleSubmit, dirty }) => (
+            {({ handleSubmit, dirty, errors }) => (
               <>
                 <form onSubmit={handleSubmit}>
                   <Stack
@@ -162,6 +162,10 @@ function Billing() {
                       <Button
                         type="submit"
                         onClick={() => {
+                          if (Object.keys(errors).length > 0) {
+                            return
+                          }
+
                           setIsEditActive((pre) => !pre)
 
                           if (dirty) {
