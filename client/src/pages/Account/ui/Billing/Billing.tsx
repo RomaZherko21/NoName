@@ -39,7 +39,7 @@ function Billing() {
       yup.object().shape({
         name_on_card: commonStringValidation(t('user:bankCard.cardHolderName'), 3),
         card_number: creditCardValidation(t('user:bankCard.number'), 16),
-        valid_thru: expirationDate(),
+        valid_thru: expirationDate(t('user:bankCard.expiryDate')),
         cvv: creditCardValidation(t('user:bankCard.cvv'), 3)
       }),
     [t]
@@ -148,7 +148,7 @@ function Billing() {
               toast.success(t('notification:success.updated'))
             }}
           >
-            {({ handleSubmit, dirty }) => (
+            {({ handleSubmit, dirty, errors }) => (
               <>
                 <form onSubmit={handleSubmit}>
                   <Stack
@@ -162,6 +162,10 @@ function Billing() {
                       <Button
                         type="submit"
                         onClick={() => {
+                          if (Object.keys(errors).length > 0) {
+                            return
+                          }
+
                           setIsEditActive((pre) => !pre)
 
                           if (dirty) {
