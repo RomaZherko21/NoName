@@ -3,6 +3,7 @@ import { useFormikContext } from 'formik'
 import { Autocomplete, Box, InputAdornment, TextField } from '@mui/material'
 
 import { countries } from '../contryConfig'
+import { useState } from 'react'
 
 interface Props {
   label: string
@@ -12,6 +13,7 @@ interface Props {
 function FormPhoneNumber2(props: Props) {
   const { label, field } = props
   const { t } = useTranslation()
+  const [country, setCountry] = useState<any>({})
   const { setFieldValue, values } = useFormikContext<{
     [key: string]: any
   }>()
@@ -23,9 +25,10 @@ function FormPhoneNumber2(props: Props) {
       autoHighlight
       fullWidth
       onChange={(_, value) => {
-        setFieldValue(field, value)
+        setFieldValue(field, '')
+        setCountry(value)
       }}
-      getOptionLabel={(option) => `+${option.phone}`}
+      getOptionLabel={(option) => values[field] || `+${option.phone}`}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <img loading="lazy" width="20" src={`/flags/${option.code.toLowerCase()}.svg`} alt="" />+
@@ -39,18 +42,19 @@ function FormPhoneNumber2(props: Props) {
           variant="outlined"
           fullWidth
           value={values[field]}
-          onChange={(value) => {
-            setFieldValue(field, value)
+          onChange={(event) => {
+            setFieldValue(field, event.target.value)
           }}
           InputProps={{
             ...params.InputProps,
+            value: values[field],
             autoComplete: 'new-password', // disable autocomplete and autofill
             startAdornment: (
               <InputAdornment position="start">
                 <img
                   loading="lazy"
                   width="24"
-                  src={`/flags/${values[field]?.code?.toLowerCase()}.svg`}
+                  src={`/flags/${country.code?.toLowerCase()}.svg`}
                   alt=""
                 />
               </InputAdornment>

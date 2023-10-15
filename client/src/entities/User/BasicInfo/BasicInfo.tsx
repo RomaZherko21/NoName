@@ -47,9 +47,6 @@ function UserBasicDetails({ user }: Props) {
         // full_name: fullNameValidation(),
         email: emailValidation(),
         // tel_number: phoneNumberValidation(t('fields.phone')),
-
-        // nativeLocation: commonStringValidation(t('user:nativeLocation')),
-        // residenceLocation: commonStringValidation(t('user:residenceLocation')),
         jobTitle: commonStringValidation(t('user:jobTitle'))
       }),
     [t]
@@ -69,11 +66,8 @@ function UserBasicDetails({ user }: Props) {
           email: user.email,
           // tel_number: normalizePhone(user.tel_number),
           tel_number: user.tel_number,
-
-          nativeLocation: `${user.native_country}, ${user.native_city}`,
           native_country: user.native_country,
           native_city: user.native_city,
-          residenceLocation: `${user.residence_country}, ${user.residence_city}`,
           residence_country: user.residence_country,
           residence_city: user.residence_city,
 
@@ -88,19 +82,13 @@ function UserBasicDetails({ user }: Props) {
               email: values.email,
               // tel_number: normalizePhone(values.tel_number),
               tel_number: values.tel_number,
-
               native_country: values.native_country,
               native_city: values.native_city,
-              // nativeLocation: values.nativeLocation,
-              // nativeLocation: `${values.native_country}, ${values.native_city}`,
-
               residence_country: values.residence_country,
               residence_city: values.residence_city,
-              // residenceLocation: `${values.residence_country}, ${values.residence_city}`,
-              // residenceLocation: values.residenceLocation,
               job_title: values.jobTitle
             })
-            console.log(user.residence_country)
+            console.log(user.residence_country, user.tel_number)
 
             toast.success(t('notification:success.updated'))
           }
@@ -112,7 +100,6 @@ function UserBasicDetails({ user }: Props) {
               {isEditActive && (
                 <>
                   <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
-                    {/* <Typography variant="body1">{t('user:fullName')}</Typography> */}
                     <InputField field={'fullName'} label={t('user:fullName')} />
                   </ListItem>
                   <Divider />
@@ -127,7 +114,6 @@ function UserBasicDetails({ user }: Props) {
                   <Divider />
                   <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
                     <FormCountrySelect label={t('user:nativeCountry')} field={'native_country'} />
-                    {/* <InputField field={'native_country'} label={t('user:nativeCountry')} /> */}
                     <InputField field={'native_city'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
@@ -136,7 +122,6 @@ function UserBasicDetails({ user }: Props) {
                       field={'residence_country'}
                       label={t('user:residenceCountry')}
                     />
-
                     <InputField field={'residence_city'} label={t('user:residenceCity')} />
                   </ListItem>
                   <Divider />

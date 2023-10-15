@@ -25,6 +25,7 @@ function FormCountrySelect(props: Props) {
       fullWidth
       onChange={(_, value) => {
         setFieldValue(field, value)
+        console.log(value)
       }}
       getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
