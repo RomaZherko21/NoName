@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import {
@@ -10,7 +10,6 @@ import {
   CardActions,
   Button,
   Divider
-  // Typography
 } from '@mui/material'
 
 import { BasicUserInfo, MetaUserInfo, UserLocation } from 'shared/types'
@@ -19,17 +18,17 @@ import { getListConfig } from './getListConfig'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { getFullName, normalizePhone, getSplitName } from 'shared/helpers'
-import { InputField } from 'shared/ui'
+import { FormPhoneNumber, InputField } from 'shared/ui'
 import {
-  fullNameValidation,
+  // fullNameValidation,
   emailValidation,
   phoneNumberValidation,
   commonStringValidation
 } from 'shared/validations'
-import UserModel from 'models/User'
 import { toast } from 'react-toastify'
-
-// import { ProfileModel } from 'pages/Profile/model'
+import FormCountrySelect from 'shared/ui/Form/FormContrySelect/FormCountrySelect'
+import { ProfileModel } from 'pages/Profile/model'
+import { FormPhoneNumber2 } from 'shared/ui/Form/FormPhoneNumber2'
 
 interface Props {
   user: BasicUserInfo & MetaUserInfo & UserLocation
@@ -37,20 +36,18 @@ interface Props {
 
 function UserBasicDetails({ user }: Props) {
   const { t } = useTranslation()
+
   const [isEditActive, setIsEditActive] = useState(false)
-  // useEffect(() => {UserModel.fetch()}, [])
 
   const listConfig = useMemo(() => getListConfig(user), [user])
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        full_name: fullNameValidation(),
+        // full_name: fullNameValidation(),
         email: emailValidation(),
-        tel_number: phoneNumberValidation(t('fields.phone'))
-        // nativeLocation: commonStringValidation(t('user:nativeLocation')),
-        // residenceLocation: commonStringValidation(t('user:residenceLocation')),
-        // jobTitle: commonStringValidation(t('user:jobTitle'))
+        // tel_number: phoneNumberValidation(t('fields.phone')),
+        jobTitle: commonStringValidation(t('user:jobTitle'))
       }),
     [t]
   )
@@ -67,22 +64,34 @@ function UserBasicDetails({ user }: Props) {
         initialValues={{
           fullName: getFullName(user.name, user.surname, user.middle_name),
           email: user.email,
-          tel_number: normalizePhone(user.tel_number),
-          nativeLocation: `${user.native_country}, ${user.native_city}`,
-          residenceLocation: `${user.residence_country}, ${user.residence_city}`,
+          // tel_number: normalizePhone(user.tel_number),
+          tel_number: user.tel_number,
+          native_country: user.native_country,
+          native_city: user.native_city,
+          residence_country: user.residence_country,
+          residence_city: user.residence_city,
+
           jobTitle: user.job_title
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          // UserModel.update(values
-          //   {
-          //   ...getSplitName(values.fullName),
-          //   email: values.email,
-          //   tel_number: normalizePhone(values.tel_number)
-          // }
-          // )
-          console.log(values)
-          toast.success(t('notification:success.updated'))
+          setIsEditActive(!isEditActive)
+          if (isEditActive) {
+            ProfileModel.editUserInfo({
+              ...getSplitName(values.fullName),
+              email: values.email,
+              // tel_number: normalizePhone(values.tel_number),
+              tel_number: values.tel_number,
+              native_country: values.native_country,
+              native_city: values.native_city,
+              residence_country: values.residence_country,
+              residence_city: values.residence_city,
+              job_title: values.jobTitle
+            })
+            console.log(user.residence_country, user.tel_number)
+
+            toast.success(t('notification:success.updated'))
+          }
         }}
       >
         {({ handleSubmit }) => (
@@ -90,29 +99,33 @@ function UserBasicDetails({ user }: Props) {
             <List sx={{ p: 0 }}>
               {isEditActive && (
                 <>
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    {/* <Typography variant="body1">{t('user:fullName')}</Typography> */}
+                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
                     <InputField field={'fullName'} label={t('user:fullName')} />
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    {/* <Typography variant="body1">{t('user:email')}</Typography> */}
+                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
                     <InputField field={'email'} label={t('user:email')} />
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    <InputField field={'tel_number'} label={t('user:telephoneNumber')}></InputField>
+                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
+                    <FormPhoneNumber2 label={t('fields:phone')} field="tel_number" />
+                    {/* <InputField field={'tel_number'} label={t('user:telephoneNumber')}></InputField> */}
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    <InputField field={'nativeLocation'} label={t('user:nativeLocation')} />
+                  <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
+                    <FormCountrySelect label={t('user:nativeCountry')} field={'native_country'} />
+                    <InputField field={'native_city'} label={t('user:nativeCity')} />
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
-                    <InputField field={'residenceLocation'} label={t('user:residenceLocation')} />
+                  <ListItem alignItems="center" sx={{ flexDirection: 'row', mt: '3px' }}>
+                    <FormCountrySelect
+                      field={'residence_country'}
+                      label={t('user:residenceCountry')}
+                    />
+                    <InputField field={'residence_city'} label={t('user:residenceCity')} />
                   </ListItem>
                   <Divider />
-                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '4px' }}>
+                  <ListItem alignItems="flex-start" sx={{ flexDirection: 'column', mt: '3px' }}>
                     <InputField field={'jobTitle'} label={t('user:jobTitle')} />
                   </ListItem>
                   <Divider />
@@ -132,8 +145,6 @@ function UserBasicDetails({ user }: Props) {
 
             <CardActions>
               <Button
-                onClick={() => setIsEditActive(!isEditActive)}
-                // onSubmit={() => {}}
                 type="submit"
                 size="small"
                 sx={{ color: ({ palette }) => palette.text.primary }}

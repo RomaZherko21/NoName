@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Afghanistan",
+    "country": "AF",
+    "phoneCode": "+93",
+    "phoneRegex": "^\\+93\\d{9}$"
+  },
+  {
+    "name": "Albania",
+    "country": "AL",
+    "phoneCode": "+355",
+    "phoneRegex": "^\\+355\\d{8,9}$"
+  },
+  {
+    "name": "Algeria",
+    "country": "DZ",
+    "phoneCode": "+213",
+    "phoneRegex": "^\\+213\\d{9}$"
+  }
+]

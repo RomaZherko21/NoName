@@ -10,7 +10,8 @@ import {
   Post,
   BasicUserInfo,
   MetaUserInfo,
-  UserCredentials
+  UserCredentials,
+  UserLocation
 } from 'shared/types'
 import LoadingModel from 'models/Loading'
 import { API } from 'services'
@@ -196,12 +197,12 @@ class ProfileModel {
     }
   }
 
-  async editUserInfo(user: BasicUserInfo & MetaUserInfo & UserCredentials) {
+  async editUserInfo(user: BasicUserInfo & MetaUserInfo & UserCredentials & UserLocation) {
     try {
       this.loading.begin()
 
       await API.user.update(user)
-      // await this.fetch({})
+      await this.fetchUser(this.id)
     } catch (err: any) {
       toast.error(err)
     } finally {
