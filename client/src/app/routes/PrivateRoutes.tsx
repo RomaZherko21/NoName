@@ -26,7 +26,7 @@ import {
 } from 'pages'
 import { ROUTES } from 'shared/consts'
 
-import { Layout } from '../Layout'
+import { L ayout } from '../Layout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
