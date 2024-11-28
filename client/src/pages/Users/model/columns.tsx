@@ -80,13 +80,13 @@ const ActionButtons = observer(({ user: data }: { user: User }) => {
   )
 })
 
-export const getColumns = (navigate:NavigateFunction): TableColumn[] => [
+export const getColumns = (navigate: NavigateFunction): TableColumn[] => [
   {
     key: 'name',
     title: i18next.t('user:name'),
     getValue: ({ name, surname, middle_name: middleName, email, avatar, id }: User) => (
       <InformativeImage
-        onClick={()=>navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(id)}))}
+        onClick={() => navigate(generatePath(ROUTES.USERS_PROFILE, { id: String(id) }))}
         imgUrl={`${API_USER_AVATAR_URL}/${avatar}`}
         imgPlaceholder={getInitials(`${name} ${surname}`)}
         PrimaryText={getFullName(name, surname, middleName)}
