@@ -11,6 +11,7 @@ x-my-sql-variables: &my-sql-variables
 x-redis-variables: &redis-variables
   REDIS_PASSWORD: ${REDIS_PASSWORD}
   REDIS_PORT_OUTER: ${REDIS_PORT_OUTER}
+  REDIS_HOST: ${REDIS_HOST}
 x-api-variables: &api-variables
   SERVER_PROTOCOL: ${SERVER_PROTOCOL}
   SERVER_HOST: ${SERVER_HOST}
@@ -29,6 +30,8 @@ x-client-variables: &client-variables
 services:
   mysql_db:
     container_name: mysql_db
+    networks:
+      - noName_network
     build:
       context: ./MySQL
       target: MySQL_DB
@@ -44,6 +47,8 @@ services:
   redis:
     container_name: redis
     image: redis:7.0.11
+    networks:
+      - noName_network
     # restart: always
     ports:
       - ${REDIS_PORT_OUTER}:${REDIS_PORT_INNER}
@@ -53,9 +58,13 @@ services:
 
   api:
     container_name: api
+    networks:
+      - noName_network
     restart: always
     build:
       context: ./server
+      dockerfile: Dockerfile.production
+      # dockerfile: Dockerfile
       target: api
     volumes:
       - api_volume:/app/node_modules
@@ -72,6 +81,8 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin:5.2.0
+    networks:
+      - noName_network
     depends_on:
       - mysql_db
     restart: unless-stopped
@@ -84,3 +95,6 @@ volumes:
   mySQL_db_volume:
   redis-volume:
   api_volume:
+
+networks:
+  noName_network: {}
